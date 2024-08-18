@@ -5,36 +5,16 @@ import { useEffect } from "react";
 import Personal from "@/components/signIn/Personal";
 import Company from "@/components/signIn/Company";
 import path from "@/constants/path";
+import useAppRouter from "@/hooks/useAppRouter";
 
 interface SignInProps {}
 
+type TabTypes = "PERSONAL" | "COMPANY";
+
 export default function SignIn({}: SignInProps) {
-  const [email, setEmail] = React.useState("");
-  const [password, setPassword] = React.useState("");
+  const [signInType, setSignInType] = React.useState<TabTypes>("PERSONAL");
 
-  const [loginEmail, setLoginEmail] = React.useState("");
-  const [loginPassword, setLoginPassword] = React.useState("");
-
-  const [signInType, setSignInType] = React.useState("personal");
-
-  const onClick = async (e: any) => {
-    e.preventDefault();
-    try {
-      const response = await axios.post(
-        `http://localhost:8000/auth/sigin`,
-        {
-          email: loginEmail,
-          password: loginPassword,
-        },
-        {
-          withCredentials: true,
-        }
-      );
-      console.log("로그인 API : ", response.data);
-    } catch (error) {
-      console.log("error: ", error);
-    }
-  };
+  const { push } = useAppRouter();
 
   const handleClickUserInfo = async () => {
     try {
@@ -64,26 +44,6 @@ export default function SignIn({}: SignInProps) {
     }
   };
 
-  const onSubmit = async (e: any) => {
-    e.preventDefault();
-
-    try {
-      const response = await axios.post(
-        `http://localhost:8000/auth/signup`,
-        {
-          email,
-          password,
-        },
-        {
-          withCredentials: true,
-        }
-      );
-      console.log("회원가입 API : ", response.data);
-    } catch (error) {
-      console.log("error: ", error);
-    }
-  };
-
   return (
     <S.SignIn>
       <a href="">asd</a>
@@ -93,24 +53,15 @@ export default function SignIn({}: SignInProps) {
       <button onClick={handleClickSignOut} type="button">
         로그아웃
       </button>
-
-      {signInType === "personal" && <Personal />}
-      {signInType === "company" && <Company />}
-
       <div>
-        <form onSubmit={onSubmit}>
-          <label htmlFor="">
-            email
-            <input type="text" value={email} onChange={(e) => setEmail(e.target.value)} />
-          </label>
-          <label htmlFor="">
-            <input type="text" value={password} onChange={(e) => setPassword(e.target.value)} />
-            password
-          </label>
-          <button>회원가입</button>
-        </form>
+        <button onClick={() => setSignInType("PERSONAL")}>일반회원</button>
+        <button onClick={() => setSignInType("COMPANY")}>기업회원</button>
       </div>
-      {/* <button onClick={}>회원가입</button> */}
+
+      {signInType === "PERSONAL" && <Personal />}
+      {signInType === "COMPANY" && <Company />}
+
+      <button onClick={() => push(path.SIGN_UP)}>회원가입</button>
     </S.SignIn>
   );
 }
