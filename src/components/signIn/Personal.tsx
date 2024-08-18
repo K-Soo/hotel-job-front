@@ -1,5 +1,6 @@
 import styled, { css } from "styled-components";
 import Image from "next/image";
+import Icon from "@/icons/Icon";
 
 interface PersonalProps {}
 
@@ -19,7 +20,9 @@ export default function Personal({}: PersonalProps) {
 
   return (
     <S.Personal>
-      <S.SocialButton name="kakao" onClick={() => onClickSocialLogin("kakao")}>
+      <Icon name="Back" />
+
+      {/* <S.SocialButton name="kakao" onClick={() => onClickSocialLogin("kakao")}>
         <Image src="/images/social/kakao_icon.svg" width={18} height={18} alt="카카오_아이콘" className="image-icon" />
         <span className="text">Sign In with Kakao</span>
       </S.SocialButton>
@@ -30,7 +33,7 @@ export default function Personal({}: PersonalProps) {
       <S.SocialButton name="apple" onClick={() => onClickSocialLogin("apple")}>
         <Image src="/images/social/apple_icon.svg" width={18} height={18} alt="애플_아이콘" className="image-icon" />
         <span className="text">Sign In with Apple</span>
-      </S.SocialButton>
+      </S.SocialButton> */}
     </S.Personal>
   );
 }
@@ -54,7 +57,6 @@ const S = {
     .text {
       font-weight: 700;
       font-size: 14px;
-      font-family: Pretendard;
     }
     ${(props) =>
       props.name === "kakao" &&
