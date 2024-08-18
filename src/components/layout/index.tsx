@@ -1,4 +1,7 @@
 import styled from "styled-components";
+export { Footer } from "@/components/layout/footer";
+export { Main } from "@/components/layout/main";
+export { Header } from "@/components/layout/header";
 
 interface LayoutProps {
   children: React.ReactNode;
