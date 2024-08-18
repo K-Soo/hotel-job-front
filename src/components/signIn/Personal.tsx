@@ -1,11 +1,94 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
+import Image from "next/image";
 
 interface PersonalProps {}
 
 export default function Personal({}: PersonalProps) {
-  return <S.Personal>Personal</S.Personal>;
+  const onClickSocialLogin = (type: string) => {
+    const isWebview = localStorage.getItem("isWebview");
+    //SWIFT 전용
+    // if (window?.webkit) {
+    //   router.push('/oauth/callback/kakao');
+    //   return window.webkit?.messageHandlers?.socialType?.postMessage(type);
+    // }
+    // if (isWebview === "1") {
+    //   return window?.jsToWebviewSocialChannel?.postMessage(JSON.stringify({ message: type })); //KAKAO , APPLE, GOOGLE
+    // }
+    // return (window.location.href = SOCIAL_URL[type]);
+  };
+
+  return (
+    <S.Personal>
+      <S.SocialButton name="kakao" onClick={() => onClickSocialLogin("kakao")}>
+        <Image src="/images/social/kakao_icon.svg" width={18} height={18} alt="카카오_아이콘" className="image-icon" />
+        <span className="text">Sign In with Kakao</span>
+      </S.SocialButton>
+      <S.SocialButton name="google" onClick={() => onClickSocialLogin("google")}>
+        <Image src="/images/social/google_icon.svg" width={18} height={18} alt="구글_아이콘" className="image-icon" />
+        <span className="text">Sign In with Google</span>
+      </S.SocialButton>
+      <S.SocialButton name="apple" onClick={() => onClickSocialLogin("apple")}>
+        <Image src="/images/social/apple_icon.svg" width={18} height={18} alt="애플_아이콘" className="image-icon" />
+        <span className="text">Sign In with Apple</span>
+      </S.SocialButton>
+    </S.Personal>
+  );
 }
 
 const S = {
   Personal: styled.div``,
+  SocialButton: styled.button<{ name: string }>`
+    height: 45px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    border-radius: 5px;
+    padding: 0 15px;
+    cursor: pointer;
+    position: relative;
+    .image-icon {
+      position: absolute;
+      left: 20px;
+    }
+    .text {
+      font-weight: 700;
+      font-size: 14px;
+      font-family: Pretendard;
+    }
+    ${(props) =>
+      props.name === "kakao" &&
+      css`
+        background-color: #fee500;
+
+        margin-bottom: 10px;
+        .text {
+          margin-left: 24px;
+          color: #000000 85%;
+          opacity: 0.85;
+        }
+      `}
+    ${(props) =>
+      props.name === "google" &&
+      css`
+        background-color: #fff;
+        color: #000;
+        margin-bottom: 10px;
+        border: 1px solid #ddd;
+        box-shadow: 1px 1px 1px #ddd;
+        .text {
+          color: rgba(0, 0, 0, 54%);
+          margin-left: 24px;
+        }
+      `}
+    ${(props) =>
+      props.name === "apple" &&
+      css`
+        background-color: #000;
+        .text {
+          color: #fff;
+          margin-left: 24px;
+        }
+      `}
+  `,
 };

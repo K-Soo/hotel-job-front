@@ -1,12 +1,15 @@
 import axios from "axios";
 import React from "react";
 import styled from "styled-components";
+import path from "@/constants/path";
+import useAppRouter from "@/hooks/useAppRouter";
 
 interface CompanyProps {}
 
 export default function Company({}: CompanyProps) {
   const [loginEmail, setLoginEmail] = React.useState("");
   const [loginPassword, setLoginPassword] = React.useState("");
+  const { push } = useAppRouter();
 
   const onClick = async (e: any) => {
     e.preventDefault();
@@ -39,6 +42,8 @@ export default function Company({}: CompanyProps) {
           password
         </label>
       </form>
+      <button onClick={() => push(path.SIGN_UP)}>회원가입</button>
+
       <button onClick={onClick} type="button">
         로그인
       </button>

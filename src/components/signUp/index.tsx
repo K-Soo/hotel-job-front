@@ -13,7 +13,7 @@ export default function SignUp({}: SignUpProps) {
 
     try {
       const response = await axios.post(
-        `http://localhost:8000/auth/signup`,
+        `http://localhost:8080/auth/signup`,
         {
           email,
           password,

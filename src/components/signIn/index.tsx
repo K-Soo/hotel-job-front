@@ -4,8 +4,6 @@ import React from "react";
 import { useEffect } from "react";
 import Personal from "@/components/signIn/Personal";
 import Company from "@/components/signIn/Company";
-import path from "@/constants/path";
-import useAppRouter from "@/hooks/useAppRouter";
 
 interface SignInProps {}
 
@@ -13,8 +11,6 @@ type TabTypes = "PERSONAL" | "COMPANY";
 
 export default function SignIn({}: SignInProps) {
   const [signInType, setSignInType] = React.useState<TabTypes>("PERSONAL");
-
-  const { push } = useAppRouter();
 
   const handleClickUserInfo = async () => {
     try {
@@ -60,8 +56,6 @@ export default function SignIn({}: SignInProps) {
 
       {signInType === "PERSONAL" && <Personal />}
       {signInType === "COMPANY" && <Company />}
-
-      <button onClick={() => push(path.SIGN_UP)}>회원가입</button>
     </S.SignIn>
   );
 }
