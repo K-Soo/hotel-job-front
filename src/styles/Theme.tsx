@@ -10,7 +10,7 @@ interface ThemeProps {
 export default function Theme({ children }: ThemeProps) {
   return (
     <ThemeProvider theme={{}}>
-      {/* <GlobalStyles /> */}
+      <GlobalStyles />
       {/* <Reset /> */}
       {children}
     </ThemeProvider>

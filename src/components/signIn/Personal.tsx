@@ -1,12 +1,14 @@
 import styled, { css } from "styled-components";
 import Image from "next/image";
 import Icon from "@/icons/Icon";
+import environment from "@/environment";
+import { SOCIAL_URL } from "@/constants/social";
+console.log("environment: ", environment.kakaoClientId);
 
 interface PersonalProps {}
 
 export default function Personal({}: PersonalProps) {
   const onClickSocialLogin = (type: string) => {
-    const isWebview = localStorage.getItem("isWebview");
     //SWIFT 전용
     // if (window?.webkit) {
     //   router.push('/oauth/callback/kakao');
@@ -15,14 +17,16 @@ export default function Personal({}: PersonalProps) {
     // if (isWebview === "1") {
     //   return window?.jsToWebviewSocialChannel?.postMessage(JSON.stringify({ message: type })); //KAKAO , APPLE, GOOGLE
     // }
-    // return (window.location.href = SOCIAL_URL[type]);
+    // window.location.href = SOCIAL_URL[type];
+    // window.location.href = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${environment.kakaoClientId}&redirect_uri=${environment.kakaoRedirectUrl}`;
+    window.location.href = "http://localhost:8080/api/auth/kakao";
   };
 
   return (
     <S.Personal>
       <Icon name="Back" />
 
-      {/* <S.SocialButton name="kakao" onClick={() => onClickSocialLogin("kakao")}>
+      <S.SocialButton name="kakao" onClick={() => onClickSocialLogin("kakao")}>
         <Image src="/images/social/kakao_icon.svg" width={18} height={18} alt="카카오_아이콘" className="image-icon" />
         <span className="text">Sign In with Kakao</span>
       </S.SocialButton>
@@ -33,7 +37,7 @@ export default function Personal({}: PersonalProps) {
       <S.SocialButton name="apple" onClick={() => onClickSocialLogin("apple")}>
         <Image src="/images/social/apple_icon.svg" width={18} height={18} alt="애플_아이콘" className="image-icon" />
         <span className="text">Sign In with Apple</span>
-      </S.SocialButton> */}
+      </S.SocialButton>
     </S.Personal>
   );
 }

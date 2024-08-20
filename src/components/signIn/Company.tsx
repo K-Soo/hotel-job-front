@@ -15,9 +15,9 @@ export default function Company({}: CompanyProps) {
     e.preventDefault();
     try {
       const response = await axios.post(
-        `http://localhost:8000/auth/sigin`,
+        `http://localhost:8080/api/auth/sign-in`,
         {
-          email: loginEmail,
+          username: loginEmail,
           password: loginPassword,
         },
         {
@@ -34,12 +34,12 @@ export default function Company({}: CompanyProps) {
     <S.company>
       <form onSubmit={onClick}>
         <label htmlFor="">
-          email
+          아이디
           <input type="text" value={loginEmail} onChange={(e) => setLoginEmail(e.target.value)} />
         </label>
         <label htmlFor="">
           <input type="text" value={loginPassword} onChange={(e) => setLoginPassword(e.target.value)} />
-          password
+          비밀번호
         </label>
       </form>
       <button onClick={() => push(path.SIGN_UP)}>회원가입</button>

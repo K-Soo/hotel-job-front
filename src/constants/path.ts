@@ -5,11 +5,15 @@ const path = {
   SIGN_UP: "/sign-up", //기업 가입
   SIGN_UP_COMPLETE: "/sign-up/complete",
 
-  TALENT_POOL: "/talent", // 인재정보 메인 페이지
+  RECRUIT: "/recruit", // 채용정보 메인 페이지
+  RECRUIT_HOTEL: "/recruit/hotel", // 호텔 채용정보
+  RECRUIT_PENSION: "/recruit/pension", // 펜션 인재정보
+  RECRUIT_PART_TIME: "/recruit/part-time", // 알바 채용정보
 
-  TALENT_POOL_HOTEL: "/talent/hotel", // 호텔 인재정보
-  TALENT_POOL_PENSION: "/talent/pension", // 펜션 인재정보
-  TALENT_POOL_PART_TIME: "/talent/part-time", // 알바 or 파출부 인재정보
+  TALENT: "/talent", // 인재정보 메인 페이지
+  TALENT_HOTEL: "/talent/hotel", // 호텔 인재정보
+  TALENT_PENSION: "/talent/pension", // 펜션 인재정보
+  TALENT_PART_TIME: "/talent/part-time", // 알바 or 파출부 인재정보
 
   SEARCH: "/search",
 

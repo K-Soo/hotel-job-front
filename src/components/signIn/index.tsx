@@ -15,7 +15,7 @@ export default function SignIn({}: SignInProps) {
   const handleClickUserInfo = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:8000/auth/user-info`,
+        `http://localhost:8080/auth/user-info`,
 
         {
           withCredentials: true,
@@ -27,14 +27,25 @@ export default function SignIn({}: SignInProps) {
       console.log("error: ", error);
     }
   };
-
   const handleClickSignOut = async () => {
     try {
-      const response = await axios.get(`http://localhost:8000/auth/sign-out`, {
+      const response = await axios.get(`http://localhost:8080/auth/sign-out`, {
         withCredentials: true,
       });
 
       console.log("로그아웃 API : ", response);
+    } catch (error) {
+      console.log("error: ", error);
+    }
+  };
+
+  const handleClickTest = async () => {
+    try {
+      const response = await axios.get(`http://localhost:8080/api/business-user`, {
+        withCredentials: true,
+      });
+
+      console.log("테스트 API : ", response);
     } catch (error) {
       console.log("error: ", error);
     }
@@ -49,6 +60,11 @@ export default function SignIn({}: SignInProps) {
       <button onClick={handleClickSignOut} type="button">
         로그아웃
       </button>
+
+      <h3>호텔잡</h3>
+
+      <button onClick={handleClickTest}>에러 테스트</button>
+
       <div>
         <button onClick={() => setSignInType("PERSONAL")}>일반회원</button>
         <button onClick={() => setSignInType("COMPANY")}>기업회원</button>
@@ -61,5 +77,7 @@ export default function SignIn({}: SignInProps) {
 }
 
 const S = {
-  SignIn: styled.div``,
+  SignIn: styled.div`
+    border: 1px solid red;
+  `,
 };

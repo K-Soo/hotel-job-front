@@ -7,5 +7,9 @@ export default function UtilityMenu({}: UtilityMenuProps) {
 }
 
 const S = {
-  UtilityMenu: styled.div``,
+  UtilityMenu: styled.div`
+    height: 30px;
+    max-width: 1080px;
+    margin: 0 auto;
+  `,
 };
