@@ -18,11 +18,15 @@ export default function Company({}: CompanyProps) {
     e.preventDefault();
     try {
       const response = await Post.signIn({ username: loginEmail, password: loginPassword });
-
-      console.log("로그인 API : ", response);
-      if (response?.status !== 200) {
+      console.log("로그인 API : ", response.result.accessToken);
+      if (response.status !== 200) {
         throw new Error();
       }
+      setAuthState({
+        accessToken: response.result.accessToken,
+        email: response.result.email,
+        provider: response.result.provider,
+      });
     } catch (error) {
       console.log("error: ", error);
     }

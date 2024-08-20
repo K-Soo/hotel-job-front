@@ -1,6 +1,7 @@
 import axios, { AxiosResponse, AxiosRequestConfig } from "axios";
 import { interceptorHelper } from "./interceptorHelper";
 import environment from "@/environment";
+import * as API from "@/types/API";
 
 const URL_API = "/api";
 
@@ -66,5 +67,5 @@ export const Get = {
 };
 
 export const Post = {
-  signIn: (body: { username: string; password: string }) => requests.post<{ code: number }>("/auth/sign-in", body),
+  signIn: (body: API.SignInRequest) => requests.post<API.SignInResponse>("/auth/sign-in", body),
 };
