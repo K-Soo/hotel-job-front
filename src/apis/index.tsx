@@ -21,3 +21,7 @@ export const OAuth = {
   //카카오 로그인
   kakaoSignIn: (body: { code: string }) => requests.post<{ success: string }>("/auth/kakao", body),
 };
+
+export const Get = {
+  getUserInfo: () => requests.get("/auth/user-info"),
+};

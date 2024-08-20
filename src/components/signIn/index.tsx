@@ -15,7 +15,7 @@ export default function SignIn({}: SignInProps) {
   const handleClickUserInfo = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:8080/auth/user-info`,
+        `http://localhost:8080/api/auth/me`,
 
         {
           withCredentials: true,
@@ -29,7 +29,7 @@ export default function SignIn({}: SignInProps) {
   };
   const handleClickSignOut = async () => {
     try {
-      const response = await axios.get(`http://localhost:8080/auth/sign-out`, {
+      const response = await axios.get(`http://localhost:8080/api/auth/sign-out`, {
         withCredentials: true,
       });
 
