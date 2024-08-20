@@ -8,7 +8,7 @@ const handleSuccessResponse = (config: AxiosResponse) => {
     return;
   }
   if (ALLOW_AUTHENTICATION_PATH.includes(config.config.url)) {
-    const accessToken = config.data?.accessToken;
+    const accessToken = config.data?.result?.accessToken;
     if (!accessToken) {
       throw new Error("Access token is missing");
     }

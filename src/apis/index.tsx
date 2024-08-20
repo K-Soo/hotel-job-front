@@ -13,8 +13,6 @@ export const instance = axios.create(config);
 
 instance.interceptors.request.use(
   (config) => {
-    console.log("시작시작시작시작시작시작시작시작시작: ", config);
-
     return config;
   },
   (error) => {
@@ -28,8 +26,6 @@ instance.interceptors.response.use(
     return config;
   },
   async (error) => {
-    console.log("interceptors -  ", error);
-
     const { config, response } = error;
     const originalRequest = config;
     const shouldRefreshToken = response?.status === 401;
@@ -70,5 +66,5 @@ export const Get = {
 };
 
 export const Post = {
-  signIn: (body: { username: string; password: string }) => requests.post("/auth/sign-in", body),
+  signIn: (body: { username: string; password: string }) => requests.post<{ code: number }>("/auth/sign-in", body),
 };
