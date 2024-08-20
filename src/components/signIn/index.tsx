@@ -4,6 +4,7 @@ import React from "react";
 import { useEffect } from "react";
 import Personal from "@/components/signIn/Personal";
 import Company from "@/components/signIn/Company";
+import { Get } from "@/apis";
 
 interface SignInProps {}
 
@@ -14,15 +15,9 @@ export default function SignIn({}: SignInProps) {
 
   const handleClickUserInfo = async () => {
     try {
-      const response = await axios.get(
-        `http://localhost:8080/api/auth/me`,
+      const response = await Get.getUserInfo();
 
-        {
-          withCredentials: true,
-        }
-      );
-
-      console.log("유저정보 API : ", response.data);
+      console.log("유저정보 API : ", response);
     } catch (error) {
       console.log("error: ", error);
     }

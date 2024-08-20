@@ -3,6 +3,7 @@ import React from "react";
 import styled from "styled-components";
 import path from "@/constants/path";
 import useAppRouter from "@/hooks/useAppRouter";
+import { Get, Post } from "@/apis";
 
 interface CompanyProps {}
 
@@ -14,17 +15,9 @@ export default function Company({}: CompanyProps) {
   const onClick = async (e: any) => {
     e.preventDefault();
     try {
-      const response = await axios.post(
-        `http://localhost:8080/api/auth/sign-in`,
-        {
-          username: loginEmail,
-          password: loginPassword,
-        },
-        {
-          withCredentials: true,
-        }
-      );
-      console.log("로그인 API : ", response.data);
+      const response = await Post.signIn({ username: loginEmail, password: loginPassword });
+
+      console.log("로그인 API : ", response);
     } catch (error) {
       console.log("error: ", error);
     }
