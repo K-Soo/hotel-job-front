@@ -25,6 +25,7 @@ export default function Navigation({}: NavigationProps) {
         <Link href={path.TALENT}>인재정보</Link>
       </div>
       <div>
+        <Link href={path.ACCOUNT}>마이페이지</Link>
         <Link href={path.SIGN_IN}>로그인</Link>
         <button onClick={handleClickSignOut} type="button">
           로그아웃

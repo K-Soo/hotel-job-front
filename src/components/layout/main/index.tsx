@@ -1,9 +1,11 @@
 import styled from "styled-components";
 
-interface MainProps {}
+interface MainProps {
+  children: React.ReactNode;
+}
 
-export function Main({}: MainProps) {
-  return <S.Main>Main</S.Main>;
+export function Main({ children }: MainProps) {
+  return <S.Main>{children}</S.Main>;
 }
 
 const S = {
