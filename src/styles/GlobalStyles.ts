@@ -3,7 +3,6 @@ import { createGlobalStyle } from "styled-components";
 import Reset from "styled-reset";
 
 const GlobalStyle = createGlobalStyle`
-/* ${Reset} */
 `;
 
 export default GlobalStyle;

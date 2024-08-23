@@ -22,17 +22,6 @@ export default function SignIn({}: SignInProps) {
       console.log("error: ", error);
     }
   };
-  const handleClickSignOut = async () => {
-    try {
-      const response = await axios.get(`http://localhost:8080/api/auth/sign-out`, {
-        withCredentials: true,
-      });
-
-      console.log("로그아웃 API : ", response);
-    } catch (error) {
-      console.log("error: ", error);
-    }
-  };
 
   const handleClickTest = async () => {
     try {
@@ -51,9 +40,6 @@ export default function SignIn({}: SignInProps) {
       <a href="">asd</a>
       <button onClick={handleClickUserInfo} type="button">
         유저정보 가져오기
-      </button>
-      <button onClick={handleClickSignOut} type="button">
-        로그아웃
       </button>
 
       <h3>호텔잡</h3>

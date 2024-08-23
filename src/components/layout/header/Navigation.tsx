@@ -1,10 +1,23 @@
 import styled from "styled-components";
 import Link from "next/link";
 import path from "@/constants/path";
+import axios from "axios";
 
 interface NavigationProps {}
 
 export default function Navigation({}: NavigationProps) {
+  const handleClickSignOut = async () => {
+    try {
+      const response = await axios.get(`http://localhost:8080/api/auth/sign-out`, {
+        withCredentials: true,
+      });
+
+      console.log("로그아웃 API : ", response);
+    } catch (error) {
+      console.log("error: ", error);
+    }
+  };
+
   return (
     <S.Navigation>
       <div>
@@ -13,6 +26,9 @@ export default function Navigation({}: NavigationProps) {
       </div>
       <div>
         <Link href={path.SIGN_IN}>로그인</Link>
+        <button onClick={handleClickSignOut} type="button">
+          로그아웃
+        </button>
       </div>
     </S.Navigation>
   );

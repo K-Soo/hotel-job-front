@@ -18,7 +18,6 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
       <QueryClientProvider client={queryClient}>
         {!Component.authentication && getLayout(<Component {...pageProps} />)}
         {Component.authentication && getLayout(<Component {...pageProps} />)}
-
         <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>
     </Theme>
