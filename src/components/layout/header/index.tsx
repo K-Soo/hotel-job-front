@@ -15,10 +15,8 @@ export function Header({}: HeaderProps) {
 
 const S = {
   Header: styled.header`
-    border: 1px solid red;
     position: sticky;
     top: -30px;
-    margin: 0 auto;
     background-color: rgba(255, 255, 255, 0.9);
   `,
 };
