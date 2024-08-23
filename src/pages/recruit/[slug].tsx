@@ -1,11 +1,16 @@
-import styled from "styled-components";
+import Layout, { Header, Footer, Main } from "@/components/layout";
+import RecruitDetailContainer from "@/containers/recruitDetailContainer";
 
-interface RecruitDetailProps {}
-
-export default function RecruitDetail({}: RecruitDetailProps) {
-  return <S.RecruitDetail>[slug]</S.RecruitDetail>;
+export default function RecruitDetailPage() {
+  return <RecruitDetailContainer />;
 }
 
-const S = {
-  RecruitDetail: styled.div``,
+RecruitDetailPage.getLayout = (page: React.ReactElement) => {
+  return (
+    <Layout>
+      <Header />
+      <Main>{page}</Main>
+      <Footer />
+    </Layout>
+  );
 };

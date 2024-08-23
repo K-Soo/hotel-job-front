@@ -2,6 +2,7 @@ import React from "react";
 import { ThemeProvider } from "styled-components";
 import GlobalStyles from "./GlobalStyles";
 import { Reset as StyledReset } from "styled-reset";
+import styledMedia from "./Media";
 
 interface ThemeProps {
   children: React.ReactNode;
@@ -9,7 +10,7 @@ interface ThemeProps {
 
 export default function Theme({ children }: ThemeProps) {
   return (
-    <ThemeProvider theme={{}}>
+    <ThemeProvider theme={styledMedia}>
       <GlobalStyles />
       <StyledReset />
       {children}
