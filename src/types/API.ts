@@ -18,3 +18,9 @@ export interface SignInResponse extends defaultResponse {
     provider: string;
   };
 }
+
+export interface RequestAccessTokenResponse extends defaultResponse {
+  result: {
+    accessToken: string;
+  };
+}

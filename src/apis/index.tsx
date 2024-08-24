@@ -27,13 +27,34 @@ instance.interceptors.response.use(
     return config;
   },
   async (error) => {
-    const { config, response } = error;
-    const originalRequest = config;
-    const shouldRefreshToken = response?.status === 401;
-    const shouldLogoutUser = response?.status === 403;
-    console.log("shouldLogoutUser: ", shouldLogoutUser);
+    const originalRequest = error.config;
+    console.error("response interceptor : ", error.response?.data);
+
+    const shouldRefreshToken = error.response.status === 401;
+    const shouldLogoutUser = error.response.status === 403;
 
     let isRefreshing = false;
+
+    // if (shouldRefreshToken && !originalRequest._retry) {
+    if (shouldRefreshToken) {
+      // originalRequest._retry = true;
+
+      try {
+        const response = await Post.requestAccessToken({});
+        console.log("토큰 재요청 API : ", response);
+        if (response.status !== 200) {
+          throw new Error();
+        }
+        const newAccessToken = response.result.accessToken;
+        instance.defaults.headers.common["Authorization"] = `Bearer ${newAccessToken}`;
+        originalRequest.headers["Authorization"] = `Bearer ${newAccessToken}`;
+        return instance(originalRequest);
+      } catch (error) {
+        if (axios.isAxiosError(error)) {
+          console.error("refresh-token error : ", error.response?.data);
+        }
+      }
+    }
 
     // // 엑세스 토큰 재요청
     // if (shouldRefreshToken && !isRefreshing) {
@@ -45,6 +66,7 @@ instance.interceptors.response.use(
       alert("만료되었습니다.");
       window.location.href = "/sign-in";
     }
+
     // // 리프레시 토큰 만료
     // if (shouldLogoutUser && !isRefreshing) {
     //   isRefreshing = true;
@@ -60,6 +82,10 @@ const responseBody = <T extends {}>(response: AxiosResponse<T>) => response.data
 const requests = {
   get: (url: string) => instance.get(url, config).then(responseBody),
   post: <T extends {}>(url: string, body: object) => instance.post<T>(url, body).then(responseBody),
+};
+
+export const Internal = {
+  checkRefreshCookie: (): Promise<{ result: boolean }> => axios.get("/api/internal/check-cookies").then(responseBody),
 };
 
 export const OAuth = {
@@ -80,4 +106,6 @@ export const Get = {
 export const Post = {
   signIn: (body: API.SignInRequest) => requests.post<API.SignInResponse>("/auth/sign-in", body),
   getUserInfo: (body: {}) => requests.post("/auth/user-info", body),
+
+  requestAccessToken: (body: {}) => requests.post<API.RequestAccessTokenResponse>("/auth/refresh-token", body),
 };

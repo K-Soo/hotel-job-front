@@ -29,9 +29,9 @@ export default function Navigation({}: NavigationProps) {
         <Link href={path.TALENT}>인재정보</Link>
       </div>
       <div>
-        {authStateValue.accessToken && <Link href={path.ACCOUNT}>마이페이지</Link>}
-        {!authStateValue.accessToken && <Link href={path.SIGN_IN}>로그인</Link>}
-        {authStateValue.accessToken && (
+        {authStateValue.provider && <Link href={path.ACCOUNT}>마이페이지</Link>}
+        {!authStateValue.provider && <Link href={path.SIGN_IN}>로그인</Link>}
+        {authStateValue.provider && (
           <button onClick={handleClickSignOut} type="button">
             로그아웃
           </button>
