@@ -24,3 +24,10 @@ export interface RequestAccessTokenResponse extends defaultResponse {
     accessToken: string;
   };
 }
+
+export interface GetUserInfoResponse extends defaultResponse {
+  result: {
+    nickname: string;
+    provider: string;
+  };
+}
