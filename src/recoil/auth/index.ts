@@ -1,7 +1,6 @@
-import { atom } from "recoil";
+import { atom, selector } from "recoil";
 
 export interface AuthAtom {
-  accessToken: string | null;
   provider: string | null;
   nickname: string | null;
 }
@@ -9,8 +8,18 @@ export interface AuthAtom {
 export const authAtom = atom<AuthAtom>({
   key: "authAtom",
   default: {
-    accessToken: null,
     provider: null,
     nickname: null,
+  },
+});
+
+export const authSelector = selector({
+  key: "authSelector",
+  get: ({ get }) => {
+    const authState = get(authAtom);
+
+    const isLogin = !!authState.provider;
+
+    return { isLogin };
   },
 });

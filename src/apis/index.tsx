@@ -34,7 +34,6 @@ instance.interceptors.response.use(
     console.error("response interceptor : ", error.response?.data);
 
     const shouldRefreshToken = error.response.status === 401;
-    console.log("shouldRefreshToken: ", shouldRefreshToken);
     const shouldLogoutUser = error.response.status === 403;
 
     // if (shouldRefreshToken && !originalRequest._retry) {
