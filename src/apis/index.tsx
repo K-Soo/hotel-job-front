@@ -31,6 +31,7 @@ instance.interceptors.response.use(
     const originalRequest = config;
     const shouldRefreshToken = response?.status === 401;
     const shouldLogoutUser = response?.status === 403;
+    console.log("shouldLogoutUser: ", shouldLogoutUser);
 
     let isRefreshing = false;
 
@@ -40,6 +41,10 @@ instance.interceptors.response.use(
     //   return interceptorHelper.handleTokenExpiredError(originalRequest, error);
     // }
 
+    if (shouldLogoutUser) {
+      alert("만료되었습니다.");
+      window.location.href = "/sign-in";
+    }
     // // 리프레시 토큰 만료
     // if (shouldLogoutUser && !isRefreshing) {
     //   isRefreshing = true;
@@ -64,8 +69,15 @@ export const OAuth = {
 
 export const Get = {
   getUserInfo: () => requests.get("/auth/user-info"),
+
+  getAccount: () => requests.get("/account"),
+
+  getAccessTokenUpdate: () => requests.get("/auth/refresh-token"),
+
+  getBusinessUser: () => requests.get("/business-user"),
 };
 
 export const Post = {
   signIn: (body: API.SignInRequest) => requests.post<API.SignInResponse>("/auth/sign-in", body),
+  getUserInfo: (body: {}) => requests.post("/auth/user-info", body),
 };

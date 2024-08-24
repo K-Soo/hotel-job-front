@@ -25,7 +25,7 @@ export default function Company({}: CompanyProps) {
       }
       setAuthState({
         accessToken: response.result.accessToken,
-        email: response.result.email,
+        nickname: response.result.nickname,
         provider: response.result.provider,
       });
       push(path.HOME);

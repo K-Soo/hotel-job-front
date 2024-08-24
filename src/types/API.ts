@@ -14,7 +14,7 @@ export interface SignInRequest {
 export interface SignInResponse extends defaultResponse {
   result: {
     accessToken: string;
-    email: string;
+    nickname: string;
     provider: string;
   };
 }

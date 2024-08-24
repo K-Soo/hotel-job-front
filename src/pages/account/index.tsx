@@ -1,7 +1,7 @@
 import Layout, { Header, Footer, Main } from "@/components/layout";
-
+import AccountContainer from "@/containers/accountContainer";
 export default function AccountPage() {
-  return <>index</>;
+  return <AccountContainer />;
 }
 
 AccountPage.getLayout = (page: React.ReactElement) => {
@@ -13,3 +13,5 @@ AccountPage.getLayout = (page: React.ReactElement) => {
     </Layout>
   );
 };
+
+AccountPage.authentication = true;
