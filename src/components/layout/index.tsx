@@ -14,8 +14,10 @@ export default function Layout({ children }: LayoutProps) {
 const S = {
   Layout: styled.div`
     min-height: 100vh;
+    height: 100%;
     display: flex;
     flex-direction: column;
     width: 100%;
+    border: 1px solid red;
   `,
 };

@@ -5,6 +5,7 @@ import Layout from "@/components/layout";
 import { AppPropsWithLayout } from "@/types/app";
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import { RecoilRoot } from "recoil";
 
 const commonLayout = (page: React.ReactElement) => <Layout>{page}</Layout>;
 
@@ -15,11 +16,13 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
 
   return (
     <Theme>
-      <QueryClientProvider client={queryClient}>
-        {!Component.authentication && getLayout(<Component {...pageProps} />)}
-        {Component.authentication && getLayout(<Component {...pageProps} />)}
-        <ReactQueryDevtools initialIsOpen={false} />
-      </QueryClientProvider>
+      <RecoilRoot>
+        <QueryClientProvider client={queryClient}>
+          {!Component.authentication && getLayout(<Component {...pageProps} />)}
+          {Component.authentication && getLayout(<Component {...pageProps} />)}
+          <ReactQueryDevtools initialIsOpen={false} />
+        </QueryClientProvider>
+      </RecoilRoot>
     </Theme>
   );
 }

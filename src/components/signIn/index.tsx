@@ -5,13 +5,22 @@ import { useEffect } from "react";
 import Personal from "@/components/signIn/Personal";
 import Company from "@/components/signIn/Company";
 import { Get } from "@/apis";
+import { useRouter } from "next/router";
 
 interface SignInProps {}
 
-type TabTypes = "PERSONAL" | "COMPANY";
+type TabTypes = "personal" | "company";
 
 export default function SignIn({}: SignInProps) {
-  const [signInType, setSignInType] = React.useState<TabTypes>("PERSONAL");
+  const [signInType, setSignInType] = React.useState<TabTypes>("personal");
+  const router = useRouter();
+  const queryType = (router.query.type as TabTypes) || "personal";
+
+  // useEffect(() => {
+  //   if (queryType) {
+  //     setSignInType(queryType);
+  //   }
+  // }, [queryType]);
 
   const handleClickUserInfo = async () => {
     try {
@@ -42,23 +51,30 @@ export default function SignIn({}: SignInProps) {
         유저정보 가져오기
       </button>
 
-      <h3>호텔잡</h3>
+      <h3 className="title">호텔잡</h3>
 
       <button onClick={handleClickTest}>에러 테스트</button>
 
       <div>
-        <button onClick={() => setSignInType("PERSONAL")}>일반회원</button>
-        <button onClick={() => setSignInType("COMPANY")}>기업회원</button>
+        <button onClick={() => setSignInType("personal")}>일반회원</button>
+        <button onClick={() => setSignInType("company")}>기업회원</button>
       </div>
 
-      {signInType === "PERSONAL" && <Personal />}
-      {signInType === "COMPANY" && <Company />}
+      {signInType === "personal" && <Personal />}
+      {signInType === "company" && <Company />}
     </S.SignIn>
   );
 }
 
 const S = {
-  SignIn: styled.div`
+  SignIn: styled.section`
     border: 1px solid red;
+    height: 100%;
+    max-width: 500px;
+    width: 100%;
+    margin: 0 auto;
+    .title {
+      font-size: 24px;
+    }
   `,
 };

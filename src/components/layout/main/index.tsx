@@ -15,7 +15,6 @@ const S = {
     margin: 0 auto;
     height: 100%;
     width: 100%;
-    border: 1px solid red;
     flex: 1;
   `,
 };

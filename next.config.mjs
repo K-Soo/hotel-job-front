@@ -1,3 +1,5 @@
+import withInterceptStdout from "next-intercept-stdout";
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: false,
@@ -12,4 +14,4 @@ const nextConfig = {
   },
 };
 
-export default nextConfig;
+export default withInterceptStdout(nextConfig, (text) => (text.includes("Duplicate atom key") ? "" : text));

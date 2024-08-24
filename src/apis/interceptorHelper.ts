@@ -13,6 +13,7 @@ const handleSuccessResponse = (config: AxiosResponse) => {
       throw new Error("Access token is missing");
     }
     if (accessToken) {
+      console.log("accessToken: ", accessToken);
       instance.defaults.headers.common["Authorization"] = `Bearer ${accessToken}`;
     }
   }

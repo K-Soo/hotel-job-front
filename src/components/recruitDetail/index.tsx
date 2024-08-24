@@ -5,8 +5,12 @@ interface RecruitDetailProps {}
 export default function RecruitDetail({}: RecruitDetailProps) {
   return (
     <S.RecruitDetail>
-      {false && <S.Images>{/* 이미지 영역 */}</S.Images>}
+      {true && <S.Images>{/* 이미지 영역 */}</S.Images>}
 
+      <S.DateTime>
+        <span>등록일</span>
+        <span>수정일</span>
+      </S.DateTime>
       <S.Header>
         <div className="left">
           <div className="left__company">메이호텔</div>
@@ -21,36 +25,41 @@ export default function RecruitDetail({}: RecruitDetailProps) {
       <S.Title>상세 정보</S.Title>
       <S.information>
         <div className="left">
-          <div>
-            <span>경력</span>
-            <span>무관</span>
+          <div className="left__item">
+            <span className="left__item--label">직무</span>
+            <span className="left__item--value">무관</span>
           </div>
-          <div>
-            <span>직무</span>
-            <span>무관</span>
+          <div className="left__item">
+            <span className="left__item--label">경력</span>
+            <span className="left__item--value">무관</span>
           </div>
-          <div>
-            <span>급여</span>
-            <span>협의</span>
+          <div className="left__item">
+            <span className="left__item--label">급여</span>
+            <span className="left__item--value">협의</span>
+          </div>
+          <div className="left__item">
+            <span className="left__item--label">고용형태</span>
+            <span className="left__item--value">계약직</span>
           </div>
         </div>
 
         <div className="right">
-          <div>
-            <span>근무지역</span>
-            <span>서울</span>
+          <div className="right__item">
+            <span className="right__item--label">근무지역</span>
+            <span className="right__item--value">서울</span>
           </div>
-          <div>
-            <span>고용형태</span>
-            <span>계약직</span>
+
+          <div className="right__item">
+            <span className="right__item--label">근무시간</span>
+            <span className="right__item--value">10시~10시</span>
           </div>
-          <div>
-            <span>근무시간</span>
-            <span>10시~10시</span>
+          <div className="right__item">
+            <span className="right__item--label">근무형태</span>
+            <span className="right__item--value">격일</span>
           </div>
-          <div>
-            <span>근무형태</span>
-            <span>무관</span>
+          <div className="right__item">
+            <span className="right__item--label">국적</span>
+            <span className="right__item--value">무관</span>
           </div>
         </div>
       </S.information>
@@ -97,54 +106,86 @@ export default function RecruitDetail({}: RecruitDetailProps) {
 
 const S = {
   RecruitDetail: styled.section`
-    border: 3px solid #000;
-    ${(props) => props.theme.tablet``};
-  `,
-  Header: styled.article`
-    display: flex;
-    justify-content: space-between;
-    border: 1px solid red;
-    .left {
-      &__company {
-        font-size: 18px;
-        color: #333;
-        font-weight: 500;
-      }
-      &__title {
-        font-size: 28px;
-        font-weight: 600;
-      }
-    }
     ${(props) => props.theme.tablet``};
   `,
   Images: styled.article`
     height: 350px;
     border-radius: 15px;
     background-color: gray;
-
+    margin-bottom: 30px;
     ${(props) => props.theme.tablet``};
   `,
+  DateTime: styled.article`
+    text-align: right;
+    margin-bottom: 5px;
+  `,
+  Header: styled.article`
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid red;
+    margin-bottom: 50px;
+
+    ${(props) => props.theme.tablet`
+      flex-direction: column-reverse;
+    `};
+    .left {
+      &__company {
+        font-size: 18px;
+        color: #333;
+        font-weight: 500;
+        margin-bottom: 5px;
+      }
+      &__title {
+        font-size: 28px;
+        font-weight: 600;
+        ${(props) => props.theme.tablet`
+          font-size: 16px;
+        `};
+      }
+    }
+  `,
+
   information: styled.article`
     border: 1px solid red;
     display: flex;
+    margin-bottom: 50px;
     .left {
       flex: 50%;
+      &__item {
+        display: flex;
+        margin-bottom: 5px;
+        &--label {
+          flex-basis: 70px;
+          border: 1px solid red;
+        }
+        &__value {
+        }
+      }
     }
     .right {
       flex: 50%;
+      &__item {
+        display: flex;
+        margin-bottom: 5px;
+        &--label {
+          flex-basis: 70px;
+        }
+        &__value {
+        }
+      }
     }
     ${(props) => props.theme.tablet``};
   `,
   Content: styled.article`
     min-height: 500px;
+    margin-bottom: 50px;
     ${(props) => props.theme.tablet``};
   `,
-  Location: styled.article`
-    ${(props) => props.theme.tablet``};
-  `,
+
   Accept: styled.article`
     display: flex;
     border: 1px solid red;
+    margin-bottom: 50px;
     .period {
       flex: 50%;
     }
@@ -153,9 +194,13 @@ const S = {
     }
     ${(props) => props.theme.tablet``};
   `,
+  Location: styled.article`
+    ${(props) => props.theme.tablet``};
+  `,
   Title: styled.article`
-    font-size: 18px;
+    font-size: 20px;
     font-weight: 600;
+    margin-bottom: 5px;
     ${(props) => props.theme.tablet``};
   `,
 };
