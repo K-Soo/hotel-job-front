@@ -3,7 +3,7 @@ import { atom, selector } from "recoil";
 export interface AuthAtom {
   provider: string | null;
   nickname: string | null;
-  isLoading: boolean;
+  status: "AUTHENTICATED" | "UNAUTHENTICATED" | "IDLE";
 }
 
 export const authAtom = atom<AuthAtom>({
@@ -11,7 +11,7 @@ export const authAtom = atom<AuthAtom>({
   default: {
     provider: null,
     nickname: null,
-    isLoading: true,
+    status: "IDLE",
   },
 });
 
@@ -20,9 +20,9 @@ export const authSelector = selector({
   get: ({ get }) => {
     const authState = get(authAtom);
 
-    const isLogin = !!authState.provider;
-    const isLoading = authState.isLoading;
+    const isLogin = authState.status === "AUTHENTICATED";
+    const status = authState.status;
 
-    return { isLogin, isLoading };
+    return { isLogin, status };
   },
 });

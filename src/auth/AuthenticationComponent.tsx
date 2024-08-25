@@ -2,12 +2,19 @@ import React from "react";
 import { Internal, Post } from "@/apis";
 import { useSetRecoilState, useRecoilValue } from "recoil";
 import { authAtom, authSelector } from "@/recoil/auth";
+import { useRouter } from "next/router";
+import { EXCLUDED_PATHS } from "@/constants/path";
 
 export default function AuthenticationComponent() {
   const authSelectorValue = useRecoilValue(authSelector);
   const setAuthAtom = useSetRecoilState(authAtom);
+  const router = useRouter();
 
   React.useEffect(() => {
+    if (EXCLUDED_PATHS.includes(router.pathname)) {
+      return;
+    }
+
     if (authSelectorValue.isLogin) {
       return;
     }
@@ -17,20 +24,20 @@ export default function AuthenticationComponent() {
         if (!cookieExist) return;
 
         const response = await Post.getUserInfo({});
-        console.log("유저정보 API : ", response);
+        console.log("GLOBAL 유저정보 API : ", response);
         if (response.status !== 200) {
           throw new Error();
         }
         setAuthAtom({
           nickname: response.result.nickname,
           provider: response.result.provider,
-          isLoading: false,
+          status: "AUTHENTICATED",
         });
       } catch (error) {
         console.log("auth error: ", error);
       }
     })();
-  }, [authSelectorValue.isLogin, setAuthAtom]);
+  }, [authSelectorValue.isLogin, router.pathname]);
 
   return null;
 }

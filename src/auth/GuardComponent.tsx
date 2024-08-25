@@ -3,6 +3,7 @@ import { useSetRecoilState, useRecoilValue } from "recoil";
 import { authAtom, authSelector } from "@/recoil/auth";
 import { useRouter } from "next/router";
 import path from "@/constants/path";
+import { Internal } from "@/apis";
 interface GuardComponentProps {
   children: React.ReactNode;
 }
@@ -15,23 +16,39 @@ export default function GuardComponent({ children }: GuardComponentProps) {
   React.useEffect(() => {
     const timer = setTimeout(() => {
       setShowLoading(true);
-    }, 1000);
+    }, 500);
 
     return () => clearTimeout(timer);
   }, []);
 
   React.useEffect(() => {
-    if (!authSelectorValue.isLogin && !authSelectorValue.isLoading) {
+    if (authSelectorValue.status === "AUTHENTICATED") {
+      return;
+    }
+    (async () => {
+      try {
+        const cookieExist = await Internal.checkRefreshCookie();
+        if (!cookieExist) {
+          router.replace(path.HOME);
+        }
+      } catch (error) {
+        console.log("auth error: ", error);
+      }
+    })();
+  }, [authSelectorValue.status, router]);
+
+  React.useEffect(() => {
+    if (authSelectorValue.status === "UNAUTHENTICATED") {
       router.replace(path.SIGN_IN);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [authSelectorValue.isLoading, authSelectorValue.isLogin]);
+  }, [authSelectorValue.status]);
 
-  if (authSelectorValue.isLoading && showLoading) {
+  if (authSelectorValue.status === "IDLE" && showLoading) {
     return <div>Loading...</div>;
   }
 
-  if (authSelectorValue.isLogin) {
+  if (authSelectorValue.status === "AUTHENTICATED") {
     return <React.Fragment>{children}</React.Fragment>;
   }
 }

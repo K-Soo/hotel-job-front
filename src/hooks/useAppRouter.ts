@@ -28,6 +28,16 @@ export default function useAppRouter() {
     }
   };
 
+  const replace = async (url: string, as?: Url, options?: TransitionOptions) => {
+    if (!isWebView) {
+      await router.replace(url, as, options);
+    }
+
+    if (device === "IOS") {
+      sendRouterEvent({ path: `${environment.baseUrl}${url}` });
+    }
+  };
+
   const back = async (): Promise<void> => {
     if (!isWebView) {
       router.back();
@@ -37,6 +47,7 @@ export default function useAppRouter() {
 
   return {
     push,
+    replace,
     asPath: router.asPath,
     events: router.events,
     pathname: router.pathname,

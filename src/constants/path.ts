@@ -21,8 +21,6 @@ const path = {
 
   CHECKOUT: "/checkout",
 
-  ACCOUNT: "/account", //내 정보
-
   SERVICE_QNA: "/account/qna", //1:1문의
   SERVICE_QNA_CREATE: "/account/qna/create", //1:1문의 등록
 
@@ -42,3 +40,5 @@ const path = {
 } as const;
 
 export default path;
+
+export const EXCLUDED_PATHS = ["/auth/kakao/callback", "/auth/google/callback", "/auth/facebook/callback", "/sign-in"];

@@ -24,9 +24,9 @@ export default function Company({}: CompanyProps) {
         throw new Error();
       }
       setAuthState({
-        accessToken: response.result.accessToken,
         nickname: response.result.nickname,
         provider: response.result.provider,
+        status: "AUTHENTICATED",
       });
       push(path.HOME);
     } catch (error) {

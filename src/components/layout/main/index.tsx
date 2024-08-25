@@ -17,7 +17,7 @@ const S = {
     display: flex;
     flex-direction: column;
     margin: 0 auto;
-    background-color: gainsboro;
+    background-color: white;
     & > section {
       flex: 1;
     }
