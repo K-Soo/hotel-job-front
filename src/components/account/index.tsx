@@ -1,11 +1,30 @@
 import styled from "styled-components";
+import Summary from "@/components/account/Summary";
+interface AccountProps {
+  children: React.ReactNode;
+}
 
-interface AccountProps {}
-
-export default function Account({}: AccountProps) {
-  return <S.Account>Account</S.Account>;
+export default function Account({ children }: AccountProps) {
+  return (
+    <S.Account>
+      {children}
+      <div className="container">
+        <Summary />
+        <div>컨텐츠</div>
+      </div>
+    </S.Account>
+  );
 }
 
 const S = {
-  Account: styled.div``,
+  Account: styled.section`
+    display: flex;
+    height: 100%;
+    ${(props) => props.theme.tablet`
+      flex-direction: column-reverse;
+    `};
+    .container {
+      width: 100%;
+    }
+  `,
 };

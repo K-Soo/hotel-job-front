@@ -4,7 +4,7 @@ import { Inter } from "next/font/google";
 import Layout, { Header, Footer, Main } from "@/components/layout";
 
 export default function HomePage() {
-  return <></>;
+  return <>메인페이지</>;
 }
 
 HomePage.getLayout = (page: React.ReactElement) => {

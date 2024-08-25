@@ -17,13 +17,14 @@ export default function AuthenticationComponent() {
         if (!cookieExist) return;
 
         const response = await Post.getUserInfo({});
-        console.log("유저정보@@@@@@@@ API : ", response);
+        console.log("유저정보 API : ", response);
         if (response.status !== 200) {
           throw new Error();
         }
         setAuthAtom({
           nickname: response.result.nickname,
           provider: response.result.provider,
+          isLoading: false,
         });
       } catch (error) {
         console.log("auth error: ", error);
