@@ -7,8 +7,6 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { RecoilRoot } from "recoil";
 import React from "react";
 import { setUserState } from "@/rxjs/state";
-import { BehaviorSubject, Subject } from "rxjs";
-import { userData$ } from "@/apis";
 import GuardComponent from "@/auth/GuardComponent";
 import AuthenticationComponent from "@/auth/AuthenticationComponent";
 

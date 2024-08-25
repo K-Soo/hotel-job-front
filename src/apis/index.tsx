@@ -22,8 +22,6 @@ instance.interceptors.request.use(
   }
 );
 
-export const userData$ = new BehaviorSubject<any>(null);
-
 instance.interceptors.response.use(
   (config) => {
     interceptorHelper.handleSuccessResponse(config);
@@ -39,11 +37,11 @@ instance.interceptors.response.use(
     // if (shouldRefreshToken && !originalRequest._retry) {
     if (shouldRefreshToken) {
       // originalRequest._retry = true;
-      interceptorHelper.handleRequestAccessToken(originalRequest);
+      return interceptorHelper.handleRequestAccessToken(originalRequest);
     }
 
     if (shouldLogoutUser) {
-      interceptorHelper.handleInvalidRefreshToken();
+      return interceptorHelper.handleInvalidRefreshToken();
     }
 
     return Promise.reject(error);
@@ -62,7 +60,7 @@ export const Internal = {
 };
 
 export const OAuth = {
-  //카카오 로그인
+  // 카카오 로그인
   kakaoSignIn: (body: { code: string }) => requests.post<{ success: string }>("/auth/kakao", body),
 };
 
@@ -74,12 +72,18 @@ export const Get = {
   getAccessTokenUpdate: () => requests.get("/auth/refresh-token"),
 
   getBusinessUser: () => requests.get("/business-user"),
+
+  //로그아웃
+  signOut: () => requests.get("/auth/sign-out"),
 };
 
 export const Post = {
+  // 사업자 로그인
   signIn: (body: API.SignInRequest) => requests.post<API.SignInResponse>("/auth/sign-in", body),
 
+  // 유저정보
   getUserInfo: (body: {}) => requests.post<API.GetUserInfoResponse>("/auth/user-info", body),
 
+  // 엑세스토큰 재요청
   requestAccessToken: (body: {}) => requests.post<API.RequestAccessTokenResponse>("/auth/refresh-token", body),
 };

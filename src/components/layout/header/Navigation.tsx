@@ -3,22 +3,22 @@ import Link from "next/link";
 import path from "@/constants/path";
 import axios from "axios";
 import { useRecoilValue } from "recoil";
-import { authAtom } from "@/recoil/auth";
+import { authAtom, authSelector } from "@/recoil/auth";
+import { Post, Get } from "@/apis";
 
 interface NavigationProps {}
 
 export default function Navigation({}: NavigationProps) {
-  const authStateValue = useRecoilValue(authAtom);
+  const authSelectorValue = useRecoilValue(authSelector);
 
   const handleClickSignOut = async () => {
     try {
-      const response = await axios.get(`http://localhost:8080/api/auth/sign-out`, {
-        withCredentials: true,
-      });
-
+      const response = await Get.signOut();
       console.log("로그아웃 API : ", response);
     } catch (error) {
-      console.log("error: ", error);
+      alert("로그아웃 중 에러가 발생했습니다.");
+    } finally {
+      window.location.href = "/";
     }
   };
 
@@ -29,9 +29,9 @@ export default function Navigation({}: NavigationProps) {
         <Link href={path.TALENT}>인재정보</Link>
       </div>
       <div>
-        {authStateValue.provider && <Link href={path.ACCOUNT}>마이페이지</Link>}
-        {!authStateValue.provider && <Link href={path.SIGN_IN}>로그인</Link>}
-        {authStateValue.provider && (
+        {authSelectorValue.isLogin && <Link href={path.ACCOUNT}>마이페이지</Link>}
+        {!authSelectorValue.isLogin && <Link href={path.SIGN_IN}>로그인</Link>}
+        {authSelectorValue.isLogin && (
           <button onClick={handleClickSignOut} type="button">
             로그아웃
           </button>
