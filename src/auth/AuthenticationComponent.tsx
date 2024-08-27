@@ -14,7 +14,6 @@ export default function AuthenticationComponent() {
     if (EXCLUDED_PATHS.includes(router.pathname)) {
       return;
     }
-
     if (authSelectorValue.isLogin) {
       return;
     }

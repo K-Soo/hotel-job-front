@@ -5,6 +5,7 @@ import axios from "axios";
 import { useRecoilValue } from "recoil";
 import { authAtom, authSelector } from "@/recoil/auth";
 import { Post, Get } from "@/apis";
+import Button from "@/components/common/Button";
 
 interface NavigationProps {}
 
@@ -28,13 +29,11 @@ export default function Navigation({}: NavigationProps) {
         <Link href={path.RECRUIT}>채용정보</Link>
         <Link href={path.TALENT}>인재정보</Link>
       </div>
-      <div>
+      <div className="route-box">
         {authSelectorValue.isLogin && <Link href={path.ACCOUNT}>마이페이지</Link>}
         {!authSelectorValue.isLogin && <Link href={path.SIGN_IN}>로그인</Link>}
         {authSelectorValue.isLogin && (
-          <button onClick={handleClickSignOut} type="button">
-            로그아웃
-          </button>
+          <Button label="SIGN OUT" onClick={() => handleClickSignOut()} name="positive" height="30px" width="80px" margin="0 0 0 15px" />
         )}
       </div>
     </S.Navigation>
@@ -49,5 +48,11 @@ const S = {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    .route-box {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      font-size: 14px;
+    }
   `,
 };

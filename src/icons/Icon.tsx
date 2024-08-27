@@ -14,6 +14,7 @@ export type IconProps = {
   onClick?: any;
   cursor?: string;
   animate?: boolean;
+  fill?: string;
 };
 
 function Icon({ name, className, style, onClick }: IconProps) {
@@ -29,14 +30,14 @@ export default styled(Icon)`
   height: ${(props) => (props.height ? props.height : "24px")}; */
   /* margin: ${(props) => (props.margin ? props.margin : "0")}; */
   /* cursor: ${(props) => (props.cursor ? props.cursor : "pointer")}; */
-  /* svg {
+  svg {
     fill: currentColor;
-  } */
-  /* ${(props) =>
+  }
+  ${(props) =>
     props.animate === undefined &&
     css`
       &:hover {
         transform: scale(1.05);
       }
-    `} */
+    `}
 `;

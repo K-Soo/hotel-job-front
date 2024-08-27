@@ -21,7 +21,7 @@ const GENERAL_USER_MENU = [
     value: "/resume",
     items: [
       { label: "이력서 목록", value: "/account/resumes" },
-      { label: "이력서 등록", value: "/account/resumes/new" },
+      { label: "이력서 등록", value: "/account/resumes/create" },
     ],
   },
   { label: "스크랩", value: "/account/scrap", items: [] },

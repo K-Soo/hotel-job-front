@@ -13,11 +13,12 @@ export default function RecruitCard({}: RecruitCardProps) {
     <S.RecruitCard
       onClick={() => handleClickCard()}
       whileHover={{
-        backgroundColor: "red",
+        backgroundColor: "#FFF",
       }}
+      transition={{ duration: 0 }}
     >
       <div className="company">
-        <div>메이호텔</div>
+        <div>영주온천 관광호텔</div>
       </div>
 
       <div className="detail">
@@ -46,7 +47,6 @@ export default function RecruitCard({}: RecruitCardProps) {
       </div>
 
       <div className="support">
-        <button>입사지원</button>
         <time>~10.15(화)</time>
         <span>15일전 등록</span>
       </div>
@@ -58,28 +58,50 @@ const S = {
   RecruitCard: styled(motion.article)`
     display: flex;
     width: 100%;
-    border-bottom: 1px solid #000;
+    border-bottom: 1px solid hsla(0, 0%, 92%, 1);
     padding: 15px;
     cursor: pointer;
+    font-size: 14px;
     .company {
       flex: 15%;
+      display: flex;
+      align-items: center;
     }
     .detail {
       flex: 35%;
       display: flex;
       flex-direction: column;
+      &__content {
+        &--title {
+          color: #292e41;
+          font-weight: 600;
+        }
+      }
       &__tag {
+        display: flex;
+        margin-bottom: 5px;
         &--item {
-          background-color: #f4f6fa;
+          display: block;
           margin-right: 10px;
+          font-size: 13px;
+          background-color: #fff;
+          padding: 3px 5px;
+          border-radius: 5px;
         }
       }
     }
     .occupation {
       flex: 10%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
     .location {
       flex: 10%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
     }
     .info {
       flex: 10%;
@@ -92,6 +114,9 @@ const S = {
       flex: 10%;
       display: flex;
       flex-direction: column;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
   `,
 };

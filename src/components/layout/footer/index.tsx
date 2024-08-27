@@ -8,8 +8,9 @@ export function Footer({}: FooterProps) {
 
 const S = {
   Footer: styled.footer`
-    margin-top: 50px;
     height: 100px;
-    background-color: gray;
+    background-color: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    background-color: black;
   `,
 };

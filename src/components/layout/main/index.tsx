@@ -17,7 +17,6 @@ const S = {
     display: flex;
     flex-direction: column;
     margin: 0 auto;
-    background-color: white;
     & > section {
       flex: 1;
     }

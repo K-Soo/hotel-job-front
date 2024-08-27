@@ -9,7 +9,7 @@ const path = {
 
   RECRUIT: "/recruit", // 채용정보 메인 페이지
   RECRUIT_HOTEL: "/recruit/hotel", // 호텔 채용정보
-  RECRUIT_PENSION: "/recruit/pension", // 펜션 인재정보
+  RECRUIT_PENSION: "/recruit/pension", // 펜션 채용정보
   RECRUIT_PART_TIME: "/recruit/part-time", // 알바 채용정보
 
   TALENT: "/talent", // 인재정보 메인 페이지
