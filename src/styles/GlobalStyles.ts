@@ -12,7 +12,7 @@ const GlobalStyle = createGlobalStyle`
    color: #171717;
  }
  body{
-   background-color: #fafafafa;
+   /* background-color: #fafafafa; */
  }
  a {
    text-decoration: none; /* 밑줄 제거 */

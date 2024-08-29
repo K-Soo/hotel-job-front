@@ -1,11 +1,13 @@
 import styled from "styled-components";
 import Icon from "@/icons/Icon";
 
-interface SearchFormProps {}
+interface SearchFormProps {
+  width?: string;
+}
 
-export default function SearchForm({}: SearchFormProps) {
+export default function SearchForm({ width }: SearchFormProps) {
   return (
-    <S.SearchForm>
+    <S.SearchForm width={width}>
       <Icon className="search-icon" name="Search" style={{ stroke: "#666" }} />
       <input type="text" className="filed" placeholder="Search" />
     </S.SearchForm>
@@ -13,8 +15,9 @@ export default function SearchForm({}: SearchFormProps) {
 }
 
 const S = {
-  SearchForm: styled.div`
+  SearchForm: styled.div<{ width?: string }>`
     height: 48px;
+    width: ${(props) => (props.width ? props.width : "100%")};
     box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
     border-radius: 8px;
     position: relative;

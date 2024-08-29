@@ -25,9 +25,13 @@ export default function Navigation({}: NavigationProps) {
 
   return (
     <S.Navigation>
-      <div>
-        <Link href={path.RECRUIT}>채용정보</Link>
-        <Link href={path.TALENT}>인재정보</Link>
+      <div className="items">
+        <Link className="items__item" href={path.RECRUIT}>
+          채용정보
+        </Link>
+        <Link className="items__item" href={path.TALENT}>
+          인재정보
+        </Link>
       </div>
       <div className="route-box">
         {authSelectorValue.isLogin && <Link href={path.ACCOUNT}>마이페이지</Link>}
@@ -48,6 +52,11 @@ const S = {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    .items {
+      &__item {
+        margin-right: 15px;
+      }
+    }
     .route-box {
       height: 100%;
       display: flex;
