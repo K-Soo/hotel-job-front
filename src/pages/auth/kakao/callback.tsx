@@ -39,7 +39,6 @@ export default function CallbackPage() {
           window.location.href = "/";
         }
       })();
-      console.log("access_token: ", access_token);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [router.isReady]);

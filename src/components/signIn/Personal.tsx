@@ -4,10 +4,12 @@ import Icon from "@/icons/Icon";
 import environment from "@/environment";
 import { SOCIAL_URL } from "@/constants/social";
 console.log("environment: ", environment.kakaoClientId);
+import { useRouter } from "next/router";
 
 interface PersonalProps {}
 
 export default function Personal({}: PersonalProps) {
+  const router = useRouter();
   const onClickSocialLogin = (type: string) => {
     //SWIFT 전용
     // if (window?.webkit) {
@@ -19,7 +21,7 @@ export default function Personal({}: PersonalProps) {
     // }
     // window.location.href = SOCIAL_URL[type];
     // window.location.href = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${environment.kakaoClientId}&redirect_uri=${environment.kakaoRedirectUrl}`;
-    window.location.href = "http://localhost:8080/api/auth/kakao";
+    window.location.href = "http://localhost:8080/api/oauth/kakao";
   };
 
   return (
