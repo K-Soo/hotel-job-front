@@ -41,4 +41,4 @@ const path = {
 
 export default path;
 
-export const EXCLUDED_PATHS = ["/auth/kakao/callback", "/auth/google/callback", "/auth/facebook/callback", "/sign-in"];
+export const EXCLUDED_PATHS = ["/oauth/kakao/callback", "/oauth/google/callback", "/sign-in"];
