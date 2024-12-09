@@ -1,4 +1,3 @@
-import axios from "axios";
 import React from "react";
 import styled from "styled-components";
 import path from "@/constants/path";
@@ -7,11 +6,9 @@ import { Get, Post } from "@/apis";
 import { authAtom } from "@/recoil/auth";
 import { useSetRecoilState } from "recoil";
 
-interface CompanyProps {}
-
-export default function Company({}: CompanyProps) {
+export default function Company() {
   const [loginEmail, setLoginEmail] = React.useState("kanabun102");
-  const [loginPassword, setLoginPassword] = React.useState("@@EErr1234");
+  const [loginPassword, setLoginPassword] = React.useState("@@eerr1234");
   const { push } = useAppRouter();
   const setAuthState = useSetRecoilState(authAtom);
 
@@ -20,7 +17,7 @@ export default function Company({}: CompanyProps) {
     try {
       const response = await Post.signIn({ username: loginEmail, password: loginPassword });
       console.log("로그인 API : ", response);
-      if (response.status !== 200) {
+      if (!response.success) {
         throw new Error();
       }
       setAuthState({

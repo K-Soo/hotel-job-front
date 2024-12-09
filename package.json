@@ -3,13 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "local": "env-cmd -e local next dev",
     "dev": "env-cmd -e development next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
   },
   "engines": {
-    "node": "20.17.0"
+    "node": "20.18.0"
   },
   "dependencies": {
     "@tanstack/react-query": "^5.51.23",

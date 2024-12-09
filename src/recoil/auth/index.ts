@@ -1,16 +1,16 @@
 import { atom, selector } from "recoil";
-
+import { ProviderType, RoleType } from "@/types";
 export interface AuthAtom {
-  provider: string | null;
-  nickname: string | null;
+  provider?: ProviderType;
+  role?: RoleType;
   status: "AUTHENTICATED" | "UNAUTHENTICATED" | "IDLE";
 }
 
 export const authAtom = atom<AuthAtom>({
   key: "authAtom",
   default: {
-    provider: null,
-    nickname: null,
+    role: undefined,
+    provider: undefined,
     status: "IDLE",
   },
 });

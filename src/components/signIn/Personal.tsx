@@ -11,6 +11,12 @@ interface PersonalProps {}
 export default function Personal({}: PersonalProps) {
   const router = useRouter();
   const onClickSocialLogin = (type: string) => {
+    const userConsentState = JSON.stringify({
+      personal: true,
+      service: true,
+      marketing: false,
+    });
+
     //SWIFT 전용
     // if (window?.webkit) {
     //   router.push('/oauth/callback/kakao');
@@ -20,8 +26,7 @@ export default function Personal({}: PersonalProps) {
     //   return window?.jsToWebviewSocialChannel?.postMessage(JSON.stringify({ message: type })); //KAKAO , APPLE, GOOGLE
     // }
     // window.location.href = SOCIAL_URL[type];
-    // window.location.href = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${environment.kakaoClientId}&redirect_uri=${environment.kakaoRedirectUrl}`;
-    window.location.href = "http://localhost:8080/api/oauth/kakao";
+    window.location.href = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${environment.kakaoClientId}&redirect_uri=${environment.kakaoRedirectUrl}&prompt=select_account`;
   };
 
   return (

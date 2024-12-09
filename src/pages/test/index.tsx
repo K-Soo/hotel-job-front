@@ -1,5 +1,6 @@
 import axios from "axios";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
+import { Get } from "@/apis";
 
 export default function TestPage() {
   const fetchPosts = async () => {
@@ -19,5 +20,20 @@ export default function TestPage() {
 
   console.log("테스트 API : ", data);
 
-  return <>index</>;
+  const fetchTest = async () => {
+    try {
+      const { data } = await Get.getTests();
+      console.log("data: ", data);
+      return data;
+    } catch (error) {
+      console.log("error: ", error);
+    }
+  };
+
+  return (
+    <>
+      <button>유저정보</button>
+      <button onClick={fetchTest}>일반 테스트</button>
+    </>
+  );
 }

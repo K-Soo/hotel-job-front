@@ -1,13 +1,13 @@
 import axios, { AxiosResponse } from "axios";
 import { instance, Post } from "@/apis";
 
-const ALLOW_AUTHENTICATION_PATH = ["/auth/sign-in", "/auth/kakao/callback"];
+const ALLOW_AUTHENTICATION_PATH = ["/auth/sign-in", "/oauth/kakao", "/auth/refresh"];
 
 const handleSuccessResponse = (config: AxiosResponse) => {
   if (!config.config?.url) {
     return;
   }
-
+  // 지정된 API 경로에 대해서만 토큰을 설정합니다.
   if (ALLOW_AUTHENTICATION_PATH.includes(config.config.url)) {
     const accessToken = config.data?.result?.accessToken;
     if (!accessToken) {
@@ -20,7 +20,7 @@ const handleSuccessResponse = (config: AxiosResponse) => {
 const handleRequestAccessToken = async (originalRequest: any) => {
   try {
     const response = await Post.requestAccessToken({});
-    if (response.status !== 200) {
+    if (!response.success) {
       throw new Error();
     }
     const newAccessToken = response.result.accessToken;
