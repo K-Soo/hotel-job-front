@@ -24,12 +24,12 @@ export default function AuthenticationComponent() {
 
         const response = await Post.getUserInfo({});
         console.log("GLOBAL 유저정보 API : ", response);
-        if (response.status !== 200) {
+        if (!response.success) {
           throw new Error();
         }
         setAuthAtom({
-          nickname: response.result.nickname,
           provider: response.result.provider,
+          role: response.result.role,
           status: "AUTHENTICATED",
         });
       } catch (error) {
