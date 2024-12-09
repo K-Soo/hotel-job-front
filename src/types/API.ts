@@ -1,11 +1,17 @@
+import * as types from "@/types";
 export interface defaultResponse {
-  status: number;
+  error: {
+    message: string;
+    code: number;
+  } | null;
+  success: boolean;
+  timestamp: Date;
 }
 
 /************************************* HTTP REQUEST **************************************/
 
 export interface SignInRequest {
-  username: string;
+  userId: string;
   password: string;
 }
 
@@ -19,6 +25,14 @@ export interface SignInResponse extends defaultResponse {
   };
 }
 
+export interface OAuthSignInResponse extends defaultResponse {
+  result: {
+    accessToken: string;
+    provider: types.ProviderType;
+    role: types.RoleType;
+  };
+}
+
 export interface RequestAccessTokenResponse extends defaultResponse {
   result: {
     accessToken: string;
@@ -27,7 +41,8 @@ export interface RequestAccessTokenResponse extends defaultResponse {
 
 export interface GetUserInfoResponse extends defaultResponse {
   result: {
-    nickname: string;
-    provider: string;
+    accessToken: string;
+    provider: types.ProviderType;
+    role: types.RoleType;
   };
 }
