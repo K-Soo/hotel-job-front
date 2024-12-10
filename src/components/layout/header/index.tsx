@@ -7,8 +7,8 @@ interface HeaderProps {}
 
 export function Header({}: HeaderProps) {
   const { scrollYProgress, scrollX, scrollY } = useScroll();
-  console.log("scrollY: ", scrollY);
-  console.log("scrollYProgress: ", scrollYProgress);
+  // console.log("scrollY: ", scrollY);
+  // console.log("scrollYProgress: ", scrollYProgress);
 
   return (
     <S.Header initial={{ borderBottom: "0px solid transparent" }}>
