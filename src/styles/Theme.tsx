@@ -25,7 +25,6 @@ export default function Theme({ children }: ThemeProps) {
   return (
     <ThemeProvider theme={styledMedia}>
       <GlobalStyles />
-      <StyledReset />
       {children}
     </ThemeProvider>
   );
