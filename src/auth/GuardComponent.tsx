@@ -4,6 +4,7 @@ import { authAtom, authSelector } from "@/recoil/auth";
 import { useRouter } from "next/router";
 import path from "@/constants/path";
 import { Internal } from "@/apis";
+import useAuth from "@/hooks/useAuth";
 interface GuardComponentProps {
   children: React.ReactNode;
 }
@@ -12,6 +13,7 @@ export default function GuardComponent({ children }: GuardComponentProps) {
   const [showLoading, setShowLoading] = React.useState(false);
   const authSelectorValue = useRecoilValue(authSelector);
   const router = useRouter();
+  const { isAuthFailure, isAuthIdle, isAuthenticated } = useAuth();
 
   React.useEffect(() => {
     const timer = setTimeout(() => {
@@ -22,7 +24,7 @@ export default function GuardComponent({ children }: GuardComponentProps) {
   }, []);
 
   React.useEffect(() => {
-    if (authSelectorValue.status === "AUTHENTICATED") {
+    if (isAuthenticated) {
       return;
     }
     (async () => {
@@ -38,17 +40,17 @@ export default function GuardComponent({ children }: GuardComponentProps) {
   }, [authSelectorValue.status, router]);
 
   React.useEffect(() => {
-    if (authSelectorValue.status === "UNAUTHENTICATED") {
+    if (isAuthFailure) {
       router.replace(path.SIGN_IN);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [authSelectorValue.status]);
 
-  if (authSelectorValue.status === "IDLE" && showLoading) {
+  if (isAuthIdle && showLoading) {
     return <div>Loading...</div>;
   }
 
-  if (authSelectorValue.status === "AUTHENTICATED") {
+  if (isAuthenticated) {
     return <React.Fragment>{children}</React.Fragment>;
   }
 }
