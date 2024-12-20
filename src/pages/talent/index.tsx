@@ -1,16 +1,21 @@
-import Layout, { Header, Footer, Main } from "@/components/layout";
-import TalentContainer from "@/containers/talentContainer";
+import Layout, { Header, Footer, Main, DesktopNavigation, MobileNavigation } from '@/components/layout';
+import TalentContainer from '@/containers/talentContainer';
+import BottomNavigation from '@/components/common/BottomNavigation';
+
 export default function TalentPage() {
   return <TalentContainer />;
 }
 
 TalentPage.getLayout = (page: React.ReactElement) => {
-  console.log("page: ", page);
   return (
     <Layout>
-      <Header />
+      <Header>
+        <DesktopNavigation />
+        <MobileNavigation />
+      </Header>
       <Main>{page}</Main>
       <Footer />
+      <BottomNavigation />
     </Layout>
   );
 };
