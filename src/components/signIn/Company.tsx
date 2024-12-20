@@ -1,33 +1,36 @@
-import React from "react";
-import styled from "styled-components";
-import path from "@/constants/path";
-import useAppRouter from "@/hooks/useAppRouter";
-import { Get, Post } from "@/apis";
-import { authAtom } from "@/recoil/auth";
-import { useSetRecoilState } from "recoil";
+import React from 'react';
+import styled from 'styled-components';
+import path from '@/constants/path';
+import useAppRouter from '@/hooks/useAppRouter';
+import { Get, Post } from '@/apis';
+import { authAtom } from '@/recoil/auth';
+import { useSetRecoilState } from 'recoil';
+import useAuth from '@/hooks/useAuth';
+import Button from '@/components/common/style/Button';
 
 export default function Company() {
-  const [loginEmail, setLoginEmail] = React.useState("kanabun102");
-  const [loginPassword, setLoginPassword] = React.useState("@@eerr1234");
+  const [loginEmail, setLoginEmail] = React.useState('kanabun102');
+  const [loginPassword, setLoginPassword] = React.useState('@@eerr1234');
   const { push } = useAppRouter();
   const setAuthState = useSetRecoilState(authAtom);
+  const { setAuthAtomState } = useAuth();
 
   const onClick = async (e: any) => {
     e.preventDefault();
     try {
-      const response = await Post.signIn({ username: loginEmail, password: loginPassword });
-      console.log("로그인 API : ", response);
+      const response = await Post.signIn({ userId: loginEmail, password: loginPassword });
+      console.log('로그인 API : ', response);
       if (!response.success) {
         throw new Error();
       }
-      setAuthState({
-        nickname: response.result.nickname,
+      setAuthAtomState({
         provider: response.result.provider,
-        status: "AUTHENTICATED",
+        role: response.result.role,
+        status: 'AUTHENTICATED',
       });
       push(path.HOME);
     } catch (error) {
-      console.log("error: ", error);
+      console.log('error: ', error);
     }
   };
 
@@ -44,10 +47,7 @@ export default function Company() {
         </label>
       </form>
       <button onClick={() => push(path.SIGN_UP)}>회원가입</button>
-
-      <button onClick={onClick} type="button">
-        로그인
-      </button>
+      <Button label="로그인" onClick={onClick} type="button" variant="primary" />
     </S.company>
   );
 }
