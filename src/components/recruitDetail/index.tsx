@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 interface RecruitDetailProps {}
 
@@ -105,15 +105,12 @@ export default function RecruitDetail({}: RecruitDetailProps) {
 }
 
 const S = {
-  RecruitDetail: styled.section`
-    ${(props) => props.theme.tablet``};
-  `,
+  RecruitDetail: styled.section``,
   Images: styled.article`
     height: 350px;
     border-radius: 15px;
     background-color: gray;
     margin-bottom: 30px;
-    ${(props) => props.theme.tablet``};
   `,
   DateTime: styled.article`
     text-align: right;
@@ -125,7 +122,7 @@ const S = {
     border: 1px solid red;
     margin-bottom: 50px;
 
-    ${(props) => props.theme.tablet`
+    ${(props) => props.theme.media.tablet`
       flex-direction: column-reverse;
     `};
     .left {
@@ -138,7 +135,7 @@ const S = {
       &__title {
         font-size: 28px;
         font-weight: 600;
-        ${(props) => props.theme.tablet`
+        ${(props) => props.theme.media.tablet`
           font-size: 16px;
         `};
       }
@@ -174,12 +171,12 @@ const S = {
         }
       }
     }
-    ${(props) => props.theme.tablet``};
+    ${(props) => props.theme.media.tablet``};
   `,
   Content: styled.article`
     min-height: 500px;
     margin-bottom: 50px;
-    ${(props) => props.theme.tablet``};
+    ${(props) => props.theme.media.tablet``};
   `,
 
   Accept: styled.article`
@@ -192,15 +189,15 @@ const S = {
     .info {
       flex: 50%;
     }
-    ${(props) => props.theme.tablet``};
+    ${(props) => props.theme.media.tablet``};
   `,
   Location: styled.article`
-    ${(props) => props.theme.tablet``};
+    ${(props) => props.theme.media.tablet``};
   `,
   Title: styled.article`
     font-size: 20px;
     font-weight: 600;
     margin-bottom: 5px;
-    ${(props) => props.theme.tablet``};
+    ${(props) => props.theme.media.tablet``};
   `,
 };
