@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 interface SummaryProps {}
 
@@ -12,8 +12,5 @@ const S = {
     width: 100%;
     height: 300px;
     border-radius: 15px;
-    ${(props) => props.theme.tablet`
-      height: 200px;
-    `};
   `,
 };
