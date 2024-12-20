@@ -1,44 +1,45 @@
 const path = {
-  HOME: "/", //홈
+  HOME: '/', //홈
 
-  SIGN_IN: "/sign-in",
-  SIGN_UP: "/sign-up", //기업 가입
-  SIGN_UP_COMPLETE: "/sign-up/complete",
+  SIGN_IN: '/sign-in',
+  SIGN_UP: '/sign-up', //기업 가입
+  SIGN_UP_COMPLETE: '/sign-up/complete',
 
-  ACCOUNT: "/account", // 마이페이지
+  ACCOUNT: '/account', // 마이페이지
 
-  RECRUIT: "/recruit", // 채용정보 메인 페이지
-  RECRUIT_HOTEL: "/recruit/hotel", // 호텔 채용정보
-  RECRUIT_PENSION: "/recruit/pension", // 펜션 채용정보
-  RECRUIT_PART_TIME: "/recruit/part-time", // 알바 채용정보
+  RECRUIT: '/recruit', // 채용정보 메인 페이지
+  RECRUIT_HOTEL: '/recruit/hotel', // 호텔 채용정보
+  RECRUIT_PENSION: '/recruit/pension', // 펜션 채용정보
+  RECRUIT_PART_TIME: '/recruit/part-time', // 알바 채용정보
 
-  TALENT: "/talent", // 인재정보 메인 페이지
-  TALENT_HOTEL: "/talent/hotel", // 호텔 인재정보
-  TALENT_PENSION: "/talent/pension", // 펜션 인재정보
-  TALENT_PART_TIME: "/talent/part-time", // 알바 or 파출부 인재정보
+  TALENT: '/talent', // 인재정보 메인 페이지
+  TALENT_HOTEL: '/talent/hotel', // 호텔 인재정보
+  TALENT_PENSION: '/talent/pension', // 펜션 인재정보
+  TALENT_PART_TIME: '/talent/part-time', // 알바 or 파출부 인재정보
 
-  SEARCH: "/search",
+  SEARCH: '/search',
 
-  CHECKOUT: "/checkout",
+  CHECKOUT: '/checkout',
 
-  SERVICE_QNA: "/account/qna", //1:1문의
-  SERVICE_QNA_CREATE: "/account/qna/create", //1:1문의 등록
+  SERVICE_QNA: '/account/qna', //1:1문의
+  SERVICE_QNA_CREATE: '/account/qna/create', //1:1문의 등록
 
-  SERVICE_LAUNCHING: "/service/launching", //입점/제휴 문의
-  SERVICE_NOTICE: "/service/notice", //공지사항
-  SERVICE_FAQ: "/service/faq", //FAQ
+  SERVICE_LAUNCHING: '/service/launching', //입점/제휴 문의
 
-  SERVICE_TERMS_AGREEMENT: "/service/terms/agreement", //이용약관
-  SERVICE_TERMS_PRIVACY: "/service/terms/privacy", //개인 정보 취급방침
+  SUPPORT_NOTICE: '/support/notice', //공지사항
+  SUPPORT_FAQ: '/support/faq', //FAQ
 
-  ACCOUNT_RECOVER_USER: "/account/recover/user", //이메일 찾기
-  ACCOUNT_RECOVER_RESET: "/account/recover/reset", //비밀번호 찾기
-  ACCOUNT_RECOVER_RESET_SUCCESS: "/account/recover/reset/success", //비밀번호 찾기 결과
+  POLICY_TERMS: '/policy/terms', //서비스 이용약관
+  POLICY__PRIVACY: '/policy/privacy', //개인정보 처리방침
 
-  ACCOUNT_POINT: "/account/point", //포인트
-  ACCOUNT_USER: "/account/user", //회원정보 수정
+  ACCOUNT_RECOVER_USER: '/account/recover/user', //이메일 찾기
+  ACCOUNT_RECOVER_RESET: '/account/recover/reset', //비밀번호 찾기
+  ACCOUNT_RECOVER_RESET_SUCCESS: '/account/recover/reset/success', //비밀번호 찾기 결과
+
+  ACCOUNT_POINT: '/account/point', //포인트
+  ACCOUNT_USER: '/account/user', //회원정보 수정
 } as const;
 
 export default path;
 
-export const EXCLUDED_PATHS = ["/oauth/kakao/callback", "/oauth/google/callback", "/sign-in"];
+export const EXCLUDED_PATHS = ['/oauth/kakao/callback', '/oauth/google/callback', '/sign-in'];
