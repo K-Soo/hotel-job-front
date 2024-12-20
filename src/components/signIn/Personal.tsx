@@ -1,22 +1,18 @@
-import styled, { css } from "styled-components";
-import Image from "next/image";
-import Icon from "@/icons/Icon";
-import environment from "@/environment";
-import { SOCIAL_URL } from "@/constants/social";
-console.log("environment: ", environment.kakaoClientId);
-import { useRouter } from "next/router";
+import styled, { css } from 'styled-components';
+import Image from 'next/image';
+import Icon from '@/icons/Icon';
+import environment from '@/environment';
+import { SOCIAL_URL } from '@/constants/social';
+console.log('environment: ', environment.kakaoClientId);
+import Button from '@/components/common/style/Button';
+
+import { useRouter } from 'next/router';
 
 interface PersonalProps {}
 
 export default function Personal({}: PersonalProps) {
   const router = useRouter();
   const onClickSocialLogin = (type: string) => {
-    const userConsentState = JSON.stringify({
-      personal: true,
-      service: true,
-      marketing: false,
-    });
-
     //SWIFT 전용
     // if (window?.webkit) {
     //   router.push('/oauth/callback/kakao');
@@ -26,22 +22,22 @@ export default function Personal({}: PersonalProps) {
     //   return window?.jsToWebviewSocialChannel?.postMessage(JSON.stringify({ message: type })); //KAKAO , APPLE, GOOGLE
     // }
     // window.location.href = SOCIAL_URL[type];
-    window.location.href = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${environment.kakaoClientId}&redirect_uri=${environment.kakaoRedirectUrl}&prompt=select_account`;
+    const state = encodeURIComponent(JSON.stringify({ initial: 'Y' }));
+    window.location.href = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${environment.kakaoClientId}&redirect_uri=${environment.kakaoRedirectUrl}&prompt=select_account&scope=openid&state=${state}`;
   };
 
   return (
     <S.Personal>
-      <Icon name="Back" />
-
-      <S.SocialButton name="kakao" onClick={() => onClickSocialLogin("kakao")}>
+      <S.SocialButton name="kakao" onClick={() => onClickSocialLogin('kakao')}>
         <Image src="/images/social/kakao_icon.svg" width={18} height={18} alt="카카오_아이콘" className="image-icon" />
         <span className="text">Sign In with Kakao</span>
       </S.SocialButton>
-      <S.SocialButton name="google" onClick={() => onClickSocialLogin("google")}>
+
+      <S.SocialButton name="google" onClick={() => onClickSocialLogin('google')}>
         <Image src="/images/social/google_icon.svg" width={18} height={18} alt="구글_아이콘" className="image-icon" />
         <span className="text">Sign In with Google</span>
       </S.SocialButton>
-      <S.SocialButton name="apple" onClick={() => onClickSocialLogin("apple")}>
+      <S.SocialButton name="apple" onClick={() => onClickSocialLogin('apple')}>
         <Image src="/images/social/apple_icon.svg" width={18} height={18} alt="애플_아이콘" className="image-icon" />
         <span className="text">Sign In with Apple</span>
       </S.SocialButton>
@@ -50,7 +46,9 @@ export default function Personal({}: PersonalProps) {
 }
 
 const S = {
-  Personal: styled.div``,
+  Personal: styled.div`
+    width: 100%;
+  `,
   SocialButton: styled.button<{ name: string }>`
     height: 45px;
     display: flex;
@@ -61,6 +59,7 @@ const S = {
     padding: 0 15px;
     cursor: pointer;
     position: relative;
+    width: 100%;
     .image-icon {
       position: absolute;
       left: 20px;
@@ -70,7 +69,7 @@ const S = {
       font-size: 14px;
     }
     ${(props) =>
-      props.name === "kakao" &&
+      props.name === 'kakao' &&
       css`
         background-color: #fee500;
 
@@ -82,7 +81,7 @@ const S = {
         }
       `}
     ${(props) =>
-      props.name === "google" &&
+      props.name === 'google' &&
       css`
         background-color: #fff;
         color: #000;
@@ -95,7 +94,7 @@ const S = {
         }
       `}
     ${(props) =>
-      props.name === "apple" &&
+      props.name === 'apple' &&
       css`
         background-color: #000;
         .text {
