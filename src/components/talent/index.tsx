@@ -1,11 +1,16 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
-interface TalentProps {}
+interface TalentProps {
+  children: React.ReactNode;
+}
 
-export default function Talent({}: TalentProps) {
-  return <S.Talent>Talent</S.Talent>;
+export default function Talent({ children }: TalentProps) {
+  return <S.Talent>{children}</S.Talent>;
 }
 
 const S = {
-  Talent: styled.div``,
+  Talent: styled.section`
+    display: flex;
+    height: 100%;
+  `,
 };
