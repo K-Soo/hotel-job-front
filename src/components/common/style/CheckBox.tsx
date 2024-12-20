@@ -1,30 +1,35 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 interface CheckBoxProps {
   label: string;
+  name: string;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  visibleIcon?: boolean;
+  margin?: string;
+  checked: boolean;
 }
 
-export default function CheckBox({ label, onChange }: CheckBoxProps) {
+export default function CheckBox({ label, name, onChange, checked, visibleIcon, margin }: CheckBoxProps) {
   return (
-    <S.CheckBox>
+    <S.CheckBox $margin={margin}>
       <div className="box">
-        <input type="checkbox" onChange={onChange} />
-        <label htmlFor="custom-checkbox">{label}</label>
+        <input id={`checkbox-${name}`} type="checkbox" onChange={onChange} name={name} checked={checked} />
+        <label htmlFor={`checkbox-${name}`}>{label}</label>
       </div>
-      <i>icon</i>
+      {visibleIcon && <i>icon</i>}
     </S.CheckBox>
   );
 }
 
 const S = {
-  CheckBox: styled.div`
-    border: 1px solid red;
+  CheckBox: styled.div<{ $margin?: string }>`
     display: flex;
     align-items: center;
     justify-content: space-between;
+    margin: ${(props) => props.$margin || 0};
     .box {
-      border: 1px solid #000;
+      display: flex;
+      align-items: center;
     }
   `,
 };
