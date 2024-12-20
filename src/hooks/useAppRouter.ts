@@ -1,7 +1,7 @@
-import { Url } from "next/dist/shared/lib/router/router";
-import useWebView from "@/hooks/useWebView";
-import { useRouter } from "next/router";
-import environment from "@/environment";
+import { Url } from 'next/dist/shared/lib/router/router';
+import useWebView from '@/hooks/useWebView';
+import { useRouter } from 'next/router';
+import environment from '@/environment';
 
 interface TransitionOptions {
   shallow?: boolean;
@@ -11,7 +11,7 @@ interface TransitionOptions {
 }
 
 const sendRouterEvent = async (params: Record<string, string | Record<string, unknown>>) => {
-  window.webkit?.messageHandlers.IOSbridge.postMessage(JSON.stringify({ type: "ROUTER_EVENT", ...params }));
+  window.webkit?.messageHandlers.IOSbridge.postMessage(JSON.stringify({ type: 'ROUTER_EVENT', ...params }));
 };
 
 export default function useAppRouter() {
@@ -23,7 +23,7 @@ export default function useAppRouter() {
       await router.push(url, as, options);
     }
 
-    if (device === "IOS") {
+    if (device === 'IOS') {
       sendRouterEvent({ path: `${environment.baseUrl}${url}` });
     }
   };
@@ -33,7 +33,7 @@ export default function useAppRouter() {
       await router.replace(url, as, options);
     }
 
-    if (device === "IOS") {
+    if (device === 'IOS') {
       sendRouterEvent({ path: `${environment.baseUrl}${url}` });
     }
   };
@@ -42,7 +42,7 @@ export default function useAppRouter() {
     if (!isWebView) {
       router.back();
     }
-    sendRouterEvent({ path: "back", data: {} });
+    sendRouterEvent({ path: 'back', data: {} });
   };
 
   return {
