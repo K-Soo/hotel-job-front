@@ -1,4 +1,4 @@
-import { css, DefaultTheme } from 'styled-components';
+import { css } from 'styled-components';
 
 const breakpoints = {
   mobile: 500,
@@ -9,7 +9,7 @@ const breakpoints = {
 
 type Breakpoints = keyof typeof breakpoints;
 
-const styledMedia = Object.keys(breakpoints).reduce((acc, label) => {
+const media = Object.keys(breakpoints).reduce((acc, label) => {
   acc[label as Breakpoints] = (literals: TemplateStringsArray, ...placeholders: any[]) => css`
     @media (max-width: ${breakpoints[label as Breakpoints]}px) {
       ${css(literals, ...placeholders)};
@@ -18,4 +18,4 @@ const styledMedia = Object.keys(breakpoints).reduce((acc, label) => {
   return acc;
 }, {} as Record<Breakpoints, (l: TemplateStringsArray, ...p: any[]) => ReturnType<typeof css>>);
 
-export default styledMedia;
+export default media;
