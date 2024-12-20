@@ -3,7 +3,7 @@ import { ProviderType, RoleType } from "@/types";
 export interface AuthAtom {
   provider?: ProviderType;
   role?: RoleType;
-  status: "AUTHENTICATED" | "UNAUTHENTICATED" | "IDLE";
+  status: "AUTHENTICATED" | "AUTHENTICATION_FAILURE" | "IDLE";
 }
 
 export const authAtom = atom<AuthAtom>({
