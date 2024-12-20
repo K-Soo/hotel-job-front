@@ -1,80 +1,49 @@
-import styled from "styled-components";
-import axios from "axios";
-import React from "react";
-import { useEffect } from "react";
-import Personal from "@/components/signIn/Personal";
-import Company from "@/components/signIn/Company";
-import { Get } from "@/apis";
-import { useRouter } from "next/router";
+import styled from 'styled-components';
+import axios from 'axios';
+import React from 'react';
+import Personal from '@/components/signIn/Personal';
+import Company from '@/components/signIn/Company';
+import Logo from '@/components/common/Logo';
+import SignInTabs from '@/components/signIn/SignInTabs';
+import { signInTabsOptions } from '@/constants/tabs';
+import { useForm, FormProvider, SubmitHandler } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { schema } from '@/utils';
 
 interface SignInProps {}
 
-type TabTypes = "personal" | "company";
+type SignInTab = 'general' | 'company';
 
 export default function SignIn({}: SignInProps) {
-  const [signInType, setSignInType] = React.useState<TabTypes>("personal");
-  const router = useRouter();
-  const queryType = (router.query.type as TabTypes) || "personal";
-
-  // useEffect(() => {
-  //   if (queryType) {
-  //     setSignInType(queryType);
-  //   }
-  // }, [queryType]);
-
-  const handleClickUserInfo = async () => {
-    try {
-      const response = await Get.getUserInfo();
-
-      console.log("유저정보 API : ", response);
-    } catch (error) {
-      console.log("error: ", error);
-    }
-  };
-
-  const handleClickTest = async () => {
-    try {
-      const response = await axios.get(`http://localhost:8080/api/business-user`, {
-        withCredentials: true,
-      });
-
-      console.log("테스트 API : ", response);
-    } catch (error) {
-      console.log("error: ", error);
-    }
-  };
+  const [tab, setTab] = React.useState<SignInTab>('general');
 
   return (
     <S.SignIn>
-      <a href="">asd</a>
-      <button onClick={handleClickUserInfo} type="button">
-        유저정보 가져오기
-      </button>
+      <div className="signin-container">
+        <Logo size="middle" margin="0 0 30px 0" />
 
-      <h3 className="title">호텔잡</h3>
+        <SignInTabs<SignInTab> margin="0 0 50px 0" currentTab={tab} setTab={setTab} tabsOptions={signInTabsOptions} />
 
-      <button onClick={handleClickTest}>에러 테스트</button>
-
-      <div>
-        <button onClick={() => setSignInType("personal")}>일반회원</button>
-        <button onClick={() => setSignInType("company")}>기업회원</button>
+        {tab === 'general' && <Personal />}
+        {tab === 'company' && <Company />}
       </div>
-
-      {signInType === "personal" && <Personal />}
-      {signInType === "company" && <Company />}
     </S.SignIn>
   );
 }
 
 const S = {
   SignIn: styled.section`
-    border: 1px solid red;
-    height: 100%;
+    min-height: 100%;
     max-width: 500px;
     width: 100%;
     margin: 0 auto;
-    .title {
-      font-size: 24px;
+    .signin-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 0 auto;
+      height: 100%;
+      max-width: 350px;
     }
   `,
 };
