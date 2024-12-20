@@ -1,6 +1,6 @@
-import React from "react";
-import styled, { css } from "styled-components";
-import * as svg from "./svg";
+import React from 'react';
+import styled, { css } from 'styled-components';
+import * as svg from './svg';
 
 export type IconType = keyof typeof svg;
 
@@ -26,18 +26,11 @@ function Icon({ name, className, style, onClick }: IconProps) {
 }
 
 export default styled(Icon)`
-  /* width: ${(props) => (props.width ? props.width : "24px")};
-  height: ${(props) => (props.height ? props.height : "24px")}; */
-  /* margin: ${(props) => (props.margin ? props.margin : "0")}; */
-  /* cursor: ${(props) => (props.cursor ? props.cursor : "pointer")}; */
+  width: ${(props) => (props.width ? props.width : '28px')};
+  height: ${(props) => (props.height ? props.height : '28px')};
+  margin: ${(props) => (props.margin ? props.margin : '0')};
+  cursor: ${(props) => (props.cursor ? props.cursor : 'pointer')};
   svg {
     fill: currentColor;
   }
-  ${(props) =>
-    props.animate === undefined &&
-    css`
-      &:hover {
-        transform: scale(1.05);
-      }
-    `}
 `;
