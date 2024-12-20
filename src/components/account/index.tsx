@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import Summary from "@/components/account/Summary";
+import styled from 'styled-components';
+import Summary from '@/components/account/Summary';
 interface AccountProps {
   children: React.ReactNode;
 }
@@ -20,7 +20,7 @@ const S = {
   Account: styled.section`
     display: flex;
     height: 100%;
-    ${(props) => props.theme.tablet`
+    ${(props) => props.theme.media.tablet`
       flex-direction: column-reverse;
     `};
     .container {
