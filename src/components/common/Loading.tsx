@@ -35,6 +35,7 @@ const S = {
     align-items: center;
     justify-content: center;
     background-color: rgba(0, 0, 0, 0.3);
+    opacity: 0.5;
     height: ${({ height }) => height || "100%"};
     z-index: 15;
   `,
