@@ -1,4 +1,4 @@
-import * as types from "@/types";
+import * as types from '@/types';
 export interface defaultResponse {
   error: {
     message: string;
@@ -8,6 +8,14 @@ export interface defaultResponse {
   timestamp: Date;
 }
 
+export interface Meta {
+  currentPage: number;
+  itemCount: number;
+  itemsPerPage: number;
+  totalItems: number;
+  totalPages: number;
+}
+
 /************************************* HTTP REQUEST **************************************/
 
 export interface SignInRequest {
@@ -15,13 +23,23 @@ export interface SignInRequest {
   password: string;
 }
 
+export interface OAuthSignInRequest {
+  code: string;
+  isInitialRequest: 'Y' | 'N';
+}
+
+export interface GetTalentListRequest {
+  page: string;
+  limit: string;
+}
+
 /************************************* HTTP RESPONSE **************************************/
 
 export interface SignInResponse extends defaultResponse {
   result: {
     accessToken: string;
-    nickname: string;
-    provider: string;
+    role: types.RoleType;
+    provider: types.ProviderType;
   };
 }
 
@@ -44,5 +62,12 @@ export interface GetUserInfoResponse extends defaultResponse {
     accessToken: string;
     provider: types.ProviderType;
     role: types.RoleType;
+  };
+}
+
+export interface GetTalentListResponse extends defaultResponse {
+  result: {
+    items: types.TalentListItem[];
+    meta: Meta;
   };
 }
