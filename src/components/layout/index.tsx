@@ -1,11 +1,14 @@
-import styled from "styled-components";
-export { Footer } from "@/components/layout/footer";
-export { Main } from "@/components/layout/main";
-export { Header } from "@/components/layout/header";
-import Loading from "@/components/common/Loading";
-import Portal from "@/components/common/Portal";
-import { useRecoilValue } from "recoil";
-import { loadingAtom } from "@/recoil/loading";
+import styled from 'styled-components';
+import Loading from '@/components/common/Loading';
+import Portal from '@/components/common/Portal';
+import { useRecoilValue } from 'recoil';
+import { loadingAtom } from '@/recoil/loading';
+
+export { Footer } from '@/components/layout/footer';
+export { Main } from '@/components/layout/main';
+export { Header } from '@/components/layout/header';
+export { DesktopNavigation } from '@/components/layout/header/desktopNavigation';
+export { MobileNavigation } from '@/components/layout/header/mobileNavigation';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -34,6 +37,5 @@ const S = {
     display: flex;
     flex-direction: column;
     width: 100%;
-    border: 1px solid red;
   `,
 };
