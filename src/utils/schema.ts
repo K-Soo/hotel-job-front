@@ -1,11 +1,11 @@
 import * as yup from 'yup';
+import { validation } from '@/utils/validation';
 
-export const schema = {};
+const signInSchema = yup.object({
+  userId: validation.USER_ID,
+  password: validation.PASSWORD,
+});
 
-const schemas = yup
-  .object()
-  .shape({
-    name: yup.string().required(),
-    age: yup.number().required(),
-  })
-  .required();
+const resumeRegister = yup.object({});
+
+export const schema = { signInSchema, resumeRegister };
