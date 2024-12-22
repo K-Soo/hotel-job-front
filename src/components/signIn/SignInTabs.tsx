@@ -80,7 +80,7 @@ const S = {
       }
       .toggle {
         position: absolute;
-        background-color: ${(props) => props.theme.colors.blue100};
+        background-color: ${(props) => props.theme.colors.blue500};
         color: #fff;
         height: 100%;
         width: 50%;
