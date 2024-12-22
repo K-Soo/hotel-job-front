@@ -3,6 +3,7 @@ import Reset from 'styled-reset';
 import pretendard from '@/fonts/pretendard';
 
 // BottomNavigation z-index: 5;
+// Header z-index: 5;
 const GlobalStyle = createGlobalStyle`
   ${Reset}
 
@@ -27,7 +28,7 @@ const GlobalStyle = createGlobalStyle`
     background-color: var(--background-color);
     color: var(--text-color);
     font-family: var(--font-family);
-    overflow-x: hidden;
+    /* overflow-x: hidden; sticky: x */
   }
 
   button {
@@ -49,6 +50,9 @@ const GlobalStyle = createGlobalStyle`
   a:active {
     text-decoration: none;
     color: inherit;
+  }
+  input:focus {
+    outline: none;
   }
 `;
 
