@@ -1,16 +1,12 @@
 import styled from 'styled-components';
 import Link from 'next/link';
 import path from '@/constants/path';
-import axios from 'axios';
 import { useRecoilValue } from 'recoil';
 import { authAtom, authSelector } from '@/recoil/auth';
 import { Post, Get } from '@/apis';
-import Button from '@/components/common/style/Button';
 import Icon from '@/icons/Icon';
 
-interface NavigationProps {}
-
-export default function Navigation({}: NavigationProps) {
+export default function Navigation() {
   const authSelectorValue = useRecoilValue(authSelector);
 
   const handleClickSignOut = async () => {
@@ -53,7 +49,7 @@ const S = {
   Navigation: styled.nav`
     max-width: 1024px;
     margin: 0 auto;
-    height: 45px;
+    height: 50px;
     display: flex;
     align-items: center;
     justify-content: space-between;
