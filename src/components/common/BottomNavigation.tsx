@@ -21,7 +21,7 @@ export default function BottomNavigation() {
         <i>IC</i>
         <span>HOME</span>
       </Link>
-      <Link className="items" href={path.HOME}>
+      <Link className="items" href={path.ACCOUNT}>
         <i>IC</i>
         <span>MY</span>
       </Link>
