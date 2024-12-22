@@ -1,18 +1,17 @@
 import styled from 'styled-components';
+import { policy } from '@/constants/policy';
 
-interface PolicyPrivacyProps {}
-
-export default function PolicyPrivacy({}: PolicyPrivacyProps) {
+export default function PolicyPrivacy() {
   return (
     <S.PolicyPrivacy>
       <S.Section>
         <S.Title>개인정보 처리방침</S.Title>
         <S.Content>
           <p>
-            호텔잡(이하 “회사”)는 「신용정보의 이용 및 보호에 관한 법률」, 「전자금융거래법」, 「전자상거래법」, 「정보통신망 이용촉진 및
-            정보보호 등에 관한 법률」, 「개인정보 보호법」, 「특정 금융거래정보의 보고 및 이용 등에 관한 법률」 등 관련 법규에 따라 이용자의
-            개인(신용)정보를 보호하고 개인(신용)정보와 관련한 이용자의 고충을 원활하게 처리할 수 있도록 다음과 같이 개인정보 처리방침을
-            수립‧공개합니다.
+            {policy.company}(이하 “회사”)는 「신용정보의 이용 및 보호에 관한 법률」, 「전자금융거래법」, 「전자상거래법」, 「정보통신망
+            이용촉진 및 정보보호 등에 관한 법률」, 「개인정보 보호법」, 「특정 금융거래정보의 보고 및 이용 등에 관한 법률」 등 관련 법규에
+            따라 이용자의 개인(신용)정보를 보호하고 개인(신용)정보와 관련한 이용자의 고충을 원활하게 처리할 수 있도록 다음과 같이 개인정보
+            처리방침을 수립‧공개합니다.
           </p>
           <br />
         </S.Content>
