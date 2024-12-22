@@ -33,6 +33,8 @@ export interface GetTalentListRequest {
   limit: string;
 }
 
+export interface ResumeRegisterRequest extends types.ResumeRegisterForm {}
+
 /************************************* HTTP RESPONSE **************************************/
 
 export interface SignInResponse extends defaultResponse {
