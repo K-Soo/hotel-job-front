@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import React from 'react';
 import Icon from '@/icons/Icon';
 import useAppRouter from '@/hooks/useAppRouter';
+import path from '@/constants/path';
 
 interface AccountMenuProps {}
 
@@ -21,7 +22,7 @@ const GENERAL_USER_MENU = [
     value: '/resume',
     items: [
       { label: '이력서 목록', value: '/account/resume' },
-      { label: '이력서 등록', value: '/account/resume/create' },
+      { label: '이력서 등록', value: path.ACCOUNT_RESUME_REGISTER },
     ],
   },
   { label: '스크랩', value: '/account/scrap', items: [] },
