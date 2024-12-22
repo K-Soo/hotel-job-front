@@ -4,6 +4,7 @@ import { regex } from './regex';
 yup.setLocale({
   mixed: {
     required: '필수 입력',
+    oneOf: '필수 선택',
   },
   number: {
     positive: '양수값을 입력해주세요',
