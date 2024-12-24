@@ -9,6 +9,7 @@ type ButtonVariant =
   | 'primary' // 기본 버튼
   | 'secondary' // 보조 버튼
   | 'secondary100' // 보조 버튼
+  | 'secondary200' // 보조 버튼
   | 'tertiary' // 중립적 버튼
   | 'danger' // 위험한 작업
   | 'success' // 성공적인 작업
@@ -93,13 +94,13 @@ const S = {
     height: ${(props) => (props.height ? props.height : '45px')};
     border-radius: ${(props) => (props.$borderRadius ? props.$borderRadius : '0')};
     font-size: ${(props) => (props.fontSize ? props.fontSize : '16px')};
-    padding: 0 8px;
     margin: ${(props) => (props.$margin ? props.$margin : '0')};
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 5px;
     white-space: nowrap;
+    padding: 0 8px;
     svg {
       fill: ${(props) => props.$iconColor};
       color: ${(props) => props.$iconColor};
@@ -115,7 +116,7 @@ const S = {
           background-color: ${(props) => props.theme.colors.blue600};
         }
         &:disabled {
-          background-color: ${(props) => props.theme.colors.blue300};
+          background-color: ${(props) => props.theme.colors.blue200};
           cursor: not-allowed;
         }
       `};
@@ -143,6 +144,20 @@ const S = {
         &:hover {
           transition: 0.3s;
           background-color: ${(props) => props.theme.colors.blue100};
+        }
+        &:disabled {
+          cursor: not-allowed;
+        }
+      `};
+
+    ${(props) =>
+      props.$variant === 'secondary200' &&
+      css`
+        color: ${(props) => props.theme.colors.gray700};
+        background-color: ${(props) => props.theme.colors.white};
+        &:hover {
+          transition: 0.3s;
+          background-color: ${(props) => props.theme.colors.gray200};
         }
         &:disabled {
           cursor: not-allowed;
