@@ -39,7 +39,7 @@ export default function UserAsideMenu() {
 const S = {
   UserAsideMenu: styled.aside`
     /* width: 100%; */
-    width: 220px;
+    width: 200px;
     padding: 15px 0;
     margin-right: 30px;
     font-size: 14px;
