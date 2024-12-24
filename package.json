@@ -1,13 +1,14 @@
 {
   "name": "hotel-job-front",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "scripts": {
     "local": "env-cmd -e local next dev",
     "dev": "env-cmd -e development next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "release": "standard-version"
   },
   "dependencies": {
     "@hookform/devtools": "^4.3.3",
@@ -28,6 +29,7 @@
     "react-hook-form": "^7.52.2",
     "recoil": "^0.7.7",
     "rxjs": "^7.8.1",
+    "standard-version": "^9.5.0",
     "styled-components": "^6.1.12",
     "styled-reset": "^4.5.2",
     "uuid": "^11.0.3",
