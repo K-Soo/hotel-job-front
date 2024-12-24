@@ -23,9 +23,13 @@ export default function UserResumeRegisterContainer() {
     defaultValues: {
       resumeType: 'GENERAL',
       careerLevel: 'NEWBIE',
+      education: undefined,
       title: '',
       summary: '',
       experiences: [],
+      isRequiredAgreement: false,
+      isOptionalAgreement: false,
+      licenses: [],
     },
   });
 
@@ -62,7 +66,7 @@ export default function UserResumeRegisterContainer() {
       ...getValues,
       {
         companyName: '',
-        // isEmployed: false,
+        isEmployed: false,
         responsibility: '',
         job: undefined,
         // city: 'NONE',
