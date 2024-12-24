@@ -1,12 +1,18 @@
-import React from "react";
-import styled from "styled-components";
-import axios from "axios";
+import React from 'react';
+import styled from 'styled-components';
+import axios from 'axios';
+import { SubmitHandler, useFormContext } from 'react-hook-form';
+import { SignUpForm } from '@/types';
+import FormInput from '@/components/common/form/FormInput';
 
-interface SignUpProps {}
+interface SignUpProps {
+  children: React.ReactNode;
+  onSubmit: SubmitHandler<SignUpForm>;
+}
 
-export default function SignUp({}: SignUpProps) {
-  const [email, setEmail] = React.useState("");
-  const [password, setPassword] = React.useState("");
+export default function SignUp({ children }: SignUpProps) {
+  const [email, setEmail] = React.useState('');
+  const [password, setPassword] = React.useState('');
 
   const onSubmit = async (e: any) => {
     e.preventDefault();
@@ -20,17 +26,18 @@ export default function SignUp({}: SignUpProps) {
         },
         {
           withCredentials: true,
-        }
+        },
       );
-      console.log("회원가입 API : ", response.data);
+      console.log('회원가입 API : ', response.data);
     } catch (error) {
-      console.log("error: ", error);
+      console.log('error: ', error);
     }
   };
 
   return (
     <S.SignUp>
-      <div>
+      {children}
+      {/* <div>
         <form onSubmit={onSubmit}>
           <label htmlFor="">
             email
@@ -42,11 +49,18 @@ export default function SignUp({}: SignUpProps) {
           </label>
           <button>회원가입</button>
         </form>
-      </div>
+      </div> */}
     </S.SignUp>
   );
 }
 
 const S = {
-  SignUp: styled.div``,
+  SignUp: styled.section`
+    max-width: 450px;
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 60px;
+  `,
 };
