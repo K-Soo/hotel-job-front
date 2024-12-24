@@ -2,16 +2,20 @@ import styled from 'styled-components';
 import Button from '@/components/common/style/Button';
 import FormInput from '@/components/common/form/FormInput';
 import { ResumeRegisterForm } from '@/types';
+import { SubmitHandler, useFormContext } from 'react-hook-form';
 
-interface ResumeBottomControllerProps {}
+interface ResumeBottomControllerProps {
+  onSubmit: SubmitHandler<ResumeRegisterForm>;
+}
 
-export default function ResumeBottomController({}: ResumeBottomControllerProps) {
+export default function ResumeBottomController({ onSubmit }: ResumeBottomControllerProps) {
+  const { handleSubmit } = useFormContext<ResumeRegisterForm>();
+
   return (
     <S.ResumeBottomController>
       <div className="resume-bottom-controller">
         <Button
-          maxWidth="120px"
-          width="120px"
+          maxWidth="130px"
           height="40px"
           label="이력서 미리보기"
           variant="secondary"
@@ -19,7 +23,15 @@ export default function ResumeBottomController({}: ResumeBottomControllerProps) 
           type="button"
           margin="0 15px 0 0"
         />
-        <Button maxWidth="120px" width="120px" height="40px" label="작성완료" variant="primary" disabled={true} type="button" />
+        <Button
+          maxWidth="130px"
+          height="40px"
+          label="작성완료"
+          variant="primary"
+          disabled={false}
+          type="button"
+          onClick={handleSubmit(onSubmit)}
+        />
       </div>
     </S.ResumeBottomController>
   );
@@ -34,7 +46,7 @@ const S = {
     width: 100%;
     height: 60px;
     border-top: 1px solid ${(props) => props.theme.colors.gray200};
-    background-color: ${(props) => props.theme.colors.white100};
+    background-color: ${(props) => props.theme.colors.white};
     .resume-bottom-controller {
       height: 100%;
       max-width: 1024px;
@@ -43,7 +55,7 @@ const S = {
       display: flex;
       align-items: center;
       justify-content: flex-end;
-      ${(props) => props.theme.media.tablet`
+      ${(props) => props.theme.media.laptop`
         padding: 0 15px;
       `};
     }
