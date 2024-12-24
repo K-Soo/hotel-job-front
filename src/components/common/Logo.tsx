@@ -13,13 +13,21 @@ const roboto = Roboto({
 interface LogoProps {
   size: 'large' | 'middle' | 'small';
   margin?: string;
+  style?: React.CSSProperties;
 }
 
-export default function Logo({ size, margin }: LogoProps) {
+export default function Logo({ size, margin, style }: LogoProps) {
   const router = useRouter();
 
   return (
-    <S.Logo className={roboto.className} whileTap={{ scale: 0.99 }} onClick={() => router.push(path.HOME)} size={size} $margin={margin}>
+    <S.Logo
+      className={roboto.className}
+      whileTap={{ scale: 0.99 }}
+      onClick={() => router.push(path.HOME)}
+      size={size}
+      $margin={margin}
+      style={style}
+    >
       <span className="hotel-word">HOTEL</span>
       <span className="job-word">JOB</span>
     </S.Logo>
