@@ -371,9 +371,9 @@ export default function PolicyPrivacy() {
             문의하실 수 있고, 회사는 정보주체의 문의에 신속하고 성실하게 답변하겠습니다.
           </p>
           <S.Heading>개인정보 보호책임자 및 신용정보관리·보호인</S.Heading>
-          <p>&bull; 고원호</p>
-          <p>&bull; 010-6479-7825</p>
-          <p>&bull; kanabun102@naver.com</p>
+          <p>&bull; {policy.name}</p>
+          <p>&bull; {policy.phone}</p>
+          <p>&bull; {policy.email}</p>
         </S.Content>
       </S.Section>
 
