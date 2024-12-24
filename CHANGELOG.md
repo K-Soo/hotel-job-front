@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.2](https://github.com/K-Soo/hotel-job-front/compare/v0.1.1...v0.1.2) (2024-12-24)
+
+
+### Features
+
+* .versionrc 파일 추가하여 커밋 타입 정의 ([bbf674b](https://github.com/K-Soo/hotel-job-front/commit/bbf674beede9539343a12322595078e28a33482f))
+
 ### 0.1.1 (2024-12-24)
 
 
