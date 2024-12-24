@@ -21,7 +21,7 @@ export default function BottomNavigation() {
         <i>IC</i>
         <span>HOME</span>
       </Link>
-      <Link className="items" href={path.ACCOUNT}>
+      <Link className="items" href={path.USER}>
         <i>IC</i>
         <span>MY</span>
       </Link>
@@ -41,7 +41,7 @@ const S = {
     width: 100%;
     height: 70px;
     box-sizing: border-box;
-    background-color: ${(props) => props.theme.colors.white100};
+    background-color: ${(props) => props.theme.colors.white};
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     box-shadow: 0 -1px 15px rgba(0, 0, 0, 0.1);
