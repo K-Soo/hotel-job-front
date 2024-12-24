@@ -48,4 +48,9 @@ const resumeRegister = yup.object({
     .default([]),
 });
 
-export const schema = { signInSchema, resumeRegister };
+const signUpSchema = yup.object({
+  userId: validation.USER_ID,
+  password: validation.PASSWORD,
+});
+
+export const schema = { signInSchema, resumeRegister, signUpSchema };
