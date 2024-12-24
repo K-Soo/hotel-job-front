@@ -4,4 +4,5 @@ export const policy = {
   email: 'help.hoteljob@gmail.com',
   domain: 'www.hotel-job-connect.com',
   application: '호텔잡',
+  phone: '010-6479-7825',
 };
