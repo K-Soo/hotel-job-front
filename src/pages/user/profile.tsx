@@ -1,7 +1,8 @@
 import Layout, { Main, Header, DesktopNavigation, MobileNavigation, Footer } from '@/components/layout';
+import UserProfileContainer from '@/containers/userProfileContainer';
 
 export default function UserProfilePage() {
-  return <>profile</>;
+  return <UserProfileContainer />;
 }
 
 UserProfilePage.getLayout = (page: React.ReactElement) => {

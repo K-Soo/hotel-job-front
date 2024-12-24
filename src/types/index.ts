@@ -64,3 +64,8 @@ export interface ResumeRegisterForm {
   isRequiredAgreement: boolean;
   isOptionalAgreement: boolean;
 }
+
+export interface SignUpForm {
+  userId: string;
+  password: string;
+}

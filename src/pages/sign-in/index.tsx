@@ -9,8 +9,7 @@ SignInPage.getLayout = (page: React.ReactElement) => {
   return (
     <Layout>
       <Header>
-        <DesktopNavigation />
-        <MobileNavigation />
+        <MobileNavigation homeIcon />
       </Header>
       <Main>{page}</Main>
     </Layout>
