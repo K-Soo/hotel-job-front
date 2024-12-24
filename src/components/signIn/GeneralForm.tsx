@@ -7,6 +7,7 @@ import { useRouter } from 'next/router';
 
 export default function GeneralForm() {
   const router = useRouter();
+
   const onClickSocialLogin = (type: string) => {
     //SWIFT 전용
     // if (window?.webkit) {
@@ -28,14 +29,14 @@ export default function GeneralForm() {
         <span className="text">Sign In with Kakao</span>
       </S.SocialButton>
 
-      <S.SocialButton name="google" onClick={() => onClickSocialLogin('google')}>
+      {/* <S.SocialButton name="google" onClick={() => onClickSocialLogin('google')}>
         <Image src="/images/social/google_icon.svg" width={18} height={18} alt="구글_아이콘" className="image-icon" />
         <span className="text">Sign In with Google</span>
       </S.SocialButton>
       <S.SocialButton name="apple" onClick={() => onClickSocialLogin('apple')}>
         <Image src="/images/social/apple_icon.svg" width={18} height={18} alt="애플_아이콘" className="image-icon" />
         <span className="text">Sign In with Apple</span>
-      </S.SocialButton>
+      </S.SocialButton> */}
     </S.GeneralForm>
   );
 }
