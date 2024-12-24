@@ -1,14 +1,16 @@
 import styled from 'styled-components';
 
-interface LineProps {}
+interface LineProps {
+  margin?: string;
+}
 
-export default function Line({}: LineProps) {
-  return <S.Line />;
+export default function Line({ margin }: LineProps) {
+  return <S.Line $margin={margin} />;
 }
 
 const S = {
-  Line: styled.div`
+  Line: styled.div<{ $margin?: string }>`
     border-top: 1px solid ${(props) => props.theme.colors.grayOpacity200};
-    margin: 20px 0;
+    margin: ${(props) => (props.$margin ? props.$margin : '20px 0')};
   `,
 };
