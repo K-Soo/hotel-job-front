@@ -10,7 +10,7 @@ export default function UtilityMenu({}: UtilityMenuProps) {
 const S = {
   UtilityMenu: styled.div`
     height: 35px;
-    max-width: 1024px;
+    width: 100%;
     margin: 0 auto;
     display: flex;
     align-content: center;
