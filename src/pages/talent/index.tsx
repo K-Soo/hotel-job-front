@@ -11,7 +11,7 @@ TalentPage.getLayout = (page: React.ReactElement) => {
     <Layout>
       <Header>
         <DesktopNavigation />
-        <MobileNavigation />
+        <MobileNavigation title="인재풀" />
       </Header>
       <Main>{page}</Main>
       <Footer />
