@@ -9,9 +9,6 @@
     "start": "next start",
     "lint": "next lint"
   },
-  "engines": {
-    "node": "20.18.0"
-  },
   "dependencies": {
     "@hookform/devtools": "^4.3.3",
     "@hookform/error-message": "^2.0.1",
