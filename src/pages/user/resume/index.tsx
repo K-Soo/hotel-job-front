@@ -1,4 +1,5 @@
-import Layout, { Main, Header, DesktopNavigation, MobileNavigation } from '@/components/layout';
+import BottomNavigation from '@/components/common/BottomNavigation';
+import Layout, { Main, Header, DesktopNavigation, MobileNavigation, Footer } from '@/components/layout';
 import UserResumeContainer from '@/containers/userResumeContainer';
 export default function UserResumePage() {
   return <UserResumeContainer />;
@@ -9,9 +10,11 @@ UserResumePage.getLayout = (page: React.ReactElement) => {
     <Layout>
       <Header>
         <DesktopNavigation />
-        <MobileNavigation />
+        <MobileNavigation title="이력서 목록" />
       </Header>
       <Main>{page}</Main>
+      <Footer />
+      <BottomNavigation />
     </Layout>
   );
 };
