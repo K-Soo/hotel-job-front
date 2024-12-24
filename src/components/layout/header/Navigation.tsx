@@ -1,13 +1,14 @@
 import styled from 'styled-components';
 import Link from 'next/link';
 import path from '@/constants/path';
-import { useRecoilValue } from 'recoil';
-import { authAtom, authSelector } from '@/recoil/auth';
-import { Post, Get } from '@/apis';
+import { Post } from '@/apis';
 import Icon from '@/icons/Icon';
+import Logo from '@/components/common/Logo';
+import useAuth from '@/hooks/useAuth';
+import { motion } from 'framer-motion';
 
 export default function Navigation() {
-  const authSelectorValue = useRecoilValue(authSelector);
+  const { isAuthenticated } = useAuth();
 
   const handleClickSignOut = async () => {
     try {
@@ -22,47 +23,70 @@ export default function Navigation() {
 
   return (
     <S.Navigation>
-      <div className="items">
-        <Link className="items__item" href={path.RECRUIT}>
+      <S.Menu>
+        <Logo size="small" margin="0 30px 0 0" />
+
+        <MotionLink className="item" href={path.RECRUIT}>
           채용정보
-        </Link>
-        <Link className="items__item" href={path.TALENT}>
+        </MotionLink>
+
+        <MotionLink className="item" href={path.TALENT}>
           인재풀
-        </Link>
-      </div>
-      <div className="route-box">
-        {authSelectorValue.isLogin && (
-          <Link href={path.ACCOUNT}>
+        </MotionLink>
+      </S.Menu>
+
+      <S.Utility>
+        {isAuthenticated && (
+          <Link href={path.USER}>
             <Icon name="User" />
           </Link>
         )}
-        {!authSelectorValue.isLogin && <Link href={path.SIGN_IN}>로그인</Link>}
+
+        {!isAuthenticated && <Link href={path.SIGN_IN}>로그인</Link>}
+
         {/* {authSelectorValue.isLogin && (
           <Button label="SIGN OUT" onClick={() => handleClickSignOut()} variant="primary" height="30px" width="80px" margin="0 0 0 15px" />
         )} */}
-      </div>
+      </S.Utility>
     </S.Navigation>
   );
 }
+
+const MotionLink = motion(Link);
 
 const S = {
   Navigation: styled.nav`
     max-width: 1024px;
     margin: 0 auto;
-    height: 50px;
+    height: 60px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    .items {
-      &__item {
-        margin-right: 15px;
-      }
-    }
-    .route-box {
-      height: 100%;
+  `,
+  Menu: styled.div`
+    display: flex;
+    align-items: center;
+    height: 100%;
+    .item {
+      margin-right: 15px;
+      font-size: 15px;
+      color: ${(props) => props.theme.colors.gray700};
+      height: 45px;
+      padding: 0 12px;
+      border-radius: 5px;
       display: flex;
       align-items: center;
-      font-size: 14px;
+      justify-content: center;
+      &:hover {
+        background-color: ${(props) => props.theme.colors.gray100};
+        color: ${(props) => props.theme.colors.black};
+        transition: all 0.3s;
+      }
     }
+  `,
+  Utility: styled.div`
+    display: flex;
+    align-items: center;
+    height: 100%;
   `,
 };
