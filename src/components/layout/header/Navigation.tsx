@@ -6,8 +6,11 @@ import Icon from '@/icons/Icon';
 import Logo from '@/components/common/Logo';
 import useAuth from '@/hooks/useAuth';
 import { motion } from 'framer-motion';
+import Button from '@/components/common/style/Button';
+import { useRouter } from 'next/router';
 
 export default function Navigation() {
+  const router = useRouter();
   const { isAuthenticated } = useAuth();
 
   const handleClickSignOut = async () => {
@@ -33,6 +36,10 @@ export default function Navigation() {
         <MotionLink className="item" href={path.TALENT}>
           인재풀
         </MotionLink>
+
+        <MotionLink className="item" href={path.TALENT}>
+          고객센터
+        </MotionLink>
       </S.Menu>
 
       <S.Utility>
@@ -42,7 +49,9 @@ export default function Navigation() {
           </Link>
         )}
 
-        {!isAuthenticated && <Link href={path.SIGN_IN}>로그인</Link>}
+        {!isAuthenticated && (
+          <Button label="로그인" variant="tertiary" height="40px" onClick={() => router.push(path.SIGN_IN)} fontSize="15px" />
+        )}
 
         {/* {authSelectorValue.isLogin && (
           <Button label="SIGN OUT" onClick={() => handleClickSignOut()} variant="primary" height="30px" width="80px" margin="0 0 0 15px" />
@@ -56,8 +65,7 @@ const MotionLink = motion(Link);
 
 const S = {
   Navigation: styled.nav`
-    max-width: 1024px;
-    margin: 0 auto;
+    width: 100%;
     height: 60px;
     display: flex;
     align-items: center;
@@ -71,7 +79,7 @@ const S = {
       margin-right: 15px;
       font-size: 15px;
       color: ${(props) => props.theme.colors.gray700};
-      height: 45px;
+      height: 40px;
       padding: 0 12px;
       border-radius: 5px;
       display: flex;
