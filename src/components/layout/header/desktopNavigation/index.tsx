@@ -13,7 +13,11 @@ export function DesktopNavigation() {
 
 const S = {
   DesktopNavigation: styled.div`
-    /* height: 110px; */
+    margin: 0 auto;
+    max-width: 1024px;
+    ${(props) => props.theme.media.laptop`
+      padding: 0 15px;
+    `}
     ${(props) => props.theme.media.tablet`
       display: none;
     `}
