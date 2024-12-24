@@ -107,5 +107,6 @@ export const Post = {
   // 엑세스토큰 재요청
   requestAccessToken: (body: void) => requests.post<void, API.RequestAccessTokenResponse>('/auth/refresh', body),
 
+  // 로그아웃
   signOut: (body: void) => requests.post('/auth/sign-out', body),
 };
