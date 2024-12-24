@@ -1,39 +1,75 @@
 import styled from 'styled-components';
 import Button from '@/components/common/style/Button';
-
+import Icon from '@/icons/Icon';
 interface ResumeSectionProps {
   title: string;
+  isRequired?: boolean;
+  guide?: string;
+  handleClickAdd: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  children: React.ReactNode;
+  visibleAddButton?: boolean;
+  name?: string;
 }
 
-export default function ResumeSection({ title }: ResumeSectionProps) {
+export default function ResumeSection({
+  title,
+  isRequired,
+  guide,
+  handleClickAdd,
+  children,
+  name,
+  visibleAddButton = true,
+}: ResumeSectionProps) {
   return (
     <S.ResumeSection>
       <S.Header>
         <div className="left">
           <h2 className="left__title">{title}</h2>
+          {isRequired && <span className="left__required">필수</span>}
         </div>
-        <div>
-          <Button label="추가" variant="primary" height="30px" width="80px" />
-        </div>
+        {visibleAddButton && (
+          <Button
+            label="추가"
+            variant="secondary"
+            height="30px"
+            width="70px"
+            name={name}
+            fontSize="13px"
+            icon={<Icon name="Plus24x24" width="16px" height="16px" margin="0 2px 0 0" />}
+            iconColor="e5e8eb"
+            onClick={handleClickAdd}
+          />
+        )}
       </S.Header>
-      <S.Content></S.Content>
+      {guide && <S.Guide>{guide}</S.Guide>}
+      <S.Content>{children}</S.Content>
     </S.ResumeSection>
   );
 }
 
 const S = {
-  ResumeSection: styled.section``,
+  ResumeSection: styled.section`
+    margin-bottom: 50px;
+  `,
   Header: styled.div`
-    border-bottom: 1px solid ${(props) => props.theme.colors.gray200};
+    border-bottom: 1px solid ${(props) => props.theme.colors.gray600};
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 50px;
+    height: 45px;
+    margin-bottom: 15px;
     .left {
+      display: flex;
+      align-items: center;
       &__title {
-        font-size: 18px;
+        font-size: 16px;
         font-weight: 500;
         color: ${(props) => props.theme.colors.gray700};
+      }
+      &__required {
+        font-size: 13px;
+        color: red;
+        padding-left: 3px;
       }
     }
     .right {
@@ -41,5 +77,14 @@ const S = {
       justify-content: flex-end;
     }
   `,
-  Content: styled.article``,
+  Content: styled.article`
+    /* padding: 30px 0; */
+  `,
+  Guide: styled.p`
+    padding: 10px;
+    color: ${(props) => props.theme.colors.gray600};
+    padding-top: 30px;
+    text-align: center;
+    font-size: 14px;
+  `,
 };
