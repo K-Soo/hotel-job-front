@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components';
 import FormError from '@/components/common/form/FormError';
 import { useFormContext, Path, FieldValues } from 'react-hook-form';
 import { motion } from 'framer-motion';
-
+import { get } from 'lodash';
 interface FormInputProps<T> {
   name: Path<T>;
   label?: string;
@@ -16,6 +16,7 @@ interface FormInputProps<T> {
   margin?: string;
   horizontal?: boolean;
   width?: string;
+  maxWidth?: string;
 }
 
 export default function FormInput<T extends FieldValues>({
@@ -30,6 +31,7 @@ export default function FormInput<T extends FieldValues>({
   margin,
   horizontal,
   width,
+  maxWidth,
 }: FormInputProps<T>) {
   const {
     formState: { errors },
@@ -54,8 +56,10 @@ export default function FormInput<T extends FieldValues>({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isFocusing]);
 
+  const error = get(errors, name);
+
   return (
-    <S.FormInput $margin={margin} $horizontal={horizontal} $width={width}>
+    <S.FormInput $margin={margin} $horizontal={horizontal} $width={width} $maxWidth={maxWidth}>
       {label && (
         <StyledLabel className="input-label" htmlFor={name + '-formInput'} required={required && !disabled}>
           {label}
@@ -72,6 +76,7 @@ export default function FormInput<T extends FieldValues>({
         placeholder={placeholder}
         type={type || 'text'}
         readOnly={readOnly}
+        disabled={disabled}
         {...register(name)}
       />
       <FormError errors={errors} name={name} />
@@ -80,9 +85,10 @@ export default function FormInput<T extends FieldValues>({
 }
 
 const S = {
-  FormInput: styled.div<{ $margin?: string; $horizontal?: boolean; $width?: string }>`
-    margin: ${(props) => (props.$margin ? props.$margin : '0 0 5px 0')};
+  FormInput: styled.div<{ $margin?: string; $horizontal?: boolean; $width?: string; $maxWidth?: string }>`
+    margin: ${(props) => (props.$margin ? props.$margin : '0')};
     width: ${(props) => (props.$width ? props.$width : '100%')};
+    max-width: ${(props) => (props.$maxWidth ? props.$maxWidth : '100%')};
     ${(props) =>
       props.$horizontal &&
       css`
@@ -123,5 +129,8 @@ const StyledMotionInput = styled(motion.input)`
   &::placeholder {
     color: ${(props) => props.theme.colors.gray400};
     font-size: 14px;
+  }
+  &:disabled {
+    background-color: ${(props) => props.theme.colors.gray100};
   }
 `;
