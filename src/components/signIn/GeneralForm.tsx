@@ -24,6 +24,8 @@ export default function GeneralForm() {
 
   return (
     <S.GeneralForm>
+      {/* <Image objectFit="cover" width={110} height={136} src="/images/shipper.png" alt="배너" /> */}
+
       <S.SocialButton name="kakao" onClick={() => onClickSocialLogin('kakao')}>
         <Image src="/images/social/kakao_icon.svg" width={18} height={18} alt="카카오_아이콘" className="image-icon" />
         <span className="text">Sign In with Kakao</span>
@@ -61,14 +63,13 @@ const S = {
       left: 20px;
     }
     .text {
-      font-weight: 700;
+      font-weight: 500;
       font-size: 14px;
     }
     ${(props) =>
       props.name === 'kakao' &&
       css`
         background-color: #fee500;
-
         margin-bottom: 10px;
         .text {
           margin-left: 24px;
