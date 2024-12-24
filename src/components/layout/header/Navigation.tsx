@@ -53,9 +53,9 @@ export default function Navigation() {
           <Button label="로그인" variant="tertiary" height="40px" onClick={() => router.push(path.SIGN_IN)} fontSize="15px" />
         )}
 
-        {/* {authSelectorValue.isLogin && (
+        {isAuthenticated && (
           <Button label="SIGN OUT" onClick={() => handleClickSignOut()} variant="primary" height="30px" width="80px" margin="0 0 0 15px" />
-        )} */}
+        )}
       </S.Utility>
     </S.Navigation>
   );
