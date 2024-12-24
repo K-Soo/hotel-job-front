@@ -18,9 +18,9 @@ export default function FormError({ name, errors, margin }: FormErrorProps) {
 
 const S = {
   FormError: styled.div<{ $margin?: string }>`
-    margin: ${(props) => (props.$margin ? props.$margin : '1px 0 0 0')};
-    height: 15px;
-    font-size: 13px;
+    margin: ${(props) => (props.$margin ? props.$margin : '1.5px 0 0 0')};
+    height: 12px;
+    font-size: 11px;
     color: crimson;
   `,
 };
