@@ -15,7 +15,7 @@ interface CompanyFormProps {
 export default function CompanyForm({ onSubmit, isSubmitError }: CompanyFormProps) {
   const { push } = useAppRouter();
 
-  const { handleSubmit, formState } = useFormContext<SignInForm>();
+  const { handleSubmit } = useFormContext<SignInForm>();
 
   return (
     <S.CompanyForm>
