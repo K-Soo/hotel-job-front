@@ -19,11 +19,6 @@ const path = {
 
   CHECKOUT: '/checkout',
 
-  SERVICE_QNA: '/account/qna', //1:1문의
-  SERVICE_QNA_CREATE: '/account/qna/create', //1:1문의 등록
-
-  SERVICE_LAUNCHING: '/service/launching', //입점/제휴 문의
-
   SUPPORT_NOTICE: '/support/notice', //공지사항
   SUPPORT_FAQ: '/support/faq', //FAQ
 
