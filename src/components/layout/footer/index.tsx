@@ -1,13 +1,13 @@
 import styled from 'styled-components';
 import Link from 'next/link';
 import path from '@/constants/path';
+import { policy } from '@/constants/policy';
 
 export function Footer() {
   return (
     <S.Footer>
       <div className="container">
         <S.Category>
-          <li className="item">회사소개</li>
           <li className="item">
             <Link href={path.SUPPORT_NOTICE} prefetch={false}>
               고객센터
@@ -25,9 +25,9 @@ export function Footer() {
           </li>
         </S.Category>
         <S.Information>
-          <p className="item">이메일: kanabun607@gmail.com</p>
+          <p className="item">이메일: {policy.email}</p>
           <p className="item">사업자등록번호: 107-37-90473 | 대표자: 고원호</p>
-          <p className="item">통신판매업 신고번호: 2024-12-11222</p>
+          {/* <p className="item">통신판매업 신고번호: 2024-12-11222</p> */}
           <p className="item">경기도 남양주시 두물로27번길 17</p>
           <strong className="item company">COPYRIGHT ⓒ HOTEL JOB ALL RIGHTS RESERVED.</strong>
         </S.Information>
