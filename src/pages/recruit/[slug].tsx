@@ -1,5 +1,6 @@
-import Layout, { Header, Footer, Main } from "@/components/layout";
-import RecruitDetailContainer from "@/containers/recruitDetailContainer";
+import Layout, { Header, Footer, Main, DesktopNavigation, MobileNavigation } from '@/components/layout';
+
+import RecruitDetailContainer from '@/containers/recruitDetailContainer';
 
 export default function RecruitDetailPage() {
   return <RecruitDetailContainer />;
@@ -8,7 +9,10 @@ export default function RecruitDetailPage() {
 RecruitDetailPage.getLayout = (page: React.ReactElement) => {
   return (
     <Layout>
-      <Header />
+      <Header>
+        <DesktopNavigation />
+        <MobileNavigation />
+      </Header>
       <Main>{page}</Main>
       <Footer />
     </Layout>
