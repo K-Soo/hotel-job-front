@@ -32,21 +32,21 @@ export default function CompanyForm({ onSubmit, isSubmitError }: CompanyFormProp
         <div className="button-group__find-box">
           <Button
             label="아이디 찾기"
-            fontSize="12px"
-            width="85px"
+            fontSize="11px"
+            width="73px"
             type="submit"
-            height="25px"
-            variant="secondary"
+            height="20px"
+            variant="secondary200"
             onClick={() => push(path.SIGN_UP)}
             margin="0 5px 0 0"
           />
           <Button
             label="비밀번호 찾기"
-            fontSize="12px"
+            fontSize="11px"
             type="submit"
-            height="25px"
-            variant="secondary"
-            width="85px"
+            height="20px"
+            variant="secondary200"
+            width="73px"
             onClick={() => push(path.SIGN_UP)}
           />
         </div>
@@ -55,7 +55,7 @@ export default function CompanyForm({ onSubmit, isSubmitError }: CompanyFormProp
           fontSize="14px"
           type="submit"
           height="25px"
-          variant="secondary"
+          variant="secondary100"
           onClick={() => push(path.SIGN_UP)}
           width="100px"
         />
@@ -78,6 +78,7 @@ const S = {
       flex: 1;
       &__find-box {
         display: flex;
+        align-items: center;
         width: auto;
       }
     }
