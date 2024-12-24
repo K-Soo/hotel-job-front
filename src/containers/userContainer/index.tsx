@@ -1,6 +1,6 @@
 import React from 'react';
 import User from '@/components/user';
-import UserAsideMenu from '@/components/common/UserAsideMenu';
+import UserAsideMenu from '@/components/common/user/UserAsideMenu';
 
 export default function UserContainer() {
   return (
