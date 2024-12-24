@@ -9,9 +9,10 @@ interface CheckBoxProps {
   checked: boolean;
   required?: boolean;
   optional?: boolean;
+  visibleView?: boolean;
 }
 
-export default function CheckBox({ label, name, onChange, checked, visibleIcon, margin, required, optional }: CheckBoxProps) {
+export default function CheckBox({ label, name, onChange, checked, visibleView, margin, required, optional }: CheckBoxProps) {
   return (
     <S.CheckBox $margin={margin}>
       <div className="wrapper">
@@ -24,7 +25,7 @@ export default function CheckBox({ label, name, onChange, checked, visibleIcon, 
           </p>
         </label>
       </div>
-      {true && <i className="view">보기</i>}
+      {visibleView && <i className="view">보기</i>}
     </S.CheckBox>
   );
 }
