@@ -1,4 +1,3 @@
-// import "@/styles/globals.css";
 import AppThemeProvider from '@/styles/AppThemeProvider';
 import Layout from '@/components/layout';
 import { AppPropsWithLayout } from '@/types/app';
@@ -39,7 +38,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
                 <Component {...pageProps} />
               </GuardComponent>,
             )}
-          {/* <ReactQueryDevtools initialIsOpen={false} /> */}
+          <ReactQueryDevtools initialIsOpen={false} />
         </QueryClientProvider>
       </RecoilRoot>
     </AppThemeProvider>
