@@ -38,6 +38,7 @@ export function Footer() {
 
 const S = {
   Footer: styled.footer`
+    margin-top: 30px;
     background-color: ${(props) => props.theme.colors.gray};
     width: 100%;
     padding: 50px 0 50px 0;
