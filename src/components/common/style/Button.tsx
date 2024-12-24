@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+import Icon, { IconType } from '@/icons/Icon';
 
 // 1. positive : 화면의 변화를 주거나 정보를 추가하는 버튼 ("전송" "확인" "더보기" 등)
 // 2. Neutral: 화면의 변화가 없거나 되돌아가는 버튼 ("취소"버튼 등)
@@ -7,6 +8,7 @@ import styled, { css } from 'styled-components';
 type ButtonVariant =
   | 'primary' // 기본 버튼
   | 'secondary' // 보조 버튼
+  | 'secondary100' // 보조 버튼
   | 'tertiary' // 중립적 버튼
   | 'danger' // 위험한 작업
   | 'success' // 성공적인 작업
@@ -19,7 +21,6 @@ type ButtonVariant =
   | 'loading'; // 작업 중 버튼
 
 interface ButtonProps {
-  onClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
   label: string;
   name?: string;
   variant: ButtonVariant;
@@ -29,7 +30,11 @@ interface ButtonProps {
   margin?: string;
   height?: string;
   width?: string;
+  maxWidth?: string;
   borderRadius?: string;
+  onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  icon?: React.ReactElement;
+  iconColor?: string;
 }
 
 export default function Button({
@@ -43,7 +48,10 @@ export default function Button({
   height,
   name,
   width,
+  maxWidth,
   borderRadius,
+  icon,
+  iconColor,
 }: ButtonProps) {
   return (
     <S.Button
@@ -52,12 +60,15 @@ export default function Button({
       height={height}
       name={name}
       width={width}
-      margin={margin}
+      $margin={margin}
       fontSize={fontSize}
       disabled={disabled}
       $borderRadius={borderRadius}
       $variant={variant}
+      $maxWidth={maxWidth}
+      $iconColor={iconColor}
     >
+      {icon}
       {label}
     </S.Button>
   );
@@ -65,36 +76,90 @@ export default function Button({
 
 const S = {
   Button: styled.button<{
-    margin?: string;
+    $margin?: string;
     width?: string;
+    $maxWidth?: string;
     height?: string;
     fontSize?: string;
     name?: string;
     $borderRadius?: string;
+    $iconColor?: string;
     $variant: ButtonVariant;
   }>`
+    box-sizing: border-box;
     cursor: pointer;
-    margin: ${(props) => (props.margin ? props.margin : '0')};
     width: ${(props) => (props.width ? props.width : '100%')};
-    height: ${(props) => (props.height ? props.height : '40px')};
+    max-width: ${(props) => (props.$maxWidth ? props.$maxWidth : '100%')};
+    height: ${(props) => (props.height ? props.height : '45px')};
     border-radius: ${(props) => (props.$borderRadius ? props.$borderRadius : '0')};
+    font-size: ${(props) => (props.fontSize ? props.fontSize : '16px')};
+    padding: 0 8px;
+    margin: ${(props) => (props.$margin ? props.$margin : '0')};
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 100%;
-    border-radius: 3px;
-    font-size: ${(props) => (props.fontSize ? props.fontSize : '16px')};
+    border-radius: 5px;
+    white-space: nowrap;
+    svg {
+      fill: ${(props) => props.$iconColor};
+      color: ${(props) => props.$iconColor};
+      stroke: ${(props) => props.$iconColor};
+    }
 
     ${(props) =>
       props.$variant === 'primary' &&
       css`
-        color: ${(props) => props.theme.colors.white100};
-        background-color: ${(props) => props.theme.colors.blue100};
+        color: ${(props) => props.theme.colors.white};
+        background-color: ${(props) => props.theme.colors.blue500};
         &:hover {
-          background-color: ${(props) => props.theme.colors.blue200};
+          background-color: ${(props) => props.theme.colors.blue600};
         }
         &:disabled {
           background-color: ${(props) => props.theme.colors.blue300};
+          cursor: not-allowed;
+        }
+      `};
+
+    ${(props) =>
+      props.$variant === 'secondary' &&
+      css`
+        color: ${(props) => props.theme.colors.gray700};
+        background-color: ${(props) => props.theme.colors.gray100};
+        &:hover {
+          transition: 0.3s;
+          background-color: ${(props) => props.theme.colors.gray200};
+          color: ${(props) => props.theme.colors.black200};
+        }
+        &:disabled {
+          cursor: not-allowed;
+        }
+      `};
+
+    ${(props) =>
+      props.$variant === 'secondary100' &&
+      css`
+        color: ${(props) => props.theme.colors.blue500};
+        background-color: ${(props) => props.theme.colors.blue50};
+        &:hover {
+          transition: 0.3s;
+          background-color: ${(props) => props.theme.colors.blue100};
+        }
+        &:disabled {
+          cursor: not-allowed;
+        }
+      `};
+
+    ${(props) =>
+      props.$variant === 'tertiary' &&
+      css`
+        color: ${(props) => props.theme.colors.black100};
+        background-color: ${(props) => props.theme.colors.white};
+        border: 1px solid ${(props) => props.theme.colors.gray200};
+        &:hover {
+          transition: 0.3s;
+          background-color: ${(props) => props.theme.colors.gray200};
+        }
+        &:disabled {
           cursor: not-allowed;
         }
       `};
