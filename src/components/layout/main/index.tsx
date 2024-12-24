@@ -19,7 +19,7 @@ const S = {
     flex-direction: column;
     margin: 0 auto;
     padding-top: 30px;
-    ${(props) => props.theme.media.tablet`
+    ${(props) => props.theme.media.laptop`
       padding: 30px 15px 0 15px;
     `};
     & > section {
