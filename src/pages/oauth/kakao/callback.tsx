@@ -16,6 +16,7 @@ import environment from '@/environment';
 import { ParsedUrlQuery } from 'querystring';
 import Loading from '@/components/common/Loading';
 import Portal from '@/components/common/Portal';
+import Line from '@/components/common/Line';
 
 export interface UrlQuery extends ParsedUrlQuery {
   code: string;
@@ -27,10 +28,15 @@ export default function KaKaoCallbackPage() {
   const [signInForm, setSignInForm] = React.useState({
     isInitialRequest: 'Y',
     allAgree: false,
+    ageAgree: false,
     personalInfoAgree: false,
     serviceTermsAgree: false,
     marketingAgree: false,
   });
+
+  const allChecked = signInForm.ageAgree && signInForm.personalInfoAgree && signInForm.serviceTermsAgree && signInForm.marketingAgree;
+  const requChecked = signInForm.ageAgree && signInForm.personalInfoAgree && signInForm.serviceTermsAgree;
+
   const { setAuthAtomState } = useAuth();
   const router = useRouter();
   const query = router.query as UrlQuery;
@@ -50,6 +56,7 @@ export default function KaKaoCallbackPage() {
       setSignInForm((prev) => ({
         ...prev,
         allAgree: restoredState?.allAgree ?? false,
+        ageAgree: restoredState?.ageAgree ?? false,
         isInitialRequest: restoredState?.isInitialRequest ?? 'Y',
         personalInfoAgree: restoredState?.personalInfoAgree ?? false,
         serviceTermsAgree: restoredState?.serviceTermsAgree ?? false,
@@ -104,6 +111,18 @@ export default function KaKaoCallbackPage() {
 
   const handleChangeCheckbox = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, checked } = event.target;
+    if (name === 'allAgree') {
+      setSignInForm((prev) => ({
+        ...prev,
+        allAgree: checked,
+        ageAgree: checked,
+        personalInfoAgree: checked,
+        serviceTermsAgree: checked,
+        marketingAgree: checked,
+      }));
+      return;
+    }
+
     setSignInForm((prev) => ({ ...prev, [name]: checked }));
   };
 
@@ -123,14 +142,17 @@ export default function KaKaoCallbackPage() {
   if (signInForm.isInitialRequest === 'N') {
     return (
       <OauthSignUpForm>
-        <CheckBox checked={true} name="allAgree" onChange={handleChangeCheckbox} label="전체 동의" margin="5px" />
+        <CheckBox name="allAgree" checked={allChecked} onChange={handleChangeCheckbox} label="전체 동의" />
+
+        <Line margin="15px 0" />
+
         <CheckBox
-          checked={signInForm.personalInfoAgree}
-          name="personalInfoAgree"
+          checked={signInForm.ageAgree}
+          name="ageAgree"
           required
           onChange={handleChangeCheckbox}
-          label="19세 이상"
-          margin="5px"
+          label="20세 이상"
+          margin="0 0 10px 0"
         />
         <CheckBox
           checked={signInForm.personalInfoAgree}
@@ -138,7 +160,8 @@ export default function KaKaoCallbackPage() {
           required
           onChange={handleChangeCheckbox}
           label="서비스이용 동의"
-          margin="5px"
+          margin="0 0 10px 0"
+          visibleView
         />
         <CheckBox
           checked={signInForm.serviceTermsAgree}
@@ -146,7 +169,8 @@ export default function KaKaoCallbackPage() {
           required
           onChange={handleChangeCheckbox}
           label="개인정보 수집동의"
-          margin="5px"
+          margin="0 0 10px 0"
+          visibleView
         />
         <CheckBox
           checked={signInForm.marketingAgree}
@@ -154,9 +178,9 @@ export default function KaKaoCallbackPage() {
           optional
           onChange={handleChangeCheckbox}
           label="마케팅 동의"
-          margin="5px"
+          margin="0 0 10px 0"
         />
-        <Button label="가입" name="positive" onClick={handleSubmitSignUp} variant="primary" />
+        <Button label="가입" name="positive" onClick={handleSubmitSignUp} variant="primary" margin="50px 0 0 0" disabled={!requChecked} />
       </OauthSignUpForm>
     );
   }
