@@ -15,9 +15,10 @@ export type IconProps = {
   cursor?: string;
   animate?: boolean;
   fill?: string;
+  color?: string;
 };
 
-function Icon({ name, className, style, onClick }: IconProps) {
+function Icon({ name, className, style, onClick, color }: IconProps) {
   return React.createElement(svg[name], {
     className,
     style,
@@ -30,7 +31,6 @@ export default styled(Icon)`
   height: ${(props) => (props.height ? props.height : '28px')};
   margin: ${(props) => (props.margin ? props.margin : '0')};
   cursor: ${(props) => (props.cursor ? props.cursor : 'pointer')};
-  svg {
-    fill: currentColor;
-  }
+  /* color: currentColor; */
+  /* fill: currentColor; */
 `;
