@@ -1,7 +1,8 @@
-import Layout, { Main, Header, DesktopNavigation, MobileNavigation } from '@/components/layout';
+import Layout, { Main, Header, DesktopNavigation, MobileNavigation, Footer } from '@/components/layout';
+import SupportNoticeContainer from '@/containers/supportNoticeContainer';
 
 export default function SupportNoticePage() {
-  return <>notice</>;
+  return <SupportNoticeContainer />;
 }
 
 SupportNoticePage.getLayout = (page: React.ReactElement) => {
@@ -12,6 +13,7 @@ SupportNoticePage.getLayout = (page: React.ReactElement) => {
         <MobileNavigation />
       </Header>
       <Main>{page}</Main>
+      <Footer />
     </Layout>
   );
 };
