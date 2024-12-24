@@ -2,6 +2,7 @@ import { createGlobalStyle } from 'styled-components';
 import Reset from 'styled-reset';
 import pretendard from '@/fonts/pretendard';
 
+// DaumPost z-index: 10;
 // BottomNavigation z-index: 5;
 // Header z-index: 5;
 const GlobalStyle = createGlobalStyle`
