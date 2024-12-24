@@ -24,6 +24,7 @@ export default function FormDate<T extends FieldValues>({ name, label, disabled,
     watch,
     clearErrors,
   } = useFormContext<T>();
+
   const error = get(errors, name);
 
   return (
