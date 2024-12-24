@@ -50,7 +50,6 @@ export default function UserResumeRegisterContainer() {
   //   },
   // });
 
-  console.log('methods: ', methods.watch());
   const onSubmit: SubmitHandler<ResumeRegisterForm> = async (data) => {
     try {
     } catch (error) {
