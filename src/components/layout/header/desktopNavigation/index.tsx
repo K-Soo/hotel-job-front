@@ -1,9 +1,8 @@
 import styled from 'styled-components';
 import Navigation from '@/components/layout/header/Navigation';
 import UtilityMenu from '@/components/layout/header/UtilityMenu';
-interface DesktopNavigationProps {}
 
-export function DesktopNavigation({}: DesktopNavigationProps) {
+export function DesktopNavigation() {
   return (
     <S.DesktopNavigation>
       <UtilityMenu />
@@ -14,6 +13,7 @@ export function DesktopNavigation({}: DesktopNavigationProps) {
 
 const S = {
   DesktopNavigation: styled.div`
+    /* height: 110px; */
     ${(props) => props.theme.media.tablet`
       display: none;
     `}
