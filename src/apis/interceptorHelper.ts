@@ -20,7 +20,7 @@ const handleSuccessResponse = (config: AxiosResponse) => {
 
 const handleRequestAccessToken = async (originalRequest: any) => {
   try {
-    const response = await Post.requestAccessToken({});
+    const response = await Post.requestAccessToken();
     if (!response.success) {
       throw new Error();
     }
