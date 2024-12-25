@@ -2,6 +2,58 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.3](https://github.com/K-Soo/hotel-job-front/compare/v0.1.2...v0.1.3) (2024-12-25)
+
+
+### Features
+
+* 개인정보 보호책임자 정보 동적으로 변경 ([7039258](https://github.com/K-Soo/hotel-job-front/commit/70392583fdb896cebac7470369b874abac924e79))
+* 사용자 등록 및 로그인 기능을 위한 컴포넌트 및 타입 추가 ([2f53b37](https://github.com/K-Soo/hotel-job-front/commit/2f53b37a9d903a2c95891bd124a7955d2d081069))
+* 정책 상수에 전화번호 추가 ([8a2be9e](https://github.com/K-Soo/hotel-job-front/commit/8a2be9e2d258c7f12df0d2df8065e2f6e812baa2))
+* Button 컴포넌트에 secondary200 변형 추가 및 스타일 수정 ([18411f6](https://github.com/K-Soo/hotel-job-front/commit/18411f61aa8e33ea8a994b81718b962057281281))
+* CheckBox 컴포넌트에 visibleView prop 추가하여 아이콘 표시 제어 기능 개선 ([7d02906](https://github.com/K-Soo/hotel-job-front/commit/7d02906d327ad5091d9c764b01b1d7a176b48ffd))
+* DesktopNavigation 컴포넌트의 최대 너비를 1024px로 설정하고 중앙 정렬 추가 ([47069a0](https://github.com/K-Soo/hotel-job-front/commit/47069a04ca9c1055e59fedc29f79b206d294cb6e))
+* ignore-build.sh 스크립트 추가하여 특정 브랜치에서 빌드 허용/무시 설정 ([2af21ee](https://github.com/K-Soo/hotel-job-front/commit/2af21eebea84ffd519114347362f9e8c2f513773))
+* KakaoCallbackPage에서 동의 체크박스 및 전체 동의 기능 추가 ([de390e1](https://github.com/K-Soo/hotel-job-front/commit/de390e1935506b7fa6f4d759626fa7d79c1f1a71))
+* Line 컴포넌트에 margin prop 추가하여 스타일 유연성 향상 ([26c735c](https://github.com/K-Soo/hotel-job-front/commit/26c735c24903b081286fbe05aef3f45c63b9e7cc))
+* Logo 컴포넌트에 style prop 추가 ([026ecab](https://github.com/K-Soo/hotel-job-front/commit/026ecab1fe5bf442d226eae9e0bbfc27a2e5a143))
+* Main 컴포넌트에 padding prop 추가 및 기본 패딩 값 설정 ([9c8706b](https://github.com/K-Soo/hotel-job-front/commit/9c8706ba8c9f52256c9fb5f9b505a1d4d2f47417))
+* makefile 추가하여 버전 관리 및 릴리즈 스크립트 설정 ([85482be](https://github.com/K-Soo/hotel-job-front/commit/85482be968f270374dbeb43d9de554f66b067de4))
+* MobileNavigation 컴포넌트에 로고 및 홈 아이콘 추가, backUrl prop 수정 ([d31dae2](https://github.com/K-Soo/hotel-job-front/commit/d31dae25cabd67fb7056a14f0b2159271d2b515d))
+* MobileNavigation에 logoIcon prop 추가 ([0751398](https://github.com/K-Soo/hotel-job-front/commit/07513984f441dea39a06fa29d4c6933e026b3e7f))
+* OauthSignUpForm에 로고 추가 및 제목 스타일 개선 ([62ba557](https://github.com/K-Soo/hotel-job-front/commit/62ba557c3768acb1066ae4b7ff456bf9dc06a094))
+* SignIn, SignUp, UserProfile 페이지에 MobileNavigation 추가 및 레이아웃 개선 ([7f2f640](https://github.com/K-Soo/hotel-job-front/commit/7f2f640e28ed121cef78b481bf0bbf877524928e))
+* SignUp 컴포넌트에 자식 요소 및 제출 핸들러 추가 ([65e4ac8](https://github.com/K-Soo/hotel-job-front/commit/65e4ac83c596dd6d3eefe55cc2cfd2a58475f7de))
+* SignUpContainer에 단계별 폼 처리 및 제출 기능 추가 ([21ffa2e](https://github.com/K-Soo/hotel-job-front/commit/21ffa2e641d37ee1abd33923092e9d78d1ac2718))
+* SignUpGeneralForm 컴포넌트 추가 및 기본 입력 필드 구성 ([9b4e305](https://github.com/K-Soo/hotel-job-front/commit/9b4e305df7d7e0b16bd40afec84db14acea9a3d2))
+* signUpSchema 추가하여 사용자 등록 검증 로직 구현 ([dacf6d2](https://github.com/K-Soo/hotel-job-front/commit/dacf6d225d2c5d7a0d6cb41ecb0ad2178273b06f))
+* SupportNotice 컴포넌트 추가 및 SupportAsideMenu 포함 ([1396346](https://github.com/K-Soo/hotel-job-front/commit/1396346ff3846df65edc8ed45b9de593deb6958c))
+* SupportNoticeContainer 컴포넌트 추가 ([aa39e8b](https://github.com/K-Soo/hotel-job-front/commit/aa39e8b92a4f4955825be4fec9b87fad21870b39))
+* SupportNoticePage에 SupportNoticeContainer 추가 및 Footer 컴포넌트 포함 ([31030cf](https://github.com/K-Soo/hotel-job-front/commit/31030cfbd838aa74b25efcfd96649845ee5f2605))
+* UserPage에 BottomNavigation 추가 및 MobileNavigation에 제목 추가 ([7d1d502](https://github.com/K-Soo/hotel-job-front/commit/7d1d502530a773ac685bdadfa0245d92cf0aeaf2))
+* UserProfileContainer 컴포넌트 추가 및 UserAsideMenu 렌더링 ([07b5a12](https://github.com/K-Soo/hotel-job-front/commit/07b5a12fcd3d6ae8e5923239c5b0b7066e8644e5))
+* UserProfilePage 컴포넌트 추가 및 레이아웃 구성 ([db24e52](https://github.com/K-Soo/hotel-job-front/commit/db24e520663d3420c683ee903272bab449b82352))
+* UserResume 컴포넌트에 UserAsideMenu 추가 및 flex 레이아웃 적용 ([9855642](https://github.com/K-Soo/hotel-job-front/commit/9855642c4a387439620c1002abc1aa57b8c12ad1))
+* UserResumeContainer에서 UserAsideMenu를 UserTemplate 및 UserTitle로 변경 ([bbd6b6c](https://github.com/K-Soo/hotel-job-front/commit/bbd6b6c4ec49c5660ca1b239715b2ccb22d8ffed))
+* UserResumePage에 Footer 및 BottomNavigation 추가 ([8dffe8e](https://github.com/K-Soo/hotel-job-front/commit/8dffe8e2fad753fa5f04045514e4e46d8f177693))
+* UtilityMenu 컴포넌트의 최대 너비를 100%로 변경 ([38573a2](https://github.com/K-Soo/hotel-job-front/commit/38573a22bbb4d96248f05fa441a53d8cb54c40df))
+
+
+### Bug Fixes
+
+* 불필요한 서비스 경로 상수 제거 ([180896c](https://github.com/K-Soo/hotel-job-front/commit/180896c74c9975a2a6a8c181d6b065daad1752ee))
+* 주석 처리된 글로벌 CSS 임포트 제거 및 ReactQueryDevtools 주석 해제 ([208d578](https://github.com/K-Soo/hotel-job-front/commit/208d5789edfd946dbfa335bf6195c4f51af02b6f))
+* CompanyForm 버튼 스타일 및 크기 조정 ([51babbb](https://github.com/K-Soo/hotel-job-front/commit/51babbbc505e6ee5a2460d8aac0ef02ca5a85470))
+* GeneralForm 컴포넌트에서 버튼 텍스트의 글꼴 두께 수정 및 불필요한 이미지 주석 제거 ([063ead6](https://github.com/K-Soo/hotel-job-front/commit/063ead63990cbdac512f5f9a253bf036e689ef7a))
+* HomeContainer에서 import 문 스타일 통일 ([1fff73c](https://github.com/K-Soo/hotel-job-front/commit/1fff73c351a42ee1a2effc0aa2c344300ff16456))
+* Navigation 컴포넌트에서 인증 상태 변수 이름 수정 ([d2c5b98](https://github.com/K-Soo/hotel-job-front/commit/d2c5b987d4722a0032ac8a53d1f4ea4fbbf3991a))
+* ReactQueryDevtools 주석 처리 ([985edc7](https://github.com/K-Soo/hotel-job-front/commit/985edc73c2fb867b6bdf31c6d3f9c14d6dd9b5af))
+* SignIn 컴포넌트의 최대 너비를 500px에서 450px로 수정 ([f44def2](https://github.com/K-Soo/hotel-job-front/commit/f44def29cc8b917247fd66a1d3088f89b370cec5))
+* User 컴포넌트에서 불필요한 공백 제거 ([dd89fb0](https://github.com/K-Soo/hotel-job-front/commit/dd89fb0e30968adf3a65c5926b8e1d2342b73666))
+* UserAsideMenu 경로 수정 ([e4937a4](https://github.com/K-Soo/hotel-job-front/commit/e4937a498e3ceabefa95f0b5e1c7294dae3b260c))
+* UserAsideMenu의 너비를 220px에서 200px로 수정 ([8594db1](https://github.com/K-Soo/hotel-job-front/commit/8594db1754a323de7ef1ccc9cfd771a04ed0312e))
+* UserResumeRegisterContainer에서 불필요한 console.log 제거 ([134145a](https://github.com/K-Soo/hotel-job-front/commit/134145afda23bf00f324d7ed3786fb767e783e4b))
+
 ### [0.1.2](https://github.com/K-Soo/hotel-job-front/compare/v0.1.1...v0.1.2) (2024-12-24)
 
 
