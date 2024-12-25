@@ -1,6 +1,7 @@
-# Changelog
+# 변경 로그
 
-All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+이 프로젝트의 모든 주요 변경 사항이 여기에 기록됩니다.
+### [0.1.4](https://github.com/K-Soo/hotel-job-front/compare/v0.1.3...v0.1.4) (2024-12-25)
 
 ### [0.1.3](https://github.com/K-Soo/hotel-job-front/compare/v0.1.2...v0.1.3) (2024-12-25)
 
