@@ -1,4 +1,4 @@
-import withInterceptStdout from "next-intercept-stdout";
+import withInterceptStdout from 'next-intercept-stdout';
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -10,11 +10,11 @@ const nextConfig = {
     config.module.rules.push({
       test: /\.svg$/i,
       issuer: /\.[jt]sx?$/,
-      use: ["@svgr/webpack"],
+      use: ['@svgr/webpack'],
     });
 
     return config;
   },
 };
 
-export default withInterceptStdout(nextConfig, (text) => (text.includes("Duplicate atom key") ? "" : text));
+export default withInterceptStdout(nextConfig, (text) => (text.includes('Duplicate atom key') ? '' : text));
