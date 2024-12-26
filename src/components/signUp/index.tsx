@@ -56,7 +56,7 @@ export default function SignUp({ children }: SignUpProps) {
 
 const S = {
   SignUp: styled.section`
-    max-width: 450px;
+    max-width: 380px;
     width: 100%;
     margin: 0 auto;
     display: flex;

@@ -28,7 +28,7 @@ const colors = {
   gray800: '#333d4b',
   gray900: '#191f28',
 
-  grayOpacity: 'rgba(0, 27, 55, 0.1)',
+  grayOpacity: 'rgba(0, 27, 55, 0.1)', //hover
   grayOpacity100: 'rgba(0, 23, 51, 0.02)',
   grayOpacity200: 'rgba(2, 32, 71, 0.05)',
   grayOpacity300: 'rgba(0, 29, 58, 0.18)',

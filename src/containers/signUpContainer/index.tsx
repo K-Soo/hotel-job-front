@@ -7,6 +7,7 @@ import { SignUpForm } from '@/types';
 import FormDevTools from '@/components/common/FormDevTools';
 import SignUpCompanyForm from '@/components/signUp/SignUpCompanyForm';
 import SignUpGeneralForm from '@/components/signUp/SignUpGeneralForm';
+import SignUpPolicyForm from '@/components/signUp/SignUpPolicyForm';
 
 export default function SignUpContainer() {
   const [step, setStep] = React.useState('STEP_1');
@@ -28,13 +29,16 @@ export default function SignUpContainer() {
     }
   };
 
-  const handleNextStep = () => {};
+  const handleNextStepOne = () => {
+    // setStep('STEP_2')};
+  };
 
   return (
     <FormProvider {...methods}>
       <SignUp onSubmit={onSubmit}>
-        {step === 'STEP_1' && <SignUpCompanyForm setStep={setStep} />}
-        {step === 'STEP_2' && <SignUpGeneralForm />}
+        {step === 'STEP_1' && <SignUpPolicyForm setStep={setStep} />}
+        {step === 'STEP_2' && <SignUpCompanyForm setStep={setStep} />}
+        {step === 'STEP_3' && <SignUpGeneralForm setStep={setStep} />}
       </SignUp>
       <FormDevTools control={methods.control} />
     </FormProvider>

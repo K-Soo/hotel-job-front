@@ -8,8 +8,8 @@ import PopularKeyword from '@/components/common/PopularKeyword';
 export default function RecruitContainer() {
   return (
     <Recruit>
-      <SearchForm />
-      <PopularKeyword />
+      {/* <SearchForm /> */}
+      {/* <PopularKeyword /> */}
       <RecruitCategory />
       <RecruitListContainer />
     </Recruit>

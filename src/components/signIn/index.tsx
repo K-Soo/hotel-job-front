@@ -16,7 +16,7 @@ export default function SignIn({ children }: SignInProps) {
 const S = {
   SignIn: styled.section`
     min-height: 100%;
-    max-width: 450px;
+    max-width: 380px;
     width: 100%;
     margin: 0 auto;
     .signin-container {

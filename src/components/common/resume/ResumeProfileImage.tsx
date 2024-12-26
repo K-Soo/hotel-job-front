@@ -52,7 +52,7 @@ const S = {
   ResumeProfileImage: styled.div<{ $previewImage: string }>`
     aspect-ratio: 3 / 4;
     height: 201px;
-    border: 1px solid ${(props) => props.theme.colors.gray400};
+    border: 1px solid ${(props) => props.theme.colors.gray300};
     border-radius: 5px;
     margin-right: 30px;
     cursor: pointer;
