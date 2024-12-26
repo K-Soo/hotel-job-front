@@ -10,9 +10,6 @@ export default function SignUpPage() {
 SignUpPage.getLayout = (page: React.ReactElement) => {
   return (
     <Layout>
-      <Header>
-        <MobileNavigation homeIcon />
-      </Header>
       <Main padding="0">{page}</Main>
     </Layout>
   );
