@@ -1,19 +1,19 @@
-import styled from "styled-components";
-import { motion } from "framer-motion";
-import { useRouter } from "next/router";
+import styled from 'styled-components';
+import { motion } from 'framer-motion';
+import { useRouter } from 'next/router';
 
 interface RecruitCardProps {}
 
 export default function RecruitCard({}: RecruitCardProps) {
   const handleClickCard = () => {
-    window.open("/recruit/1", "_blank");
+    window.open('/recruit/1', '_blank');
   };
 
   return (
     <S.RecruitCard
       onClick={() => handleClickCard()}
       whileHover={{
-        backgroundColor: "#FFF",
+        backgroundColor: '#FFF',
       }}
       transition={{ duration: 0 }}
     >
@@ -57,11 +57,13 @@ export default function RecruitCard({}: RecruitCardProps) {
 const S = {
   RecruitCard: styled(motion.article)`
     display: flex;
+    align-items: center;
     width: 100%;
     border-bottom: 1px solid hsla(0, 0%, 92%, 1);
     padding: 15px;
     cursor: pointer;
     font-size: 14px;
+    height: 100px;
     .company {
       flex: 15%;
       display: flex;
