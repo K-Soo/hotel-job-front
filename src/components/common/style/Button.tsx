@@ -36,6 +36,7 @@ interface ButtonProps {
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
   icon?: React.ReactElement;
   iconColor?: string;
+  padding?: string;
 }
 
 export default function Button({
@@ -53,6 +54,7 @@ export default function Button({
   borderRadius,
   icon,
   iconColor,
+  padding,
 }: ButtonProps) {
   return (
     <S.Button
@@ -68,6 +70,7 @@ export default function Button({
       $variant={variant}
       $maxWidth={maxWidth}
       $iconColor={iconColor}
+      $padding={padding}
     >
       {icon}
       {label}
@@ -86,6 +89,7 @@ const S = {
     $borderRadius?: string;
     $iconColor?: string;
     $variant: ButtonVariant;
+    $padding?: string;
   }>`
     box-sizing: border-box;
     cursor: pointer;
@@ -100,7 +104,7 @@ const S = {
     justify-content: center;
     border-radius: 5px;
     white-space: nowrap;
-    padding: 0 8px;
+    padding: ${(props) => (props.$padding ? props.$padding : '0 8px')};
     svg {
       fill: ${(props) => props.$iconColor};
       color: ${(props) => props.$iconColor};
@@ -167,12 +171,13 @@ const S = {
     ${(props) =>
       props.$variant === 'tertiary' &&
       css`
-        color: ${(props) => props.theme.colors.black100};
+        color: ${(props) => props.theme.colors.gray700};
         background-color: ${(props) => props.theme.colors.white};
         border: 1px solid ${(props) => props.theme.colors.gray200};
         &:hover {
           transition: 0.3s;
-          background-color: ${(props) => props.theme.colors.gray200};
+          background-color: ${(props) => props.theme.colors.gray};
+          color: ${(props) => props.theme.colors.black200};
         }
         &:disabled {
           cursor: not-allowed;

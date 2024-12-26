@@ -3,7 +3,6 @@ import UserResumeRegister from '@/components/userResumeRegister';
 import ResumeBottomController from '@/components/common/resume/ResumeBottomController';
 import SignIn from '@/components/signIn';
 import Logo from '@/components/common/Logo';
-import SignInTabs from '@/components/signIn/SignInTabs';
 import { signInTabsOptions } from '@/constants/tabs';
 import { useForm, FormProvider, SubmitHandler } from 'react-hook-form';
 import { ResumeRegisterForm } from '@/types';

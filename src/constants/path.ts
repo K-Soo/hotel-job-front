@@ -5,6 +5,8 @@ const path = {
   SIGN_UP: '/sign-up', //기업 가입
   SIGN_UP_COMPLETE: '/sign-up/complete',
 
+  LANDING_EMPLOYER: '/landing/employer', //랜딩 사업자
+
   RECRUIT: '/recruit', // 채용정보 메인 페이지
   RECRUIT_HOTEL: '/recruit/hotel', // 호텔 채용정보
   RECRUIT_PENSION: '/recruit/pension', // 펜션 채용정보

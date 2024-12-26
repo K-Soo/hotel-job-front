@@ -11,7 +11,7 @@ export function Header({ children }: HeaderProps) {
 const S = {
   Header: styled.header`
     position: sticky;
-    top: -35px;
+    top: -25px;
     box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.1);
     z-index: 5;
     background-color: ${(props) => props.theme.colors.white};
