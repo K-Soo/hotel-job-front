@@ -16,9 +16,6 @@ import { ParsedUrlQuery } from 'querystring';
 import { useRouter } from 'next/router';
 import dynamic from 'next/dynamic';
 
-const DynamicNationCodeModal = dynamic(() => import('@/components/signIn/GeneralForm'), { ssr: false });
-const Dasd = dynamic(() => import('@/components/signIn/CompanyForm'), { ssr: false });
-
 type SignInTab = 'general' | 'company';
 
 export interface UrlQuery extends ParsedUrlQuery {
@@ -78,7 +75,7 @@ export default function SignInContainer() {
     <SignIn>
       <FormProvider {...methods}>
         <Logo size="middle" margin="0 0 30px 0" />
-        <Tabs<SignInTab> margin="0 0 30px 0" tabsOptions={signInTabsOptions} />
+        <Tabs margin="0 0 30px 0" tabsOptions={signInTabsOptions} />
         {router.isReady && (
           <>
             {type === 'general' && <GeneralForm />}
