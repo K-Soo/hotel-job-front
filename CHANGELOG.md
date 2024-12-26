@@ -1,6 +1,63 @@
 # 변경 로그
 
-이 프로젝트의 모든 주요 변경 사항이 여기에 기록됩니다.
+프로젝트의 모든 주요 변경 사항
+### [0.1.5](https://github.com/K-Soo/hotel-job-front/compare/v0.1.4...v0.1.5) (2024-12-26)
+
+
+### Features
+
+* 변경 로그 헤더 추가 ([7797370](https://github.com/K-Soo/hotel-job-front/commit/77973704f854e51e829a6f907017ed0632bc609d))
+* 새로운 화살표 아이콘 SVG 파일 추가 ([7576837](https://github.com/K-Soo/hotel-job-front/commit/7576837ce698b3a8b8db4c446ab71a919e4bcb8d))
+* 정책 정보 업데이트 및 새로운 필드 추가 ([5ff43fd](https://github.com/K-Soo/hotel-job-front/commit/5ff43fdab6f553e26dddc99b92f575b4a87717ee))
+* 회원가입 단계에서 정책 정보 입력 폼 추가 및 단계 순서 변경 ([08f3a4d](https://github.com/K-Soo/hotel-job-front/commit/08f3a4d7687eb77a07f0a02844c202baafebe475))
+* AccountBottomSheet 컴포넌트 추가 및 하단 시트 기능 구현 ([db5a15c](https://github.com/K-Soo/hotel-job-front/commit/db5a15c3bc9cba43cee38a598feb3adf0e8d916b))
+* ArrowRight16x16 SVG 아이콘 추가 ([f2bf8d6](https://github.com/K-Soo/hotel-job-front/commit/f2bf8d6b019667348a584e8f03db981d539a4294))
+* BottomNavigation 컴포넌트에 인증 상태에 따른 버튼 링크 추가 및 Portal로 감싸기 ([9b76e7b](https://github.com/K-Soo/hotel-job-front/commit/9b76e7bf65475bfb47246df0000a68a8d80b5f17))
+* BottomSheet 상태 관리를 위한 Recoil atom 추가 ([eccb845](https://github.com/K-Soo/hotel-job-front/commit/eccb845010ddaa9b19d6d2994b5734ef6a7b29cc))
+* Footer 컴포넌트에서 사업자등록번호 및 통신판매업 신고번호 동적 렌더링 구현 ([6030473](https://github.com/K-Soo/hotel-job-front/commit/6030473c01871b850a45c7e9daa4299c06c56b0a))
+* Layout 컴포넌트에 AccountBottomSheet 추가 및 상태에 따른 렌더링 구현 ([0821f7d](https://github.com/K-Soo/hotel-job-front/commit/0821f7dea3149a81e5238aa1f239598a5a3b8479))
+* package.json 및 pnpm-lock.yaml에 react-spring-bottom-sheet 추가 ([fc8c671](https://github.com/K-Soo/hotel-job-front/commit/fc8c671fdb4142fbfb11833e3ee071a7872b7b00))
+* RecruitCard 컴포넌트의 스타일 개선 및 클릭 시 동작 수정 ([939d95d](https://github.com/K-Soo/hotel-job-front/commit/939d95dfd05dafeac015e8261cc4ff7ab0f7f929))
+* RecruitDetail 컴포넌트에 세부 정보 및 위치 관련 하위 컴포넌트 추가 ([962351e](https://github.com/K-Soo/hotel-job-front/commit/962351ed38873ee06567c048f570584664009527))
+* RecruitDetailDateTime 컴포넌트 추가 및 등록일, 수정일 표시 구현 ([628c00f](https://github.com/K-Soo/hotel-job-front/commit/628c00fd97b52c33f28eb5e8ff20d42d8c38b675))
+* RecruitDetailFavoriteShareBar 컴포넌트 추가 및 즐겨찾기, 공유하기 기능 구현 ([40f69ab](https://github.com/K-Soo/hotel-job-front/commit/40f69ab9abbaf3e5e42860bf3393bacca60c05ba))
+* RecruitDetailJobInformation 컴포넌트 추가 및 직무, 경력, 급여 등 정보 표시 구현 ([2ddd08e](https://github.com/K-Soo/hotel-job-front/commit/2ddd08e9f707871d12ca496af38677677b665098))
+* RecruitDetailLocation 컴포넌트 추가 및 위치 정보 표시 구현 ([2450577](https://github.com/K-Soo/hotel-job-front/commit/24505776a9de48da96dcad19ab2cbd6b54ca0ce8))
+* RecruitDetailPeriod 컴포넌트 추가 및 지원 방법, 담당자, 연락처 정보 표시 구현 ([c69539d](https://github.com/K-Soo/hotel-job-front/commit/c69539d7dfe02573847311a0a3d80a70ad561e56))
+* SignUpGeneralForm 컴포넌트에 단계 변경 기능 및 레이아웃 개선 추가 ([73d80cc](https://github.com/K-Soo/hotel-job-front/commit/73d80ccda5ab5c230e2f3b04cdc5407c81694632))
+* SignUpPolicyForm 컴포넌트 추가 및 이용 약관 동의 기능 구현 ([31bedae](https://github.com/K-Soo/hotel-job-front/commit/31bedae107fd8de228d67c30b5c51c31801cd3f8))
+* UserAsideMenu 컴포넌트에 애니메이션 추가 및 스타일 개선 ([fd5e33f](https://github.com/K-Soo/hotel-job-front/commit/fd5e33fca228fb8cce46ac90cdad0da6b4a9b9b1))
+
+
+### Bug Fixes
+
+* GlobalStyles에서 BottomNavigation 및 AccountBottomSheet의 z-index 수정 ([04e9be5](https://github.com/K-Soo/hotel-job-front/commit/04e9be5051129a64f97ce3400826dec8d55c5284))
+* grayOpacity 주석 추가 ([1811a0d](https://github.com/K-Soo/hotel-job-front/commit/1811a0d29ab16c7e237c84d7de7ac4f0637fa838))
+* ResumeProfileImage 컴포넌트의 테두리 색상을 gray300으로 수정 ([e8debd5](https://github.com/K-Soo/hotel-job-front/commit/e8debd5a95773b00726a9d70312955976ba2030b))
+* SignIn 컴포넌트의 최대 너비를 450px에서 380px로 수정 ([9fc7559](https://github.com/K-Soo/hotel-job-front/commit/9fc75590e3fa2cb2dd779033e6dd1dc9f5443fc6))
+* SignUp 컴포넌트의 최대 너비를 450px에서 380px로 수정 ([ba41d94](https://github.com/K-Soo/hotel-job-front/commit/ba41d9497a401371cb65ee65e667b30bc9398d40))
+* SignUpCompanyForm 컴포넌트의 레이아웃 및 버튼 동작 수정 ([e601945](https://github.com/K-Soo/hotel-job-front/commit/e601945272bcca200105669232bba94cd65a214d))
+* User 컴포넌트에 빨간색 테두리 추가 ([570e65e](https://github.com/K-Soo/hotel-job-front/commit/570e65e02440d9fc3af1e81830f1df1c17b4d379))
+
+
+### Chore
+
+* RecruitContainer에서 SearchForm 및 PopularKeyword 주석 처리 ([df853ae](https://github.com/K-Soo/hotel-job-front/commit/df853aecf5c6eafaa2a05f2250483d440b9de15c))
+* UserResume 컴포넌트에 주석 추가 ([b555d9d](https://github.com/K-Soo/hotel-job-front/commit/b555d9d53dbc4d8b9aaeecea14cabc51443eee59))
+* UserResumeRegister 컴포넌트에서 불필요한 import 제거 ([2e806b6](https://github.com/K-Soo/hotel-job-front/commit/2e806b6ff08be52d74ee236c3c1265dc55391016))
+
+
+### Styles
+
+* RecruitDetailContainer에서 import 구문을 일관된 따옴표 스타일로 수정 ([d090e88](https://github.com/K-Soo/hotel-job-front/commit/d090e88c9c00595c112ae15286bffdaeaedf8152))
+* RecruitList 컴포넌트의 import 문을 일관된 따옴표 스타일로 수정 ([592bdb1](https://github.com/K-Soo/hotel-job-front/commit/592bdb12bbc5e085f0661ac7ef9be164f842c44e))
+
+
+### Refactors
+
+* RecruitListContainer에서 불필요한 JSX 제거 ([6e34cbb](https://github.com/K-Soo/hotel-job-front/commit/6e34cbbf3d3d81d05bf06732c245849ea5dc067b))
+* SignUpPage에서 불필요한 Header 컴포넌트 제거 ([2f1fbb4](https://github.com/K-Soo/hotel-job-front/commit/2f1fbb40e4c40145b95c143e282c5b896791d7d2))
+
 ### [0.1.4](https://github.com/K-Soo/hotel-job-front/compare/v0.1.3...v0.1.4) (2024-12-25)
 
 ### [0.1.3](https://github.com/K-Soo/hotel-job-front/compare/v0.1.2...v0.1.3) (2024-12-25)
