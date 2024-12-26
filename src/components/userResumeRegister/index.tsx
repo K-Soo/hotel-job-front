@@ -1,7 +1,6 @@
 import styled from 'styled-components';
-import { SubmitHandler, useFormContext } from 'react-hook-form';
+import { useFormContext } from 'react-hook-form';
 import { ResumeRegisterForm } from '@/types';
-import ResumeBottomController from '@/components/common/resume/ResumeBottomController';
 import ResumeSection from '@/components/common/resume/ResumeSection';
 import ResumePolicy from '@/components/common/resume/ResumePolicy';
 import ResumeProgress from '@/components/common/resume/ResumeProgress';
