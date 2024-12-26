@@ -7,6 +7,7 @@ interface UserResumeProps {
   children: React.ReactNode;
 }
 
+//가능동
 export default function UserResume({ children }: UserResumeProps) {
   return (
     <S.UserResume>
