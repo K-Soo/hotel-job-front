@@ -27,6 +27,7 @@
     "react-dom": "^18",
     "react-dropzone": "^14.3.5",
     "react-hook-form": "^7.52.2",
+    "react-spring-bottom-sheet": "^3.4.1",
     "recoil": "^0.7.7",
     "rxjs": "^7.8.1",
     "standard-version": "^9.5.0",
