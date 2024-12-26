@@ -3,8 +3,9 @@ import Reset from 'styled-reset';
 import pretendard from '@/fonts/pretendard';
 
 // DaumPost z-index: 10;
-// BottomNavigation z-index: 5;
+// BottomNavigation z-index: 10;
 // Header z-index: 5;
+// AccountBottomSheet z-index: 10;
 const GlobalStyle = createGlobalStyle`
   ${Reset}
 
