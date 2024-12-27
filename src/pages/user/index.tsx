@@ -1,6 +1,6 @@
 import Layout, { Main, Header, DesktopNavigation, MobileNavigation, Footer } from '@/components/layout';
 import UserContainer from '@/containers/userContainer';
-import BottomNavigation from '@/components/common/BottomNavigation';
+import BottomNavigation from '@/components/layout/BottomNavigation';
 
 export default function UserPage() {
   return <UserContainer />;
