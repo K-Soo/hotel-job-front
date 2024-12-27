@@ -23,26 +23,65 @@ export const GENERAL_ASIDE_MENU = [
   { label: '결제내역', value: '/user/payments', items: [] },
 ];
 
-const PARTNER_ASIDE_MENU = [
-  { label: 'MY홈', value: '', items: [] },
+export const EMPLOYER_ASIDE_MENU = [
+  { label: '홈', value: path.EMPLOYER, items: [], icon: 'ArrowRight16x16' },
 
   {
-    label: '회원정보',
+    label: '업체정보 관리',
     value: '',
+    icon: 'ArrowRight16x16',
     items: [
-      { label: '회원정보 수정', value: '/partner/profile' },
-      { label: '메일 수신 설정', value: '/partner/email' },
+      { label: '업체 정보', value: path.EMPLOYER_ACCOUNT },
+      { label: '마케팅 수신 설정', value: path.EMPLOYER_ACCOUNT_MARKETING },
+      { label: '비밀번호 변경', value: path.EMPLOYER_ACCOUNT_AUTHENTICATION },
     ],
   },
 
   {
-    label: '채용',
-    value: '/resume',
+    label: '지원자 · 공고 관리',
+    value: '',
+    icon: 'ArrowRight16x16',
     items: [
-      { label: '채용 등록', value: '/partner/' },
-      { label: '이력서 등록', value: '/partner/' },
+      { label: '공고 목록', value: path.EMPLOYER_CANDIDATE },
+      { label: '지원자 관리', value: path.EMPLOYER_CANDIDATE },
+      { label: '일정 관리', value: path.EMPLOYER_CANDIDATE },
     ],
   },
 
-  { label: '결제내역', value: '', items: [] },
+  {
+    label: '채용상품',
+    value: '',
+    icon: 'ArrowRight16x16',
+    items: [
+      { label: '메인광고', value: path.EMPLOYER_PRODUCT_MAIN_AD },
+      { label: '지면광고', value: path.EMPLOYER_PRODUCT_PRINT_AD },
+      { label: '이력서 열람', value: path.EMPLOYER_PRODUCT_RESUME },
+    ],
+  },
+
+  {
+    label: '상품 · 결제관리',
+    value: '',
+    icon: 'ArrowRight16x16',
+    items: [
+      { label: '상품이용 내역', value: path.EMPLOYER },
+      { label: '결제내역', value: path.EMPLOYER },
+      { label: '쿠폰', value: path.EMPLOYER },
+      { label: '포인트', value: path.EMPLOYER },
+    ],
+  },
+
+  {
+    label: '알림설정',
+    value: '',
+    icon: 'ArrowRight16x16',
+    items: [],
+  },
+
+  {
+    label: '로그아웃',
+    value: '',
+    icon: 'ArrowRight16x16',
+    items: [],
+  },
 ];
