@@ -1,4 +1,4 @@
-import BottomNavigation from '@/components/common/BottomNavigation';
+import BottomNavigation from '@/components/layout/BottomNavigation';
 import Layout, { Main, Header, DesktopNavigation, MobileNavigation, Footer } from '@/components/layout';
 import UserResumeContainer from '@/containers/userResumeContainer';
 export default function UserResumePage() {
