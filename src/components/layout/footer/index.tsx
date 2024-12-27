@@ -25,10 +25,11 @@ export function Footer() {
           </li>
         </S.Category>
         <S.Information>
-          <p className="item">이메일: {policy.email}</p>
           <p className="item">사업자등록번호: {policy.businessNumber} | 대표자: 고원호</p>
           <p className="item">통신판매업 신고번호: {policy.mailOrderNumber}</p>
           <p className="item">{policy.address}</p>
+          <p className="item">이메일: {policy.email}</p>
+          <p className="item">연락처: {policy.phone}</p>
           <strong className="item company">COPYRIGHT ⓒ HOTEL JOB ALL RIGHTS RESERVED.</strong>
         </S.Information>
       </div>
