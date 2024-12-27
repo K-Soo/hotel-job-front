@@ -1,6 +1,37 @@
 # 변경 로그
 
 프로젝트의 모든 주요 변경 사항
+### [0.1.7](https://github.com/K-Soo/hotel-job-front/compare/v0.1.6...v0.1.7) (2024-12-27)
+
+
+### Features
+
+* 기업 관련 경로 상수 추가 ([3251b7c](https://github.com/K-Soo/hotel-job-front/commit/3251b7cff4a1ef007b47dba6ef695fce409c5b06))
+* 사이드 아이콘 SVG 파일 추가 ([7497016](https://github.com/K-Soo/hotel-job-front/commit/7497016af3af31f5486a77a2b6304a72743568b4))
+* 홈 아이콘 및 사이드 아이콘 SVG 파일 추가 ([2fae671](https://github.com/K-Soo/hotel-job-front/commit/2fae671af6ad868c5a0df5e128e66838eb7c41ca))
+* Employer 컴포넌트 추가 및 EmployerQuickMenu 포함 ([4a4328c](https://github.com/K-Soo/hotel-job-front/commit/4a4328ceda0ee503c7cd2ab6f2d878e10eb819f1))
+* EmployerAccountPage 컴포넌트 추가 및 레이아웃 구성 ([6659350](https://github.com/K-Soo/hotel-job-front/commit/6659350f691f59cfcf9cd820841a1a56223d8620))
+* EmployerAside 메뉴 항목 추가 및 업체정보 관리, 지원자 관리, 채용상품, 상품 · 결제관리 섹션 구성 ([7bc635d](https://github.com/K-Soo/hotel-job-front/commit/7bc635d0d53f2800c32ed7a05988d7fc5aac9bf9))
+* EmployerAside 컴포넌트에 메뉴 항목 추가 및 스타일 개선 ([29a5efb](https://github.com/K-Soo/hotel-job-front/commit/29a5efbe8e95a42ff8ef5c87964e96c750bb47f3))
+* EmployerContainer 컴포넌트 추가 및 Employer 컴포넌트 렌더링 ([29f8fda](https://github.com/K-Soo/hotel-job-front/commit/29f8fda7d3694ae284bed7da2f4b3f82d03ae558))
+* EmployerMain 컴포넌트에 조건부로 EmployerAside 추가 및 배경색 설정 ([43007ef](https://github.com/K-Soo/hotel-job-front/commit/43007efb6e5ad82c2e2ae81a5b0e3402b14bd856))
+* EmployerPage 컴포넌트 추가 및 레이아웃 구성 ([788d85e](https://github.com/K-Soo/hotel-job-front/commit/788d85e2ce4a057e41984f6fa8d1a6458c6e4ce0))
+* EmployerProductMainPage 컴포넌트 추가 및 레이아웃 구성 ([2c7bce2](https://github.com/K-Soo/hotel-job-front/commit/2c7bce27794534797aaf8f5e461be200ab44dc33))
+* EmployerProductRecruitPage 컴포넌트 추가 ([8838162](https://github.com/K-Soo/hotel-job-front/commit/883816276ad22b86740cd0ba2a42ea4b4db79a3a))
+* EmployerQuickMenu 컴포넌트 추가 ([8a0308b](https://github.com/K-Soo/hotel-job-front/commit/8a0308b6cb6ed3fff6ae890483e5faabede6e749))
+* LandingEmployer 컴포넌트에 '미리보기' 버튼 추가 ([9707f7f](https://github.com/K-Soo/hotel-job-front/commit/9707f7f3a60f2541f00fe4e30d9a4b6083b13bb8))
+
+
+### Bug Fixes
+
+* '인재풀' 메뉴 항목을 '인재'로 수정 ([8ba652d](https://github.com/K-Soo/hotel-job-front/commit/8ba652d8fdeb0e433b7df167d771430a81df0849))
+* BottomNavigation 컴포넌트에서 '인재풀' 텍스트를 '인재'로 수정 ([b4c1be9](https://github.com/K-Soo/hotel-job-front/commit/b4c1be97dbd93d0271790d66cd9f3c794d1e0699))
+
+
+### Refactors
+
+* UserAsideMenu 컴포넌트에서 불필요한 margin 스타일 제거 ([32a7fff](https://github.com/K-Soo/hotel-job-front/commit/32a7fff84b10b2cd8f8639d90340b9c576966fe5))
+
 ### [0.1.6](https://github.com/K-Soo/hotel-job-front/compare/v0.1.5...v0.1.6) (2024-12-26)
 
 
