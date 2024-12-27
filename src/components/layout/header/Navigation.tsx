@@ -34,7 +34,7 @@ export default function Navigation() {
         </MotionLink>
 
         <MotionLink className="item" href={path.TALENT}>
-          인재풀
+          인재
         </MotionLink>
 
         <MotionLink className="item" href={path.TALENT}>
