@@ -35,7 +35,7 @@ export default function BottomNavigation() {
         </S.ButtonLink>
         <S.ButtonLink className="items" name={path.TALENT} onClick={handleLink}>
           <i>IC</i>
-          <span>인재풀</span>
+          <span>인재</span>
         </S.ButtonLink>
 
         {isAuthenticated && (
