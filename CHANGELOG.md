@@ -1,6 +1,30 @@
 # 변경 로그
 
 프로젝트의 모든 주요 변경 사항
+### [0.1.8](https://github.com/K-Soo/hotel-job-front/compare/v0.1.7...v0.1.8) (2024-12-27)
+
+
+### Features
+
+* 여러 SVG 아이콘 추가 ([fa31e75](https://github.com/K-Soo/hotel-job-front/commit/fa31e755a6d1aac83c3ea1a55513fd530ca756ac))
+* 여러 SVG 아이콘 파일 추가 ([f983875](https://github.com/K-Soo/hotel-job-front/commit/f98387506b9a5be5faf61f797e671e99aea35e8e))
+* 일반 및 고용주 사이드 메뉴 아이콘 업데이트 ([748883f](https://github.com/K-Soo/hotel-job-front/commit/748883fd58dcf179affb0a2fbe6f0f9533dae7bc))
+* BottomNavigation 컴포넌트 재구성 및 아이콘 추가 ([5a34844](https://github.com/K-Soo/hotel-job-front/commit/5a34844515dfc0b1c3e19e55f3b297da43da11a3))
+* EmployerAside 컴포넌트의 아이콘 변경 및 크기 조정 버튼 텍스트 수정 ([27cc760](https://github.com/K-Soo/hotel-job-front/commit/27cc760884b698977f8be0238ac23f2a905d8a7f))
+* footer 컴포넌트에 상호명 추가 및 정보 수정 ([ce0fd80](https://github.com/K-Soo/hotel-job-front/commit/ce0fd80237fb8bc95646c470392797111357c31c))
+* footer 컴포넌트에 이메일 및 연락처 정보 추가 ([61fc394](https://github.com/K-Soo/hotel-job-front/commit/61fc3948eabadf38bf8892c7fb5b0ae5d62e4c62))
+
+
+### Bug Fixes
+
+* BottomNavigation 컴포넌트의 import 경로 수정 ([c12ff13](https://github.com/K-Soo/hotel-job-front/commit/c12ff13d31c5984c29eb0da5061a08137e723ee1))
+* BottomNavigation 컴포넌트의 import 경로 수정 ([17d2409](https://github.com/K-Soo/hotel-job-front/commit/17d24096a8e43c153712daf6e4b85e8b08b4b7ec))
+* BottomNavigation 컴포넌트의 import 경로 수정 ([b4c28f5](https://github.com/K-Soo/hotel-job-front/commit/b4c28f5b8a75fef4ec73690169df6e2f8abf87e0))
+* BottomNavigation 컴포넌트의 import 경로 수정 ([368d4ff](https://github.com/K-Soo/hotel-job-front/commit/368d4ff6dc4d7194c16a4a780a47467ededd7107))
+* GlobalStyles에서 텍스트 크기 자동 조정 비활성화 및 버튼 하이라이트 제거 ([0382931](https://github.com/K-Soo/hotel-job-front/commit/038293106284f156a7278d37ad927257a3df9dfb))
+* makefile에서 git push 명령어의 브랜치 이름을 'main'으로 수정 ([45b3e27](https://github.com/K-Soo/hotel-job-front/commit/45b3e2709486c40c4788cff2e8ec6013a192fec6))
+* UserPage에서 BottomNavigation의 import 경로 수정 ([a50b0d3](https://github.com/K-Soo/hotel-job-front/commit/a50b0d36ff220b08c7393c8fedcbbe58f98f3285))
+
 ### [0.1.7](https://github.com/K-Soo/hotel-job-front/compare/v0.1.6...v0.1.7) (2024-12-27)
 
 
