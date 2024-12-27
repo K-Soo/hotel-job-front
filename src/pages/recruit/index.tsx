@@ -1,6 +1,6 @@
 import Layout, { Header, Footer, Main, DesktopNavigation, MobileNavigation } from '@/components/layout';
 import RecruitContainer from '@/containers/recruitContainer';
-import BottomNavigation from '@/components/common/BottomNavigation';
+import BottomNavigation from '@/components/layout/BottomNavigation';
 
 export default function RecruitPage() {
   return <RecruitContainer />;

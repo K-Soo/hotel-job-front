@@ -1,7 +1,7 @@
 import path from '@/constants/path';
 
 export const GENERAL_ASIDE_MENU = [
-  { label: 'MY홈', value: '/user', items: [] },
+  { label: 'MY홈', value: '/user', items: [], icon: 'Home24x24' },
   {
     label: '회원정보',
     value: '',
@@ -24,12 +24,12 @@ export const GENERAL_ASIDE_MENU = [
 ];
 
 export const EMPLOYER_ASIDE_MENU = [
-  { label: '홈', value: path.EMPLOYER, items: [], icon: 'ArrowRight16x16' },
+  { label: '홈', value: path.EMPLOYER, items: [], icon: 'Home24x24' },
 
   {
     label: '업체정보 관리',
     value: '',
-    icon: 'ArrowRight16x16',
+    icon: 'Buildings24x24',
     items: [
       { label: '업체 정보', value: path.EMPLOYER_ACCOUNT },
       { label: '마케팅 수신 설정', value: path.EMPLOYER_ACCOUNT_MARKETING },
@@ -40,7 +40,7 @@ export const EMPLOYER_ASIDE_MENU = [
   {
     label: '지원자 · 공고 관리',
     value: '',
-    icon: 'ArrowRight16x16',
+    icon: 'UserRounded24x24',
     items: [
       { label: '공고 목록', value: path.EMPLOYER_CANDIDATE },
       { label: '지원자 관리', value: path.EMPLOYER_CANDIDATE },
@@ -51,7 +51,7 @@ export const EMPLOYER_ASIDE_MENU = [
   {
     label: '채용상품',
     value: '',
-    icon: 'ArrowRight16x16',
+    icon: 'Shop24x24',
     items: [
       { label: '메인광고', value: path.EMPLOYER_PRODUCT_MAIN_AD },
       { label: '지면광고', value: path.EMPLOYER_PRODUCT_PRINT_AD },
@@ -62,7 +62,7 @@ export const EMPLOYER_ASIDE_MENU = [
   {
     label: '상품 · 결제관리',
     value: '',
-    icon: 'ArrowRight16x16',
+    icon: 'Card24x24',
     items: [
       { label: '상품이용 내역', value: path.EMPLOYER },
       { label: '결제내역', value: path.EMPLOYER },
@@ -74,14 +74,21 @@ export const EMPLOYER_ASIDE_MENU = [
   {
     label: '알림설정',
     value: '',
-    icon: 'ArrowRight16x16',
+    icon: 'SolarBell24x24',
+    items: [],
+  },
+
+  {
+    label: '문의',
+    value: '',
+    icon: 'Question24x24',
     items: [],
   },
 
   {
     label: '로그아웃',
     value: '',
-    icon: 'ArrowRight16x16',
+    icon: 'Logout24x24',
     items: [],
   },
 ];

@@ -30,18 +30,27 @@ const GlobalStyle = createGlobalStyle`
     background-color: var(--background-color);
     color: var(--text-color);
     font-family: var(--font-family);
+    -webkit-text-size-adjust: 100%; 
+    text-size-adjust: 100%; //텍스트 크기를 자동으로 조정하지 않음
     /* overflow-x: hidden; sticky: x */
   }
+
+  button, a {
+  }
+
 
   button {
     all: unset;
     box-sizing: border-box;
+    -webkit-tap-highlight-color: #e8f3ff; /* 하이라이트 제거 */
   }
 
   a {
     text-decoration: none;
     color: inherit;
   }
+
+  
 
   a:visited {
     color: inherit;
