@@ -27,14 +27,29 @@ const path = {
   POLICY_TERMS: '/policy/terms', //서비스 이용약관
   POLICY__PRIVACY: '/policy/privacy', //개인정보 처리방침
 
+  // USER
   USER: '/user', //마이페이지
   USER_RESUME_REGISTER: '/user/resume/register', // 이력서 등록
   USER_USER: '/user/profile', //프로필 페이지
   USER_POINT: '/user/point', //포인트
 
-  ACCOUNT_RECOVER_RESET_SUCCESS: '/account/recover/reset/success', //비밀번호 찾기 결과
-  ACCOUNT_RECOVER_USER: '/account/recover/user', //이메일 찾기
-  ACCOUNT_RECOVER_RESET: '/account/recover/reset', //비밀번호 찾기
+  // EMPLOYER
+  EMPLOYER: '/employer', //기업 - 홈
+  EMPLOYER_CANDIDATE: '/employer/candidate', //기업 - 지원자
+  EMPLOYER_SCHEDULE: '/employer/schedule', //기업 - 일정
+  EMPLOYER_JOB_OPENING: '/employer/job-opening', //기업 - 채용공고
+
+  EMPLOYER_PRODUCT_MAIN_AD: '/employer/product/main', //기업 - 상품 메인광고
+  EMPLOYER_PRODUCT_PRINT_AD: '/employer/product/print', // 기업 - 상품 지면광고
+  EMPLOYER_PRODUCT_RESUME: '/employer/product/resume', // 기업 - 이력서 열람
+
+  EMPLOYER_ACCOUNT: '/employer/account', // 기업 - 계정 · 업체정보
+  EMPLOYER_ACCOUNT_MARKETING: '/employer/account/marketing', // 기업 - 마케팅 수신 설정
+  EMPLOYER_ACCOUNT_AUTHENTICATION: '/employer/account/authentication', // 기업 - 비밀번호 변경
+
+  // ACCOUNT_RECOVER_RESET_SUCCESS: '/account/recover/reset/success', //비밀번호 찾기 결과
+  // ACCOUNT_RECOVER_USER: '/account/recover/user', //이메일 찾기
+  // ACCOUNT_RECOVER_RESET: '/account/recover/reset', //비밀번호 찾기
 } as const;
 
 export default path;

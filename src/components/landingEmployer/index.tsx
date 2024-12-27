@@ -20,6 +20,7 @@ export default function LandingEmployer() {
             margin="30px 0 0 0"
             onClick={() => router.push(path.SIGN_UP)}
           />
+          <Button label="미리보기" variant="primary" width="180px" margin="30px 0 0 0" onClick={() => router.push(path.EMPLOYER)} />
         </div>
       </S.Announcement>
 

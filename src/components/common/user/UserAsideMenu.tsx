@@ -78,7 +78,6 @@ const S = {
   Menu: styled(motion.div)`
     .menu-item {
       min-height: 40px;
-      /* margin: 5px 0; */
       height: 100%;
       display: flex;
       justify-content: space-between;
