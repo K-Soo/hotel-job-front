@@ -37,8 +37,7 @@ export function EmployerAside() {
   return (
     <S.EmployerAside ref={asideRef} animate={controls} initial={{ width: '220px' }}>
       <S.ResizeButton className="resize-button" onClick={handleClickResize}>
-        <Icon name="Side24x24" width="24px" height="24px" />
-        <h6 className="resize-text">축소</h6>
+        <Icon name={isExpanded ? 'MinimizeSquare24x24' : 'MaximizeSquare24x24'} width="24px" height="24px" />
       </S.ResizeButton>
 
       {EMPLOYER_ASIDE_MENU.map((element) => {
@@ -46,8 +45,7 @@ export function EmployerAside() {
           <S.Menu key={element.label} onClick={() => handleClickMenu(element.label, element.value)}>
             <S.MenuItem>
               <motion.div className="item-wrapper" whileTap={{ scale: 0.98 }}>
-                {/* <Icon name={element.icon as IconType} width="16px" height="16px" /> */}
-                <Icon name={'Location24x24'} width="24px" height="24px" />
+                <Icon name={element.icon as IconType} width="24px" height="24px" />
                 <h6 className="title">{element.label}</h6>
               </motion.div>
               {element.items.length !== 0 && <Icon className="arrow-icon" name="ArrowRight16x16" width="16px" height="16px" />}
