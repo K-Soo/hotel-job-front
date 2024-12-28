@@ -6,6 +6,7 @@ import pretendard from '@/fonts/pretendard';
 // BottomNavigation z-index: 10;
 // Header z-index: 5;
 // AccountBottomSheet z-index: 10;
+// ProductOptionAsideMenu z-index: 10;
 const GlobalStyle = createGlobalStyle`
   ${Reset}
 
@@ -35,14 +36,10 @@ const GlobalStyle = createGlobalStyle`
     /* overflow-x: hidden; sticky: x */
   }
 
-  button, a {
-  }
-
-
   button {
     all: unset;
     box-sizing: border-box;
-    -webkit-tap-highlight-color: #e8f3ff; /* 하이라이트 제거 */
+    -webkit-tap-highlight-color: #e8f3ff; 
   }
 
   a {
