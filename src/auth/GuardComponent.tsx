@@ -41,6 +41,7 @@ export default function GuardComponent({ allowedRoles, children }: GuardComponen
       alert('접근 권한이 없습니다.');
       router.replace(path.SIGN_IN);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [allowedRoles, role]);
 
   if (isAuthIdle && showLoading) {
