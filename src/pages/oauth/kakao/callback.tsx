@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import axios from 'axios';
 import { useSetRecoilState } from 'recoil';
 import Layout, { Main } from '@/components/layout';
-import { OAuth, Get, Post, instance } from '@/apis';
+import { OAuth } from '@/apis';
 import Consent from '@/components/common/Consent';
 import OauthSignUpForm from '@/components/common/OauthSignUpForm';
 import path from '@/constants/path';
@@ -85,8 +85,7 @@ export default function KaKaoCallbackPage() {
         throw new Error();
       }
       setAuthAtomState({
-        provider: response.result.provider,
-        role: response.result.role,
+        ...response.result,
         status: 'AUTHENTICATED',
       });
       replace(path.HOME);

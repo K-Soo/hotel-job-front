@@ -20,7 +20,7 @@ const handleSuccessResponse = (config: AxiosResponse) => {
 
 const handleRequestAccessToken = async (originalRequest: any) => {
   try {
-    const response = await Post.requestAccessToken();
+    const response = await Post.requestAccessToken({});
     if (!response.success) {
       throw new Error();
     }
@@ -36,6 +36,9 @@ const handleRequestAccessToken = async (originalRequest: any) => {
 };
 
 const handleInvalidRefreshToken = () => {
+  if (typeof window === 'undefined') {
+    return;
+  }
   alert('로그인 정보가 만료되었습니다.');
   window.location.href = '/sign-in';
 };

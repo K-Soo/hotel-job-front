@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 interface CheckBoxProps {
-  label: string;
+  label?: string;
   name: string;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   visibleIcon?: boolean;
@@ -18,11 +18,13 @@ export default function CheckBox({ label, name, onChange, checked, visibleView, 
       <div className="wrapper">
         <input id={`checkbox-${name}`} type="checkbox" onChange={onChange} name={name} checked={checked} />
         <label htmlFor={`checkbox-${name}`}>
-          <p className="label-text">
-            {required && <span className="label-text__required">[필수]</span>}
-            {optional && <span className="label-text__optional">[선택]</span>}
-            <span>{label}</span>
-          </p>
+          {label && (
+            <p className="label-text">
+              {required && <span className="label-text__required">[필수]</span>}
+              {optional && <span className="label-text__optional">[선택]</span>}
+              <span>{label}</span>
+            </p>
+          )}
         </label>
       </div>
       {visibleView && <i className="view">보기</i>}

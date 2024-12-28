@@ -1,4 +1,4 @@
-import Layout, { Main, Header, DesktopNavigation, MobileNavigation } from '@/components/layout';
+import Layout, { Main, Header, MobileNavigation } from '@/components/layout';
 import SignInContainer from '@/containers/signInContainer';
 
 export default function SignInPage() {

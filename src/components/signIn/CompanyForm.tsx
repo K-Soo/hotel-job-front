@@ -15,17 +15,21 @@ interface CompanyFormProps {
 export default function CompanyForm({ onSubmit, isSubmitError }: CompanyFormProps) {
   const { push } = useAppRouter();
 
-  const { handleSubmit } = useFormContext<SignInForm>();
+  const {
+    handleSubmit,
+    formState: { isSubmitting },
+  } = useFormContext<SignInForm>();
+  console.log('isSubmitting: ', isSubmitting);
 
   return (
     <S.CompanyForm>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <FormInput<SignInForm> label="아이디" name="userId" required />
-        <FormInput<SignInForm> label="비밀번호" name="password" required type="password" />
+        <FormInput<SignInForm> label="아이디" name="userId" />
+        <FormInput<SignInForm> label="비밀번호" name="password" type="password" />
 
         <S.ResponseErrorText $isVisible={isSubmitError}>로그인 정보를 확인해주세요.</S.ResponseErrorText>
 
-        <Button label="로그인" type="submit" variant="primary" margin="30px 0 0 0" />
+        <Button label="로그인" type="submit" variant="primary" margin="30px 0 0 0" isLoading={isSubmitting} />
       </form>
       <div className="line" />
       <div className="button-group">
@@ -84,9 +88,10 @@ const S = {
     }
   `,
   ResponseErrorText: styled.p<{ $isVisible: boolean }>`
+    margin-top: 15px;
     text-align: center;
-    color: crimson;
-    font-weight: 500;
+    color: ${(props) => props.theme.colors.red500};
+    font-weight: 400;
     visibility: ${(props) => (props.$isVisible ? 'visible' : 'hidden')};
   `,
 };

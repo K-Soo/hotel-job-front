@@ -3,6 +3,7 @@ import DaumPostcode, { Address } from 'react-daum-postcode';
 import Background from '@/components/common/Background';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { daumPostAtom } from '@/recoil/daumPost';
+import Portal from '@/components/common/Portal';
 
 interface DaumPostProps {}
 
@@ -35,27 +36,29 @@ export default function DaumPost({}: DaumPostProps) {
   };
 
   return (
-    <Background>
-      <S.DaumPost>
-        <S.Header>
-          <h1>주소 검색</h1>
-          <i onClick={handleClickClose}>X</i>
-        </S.Header>
-        <DaumPostcode
-          className="daum"
-          onComplete={handleComplete}
-          autoClose={true}
-          onResize={(size) => {
-            console.log('size: ', size);
-          }}
-          style={{
-            height: 'calc(100% - 50px)',
-          }}
-          onClose={handleClickClose}
-          animation={true}
-        />
-      </S.DaumPost>
-    </Background>
+    <Portal>
+      <Background>
+        <S.DaumPost>
+          <S.Header>
+            <h1>주소 검색</h1>
+            <i onClick={handleClickClose}>X</i>
+          </S.Header>
+          <DaumPostcode
+            className="daum"
+            onComplete={handleComplete}
+            autoClose={true}
+            onResize={(size) => {
+              console.log('size: ', size);
+            }}
+            style={{
+              height: 'calc(100% - 50px)',
+            }}
+            onClose={handleClickClose}
+            animation={true}
+          />
+        </S.DaumPost>
+      </Background>
+    </Portal>
   );
 }
 

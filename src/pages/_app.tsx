@@ -7,7 +7,6 @@ import { RecoilRoot } from 'recoil';
 import React from 'react';
 import GuardComponent from '@/auth/GuardComponent';
 import AuthenticationComponent from '@/auth/AuthenticationComponent';
-import StyledComponentsRegistry from '@/lib/styled-components-registry';
 
 const commonLayout = (page: React.ReactElement) => <Layout>{page}</Layout>;
 
@@ -33,9 +32,10 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
         <AuthenticationComponent />
         <QueryClientProvider client={queryClient}>
           {!Component.authentication && getLayout(<Component {...pageProps} />)}
+
           {Component.authentication &&
             getLayout(
-              <GuardComponent>
+              <GuardComponent allowedRoles={Component.allowedRoles}>
                 <Component {...pageProps} />
               </GuardComponent>,
             )}

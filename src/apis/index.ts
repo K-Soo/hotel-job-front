@@ -9,6 +9,9 @@ const VERSION = '/v1';
 const config: AxiosRequestConfig = {
   baseURL: environment.apiUrl + URL_API + VERSION,
   withCredentials: true,
+  // headers: {
+  //   Origin: 'localhost:3000',
+  // },
 };
 
 export const instance = axios.create(config);
@@ -34,7 +37,6 @@ instance.interceptors.response.use(
 
     // access token 만료 or 누락
     const shouldRefreshToken = responseData?.error?.code === 'ERR-1000' || responseData?.error?.code === 'ERR-1001';
-    console.log('shouldRefreshToken: ', shouldRefreshToken);
 
     // access token 위조
     // refresh token 만료 or 누락 or 위조
@@ -58,11 +60,12 @@ instance.interceptors.response.use(
   },
 );
 
-const responseBody = <T>(response: AxiosResponse<T>) => response.data;
+const responseBody = <T>(response: AxiosResponse<T>) => response?.data;
 
 const requests = {
   get: <Response>(url: string) => instance.get<Response>(url, config).then(responseBody),
-  post: <Request, Response>(url: string, body: Request) => instance.post<Response>(url, body).then(responseBody),
+  post: <Request, Response>(url: string, body: Request, config?: AxiosRequestConfig) =>
+    instance.post<Response>(url, body, config).then(responseBody),
 };
 
 export const Internal = {
@@ -102,10 +105,11 @@ export const Post = {
   signIn: (body: API.SignInRequest) => requests.post<API.SignInRequest, API.SignInResponse>('/auth/sign-in', body),
 
   // 유저정보
-  getUserInfo: (body: void) => requests.post<void, API.GetUserInfoResponse>('/auth/me', body),
+  getUserInfo: (body: {}, config?: AxiosRequestConfig) => requests.post<{}, API.GetUserInfoResponse>('/auth/me', body, config),
 
   // 엑세스토큰 재요청
-  requestAccessToken: (body: void) => requests.post<void, API.RequestAccessTokenResponse>('/auth/refresh', body),
+  requestAccessToken: (body: {}, config?: AxiosRequestConfig) =>
+    requests.post<{}, API.RequestAccessTokenResponse>('/auth/refresh', body, config),
 
   // 로그아웃
   signOut: (body: void) => requests.post('/auth/sign-out', body),

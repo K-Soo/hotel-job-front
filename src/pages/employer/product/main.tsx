@@ -12,3 +12,6 @@ EmployerProductMainPage.getLayout = (page: React.ReactElement) => {
     </Layout>
   );
 };
+
+EmployerProductMainPage.authentication = true;
+EmployerProductMainPage.allowedRoles = ['EMPLOYER'];

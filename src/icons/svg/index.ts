@@ -28,8 +28,10 @@ import minimizeSquareA24x24 from './minimizeSquareA24x24.svg';
 import Star24x24 from './star24x24.svg';
 import Bill24x24 from './bill24x24.svg';
 import Settings24x24 from './settings24x24.svg';
+import CloseA24x24 from './closeA24x24.svg';
 
 export {
+  CloseA24x24,
   Settings24x24,
   Bill24x24,
   Star24x24,

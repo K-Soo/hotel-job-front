@@ -26,6 +26,7 @@ const GlobalStyle = createGlobalStyle`
 
   html {
     overflow-x: hidden;
+    scrollbar-gutter: stable; //스크롤바 공간 예약
   }
   body {
     background-color: var(--background-color);
@@ -40,6 +41,11 @@ const GlobalStyle = createGlobalStyle`
     all: unset;
     box-sizing: border-box;
     -webkit-tap-highlight-color: #e8f3ff; 
+  }
+  select {
+    outline: none; /* 기본 포커스 스타일 제거 */
+    all: unset;
+    box-sizing: border-box;
   }
 
   a {
