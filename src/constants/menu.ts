@@ -38,9 +38,9 @@ export const EMPLOYER_ASIDE_MENU = [
     value: '',
     icon: 'UserRounded24x24',
     items: [
-      { label: '공고 목록', value: path.EMPLOYER_CANDIDATE },
+      { label: '공고 목록', value: path.EMPLOYER_RECRUITMENT },
       { label: '지원자 관리', value: path.EMPLOYER_CANDIDATE },
-      { label: '일정 관리', value: path.EMPLOYER_CANDIDATE },
+      { label: '일정 관리', value: path.EMPLOYER_SCHEDULE },
     ],
   },
 
@@ -65,13 +65,6 @@ export const EMPLOYER_ASIDE_MENU = [
       { label: '쿠폰', value: path.EMPLOYER },
       { label: '포인트', value: path.EMPLOYER },
     ],
-  },
-
-  {
-    label: '알림설정',
-    value: '',
-    icon: 'SolarBell24x24',
-    items: [],
   },
 
   {
