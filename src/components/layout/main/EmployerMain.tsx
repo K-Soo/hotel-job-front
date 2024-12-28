@@ -6,7 +6,7 @@ interface EmployerMainProps {
   children: React.ReactNode;
 }
 
-const EXCLUDED_ASIDE_PATH = ['landing', 'checkout'] as const;
+const EXCLUDED_ASIDE_PATH = ['landing', 'checkout', 'setup'] as const;
 
 export function EmployerMain({ children }: EmployerMainProps) {
   const router = useRouter();
