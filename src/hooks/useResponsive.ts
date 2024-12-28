@@ -3,7 +3,7 @@ import { useMediaQuery } from 'react-responsive';
 
 export default function useResponsive() {
   const isMobileQuery = useMediaQuery({ query: '(max-width: 500px)' });
-  const isTabletQuery = useMediaQuery({ query: '(min-width: 501px) and (max-width: 768px)' });
+  const isTabletQuery = useMediaQuery({ query: '(max-width: 768px)' });
   const isLaptopQuery = useMediaQuery({ query: '(max-width: 1024px)' });
 
   const [isMobile, setIsMobile] = React.useState(false);
