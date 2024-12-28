@@ -1,15 +1,11 @@
 import styled from 'styled-components';
-import Loading from '@/components/common/Loading';
 import { useRecoilValue } from 'recoil';
 import { loadingAtom } from '@/recoil/loading';
 import { daumPostAtom } from '@/recoil/daumPost';
 import { bottomSheetAtom } from '@/recoil/bottomSheet';
-import AccountBottomSheet from '@/components/common/AccountBottomSheet';
-import DaumPost from '@/components/common/DaumPost';
-import Alert from '@/components/common/Alert';
-import Confirm from '@/components/common/Confirm';
 import Modal from '@/components/common/Modal';
 import { alertWithConfirmSelector } from '@/recoil/alertWithConfirm';
+import dynamic from 'next/dynamic';
 
 export { Footer } from '@/components/layout/footer';
 export { Main } from '@/components/layout/main';
@@ -19,6 +15,12 @@ export { DesktopNavigation } from '@/components/layout/header/desktopNavigation'
 export { MobileNavigation } from '@/components/layout/header/mobileNavigation';
 export { EmployerHeader } from '@/components/layout/header/employerHeader';
 export { EmployerAside } from '@/components/layout/aside/EmployerAside';
+
+const DynamicNoSSRLoading = dynamic(() => import('@/components/common/Loading'), { ssr: false });
+const DynamicNoSSRDaumPost = dynamic(() => import('@/components/common/DaumPost'), { ssr: false });
+const DynamicNoSSRAccountBottomSheet = dynamic(() => import('@/components/common/AccountBottomSheet'), { ssr: false });
+const DynamicNoSSRAlert = dynamic(() => import('@/components/common/Alert'), { ssr: false });
+const DynamicNoSSRConfirm = dynamic(() => import('@/components/common/Confirm'), { ssr: false });
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -32,14 +34,14 @@ export default function Layout({ children }: LayoutProps) {
 
   return (
     <S.Layout>
-      {loadingAtomValue.isLoading && <Loading />}
+      {loadingAtomValue.isLoading && <DynamicNoSSRLoading />}
 
-      {daumPostAtomValue.isOpen && <DaumPost />}
+      {daumPostAtomValue.isOpen && <DynamicNoSSRDaumPost />}
 
-      {bottomSheetAtomValue.isOpen && <AccountBottomSheet />}
+      {bottomSheetAtomValue.isOpen && <DynamicNoSSRAccountBottomSheet />}
 
-      {alertWithConfirmSelectorValue.type === 'ALERT' && <Alert />}
-      {alertWithConfirmSelectorValue.type === 'CONFIRM' && <Confirm />}
+      {alertWithConfirmSelectorValue.type === 'ALERT' && <DynamicNoSSRAlert />}
+      {alertWithConfirmSelectorValue.type === 'CONFIRM' && <DynamicNoSSRConfirm />}
 
       {children}
     </S.Layout>
