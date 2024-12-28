@@ -85,8 +85,7 @@ export default function KaKaoCallbackPage() {
         throw new Error();
       }
       setAuthAtomState({
-        provider: response.result.provider,
-        role: response.result.role,
+        ...response.result,
         status: 'AUTHENTICATED',
       });
       replace(path.HOME);
