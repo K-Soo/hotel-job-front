@@ -1,6 +1,56 @@
 # 변경 로그
 
 프로젝트의 모든 주요 변경 사항
+### [0.1.9](https://github.com/K-Soo/hotel-job-front/compare/v0.1.8...v0.1.9) (2024-12-28)
+
+
+### Features
+
+* 결제 및 제품 옵션 사이드 메뉴 상태 관리를 위한 Recoil atom 추가 ([506d5ca](https://github.com/K-Soo/hotel-job-front/commit/506d5cafaf18465529d942452d7a26c0f4b2b752))
+* 계정설정 메뉴 항목 추가 및 기존 메뉴 항목 수정 ([36ce457](https://github.com/K-Soo/hotel-job-front/commit/36ce457b46b101a7a7c9056adf169c00c6a951e8))
+* 고용주 제품 섹션 페이지 컴포넌트 추가 ([064cd65](https://github.com/K-Soo/hotel-job-front/commit/064cd65c170d41f6fce11b4b8e74070a57cd13b2))
+* 고용주 제품 체크아웃 페이지 컴포넌트 추가 ([6f771d8](https://github.com/K-Soo/hotel-job-front/commit/6f771d8ec8a9c2f58a2425ae55128368cdbebc2e))
+* 새로운 SVG 아이콘 파일 추가 (bill, bookmark, maximizeSquareA, minimizeSquareA, settings, star) ([37b01e1](https://github.com/K-Soo/hotel-job-front/commit/37b01e1fb22b5c3e171b44ffd9c88b8f2c3f3623))
+* 색상 팔레트에 추가 블랙 색상 및 아이콘 색상 정의 ([8180b6a](https://github.com/K-Soo/hotel-job-front/commit/8180b6a334a4eaa495ddfec0309a5d4ab4340840))
+* 주소에서 아파트 호수 제거 ([03dd1aa](https://github.com/K-Soo/hotel-job-front/commit/03dd1aa89477b1b7f8b23edb86a1f1698f16f75d))
+* bookmark SVG 아이콘 파일 삭제 ([864a614](https://github.com/K-Soo/hotel-job-front/commit/864a614d767ef80aa13fa3185162efa512af6bfc))
+* Button 컴포넌트에 checkout 변형 추가 및 애니메이션 효과 구현 ([82dc267](https://github.com/K-Soo/hotel-job-front/commit/82dc2678d0000cd599c8455be14dc012d292e999))
+* ChoiceDeviceFilter 컴포넌트 추가 ([2dda33c](https://github.com/K-Soo/hotel-job-front/commit/2dda33c1dd03a3bd9125ea431020538934d83437))
+* EMPLOYER_PRODUCT_CHECKOUT 및 EMPLOYER_PRODUCT_SECTION 경로 추가 ([70fcb9b](https://github.com/K-Soo/hotel-job-front/commit/70fcb9b2412ca1b245252721a21666588e6fb8c8))
+* EmployerAside 컴포넌트에 sticky 포지션 추가하여 스크롤 시 고정되도록 개선 ([deb5c79](https://github.com/K-Soo/hotel-job-front/commit/deb5c79d0a5966e961351f1cfff34fbb2bcece75))
+* EmployerHeader 컴포넌트에서 로그인 버튼 클릭 시 회사 타입으로 리디렉션하도록 수정 및 배경색 추가 ([2aa30f6](https://github.com/K-Soo/hotel-job-front/commit/2aa30f6585093edeb373f9d695e1f4bc6eb75ed2))
+* EmployerMain 컴포넌트에서 제외된 사이드바 경로에 'checkout' 추가 및 섹션 패딩 수정 ([559d38e](https://github.com/K-Soo/hotel-job-front/commit/559d38e730471a7034cf24db8b1983a1c01d1208))
+* EmployerProductCheckout 컴포넌트 추가 ([c6c6d76](https://github.com/K-Soo/hotel-job-front/commit/c6c6d768934742c098357ac26130038460ff22a1))
+* EmployerProductCheckoutContainer 컴포넌트 추가 ([bc8ecf5](https://github.com/K-Soo/hotel-job-front/commit/bc8ecf51cb06a5299f1f9a98a5d30a7b8788a053))
+* EmployerProductSection 컴포넌트 추가 ([cbbdc3d](https://github.com/K-Soo/hotel-job-front/commit/cbbdc3dfce71a0624f13fea9c110467280989eb5))
+* EmployerProductSectionContainer 컴포넌트 추가 ([7858995](https://github.com/K-Soo/hotel-job-front/commit/7858995504e17b5ddde574bf9a84c0a2bb559b1e))
+* EmployerQuickMenu 컴포넌트 추가 및 스타일링 ([f47ca6f](https://github.com/K-Soo/hotel-job-front/commit/f47ca6f1877401b4c744e639ed3c8f1388118a92))
+* Footer 컴포넌트 정보 표시 방식 개선 및 스타일 수정 ([23f8c67](https://github.com/K-Soo/hotel-job-front/commit/23f8c6726f036fa32ce06e0026f07b15c0092146))
+* GlobalStyles에 ProductOptionAsideMenu z-index 추가 및 불필요한 코드 제거 ([137a468](https://github.com/K-Soo/hotel-job-front/commit/137a468bef538517fb70361a6f7b243dab54ac6f))
+* ProductOptionAsideMenu 컴포넌트 추가 ([1a6c30a](https://github.com/K-Soo/hotel-job-front/commit/1a6c30af30f3c07e74f9752f177103ed57ae1986))
+* ProductSectionCard 컴포넌트 추가 및 스타일링 구현 ([ad9c134](https://github.com/K-Soo/hotel-job-front/commit/ad9c1349ec7d012c0e59ef15bfb638327c0d9a8d))
+* ProductSectionPreview 컴포넌트 추가 및 스타일링 구현 ([dd7459f](https://github.com/K-Soo/hotel-job-front/commit/dd7459f70109b9997e00c60a5d7d959446f8b144))
+* productUseDateOptions 추가 ([f0eb98f](https://github.com/K-Soo/hotel-job-front/commit/f0eb98f89d82576c1e567e0b40275828b0b52bb5))
+* RecruitCard 및 SVG 아이콘 파일 삭제 ([f6c0124](https://github.com/K-Soo/hotel-job-front/commit/f6c01246f968c2376820f2ce8fdcbc222f400fee))
+* RecruitContainer에 새로운 섹션 추가 및 스타일 수정 ([e777f24](https://github.com/K-Soo/hotel-job-front/commit/e777f242ac0f19838b83e860eaf11218537996bf))
+* RecruitDesktopCard 컴포넌트 추가 및 카드 확장 기능 구현 ([e96992e](https://github.com/K-Soo/hotel-job-front/commit/e96992e4f8d5f2905464f5a0b56d28494211372a))
+* RecruitList 컴포넌트에서 RecruitCard를 RecruitDesktopCard 및 RecruitMobileCard로 변경 ([fe90268](https://github.com/K-Soo/hotel-job-front/commit/fe902687a9f9696c434d9d6240da27f889b96a6f))
+* RecruitMobileCard 컴포넌트 추가 및 스타일 구현 ([7d2178a](https://github.com/K-Soo/hotel-job-front/commit/7d2178a9e10b2f57a9992fac8e40f1213da3e431))
+* RecruitPrice 컴포넌트 추가 및 스타일 구현 ([3d385d7](https://github.com/K-Soo/hotel-job-front/commit/3d385d7c5f2a02fca8b22d2163668bc2c1e67af3))
+* RecruitSectionTitle 컴포넌트에서 카운트 표시 주석 처리 ([77b3d0b](https://github.com/K-Soo/hotel-job-front/commit/77b3d0bbebc413c2333ab23980236123807a3f1a))
+* Select 컴포넌트에 옵션 추가 및 스타일링 개선 ([81cc5a8](https://github.com/K-Soo/hotel-job-front/commit/81cc5a854b9f53f4389518eebd39f53c53cd9834))
+* SVG 아이콘 추가 - 북마크, 최대화, 최소화, 별, 청구서, 설정 아이콘 ([ad2378b](https://github.com/K-Soo/hotel-job-front/commit/ad2378b3dd25c85b833bc1270de7deb581a8825a))
+* Tag 컴포넌트 추가 및 스타일링 ([67ac4ea](https://github.com/K-Soo/hotel-job-front/commit/67ac4ea86361bc40854deda6f0d0f059ca55052f))
+* UrgentTag 컴포넌트 추가 ([f3f9659](https://github.com/K-Soo/hotel-job-front/commit/f3f9659e94106f0a1f0f0ff56bf04c29ef5fafe1))
+* useResponsive 훅에서 태블릿 쿼리 수정 ([d3ea521](https://github.com/K-Soo/hotel-job-front/commit/d3ea52161cb826e7f2209b5605ca981ff38232bf))
+
+
+### Bug Fixes
+
+* BottomNavigation 컴포넌트에서 IconText의 prop 이름을 변경하여 스타일링 개선 ([a036fe0](https://github.com/K-Soo/hotel-job-front/commit/a036fe0220f232329b12df29fa47a3d662896ab9))
+* RecruitSearchPanel에서 위치 입력 placeholder 수정 및 태블릿에서 버튼 숨김 ([c2ae561](https://github.com/K-Soo/hotel-job-front/commit/c2ae561bfd4b1280cc02679b8b70d9010422e2ff))
+* Tabs 컴포넌트에서 router.replace에 scroll 옵션 추가 ([e78f13a](https://github.com/K-Soo/hotel-job-front/commit/e78f13a8597899af22663e9e0ad94a2229def2f8))
+
 ### [0.1.8](https://github.com/K-Soo/hotel-job-front/compare/v0.1.7...v0.1.8) (2024-12-27)
 
 
