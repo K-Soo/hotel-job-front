@@ -19,6 +19,7 @@ export default function ProductSectionCard({ margin, title }: ProductSectionCard
   const setProductOptionAsideMenuAtom = useSetRecoilState(productOptionAsideMenuAtom);
 
   const handleClickProductPurchase = () => {
+    setIsFocus(false);
     setProductOptionAsideMenuAtom({ isOpen: true });
   };
 
@@ -77,9 +78,9 @@ const S = {
     }
   `,
   Option: styled.div`
-    border: 1px solid red;
+    /* border: 1px solid red; */
   `,
   Checkout: styled.div`
-    border: 1px solid red;
+    /* border: 1px solid red; */
   `,
 };
