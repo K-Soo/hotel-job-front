@@ -3,9 +3,10 @@ import styled from 'styled-components';
 
 interface BackgroundProps {
   children: React.ReactNode;
+  onClick?: () => void;
 }
 
-export default function Background({ children }: BackgroundProps) {
+export default function Background({ onClick, children }: BackgroundProps) {
   React.useEffect(() => {
     const targetElement = document.querySelector('html') as HTMLHtmlElement;
     targetElement.style.overflow = 'hidden';
@@ -14,7 +15,7 @@ export default function Background({ children }: BackgroundProps) {
     };
   }, []);
 
-  return <S.Background>{children}</S.Background>;
+  return <S.Background onClick={onClick}>{children}</S.Background>;
 }
 
 const S = {
