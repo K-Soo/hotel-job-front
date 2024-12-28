@@ -1,5 +1,6 @@
 import styled, { css, keyframes } from 'styled-components';
 import Icon, { IconType } from '@/icons/Icon';
+import Image from 'next/image';
 
 type ButtonVariant =
   | 'primary' // 기본 버튼
@@ -34,6 +35,7 @@ interface ButtonProps {
   icon?: React.ReactElement;
   iconColor?: string;
   padding?: string;
+  isLoading?: boolean;
 }
 
 export default function Button({
@@ -52,6 +54,7 @@ export default function Button({
   icon,
   iconColor,
   padding,
+  isLoading,
 }: ButtonProps) {
   return (
     <S.Button
@@ -62,15 +65,16 @@ export default function Button({
       width={width}
       $margin={margin}
       fontSize={fontSize}
-      disabled={disabled}
+      disabled={disabled || isLoading}
       $borderRadius={borderRadius}
       $variant={variant}
       $maxWidth={maxWidth}
       $iconColor={iconColor}
       $padding={padding}
     >
-      {icon}
-      {label}
+      {!isLoading && icon}
+      {isLoading && <Image src="/images/rolling.gif" alt="image" width={30} height={30} />}
+      {!isLoading && label}
     </S.Button>
   );
 }
@@ -207,7 +211,7 @@ const S = {
         overflow: hidden;
         position: relative;
         &:hover {
-          background: red;
+          background: rgba(251, 75, 2, 1);
         }
         &::before {
           position: absolute;
