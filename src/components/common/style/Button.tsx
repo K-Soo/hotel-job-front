@@ -1,9 +1,5 @@
-import styled, { css } from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
 import Icon, { IconType } from '@/icons/Icon';
-
-// 1. positive : 화면의 변화를 주거나 정보를 추가하는 버튼 ("전송" "확인" "더보기" 등)
-// 2. Neutral: 화면의 변화가 없거나 되돌아가는 버튼 ("취소"버튼 등)
-// 3. Negative: 삭제, 리셋, 추가 정보를 차단하는 버튼
 
 type ButtonVariant =
   | 'primary' // 기본 버튼
@@ -19,7 +15,8 @@ type ButtonVariant =
   | 'outline' // 테두리만 있는 버튼
   | 'text' // 텍스트만 있는 버튼
   | 'disabled' // 비활성화된 버튼
-  | 'loading'; // 작업 중 버튼
+  | 'loading' // 작업 중 버튼
+  | 'checkout'; // 결제
 
 interface ButtonProps {
   label: string;
@@ -78,6 +75,25 @@ export default function Button({
   );
 }
 
+const twinkle = keyframes`
+  0% {
+    -webkit-transform: scale(0) rotate(45deg);
+    opacity: 0;
+  }
+  80% {
+    -webkit-transform: scale(0) rotate(45deg);
+    opacity: 0.5;
+  }
+  81% {
+    -webkit-transform: scale(4) rotate(45deg);
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: scale(50) rotate(45deg);
+    opacity: 0;
+  }
+`;
+
 const S = {
   Button: styled.button<{
     $margin?: string;
@@ -96,13 +112,12 @@ const S = {
     width: ${(props) => (props.width ? props.width : '100%')};
     max-width: ${(props) => (props.$maxWidth ? props.$maxWidth : '100%')};
     height: ${(props) => (props.height ? props.height : '45px')};
-    border-radius: ${(props) => (props.$borderRadius ? props.$borderRadius : '0')};
+    border-radius: ${(props) => (props.$borderRadius ? props.$borderRadius : '5px')};
     font-size: ${(props) => (props.fontSize ? props.fontSize : '16px')};
     margin: ${(props) => (props.$margin ? props.$margin : '0')};
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 5px;
     white-space: nowrap;
     padding: ${(props) => (props.$padding ? props.$padding : '0 8px')};
     svg {
@@ -178,6 +193,32 @@ const S = {
           transition: 0.3s;
           background-color: ${(props) => props.theme.colors.gray};
           color: ${(props) => props.theme.colors.black200};
+        }
+        &:disabled {
+          cursor: not-allowed;
+        }
+      `};
+
+    ${(props) =>
+      props.$variant === 'checkout' &&
+      css`
+        color: ${(props) => props.theme.colors.gray100};
+        background: linear-gradient(0deg, rgba(255, 27, 0, 1) 0%, rgba(251, 75, 2, 1) 100%);
+        overflow: hidden;
+        position: relative;
+        &:hover {
+          background: red;
+        }
+        &::before {
+          position: absolute;
+          content: '';
+          display: inline-block;
+          top: -180px;
+          left: 0;
+          width: 30px;
+          height: 100%;
+          background-color: #fff;
+          animation: ${twinkle} 6s ease-in-out infinite;
         }
         &:disabled {
           cursor: not-allowed;
