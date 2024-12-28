@@ -3,8 +3,17 @@ const colors = {
   white100: '#FFFFFF',
 
   black: '#000000',
-  black100: '#131313',
-  black200: '#212529',
+  black100: '#0d0d0d',
+  black200: '#1a1a1a',
+  black300: '#262626',
+  black400: '#333333',
+  black500: '#404040',
+  black600: '#4d4d4d',
+  black700: '#595959',
+  black800: '#666666',
+  black900: '#737373',
+
+  icon100: '#1C274D', //active
 
   blue50: '#e8f3ff',
   blue100: '#c9e2ff',

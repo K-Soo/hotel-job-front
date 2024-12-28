@@ -29,21 +29,21 @@ export default function BottomNavigation() {
         <div className="item">
           <S.ButtonLink name={path.HOME} onClick={handleLink}>
             <Icon name="Home24x24" width="24px" height="24px" />
-            <S.IconText active={router.pathname === path.HOME}>홈</S.IconText>
+            <S.IconText $active={router.pathname === path.HOME}>홈</S.IconText>
           </S.ButtonLink>
         </div>
 
         <div className="item">
           <S.ButtonLink name={path.RECRUIT} onClick={handleLink}>
             <Icon name="Rocket24x24" width="24px" height="24px" />
-            <S.IconText active={router.pathname === path.RECRUIT}>채용</S.IconText>
+            <S.IconText $active={router.pathname === path.RECRUIT}>채용</S.IconText>
           </S.ButtonLink>
         </div>
 
         <div className="item">
           <S.ButtonLink name={path.TALENT} onClick={handleLink}>
             <Icon name="StickerSmileSquare24x24" width="24px" height="24px" />
-            <S.IconText active={router.pathname === path.TALENT}>인재</S.IconText>
+            <S.IconText $active={router.pathname === path.TALENT}>인재</S.IconText>
           </S.ButtonLink>
         </div>
 
@@ -51,7 +51,7 @@ export default function BottomNavigation() {
           <div className="item">
             <S.ButtonLink onClick={handleClickPopUpSheet}>
               <Icon name="StickerSmileSquare24x24" width="24px" height="24px" />
-              <S.IconText active={router.pathname === path.USER}>MY</S.IconText>
+              <S.IconText $active={router.pathname === path.USER}>MY</S.IconText>
             </S.ButtonLink>
           </div>
         )}
@@ -59,7 +59,7 @@ export default function BottomNavigation() {
           <div className="item">
             <S.ButtonLink name={path.SIGN_IN} onClick={handleLink}>
               <Icon name="UserRounded24x24" width="24px" height="24px" />
-              <S.IconText active={router.pathname === path.SIGN_IN}>로그인</S.IconText>
+              <S.IconText $active={router.pathname === path.SIGN_IN}>로그인</S.IconText>
             </S.ButtonLink>
           </div>
         )}
@@ -102,12 +102,12 @@ const S = {
     height: 55px;
     border-radius: 10px;
   `,
-  IconText: styled.span<{ active: boolean }>`
+  IconText: styled.span<{ $active: boolean }>`
     font-size: 13px;
     padding-top: 5px;
     color: ${(props) => props.theme.colors.gray500};
     ${(props) =>
-      props.active &&
+      props.$active &&
       css`
         color: ${props.theme.colors.black200};
         font-weight: 500;

@@ -48,10 +48,14 @@ export default function Tabs({ margin, width, tabsOptions, height, backgroundCol
     urlSearchParams.set('type', value);
 
     const paramsObj = Object.fromEntries(urlSearchParams);
-    router.replace({
-      pathname: pathname,
-      query: paramsObj,
-    });
+    router.replace(
+      {
+        pathname: pathname,
+        query: paramsObj,
+      },
+      undefined,
+      { scroll: false },
+    );
   };
 
   React.useEffect(() => {

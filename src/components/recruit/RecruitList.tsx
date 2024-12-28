@@ -1,19 +1,22 @@
 import React from 'react';
 import styled from 'styled-components';
-import RecruitCard from '@/components/recruit/RecruitCard';
+import RecruitDesktopCard from '@/components/recruit/RecruitDesktopCard';
+import RecruitMobileCard from '@/components/recruit/RecruitMobileCard';
 import { motion } from 'framer-motion';
+import useResponsive from '@/hooks/useResponsive';
 
 interface RecruitListProps {}
 
 export default function RecruitList({}: RecruitListProps) {
-  const recruitArray = Array.from({ length: 100 });
+  const recruitArray = Array.from({ length: 5 });
   const scrollRef = React.useRef(null);
+  const { isTablet } = useResponsive();
 
   return (
     <S.RecruitList ref={scrollRef}>
       {recruitArray.map((_, index) => (
         <motion.div key={index} initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ root: scrollRef, once: true }}>
-          <RecruitCard />
+          {isTablet ? <RecruitMobileCard /> : <RecruitDesktopCard />}
         </motion.div>
       ))}
     </S.RecruitList>

@@ -35,12 +35,14 @@ const path = {
 
   // EMPLOYER
   EMPLOYER: '/employer', //기업 - 홈
+  EMPLOYER_PRODUCT_CHECKOUT: '/employer/product/checkout', //기업 - 결제
+
   EMPLOYER_CANDIDATE: '/employer/candidate', //기업 - 지원자
   EMPLOYER_SCHEDULE: '/employer/schedule', //기업 - 일정
   EMPLOYER_JOB_OPENING: '/employer/job-opening', //기업 - 채용공고
 
-  EMPLOYER_PRODUCT_MAIN_AD: '/employer/product/main', //기업 - 상품 메인광고
-  EMPLOYER_PRODUCT_PRINT_AD: '/employer/product/print', // 기업 - 상품 지면광고
+  EMPLOYER_PRODUCT_MAIN: '/employer/product/main', //기업 - 상품 메인광고
+  EMPLOYER_PRODUCT_SECTION: '/employer/product/section', // 기업 - 상품 섹션광고
   EMPLOYER_PRODUCT_RESUME: '/employer/product/resume', // 기업 - 이력서 열람
 
   EMPLOYER_ACCOUNT: '/employer/account', // 기업 - 계정 · 업체정보

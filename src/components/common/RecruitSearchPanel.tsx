@@ -113,7 +113,7 @@ export default function RecruitSearchPanel({}: RecruitSearchPanelProps) {
             ref={inputRef}
             type="text"
             name="location"
-            placeholder="시, 군, 구"
+            placeholder="전국"
             onFocus={() => setIsLocationFocus(true)}
             onBlur={handleBlur}
             onChange={handleChangeLocationFiled}
@@ -151,7 +151,7 @@ export default function RecruitSearchPanel({}: RecruitSearchPanelProps) {
             </DropdownTemplate>
           )}
         </div>
-        {<Button label="검색" variant="primary" width="80px" margin="0 0 0 10px" type="submit" />}
+        {!isTablet && <Button label="검색" variant="primary" width="80px" margin="0 0 0 10px" type="submit" />}
       </S.Form>
     </S.RecruitSearchPanel>
   );

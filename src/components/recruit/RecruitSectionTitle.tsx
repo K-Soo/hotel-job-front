@@ -9,7 +9,7 @@ export default function RecruitSectionTitle({ title, count = 0 }: RecruitSection
   return (
     <S.RecruitSectionTitle>
       <h3 className="title">{title}</h3>
-      <span>총 {count}건</span>
+      {/* <span>총 {count}건</span> */}
     </S.RecruitSectionTitle>
   );
 }

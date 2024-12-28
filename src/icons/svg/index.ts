@@ -22,8 +22,20 @@ import StickerSmileCircle24x24 from './stickerSmileCircle24x24.svg';
 import StickerSmileSquare24x24 from './stickerSmileSquare24x24.svg';
 import Login24x24 from './login24x24.svg';
 import Rocket24x24 from './rocket24x24.svg';
+import Bookmark24x24 from './bookmark24x24.svg';
+import maximizeSquareA24x24 from './maximizeSquareA24x24.svg';
+import minimizeSquareA24x24 from './minimizeSquareA24x24.svg';
+import Star24x24 from './star24x24.svg';
+import Bill24x24 from './bill24x24.svg';
+import Settings24x24 from './settings24x24.svg';
 
 export {
+  Settings24x24,
+  Bill24x24,
+  Star24x24,
+  maximizeSquareA24x24,
+  minimizeSquareA24x24,
+  Bookmark24x24,
   Rocket24x24,
   Login24x24,
   StickerSmileCircle24x24,

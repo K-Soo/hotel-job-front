@@ -14,9 +14,17 @@ export function EmployerHeader({}: EmployerHeaderProps) {
 
   return (
     <S.EmployerHeader>
+      {/* TODO: 일반 페이지와 분기 처리 */}
       <Logo size="small" margin="0 30px 0 0" />
       {!isAuthenticated && (
-        <Button label="로그인" variant="tertiary" height="40px" onClick={() => router.push(path.SIGN_IN)} fontSize="15px" width="80px" />
+        <Button
+          label="로그인"
+          variant="tertiary"
+          height="40px"
+          onClick={() => router.push(`${path.SIGN_IN}?type=company`)}
+          fontSize="15px"
+          width="80px"
+        />
       )}
     </S.EmployerHeader>
   );
@@ -28,6 +36,7 @@ const S = {
     top: -0;
     height: 60px;
     border-bottom: 1px solid ${(props) => props.theme.colors.gray200};
+    background-color: ${(props) => props.theme.colors.white};
     display: flex;
     display: flex;
     align-items: center;
