@@ -10,25 +10,26 @@ export default function AuthenticationComponent() {
   const { isAuthenticated, setAuthAtomState } = useAuth();
 
   React.useEffect(() => {
-    if (EXCLUDED_PATHS.includes(router.pathname)) {
-      return;
-    }
     if (isAuthenticated) {
       return;
     }
+
+    if (EXCLUDED_PATHS.includes(router.pathname)) {
+      return;
+    }
+
     (async () => {
       try {
         const cookieExist = await Internal.checkRefreshCookie();
         if (!cookieExist) return;
 
-        const response = await Post.getUserInfo();
+        const response = await Post.getUserInfo({});
         console.log('유저정보 API : ', response);
         if (!response.success) {
           throw new Error();
         }
         setAuthAtomState({
-          provider: response.result.provider,
-          role: response.result.role,
+          ...response.result,
           status: 'AUTHENTICATED',
         });
       } catch (error) {
