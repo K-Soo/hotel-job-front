@@ -1,12 +1,15 @@
 import styled from 'styled-components';
 import Loading from '@/components/common/Loading';
-import Portal from '@/components/common/Portal';
 import { useRecoilValue } from 'recoil';
 import { loadingAtom } from '@/recoil/loading';
 import { daumPostAtom } from '@/recoil/daumPost';
 import { bottomSheetAtom } from '@/recoil/bottomSheet';
 import AccountBottomSheet from '@/components/common/AccountBottomSheet';
 import DaumPost from '@/components/common/DaumPost';
+import Alert from '@/components/common/Alert';
+import Confirm from '@/components/common/Confirm';
+import Modal from '@/components/common/Modal';
+import { alertWithConfirmSelector } from '@/recoil/alertWithConfirm';
 
 export { Footer } from '@/components/layout/footer';
 export { Main } from '@/components/layout/main';
@@ -25,22 +28,18 @@ export default function Layout({ children }: LayoutProps) {
   const loadingAtomValue = useRecoilValue(loadingAtom);
   const daumPostAtomValue = useRecoilValue(daumPostAtom);
   const bottomSheetAtomValue = useRecoilValue(bottomSheetAtom);
+  const alertWithConfirmSelectorValue = useRecoilValue(alertWithConfirmSelector);
 
   return (
     <S.Layout>
-      {loadingAtomValue.isLoading && (
-        <Portal>
-          <Loading />
-        </Portal>
-      )}
+      {loadingAtomValue.isLoading && <Loading />}
 
-      {daumPostAtomValue.isOpen && (
-        <Portal>
-          <DaumPost />
-        </Portal>
-      )}
+      {daumPostAtomValue.isOpen && <DaumPost />}
 
       {bottomSheetAtomValue.isOpen && <AccountBottomSheet />}
+
+      {alertWithConfirmSelectorValue.type === 'ALERT' && <Alert />}
+      {alertWithConfirmSelectorValue.type === 'CONFIRM' && <Confirm />}
 
       {children}
     </S.Layout>
