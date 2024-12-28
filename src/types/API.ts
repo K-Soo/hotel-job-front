@@ -61,9 +61,11 @@ export interface RequestAccessTokenResponse extends defaultResponse {
 
 export interface GetUserInfoResponse extends defaultResponse {
   result: {
+    nickname: string;
     accessToken: string;
     provider: types.ProviderType;
     role: types.RoleType;
+    accountStatus: types.AccountStatusType;
   };
 }
 
