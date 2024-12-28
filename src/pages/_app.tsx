@@ -33,9 +33,10 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
         <AuthenticationComponent />
         <QueryClientProvider client={queryClient}>
           {!Component.authentication && getLayout(<Component {...pageProps} />)}
+
           {Component.authentication &&
             getLayout(
-              <GuardComponent>
+              <GuardComponent allowedRoles={Component.allowedRoles}>
                 <Component {...pageProps} />
               </GuardComponent>,
             )}
