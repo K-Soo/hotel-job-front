@@ -30,11 +30,7 @@ export const EMPLOYER_ASIDE_MENU = [
     label: '업체정보 관리',
     value: '',
     icon: 'Buildings24x24',
-    items: [
-      { label: '업체 정보', value: path.EMPLOYER_ACCOUNT },
-      { label: '마케팅 수신 설정', value: path.EMPLOYER_ACCOUNT_MARKETING },
-      { label: '비밀번호 변경', value: path.EMPLOYER_ACCOUNT_AUTHENTICATION },
-    ],
+    items: [],
   },
 
   {
@@ -53,8 +49,8 @@ export const EMPLOYER_ASIDE_MENU = [
     value: '',
     icon: 'Shop24x24',
     items: [
-      { label: '메인광고', value: path.EMPLOYER_PRODUCT_MAIN_AD },
-      { label: '지면광고', value: path.EMPLOYER_PRODUCT_PRINT_AD },
+      { label: '메인 광고', value: path.EMPLOYER_PRODUCT_MAIN },
+      { label: '지면 광고', value: path.EMPLOYER_PRODUCT_SECTION },
       { label: '이력서 열람', value: path.EMPLOYER_PRODUCT_RESUME },
     ],
   },
@@ -83,6 +79,17 @@ export const EMPLOYER_ASIDE_MENU = [
     value: '',
     icon: 'Question24x24',
     items: [],
+  },
+
+  {
+    label: '계정설정',
+    value: '',
+    icon: 'Settings24x24',
+    items: [
+      { label: '계정정보', value: path.EMPLOYER_ACCOUNT },
+      { label: '마케팅 수신 설정', value: path.EMPLOYER_ACCOUNT_MARKETING },
+      { label: '비밀번호 변경', value: path.EMPLOYER_ACCOUNT_AUTHENTICATION },
+    ],
   },
 
   {
