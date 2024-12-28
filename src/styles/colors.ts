@@ -7,7 +7,7 @@ const colors = {
   black200: '#1a1a1a',
   black300: '#262626',
   black400: '#333333',
-  black500: '#404040',
+  black500: '#404040', //form font-color
   black600: '#4d4d4d',
   black700: '#595959',
   black800: '#666666',
@@ -15,6 +15,7 @@ const colors = {
 
   icon100: '#1C274D', //active
 
+  blue: '#fbfdff',
   blue50: '#e8f3ff',
   blue100: '#c9e2ff',
   blue200: '#90c2ff',
@@ -25,6 +26,9 @@ const colors = {
   blue700: '#1b64da',
   blue800: '#1957c2',
   blue900: '#194aa6',
+
+  red300: '#ff6d6a',
+  red500: '#f20000',
 
   gray: '#f9fafb',
   gray100: '#f2f4f6',
