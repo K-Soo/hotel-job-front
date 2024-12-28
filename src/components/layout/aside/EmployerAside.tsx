@@ -76,14 +76,15 @@ const S = {
     overflow-y: auto;
     position: sticky;
     top: 60px;
-    max-height: calc(100vh - 60px);
+    height: calc(100vh - 60px);
     user-select: none;
+    scrollbar-width: thin;
+    scrollbar-color: #eaeaea #fafafa;
     svg {
       flex-shrink: 0;
     }
   `,
   ResizeButton: styled.button`
-    margin-bottom: 20px;
     padding: 0 10px;
     display: flex;
     align-items: center;
