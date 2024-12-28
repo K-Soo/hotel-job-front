@@ -5,7 +5,7 @@ export const policy = {
   domain: 'www.hotel-job-connect.com',
   application: '호텔잡',
   phone: '010-6479-7825',
-  address: '경기도 남양주시 두물로27번길 17, 202',
+  address: '경기도 남양주시 두물로27번길 17',
   businessNumber: '107-37-90473',
   mailOrderNumber: '2024-별내-2240',
 };
