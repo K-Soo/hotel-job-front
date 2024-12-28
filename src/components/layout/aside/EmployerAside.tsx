@@ -74,6 +74,8 @@ const S = {
     padding: 15px 4px 15px 10px;
     font-size: 15px;
     overflow-y: auto;
+    position: sticky;
+    top: 60px;
     max-height: calc(100vh - 60px);
     user-select: none;
     svg {
