@@ -13,6 +13,7 @@ export default function useAuth() {
     isAuthIdle,
     isAuthFailure,
 
+    role: authAtomState.role,
     authAtomState,
     setAuthAtomState,
     authStatus: authAtomState.status,
