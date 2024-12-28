@@ -4,6 +4,19 @@ import { city } from '@/constants/location';
 
 export type ProviderType = 'local' | 'kakao';
 export type RoleType = 'ADMIN' | 'EMPLOYER' | 'JOB_SEEKER';
+export type AccountStatusType =
+  | 'ACTIVE'
+  | 'INACTIVE'
+  | 'BLOCKED'
+  | 'SUSPENDED'
+  | 'LOCKED'
+  | 'DELETED'
+  | 'PENDING'
+  | 'RECOVERY'
+  | 'ANONYMIZED'
+  | 'WAITING_APPROVAL'
+  | 'WAITING_APPROVAL';
+
 export type ResumeType = 'FILE' | 'GENERAL'; //파일, 일반
 export type CareerLevel = keyof typeof careerLevel;
 export type EducationLevel = keyof typeof educationLevel;
