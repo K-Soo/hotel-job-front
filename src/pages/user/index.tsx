@@ -20,3 +20,4 @@ UserPage.getLayout = (page: React.ReactElement) => {
 };
 
 UserPage.authentication = true;
+UserPage.allowedRoles = ['JOB_SEEKER'];
