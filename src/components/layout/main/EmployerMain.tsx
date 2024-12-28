@@ -6,7 +6,7 @@ interface EmployerMainProps {
   children: React.ReactNode;
 }
 
-const EXCLUDED_ASIDE_PATH = ['landing'] as const;
+const EXCLUDED_ASIDE_PATH = ['landing', 'checkout'] as const;
 
 export function EmployerMain({ children }: EmployerMainProps) {
   const router = useRouter();
@@ -28,7 +28,7 @@ const S = {
     background-color: ${(props) => props.theme.colors.grayOpacity100};
     & > section {
       flex: 1;
-      padding: 20px;
+      padding: 30px;
     }
   `,
 };
