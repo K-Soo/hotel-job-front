@@ -36,6 +36,7 @@ export default function AuthenticationComponent() {
         console.log('auth error: ', error);
       }
     })();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isAuthenticated, router.pathname]);
 
   return null;
