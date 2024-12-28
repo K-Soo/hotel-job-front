@@ -1,6 +1,6 @@
 {
   "name": "hotel-job-front",
-  "version": "0.1.9",
+  "version": "0.1.10",
   "private": true,
   "scripts": {
     "local": "env-cmd -e local next dev",

@@ -1,6 +1,75 @@
 # 변경 로그
 
 프로젝트의 모든 주요 변경 사항
+### [0.1.10](https://github.com/K-Soo/hotel-job-front/compare/v0.1.9...v0.1.10) (2024-12-28)
+
+
+### Features
+
+* 경로 상수 업데이트 및 새로운 경로 추가 ([2a84f85](https://github.com/K-Soo/hotel-job-front/commit/2a84f853e6bbb69e864aec3aa2b326b861c827fd))
+* 고용주 메인 컴포넌트에서 제외된 사이드 경로에 'setup' 추가 ([e903f69](https://github.com/K-Soo/hotel-job-front/commit/e903f692f279a5ae78761450bdeee668c431e0d5))
+* 고용주 사이드 메뉴의 경로 수정 및 불필요한 항목 제거 ([75dedfb](https://github.com/K-Soo/hotel-job-front/commit/75dedfbc1b9efa1d7fe5d4f941e8976614fe06e9))
+* 고용주 페이지에 서버 사이드 인증 및 역할 확인 기능 추가 ([9fed46b](https://github.com/K-Soo/hotel-job-front/commit/9fed46b6ef242496e1df182ec9d7271588fe0ebf))
+* 고용주 후보 페이지 컴포넌트 추가 및 인증 및 역할 설정 ([a23e83f](https://github.com/K-Soo/hotel-job-front/commit/a23e83fabc0277155290a12752b7e7950c50f9bf))
+* 로그인 정보 만료 시 서버 환경에서 경고 메시지 표시 방지 ([6423d8f](https://github.com/K-Soo/hotel-job-front/commit/6423d8fba2b243e41b8865d5e5d9697c059132c4))
+* 로컬 환경 설정을 위한 API URL을 localhost로 변경 및 webpack 설정 수정 ([f74d221](https://github.com/K-Soo/hotel-job-front/commit/f74d2219a5b25f8bb53d455651dc7188905eef87))
+* 배경 컴포넌트에 클릭 이벤트 핸들러 추가 ([966d2d8](https://github.com/K-Soo/hotel-job-front/commit/966d2d8ac2e7c15388794fbb20e4cc7d22ef1a2d))
+* 상품 구매 클릭 시 포커스 해제 및 스타일 수정 ([9e417d3](https://github.com/K-Soo/hotel-job-front/commit/9e417d39ebf3e3f982a5750da96a7f1774b1fdc0))
+* 상품 옵션 사이드 메뉴에 상품 정보 및 효과 플러스 옵션 추가 ([b0f82a1](https://github.com/K-Soo/hotel-job-front/commit/b0f82a1f2b263549c6fd1eddedbf390ef14fbb00))
+* 색상 정의에 새로운 색상 추가 및 주석 업데이트 ([3b2211b](https://github.com/K-Soo/hotel-job-front/commit/3b2211b2729e4a4815a2dce16e285172bc7d85c0))
+* 알림 컴포넌트 추가 및 스타일링 적용 ([e9a03c6](https://github.com/K-Soo/hotel-job-front/commit/e9a03c6e19bc8fa9ef01432d19ee7874964d56db))
+* 역할 기반 접근 제어 추가 및 로딩 컴포넌트로 변경 ([a0f3416](https://github.com/K-Soo/hotel-job-front/commit/a0f3416c2217e31151e355e7b7b0a927015b9f91))
+* 인증 및 리디렉션 처리를 위한 미들웨어 추가 ([182b71b](https://github.com/K-Soo/hotel-job-front/commit/182b71bdc332d7111d27e402fb6172a4f23b3d9f))
+* 인증 상태에 따라 경로 제외 처리 로직 수정 및 유저 정보 API 호출 개선 ([55efebe](https://github.com/K-Soo/hotel-job-front/commit/55efebef914d611ab8866f01a44e01092c601b21))
+* 카카오 콜백 페이지에서 인증 정보 설정 방식 개선 ([99664e0](https://github.com/K-Soo/hotel-job-front/commit/99664e08233793cdd8a5e7cb18f8d1ff5e6d60f8))
+* AccountStatusType 추가 ([3edbc90](https://github.com/K-Soo/hotel-job-front/commit/3edbc903cc0798867c11080d002c2105c95b40fb))
+* alertWithConfirmAtom 및 alertWithConfirmSelector 추가 ([dc1b120](https://github.com/K-Soo/hotel-job-front/commit/dc1b1203c413b296cb23f683efccea74defb4355))
+* AuthAtom에 accountStatus 및 nickname 속성 추가 ([64a4fb6](https://github.com/K-Soo/hotel-job-front/commit/64a4fb68068484b1169b529e4c50efea1edb11dd))
+* Axios 요청 구성 수정 및 응답 처리 개선 ([20f167a](https://github.com/K-Soo/hotel-job-front/commit/20f167a8f9d71049bb7bd51bf7186f996e7dc643))
+* Button 컴포넌트에 로딩 상태 추가 및 아이콘 표시 방식 수정 ([ccf8408](https://github.com/K-Soo/hotel-job-front/commit/ccf8408e4bc3dd114252ee9cf121cf1aeaeffa8e))
+* CheckBox 컴포넌트에서 라벨을 선택적으로 표시하도록 수정 ([1108484](https://github.com/K-Soo/hotel-job-front/commit/110848451915c1c2eee53a656e75348ce28c9f14))
+* Close 아이콘 추가 ([8272236](https://github.com/K-Soo/hotel-job-front/commit/8272236b4002167683c9cc156477d3e9aabdf0e8))
+* close 아이콘 SVG 파일 추가 ([60f832c](https://github.com/K-Soo/hotel-job-front/commit/60f832c51669f3a888428773197c9398827fae14))
+* CompanyForm 컴포넌트에 로딩 상태 추가 및 입력 필드 수정 ([a1bd001](https://github.com/K-Soo/hotel-job-front/commit/a1bd00149fb34a29c13519012f7a7378c84db7a0))
+* Confirm 컴포넌트 추가 ([61db52f](https://github.com/K-Soo/hotel-job-front/commit/61db52fc32624c18067b6c6e03931385f8a3cb75))
+* DaumPost 컴포넌트를 Portal로 감싸기 ([faa3263](https://github.com/K-Soo/hotel-job-front/commit/faa3263823cfb1732a567fea45d56617ef7be2f6))
+* EmployerAccountPage에 인증 및 허용 역할 추가 ([18e798d](https://github.com/K-Soo/hotel-job-front/commit/18e798d6b2b6125d6c4571e43253770c07c9d1f4))
+* EmployerAside 컴포넌트의 높이 조정 및 스크롤바 스타일 추가 ([7e18b31](https://github.com/K-Soo/hotel-job-front/commit/7e18b3165dcef957890e804d7a99e6d43559b756))
+* EmployerHeader 컴포넌트에 사용자 제어 바 및 알림 아이콘 추가 ([d162da3](https://github.com/K-Soo/hotel-job-front/commit/d162da3ee5aff8324cc8fc16b64f0d42dbc775a0))
+* EmployerProductCheckoutPage에 인증 및 허용 역할 추가 ([eaf6408](https://github.com/K-Soo/hotel-job-front/commit/eaf640857168b0b208b0114be1295bc33454d966))
+* EmployerProductMainPage에 인증 및 허용 역할 추가 ([a4317a7](https://github.com/K-Soo/hotel-job-front/commit/a4317a7ef86dfb610f8128f429115146ebe3adb5))
+* EmployerProductRecruitPage에 인증 및 허용 역할 추가 ([8fd92ac](https://github.com/K-Soo/hotel-job-front/commit/8fd92acd2b2f80527e5370548b425138fe97f587))
+* EmployerProductSectionPage에 인증 및 허용 역할 추가 ([0dcbeb1](https://github.com/K-Soo/hotel-job-front/commit/0dcbeb1fdf81e83ae7d0037359fef67390e97964))
+* EmployerRecruitmentPage 컴포넌트 추가 ([d718c84](https://github.com/K-Soo/hotel-job-front/commit/d718c8450dae188c59e83bb9b720eae8850419f6))
+* FormInput 컴포넌트의 라벨 스타일 수정 및 포커스 시 효과 추가 ([76c4113](https://github.com/K-Soo/hotel-job-front/commit/76c41130594da3c4ac6ad73e0072ef475213c70d))
+* GetUserInfoResponse에 nickname 및 accountStatus 속성 추가 ([61d511d](https://github.com/K-Soo/hotel-job-front/commit/61d511d28e336a2206b61f55f5a81a6466705e7c))
+* GlobalStyles에 스크롤바 공간 예약 및 select 기본 포커스 스타일 제거 ([56ee072](https://github.com/K-Soo/hotel-job-front/commit/56ee072bcd3e907e65ca5978e40d4715615afe59))
+* GuardComponent에 allowedRoles 속성 추가 ([871d963](https://github.com/K-Soo/hotel-job-front/commit/871d96337ff44250a97ec8fa6ce00481f5845f77))
+* LandingEmployer 컴포넌트에서 미리보기 버튼 주석 처리 ([fda7425](https://github.com/K-Soo/hotel-job-front/commit/fda7425aecc8dd84153ef0e164e98defe3ed2077))
+* Layout 컴포넌트에 Alert 및 Confirm 추가 ([507d93f](https://github.com/K-Soo/hotel-job-front/commit/507d93f7420ceba51458f8a6675e603ebb417407))
+* Layout 컴포넌트에서 동적 임포트를 사용하여 SSR 비활성화 ([db98ab3](https://github.com/K-Soo/hotel-job-front/commit/db98ab3da67a7429f2c59848dc3624a0f841f3ff))
+* Line 컴포넌트에 색상 속성 추가 ([55de6d9](https://github.com/K-Soo/hotel-job-front/commit/55de6d9343b66db88bdd6b1e193758afda7f52a9))
+* Loading 컴포넌트를 Portal로 감싸기 ([8b0bb63](https://github.com/K-Soo/hotel-job-front/commit/8b0bb63223ee5fa1d63c1b37981d29ace968d93f))
+* Modal 컴포넌트 추가 ([3c92624](https://github.com/K-Soo/hotel-job-front/commit/3c92624a2ba75e73e60edda16f24325388c64c8b))
+* NextPageWithLayout에 allowedRoles 속성 추가 ([46c05a3](https://github.com/K-Soo/hotel-job-front/commit/46c05a343ab1610e9482974f551115f5758eaa20))
+* requestAccessToken 호출 시 빈 객체 전달 ([7aad482](https://github.com/K-Soo/hotel-job-front/commit/7aad48215338dd3e18d52e845b3abb0a06a6b3d4))
+* SaleRate 컴포넌트 추가 ([3af0d27](https://github.com/K-Soo/hotel-job-front/commit/3af0d27cc1f65ad677f7ffdbec34026fe9164c3f))
+* Select 컴포넌트에 여백 속성 추가 및 아이콘 표시 방식 개선 ([d243cc3](https://github.com/K-Soo/hotel-job-front/commit/d243cc31cb8a6fbef10a60676ba19e12a3ef56a8))
+* SetupCompanyPage 컴포넌트 추가 및 인증 및 허용 역할 설정 ([5de0614](https://github.com/K-Soo/hotel-job-front/commit/5de061430e7d37277d09cdd9c467858939150338))
+* SignInContainer에서 동적 컴포넌트 로딩 및 로그인 시도 제한 기능 추가 ([5782f8d](https://github.com/K-Soo/hotel-job-front/commit/5782f8d97b4a7e91e5173afe22cb5e98c8179e52))
+* Tag 컴포넌트에 라벨 및 유형 추가, 긴급 태그 애니메이션 효과 구현 ([94c6c68](https://github.com/K-Soo/hotel-job-front/commit/94c6c68503752affb14389b605d3c7960378dd88))
+* useAuth 훅에 역할(role) 상태 추가 ([ec49b16](https://github.com/K-Soo/hotel-job-front/commit/ec49b16de80b223b7199ee9138ab92fc5862b200))
+* UserPage에 허용 역할 추가 ([221f92d](https://github.com/K-Soo/hotel-job-front/commit/221f92d09242e6cd2119061c30251b05d8e1d762))
+
+
+### Bug Fixes
+
+* _app.tsx에서 사용하지 않는 StyledComponentsRegistry 제거 ([196cc2b](https://github.com/K-Soo/hotel-job-front/commit/196cc2bd8c5525249db678698b7be80ab8dd842a))
+* 불필요한 import 제거 ([12fc7c6](https://github.com/K-Soo/hotel-job-front/commit/12fc7c687d8532242023c10144dbd291127458a4))
+* eslint 경고를 무시하기 위해 react-hooks/exhaustive-deps 규칙 비활성화 ([38aa12e](https://github.com/K-Soo/hotel-job-front/commit/38aa12ea4a280954d4f51a7b0e853e53ea907f9e))
+* GuardComponent에서 eslint 경고 무시 추가 ([d7a6e14](https://github.com/K-Soo/hotel-job-front/commit/d7a6e147483f4d5534218e2e74e64013cf77ca8f))
+* SignInPage에서 사용하지 않는 DesktopNavigation 제거 ([50ffa5e](https://github.com/K-Soo/hotel-job-front/commit/50ffa5e2d6effcfd264991fc8180297d177bb0d5))
+
 ### [0.1.9](https://github.com/K-Soo/hotel-job-front/compare/v0.1.8...v0.1.9) (2024-12-28)
 
 
