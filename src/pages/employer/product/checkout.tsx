@@ -13,3 +13,6 @@ EmployerProductCheckoutPage.getLayout = (page: React.ReactElement) => {
     </Layout>
   );
 };
+
+EmployerProductCheckoutPage.authentication = true;
+EmployerProductCheckoutPage.allowedRoles = ['EMPLOYER'];
