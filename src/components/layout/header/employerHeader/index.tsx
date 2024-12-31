@@ -7,13 +7,51 @@ import Logo from '@/components/common/Logo';
 import Icon from '@/icons/Icon';
 import DropdownTemplate from '@/components/common/DropdownTemplate';
 import React from 'react';
+import { Post } from '@/apis';
 
 export function EmployerHeader() {
   const [isDropdownOpen, setIsDropdownOpen] = React.useState(false);
 
+  const dropdownRef = React.useRef<HTMLDivElement>(null);
+  const inputRef = React.useRef(null);
+
   const router = useRouter();
 
   const { isAuthenticated, authAtomState, isAuthIdle } = useAuth();
+
+  const handleBlur = (event: React.FocusEvent) => {
+    event.stopPropagation();
+    const relatedTarget = event.relatedTarget as HTMLElement | null;
+    console.log('relatedTarget: ', relatedTarget);
+    // input 또는 dropdown 내부 클릭인 경우 blur 무시
+    if (dropdownRef.current?.contains(relatedTarget)) {
+      return;
+    }
+    setIsDropdownOpen(false);
+  };
+
+  const handleFocus = (event: React.FocusEvent<HTMLDivElement>) => {
+    event.stopPropagation();
+    console.log('111');
+    setIsDropdownOpen(true);
+  };
+
+  const handleClickToggle = () => {
+    // setIsDropdownOpen((prev) => !prev);
+  };
+
+  const handleClickDropdownItem = (value: string) => {};
+
+  const handleClickSignOut = async () => {
+    try {
+      const response = await Post.signOut();
+      console.log('로그아웃 API : ', response);
+    } catch (error) {
+      console.log('error: ', error);
+    } finally {
+      window.location.href = '/sign-in';
+    }
+  };
 
   return (
     <S.EmployerHeader>
@@ -36,15 +74,17 @@ export function EmployerHeader() {
             <Icon name="SolarBell24x24" width="22px" height="22px" />
             <span>알림</span>
           </S.UtilMenu>
-          <S.UserInfo onClick={() => setIsDropdownOpen((prev) => !prev)}>
+
+          <S.UserInfo ref={inputRef} tabIndex={0} onBlur={handleBlur} onFocus={handleFocus} onClick={handleClickToggle}>
             <span className="nickname">{authAtomState.nickname}</span>
-            {/* <Icon className="arrow-icon" name="ArrowRight16x16" width="16px" height="16px" /> */}
+            <Icon className="arrow-icon" name="ArrowRight16x16" width="16px" height="16px" />
           </S.UserInfo>
-          {/* {isDropdownOpen && (
-            <DropdownTemplate outStyle={{ top: '60px' }}>
-              <div>asd</div>
+
+          {isDropdownOpen && (
+            <DropdownTemplate ref={dropdownRef} tabIndex={0}>
+              <div onClick={handleClickSignOut}>로그아웃</div>
             </DropdownTemplate>
-          )} */}
+          )}
         </div>
       )}
     </S.EmployerHeader>
@@ -62,7 +102,7 @@ const S = {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding-left: 15px;
+    padding: 0 15px;
     .user-control-bar {
       height: 45px;
       display: flex;

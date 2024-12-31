@@ -28,7 +28,7 @@ export const EMPLOYER_ASIDE_MENU = [
 
   {
     label: '업체정보 관리',
-    value: '',
+    value: path.EMPLOYER_BUSINESS,
     icon: 'Buildings24x24',
     items: [],
   },

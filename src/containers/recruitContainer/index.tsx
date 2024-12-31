@@ -4,6 +4,8 @@ import RecruitSectionTitle from '@/components/recruit/RecruitSectionTitle';
 import RecruitFilterButton from '@/components/recruit/RecruitFilterButton';
 import RecruitFilterPanel from '@/components/recruit/RecruitFilterPanel';
 import RecruitListContainer from '@/containers/recruitContainer/RecruitListContainer';
+import RecruitUrgentListContainer from '@/containers/recruitContainer/RecruitUrgentListContainer';
+import RecruitPremiumListContainer from '@/containers/recruitContainer/RecruitPremiumListContainer';
 import RecruitSearchPanel from '@/components/common/RecruitSearchPanel';
 import { recruitOrderFilterOptions } from '@/constants/tabs';
 import Tabs from '@/components/common/Tabs';
@@ -18,11 +20,11 @@ export default function RecruitContainer() {
 
       <Line margin="20px 0" />
 
-      <RecruitSectionTitle title="알짜" count={0} />
-      <RecruitListContainer />
+      <RecruitSectionTitle title="프리미엄 채용" count={0} />
+      <RecruitPremiumListContainer />
 
       <RecruitSectionTitle title="🔥 급구채용" count={0} />
-      <RecruitListContainer />
+      <RecruitUrgentListContainer />
 
       <div style={{ display: 'flex', justifyContent: 'flex-end', margin: '0' }}>
         <Tabs
@@ -34,6 +36,7 @@ export default function RecruitContainer() {
           backgroundColor="#FFFFFF"
         />
       </div>
+
       <RecruitSectionTitle title="일반채용" count={0} />
       <RecruitListContainer />
     </Recruit>

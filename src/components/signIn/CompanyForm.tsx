@@ -19,7 +19,6 @@ export default function CompanyForm({ onSubmit, isSubmitError }: CompanyFormProp
     handleSubmit,
     formState: { isSubmitting },
   } = useFormContext<SignInForm>();
-  console.log('isSubmitting: ', isSubmitting);
 
   return (
     <S.CompanyForm>

@@ -1,74 +1,67 @@
 import styled from 'styled-components';
 import Icon from '@/icons/Icon';
 import RecruitPrice from '@/components/recruit/RecruitPrice';
+import Tag from '@/components/common/Tag';
+import { motion } from 'framer-motion';
 
-interface RecruitMobileCardProps {}
+interface RecruitUrgentCardProps {}
 
-export default function RecruitMobileCard({}: RecruitMobileCardProps) {
+export default function RecruitUrgentCard({}: RecruitUrgentCardProps) {
   return (
-    <S.RecruitMobileCard>
+    <S.RecruitUrgentCard whileTap={{ scale: 0.98 }} whileHover={{ border: '1px solid #b0b8c1' }}>
       <S.HeaderBox>
         <div className="tags">
-          {/* <RecruitTag>숙식제공</RecruitTag> */}
-          {/* <RecruitTag>수당</RecruitTag> */}
-          {/* <RecruitTag>수당</RecruitTag> */}
+          <Tag label="급구" type="URGENT" />
         </div>
-        <time>TODAY</time>
       </S.HeaderBox>
       <S.ContentBox>
         <div className="info-box">
-          <h6 className="info-box__title">청소 이모구합니다. 밥 맛깔나게 잘하시는분 오셨으면 좋겠습니다.</h6>
+          <h6 className="info-box__title">당직자 구합니다. 휴계시간 많아요.</h6>
           <div className="info-box__detail">
             <div className="info-box__detail--company">호텔 더 아무무</div>
             <address className="info-box__detail--address">서울 송파구</address>
           </div>
         </div>
-        <div className="icon-box">
-          <Icon name="Star24x24" width="24px" height="24px" margin="0" />
-        </div>
       </S.ContentBox>
+
       <S.infoBox>
         <div className="jobs">
           <span className="jobs__text">룸메이드</span>
           <div className="jobs__conditions">
-            <span>경력무관</span>
-            <span>경력무관</span>
+            <span>경력1년</span>
+            <span>정규직</span>
+            <span>부부팀</span>
           </div>
         </div>
-        <div>
+        <div className="price-wrapper">
           <RecruitPrice fonSize="13px" />
+          <Icon className="title__icon" name="ExternalLinkB50x50" width="20px" height="20px" />
+          {/* <Icon name="Star24x24" width="16px" height="16px" /> */}
         </div>
       </S.infoBox>
-    </S.RecruitMobileCard>
+    </S.RecruitUrgentCard>
   );
 }
 
-const RecruitTag = styled.span`
-  height: 18px;
-  width: fit-content;
-  display: flex;
-  align-items: center;
-  padding: 0px 5px;
-  border-radius: 3px;
-  margin-right: 8px;
-  background-color: ${(props) => props.theme.colors.blue50};
-  font-size: 13px;
-  font-weight: 300;
-  color: ${(props) => props.theme.colors.blue800};
-  letter-spacing: 0.8px;
-  &:hover {
-    background-color: ${(props) => props.theme.colors.blue100};
-  }
-`;
-
 const S = {
-  RecruitMobileCard: styled.div`
-    width: 100%;
-    height: 160px;
+  RecruitUrgentCard: styled(motion.div)`
+    width: calc(20% - 8px);
+    aspect-ratio: 1;
     display: flex;
     flex-direction: column;
-    border-bottom: 0.8px solid ${(props) => props.theme.colors.gray500};
-    padding: 15px 10px;
+    padding: 10px;
+    border: 1px solid ${(props) => props.theme.colors.gray300};
+    ${(props) => props.theme.media.laptop`
+      width: calc(25% - 8px);
+    `};
+
+    ${(props) => props.theme.media.tablet`
+      aspect-ratio: 5 / 3;
+      width: calc(50% - 10px);
+    `};
+
+    ${(props) => props.theme.media.mobile`
+    `};
   `,
   HeaderBox: styled.div`
     display: flex;
@@ -90,7 +83,7 @@ const S = {
       flex: 1;
       &__title {
         color: ${(props) => props.theme.colors.gray800};
-        font-size: 16px;
+        font-size: 14px;
         font-weight: 500;
         margin-bottom: 10px;
         overflow: hidden;
@@ -101,19 +94,18 @@ const S = {
         text-overflow: ellipsis;
         -webkit-box-orient: vertical;
         -webkit-line-clamp: 2;
+        ${(props) => props.theme.media.laptop`
+          font-size: 15px;
+        `};
       }
       &__detail {
         display: flex;
-        align-items: center;
+        flex-direction: column;
         &--company {
-          font-size: 14px;
+          font-size: 13px;
           font-weight: 400;
           color: ${(props) => props.theme.colors.black100};
-          &::after {
-            content: '|';
-            margin: 0 8px;
-            color: ${(props) => props.theme.colors.gray400};
-          }
+          margin-bottom: 5px;
         }
         &--address {
           font-size: 13px;
@@ -122,18 +114,12 @@ const S = {
         }
       }
     }
-    .icon-box {
-      margin-left: 35px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
   `,
-
   infoBox: styled.div`
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
-    align-items: end;
+    margin-top: 10px;
     .jobs {
       &__text {
         font-size: 14px;
@@ -141,13 +127,18 @@ const S = {
       &__conditions {
         display: flex;
         align-items: center;
-        font-size: 13px;
+        font-size: 12px;
         color: ${(props) => props.theme.colors.gray600};
         margin-top: 5px;
         & > span {
           margin-right: 5px;
         }
       }
+    }
+    .price-wrapper {
+      margin-top: 5px;
+      display: flex;
+      justify-content: space-between;
     }
   `,
 };

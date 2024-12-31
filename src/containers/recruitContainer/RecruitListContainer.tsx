@@ -1,6 +1,20 @@
 import React from 'react';
-import RecruitList from '@/components/recruit/RecruitList';
+import RecruitDesktopCard from '@/components/recruit/RecruitDesktopCard';
+import RecruitMobileCard from '@/components/recruit/RecruitMobileCard';
+import useResponsive from '@/hooks/useResponsive';
 
 export default function RecruitListContainer() {
-  return <RecruitList />;
+  const recruitArray = Array.from({ length: 10 });
+  const { isTablet } = useResponsive();
+
+  return (
+    <>
+      {recruitArray.map((el, index) => {
+        if (isTablet) {
+          return <RecruitMobileCard key={index} />;
+        }
+        return <RecruitDesktopCard recruitType="NORMAL" key={index} />;
+      })}
+    </>
+  );
 }

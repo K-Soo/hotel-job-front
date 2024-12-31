@@ -82,3 +82,15 @@ export interface SignUpForm {
   userId: string;
   password: string;
 }
+
+export interface BusinessForm {
+  businessName: string; // 사업자명
+  businessRegistrationNumber: string; // 사업자번호
+  tradeName: string; // 상호명
+}
+
+export interface BusinessManagerForm {
+  managerName: string;
+  managerNumber: string;
+  managerEmail: string;
+}

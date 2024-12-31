@@ -1,8 +1,6 @@
 import React from 'react';
-import { useSetRecoilState, useRecoilValue } from 'recoil';
 import { useRouter } from 'next/router';
 import path from '@/constants/path';
-import { Internal } from '@/apis';
 import useAuth from '@/hooks/useAuth';
 import { RoleType } from '@/types';
 import Loading from '@/components/common/Loading';
@@ -41,6 +39,11 @@ export default function GuardComponent({ allowedRoles, children }: GuardComponen
       alert('접근 권한이 없습니다.');
       router.replace(path.SIGN_IN);
     }
+
+    // 미 인증 기업정보 미 인증 시 기업정보 등록 페이지로 이동
+    // if (role === 'EMPLOYER') {
+    //   router.replace(path.EMPLOYER_SETUP_COMPANY);
+    // }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [allowedRoles, role]);
 

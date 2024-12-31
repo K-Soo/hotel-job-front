@@ -16,10 +16,10 @@ export default function RecruitPrice({ fonSize }: RecruitPriceProps) {
 const S = {
   RecruitPrice: styled.div<{ $fonSize?: string }>`
     background-color: ${(props) => props.theme.colors.gray100};
-    padding: 5px 8px;
-    border-radius: 5px;
+    padding: 4px 5px;
+    border-radius: 4px;
     width: fit-content;
-    font-size: ${(props) => props.$fonSize || '16px'};
+    font-size: ${(props) => props.$fonSize || '14px'};
     .pay-type {
       letter-spacing: 1px;
       padding-right: 5px;
@@ -28,9 +28,9 @@ const S = {
       /* color: #8050c8; //일급 */
       /* color: #00a1ef; //연봉 */
     }
-    .apy-price {
+    .pay-price {
       letter-spacing: 0.3px;
-      font-weight: 500;
+      font-weight: 400;
     }
   `,
 };

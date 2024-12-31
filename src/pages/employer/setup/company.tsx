@@ -1,10 +1,11 @@
 import Layout, { EmployerMain, EmployerHeader } from '@/components/layout';
+import EmployerSetupCompanyContainer from '@/containers/employerSetupCompanyContainer';
 
-export default function SetupCompanyPage() {
-  return <>company</>;
+export default function EmployerSetupCompanyPage() {
+  return <EmployerSetupCompanyContainer />;
 }
 
-SetupCompanyPage.getLayout = (page: React.ReactElement) => {
+EmployerSetupCompanyPage.getLayout = (page: React.ReactElement) => {
   return (
     <Layout>
       <EmployerHeader />
@@ -13,5 +14,5 @@ SetupCompanyPage.getLayout = (page: React.ReactElement) => {
   );
 };
 
-SetupCompanyPage.authentication = true;
-SetupCompanyPage.allowedRoles = ['EMPLOYER'];
+EmployerSetupCompanyPage.authentication = true;
+EmployerSetupCompanyPage.allowedRoles = ['EMPLOYER'];

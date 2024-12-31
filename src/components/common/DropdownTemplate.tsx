@@ -29,6 +29,7 @@ const S = {
     height: 100%;
     height: 450px;
     z-index: 5;
+    padding-top: 10px;
   `,
   Content: styled(motion.div)`
     background-color: ${({ theme }) => theme.colors.white};

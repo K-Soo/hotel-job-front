@@ -18,6 +18,7 @@ const S = {
   RecruitSectionTitle: styled.div`
     display: flex;
     align-items: end;
+    margin-bottom: 10px;
     .title {
       font-size: 20px;
       padding-right: 10px;

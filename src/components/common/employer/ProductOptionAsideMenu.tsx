@@ -33,7 +33,7 @@ export default function ProductOptionAsideMenu() {
         >
           <S.Header>
             <h4>옵션 선택</h4>
-            <Icon name="Card24x24" onClick={() => setProductOptionAsideMenuAtom({ isOpen: false })} />
+            <Icon name="CloseA24x24" onClick={() => setProductOptionAsideMenuAtom({ isOpen: false })} width="32px" height="32px" />
           </S.Header>
 
           <S.Content>

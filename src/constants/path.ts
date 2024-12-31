@@ -37,6 +37,7 @@ const path = {
   EMPLOYER: '/employer', //기업 - 홈
   EMPLOYER_SETUP_COMPANY: '/employer/setup/company', //초기화 - 회사정보
 
+  EMPLOYER_BUSINESS: '/employer/business', //업체정보
   EMPLOYER_CANDIDATE: '/employer/candidate', //지원자
   EMPLOYER_SCHEDULE: '/employer/schedule', //일정
 
