@@ -92,7 +92,6 @@ const S = {
     display: inline;
     pointer-events: none;
     user-select: none;
-
     ${(props) =>
       props.$type === 'BEST' &&
       css`
@@ -121,7 +120,7 @@ const S = {
           width: 30px;
           height: 100%;
           background-color: #fff;
-          animation: ${twinkle} 3s ease-in-out infinite;
+          animation: ${twinkle} 6s ease-in-out infinite;
         }
       `};
   `,
