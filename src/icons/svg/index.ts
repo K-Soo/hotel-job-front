@@ -29,8 +29,18 @@ import Star24x24 from './star24x24.svg';
 import Bill24x24 from './bill24x24.svg';
 import Settings24x24 from './settings24x24.svg';
 import CloseA24x24 from './closeA24x24.svg';
+import ExternalLinkA24x24 from './externalLinkA24x24.svg';
+import ExternalLinkB50x50 from './externalLinkB50x50.svg';
+import SearchPlusA24x24 from './searchPlusA24x24.svg';
+import SearchPlusB32x32 from './searchPlusB32x32.svg';
+import Case24x24 from './case24x24.svg';
 
 export {
+  Case24x24,
+  SearchPlusB32x32,
+  SearchPlusA24x24,
+  ExternalLinkA24x24,
+  ExternalLinkB50x50,
   CloseA24x24,
   Settings24x24,
   Bill24x24,
