@@ -53,4 +53,16 @@ const signUpSchema = yup.object({
   password: validation.PASSWORD,
 });
 
-export const schema = { signInSchema, resumeRegister, signUpSchema };
+const businessForm = yup.object({
+  businessName: yup.string().required(),
+  businessRegistrationNumber: yup.string().required(),
+  tradeName: yup.string().required(),
+});
+
+const businessManagerForm = yup.object({
+  managerName: yup.string().required(),
+  managerNumber: yup.string().required(),
+  managerEmail: yup.string().required(),
+});
+
+export const schema = { signInSchema, resumeRegister, signUpSchema, businessForm, businessManagerForm };
