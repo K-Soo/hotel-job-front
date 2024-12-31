@@ -8,7 +8,7 @@ export default function RecruitUrgentListContainer() {
   return (
     <RecruitUrgentList>
       {recruitArray.map((el, index) => {
-        return <RecruitUrgentCard />;
+        return <RecruitUrgentCard key={index} />;
       })}
     </RecruitUrgentList>
   );

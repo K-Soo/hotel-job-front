@@ -11,9 +11,9 @@ export default function RecruitListContainer() {
     <>
       {recruitArray.map((el, index) => {
         if (isTablet) {
-          return <RecruitMobileCard />;
+          return <RecruitMobileCard key={index} />;
         }
-        return <RecruitDesktopCard recruitType="NORMAL" />;
+        return <RecruitDesktopCard recruitType="NORMAL" key={index} />;
       })}
     </>
   );

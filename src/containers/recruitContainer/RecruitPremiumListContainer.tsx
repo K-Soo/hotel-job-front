@@ -10,7 +10,7 @@ export default function RecruitPremiumListContainer() {
   return (
     <RecruitPremiumList>
       {recruitArray.map((el, index) => {
-        return <RecruitPremiumCard />;
+        return <RecruitPremiumCard key={index} />;
       })}
     </RecruitPremiumList>
   );
