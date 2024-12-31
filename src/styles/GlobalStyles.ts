@@ -26,7 +26,7 @@ const GlobalStyle = createGlobalStyle`
 
   html {
     overflow-x: hidden;
-    scrollbar-gutter: stable; //스크롤바 공간 예약
+    /* scrollbar-gutter: stable; //스크롤바 공간 예약 */
   }
   body {
     background-color: var(--background-color);
