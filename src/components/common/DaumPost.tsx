@@ -5,9 +5,7 @@ import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { daumPostAtom } from '@/recoil/daumPost';
 import Portal from '@/components/common/Portal';
 
-interface DaumPostProps {}
-
-export default function DaumPost({}: DaumPostProps) {
+export default function DaumPost() {
   const daumPostAtomValue = useRecoilValue(daumPostAtom);
   const setDaumPostState = useSetRecoilState(daumPostAtom);
 
