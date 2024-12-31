@@ -16,10 +16,6 @@ export default function Alert() {
     <Portal>
       <Background>
         <S.Alert>
-          <StyledIcon>
-            <Icon className="icon-close" name="CloseA24x24" width="24px" height="24px" />
-          </StyledIcon>
-
           <S.Content>
             <h3 className="title">{alertWithConfirmSelectorValue.title}</h3>
             <p className="description">{alertWithConfirmSelectorValue.subTitle}</p>
@@ -35,7 +31,10 @@ export default function Alert() {
             variant="secondary100"
             maxWidth="200px"
             margin="15px 0 0 0"
-            onClick={alertWithConfirmSelectorValue.onClickConfirm}
+            onClick={() => {
+              alertWithConfirmSelectorValue.onClickConfirm();
+              resetAlertWithConfirmAtom();
+            }}
           />
         </S.Alert>
       </Background>
@@ -68,7 +67,7 @@ const S = {
     justify-content: space-between;
     align-items: center;
     will-change: transform;
-    padding: 15px 15px 20px 15px;
+    padding: 30px 15px;
     .image-box {
       position: relative;
       display: flex;
