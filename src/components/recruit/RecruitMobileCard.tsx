@@ -9,9 +9,9 @@ export default function RecruitMobileCard({}: RecruitMobileCardProps) {
     <S.RecruitMobileCard>
       <S.HeaderBox>
         <div className="tags">
-          <RecruitTag>숙식제공</RecruitTag>
-          <RecruitTag>수당</RecruitTag>
-          <RecruitTag>수당</RecruitTag>
+          {/* <RecruitTag>숙식제공</RecruitTag> */}
+          {/* <RecruitTag>수당</RecruitTag> */}
+          {/* <RecruitTag>수당</RecruitTag> */}
         </div>
         <time>TODAY</time>
       </S.HeaderBox>
@@ -67,11 +67,8 @@ const S = {
     height: 160px;
     display: flex;
     flex-direction: column;
-    border: 0.8px solid ${(props) => props.theme.colors.gray200};
+    border-bottom: 0.8px solid ${(props) => props.theme.colors.gray500};
     padding: 15px 10px;
-    margin: 8px 0;
-    border-radius: 10px;
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.05);
   `,
   HeaderBox: styled.div`
     display: flex;
@@ -80,7 +77,6 @@ const S = {
     font-size: 13px;
     margin-bottom: 10px;
     font-weight: 500;
-
     color: ${(props) => props.theme.colors.gray700};
     .tags {
       display: flex;
