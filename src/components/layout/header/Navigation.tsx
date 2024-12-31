@@ -18,7 +18,7 @@ export default function Navigation() {
       const response = await Post.signOut();
       console.log('로그아웃 API : ', response);
     } catch (error) {
-      alert('로그아웃 중 에러가 발생했습니다.');
+      console.log('error: ', error);
     } finally {
       window.location.href = '/sign-in';
     }
