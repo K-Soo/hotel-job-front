@@ -147,7 +147,7 @@ const S = {
     ${(props) =>
       props.$variant === 'secondary' &&
       css`
-        color: ${(props) => props.theme.colors.gray700};
+        color: ${(props) => props.theme.colors.gray600};
         background-color: ${(props) => props.theme.colors.gray100};
         &:hover {
           transition: 0.3s;
