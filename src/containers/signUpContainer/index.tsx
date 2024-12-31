@@ -5,7 +5,6 @@ import { schema } from '@/utils';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { SignUpForm } from '@/types';
 import FormDevTools from '@/components/common/FormDevTools';
-import SignUpCompanyForm from '@/components/signUp/SignUpCompanyForm';
 import SignUpGeneralForm from '@/components/signUp/SignUpGeneralForm';
 
 export default function SignUpContainer() {
@@ -34,10 +33,7 @@ export default function SignUpContainer() {
 
   return (
     <FormProvider {...methods}>
-      <SignUp onSubmit={onSubmit}>
-        {step === 'STEP_1' && <SignUpCompanyForm setStep={setStep} />}
-        {step === 'STEP_2' && <SignUpGeneralForm setStep={setStep} />}
-      </SignUp>
+      <SignUp onSubmit={onSubmit}>{step === 'STEP_1' && <SignUpGeneralForm setStep={setStep} />}</SignUp>
       <FormDevTools control={methods.control} />
     </FormProvider>
   );
