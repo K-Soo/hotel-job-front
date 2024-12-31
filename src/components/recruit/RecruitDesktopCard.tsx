@@ -2,10 +2,14 @@ import React from 'react';
 import styled from 'styled-components';
 import { motion, useAnimationControls } from 'framer-motion';
 import Icon from '@/icons/Icon';
+import Tag from '@/components/common/Tag';
+import RecruitPrice from '@/components/recruit/RecruitPrice';
 
-interface RecruitDesktopCardProps {}
+interface RecruitDesktopCardProps {
+  recruitType: 'URGENT' | 'NORMAL';
+}
 
-export default function RecruitDesktopCard({}: RecruitDesktopCardProps) {
+export default function RecruitDesktopCard({ recruitType }: RecruitDesktopCardProps) {
   const [isExpanded, setIsExpanded] = React.useState(false);
 
   const expansionContentRef = React.useRef(null);
@@ -19,14 +23,18 @@ export default function RecruitDesktopCard({}: RecruitDesktopCardProps) {
     setIsExpanded((prev) => !prev);
     controls.start({
       height: isExpanded ? 80 : 0,
+      transition: { duration: 0.1 },
     });
   };
 
   return (
-    <S.RecruitDesktopCard onClick={() => {}}>
+    <S.RecruitDesktopCard
+      onClick={(event) => {
+        event.stopPropagation();
+      }}
+    >
       <S.Body>
         <S.LocationRow>
-          <Icon name="Star24x24" width="20px" height="20px" margin="0 13px 0 0" />
           <div className="location-box">
             <span className="city">서울</span>
             <span className="suburbs">송파구</span>
@@ -34,22 +42,26 @@ export default function RecruitDesktopCard({}: RecruitDesktopCardProps) {
         </S.LocationRow>
 
         <S.Summary>
-          <Icon
-            className="icon"
-            name="maximizeSquareA24x24"
-            width="24px"
-            height="24px"
-            margin="0 13px 0 0"
-            onClick={handleClickExpansion}
-          />
-
           <div style={{ display: 'flex' }}>
-            <RecruitTag>숙식제공</RecruitTag>
-            <RecruitTag>식대제공</RecruitTag>
+            {recruitType === 'URGENT' && <Tag label="급구" type="URGENT" />}
+            {/* <RecruitTag>숙식제공</RecruitTag> */}
+            {/* <RecruitTag>식대제공</RecruitTag> */}
           </div>
-          <h6 className="title">분당 격일제 당번 채용공고입니다.</h6>
+          <div className="title">
+            <h5 className="title__text">분당 격일제 당번 채용공고입니다.</h5>
+            <Icon className="title__icon" name="ExternalLinkB50x50" width="24px" height="24px" />
+          </div>
           <div className="company">영주온천 관광호텔</div>
         </S.Summary>
+
+        <S.Utils
+          onClick={(event) => {
+            event.stopPropagation();
+            handleClickExpansion();
+          }}
+        >
+          <Icon className="icon" name="SearchPlusA24x24" width="24px" height="24px" margin="0" />
+        </S.Utils>
 
         <S.JobRow>지배인,당번</S.JobRow>
 
@@ -60,10 +72,7 @@ export default function RecruitDesktopCard({}: RecruitDesktopCardProps) {
         </S.InfoRow>
 
         <S.PayRow>
-          <div className="pay-wrapper">
-            <span className="pay-wrapper__type">월급</span>
-            <span className="pay-wrapper__price">5,200,000</span>
-          </div>
+          <RecruitPrice />
         </S.PayRow>
 
         <S.DateRow>
@@ -100,7 +109,6 @@ const RecruitTag = styled.span`
 const S = {
   RecruitDesktopCard: styled.article`
     width: 100%;
-    cursor: pointer;
     font-size: 14px;
     display: flex;
     flex-direction: column;
@@ -108,9 +116,10 @@ const S = {
     color: ${(props) => props.theme.colors.black100};
     border-bottom: 1px solid ${(props) => props.theme.colors.gray300};
     height: auto;
+    cursor: pointer;
     &:hover {
       /* transition: 0.3s; */
-      /* background-color: ${(props) => props.theme.colors.blue100}; */
+      background-color: ${(props) => props.theme.colors.gray};
     }
   `,
   Body: styled.div`
@@ -126,12 +135,6 @@ const S = {
     padding-left: 5px;
     position: relative;
     height: 100%;
-    svg {
-      fill: ${(props) => props.theme.colors.gray400};
-      position: absolute;
-      top: 10px;
-      left: 10px;
-    }
     .location-box {
       display: flex;
       flex-direction: column;
@@ -153,7 +156,6 @@ const S = {
     justify-content: center;
     height: 100%;
     position: relative;
-    /* border: 1px solid gray; */
     .icon {
       position: absolute;
       right: 5px;
@@ -165,14 +167,35 @@ const S = {
       font-size: 16px;
       margin-bottom: 3px;
       color: ${(props) => props.theme.colors.gray800};
-      &:hover {
-        text-decoration: underline;
+      display: flex;
+      align-items: center;
+      &__text {
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+      &__icon {
+        margin-left: 8px;
+        fill: ${(props) => props.theme.colors.gray500};
       }
     }
     .company {
       font-size: 14px;
       font-weight: 300;
       color: ${(props) => props.theme.colors.gray800};
+    }
+  `,
+  Utils: styled.div`
+    flex: 1 0 4%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    svg {
+      width: 22px;
+      height: 22px;
+      color: ${(props) => props.theme.colors.gray400};
     }
   `,
   JobRow: styled.div`
