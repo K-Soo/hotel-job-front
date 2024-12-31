@@ -6,6 +6,7 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { RecoilRoot } from 'recoil';
 import React from 'react';
 import GuardComponent from '@/auth/GuardComponent';
+import EmployerGuardComponent from '@/auth/EmployerGuardComponent';
 import AuthenticationComponent from '@/auth/AuthenticationComponent';
 
 const commonLayout = (page: React.ReactElement) => <Layout>{page}</Layout>;
@@ -39,7 +40,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
                 <Component {...pageProps} />
               </GuardComponent>,
             )}
-          {/* <ReactQueryDevtools initialIsOpen={false} /> */}
+          <ReactQueryDevtools initialIsOpen={false} />
         </QueryClientProvider>
       </RecoilRoot>
     </AppThemeProvider>
