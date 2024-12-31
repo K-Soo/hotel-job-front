@@ -17,6 +17,7 @@ interface FormInputProps<T> {
   horizontal?: boolean;
   width?: string;
   maxWidth?: string;
+  minWidth?: string;
 }
 
 export default function FormInput<T extends FieldValues>({
@@ -32,6 +33,7 @@ export default function FormInput<T extends FieldValues>({
   horizontal,
   width,
   maxWidth,
+  minWidth,
 }: FormInputProps<T>) {
   const {
     formState: { errors },
@@ -59,9 +61,9 @@ export default function FormInput<T extends FieldValues>({
   const error = get(errors, name);
 
   return (
-    <S.FormInput $margin={margin} $horizontal={horizontal} $width={width} $maxWidth={maxWidth}>
+    <S.FormInput $margin={margin} $horizontal={horizontal} $width={width} $maxWidth={maxWidth} $minWidth={minWidth}>
       {label && (
-        <S.FormLabel className="input-label" htmlFor={name + '-formInput'} required={required && !disabled}>
+        <S.FormLabel className="input-label" htmlFor={name + '-formInput'} required={required && !readOnly}>
           {label}
         </S.FormLabel>
       )}
@@ -79,7 +81,7 @@ export default function FormInput<T extends FieldValues>({
   );
 }
 
-const StyledMotionInput = styled(motion.input)`
+const StyledMotionInput = styled(motion.input)<{ readOnly?: boolean; disabled?: boolean }>`
   border: 1px solid ${({ theme }) => theme.colors.gray300};
   display: block;
   height: 40px;
@@ -89,38 +91,48 @@ const StyledMotionInput = styled(motion.input)`
   font-size: 16px;
   &:hover {
     background-color: ${(props) => props.theme.colors.blue};
+    border: 1px solid ${(props) => props.theme.colors.blue100};
   }
+
   &:focus {
     transition: 0.3s;
     border: 1px solid ${(props) => props.theme.colors.blue500};
   }
+
   &::placeholder {
     color: ${(props) => props.theme.colors.gray400};
     font-size: 14px;
   }
-  &:disabled {
-    background-color: ${(props) => props.theme.colors.gray100};
-  }
+
+  ${(props) =>
+    props.disabled &&
+    css`
+      border: 1px solid ${({ theme }) => theme.colors.gray300};
+      background-color: ${(props) => props.theme.colors.gray};
+      pointer-events: none;
+    `};
+
+  ${(props) =>
+    props.readOnly &&
+    css`
+      background-color: none;
+      border: none;
+      pointer-events: none;
+    `};
 `;
 
 const S = {
-  FormInput: styled.div<{ $margin?: string; $horizontal?: boolean; $width?: string; $maxWidth?: string }>`
+  FormInput: styled.div<{ $margin?: string; $horizontal?: boolean; $width?: string; $maxWidth?: string; $minWidth?: string }>`
     margin: ${(props) => (props.$margin ? props.$margin : '0')};
-    width: ${(props) => (props.$width ? props.$width : '100%')};
     max-width: ${(props) => (props.$maxWidth ? props.$maxWidth : '100%')};
-
-    ${(props) =>
-      props.$horizontal &&
-      css`
-        display: flex;
-        align-items: center;
-      `};
+    min-width: ${(props) => (props.$minWidth ? props.$minWidth : '100%')};
+    width: ${(props) => (props.$width ? props.$width : '100%')};
   `,
   FormLabel: styled.label<{ required?: boolean }>`
-    color: ${({ theme }) => theme.colors.gray700};
+    color: ${({ theme }) => theme.colors.gray600};
     display: block;
     margin-bottom: 3px;
-    font-size: 15px;
+    font-size: 14px;
     cursor: default;
     white-space: nowrap;
     margin-right: 15px;
