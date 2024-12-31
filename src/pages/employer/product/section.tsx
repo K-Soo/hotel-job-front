@@ -1,6 +1,6 @@
 import Layout, { EmployerMain, EmployerHeader } from '@/components/layout';
 import EmployerProductSectionContainer from '@/containers/employerProductSectionContainer';
-
+import React from 'react';
 export default function EmployerProductSectionPage() {
   return <EmployerProductSectionContainer />;
 }
