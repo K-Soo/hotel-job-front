@@ -6,11 +6,12 @@ interface FormErrorProps {
   name: string;
   errors: FieldErrors<FieldValues>;
   margin?: string;
+  style?: React.CSSProperties;
 }
 
-export default function FormError({ name, errors, margin }: FormErrorProps) {
+export default function FormError({ name, errors, margin, style }: FormErrorProps) {
   return (
-    <S.FormError $margin={margin}>
+    <S.FormError $margin={margin} style={style}>
       <ErrorMessage errors={errors} name={name} />
     </S.FormError>
   );
@@ -22,5 +23,6 @@ const S = {
     height: 12px;
     font-size: 11px;
     color: crimson;
+    padding-left: 10px;
   `,
 };
