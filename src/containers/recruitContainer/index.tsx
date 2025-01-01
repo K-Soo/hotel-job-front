@@ -7,7 +7,7 @@ import RecruitListContainer from '@/containers/recruitContainer/RecruitListConta
 import RecruitUrgentListContainer from '@/containers/recruitContainer/RecruitUrgentListContainer';
 import RecruitPremiumListContainer from '@/containers/recruitContainer/RecruitPremiumListContainer';
 import RecruitSearchPanel from '@/components/common/RecruitSearchPanel';
-import { recruitOrderFilterOptions } from '@/constants/tabs';
+import { recruitOrderFilterTabOptions } from '@/constants/tabs';
 import Tabs from '@/components/common/Tabs';
 import Line from '@/components/common/Line';
 
@@ -28,7 +28,7 @@ export default function RecruitContainer() {
 
       <div style={{ display: 'flex', justifyContent: 'flex-end', margin: '0' }}>
         <Tabs
-          tabsOptions={recruitOrderFilterOptions}
+          tabsOptions={recruitOrderFilterTabOptions}
           width="180px"
           height="35px"
           fontSize="13px"
