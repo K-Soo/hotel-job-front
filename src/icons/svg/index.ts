@@ -34,8 +34,12 @@ import ExternalLinkB50x50 from './externalLinkB50x50.svg';
 import SearchPlusA24x24 from './searchPlusA24x24.svg';
 import SearchPlusB32x32 from './searchPlusB32x32.svg';
 import Case24x24 from './case24x24.svg';
+import CheckOn16x17 from './checkOn16x17.svg';
+import Info24x24 from './info24x24.svg';
 
 export {
+  Info24x24,
+  CheckOn16x17,
   Case24x24,
   SearchPlusB32x32,
   SearchPlusA24x24,
