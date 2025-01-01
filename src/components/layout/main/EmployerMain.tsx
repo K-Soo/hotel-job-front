@@ -16,7 +16,7 @@ export function EmployerMain({ children }: EmployerMainProps) {
   return (
     <S.EmployerMain>
       {!isExcludedAsidePath && <EmployerAside />}
-      <div className="test">
+      <div className="main-container">
         {children}
         <footer className="employer-footer">©2024 celestara</footer>
       </div>
@@ -29,14 +29,14 @@ const S = {
     min-height: calc(100vh - 60px);
     display: flex;
     background-color: ${(props) => props.theme.colors.white};
-    .test {
+    .main-container {
       flex: 1;
       display: flex;
       flex-direction: column;
       & > section {
         flex: 1;
         padding: 30px;
-        overflow-y: auto;
+        /* overflow-y: auto; */
       }
       .employer-footer {
         border-top: 1px solid ${(props) => props.theme.colors.gray200};
