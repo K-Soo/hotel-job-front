@@ -2,16 +2,25 @@ import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import Icon from '@/icons/Icon';
 import RecruitPrice from '@/components/recruit/RecruitPrice';
+import { useRouter } from 'next/router';
 
 interface RecruitPremiumCardProps {}
 
 export default function RecruitPremiumCard({}: RecruitPremiumCardProps) {
+  const router = useRouter();
+
+  const handleClickCard = (event: any) => {
+    event.stopPropagation();
+    window.open('/recruit/1', '_blank');
+  };
+
   return (
     <S.RecruitPremiumCard
       whileHover={{
         border: '1px solid #4593fc',
       }}
       whileTap={{ scale: 0.98 }}
+      onClick={() => router.push('/recruit/1')}
     >
       <S.HeaderBox>
         <div className="tags">
@@ -47,7 +56,14 @@ export default function RecruitPremiumCard({}: RecruitPremiumCardProps) {
         </div>
         <div className="price-wrapper">
           <RecruitPrice fonSize="13px" />
-          <Icon className="title__icon" name="ExternalLinkB50x50" width="22px" height="22px" margin="0 0 0 5px" />
+          <Icon
+            className="title__icon"
+            name="ExternalLinkB50x50"
+            width="22px"
+            height="22px"
+            margin="0 0 0 5px"
+            onClick={(event: any) => handleClickCard(event)}
+          />
         </div>
       </S.infoBox>
     </S.RecruitPremiumCard>
