@@ -1,5 +1,7 @@
 import * as yup from 'yup';
-import { careerLevel, salaryType, job, position, educationLevel, licenseStage } from '@/constants/resume';
+import { careerLevel, position, licenseStage } from '@/constants/resume';
+import { educationLevel, salaryType } from '@/constants';
+import { job } from '@/constants/job';
 import { validation } from '@/utils/validation';
 import { CareerLevel, SalaryType, Job, Position, EducationLevel, LicenseStage } from '@/types';
 
@@ -29,7 +31,7 @@ const resumeRegister = yup.object({
         companyName: yup.string().required(),
         salaryType: yup.string().oneOf(salaryTypeKeyValue).default(undefined),
         job: yup.string().oneOf(jobKeyValue).default(undefined),
-        position: yup.string().oneOf(positionKeyValue).required(),
+        position: yup.string().oneOf(positionKeyValue).default(undefined),
         responsibility: yup.string().default(''),
         startDate: yup.date().required(),
         endDate: yup.date().required(),

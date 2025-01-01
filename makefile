@@ -1,7 +1,7 @@
 
 #버전관리
 release-version:
-	(npm i && node_modules/.bin/standard-version)
+	(node_modules/.bin/standard-version)
 	git push --follow-tags origin main
 
 

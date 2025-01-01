@@ -1,6 +1,8 @@
 import * as API from '@/types/API';
-import { educationLevel, careerLevel, job, position, salaryType, licenseStage } from '@/constants/resume';
+import { careerLevel, licenseStage } from '@/constants/resume';
 import { city } from '@/constants/location';
+import { educationLevel, position, salaryType } from '@/constants';
+import { job } from '@/constants/job';
 
 export type ProviderType = 'local' | 'kakao';
 export type RoleType = 'ADMIN' | 'EMPLOYER' | 'JOB_SEEKER';
@@ -16,6 +18,13 @@ export type AccountStatusType =
   | 'ANONYMIZED'
   | 'WAITING_APPROVAL'
   | 'WAITING_APPROVAL';
+
+const test = {
+  라벨: 'LABEL',
+  아이템: 'ITEM',
+} as const;
+
+type TestValueType = keyof typeof test;
 
 export type ResumeType = 'FILE' | 'GENERAL'; //파일, 일반
 export type CareerLevel = keyof typeof careerLevel;
@@ -35,7 +44,7 @@ export type Experience = {
   isEmployed: boolean; //재직중
   responsibility: string; //담당업무
   job?: Job | undefined; //직무
-  position: Position; //직급/직책
+  position?: Position; //직급/직책
   startDate: Date;
   endDate: Date;
   // city: City;

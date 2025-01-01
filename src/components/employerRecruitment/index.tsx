@@ -1,9 +1,11 @@
 import styled from 'styled-components';
 
-interface EmployerRecruitmentProps {}
+interface EmployerRecruitmentProps {
+  children: React.ReactNode;
+}
 
-export default function EmployerRecruitment({}: EmployerRecruitmentProps) {
-  return <S.EmployerRecruitment>index</S.EmployerRecruitment>;
+export default function EmployerRecruitment({ children }: EmployerRecruitmentProps) {
+  return <S.EmployerRecruitment>{children}</S.EmployerRecruitment>;
 }
 
 const S = {

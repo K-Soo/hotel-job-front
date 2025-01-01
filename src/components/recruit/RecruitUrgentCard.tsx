@@ -45,16 +45,12 @@ export default function RecruitUrgentCard({}: RecruitUrgentCardProps) {
 
 const S = {
   RecruitUrgentCard: styled(motion.div)`
-    width: calc(20% - 8px);
-    aspect-ratio: 1;
+    width: calc(25% - 8px);
+    aspect-ratio: 4 / 3;
     display: flex;
     flex-direction: column;
     padding: 10px;
     border: 1px solid ${(props) => props.theme.colors.gray300};
-    ${(props) => props.theme.media.laptop`
-      width: calc(25% - 8px);
-    `};
-
     ${(props) => props.theme.media.tablet`
       aspect-ratio: 5 / 3;
       width: calc(50% - 10px);

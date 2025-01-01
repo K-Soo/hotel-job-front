@@ -17,7 +17,8 @@ type ButtonVariant =
   | 'text' // 텍스트만 있는 버튼
   | 'disabled' // 비활성화된 버튼
   | 'loading' // 작업 중 버튼
-  | 'checkout'; // 결제
+  | 'checkout' // 결제
+  | 'select'; //검색
 
 interface ButtonProps {
   label: string;
@@ -197,6 +198,21 @@ const S = {
           transition: 0.3s;
           background-color: ${(props) => props.theme.colors.gray};
           color: ${(props) => props.theme.colors.black200};
+        }
+        &:disabled {
+          cursor: not-allowed;
+        }
+      `};
+
+    ${(props) =>
+      props.$variant === 'select' &&
+      css`
+        color: ${(props) => props.theme.colors.white};
+        background-color: ${(props) => props.theme.colors.black400};
+        border: 1px solid ${(props) => props.theme.colors.gray200};
+        &:hover {
+          transition: 0.3s;
+          background-color: ${(props) => props.theme.colors.black};
         }
         &:disabled {
           cursor: not-allowed;

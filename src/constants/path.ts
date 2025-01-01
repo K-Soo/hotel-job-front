@@ -41,16 +41,17 @@ const path = {
   EMPLOYER_CANDIDATE: '/employer/candidate', //지원자
   EMPLOYER_SCHEDULE: '/employer/schedule', //일정
 
-  EMPLOYER_RECRUITMENT: '/employer/recruitment', //채용 공고
+  EMPLOYER_RECRUITMENT: '/employer/recruitment', //채용공고
+  EMPLOYER_RECRUITMENT_REGISTER: '/employer/recruitment/register', //채용공고 생성
 
   EMPLOYER_PRODUCT_MAIN: '/employer/product/main', //상품 메인광고
   EMPLOYER_PRODUCT_SECTION: '/employer/product/section', //상품 섹션광고
   EMPLOYER_PRODUCT_RESUME: '/employer/product/resume', //상품 이력서 열람
   EMPLOYER_PRODUCT_CHECKOUT: '/employer/product/checkout', //기업 - 결제
 
-  EMPLOYER_ACCOUNT: '/employer/account', // 기업 - 계정 · 업체정보
-  EMPLOYER_ACCOUNT_MARKETING: '/employer/account/marketing', // 기업 - 마케팅 수신 설정
-  EMPLOYER_ACCOUNT_AUTHENTICATION: '/employer/account/authentication', // 기업 - 비밀번호 변경
+  EMPLOYER_ACCOUNT: '/employer/account', // 계정 · 업체정보
+  EMPLOYER_ACCOUNT_ACCOUNT: '/employer/account/policy', // 이용동의 관리
+  EMPLOYER_ACCOUNT_AUTHENTICATION: '/employer/account/authentication', // 비밀번호 변경
 
   // ACCOUNT_RECOVER_RESET_SUCCESS: '/account/recover/reset/success', //비밀번호 찾기 결과
   // ACCOUNT_RECOVER_USER: '/account/recover/user', //이메일 찾기

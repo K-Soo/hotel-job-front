@@ -11,7 +11,7 @@ import { useRouter } from 'next/router';
 
 export default function Navigation() {
   const router = useRouter();
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, role } = useAuth();
 
   const handleClickSignOut = async () => {
     try {
@@ -21,6 +21,15 @@ export default function Navigation() {
       console.log('error: ', error);
     } finally {
       window.location.href = '/sign-in';
+    }
+  };
+
+  const handleClickUserIcon = () => {
+    if (role === 'JOB_SEEKER') {
+      router.push(path.USER);
+    }
+    if (role === 'EMPLOYER') {
+      router.push(path.EMPLOYER);
     }
   };
 
@@ -44,9 +53,9 @@ export default function Navigation() {
 
       <S.Utility>
         {isAuthenticated && (
-          <Link href={path.USER}>
+          <button onClick={handleClickUserIcon}>
             <Icon name="User" />
-          </Link>
+          </button>
         )}
 
         {!isAuthenticated && (
@@ -64,9 +73,9 @@ export default function Navigation() {
           <Button label="로그인" variant="tertiary" height="40px" onClick={() => router.push(path.SIGN_IN)} fontSize="15px" />
         )}
 
-        {isAuthenticated && (
+        {/* {isAuthenticated && (
           <Button label="SIGN OUT" onClick={() => handleClickSignOut()} variant="primary" height="30px" width="80px" margin="0 0 0 15px" />
-        )}
+        )} */}
       </S.Utility>
     </S.Navigation>
   );

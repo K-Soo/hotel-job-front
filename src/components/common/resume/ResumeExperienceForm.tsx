@@ -6,7 +6,7 @@ import FormSelect from '@/components/common/form/FormSelect';
 import FormArea from '@/components/common/form/FormArea';
 import FormToggle from '@/components/common/form/FormToggle';
 import FormDate from '@/components/common/form/FormDate';
-import { jobOptions, positionOptions, salaryTypeOptions } from '@/constants/options';
+import { optionalJobOptions, positionOptions, salaryTypeOptions } from '@/constants/options';
 import { v4 as uuidv4 } from 'uuid';
 
 export default function ResumeExperienceForm() {
@@ -33,7 +33,14 @@ export default function ResumeExperienceForm() {
           </div>
 
           <div style={{ display: 'flex' }}>
-            <FormSelect name={`experiences.${index}.job`} label="직무" options={jobOptions} required margin="0 15px 0 0" maxWidth="220px" />
+            <FormSelect
+              name={`experiences.${index}.job`}
+              label="직무"
+              options={optionalJobOptions}
+              required
+              margin="0 15px 0 0"
+              maxWidth="220px"
+            />
             <FormSelect name={`experiences.${index}.position`} label="직급/직책" options={positionOptions} maxWidth="180px" />
           </div>
 

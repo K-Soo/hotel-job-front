@@ -3,7 +3,7 @@ import UserResumeRegister from '@/components/userResumeRegister';
 import ResumeBottomController from '@/components/common/resume/ResumeBottomController';
 import SignIn from '@/components/signIn';
 import Logo from '@/components/common/Logo';
-import { signInTabsOptions } from '@/constants/tabs';
+import { signInTabOptions } from '@/constants/tabs';
 import { useForm, FormProvider, SubmitHandler } from 'react-hook-form';
 import { ResumeRegisterForm } from '@/types';
 import { schema } from '@/utils';
@@ -70,7 +70,7 @@ export default function UserResumeRegisterContainer() {
         // city: 'NONE',
         startDate: new Date(),
         endDate: new Date(),
-        position: 'NONE',
+        position: undefined,
         salaryType: undefined,
         // baseSalary: 0,
         // allowance: 0,

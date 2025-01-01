@@ -12,3 +12,6 @@ EmployerRecruitmentPage.getLayout = (page: React.ReactElement) => {
     </Layout>
   );
 };
+
+EmployerRecruitmentPage.authentication = true;
+EmployerRecruitmentPage.allowedRoles = ['EMPLOYER'];

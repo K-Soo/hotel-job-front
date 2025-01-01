@@ -51,7 +51,7 @@ export const EMPLOYER_ASIDE_MENU = [
     items: [
       { label: '메인 광고', value: path.EMPLOYER_PRODUCT_MAIN },
       { label: '지면 광고', value: path.EMPLOYER_PRODUCT_SECTION },
-      { label: '이력서 열람', value: path.EMPLOYER_PRODUCT_RESUME },
+      { label: '이력서 열람 서비스', value: path.EMPLOYER_PRODUCT_RESUME },
     ],
   },
 
@@ -80,7 +80,7 @@ export const EMPLOYER_ASIDE_MENU = [
     icon: 'Settings24x24',
     items: [
       { label: '계정정보', value: path.EMPLOYER_ACCOUNT },
-      { label: '마케팅 수신 설정', value: path.EMPLOYER_ACCOUNT_MARKETING },
+      { label: '이용 동의 관리', value: path.EMPLOYER_ACCOUNT_ACCOUNT },
       { label: '비밀번호 변경', value: path.EMPLOYER_ACCOUNT_AUTHENTICATION },
     ],
   },

@@ -129,7 +129,7 @@ const S = {
     width: ${(props) => (props.$width ? props.$width : '100%')};
   `,
   FormLabel: styled.label<{ required?: boolean }>`
-    color: ${({ theme }) => theme.colors.gray600};
+    color: ${({ theme }) => theme.colors.gray700};
     display: block;
     margin-bottom: 3px;
     font-size: 14px;

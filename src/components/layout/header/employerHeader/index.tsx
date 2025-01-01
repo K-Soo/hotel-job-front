@@ -8,6 +8,7 @@ import Icon from '@/icons/Icon';
 import DropdownTemplate from '@/components/common/DropdownTemplate';
 import React from 'react';
 import { Post } from '@/apis';
+import Link from 'next/link';
 
 export function EmployerHeader() {
   const [isDropdownOpen, setIsDropdownOpen] = React.useState(false);
@@ -22,7 +23,6 @@ export function EmployerHeader() {
   const handleBlur = (event: React.FocusEvent) => {
     event.stopPropagation();
     const relatedTarget = event.relatedTarget as HTMLElement | null;
-    console.log('relatedTarget: ', relatedTarget);
     // input 또는 dropdown 내부 클릭인 경우 blur 무시
     if (dropdownRef.current?.contains(relatedTarget)) {
       return;
@@ -56,7 +56,10 @@ export function EmployerHeader() {
   return (
     <S.EmployerHeader>
       {/* TODO: 분기 처리 */}
-      <Logo size="small" margin="0 30px 0 0" />
+      <div className="nav-bar">
+        <Logo size="small" margin="0 100px 0 0" />
+        <Link href={path.SUPPORT_NOTICE}>인재풀</Link>
+      </div>
       {!isAuthIdle && !isAuthenticated && (
         <Button
           label="로그인"
@@ -103,6 +106,10 @@ const S = {
     align-items: center;
     justify-content: space-between;
     padding: 0 15px;
+    .nav-bar {
+      display: flex;
+      align-items: center;
+    }
     .user-control-bar {
       height: 45px;
       display: flex;

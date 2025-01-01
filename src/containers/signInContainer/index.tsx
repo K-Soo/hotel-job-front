@@ -1,7 +1,7 @@
 import React from 'react';
 import SignIn from '@/components/signIn';
 import Logo from '@/components/common/Logo';
-import { signInTabsOptions } from '@/constants/tabs';
+import { signInTabOptions } from '@/constants/tabs';
 import { useForm, FormProvider, SubmitHandler } from 'react-hook-form';
 import { SignInForm } from '@/types';
 import { schema } from '@/utils';
@@ -96,7 +96,7 @@ export default function SignInContainer() {
     <SignIn>
       <FormProvider {...methods}>
         <Logo size="middle" margin="0 0 30px 0" />
-        <Tabs margin="0 0 30px 0" tabsOptions={signInTabsOptions} />
+        <Tabs margin="0 0 30px 0" tabsOptions={signInTabOptions} />
         {type === 'general' && <DynamicGeneralForm />}
         {type === 'company' && <DynamicCompanyForm onSubmit={onSubmit} isSubmitError={isSubmitError} />}
         <FormDevTools control={methods.control} />
