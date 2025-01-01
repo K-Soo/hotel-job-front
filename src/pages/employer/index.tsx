@@ -2,7 +2,6 @@ import Layout, { EmployerMain, EmployerHeader } from '@/components/layout';
 import EmployerContainer from '@/containers/employerContainer';
 import { GetServerSideProps, InferGetServerSidePropsType, GetServerSidePropsContext } from 'next';
 import { Post } from '@/apis';
-import path from '@/constants/path';
 
 export default function EmployerPage() {
   return <EmployerContainer />;
