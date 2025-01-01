@@ -1,6 +1,95 @@
 # 변경 로그
 
 프로젝트의 모든 주요 변경 사항
+### [0.1.12](https://github.com/K-Soo/hotel-job-front/compare/v0.1.11...v0.1.12) (2025-01-01)
+
+
+### Features
+
+* 고용주 계정 정책 컨테이너 컴포넌트 추가 및 폼 관리 설정 ([6971baa](https://github.com/K-Soo/hotel-job-front/commit/6971baa7d9e1416688c24f1a133e06bafc9d11ee))
+* 고용주 계정 정책 페이지 컴포넌트 추가 ([38036ac](https://github.com/K-Soo/hotel-job-front/commit/38036ac6ba9f17084982395aa4765ed5495ef9a4))
+* 고용주 계정 컨테이너 컴포넌트 추가 및 폼 관리 설정 ([5ad688e](https://github.com/K-Soo/hotel-job-front/commit/5ad688e4236a0f07068aaf6e4e3d519833d31bad))
+* 고용주 계정 페이지에 컨테이너 컴포넌트 추가 ([d340da9](https://github.com/K-Soo/hotel-job-front/commit/d340da9c539f33ddee503420f9b460933a312886))
+* 고용주 채용 등록 컨테이너 컴포넌트 추가 및 폼 관리 설정 ([a6e2fb1](https://github.com/K-Soo/hotel-job-front/commit/a6e2fb11fb7a5dd80812f356f662c3a52a193777))
+* 고용주 채용 등록 페이지 컴포넌트 추가 및 인증, 역할 제한 설정 ([05ea63e](https://github.com/K-Soo/hotel-job-front/commit/05ea63edf31e94cd188497e0d6cb65879e8cab14))
+* 고용주 채용 상세 페이지 컴포넌트 추가 및 인증, 역할 제한 설정 ([742627b](https://github.com/K-Soo/hotel-job-front/commit/742627bceb9ebc69f4b4cdc08a4a826b38c9f85b))
+* 고용주 채용 컨테이너에 상태 표시줄 및 필터 버튼 추가 ([f48b7a9](https://github.com/K-Soo/hotel-job-front/commit/f48b7a986b5581c3321a47caf7b08a4fbeffecc8))
+* 고용주 채용 페이지에 인증 및 역할 제한 추가 ([f055a52](https://github.com/K-Soo/hotel-job-front/commit/f055a52f9e5db1dd0f5e9c12672c270c2b9b7fd6))
+* 교육 수준, 직위 및 급여 유형 상수 추가 ([636c914](https://github.com/K-Soo/hotel-job-front/commit/636c914feeea3ff20fce8f6980708c2218ea9ae5))
+* 급여 유형, 직무, 교육 수준 등 선택 옵션 상수 추가 ([45a7bd2](https://github.com/K-Soo/hotel-job-front/commit/45a7bd2c546ce7fdebfe9a08e15041284f1dcecc))
+* 로그인 및 채용 공고 필터 탭 옵션 수정 및 채용 상태 탭 옵션 추가 ([eed0939](https://github.com/K-Soo/hotel-job-front/commit/eed0939021dc1230cb346671ae20495b36a39484))
+* 로그인 컨테이너에서 탭 옵션 변수 이름 수정 ([13721ad](https://github.com/K-Soo/hotel-job-front/commit/13721ad62b02525e0ac3ba742c0b8d24ef583257))
+* 로그인 탭 옵션 변수 이름 수정 및 기본값을 정의되지 않음으로 변경 ([8d67333](https://github.com/K-Soo/hotel-job-front/commit/8d673330f1d73987f89ec5fea5347849924d489c))
+* 메뉴 항목의 라벨 수정 ([d62da6c](https://github.com/K-Soo/hotel-job-front/commit/d62da6cb9be03294a0111eab107e9e3477857ed8))
+* 불필요한 import 문 제거 ([fd29488](https://github.com/K-Soo/hotel-job-front/commit/fd29488fbc6480c82dee89209bd9ffedaf538f41))
+* 스키마에서 불필요한 상수 제거 및 position 필드 기본값 설정 ([31cbd7c](https://github.com/K-Soo/hotel-job-front/commit/31cbd7c42990479f687527205f48d939dffc5707))
+* 이력서 관련 상수에서 교육 수준, 직무 및 급여 유형 제거 ([842e8f9](https://github.com/K-Soo/hotel-job-front/commit/842e8f9f3d55c6c0aa2a208c732f725e132dffb1))
+* 인재 컨테이너에서 필터 컴포넌트 제거 ([9fdb755](https://github.com/K-Soo/hotel-job-front/commit/9fdb7555c2c54b442e509ee55203f0468c0da65f))
+* 채용 테이블 컴포넌트 및 스타일 추가 ([a7fc7e2](https://github.com/K-Soo/hotel-job-front/commit/a7fc7e29f4488054c372c99acb4c56daf999b3af))
+* 채용 프리미엄 리스트 컨테이너의 모집 배열 길이 6에서 9로 수정 ([a21faa4](https://github.com/K-Soo/hotel-job-front/commit/a21faa4daaa078a2a7399470e418850fbb5b57cb))
+* 채용 필터 버튼 컴포넌트 추가 ([ca72d39](https://github.com/K-Soo/hotel-job-front/commit/ca72d39eec14fb75d0685b124852614e5d812176))
+* 채용공고 및 계정 관련 경로 상수 수정 ([3508b70](https://github.com/K-Soo/hotel-job-front/commit/3508b7078b16e0ce8f7ef8f3fd34b267af0d88d4))
+* 체크 아이콘 및 정보 아이콘 SVG 파일 추가 ([ec3f5c8](https://github.com/K-Soo/hotel-job-front/commit/ec3f5c8edbc15f7f054ed9ee659dd67ce6c7ad7a))
+* 체크 아이콘 및 정보 아이콘 SVG 파일 추가 ([dec457c](https://github.com/K-Soo/hotel-job-front/commit/dec457c405dcc2d902a7cee34c10facf187b7d53))
+* 최저 임금 상수 추가 ([562f42e](https://github.com/K-Soo/hotel-job-front/commit/562f42e9624e78a8db6d47d9b970334864968d9e))
+* 타입 정의 수정 및 불필요한 상수 제거 ([525ca0a](https://github.com/K-Soo/hotel-job-front/commit/525ca0a324831f3f8808b3c772e9759f64e4f05e))
+* 필터 탭 옵션 변수 이름 수정 ([707164d](https://github.com/K-Soo/hotel-job-front/commit/707164da400d1ba52bfb228b8f57fd70899d5054))
+* 호텔 및 관광 관련 직무 상수 추가 ([7092ea3](https://github.com/K-Soo/hotel-job-front/commit/7092ea3710f797e2152fca9e982bd99c18cd2fcb))
+* BusinessInfo 컴포넌트 추가 및 기본 구조 구현 ([11bca55](https://github.com/K-Soo/hotel-job-front/commit/11bca5596501f0d89659e0ce6d83d347e7cbbd49))
+* Button 컴포넌트에 'select' 변형 추가 및 스타일 정의 ([d00b52c](https://github.com/K-Soo/hotel-job-front/commit/d00b52c70d9cad7cb670979030cabc449e38c347))
+* CheckBox 컴포넌트에 fontSize 및 value 속성 추가, 스타일 개선 ([4d0363f](https://github.com/K-Soo/hotel-job-front/commit/4d0363f34baf844b7b77bc3a6844ce3f494c9aca))
+* EmployerAccount 컴포넌트 추가 및 기본 구조 구현 ([61437ef](https://github.com/K-Soo/hotel-job-front/commit/61437ef735d4bbf4fc49dd94a86db8dd69f0578a))
+* EmployerAccountPolicy 컴포넌트 추가 및 기본 구조 구현 ([d007445](https://github.com/K-Soo/hotel-job-front/commit/d0074452679876e5fa917186053384e45df8f8bf))
+* EmployerBusiness 컴포넌트에서 불필요한 주석 제거 ([519de4d](https://github.com/K-Soo/hotel-job-front/commit/519de4d4c79522b5c0fab4071d1619d47c23a657))
+* EmployerHeader 컴포넌트에 인재풀 링크 추가 및 스타일 수정 ([339e62e](https://github.com/K-Soo/hotel-job-front/commit/339e62e820018af5e3773b50394c12f05d8f80b3))
+* EmployerMain 컴포넌트의 클래스 이름 변경 및 스타일 수정 ([0209beb](https://github.com/K-Soo/hotel-job-front/commit/0209bebb61df4d6d085cfd8d16e6d34570225c97))
+* EmployerRecruitment 컴포넌트에 children 속성 추가 ([6772a4f](https://github.com/K-Soo/hotel-job-front/commit/6772a4f1bd92f002b61715bfbeb6199ddfe8d974))
+* EmployerRecruitmentRegister 컴포넌트 추가 및 기본 구조 구현 ([242bcc9](https://github.com/K-Soo/hotel-job-front/commit/242bcc941440f4d23397a8bb5b9405edf6eab056))
+* EmployerTemplateForm 컴포넌트에 스타일 속성 추가 및 구조 개선 ([0a566dc](https://github.com/K-Soo/hotel-job-front/commit/0a566dce144fda64cc8e9890d4162c35191c98a5))
+* FormArrayRadio 컴포넌트 추가 및 라디오 버튼 기능 구현 ([cfd90fc](https://github.com/K-Soo/hotel-job-front/commit/cfd90fc5332d2d6ca7949f63b617ba9b82c79668))
+* FormCheckbox 컴포넌트 개선 및 체크 상태 시 스타일 추가 ([07ff330](https://github.com/K-Soo/hotel-job-front/commit/07ff330f860e84353890a23052354a986d437e94))
+* FormEditor 컴포넌트 추가 및 기본 내용 및 스타일 구현 ([ee4e709](https://github.com/K-Soo/hotel-job-front/commit/ee4e709063c570fdec725cd4527a11b6fe912ffa))
+* FormInputB 컴포넌트에 레이블 유연성 및 스타일 개선 ([4c0bc02](https://github.com/K-Soo/hotel-job-front/commit/4c0bc0238ec8503e38b90611c1d49d753151e259))
+* FormRadio 컴포넌트 추가 및 기본 기능 구현 ([af1a82c](https://github.com/K-Soo/hotel-job-front/commit/af1a82c24b6be7bbfa86863c7b5b58d0dcc7c497))
+* FormSelect 컴포넌트에 아이콘 추가 및 스타일 개선 ([97785db](https://github.com/K-Soo/hotel-job-front/commit/97785dbf496e1885feca8bb1d8315344fe058b5e))
+* FormTagBox 컴포넌트 추가 및 기본 기능 구현 ([7119932](https://github.com/K-Soo/hotel-job-front/commit/7119932534acd6da716b6ad0aa13e396ae810287))
+* HorizontalFormWrapper 컴포넌트에 레이블, 필수 여부 및 테두리 속성 추가 ([9cd3c0a](https://github.com/K-Soo/hotel-job-front/commit/9cd3c0a691a7978b00b3c2dc3e23e17694e48f89))
+* JobModal 컴포넌트 추가 및 직무 선택 기능 구현 ([95aaafe](https://github.com/K-Soo/hotel-job-front/commit/95aaafe687f459fb083ef44c89486a029b4866c3))
+* Navigation 컴포넌트에 사용자 역할에 따른 아이콘 클릭 핸들러 추가 ([215619d](https://github.com/K-Soo/hotel-job-front/commit/215619da9b9679d5106bc1a342b5635f8a81a218))
+* pnpm-lock.yaml에 react-quill 및 관련 패키지 추가 ([7efd72b](https://github.com/K-Soo/hotel-job-front/commit/7efd72b63022d5793d58c072f08f05674cc08c28))
+* react-quill 패키지 추가 ([0952ec7](https://github.com/K-Soo/hotel-job-front/commit/0952ec7792708878edff73e074ea8dafd02c2cc3))
+* RecruitmentDetailAdditional 컴포넌트 추가 및 기본 구조 구현 ([69e207f](https://github.com/K-Soo/hotel-job-front/commit/69e207feda429274a9d24d722f20befcba233a45))
+* RecruitmentJobConditionAdditional 컴포넌트 추가 및 기본 구조 구현 ([d540dd0](https://github.com/K-Soo/hotel-job-front/commit/d540dd0e8d4790e532aed768676ac8e11941aca5))
+* RecruitmentPolicy 컴포넌트 추가 및 정책 안내 내용 구현 ([f49f1fa](https://github.com/K-Soo/hotel-job-front/commit/f49f1fa9d1597d4679914b222ddf730ce8c0cf6c))
+* RecruitmentRegisterBasicForm 컴포넌트 추가 및 기본 구조 구현 ([a6f4850](https://github.com/K-Soo/hotel-job-front/commit/a6f4850ffd50b1212b4823f82e2239c0b4ea92ff))
+* RecruitmentRegisterDetailForm 컴포넌트 추가 및 기본 구조 구현 ([eec5642](https://github.com/K-Soo/hotel-job-front/commit/eec56426cb0356ac67aba6277edfbfacc71c06a9))
+* RecruitmentRegisterJobConditionForm 컴포넌트 추가 및 기본 구조 구현 ([fa99bbf](https://github.com/K-Soo/hotel-job-front/commit/fa99bbff5c8b4f523ea8383fe857345f34d2e87c))
+* RecruitmentRegisterManagerForm 컴포넌트 추가 및 기본 구조 구현 ([3aec603](https://github.com/K-Soo/hotel-job-front/commit/3aec603e14ee0dbf5a2363b08d2a2228b02fd008))
+* RecruitmentRegisterProgressMenu 컴포넌트 추가 및 기본 구조 구현 ([2d165b3](https://github.com/K-Soo/hotel-job-front/commit/2d165b33b2e59e47a10a497a776e983fef81a664))
+* RecruitmentRegisterWorkPlaceForm 컴포넌트 추가 및 기본 구조 구현 ([7af3b9f](https://github.com/K-Soo/hotel-job-front/commit/7af3b9f318ca9a215e0b3b62ac522cac6b28705c))
+* RecruitmentStatusBar 컴포넌트 추가 및 기본 구조 구현 ([5eb4c26](https://github.com/K-Soo/hotel-job-front/commit/5eb4c26f7ae729a13e08abdf21d2e0965cd9318c))
+* RecruitPremiumCard 컴포넌트에 클릭 핸들러 추가 및 링크 열기 기능 구현 ([1dff1a3](https://github.com/K-Soo/hotel-job-front/commit/1dff1a35b9b9a807117c116d662abf46e2c72242))
+* RecruitUrgentCard 컴포넌트의 너비 및 종횡비 수정 ([fb03810](https://github.com/K-Soo/hotel-job-front/commit/fb03810cb9aacce714c74893fbe67adfa8b4a86f))
+* ResumeExperienceForm에서 jobOptions를 optionalJobOptions로 변경 ([2602a69](https://github.com/K-Soo/hotel-job-front/commit/2602a69e37ee3f5ef70c776c048542b54e40a3c4))
+* TalentList 컴포넌트의 불필요한 텍스트 제거 및 스타일 수정 ([a931a71](https://github.com/K-Soo/hotel-job-front/commit/a931a7194ed435f18884c1c1182999a5337f5b34))
+* ToggleButton 컴포넌트 추가 ([2363b15](https://github.com/K-Soo/hotel-job-front/commit/2363b154564d46ee7be85475ba6b9a41b08defc0))
+
+
+### Bug Fixes
+
+* FormInput 컴포넌트의 레이블 색상 수정 ([9ffdfe4](https://github.com/K-Soo/hotel-job-front/commit/9ffdfe4882c3310f48c5716834059a4a353ff6fd))
+* makefile에서 npm 설치 제거 ([03e792b](https://github.com/K-Soo/hotel-job-front/commit/03e792b2e90a0a572f21520e6e0de0463415524b))
+
+
+### Refactors
+
+* ToggleFilter, TalentFilter 및 옵션 상수 제거 ([05e7655](https://github.com/K-Soo/hotel-job-front/commit/05e76553a82fb10cdb02a296136a1c888d8331c5))
+
+
+### Styles
+
+* GlobalStyles 파일에 공백 추가 ([a14e2fb](https://github.com/K-Soo/hotel-job-front/commit/a14e2fb7c894f6f1a6cdf0343e6c28a546632efe))
+
 ### [0.1.11](https://github.com/K-Soo/hotel-job-front/compare/v0.1.10...v0.1.11) (2024-12-31)
 
 
