@@ -18,6 +18,7 @@ interface FormInputProps<T> {
   width?: string;
   maxWidth?: string;
   minWidth?: string;
+  labelFlexBasis?: string;
 }
 
 export default function FormInputB<T extends FieldValues>({
@@ -34,6 +35,7 @@ export default function FormInputB<T extends FieldValues>({
   width,
   maxWidth,
   minWidth,
+  labelFlexBasis,
 }: FormInputProps<T>) {
   const {
     formState: { errors },
@@ -63,7 +65,12 @@ export default function FormInputB<T extends FieldValues>({
   return (
     <S.FormInputB $margin={margin} $horizontal={horizontal} $width={width} $maxWidth={maxWidth} $minWidth={minWidth}>
       {label && (
-        <S.FormLabel className="input-label" htmlFor={name + '-FormInputB'} required={required && !readOnly}>
+        <S.FormLabel
+          className="input-label"
+          htmlFor={name + '-FormInputB'}
+          required={required && !readOnly}
+          labelFlexBasis={labelFlexBasis}
+        >
           {label}
         </S.FormLabel>
       )}
@@ -93,7 +100,6 @@ const StyledMotionInput = styled(motion.input)<{ readOnly?: boolean; disabled?: 
   border-radius: 5px;
   font-size: 16px;
   box-sizing: border-box;
-
   &:hover {
     background-color: ${(props) => props.theme.colors.blue};
     border: 1px solid ${(props) => props.theme.colors.blue100};
@@ -106,7 +112,8 @@ const StyledMotionInput = styled(motion.input)<{ readOnly?: boolean; disabled?: 
 
   &::placeholder {
     color: ${(props) => props.theme.colors.gray400};
-    font-size: 14px;
+    font-size: 15px;
+    font-weight: 300;
   }
 
   ${(props) =>
@@ -130,7 +137,7 @@ const S = {
   FormInputB: styled.div<{ $margin?: string; $horizontal?: boolean; $width?: string; $maxWidth?: string; $minWidth?: string }>`
     margin: ${(props) => (props.$margin ? props.$margin : '0')};
     max-width: ${(props) => (props.$maxWidth ? props.$maxWidth : '100%')};
-    min-width: ${(props) => (props.$minWidth ? props.$minWidth : '100%')};
+    min-width: ${(props) => (props.$minWidth ? props.$minWidth : 'auto')};
     width: ${(props) => (props.$width ? props.$width : '100%')};
     display: flex;
     align-items: center;
@@ -138,14 +145,13 @@ const S = {
       flex: 1;
     }
   `,
-  FormLabel: styled.label<{ required?: boolean }>`
-    color: ${({ theme }) => theme.colors.gray600};
+  FormLabel: styled.label<{ required?: boolean; labelFlexBasis?: string }>`
+    color: ${({ theme }) => theme.colors.gray700};
     display: block;
-    margin-bottom: 3px;
     font-size: 14px;
     cursor: default;
     white-space: nowrap;
-    flex-basis: 180px;
+    flex-basis: ${(props) => props.labelFlexBasis || '150px'};
     ${(props) =>
       props.required &&
       css`
