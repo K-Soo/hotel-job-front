@@ -99,13 +99,14 @@ const S = {
     position: sticky;
     top: -0;
     height: 60px;
-    border-bottom: 1px solid ${(props) => props.theme.colors.gray200};
-    background-color: ${(props) => props.theme.colors.white};
+    z-index: 10;
     display: flex;
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 0 15px;
+    border-bottom: 1px solid ${(props) => props.theme.colors.gray200};
+    background-color: ${(props) => props.theme.colors.white};
     .nav-bar {
       display: flex;
       align-items: center;
