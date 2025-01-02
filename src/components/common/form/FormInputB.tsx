@@ -92,6 +92,7 @@ export default function FormInputB<T extends FieldValues>({
 const StyledMotionInput = styled(motion.input)<{ readOnly?: boolean; disabled?: boolean }>`
   all: unset;
   border: 1px solid ${({ theme }) => theme.colors.gray300};
+  color: ${({ theme }) => theme.colors.black500};
   display: block;
   height: 40px;
   width: 100%;
