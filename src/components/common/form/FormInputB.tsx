@@ -48,16 +48,15 @@ export default function FormInputB<T extends FieldValues>({
   const watchValue = watch(name);
 
   React.useEffect(() => {
-    if (watchValue && watchValue.length !== 0) {
+    if (error && watchValue.length !== 0) {
       clearErrors(name);
     }
-  }, [clearErrors, name, watchValue]);
+  }, [watchValue]);
 
   React.useEffect(() => {
     if (isFocusing) {
       setFocus(name);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isFocusing]);
 
   const error = get(errors, name);
