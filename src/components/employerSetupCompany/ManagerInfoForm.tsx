@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import FormInput from '@/components/common/form/FormInput';
-import { BusinessForm } from '@/types';
+import { SetupCompanyForm } from '@/types';
 import Button from '@/components/common/style/Button';
 import Line from '@/components/common/Line';
 
@@ -12,20 +12,12 @@ export default function ManagerInfoForm({ children }: ManagerInfoFormProps) {
   return (
     <S.ManagerInfoForm>
       <S.Header>
-        <h2 className="title">업체 기본 정보</h2>
+        <h2 className="title">담당자 기본 정보</h2>
       </S.Header>
 
-      <div className="address-wrapper">
-        <FormInput<BusinessForm> required label="업체 주소" name="businessRegistrationNumber" placeholder="주소" disabled />
-        <Button label="검색" variant="secondary100" width="100px" height="40px" margin="0 0 0 15px" />
-      </div>
-
-      <FormInput<BusinessForm> required name="businessRegistrationNumber" placeholder="상세 주소" />
-
-      <Line margin="15px 0" />
-
-      <FormInput<BusinessForm> required label="담당자명" name="businessName" placeholder="사업자등록번호" />
-      <FormInput<BusinessForm> required label="담당자 연락처" name="businessName" placeholder="사업자등록번호" />
+      <FormInput<SetupCompanyForm> required label="담당자명" name="managerName" placeholder="담당자명" />
+      <FormInput<SetupCompanyForm> required label="담당자 연락처" name="managerNumber" placeholder="담당자 연락처" mask="999-9999-9999" />
+      <FormInput<SetupCompanyForm> required label="담당자 이메일" name="managerEmail" placeholder="담당자 이메일" />
 
       <S.ButtonBox>{children}</S.ButtonBox>
     </S.ManagerInfoForm>
@@ -49,10 +41,10 @@ const S = {
     justify-content: space-between;
     height: 100px;
     padding: 0 15px;
-    border-radius: 5px;
+    border-radius: 8px;
     background-color: ${(props) => props.theme.colors.gray100};
     .title {
-      font-size: 20px;
+      font-size: 18px;
       font-weight: 500;
       color: ${(props) => props.theme.colors.gray800};
     }
