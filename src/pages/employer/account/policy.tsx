@@ -1,4 +1,4 @@
-import Layout, { EmployerMain, EmployerHeader } from '@/components/layout';
+import Layout, { EmployerMain, EmployerHeader, EmployerFooter } from '@/components/layout';
 import EmployerAccountPolicyContainer from '@/containers/employerAccountPolicyContainer';
 
 export default function EmployerAccountPolicyPage() {
@@ -10,6 +10,7 @@ EmployerAccountPolicyPage.getLayout = (page: React.ReactElement) => {
     <Layout>
       <EmployerHeader />
       <EmployerMain>{page}</EmployerMain>
+      <EmployerFooter />
     </Layout>
   );
 };
