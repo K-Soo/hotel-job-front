@@ -69,14 +69,15 @@ export function EmployerAside() {
 
 const S = {
   EmployerAside: styled(motion.aside)`
-    border-right: 1px solid ${(props) => props.theme.colors.gray200};
+    /* border-right: 1px solid ${(props) => props.theme.colors.gray200}; */
     background-color: ${(props) => props.theme.colors.white};
     padding: 15px 4px 15px 10px;
     font-size: 15px;
     overflow-y: auto;
     position: sticky;
     top: 60px;
-    height: calc(100vh - 60px);
+    height: calc(100vh - 60px - 50px);
+    min-height: 100%;
     user-select: none;
     scrollbar-width: thin;
     scrollbar-color: #eaeaea #fafafa;
