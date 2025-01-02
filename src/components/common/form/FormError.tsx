@@ -23,6 +23,5 @@ const S = {
     height: 12px;
     font-size: 11px;
     color: crimson;
-    padding-left: 10px;
   `,
 };
