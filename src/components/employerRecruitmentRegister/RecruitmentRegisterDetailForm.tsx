@@ -3,6 +3,7 @@ import HorizontalFormWrapper from '@/components/common/form/HorizontalFormWrappe
 import FormInputB from '@/components/common/form/FormInputB';
 import FormSelect from '@/components/common/form/FormSelect';
 import FormInput from '@/components/common/form/FormInput';
+import FormNumberInput from '@/components/common/form/FormNumberInput';
 import FormCheckbox from '@/components/common/form/FormCheckbox';
 import { useFormContext } from 'react-hook-form';
 import RecruitmentDetailAdditional from '@/components/employerRecruitmentRegister/RecruitmentDetailAdditional';
@@ -22,7 +23,7 @@ export default function RecruitmentRegisterDetailForm({ setIsOpenJobModal }: Rec
   return (
     <S.RecruitmentRegisterDetailForm>
       <HorizontalFormWrapper>
-        <FormInputB<any> required label="직무" name="a" placeholder="직무" />
+        <FormInputB<any> required label="직무" name="직무" placeholder="직무" />
         <Button label="선택" variant="primary" height="40px" width="100px" margin="0 0 0 15px" onClick={() => setIsOpenJobModal(true)} />
       </HorizontalFormWrapper>
 
@@ -35,12 +36,11 @@ export default function RecruitmentRegisterDetailForm({ setIsOpenJobModal }: Rec
       <HorizontalFormWrapper label="국적" required>
         <FormCheckbox label="내국인" name="내국인" visibleIcon={false} margin="0 30px 0 0" />
         <FormCheckbox label="외국인" name="외국인" visibleIcon={false} margin="0 30px 0 0" />
-
-        <FormInputB<any> name="a" placeholder="예시) H-2, F-2, 결혼비자, 영주권" maxWidth="320px" />
+        <FormInputB<any> name="결혼비자" placeholder="예시) H-2, F-2, 결혼비자, 영주권" maxWidth="320px" />
       </HorizontalFormWrapper>
 
-      <HorizontalFormWrapper>
-        <FormInputB<any> required label="모집인원" name="a" placeholder="모집인원" maxWidth="250px" />
+      <HorizontalFormWrapper label="모집인원" required>
+        <FormNumberInput<any> name="모집인원" placeholder="모집인원" maxWidth="100px" unit="명" />
       </HorizontalFormWrapper>
 
       <HorizontalFormWrapper label="학력조건">
