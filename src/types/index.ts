@@ -6,6 +6,8 @@ import { job } from '@/constants/job';
 
 export type ProviderType = 'local' | 'kakao';
 export type RoleType = 'ADMIN' | 'EMPLOYER' | 'JOB_SEEKER';
+export type CompanyVerificationStatus = 'NOT_REQUESTED' | 'PENDING' | 'VERIFIED' | 'REJECTED';
+
 export type AccountStatusType =
   | 'ACTIVE'
   | 'INACTIVE'
@@ -64,11 +66,6 @@ export type License = {
 
 export type Military = {};
 
-export interface defaultResponse {
-  success: boolean;
-  message: string;
-}
-
 export interface SignInForm extends API.SignInRequest {}
 
 export interface ResumeRegisterForm {
@@ -93,12 +90,25 @@ export interface SignUpForm {
 }
 
 export interface BusinessForm {
-  businessName: string; // 사업자명
   businessRegistrationNumber: string; // 사업자번호
-  tradeName: string; // 상호명
+  companyName: string; // 상호명
+  businessOwner: string; // 사업자명
 }
 
 export interface BusinessManagerForm {
+  managerName: string;
+  managerNumber: string;
+  managerEmail: string;
+}
+
+export interface SetupCompanyForm {
+  businessRegistrationNumber: string; // 사업자번호
+  companyName: string; // 상호명
+  businessOwner: string; // 사업자명
+
+  address: string; // 주소
+  addressDetail: string; // 상세주소
+
   managerName: string;
   managerNumber: string;
   managerEmail: string;
