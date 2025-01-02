@@ -1,4 +1,4 @@
-import Layout, { EmployerMain, EmployerHeader } from '@/components/layout';
+import Layout, { EmployerMain, EmployerHeader, EmployerFooter } from '@/components/layout';
 import EmployerContainer from '@/containers/employerContainer';
 import { GetServerSideProps, InferGetServerSidePropsType, GetServerSidePropsContext } from 'next';
 import { Post } from '@/apis';
@@ -12,6 +12,7 @@ EmployerPage.getLayout = (page: React.ReactElement) => {
     <Layout>
       <EmployerHeader />
       <EmployerMain>{page}</EmployerMain>
+      <EmployerFooter />
     </Layout>
   );
 };
