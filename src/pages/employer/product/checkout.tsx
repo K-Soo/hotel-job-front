@@ -1,4 +1,4 @@
-import Layout, { EmployerMain, EmployerHeader } from '@/components/layout';
+import Layout, { EmployerMain, EmployerHeader, EmployerFooter } from '@/components/layout';
 import EmployerProductCheckoutContainer from '@/containers/employerProductCheckoutContainer';
 
 export default function EmployerProductCheckoutPage() {
@@ -10,6 +10,7 @@ EmployerProductCheckoutPage.getLayout = (page: React.ReactElement) => {
     <Layout>
       <EmployerHeader />
       <EmployerMain>{page}</EmployerMain>
+      <EmployerFooter />
     </Layout>
   );
 };
