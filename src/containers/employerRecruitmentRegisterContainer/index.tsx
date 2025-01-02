@@ -2,7 +2,10 @@ import React from 'react';
 import EmployerRecruitmentRegister from '@/components/employerRecruitmentRegister';
 import { useForm, FormProvider, SubmitHandler, useFormContext } from 'react-hook-form';
 import FormDevTools from '@/components/common/FormDevTools';
-import JobModal from '@/components/common/employer/JobModal';
+import dynamic from 'next/dynamic';
+import RecruitmentRegisterProgressMenu from '@/components/employerRecruitmentRegister/RecruitmentRegisterProgressMenu';
+
+const DynamicJobModal = dynamic(() => import('@/components/common/employer/JobModal'), { ssr: false });
 
 export type Person = {
   users: {
@@ -37,9 +40,11 @@ export default function EmployerRecruitmentRegisterContainer() {
   return (
     <>
       <FormProvider {...methods}>
-        {isOpenJobModal && <JobModal name="job" setIsOpenJobModal={setIsOpenJobModal} />}
-        <EmployerRecruitmentRegister setIsOpenJobModal={setIsOpenJobModal} />
-        <FormDevTools control={methods.control} />
+        {isOpenJobModal && <DynamicJobModal name="job" setIsOpenJobModal={setIsOpenJobModal} />}
+        <EmployerRecruitmentRegister setIsOpenJobModal={setIsOpenJobModal}>
+          <RecruitmentRegisterProgressMenu />
+        </EmployerRecruitmentRegister>
+        {/* <FormDevTools control={methods.control} /> */}
       </FormProvider>
     </>
   );

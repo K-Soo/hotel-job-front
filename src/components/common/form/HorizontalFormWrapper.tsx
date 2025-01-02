@@ -9,7 +9,7 @@ interface HorizontalFormWrapperProps {
 
 export default function HorizontalFormWrapper({ label, required, border, children }: HorizontalFormWrapperProps) {
   return (
-    <S.HorizontalFormWrapper border={border}>
+    <S.HorizontalFormWrapper $border={border}>
       {label && <S.FormLabel required={required}>{label}</S.FormLabel>}
       {children}
     </S.HorizontalFormWrapper>
@@ -17,10 +17,10 @@ export default function HorizontalFormWrapper({ label, required, border, childre
 }
 
 const S = {
-  HorizontalFormWrapper: styled.div<{ border?: string }>`
+  HorizontalFormWrapper: styled.div<{ $border?: string }>`
     padding: 15px 0 15px 15px;
     border-bottom: 1px solid ${(props) => props.theme.colors.gray300};
-    border-bottom: ${(props) => props.border};
+    border-bottom: ${(props) => props.$border};
     display: flex;
     align-items: center;
     min-height: 70px;

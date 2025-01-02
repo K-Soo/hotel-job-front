@@ -1,4 +1,4 @@
-import Layout, { EmployerMain, EmployerHeader } from '@/components/layout';
+import Layout, { EmployerMain, EmployerHeader, EmployerFooter } from '@/components/layout';
 import EmployerAccountContainer from '@/containers/employerAccountContainer';
 export default function EmployerAccountPage() {
   return <EmployerAccountContainer />;
@@ -9,6 +9,7 @@ EmployerAccountPage.getLayout = (page: React.ReactElement) => {
     <Layout>
       <EmployerHeader />
       <EmployerMain>{page}</EmployerMain>
+      <EmployerFooter />
     </Layout>
   );
 };

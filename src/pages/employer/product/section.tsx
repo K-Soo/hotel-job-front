@@ -1,4 +1,4 @@
-import Layout, { EmployerMain, EmployerHeader } from '@/components/layout';
+import Layout, { EmployerMain, EmployerHeader, EmployerFooter } from '@/components/layout';
 import EmployerProductSectionContainer from '@/containers/employerProductSectionContainer';
 import React from 'react';
 export default function EmployerProductSectionPage() {
@@ -10,6 +10,7 @@ EmployerProductSectionPage.getLayout = (page: React.ReactElement) => {
     <Layout>
       <EmployerHeader />
       <EmployerMain>{page}</EmployerMain>
+      <EmployerFooter />
     </Layout>
   );
 };

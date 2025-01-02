@@ -17,6 +17,8 @@ export default function BusinessInfoForm({ children }: BusinessInfoFormProps) {
       <FormInput<BusinessForm> required label="사업자등록번호" name="businessRegistrationNumber" placeholder="사업자등록번호" />
       <FormInput<BusinessForm> required label="상호명" name="businessName" placeholder="상호명" />
 
+      <FormInput<BusinessForm> required label="대표자명" name="tradeName" placeholder="대표자" />
+
       <S.ButtonBox>{children}</S.ButtonBox>
     </S.BusinessInfoForm>
   );

@@ -37,7 +37,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
           {Component.authentication &&
             getLayout(
               <GuardComponent allowedRoles={Component.allowedRoles}>
-                <Component {...pageProps} />
+                <Component {...pageProps} />,
               </GuardComponent>,
             )}
           <ReactQueryDevtools initialIsOpen={false} />

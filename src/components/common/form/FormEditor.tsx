@@ -22,7 +22,7 @@ const init =
 
 export default function FormEditor({ placeholder }: FormEditorProps) {
   const [content, setContent] = React.useState('');
-  const quillRef = React.useRef<ReactQuill>(null);
+  // const quillRef = React.useRef<ReactQuill>(null);
 
   React.useEffect(() => {
     setContent(init);
@@ -32,35 +32,9 @@ export default function FormEditor({ placeholder }: FormEditorProps) {
     return {
       toolbar: {
         container: toolbarOptions,
-        handlers: {
-          indent: (value: string) => handleIndent(value), // 커스텀 핸들러 추가
-        },
       },
     };
   }, []);
-
-  const MAX_INDENT_LEVEL = 1;
-  const handleIndent = (value: string) => {
-    const editor = quillRef.current?.getEditor();
-    if (!editor) return;
-
-    const range = editor.getSelection();
-    if (!range) return;
-
-    // 현재 포맷 정보 가져오기
-    const format = editor.getFormat(range.index);
-    const currentIndent = format.indent || 0;
-
-    // 들여쓰기 조건
-    if (value === '+1' && currentIndent < MAX_INDENT_LEVEL) {
-      editor.format('indent', currentIndent + 1);
-    }
-
-    // 내어쓰기 조건
-    if (value === '-1' && currentIndent > 0) {
-      editor.format('indent', currentIndent - 1);
-    }
-  };
 
   return (
     <S.FormEditor>
@@ -71,7 +45,6 @@ export default function FormEditor({ placeholder }: FormEditorProps) {
           setContent(value);
         }}
         placeholder={placeholder}
-        ref={quillRef}
         value={content}
         // onFocus={handleFocus}
         // onBlur={handleBlur}

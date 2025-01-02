@@ -1,3 +1,4 @@
+import React from 'react';
 import styled, { css } from 'styled-components';
 
 interface EmployerTemplateFormProps {
@@ -84,6 +85,6 @@ const S = {
   `,
 };
 
-EmployerTemplateForm.Title = Title;
+EmployerTemplateForm.Title = React.memo(Title);
 EmployerTemplateForm.Content = Content;
-EmployerTemplateForm.SubTitle = SubTitle;
+EmployerTemplateForm.SubTitle = React.memo(SubTitle);

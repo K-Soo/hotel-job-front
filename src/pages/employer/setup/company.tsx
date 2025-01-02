@@ -1,4 +1,4 @@
-import Layout, { EmployerMain, EmployerHeader } from '@/components/layout';
+import Layout, { EmployerMain, EmployerHeader, EmployerFooter } from '@/components/layout';
 import EmployerSetupCompanyContainer from '@/containers/employerSetupCompanyContainer';
 
 export default function EmployerSetupCompanyPage() {
@@ -10,6 +10,7 @@ EmployerSetupCompanyPage.getLayout = (page: React.ReactElement) => {
     <Layout>
       <EmployerHeader />
       <EmployerMain>{page}</EmployerMain>
+      <EmployerFooter />
     </Layout>
   );
 };

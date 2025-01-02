@@ -2,10 +2,11 @@ import styled from 'styled-components';
 import Button from '@/components/common/style/Button';
 import Link from 'next/link';
 import Icon from '@/icons/Icon';
+import React from 'react';
 
 interface RecruitmentRegisterProgressMenuProps {}
 
-export default function RecruitmentRegisterProgressMenu({}: RecruitmentRegisterProgressMenuProps) {
+function RecruitmentRegisterProgressMenu({}: RecruitmentRegisterProgressMenuProps) {
   return (
     <S.RecruitmentRegisterProgressMenu>
       <S.MenuForm>
@@ -40,6 +41,8 @@ export default function RecruitmentRegisterProgressMenu({}: RecruitmentRegisterP
     </S.RecruitmentRegisterProgressMenu>
   );
 }
+
+export default React.memo(RecruitmentRegisterProgressMenu);
 
 const S = {
   RecruitmentRegisterProgressMenu: styled.aside`

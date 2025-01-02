@@ -49,6 +49,16 @@ export default function EmployerBusinessFormContainer() {
           />
         </HorizontalFormWrapper>
 
+        <HorizontalFormWrapper>
+          <FormInputB<BusinessForm>
+            disabled={modifyMode}
+            readOnly={!modifyMode}
+            label="사업장 주소"
+            name="businessName"
+            placeholder="주소"
+          />
+        </HorizontalFormWrapper>
+
         <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '20px' }}>
           {modifyMode && (
             <>

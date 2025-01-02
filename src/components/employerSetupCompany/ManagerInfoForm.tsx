@@ -15,8 +15,6 @@ export default function ManagerInfoForm({ children }: ManagerInfoFormProps) {
         <h2 className="title">업체 기본 정보</h2>
       </S.Header>
 
-      <FormInput<BusinessForm> required label="대표자명" name="tradeName" placeholder="대표자" />
-
       <div className="address-wrapper">
         <FormInput<BusinessForm> required label="업체 주소" name="businessRegistrationNumber" placeholder="주소" disabled />
         <Button label="검색" variant="secondary100" width="100px" height="40px" margin="0 0 0 15px" />

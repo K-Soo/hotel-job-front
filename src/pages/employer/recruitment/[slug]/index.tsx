@@ -1,4 +1,4 @@
-import Layout, { EmployerMain, EmployerHeader } from '@/components/layout';
+import Layout, { EmployerMain, EmployerHeader, EmployerFooter } from '@/components/layout';
 
 export default function EmployerRecruitmentDetailPage() {
   return <>index</>;
@@ -9,6 +9,7 @@ EmployerRecruitmentDetailPage.getLayout = (page: React.ReactElement) => {
     <Layout>
       <EmployerHeader />
       <EmployerMain>{page}</EmployerMain>
+      <EmployerFooter />
     </Layout>
   );
 };
