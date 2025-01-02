@@ -1,6 +1,62 @@
 # 변경 로그
 
 프로젝트의 모든 주요 변경 사항
+### [0.1.13](https://github.com/K-Soo/hotel-job-front/compare/v0.1.12...v0.1.13) (2025-01-02)
+
+
+### Features
+
+* BusinessInfoForm에 대표자명 필드 추가 ([fdd0fb6](https://github.com/K-Soo/hotel-job-front/commit/fdd0fb6c9fb8c210cd401b308187ff6874731055))
+* EmployerAccountPage에 EmployerFooter 추가 ([d71c6a3](https://github.com/K-Soo/hotel-job-front/commit/d71c6a3c586110f0f609e08f7d58d9264d91f57f))
+* EmployerAccountPolicyPage에 EmployerFooter 추가 ([e40edc6](https://github.com/K-Soo/hotel-job-front/commit/e40edc674d9e42739fba32a300e299ba3e2deede))
+* EmployerAside 컴포넌트의 높이 조정 및 최소 높이 설정 ([b1232d8](https://github.com/K-Soo/hotel-job-front/commit/b1232d8c3091a406f2e8b0798e2824ee6fba7afc))
+* EmployerBusinessFormContainer에 사업장 주소 입력 필드 추가 ([ed70bee](https://github.com/K-Soo/hotel-job-front/commit/ed70bee1cdbe7e2f6eaf1ed61832c80e96b0b1a7))
+* EmployerBusinessPage에 EmployerFooter 추가 ([300fcf4](https://github.com/K-Soo/hotel-job-front/commit/300fcf4db111fee0f8088b245fddace1c2fc1eec))
+* EmployerCandidatePage에 EmployerFooter 추가 ([71c2080](https://github.com/K-Soo/hotel-job-front/commit/71c2080f5f42ededfa943b016fd35685712cc41c))
+* EmployerFooter 컴포넌트 추가 ([a1e5f72](https://github.com/K-Soo/hotel-job-front/commit/a1e5f72af2689cbfa6d19d32850a29da6f4f3f5b))
+* EmployerFooter 컴포넌트를 레이아웃에 추가 ([72f08c4](https://github.com/K-Soo/hotel-job-front/commit/72f08c4b58377166400fedb97f8db3e534784815))
+* EmployerHeader 컴포넌트에 z-index 추가 및 스타일 정리 ([7794577](https://github.com/K-Soo/hotel-job-front/commit/77945776da6dedaa6ce8c5194a10c7a79291b3d0))
+* EmployerMain 컴포넌트에서 footer 제거 및 스타일 수정 ([cb3902a](https://github.com/K-Soo/hotel-job-front/commit/cb3902a040cad8b0ff2491fa3de8157a3750e487))
+* EmployerPage에 EmployerFooter 추가 ([cdd08f9](https://github.com/K-Soo/hotel-job-front/commit/cdd08f9bd74f95a473694eef3131723b797c7da1))
+* EmployerProductCheckoutPage에 EmployerFooter 추가 ([9bfee0b](https://github.com/K-Soo/hotel-job-front/commit/9bfee0b8f98566e2fde5ecd82dd8d73cb4e90f89))
+* EmployerProductMainPage에 EmployerFooter 추가 ([552213c](https://github.com/K-Soo/hotel-job-front/commit/552213ca557713f5590fba9ae1f876d7cfc5c842))
+* EmployerProductSectionPage에 EmployerFooter 추가 ([754367b](https://github.com/K-Soo/hotel-job-front/commit/754367bf54b51ad12aa1fc7a2eb07fa998c5f70f))
+* EmployerRecruitmentDetailPage에 EmployerFooter 추가 ([51a0946](https://github.com/K-Soo/hotel-job-front/commit/51a0946b4305a9fe9c8638b2dae52b10e1c8c551))
+* EmployerRecruitmentPage에 EmployerFooter 추가 ([6f426df](https://github.com/K-Soo/hotel-job-front/commit/6f426dfe747e2acd5383ad88ef937cced9a85562))
+* EmployerRecruitmentRegisterContainer에 동적 JobModal 및 진행 상황 메뉴 추가 ([ccd5432](https://github.com/K-Soo/hotel-job-front/commit/ccd5432de9caf2fe6bdc79192c2c5d055572a6f9))
+* EmployerRecruitmentRegisterPage에 EmployerFooter 추가 ([c32d825](https://github.com/K-Soo/hotel-job-front/commit/c32d82562da37bd4e8ed4eabbfc46cec7b60d933))
+* EmployerSetupCompanyPage에 EmployerFooter 추가 ([f92b7dc](https://github.com/K-Soo/hotel-job-front/commit/f92b7dc7ffb5fc45824fd5cc263b9e05ffc76d2f))
+* EmployerTemplateForm 컴포넌트의 Title 및 SubTitle을 React.memo로 최적화 ([ae85eb6](https://github.com/K-Soo/hotel-job-front/commit/ae85eb60780e7dcb2b9992a765cf84934a6668d7))
+* FormCheckbox 컴포넌트에서 아이콘 스타일링 개선 및 불필요한 코드 제거 ([5d65c24](https://github.com/K-Soo/hotel-job-front/commit/5d65c24c44e9ea961ccdfa088c6e96c542af0cc6))
+* FormEditor에서 indent 핸들러 및 quillRef 제거 ([8887c38](https://github.com/K-Soo/hotel-job-front/commit/8887c38467e72440d28c5232ebcc9b6356ac1d64))
+* FormInput 컴포넌트의 최소 너비 기본값을 'auto'로 변경 ([e67686b](https://github.com/K-Soo/hotel-job-front/commit/e67686bc1bfed83a062427cd26535ff1244d7f0f))
+* FormNumberInput 컴포넌트 추가 및 숫자 입력 처리 로직 구현 ([b64ee89](https://github.com/K-Soo/hotel-job-front/commit/b64ee89114c510b9025d971146457b652f0ca732))
+* ManagerInfoForm에서 대표자명 필드 제거 ([bf5c3ba](https://github.com/K-Soo/hotel-job-front/commit/bf5c3ba5762d3ffddc52900918a97dd8722384c6))
+* MinimumWage 컴포넌트 추가 및 최저임금 정보 표시 ([dc34ef6](https://github.com/K-Soo/hotel-job-front/commit/dc34ef6beec3a8fbdbf0153408ffa6692319ea90))
+* minimumWage.ts 파일 삭제 ([7d30c0a](https://github.com/K-Soo/hotel-job-front/commit/7d30c0a5c95af0a19d3ce89d1d30f3461a0f0b5d))
+* priceComma 유틸리티 함수 추가 ([92034e6](https://github.com/K-Soo/hotel-job-front/commit/92034e684a54cef123ec330aee0a9ca133d5a55e))
+* priceComma 유틸리티 함수 추가 ([98847a3](https://github.com/K-Soo/hotel-job-front/commit/98847a39c0153de9a78b7daa0e74dddf90d0ed7a))
+* RecruitmentPolicy 컴포넌트 리팩토링 및 스타일 개선 ([fac3953](https://github.com/K-Soo/hotel-job-front/commit/fac3953db6699f5de691ee748768cd10bcf0ca6a))
+* RecruitmentRegisterBasicForm에서 공고제목 필드의 name 속성 수정 ([df06593](https://github.com/K-Soo/hotel-job-front/commit/df065934323bfdff503e093843bdf6142edc60e7))
+* RecruitmentRegisterDetailForm에서 FormNumberInput 컴포넌트 추가 및 필드 이름 수정 ([d9eff1b](https://github.com/K-Soo/hotel-job-front/commit/d9eff1ba141f04c0e0214ebe0c1e1a8f2563de20))
+* RecruitmentRegisterJobConditionForm에서 FormNumberInput 및 MinimumWage 컴포넌트 추가 ([02a1f4d](https://github.com/K-Soo/hotel-job-front/commit/02a1f4d08f959ed8b458674ffa57073871aaea6a))
+* RecruitmentRegisterManagerForm에서 필드 이름을 담당자명, 연락처, 이메일로 수정 ([afb4469](https://github.com/K-Soo/hotel-job-front/commit/afb44696e2bb3ce006e8a5114410e661a7f996df))
+* RecruitmentRegisterProgressMenu 컴포넌트를 React.memo로 최적화 ([58da491](https://github.com/K-Soo/hotel-job-front/commit/58da491d0deb5dc0ff26d65b77547f3493350c5c))
+* RecruitmentRegisterWorkPlaceForm에서 객실수 필드 및 주소 필드 이름 수정 ([d8d6a08](https://github.com/K-Soo/hotel-job-front/commit/d8d6a08a9c722acf8e3e73580e81a99b52a34a9b))
+
+
+### Bug Fixes
+
+* App 컴포넌트에서 Component 렌더링 시 불필요한 쉼표 제거 ([0c86f29](https://github.com/K-Soo/hotel-job-front/commit/0c86f2968a2f321af2c16bcaa99e0a63a5fcee0c))
+* FormInputB 컴포넌트에서 오류 조건에 따른 clearErrors 호출 로직 수정 ([48e2cc8](https://github.com/K-Soo/hotel-job-front/commit/48e2cc86ed724bf23dbba7551da4e9ab2d915bbd))
+* GuardComponent에서 로딩 상태 조건 주석 추가 ([6595ee9](https://github.com/K-Soo/hotel-job-front/commit/6595ee9fa3da423817c4e32adb6e47c10b167495))
+* HorizontalFormWrapper 컴포넌트의 border prop을 $border로 변경 ([b1d12e4](https://github.com/K-Soo/hotel-job-front/commit/b1d12e4e7b60acb50eed82ae76e9c5c8648c3584))
+
+
+### Refactors
+
+* EmployerRecruitmentRegister 컴포넌트의 구조 개선 및 스타일 수정 ([aa8bd49](https://github.com/K-Soo/hotel-job-front/commit/aa8bd49c9a7c43009c5949e3337628422e493e5f))
+
 ### [0.1.12](https://github.com/K-Soo/hotel-job-front/compare/v0.1.11...v0.1.12) (2025-01-01)
 
 
