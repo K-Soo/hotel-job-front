@@ -13,60 +13,68 @@ const DynamicFormEditor = dynamic(() => import('@/components/common/form/FormEdi
 
 interface EmployerRecruitmentRegisterProps {
   setIsOpenJobModal: React.Dispatch<React.SetStateAction<boolean>>;
-  children?: React.ReactNode;
+  children: React.ReactNode;
 }
 
+// let renderCount = 0;
+
 export default function EmployerRecruitmentRegister({ children, setIsOpenJobModal }: EmployerRecruitmentRegisterProps) {
+  // renderCount++;
+
   return (
     <S.EmployerRecruitmentRegister>
-      <form className="recruitment-register-container">
-        <EmployerTemplateForm height="100%">
-          <EmployerTemplateForm.SubTitle title="공고 기본 설정" size="large" id="basic" />
-          <EmployerTemplateForm.Content marginBottom="80px">
-            <RecruitmentRegisterBasicForm />
-          </EmployerTemplateForm.Content>
+      <div className="register-container">
+        <form className="register-container__form">
+          <EmployerTemplateForm height="100%">
+            <EmployerTemplateForm.SubTitle title="공고 기본 설정" size="large" id="basic" />
+            <EmployerTemplateForm.Content marginBottom="80px">
+              <RecruitmentRegisterBasicForm />
+            </EmployerTemplateForm.Content>
 
-          <EmployerTemplateForm.SubTitle title="모집내용" size="large" id="detail" />
-          <EmployerTemplateForm.Content marginBottom="80px">
-            <RecruitmentRegisterDetailForm setIsOpenJobModal={setIsOpenJobModal} />
-          </EmployerTemplateForm.Content>
+            <EmployerTemplateForm.SubTitle title="모집내용" size="large" id="detail" />
+            <EmployerTemplateForm.Content marginBottom="80px">
+              <RecruitmentRegisterDetailForm setIsOpenJobModal={setIsOpenJobModal} />
+            </EmployerTemplateForm.Content>
 
-          <EmployerTemplateForm.SubTitle title="상세 모집내용" size="large" id="detail" />
-          <EmployerTemplateForm.Content marginBottom="80px">
-            <DynamicFormEditor />
-          </EmployerTemplateForm.Content>
+            <EmployerTemplateForm.SubTitle title="상세 모집내용" size="large" id="detail" />
+            <EmployerTemplateForm.Content marginBottom="80px">
+              <DynamicFormEditor />
+            </EmployerTemplateForm.Content>
 
-          <EmployerTemplateForm.SubTitle title="근무조건" size="large" id="condition" />
-          <EmployerTemplateForm.Content marginBottom="80px">
-            <RecruitmentRegisterJobConditionForm />
-          </EmployerTemplateForm.Content>
+            <EmployerTemplateForm.SubTitle title="근무조건" size="large" id="condition" />
+            <EmployerTemplateForm.Content marginBottom="80px">
+              <RecruitmentRegisterJobConditionForm />
+            </EmployerTemplateForm.Content>
 
-          <EmployerTemplateForm.SubTitle title="근무지 정보" size="large" id="place" />
-          <EmployerTemplateForm.Content marginBottom="80px">
-            <RecruitmentRegisterWorkPlaceForm />
-          </EmployerTemplateForm.Content>
+            <EmployerTemplateForm.SubTitle title="근무지 정보" size="large" id="place" />
+            <EmployerTemplateForm.Content marginBottom="80px">
+              <RecruitmentRegisterWorkPlaceForm />
+            </EmployerTemplateForm.Content>
 
-          <EmployerTemplateForm.SubTitle title="인사담당자 정보" size="large" id="manager" />
-          <EmployerTemplateForm.Content>
-            <RecruitmentRegisterManagerForm />
-          </EmployerTemplateForm.Content>
+            <EmployerTemplateForm.SubTitle title="인사담당자 정보" size="large" id="manager" />
+            <EmployerTemplateForm.Content>
+              <RecruitmentRegisterManagerForm />
+            </EmployerTemplateForm.Content>
 
-          <RecruitmentPolicy />
-        </EmployerTemplateForm>
-      </form>
-
-      <RecruitmentRegisterProgressMenu />
+            <RecruitmentPolicy />
+          </EmployerTemplateForm>
+        </form>
+        {children}
+      </div>
     </S.EmployerRecruitmentRegister>
   );
 }
 
 const S = {
   EmployerRecruitmentRegister: styled.section`
-    display: flex;
-    max-width: 1024px;
-    margin: 0 auto;
-    .recruitment-register-container {
-      flex: 1;
+    .register-container {
+      margin: 0 auto;
+      max-width: 1024px;
+      width: 100%;
+      display: flex;
+      &__form {
+        flex: 1;
+      }
     }
   `,
 };
