@@ -1,4 +1,6 @@
 import * as types from '@/types';
+
+type ResponseStatus = 'success' | 'duplicate';
 export interface defaultResponse {
   error: {
     message: string;
@@ -35,6 +37,8 @@ export interface GetTalentListRequest {
 
 export interface ResumeRegisterRequest extends types.ResumeRegisterForm {}
 
+export interface SetupCompanyRequest extends types.SetupCompanyForm {}
+
 /************************************* HTTP RESPONSE **************************************/
 
 export interface SignInResponse extends defaultResponse {
@@ -66,6 +70,7 @@ export interface GetUserInfoResponse extends defaultResponse {
     provider: types.ProviderType;
     role: types.RoleType;
     accountStatus: types.AccountStatusType;
+    companyVerificationStatus: types.CompanyVerificationStatus;
   };
 }
 
@@ -73,5 +78,11 @@ export interface GetTalentListResponse extends defaultResponse {
   result: {
     items: types.TalentListItem[];
     meta: Meta;
+  };
+}
+
+export interface SetupCompanyResponse extends defaultResponse {
+  result: {
+    status: ResponseStatus;
   };
 }
