@@ -59,5 +59,3 @@ const path = {
 } as const;
 
 export default path;
-
-export const EXCLUDED_PATHS = ['/oauth/kakao/callback', '/oauth/google/callback', '/sign-in'];
