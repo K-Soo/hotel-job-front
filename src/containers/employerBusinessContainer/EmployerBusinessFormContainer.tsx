@@ -35,7 +35,7 @@ export default function EmployerBusinessFormContainer() {
         </HorizontalFormWrapper>
 
         <HorizontalFormWrapper>
-          <FormInputB<BusinessForm> disabled={modifyMode} readOnly={!modifyMode} label="상호명" name="businessName" placeholder="상호명" />
+          <FormInputB<BusinessForm> disabled={modifyMode} readOnly={!modifyMode} label="상호명" name="companyName" placeholder="상호명" />
         </HorizontalFormWrapper>
 
         <HorizontalFormWrapper>
@@ -44,20 +44,20 @@ export default function EmployerBusinessFormContainer() {
             readOnly={!modifyMode}
             required
             label="대표자명"
-            name="tradeName"
+            name="businessOwner"
             placeholder="대표자명"
           />
         </HorizontalFormWrapper>
 
-        <HorizontalFormWrapper>
+        {/* <HorizontalFormWrapper>
           <FormInputB<BusinessForm>
             disabled={modifyMode}
             readOnly={!modifyMode}
             label="사업장 주소"
-            name="businessName"
+            name=""
             placeholder="주소"
           />
-        </HorizontalFormWrapper>
+        </HorizontalFormWrapper> */}
 
         <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '20px' }}>
           {modifyMode && (
