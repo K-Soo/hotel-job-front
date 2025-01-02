@@ -8,6 +8,9 @@ const environment = {
 
   kakaoRedirectUrl: process.env.NEXT_PUBLIC_KAKAO_REDIRECT_URL,
   kakaoClientId: process.env.NEXT_PUBLIC_KAKAO_CLIENT_ID,
+
+  nationTextServiceKey: process.env.NEXT_PUBLIC_NATIONAL_TAX_SERVICE_KEY!,
+  nationBusinessUrl: process.env.NEXT_PUBLIC_NATIONAL_BUSINESS_URL!,
 };
 
 export default environment;
