@@ -11,6 +11,7 @@ export default function AuthenticationComponent() {
   const router = useRouter();
 
   const { isAuthenticated, setAuthAtomState } = useAuth();
+
   const isExcludedPath = EXCLUDED_PATHS.includes(router.pathname);
 
   // 쿠키 존재 여부 확인
@@ -23,15 +24,18 @@ export default function AuthenticationComponent() {
       enabled: !isAuthenticated && !isExcludedPath, // 인증된 사용자와 제외 경로에서는 실행 안 함
     },
   });
+  console.log('cookieData: ', cookieData);
+
+  console.log('isExcludedPath: ', isExcludedPath);
 
   // 사용자 정보 가져오기
   const { data: userInfoData } = useFetchQuery({
     queryKey: [queryKeys.USER_INFO],
     queryFn: Post.authMe,
     options: {
+      enabled: !isAuthenticated && !!cookieData?.result && !isExcludedPath,
       staleTime: 60 * 1000 * 5,
       gcTime: 60 * 1000 * 10,
-      enabled: !isAuthenticated && cookieData?.result, // 쿠키가 확인된 경우에만 실행
     },
   });
 
@@ -43,7 +47,6 @@ export default function AuthenticationComponent() {
       ...userInfoData.result,
       status: 'AUTHENTICATED',
     });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userInfoData]);
 
   return null;
