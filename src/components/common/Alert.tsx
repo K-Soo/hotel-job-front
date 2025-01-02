@@ -9,7 +9,6 @@ import { alertWithConfirmSelector, alertWithConfirmAtom } from '@/recoil/alertWi
 
 export default function Alert() {
   const alertWithConfirmSelectorValue = useRecoilValue(alertWithConfirmSelector);
-  const setAlertWithConfirmAtom = useSetRecoilState(alertWithConfirmAtom);
   const resetAlertWithConfirmAtom = useResetRecoilState(alertWithConfirmAtom);
 
   return (
@@ -27,7 +26,7 @@ export default function Alert() {
           )}
           <Button
             name="positive"
-            label="확인"
+            label={alertWithConfirmSelectorValue.confirmLabel}
             variant="secondary100"
             maxWidth="200px"
             margin="15px 0 0 0"
@@ -90,8 +89,9 @@ const S = {
     position: relative;
     flex: 1;
     .title {
+      margin-top: 10px;
       color: ${(props) => props.theme.colors.black100};
-      font-size: 28px;
+      font-size: 26px;
       font-weight: 500;
       text-align: center;
       ${(props) => props.theme.media.tablet`
@@ -102,11 +102,11 @@ const S = {
       `};
     }
     .description {
-      color: ${(props) => props.theme.colors.black500};
+      color: ${(props) => props.theme.colors.black400};
       font-weight: 400;
       margin-top: 30px;
-      font-size: 17px;
-      text-align: left;
+      font-size: 18px;
+      text-align: center;
       line-height: 1.1;
       padding: 0 20px;
       ${(props) => props.theme.media.mobile`
