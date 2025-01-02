@@ -105,7 +105,7 @@ export const Post = {
   signIn: (body: API.SignInRequest) => requests.post<API.SignInRequest, API.SignInResponse>('/auth/sign-in', body),
 
   // 유저정보
-  getUserInfo: (body: {}, config?: AxiosRequestConfig) => requests.post<{}, API.GetUserInfoResponse>('/auth/me', body, config),
+  authMe: (body: {}, config?: AxiosRequestConfig) => requests.post<{}, API.GetUserInfoResponse>('/auth/me', body, config),
 
   // 엑세스토큰 재요청
   requestAccessToken: (body: {}, config?: AxiosRequestConfig) =>
@@ -113,4 +113,8 @@ export const Post = {
 
   // 로그아웃
   signOut: (body: void) => requests.post('/auth/sign-out', body),
+
+  // 초기 회사정보 등록
+  setupCompany: (body: API.SetupCompanyRequest) =>
+    requests.post<API.SetupCompanyRequest, API.SetupCompanyResponse>('/employers/company', body),
 };
