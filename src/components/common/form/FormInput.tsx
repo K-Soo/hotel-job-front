@@ -125,7 +125,7 @@ const S = {
   FormInput: styled.div<{ $margin?: string; $horizontal?: boolean; $width?: string; $maxWidth?: string; $minWidth?: string }>`
     margin: ${(props) => (props.$margin ? props.$margin : '0')};
     max-width: ${(props) => (props.$maxWidth ? props.$maxWidth : '100%')};
-    min-width: ${(props) => (props.$minWidth ? props.$minWidth : '100%')};
+    min-width: ${(props) => (props.$minWidth ? props.$minWidth : 'auto')};
     width: ${(props) => (props.$width ? props.$width : '100%')};
   `,
   FormLabel: styled.label<{ required?: boolean }>`
