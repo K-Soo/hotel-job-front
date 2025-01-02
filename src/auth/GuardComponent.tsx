@@ -48,6 +48,7 @@ export default function GuardComponent({ allowedRoles, children }: GuardComponen
   }, [allowedRoles, role]);
 
   if (isAuthIdle && showLoading) {
+    // if (true) {
     return <Loading />;
   }
 
