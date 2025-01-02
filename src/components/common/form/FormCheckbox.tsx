@@ -42,7 +42,7 @@ export default function FormCheckbox<T extends FieldValues>({
             </p>
           </label>
         </div>
-        {visibleIcon && <i className="view">보기</i>}
+        {visibleIcon && <S.ViewIcon>보기</S.ViewIcon>}
       </S.FormCheckbox>
       {error && <FormError errors={errors} name={name} />}
     </>
@@ -57,31 +57,16 @@ const S = {
     justify-content: space-between;
     user-select: none;
     font-size: 13px;
-    cursor: pointer;
-    .view {
-      white-space: nowrap;
-      margin-left: 10px;
-      color: ${(props) => props.theme.colors.gray600};
-      &:hover {
-        text-decoration: underline;
-        color: ${(props) => props.theme.colors.blue700};
-        text-decoration: underline;
-        cursor: pointer;
-        font-weight: 400;
-      }
-    }
     .wrapper {
       display: flex;
       align-items: center;
       justify-content: space-between;
-
       line-height: 1.2;
-      :hover {
+      &:hover {
         color: ${(props) => props.theme.colors.blue700};
       }
       .label-text {
         font-weight: 300;
-        cursor: pointer;
         word-break: keep-all;
         ${(props) =>
           props.$active &&
@@ -110,6 +95,7 @@ const S = {
         display: flex;
         align-items: center;
         font-size: 13px;
+        cursor: pointer;
       }
 
       label:before {
@@ -122,7 +108,6 @@ const S = {
         height: 22px;
         border: 2px solid #ccc;
         border-radius: 5px;
-        cursor: pointer;
       }
 
       label:hover:before {
@@ -151,6 +136,17 @@ const S = {
         background-repeat: no-repeat;
         background-position: center;
       }
+    }
+  `,
+  ViewIcon: styled.i`
+    white-space: nowrap;
+    margin-left: 10px;
+    color: ${(props) => props.theme.colors.gray600};
+    &:hover {
+      text-decoration: underline;
+      color: ${(props) => props.theme.colors.blue700};
+      text-decoration: underline;
+      font-weight: 400;
     }
   `,
 };
