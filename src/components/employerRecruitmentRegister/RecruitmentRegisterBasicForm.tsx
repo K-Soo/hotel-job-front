@@ -9,7 +9,7 @@ export default function RecruitmentRegisterBasicForm({}: RecruitmentRegisterBasi
   return (
     <S.RecruitmentRegisterBasicForm>
       <HorizontalFormWrapper>
-        <FormInputB<any> required label="공고제목" name="a" placeholder="공고제목" />
+        <FormInputB<any> required label="공고제목" name="공고제목" placeholder="공고제목" />
       </HorizontalFormWrapper>
     </S.RecruitmentRegisterBasicForm>
   );
