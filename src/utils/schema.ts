@@ -56,9 +56,9 @@ const signUpSchema = yup.object({
 });
 
 const businessForm = yup.object({
-  businessName: yup.string().required(),
   businessRegistrationNumber: yup.string().required(),
-  tradeName: yup.string().required(),
+  companyName: yup.string().required(),
+  businessOwner: yup.string().required(),
 });
 
 const businessManagerForm = yup.object({
@@ -67,4 +67,17 @@ const businessManagerForm = yup.object({
   managerEmail: yup.string().required(),
 });
 
-export const schema = { signInSchema, resumeRegister, signUpSchema, businessForm, businessManagerForm };
+const setupCompanyForm = yup.object({
+  businessRegistrationNumber: validation.REQUIRED_TEXT_1({ minLength: 10, maxLength: 10 }),
+  companyName: validation.REQUIRED_TEXT_1({ minLength: 2, maxLength: 30 }), //상호
+  businessOwner: validation.REQUIRED_TEXT_2({ minLength: 2, maxLength: 10 }),
+
+  address: yup.string().required('주소를 검색해주세요'),
+  addressDetail: validation.REQUIRED_TEXT_1({ minLength: 2, maxLength: 30 }),
+
+  managerName: validation.REQUIRED_TEXT_2({ minLength: 2, maxLength: 10 }),
+  managerNumber: validation.PHONE,
+  managerEmail: validation.REQUIRED_EMAIL(),
+});
+
+export const schema = { signInSchema, resumeRegister, signUpSchema, businessForm, businessManagerForm, setupCompanyForm };
