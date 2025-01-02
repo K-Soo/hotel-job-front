@@ -4,6 +4,8 @@ import FormError from '@/components/common/form/FormError';
 import { useFormContext, Path, FieldValues } from 'react-hook-form';
 import { motion } from 'framer-motion';
 import { get } from 'lodash';
+import { useHookFormMask } from 'use-mask-input';
+
 interface FormInputProps<T> {
   name: Path<T>;
   label?: string;
@@ -18,6 +20,8 @@ interface FormInputProps<T> {
   width?: string;
   maxWidth?: string;
   minWidth?: string;
+  mask?: string | string[];
+  maxLength?: number;
 }
 
 export default function FormInput<T extends FieldValues>({
@@ -34,6 +38,8 @@ export default function FormInput<T extends FieldValues>({
   width,
   maxWidth,
   minWidth,
+  mask,
+  maxLength,
 }: FormInputProps<T>) {
   const {
     formState: { errors },
@@ -42,6 +48,8 @@ export default function FormInput<T extends FieldValues>({
     watch,
     clearErrors,
   } = useFormContext<T>();
+
+  const registerWithMask = useHookFormMask(register);
 
   const watchValue = watch(name);
 
@@ -58,7 +66,7 @@ export default function FormInput<T extends FieldValues>({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isFocusing]);
 
-  const error = get(errors, name);
+  // const error = get(errors, name);
 
   return (
     <S.FormInput $margin={margin} $horizontal={horizontal} $width={width} $maxWidth={maxWidth} $minWidth={minWidth}>
@@ -74,7 +82,9 @@ export default function FormInput<T extends FieldValues>({
         type={type || 'text'}
         readOnly={readOnly}
         disabled={disabled}
-        {...register(name)}
+        maxLength={maxLength}
+        tabIndex={disabled ? -1 : undefined}
+        {...(mask ? registerWithMask(name, mask, { autoUnmask: true, showMaskOnFocus: false, placeholder: '_' }) : register(name))}
       />
       <FormError errors={errors} name={name} />
     </S.FormInput>
@@ -83,10 +93,11 @@ export default function FormInput<T extends FieldValues>({
 
 const StyledMotionInput = styled(motion.input)<{ readOnly?: boolean; disabled?: boolean }>`
   border: 1px solid ${({ theme }) => theme.colors.gray300};
+  color: ${({ theme }) => theme.colors.black500};
   display: block;
   height: 40px;
   width: 100%;
-  padding-left: 10px;
+  padding: 0 10px;
   border-radius: 5px;
   font-size: 16px;
   &:hover {
