@@ -10,46 +10,12 @@ interface SignUpProps {
   onSubmit: SubmitHandler<SignUpForm>;
 }
 
-export default function SignUp({ children }: SignUpProps) {
-  const [email, setEmail] = React.useState('');
-  const [password, setPassword] = React.useState('');
-
-  const onSubmit = async (e: any) => {
-    e.preventDefault();
-
-    try {
-      const response = await axios.post(
-        `http://localhost:8080/auth/signup`,
-        {
-          email,
-          password,
-        },
-        {
-          withCredentials: true,
-        },
-      );
-      console.log('회원가입 API : ', response.data);
-    } catch (error) {
-      console.log('error: ', error);
-    }
-  };
+export default function SignUp({ onSubmit, children }: SignUpProps) {
+  const { handleSubmit } = useFormContext<SignUpForm>();
 
   return (
     <S.SignUp>
-      {children}
-      {/* <div>
-        <form onSubmit={onSubmit}>
-          <label htmlFor="">
-            email
-            <input type="text" value={email} onChange={(e) => setEmail(e.target.value)} />
-          </label>
-          <label htmlFor="">
-            <input type="text" value={password} onChange={(e) => setPassword(e.target.value)} />
-            password
-          </label>
-          <button>회원가입</button>
-        </form>
-      </div> */}
+      <form onSubmit={handleSubmit(onSubmit)}>{children}</form>
     </S.SignUp>
   );
 }
