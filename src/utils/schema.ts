@@ -49,10 +49,18 @@ const resumeRegister = yup.object({
     )
     .default([]),
 });
-
 const signUpSchema = yup.object({
   userId: validation.USER_ID,
   password: validation.PASSWORD,
+  passwordConfirm: validation.PASSWORD_CONFIRM,
+
+  ageAgree: yup.boolean().default(false).oneOf([true], '필수 동의'),
+  personalInfoAgree: yup.boolean().default(false).oneOf([true], '필수 동의'),
+  serviceTermsAgree: yup.boolean().default(false).oneOf([true], '필수 동의'),
+  smsMarketingAgree: yup.boolean().default(false),
+  emailMarketingAgree: yup.boolean().default(false),
+
+  userIdAvailableState: yup.boolean().default(false),
 });
 
 const businessForm = yup.object({
@@ -80,4 +88,24 @@ const setupCompanyForm = yup.object({
   managerEmail: validation.REQUIRED_EMAIL(),
 });
 
-export const schema = { signInSchema, resumeRegister, signUpSchema, businessForm, businessManagerForm, setupCompanyForm };
+const oauthSignInSchema = yup.object({
+  code: yup.string().required(),
+  requestType: yup.string().oneOf(['signIn', 'signUp']).required(),
+  ageAgree: yup.boolean().default(false).oneOf([true], '필수 동의'),
+
+  personalInfoAgree: yup.boolean().default(false).oneOf([true], '필수 동의'),
+  serviceTermsAgree: yup.boolean().default(false).oneOf([true], '필수 동의'),
+
+  smsMarketingAgree: yup.boolean().default(false),
+  emailMarketingAgree: yup.boolean().default(false),
+});
+
+export const schema = {
+  signInSchema,
+  resumeRegister,
+  signUpSchema,
+  businessForm,
+  businessManagerForm,
+  setupCompanyForm,
+  oauthSignInSchema,
+};

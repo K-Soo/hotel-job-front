@@ -1,5 +1,5 @@
 import SignUpContainer from '@/containers/signUpContainer';
-import Layout, { Header, Footer, Main, DesktopNavigation, MobileNavigation } from '@/components/layout';
+import Layout, { Main } from '@/components/layout';
 
 export default function SignUpPage() {
   return <SignUpContainer />;
