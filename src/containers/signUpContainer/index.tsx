@@ -8,9 +8,15 @@ import FormDevTools from '@/components/common/FormDevTools';
 import SignUpGeneralForm from '@/components/signUp/SignUpGeneralForm';
 import SignUpCompleteForm from '@/components/signUp/SignUpCompleteForm';
 import { Post } from '@/apis';
+import { useRouter } from 'next/router';
+import path from '@/constants/path';
+import useAuth from '@/hooks/useAuth';
 
 export default function SignUpContainer() {
   const [step, setStep] = React.useState('STEP_1');
+
+  const router = useRouter();
+  const { setAuthAtomState } = useAuth();
 
   const methods = useForm<SignUpForm>({
     resolver: yupResolver(schema.signUpSchema),
@@ -25,7 +31,7 @@ export default function SignUpContainer() {
       ageAgree: false,
       personalInfoAgree: false,
       serviceTermsAgree: false,
-      smsMarketingAgree: true,
+      smsMarketingAgree: false,
       emailMarketingAgree: false,
 
       userIdAvailableState: false,
@@ -46,10 +52,24 @@ export default function SignUpContainer() {
       methods.setError('userId', { type: 'custom', message: '아이디 중복체크를 해주세요.' });
       return;
     }
-    methods.unregister('userIdAvailableState');
+    const requestData = {
+      userId: data.userId,
+      password: data.password,
+
+      ageAgree: data.ageAgree,
+      personalInfoAgree: data.personalInfoAgree,
+      serviceTermsAgree: data.serviceTermsAgree,
+      smsMarketingAgree: data.smsMarketingAgree,
+      emailMarketingAgree: data.emailMarketingAgree,
+    };
     try {
-      const response = await Post.signUpEmployer(data);
+      const response = await Post.signUpEmployer(requestData);
       console.log('회원가입 API : ', response);
+      setAuthAtomState({
+        ...response.result,
+        status: 'AUTHENTICATED',
+      });
+      router.replace(path.EMPLOYER);
     } catch (error) {
       alert('회원가입 중 오류가 발생했습니다.');
     }
