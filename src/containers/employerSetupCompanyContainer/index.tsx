@@ -28,8 +28,6 @@ export default function EmployerSetupCompanyContainer() {
   const [submitCount, setSubmitCount] = React.useState<number>(0);
   const [isSuccessVerified, setIsSuccessVerified] = React.useState<boolean>(false);
 
-  const { authAtomState } = useAuth();
-
   const queryClient = useQueryClient();
   const daumPostAtomValue = useRecoilValue(daumPostAtom);
   const { setAlertWithConfirmAtom } = useAlertWithConfirm();
