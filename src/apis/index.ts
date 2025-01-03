@@ -9,9 +9,6 @@ const VERSION = '/v1';
 const config: AxiosRequestConfig = {
   baseURL: environment.apiUrl + URL_API + VERSION,
   withCredentials: true,
-  // headers: {
-  //   Origin: 'localhost:3000',
-  // },
 };
 
 export const instance = axios.create(config);
@@ -88,6 +85,8 @@ export const OAuth = {
 
 export const Get = {
   getTests: () => requests.get('/tests'),
+
+  getHealth: () => requests.get('/health'),
 
   getUserInfo: () => requests.get('/auth/user-info'),
 
