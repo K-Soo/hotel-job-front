@@ -36,7 +36,7 @@ export interface ResumeRegisterRequest extends types.ResumeRegisterForm {}
 
 export interface SetupCompanyRequest extends types.SetupCompanyForm {}
 
-export interface SignUpEmployerRequest extends Omit<types.SignUpForm, 'userIdAvailableState'> {}
+export interface SignUpEmployerRequest extends Omit<types.SignUpForm, 'userIdAvailableState' | 'passwordConfirm'> {}
 
 /************************************* HTTP RESPONSE **************************************/
 
