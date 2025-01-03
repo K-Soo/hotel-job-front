@@ -46,11 +46,8 @@ instance.interceptors.response.use(
       responseData?.error?.code === 'ERR-1022' ||
       responseData?.error?.code === 'ERR-1002';
 
-    // ERR-1030 서버에서 쿠키토큰으로 사용자를 찾을수없을때 쿠키강제삭제 요청
-    const forcedCookieDeletionRequest = responseData?.error?.code === 'ERR-1030';
-
     //소셜로그인 초기 로그인 요청을 했는데 서버에서 userId로 사용자를 찾을수없을때
-    const notFoundOauthUser = responseData?.error?.code === 'ERR-1030';
+    const notFoundUser = responseData?.error?.code === 'ERR-1030';
 
     if (shouldRefreshToken && !originalRequest._retry) {
       // if (shouldRefreshToken) {
@@ -58,15 +55,10 @@ instance.interceptors.response.use(
       return interceptorHelper.handleRequestAccessToken(originalRequest);
     }
 
-    if (forcedCookieDeletionRequest) {
+    if (notFoundUser) {
       alert('고객센터에 문의해주세요.');
       Post.signOut();
-      window.location.href = '/sign-in';
-    }
-
-    if (notFoundOauthUser) {
-      alert('고객센터에 문의해주세요.');
-      window.location.href = '/sign-in';
+      window.location.href = '/';
     }
 
     if (shouldLogoutUser) {
