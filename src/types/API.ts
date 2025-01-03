@@ -1,6 +1,6 @@
 import * as types from '@/types';
 
-type ResponseStatus = 'success' | 'duplicate';
+type ResponseStatus = 'success' | 'duplicate' | 'available';
 export interface defaultResponse {
   error: {
     message: string;
@@ -25,10 +25,7 @@ export interface SignInRequest {
   password: string;
 }
 
-export interface OAuthSignInRequest {
-  code: string;
-  isInitialRequest: 'Y' | 'N';
-}
+export interface OAuthSignInRequest extends types.OAuthSignInForm {}
 
 export interface GetTalentListRequest {
   page: string;
@@ -38,6 +35,8 @@ export interface GetTalentListRequest {
 export interface ResumeRegisterRequest extends types.ResumeRegisterForm {}
 
 export interface SetupCompanyRequest extends types.SetupCompanyForm {}
+
+export interface SignUpEmployerRequest extends Omit<types.SignUpForm, 'userIdAvailableState'> {}
 
 /************************************* HTTP RESPONSE **************************************/
 
@@ -82,6 +81,18 @@ export interface GetTalentListResponse extends defaultResponse {
 }
 
 export interface SetupCompanyResponse extends defaultResponse {
+  result: {
+    status: ResponseStatus;
+  };
+}
+
+export interface verificationsEmployerUserIdResponse extends defaultResponse {
+  result: {
+    status: ResponseStatus;
+  };
+}
+
+export interface SignUpEmployerResponse extends defaultResponse {
   result: {
     status: ResponseStatus;
   };
