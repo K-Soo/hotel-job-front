@@ -4,19 +4,14 @@ import axios from 'axios';
 import { useSetRecoilState } from 'recoil';
 import Layout, { Main } from '@/components/layout';
 import { OAuth } from '@/apis';
-import Consent from '@/components/common/Consent';
 import OauthSignUpForm from '@/components/common/OauthSignUpForm';
 import path from '@/constants/path';
 import useAppRouter from '@/hooks/useAppRouter';
 import { loadingAtom } from '@/recoil/loading';
 import useAuth from '@/hooks/useAuth';
-import CheckBox from '@/components/common/style/CheckBox';
-import Button from '@/components/common/style/Button';
-import environment from '@/environment';
 import { ParsedUrlQuery } from 'querystring';
 import Loading from '@/components/common/Loading';
 import Portal from '@/components/common/Portal';
-import Line from '@/components/common/Line';
 import { url } from '@/constants/oauth';
 import { useForm, FormProvider, SubmitHandler } from 'react-hook-form';
 import { schema } from '@/utils';
@@ -57,8 +52,6 @@ export default function KaKaoCallbackPage() {
     },
   });
 
-  console.log('@@@@: ', methods.watch());
-
   // 초기 진입시 작동
   React.useEffect(() => {
     if (router.isReady) {
@@ -79,7 +72,7 @@ export default function KaKaoCallbackPage() {
       methods.setValue('serviceTermsAgree', restoredState.serviceTermsAgree ?? false);
       methods.setValue('personalInfoAgree', restoredState.personalInfoAgree ?? false);
 
-      methods.setValue('serviceTermsAgree', restoredState.serviceTermsAgree ?? false);
+      methods.setValue('smsMarketingAgree', restoredState.serviceTermsAgree ?? false);
       methods.setValue('emailMarketingAgree', restoredState.emailMarketingAgree ?? false);
 
       setStatus('EXIST');
@@ -90,7 +83,6 @@ export default function KaKaoCallbackPage() {
     setLoadingAtom({ isLoading: true });
 
     const requestBody = methods.getValues();
-    console.log('requestBody: ', requestBody);
 
     if (!requestBody.code) {
       return;
