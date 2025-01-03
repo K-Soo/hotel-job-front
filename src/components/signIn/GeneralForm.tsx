@@ -1,13 +1,9 @@
 import styled, { css } from 'styled-components';
 import Image from 'next/image';
-import environment from '@/environment';
-import { SOCIAL_URL } from '@/constants/social';
-import Button from '@/components/common/style/Button';
 import { useRouter } from 'next/router';
+import { url } from '@/constants/oauth';
 
 export default function GeneralForm() {
-  const router = useRouter();
-
   const onClickSocialLogin = (type: string) => {
     //SWIFT 전용
     // if (window?.webkit) {
@@ -18,8 +14,10 @@ export default function GeneralForm() {
     //   return window?.jsToWebviewSocialChannel?.postMessage(JSON.stringify({ message: type })); //KAKAO , APPLE, GOOGLE
     // }
     // window.location.href = SOCIAL_URL[type];
-    const state = encodeURIComponent(JSON.stringify({ initial: 'Y' }));
-    window.location.href = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${environment.kakaoClientId}&redirect_uri=${environment.kakaoRedirectUrl}&prompt=select_account&scope=openid&state=${state}`;
+    const state = encodeURIComponent(JSON.stringify({ requestType: 'signIn' }));
+    const baseUrl = url.KAKAO_OAUTH_URL + `&state=${state}`;
+
+    window.location.href = baseUrl;
   };
 
   return (
