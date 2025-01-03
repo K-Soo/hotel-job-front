@@ -46,10 +46,27 @@ instance.interceptors.response.use(
       responseData?.error?.code === 'ERR-1022' ||
       responseData?.error?.code === 'ERR-1002';
 
-    // if (shouldRefreshToken && !originalRequest._retry) {
-    if (shouldRefreshToken) {
+    // ERR-1030 서버에서 쿠키토큰으로 사용자를 찾을수없을때 쿠키강제삭제 요청
+    const forcedCookieDeletionRequest = responseData?.error?.code === 'ERR-1030';
+
+    //소셜로그인 초기 로그인 요청을 했는데 서버에서 userId로 사용자를 찾을수없을때
+    const notFoundOauthUser = responseData?.error?.code === 'ERR-1030';
+
+    if (shouldRefreshToken && !originalRequest._retry) {
+      // if (shouldRefreshToken) {
       originalRequest._retry = true;
       return interceptorHelper.handleRequestAccessToken(originalRequest);
+    }
+
+    if (forcedCookieDeletionRequest) {
+      alert('고객센터에 문의해주세요.');
+      Post.signOut();
+      window.location.href = '/sign-in';
+    }
+
+    if (notFoundOauthUser) {
+      alert('고객센터에 문의해주세요.');
+      window.location.href = '/sign-in';
     }
 
     if (shouldLogoutUser) {
@@ -98,11 +115,22 @@ export const Get = {
     const url = `/talents${queryString && `?${queryString}`}`;
     return requests.get<API.GetTalentListResponse>(url);
   },
+
+  // 사업자 -  회사정보 가져오기
+  getMyCompany: () => requests.get<any>('/employers/company'),
 };
 
 export const Post = {
+  //아이디 중복확인
+  verificationsEmployerUserId: (body: { userId: string }) =>
+    requests.post<{ userId: string }, API.verificationsEmployerUserIdResponse>('/verifications/employer/user-id', body),
+
   // 사업자 로그인
   signIn: (body: API.SignInRequest) => requests.post<API.SignInRequest, API.SignInResponse>('/auth/sign-in', body),
+
+  // 사업자 회원가입
+  signUpEmployer: (body: API.SignUpEmployerRequest) =>
+    requests.post<API.SignUpEmployerRequest, API.SignUpEmployerResponse>('/auth/sign-up', body),
 
   // 유저정보
   authMe: (body: {}, config?: AxiosRequestConfig) => requests.post<{}, API.GetUserInfoResponse>('/auth/me', body, config),
