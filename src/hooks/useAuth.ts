@@ -3,6 +3,7 @@ import { useRecoilState } from 'recoil';
 
 export default function useAuth() {
   const [authAtomState, setAuthAtomState] = useRecoilState(authAtom);
+  console.log('authAtomState: ', authAtomState);
 
   const isAuthenticated = authAtomState.status === 'AUTHENTICATED';
   const isAuthIdle = authAtomState.status === 'IDLE';
