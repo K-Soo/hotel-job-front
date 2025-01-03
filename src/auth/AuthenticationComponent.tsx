@@ -24,9 +24,6 @@ export default function AuthenticationComponent() {
       enabled: !isAuthenticated && !isExcludedPath, // 인증된 사용자와 제외 경로에서는 실행 안 함
     },
   });
-  console.log('cookieData: ', cookieData);
-
-  console.log('isExcludedPath: ', isExcludedPath);
 
   // 사용자 정보 가져오기
   const { data: userInfoData } = useFetchQuery({
