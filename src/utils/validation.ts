@@ -30,9 +30,19 @@ const NUMBER_VALID_TEXT = '숫자만 입력 가능합니다.';
 const SPACES_VALID_TEXT_1 = '공백불가';
 
 export const validation = {
-  USER_ID: yup.string().required().matches(regex.userId, '아이디를 형식을 확인해주세요.'),
+  USER_ID: yup
+    .string()
+    .required()
+    .min(8, MORE_TEXT(8))
+    .max(16, LESS_TEXT(16))
+    .matches(regex.FIRST_SPACE, FIRST_SPACES_VALID_TEXT)
+    .matches(regex.LAST_SPACE, LAST_SPACES_VALID_TEXT)
+    .matches(regex.userId, '소문자 + 숫자만 입력가능합니다.'),
   PASSWORD: yup.string().required().matches(regex.password, '비밀번호 형식을 확인해주세요.'),
-  PASSWORD_CONFIRM: yup.string().required(),
+  PASSWORD_CONFIRM: yup
+    .string()
+    .required()
+    .oneOf([yup.ref('password')], '비밀번호가 일치하지않습니다.'),
   PHONE: yup.string().required().matches(regex.phone, '010으로 시작하는 "-"를 제외한 숫자'),
   REQUIRED_EMAIL: () =>
     yup
