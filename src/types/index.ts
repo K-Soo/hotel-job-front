@@ -87,6 +87,15 @@ export interface ResumeRegisterForm {
 export interface SignUpForm {
   userId: string;
   password: string;
+  passwordConfirm: string;
+
+  ageAgree: boolean;
+  personalInfoAgree: boolean;
+  serviceTermsAgree: boolean;
+  smsMarketingAgree: boolean;
+  emailMarketingAgree: boolean;
+
+  userIdAvailableState: boolean;
 }
 
 export interface BusinessForm {
@@ -112,4 +121,17 @@ export interface SetupCompanyForm {
   managerName: string;
   managerNumber: string;
   managerEmail: string;
+}
+
+export interface OAuthSignInForm {
+  code: string;
+  requestType: 'signIn' | 'signUp';
+
+  ageAgree: boolean;
+
+  personalInfoAgree: boolean;
+  serviceTermsAgree: boolean;
+
+  smsMarketingAgree: boolean;
+  emailMarketingAgree: boolean;
 }
