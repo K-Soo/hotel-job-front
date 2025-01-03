@@ -1,6 +1,7 @@
 import axios from 'axios';
 import environment from '@/environment';
 import { Get } from '@/apis';
+
 export default function TestPage() {
   const statusUrl = `${environment.nationBusinessUrl}?serviceKey=${environment.nationTextServiceKey}&returnType=JSON`;
 
@@ -21,6 +22,7 @@ export default function TestPage() {
     <>
       {/* <button onClick={() => fetchPosts()}>유저정보</button> */}
       <button onClick={() => fetchStatus()}>상태</button>
+      <button>{environment.apiUrl}</button>
     </>
   );
 }
