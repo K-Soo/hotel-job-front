@@ -15,7 +15,6 @@ import useAuth from '@/hooks/useAuth';
 import { ParsedUrlQuery } from 'querystring';
 import { useRouter } from 'next/router';
 import path from '@/constants/path';
-import dynamic from 'next/dynamic';
 import environment from '@/environment';
 
 type SignInTab = 'general' | 'company';
@@ -26,7 +25,6 @@ export interface UrlQuery extends ParsedUrlQuery {
 
 export default function SignInContainer() {
   const [isSubmitError, setIsSubmitError] = React.useState(false);
-  const [previousData, setPreviousData] = React.useState<SignInForm | null>(null);
 
   const router = useRouter();
   const { type = 'general' } = router.query as UrlQuery;
@@ -39,8 +37,8 @@ export default function SignInContainer() {
     mode: 'onSubmit',
     reValidateMode: 'onChange',
     defaultValues: {
-      userId: environment.isLocal ? 'kanabun102' : '',
-      password: environment.isLocal ? '@@EErr1234' : '',
+      userId: environment.isProd ? '' : 'kanabun102',
+      password: environment.isProd ? '' : '@@EErr1234',
     },
   });
 
@@ -70,9 +68,8 @@ export default function SignInContainer() {
         ...response.result,
         status: 'AUTHENTICATED',
       });
-      router.push(path.EMPLOYER);
+      router.push(path.HOME);
     } catch (error) {
-      console.log('error: ', error);
       methods.setValue('password', '');
       setIsSubmitError(true);
     } finally {
