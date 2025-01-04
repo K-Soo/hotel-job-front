@@ -11,6 +11,8 @@ const environment = {
 
   nationTextServiceKey: process.env.NEXT_PUBLIC_NATIONAL_TAX_SERVICE_KEY!,
   nationBusinessUrl: process.env.NEXT_PUBLIC_NATIONAL_BUSINESS_URL!,
+
+  test: process.env.TEST,
 };
 
 export default environment;
