@@ -1,36 +1,38 @@
 import styled from 'styled-components';
+import { useFormContext } from 'react-hook-form';
+import { useSetRecoilState, useResetRecoilState } from 'recoil';
 import DaumPostcode, { Address } from 'react-daum-postcode';
 import Background from '@/components/common/Background';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { daumPostAtom } from '@/recoil/daumPost';
 import Portal from '@/components/common/Portal';
+import Icon from '@/icons/Icon';
 
 export default function DaumPost() {
-  const daumPostAtomValue = useRecoilValue(daumPostAtom);
-  const setDaumPostState = useSetRecoilState(daumPostAtom);
+  const { setValue } = useFormContext();
 
-  const handleClickClose = () => {
-    setDaumPostState({ isOpen: false });
-  };
+  const setDaumPostState = useSetRecoilState(daumPostAtom);
+  const resetDaumPostAtom = useResetRecoilState(daumPostAtom);
 
   const handleComplete = (data: Address) => {
-    const { address, addressType, bname, buildingName, zonecode } = data;
+    const { address, addressType, buildingName, zonecode, jibunAddress } = data;
+
     let fullAddress = address;
     let extraAddress = '';
+
     if (addressType === 'R') {
-      if (bname !== '') {
-        extraAddress += bname;
-      }
       if (buildingName !== '') {
-        extraAddress += extraAddress !== '' ? `, ${buildingName}` : buildingName;
+        extraAddress = buildingName;
       }
-      fullAddress += extraAddress !== '' ? ` (${extraAddress})` : '';
+      if (extraAddress !== '') {
+        fullAddress += ` (${extraAddress})`;
+      }
     }
-    // clearErrors(['newZipcode', 'newBasicAddress']);
-    // setValue('newZipcode', zonecode);
-    // setValue('newBasicAddress', fullAddress);
-    // resetDaumPostState();
-    // setFocus('newDetailAddress');
+
+    if (addressType === 'J') {
+      fullAddress = jibunAddress;
+    }
+    setValue('address', fullAddress);
+    resetDaumPostAtom();
   };
 
   return (
@@ -39,20 +41,17 @@ export default function DaumPost() {
         <S.DaumPost>
           <S.Header>
             <h1>주소 검색</h1>
-            <i onClick={handleClickClose}>X</i>
+            <Icon name="CloseA24x24" width="24px" height="24px" onClick={() => setDaumPostState({ isOpen: false })} />
           </S.Header>
           <DaumPostcode
             className="daum"
             onComplete={handleComplete}
-            autoClose={true}
-            onResize={(size) => {
-              console.log('size: ', size);
-            }}
+            autoClose={false}
             style={{
               height: 'calc(100% - 50px)',
             }}
-            onClose={handleClickClose}
-            animation={true}
+            onClose={() => setDaumPostState({ isOpen: false })}
+            animation={false}
           />
         </S.DaumPost>
       </Background>
@@ -69,9 +68,7 @@ const S = {
     max-width: 500px;
     height: 600px;
     width: 100%;
-    /* background-color: red; */
     z-index: 10;
-    /* border: 2px solid #000; */
     border-radius: 10px;
     overflow: hidden;
     box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.3);
@@ -92,5 +89,6 @@ const S = {
     height: 50px;
     padding: 0 15px;
     background-color: ${(props) => props.theme.colors.white};
+    font-size: 18px;
   `,
 };

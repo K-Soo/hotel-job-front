@@ -10,6 +10,7 @@ interface FormCheckboxProps<T> {
   margin?: string;
   required?: boolean;
   optional?: boolean;
+  disabled?: boolean;
 }
 
 export default function FormCheckbox<T extends FieldValues>({
@@ -19,6 +20,7 @@ export default function FormCheckbox<T extends FieldValues>({
   margin,
   required,
   optional,
+  disabled,
 }: FormCheckboxProps<T>) {
   const {
     register,
@@ -30,118 +32,118 @@ export default function FormCheckbox<T extends FieldValues>({
   const error = get(errors, name);
 
   return (
-    <>
-      <S.FormCheckbox $margin={margin} $active={!!watchValue}>
-        <div className="wrapper">
-          <input id={`FormCheckbox-${name}`} type="checkbox" checked={!!watchValue} {...register(name)} />
-          <label htmlFor={`FormCheckbox-${name}`}>
-            <p className="label-text">
-              {required && <span className="label-text__required">[필수]</span>}
-              {optional && <span className="label-text__optional">[선택]</span>}
+    <S.FormCheckbox $margin={margin}>
+      <S.CheckBoxContainer $active={!!watchValue}>
+        <div>
+          <input id={`FormCheckbox-${name}`} type="checkbox" checked={watchValue} {...register(name)} />
+          <label className="form-label" htmlFor={`FormCheckbox-${name}`}>
+            <p className="form-label__wrapper">
+              {required && <span className="form-label__wrapper--required">[필수]</span>}
+              {optional && <span className="form-label__wrapper--optional">[선택]</span>}
               <span>{label}</span>
             </p>
           </label>
         </div>
         {visibleIcon && <S.ViewIcon>보기</S.ViewIcon>}
-      </S.FormCheckbox>
+      </S.CheckBoxContainer>
+
       {error && <FormError errors={errors} name={name} />}
-    </>
+    </S.FormCheckbox>
   );
 }
 
 const S = {
   FormCheckbox: styled.div<{ $margin?: string; $active?: boolean }>`
     margin: ${(props) => props.$margin || 0};
+  `,
+  CheckBoxContainer: styled.div<{ $active?: boolean }>`
     display: flex;
     align-items: center;
     justify-content: space-between;
-    user-select: none;
     font-size: 13px;
-    .wrapper {
+    user-select: none;
+    /* &:hover {
+      color: ${(props) => props.theme.colors.blue700};
+    } */
+    input[type='checkbox'] {
+      display: none;
+    }
+    input[type='checkbox']:checked + label:before {
+      background-color: ${(props) => props.theme.colors.blue700};
+      border: 2px solid ${(props) => props.theme.colors.blue700};
+    }
+    input[type='checkbox']:checked + label:after {
+      content: '';
+      position: absolute;
+      left: 3px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 16px;
+      height: 17px;
+      background-image: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white"><path d="M9 16.2l-5.2-5.2L3 12.8l6 6 12-12-1.4-1.4-10.6 10.8z"/></svg>');
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+
+    .form-label {
+      position: relative;
+      padding-left: 30px;
+      min-height: 24px;
+      color: ${(props) => props.theme.colors.gray700};
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      line-height: 1.2;
-      &:hover {
-        color: ${(props) => props.theme.colors.blue700};
-      }
-      .label-text {
+      font-size: 13px;
+      cursor: pointer;
+
+      &__wrapper {
         font-weight: 300;
         word-break: keep-all;
+
         ${(props) =>
           props.$active &&
           `
           color: ${props.theme.colors.blue700};
           font-weight: 400;
         `};
-        &__required {
+        &--required {
           color: ${(props) => props.theme.colors.blue700};
           padding-right: 2px;
         }
-        &__optional {
+        &--optional {
           padding-right: 2px;
         }
       }
+    }
 
-      input[type='checkbox'] {
-        display: none;
-      }
+    .form-label:before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 22px;
+      height: 22px;
+      border: 2px solid #ccc;
+      border-radius: 5px;
+    }
 
-      label {
-        position: relative;
-        padding-left: 30px;
-        min-height: 24px;
-        color: ${(props) => props.theme.colors.gray700};
-        display: flex;
-        align-items: center;
-        font-size: 13px;
-        cursor: pointer;
-      }
+    .form-label:hover:before {
+      border-color: #888;
+      background-color: ${(props) => props.theme.colors.blue100};
+      border: 2px solid ${(props) => props.theme.colors.blue700};
+    }
 
-      label:before {
-        content: '';
-        position: absolute;
-        left: 0;
-        top: 50%;
-        transform: translateY(-50%);
-        width: 22px;
-        height: 22px;
-        border: 2px solid #ccc;
-        border-radius: 5px;
-      }
-
-      label:hover:before {
-        border-color: #888;
-        background-color: ${(props) => props.theme.colors.blue100};
-        border: 2px solid ${(props) => props.theme.colors.blue700};
-      }
-
-      /* 체크된 상태 */
-      input[type='checkbox']:checked + label:before {
-        background-color: ${(props) => props.theme.colors.blue700};
-        border: 2px solid ${(props) => props.theme.colors.blue700};
-      }
-
-      /* 체크된 상태 */
-      input[type='checkbox']:checked + label:after {
-        content: '';
-        position: absolute;
-        left: 3px;
-        top: 50%;
-        transform: translateY(-50%);
-        width: 16px;
-        height: 17px;
-        background-image: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white"><path d="M9 16.2l-5.2-5.2L3 12.8l6 6 12-12-1.4-1.4-10.6 10.8z"/></svg>');
-        background-size: contain;
-        background-repeat: no-repeat;
-        background-position: center;
-      }
+    input[type='checkbox']:disabled + label:before {
+      background-color: #ccc;
+      border: 2px solid #ccc;
     }
   `,
   ViewIcon: styled.i`
     white-space: nowrap;
     margin-left: 10px;
     color: ${(props) => props.theme.colors.gray600};
+    cursor: pointer;
     &:hover {
       text-decoration: underline;
       color: ${(props) => props.theme.colors.blue700};

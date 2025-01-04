@@ -15,11 +15,7 @@ import useAuth from '@/hooks/useAuth';
 import { ParsedUrlQuery } from 'querystring';
 import { useRouter } from 'next/router';
 import path from '@/constants/path';
-import dynamic from 'next/dynamic';
 import environment from '@/environment';
-
-const DynamicCompanyForm = dynamic(() => import('@/components/signIn/CompanyForm'), { ssr: false });
-const DynamicGeneralForm = dynamic(() => import('@/components/signIn/GeneralForm'), { ssr: false });
 
 type SignInTab = 'general' | 'company';
 
@@ -29,7 +25,6 @@ export interface UrlQuery extends ParsedUrlQuery {
 
 export default function SignInContainer() {
   const [isSubmitError, setIsSubmitError] = React.useState(false);
-  const [previousData, setPreviousData] = React.useState<SignInForm | null>(null);
 
   const router = useRouter();
   const { type = 'general' } = router.query as UrlQuery;
@@ -42,14 +37,10 @@ export default function SignInContainer() {
     mode: 'onSubmit',
     reValidateMode: 'onChange',
     defaultValues: {
-      userId: environment.isLocal ? 'kanabun102' : '',
-      password: environment.isLocal ? '@@EErr1234' : '',
+      userId: environment.isProd ? '' : 'kanabun102',
+      password: environment.isProd ? '' : '@@EErr1234',
     },
   });
-
-  console.log('dirtyFields: ', methods.formState.dirtyFields);
-  console.log('validatingFields: ', methods.formState.validatingFields);
-  console.log('disabled: ', methods.formState.isSubmitting);
 
   React.useEffect(() => {
     if (methods.formState.submitCount > 5) {
@@ -77,9 +68,8 @@ export default function SignInContainer() {
         ...response.result,
         status: 'AUTHENTICATED',
       });
-      router.push(path.EMPLOYER);
+      router.push(path.HOME);
     } catch (error) {
-      console.log('error: ', error);
       methods.setValue('password', '');
       setIsSubmitError(true);
     } finally {
@@ -97,8 +87,8 @@ export default function SignInContainer() {
       <FormProvider {...methods}>
         <Logo size="middle" margin="0 0 30px 0" />
         <Tabs margin="0 0 30px 0" tabsOptions={signInTabOptions} />
-        {type === 'general' && <DynamicGeneralForm />}
-        {type === 'company' && <DynamicCompanyForm onSubmit={onSubmit} isSubmitError={isSubmitError} />}
+        {type === 'general' && <GeneralForm />}
+        {type === 'company' && <CompanyForm onSubmit={onSubmit} isSubmitError={isSubmitError} />}
         <FormDevTools control={methods.control} />
       </FormProvider>
     </SignIn>

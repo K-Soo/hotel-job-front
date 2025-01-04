@@ -71,6 +71,7 @@ const S = {
     margin: ${(props) => (props.$margin ? props.$margin : '0 0 10px 0')};
     width: ${(props) => (props.$width ? props.$width : '100%')};
     max-width: ${(props) => (props.$maxWidth ? props.$maxWidth : '100%')};
+    color: ${({ theme }) => theme.colors.black500};
     .form-select-container {
       position: relative;
       .form-select-icon {

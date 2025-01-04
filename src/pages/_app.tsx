@@ -30,8 +30,8 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
   return (
     <AppThemeProvider>
       <RecoilRoot>
-        <AuthenticationComponent />
         <QueryClientProvider client={queryClient}>
+          <AuthenticationComponent />
           {!Component.authentication && getLayout(<Component {...pageProps} />)}
 
           {Component.authentication &&

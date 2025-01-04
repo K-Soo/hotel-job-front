@@ -17,3 +17,4 @@ UserResumeRegisterPage.getLayout = (page: React.ReactElement) => {
 };
 
 UserResumeRegisterPage.authentication = true;
+UserResumeRegisterPage.allowedRoles = ['JOB_SEEKER'];

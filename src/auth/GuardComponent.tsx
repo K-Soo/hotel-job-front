@@ -13,7 +13,7 @@ interface GuardComponentProps {
 export default function GuardComponent({ allowedRoles, children }: GuardComponentProps) {
   const [showLoading, setShowLoading] = React.useState(false);
   const router = useRouter();
-  const { isAuthFailure, isAuthIdle, isAuthenticated, authStatus, role } = useAuth();
+  const { isAuthFailure, isAuthIdle, isAuthenticated, authAtomState, role } = useAuth();
 
   React.useEffect(() => {
     const timer = setTimeout(() => {
@@ -41,11 +41,11 @@ export default function GuardComponent({ allowedRoles, children }: GuardComponen
     }
 
     // 미 인증 기업정보 미 인증 시 기업정보 등록 페이지로 이동
-    // if (role === 'EMPLOYER') {
-    //   router.replace(path.EMPLOYER_SETUP_COMPANY);
-    // }
+    if (role === 'EMPLOYER' && authAtomState.companyVerificationStatus === 'NOT_REQUESTED') {
+      router.replace(path.EMPLOYER_SETUP_COMPANY);
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [allowedRoles, role]);
+  }, [allowedRoles, role, authAtomState.companyVerificationStatus]);
 
   if (isAuthIdle && showLoading) {
     // if (true) {

@@ -1,28 +1,22 @@
 import axios from 'axios';
-import { keepPreviousData, useQuery } from '@tanstack/react-query';
+import environment from '@/environment';
 import { Get } from '@/apis';
 
 export default function TestPage() {
-  const fetchPosts = async () => {
-    const { data } = await axios.get('https://jsonplaceholder.typicode.com/posts');
-    return data;
+  const fetchStatus = async () => {
+    try {
+      const response = await Get.getHealth();
+      console.log('response: ', response);
+    } catch (error) {
+      console.log('error: ', error);
+    }
   };
-
-  const { data, isError, isLoading, status, isSuccess } = useQuery({
-    queryFn: () => fetchPosts(),
-    queryKey: ['fetchPosts'],
-    staleTime: 1000 * 60 * 5,
-    gcTime: 1000 * 60 * 5,
-    placeholderData: keepPreviousData,
-  });
-  console.log('status: ', status);
-  console.log('isLoading: ', isLoading);
-
-  console.log('테스트 API : ', data);
 
   return (
     <>
-      <button>유저정보</button>
+      <button onClick={() => fetchStatus()}>상태</button>
+      <button>environment: {environment.apiUrl}</button>
+      <button>environment test: {environment.test}</button>
     </>
   );
 }

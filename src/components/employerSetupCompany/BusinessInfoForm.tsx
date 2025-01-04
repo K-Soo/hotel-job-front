@@ -1,23 +1,41 @@
 import styled from 'styled-components';
 import FormInput from '@/components/common/form/FormInput';
-import { BusinessForm } from '@/types';
+import Button from '@/components/common/style/Button';
+import { SetupCompanyForm } from '@/types';
+import { useSetRecoilState } from 'recoil';
+import { daumPostAtom } from '@/recoil/daumPost';
+import { useRecoilValue } from 'recoil';
+import DaumPost from '@/components/common/DaumPost';
+import React from 'react';
 
 interface BusinessInfoFormProps {
   children: React.ReactNode;
 }
 
 export default function BusinessInfoForm({ children }: BusinessInfoFormProps) {
+  const setDaumPostAtom = useSetRecoilState(daumPostAtom);
+
   return (
     <S.BusinessInfoForm>
       <S.Header>
-        <h2 className="title">업체 기본 정보</h2>
-        {/* <div>사업자 정보를 입력해주세요</div> */}
+        <h2 className="title">사업자 기본 정보</h2>
       </S.Header>
 
-      <FormInput<BusinessForm> required label="사업자등록번호" name="businessRegistrationNumber" placeholder="사업자등록번호" />
-      <FormInput<BusinessForm> required label="상호명" name="businessName" placeholder="상호명" />
+      <FormInput<SetupCompanyForm> required label="대표자명" name="businessOwner" placeholder="대표자" />
 
-      <FormInput<BusinessForm> required label="대표자명" name="tradeName" placeholder="대표자" />
+      <div className="address-wrapper">
+        <FormInput<SetupCompanyForm> required label="업체 주소" name="address" placeholder="주소" disabled />
+        <Button
+          label="검색"
+          variant="secondary100"
+          width="100px"
+          height="40px"
+          margin="0 0 0 15px"
+          onClick={() => setDaumPostAtom({ isOpen: true })}
+        />
+      </div>
+
+      <FormInput<SetupCompanyForm> required name="addressDetail" placeholder="상세 주소" />
 
       <S.ButtonBox>{children}</S.ButtonBox>
     </S.BusinessInfoForm>
@@ -29,6 +47,10 @@ const S = {
     max-width: 450px;
     margin: 0 auto;
     padding: 15px;
+    .address-wrapper {
+      display: flex;
+      align-items: center;
+    }
   `,
   Header: styled.div`
     margin-bottom: 30px;
@@ -37,10 +59,10 @@ const S = {
     justify-content: space-between;
     height: 100px;
     padding: 0 15px;
-    border-radius: 5px;
+    border-radius: 8px;
     background-color: ${(props) => props.theme.colors.gray100};
     .title {
-      font-size: 20px;
+      font-size: 18px;
       font-weight: 500;
       color: ${(props) => props.theme.colors.gray800};
     }

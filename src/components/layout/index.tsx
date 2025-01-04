@@ -37,8 +37,6 @@ export default function Layout({ children }: LayoutProps) {
     <S.Layout>
       {loadingAtomValue.isLoading && <DynamicNoSSRLoading />}
 
-      {daumPostAtomValue.isOpen && <DynamicNoSSRDaumPost />}
-
       {bottomSheetAtomValue.isOpen && <DynamicNoSSRAccountBottomSheet />}
 
       {alertWithConfirmSelectorValue.type === 'ALERT' && <DynamicNoSSRAlert />}

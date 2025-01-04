@@ -7,8 +7,6 @@ const handleSuccessResponse = (config: AxiosResponse) => {
   if (!config.config?.url) {
     return;
   }
-  console.log('config.config?.url: ', config.config?.url);
-  // 지정된 API 경로에 대해서만 토큰을 설정합니다.
   if (ALLOW_AUTHENTICATION_PATH.includes(config.config.url)) {
     const accessToken = config.data?.result?.accessToken;
     if (!accessToken) {

@@ -1,20 +1,24 @@
-import { SubmitHandler } from 'react-hook-form';
+import { SubmitHandler, useFormContext } from 'react-hook-form';
 import styled from 'styled-components';
-import { BusinessForm } from '@/types';
+import { SetupCompanyForm } from '@/types';
 import FormInput from '@/components/common/form/FormInput';
 import Button from '@/components/common/style/Button';
 
 interface EmployerSetupCompanyProps {
-  onSubmit: SubmitHandler<BusinessForm>;
   children: React.ReactNode;
+  onSubmit: SubmitHandler<SetupCompanyForm>;
 }
 
-export default function EmployerSetupCompany({ children }: EmployerSetupCompanyProps) {
-  return <S.EmployerSetupCompany>{children}</S.EmployerSetupCompany>;
+export default function EmployerSetupCompany({ onSubmit, children }: EmployerSetupCompanyProps) {
+  const { handleSubmit } = useFormContext<SetupCompanyForm>();
+
+  return (
+    <S.EmployerSetupCompany>
+      <form onSubmit={handleSubmit(onSubmit)}>{children}</form>
+    </S.EmployerSetupCompany>
+  );
 }
 
 const S = {
-  EmployerSetupCompany: styled.section`
-    border: 1px solid red;
-  `,
+  EmployerSetupCompany: styled.section``,
 };

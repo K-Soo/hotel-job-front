@@ -49,16 +49,24 @@ const resumeRegister = yup.object({
     )
     .default([]),
 });
-
 const signUpSchema = yup.object({
   userId: validation.USER_ID,
   password: validation.PASSWORD,
+  passwordConfirm: validation.PASSWORD_CONFIRM,
+
+  ageAgree: yup.boolean().default(false).oneOf([true], '필수 동의'),
+  personalInfoAgree: yup.boolean().default(false).oneOf([true], '필수 동의'),
+  serviceTermsAgree: yup.boolean().default(false).oneOf([true], '필수 동의'),
+  smsMarketingAgree: yup.boolean().default(false),
+  emailMarketingAgree: yup.boolean().default(false),
+
+  userIdAvailableState: yup.boolean().default(false),
 });
 
 const businessForm = yup.object({
-  businessName: yup.string().required(),
   businessRegistrationNumber: yup.string().required(),
-  tradeName: yup.string().required(),
+  companyName: yup.string().required(),
+  businessOwner: yup.string().required(),
 });
 
 const businessManagerForm = yup.object({
@@ -67,4 +75,37 @@ const businessManagerForm = yup.object({
   managerEmail: yup.string().required(),
 });
 
-export const schema = { signInSchema, resumeRegister, signUpSchema, businessForm, businessManagerForm };
+const setupCompanyForm = yup.object({
+  businessRegistrationNumber: validation.REQUIRED_TEXT_1({ minLength: 10, maxLength: 10 }),
+  companyName: validation.REQUIRED_TEXT_1({ minLength: 2, maxLength: 30 }), //상호
+  businessOwner: validation.REQUIRED_TEXT_2({ minLength: 2, maxLength: 10 }),
+
+  address: yup.string().required('주소를 검색해주세요'),
+  addressDetail: validation.REQUIRED_TEXT_1({ minLength: 2, maxLength: 30 }),
+
+  managerName: validation.REQUIRED_TEXT_2({ minLength: 2, maxLength: 10 }),
+  managerNumber: validation.PHONE,
+  managerEmail: validation.REQUIRED_EMAIL(),
+});
+
+const oauthSignInSchema = yup.object({
+  code: yup.string().required(),
+  requestType: yup.string().oneOf(['signIn', 'signUp']).required(),
+  ageAgree: yup.boolean().default(false).oneOf([true], '필수 동의'),
+
+  personalInfoAgree: yup.boolean().default(false).oneOf([true], '필수 동의'),
+  serviceTermsAgree: yup.boolean().default(false).oneOf([true], '필수 동의'),
+
+  smsMarketingAgree: yup.boolean().default(false),
+  emailMarketingAgree: yup.boolean().default(false),
+});
+
+export const schema = {
+  signInSchema,
+  resumeRegister,
+  signUpSchema,
+  businessForm,
+  businessManagerForm,
+  setupCompanyForm,
+  oauthSignInSchema,
+};

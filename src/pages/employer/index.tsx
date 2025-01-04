@@ -30,30 +30,30 @@ export const getServerSideProps: GetServerSideProps = async (context: GetServerS
     withCredentials: true,
   };
 
-  try {
-    const responseAccessToken = await Post.requestAccessToken({}, requestHeader);
-    if (!responseAccessToken) throw new Error();
+  // try {
+  //   const responseAccessToken = await Post.requestAccessToken({}, requestHeader);
+  //   if (!responseAccessToken) throw new Error();
 
-    const responseUserInfo = await Post.getUserInfo({}, requestHeader);
-    if (!responseUserInfo) throw new Error();
-    if (responseUserInfo.result.role === 'EMPLOYER') {
-      return {
-        props: {},
-      };
-      // TODO: 초기인증
-      // return {
-      //   redirect: {
-      //     destination: path.EMPLOYER_SETUP_COMPANY,
-      //     permanent: false,
-      //   },
-      // };
-    }
-  } catch (error) {
-    console.error('error: ', error);
-    return {
-      notFound: true,
-    };
-  }
+  //   const responseUserInfo = await Post.authMe({}, requestHeader);
+  //   if (!responseUserInfo) throw new Error();
+  //   if (responseUserInfo.result.role === 'EMPLOYER') {
+  //     return {
+  //       props: {},
+  //     };
+  //     // TODO: 초기인증
+  //     // return {
+  //     //   redirect: {
+  //     //     destination: path.EMPLOYER_SETUP_COMPANY,
+  //     //     permanent: false,
+  //     //   },
+  //     // };
+  //   }
+  // } catch (error) {
+  //   console.error('error: ', error);
+  //   return {
+  //     notFound: true,
+  //   };
+  // }
 
   return {
     props: {},

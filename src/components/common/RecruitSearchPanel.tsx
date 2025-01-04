@@ -9,9 +9,7 @@ import DropdownTemplate from '@/components/common/DropdownTemplate';
 import { location } from '@/constants/location';
 import { motion } from 'framer-motion';
 
-interface RecruitSearchPanelProps {}
-
-export default function RecruitSearchPanel({}: RecruitSearchPanelProps) {
+export default function RecruitSearchPanel() {
   const [isSearchFocus, setIsSearchFocus] = React.useState(false);
   const [isLocationFocus, setIsLocationFocus] = React.useState(false);
   const [form, setForm] = React.useState({
