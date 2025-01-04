@@ -20,3 +20,4 @@ UserResumePage.getLayout = (page: React.ReactElement) => {
 };
 
 UserResumePage.authentication = true;
+UserResumePage.allowedRoles = ['JOB_SEEKER'];
