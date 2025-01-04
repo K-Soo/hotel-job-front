@@ -22,7 +22,7 @@ export default function TestPage() {
     <>
       {/* <button onClick={() => fetchPosts()}>유저정보</button> */}
       <button onClick={() => fetchStatus()}>상태</button>
-      <button>{environment.apiUrl}</button>
+      <button>environment: {environment.apiUrl}</button>
     </>
   );
 }
