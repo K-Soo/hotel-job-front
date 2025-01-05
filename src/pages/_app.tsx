@@ -8,7 +8,9 @@ import React from 'react';
 import GuardComponent from '@/auth/GuardComponent';
 import EmployerGuardComponent from '@/auth/EmployerGuardComponent';
 import AuthenticationComponent from '@/auth/AuthenticationComponent';
-
+import environment from '@/environment';
+import Maintenance from '@/components/common/Maintenance';
+import { Footer } from '@/components/layout';
 const commonLayout = (page: React.ReactElement) => <Layout>{page}</Layout>;
 
 const queryClientDefaultOption = {
@@ -26,6 +28,17 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
   const getLayout = Component.getLayout ?? commonLayout;
 
   const [queryClient] = React.useState(() => new QueryClient(queryClientDefaultOption));
+
+  if (!environment.isProd) {
+    return (
+      <AppThemeProvider>
+        <div>
+          <Maintenance />
+          <Footer />
+        </div>
+      </AppThemeProvider>
+    );
+  }
 
   return (
     <AppThemeProvider>
