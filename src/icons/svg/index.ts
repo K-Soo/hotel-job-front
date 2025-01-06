@@ -36,8 +36,10 @@ import SearchPlusB32x32 from './searchPlusB32x32.svg';
 import Case24x24 from './case24x24.svg';
 import CheckOn16x17 from './checkOn16x17.svg';
 import Info24x24 from './info24x24.svg';
+import Close25x25 from './close25x25.svg';
 
 export {
+  Close25x25,
   Info24x24,
   CheckOn16x17,
   Case24x24,
