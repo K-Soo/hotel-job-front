@@ -127,8 +127,10 @@ export const Get = {
 };
 
 export const Post = {
-  //certification
-  startCertification: (body: void) => requests.post<void, API.StartCertificationResponse>('/certification/hash-up', body),
+  // 본인인증 요청
+  certificationStart: (body: void) => requests.post<void, API.CertificationStartResponse>('/certification/start', body),
+  // 본인인증 검증
+  certificationVerify: (body: any) => requests.post<any, any>('/certification/verify', body),
 
   //아이디 중복확인
   verificationsEmployerUserId: (body: { userId: string }) =>
