@@ -15,17 +15,21 @@ export default function CertificationModal() {
   const setCertificationModalAtom = useSetRecoilState(certificationModalAtom);
 
   React.useEffect(() => {
-    const handleMessage = (event: MessageEvent) => {
+    const handleMessage = async (event: MessageEvent) => {
       console.log('event: ', event);
       // if (event.origin !== environment.baseUrl) {
       //   return;
       // }
 
       const data = JSON.parse(event.data);
-      console.log('data: ', data);
       if (data.type === 'CERTIFICATION_SUCCESS') {
-        alert('본인 인증에 성공했습니다.');
-        // setCertificationModalAtom({ isOpen: false });
+        const response = await Post.certificationVerify(data.payload);
+        console.log('본인인증 검증 API : ', response);
+      }
+
+      if (data.type === 'CERTIFICATION_FAIL') {
+        alert('본인 인증 실패');
+        setCertificationModalAtom({ isOpen: false });
       }
 
       // if (event.data.success) {
@@ -44,7 +48,7 @@ export default function CertificationModal() {
   const startCertification = async () => {
     setIsLoading(true);
     try {
-      const response = await Post.startCertification();
+      const response = await Post.certificationStart();
       console.log('인증요청 API : ', response);
 
       if (response.result.status !== 'success') {
