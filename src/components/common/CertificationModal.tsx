@@ -56,11 +56,13 @@ export default function CertificationModal() {
 
   React.useEffect(() => {
     const handleMessage = async (event: MessageEvent) => {
+      console.log('event: ', event);
+      console.log('environment.baseUrl: ', environment.baseUrl);
       if (event.origin !== environment.baseUrl) {
         return;
       }
 
-      if (event?.data?.type === 'CERTIFICATION_SUCCESS') {
+      if (event.data?.type === 'CERTIFICATION_SUCCESS') {
         const data = JSON.parse(event.data);
         console.log('parse: ', data);
 
