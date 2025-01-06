@@ -1,6 +1,123 @@
 # 변경 로그
 
 프로젝트의 모든 주요 변경 사항
+### [0.1.14](https://github.com/K-Soo/hotel-job-front/compare/v0.1.13...v0.1.14) (2025-01-06)
+
+
+### Features
+
+* .env-cmdrc.json 및 package.json에 국세청 API 키 및 비즈니스 URL 추가 ([2a69327](https://github.com/K-Soo/hotel-job-front/commit/2a69327f2bbf5936a1c10e243a81e4067835a13c))
+* 동적 컴포넌트 로딩을 일반 컴포넌트로 변경 ([6db0555](https://github.com/K-Soo/hotel-job-front/commit/6db055514e0388b99493dce9e6b63b8aabee3771))
+* 로딩 상태 관리를 위한 useLoading 훅 추가 ([5f315e0](https://github.com/K-Soo/hotel-job-front/commit/5f315e0d40571de77b47ca8836665e0c58a94d19))
+* 불필요한 로그 제거 - Axios 응답 처리에서 URL 로그 삭제 ([6cae189](https://github.com/K-Soo/hotel-job-front/commit/6cae189ea82e51258221d6a7946bfe515f5cc2de))
+* 사용자 이력서 페이지에 JOB_SEEKER 역할 추가 및 리디렉션 처리 개선 ([1e67ab2](https://github.com/K-Soo/hotel-job-front/commit/1e67ab21eb8dd5713d09cbcdb877bc3debf98a18))
+* 사용자 ID 및 비밀번호 확인을 위한 유효성 검사 규칙 강화 ([2d0c96c](https://github.com/K-Soo/hotel-job-front/commit/2d0c96c30794c361b04ed8d61d079aa6f97c817e))
+* 사용자 ID 정규 표현식 수정 - 8자 이상 16자 이하로 변경 ([df1f33c](https://github.com/K-Soo/hotel-job-front/commit/df1f33c13eedfb3e9173ae9f0cd5e55ad26edfb4))
+* 상태 API 호출 기능 추가 및 불필요한 코드 제거 ([5879bfc](https://github.com/K-Soo/hotel-job-front/commit/5879bfc5d882482387b2ddcfdd455ad4000b56a7))
+* 서버 사이드 렌더링을 위한 인증 로직 추가 및 사용자 역할에 따른 리다이렉트 처리 ([5edcaf4](https://github.com/K-Soo/hotel-job-front/commit/5edcaf47de885dfca9a4c5639a12a1c680c72453))
+* 서버 오류 코드 처리 및 소셜 로그인 사용자 찾기 로직 추가 ([2849698](https://github.com/K-Soo/hotel-job-front/commit/284969885be22f0ff2dc91eb8b7747ae4c001643))
+* 오류 코드 처리 개선 - 사용자 찾기 실패 시 메시지 및 리다이렉트 수정 ([9491eef](https://github.com/K-Soo/hotel-job-front/commit/9491eef27a502fe0ca817062d428a280cd4f3285))
+* 유지보수 페이지 추가 및 비생산 환경에서 표시 ([6635b46](https://github.com/K-Soo/hotel-job-front/commit/6635b462ce9076eb6799abaae0fd25dd7ecf10bb))
+* 유효성 검사에 공백 체크 및 한글 입력 제한 추가 ([9232547](https://github.com/K-Soo/hotel-job-front/commit/92325470be7165326a7dad7e3d993a0b3e036025))
+* 인증 결과 페이지 컴포넌트 추가 ([3211d59](https://github.com/K-Soo/hotel-job-front/commit/3211d59342dd39a11bc0bd8a24d5f1c6893383d8))
+* 인증 모달 상태 관리를 위한 Recoil 원자 추가 ([b13f6e3](https://github.com/K-Soo/hotel-job-front/commit/b13f6e33c729322f21113c49453064522cf91b4e))
+* 인증 모달 컴포넌트 추가 및 상태 관리 구현 ([b8f6e2c](https://github.com/K-Soo/hotel-job-front/commit/b8f6e2c67bca3eecdf011d92566c2c94e25aed21))
+* 인증 모달 컴포넌트 추가 및 인증 요청 처리 로직 구현 ([98a6bc8](https://github.com/K-Soo/hotel-job-front/commit/98a6bc8ed81f9563eb8d20e8245d9ca153fe218c))
+* 인증 상태 로깅 추가 - authAtomState 상태 출력 ([0e02010](https://github.com/K-Soo/hotel-job-front/commit/0e0201059553d584cebd55f572719237b467f437))
+* 인증 상태 및 제외 경로 디버깅 로그 추가 ([c095a57](https://github.com/K-Soo/hotel-job-front/commit/c095a578d3bf0d088b7195f820372a9922c53b2a))
+* 인증 상태에 따른 사용자 정보 가져오기 로직 개선 ([ac63711](https://github.com/K-Soo/hotel-job-front/commit/ac637111b07899573ef9b42f088f34a66fc8a929))
+* 인증 성공 메시지 및 채용 공고 등록 안내 추가 ([4b5f7c1](https://github.com/K-Soo/hotel-job-front/commit/4b5f7c195c41e64bd10cda94bfb862175db3d9fe))
+* 인증 시작 메서드 추가 및 기존 메서드 이름 변경 ([13abeb4](https://github.com/K-Soo/hotel-job-front/commit/13abeb49bfcbd5dddcb178d6336be890d492dea2))
+* 인증 페이지 컴포넌트 삭제 ([436d91d](https://github.com/K-Soo/hotel-job-front/commit/436d91d4a56544b597755027c01f8e4af8221e0b))
+* 인증 페이지 컴포넌트 추가 ([b42d320](https://github.com/K-Soo/hotel-job-front/commit/b42d3202284d7159191e12de767eb3e111bdf1da))
+* 정규 표현식에 공백, 모음, 자음, 한글 및 전화번호 체크 추가 ([74ceb97](https://github.com/K-Soo/hotel-job-front/commit/74ceb97838282e650fc1b129445b0b93ec5c7f30))
+* 카카오 콜백 페이지 수정 - SMS 마케팅 동의 항목 이름 변경 및 불필요한 로그 제거 ([2cbdac3](https://github.com/K-Soo/hotel-job-front/commit/2cbdac3bc79f4cf11d9c0e78e509de2c26a12ecf))
+* 카카오 OAuth 콜백 페이지에서 react-hook-form을 사용한 사용자 인증 폼 구현 ([ab76fd2](https://github.com/K-Soo/hotel-job-front/commit/ab76fd2fca34d64df48eb7cf80cd26cd27603726))
+* 카카오 OAuth URL 상수를 정의하는 oauth.ts 파일 추가 ([623d9b0](https://github.com/K-Soo/hotel-job-front/commit/623d9b0800430d8a012b20070e9311072d648862))
+* 쿠키 확인 로깅 추가 ([f8972a3](https://github.com/K-Soo/hotel-job-front/commit/f8972a327cc70ba3544512c2aae18282c4400c4c))
+* 프로덕션 환경에서 홈 경로에 대한 조건부 렌더링 추가 ([7188dc1](https://github.com/K-Soo/hotel-job-front/commit/7188dc1444efebc58fb9598897978d0e11bb595c))
+* 헬스 체크 API 추가 - 상태 확인을 위한 getHealth 메서드 구현 ([5da9cb1](https://github.com/K-Soo/hotel-job-front/commit/5da9cb184dc48dfc0ce38a7b086b44ad14b93dd3))
+* 홈 컨테이너에서 헬스 체크 API 호출 제거 ([c490a84](https://github.com/K-Soo/hotel-job-front/commit/c490a8458c4ce2f6566796919b20eea0aafd723e))
+* 홈 페이지에서 불필요한 임포트 제거 ([a081e4d](https://github.com/K-Soo/hotel-job-front/commit/a081e4d7de0e27d242667be06f6aa8900f7f899b))
+* 환경 변수 표시 개선 - API URL 버튼 텍스트 수정 ([ad1794a](https://github.com/K-Soo/hotel-job-front/commit/ad1794adf89e96cc085a3444989ca5f07422dda2))
+* 회사 설정 폼에 회사명, 사업자, 주소 및 관리자 정보 필드 추가 ([9d20e77](https://github.com/K-Soo/hotel-job-front/commit/9d20e77fea8cae92df8cbfa079d8cbc24be14a60))
+* 회사 인증 상태 타입 및 회사 설정 폼 인터페이스 추가 ([e73ad68](https://github.com/K-Soo/hotel-job-front/commit/e73ad6833ac892a24d6196859560edf12d8a2f7a))
+* 회사 인증 상태 필드 추가 및 초기값 설정 ([c747db7](https://github.com/K-Soo/hotel-job-front/commit/c747db7dfa534bded034d734d693748468a8e3f8))
+* 회원가입 단계 추가 및 아이디 중복 체크 기능 구현 ([382f135](https://github.com/K-Soo/hotel-job-front/commit/382f1355240f3bb878df1291e0a7fe29a189ebe5))
+* 회원가입 로직 개선 - SMS 마케팅 동의 기본값 수정 및 요청 데이터 구조 변경 ([1819c67](https://github.com/K-Soo/hotel-job-front/commit/1819c67cf4724c15145a135e7a15b02e1bc0a24d))
+* 회원가입 스키마에 추가 동의 항목 및 비밀번호 확인 필드 추가 ([a762e21](https://github.com/K-Soo/hotel-job-front/commit/a762e215e5a76bbda85c4e914c703171f7908deb))
+* 회원가입 요청 타입 수정 - passwordConfirm 필드 제거 ([28f403b](https://github.com/K-Soo/hotel-job-front/commit/28f403bb09b3701a78e740f562d8088245bce6fd))
+* 회원가입 폼에 비밀번호 확인 및 동의 항목 추가, OAuth 로그인 폼 정의 ([a058093](https://github.com/K-Soo/hotel-job-front/commit/a058093af523424f0b2d6be40a880f9fd65a6dd4))
+* 회원가입 폼에 전체 동의 체크박스 및 필수 동의 항목 추가 ([7b15c18](https://github.com/K-Soo/hotel-job-front/commit/7b15c18b8a67d7b9696bade86847277ff03dc22e))
+* Alert 컴포넌트의 버튼 레이블 및 스타일 개선 ([1c73821](https://github.com/K-Soo/hotel-job-front/commit/1c7382170287d1bf7a87a41efdb2492d36ea874d))
+* API 타입 정의에 사용자 ID 검증 및 고용주 회원가입 요청 응답 추가 ([2084e56](https://github.com/K-Soo/hotel-job-front/commit/2084e56fe4978d3af30e2d213ef20014e4d59be4))
+* API 타입에 'failure' 상태 추가 및 인증 시작 응답 인터페이스 정의 ([a04202c](https://github.com/K-Soo/hotel-job-front/commit/a04202c01edb417809a3240ab96d8f26a3da4c3e))
+* API 타입에 회사 설정 요청 및 응답 인터페이스 추가 ([36408e8](https://github.com/K-Soo/hotel-job-front/commit/36408e8b409ce55d4dd9a233d3000978d8e24d9f))
+* Auth API 통합 및 관련 메서드 업데이트 ([d957e22](https://github.com/K-Soo/hotel-job-front/commit/d957e22f1b7ee2cbbe81a2c07e4b6771d43eae5d))
+* AuthenticationComponent 위치 변경하여 렌더링 순서 조정 ([79580c9](https://github.com/K-Soo/hotel-job-front/commit/79580c914616ef18ec26c0b0464d51682de9b797))
+* AuthenticationComponent에서 사용자 정보 가져오기 로직 개선 및 쿠키 확인 추가 ([97c37e0](https://github.com/K-Soo/hotel-job-front/commit/97c37e0a4e7d247d99b769d6e1942f7c3464248e))
+* BusinessInfoForm 컴포넌트에 주소 입력 및 검색 버튼 추가 ([383bdc7](https://github.com/K-Soo/hotel-job-front/commit/383bdc7563103ff40f8c02bc71951cce3c302bfb))
+* BusinessNumberForm 컴포넌트 추가 및 기본 정보 입력 필드 구현 ([8387bb1](https://github.com/K-Soo/hotel-job-front/commit/8387bb105505792d25fc8f779d3ebe3bd5da442e))
+* Button 컴포넌트에 비활성화 상태에서 투명도 추가 ([4af01c7](https://github.com/K-Soo/hotel-job-front/commit/4af01c7cfef10d38c11a1ce915f4f1316d2b1d92))
+* CheckBox 컴포넌트에 비활성화 상태 지원 추가 ([282de7c](https://github.com/K-Soo/hotel-job-front/commit/282de7c211bed001dc491a2ebaa8b4a184b25946))
+* close 아이콘 SVG 파일 추가 ([c8f42cd](https://github.com/K-Soo/hotel-job-front/commit/c8f42cd2d4ccbb5c3b22efc49ccff7553d035f0e))
+* close 아이콘 SVG 파일 추가 ([e5f4bd1](https://github.com/K-Soo/hotel-job-front/commit/e5f4bd1d827961aea7723557a7b26d3e899b591f))
+* CompanyForm 컴포넌트에 입력 필드에 플레이스홀더 추가 ([c12530b](https://github.com/K-Soo/hotel-job-front/commit/c12530bd9693f44d98f03833c87c35e29198cbb3))
+* Confirm 컴포넌트 추가 및 스타일 개선, Recoil 상태 관리 통합 ([264b09d](https://github.com/K-Soo/hotel-job-front/commit/264b09d18c7b14f21e1ff53d1864d9daabdf66de))
+* DaumPost 컴포넌트에서 주소 처리 로직 개선 및 스타일 수정 ([6c3dd2f](https://github.com/K-Soo/hotel-job-front/commit/6c3dd2f0a55df461556c71483256c356b2c64b97))
+* EmployerBusinessContainer에 사용자 인증 기반 API 호출 추가 ([4a53325](https://github.com/K-Soo/hotel-job-front/commit/4a5332548fbe55bb539bf246fb9aba87cf497df4))
+* EmployerBusinessFormContainer에서 필드 이름 수정 및 주석 처리 ([c903770](https://github.com/K-Soo/hotel-job-front/commit/c903770e3612faffb62c7d3cbce7b6f32040a1e9))
+* EmployerHeader 컴포넌트에서 로고를 링크로 변경 ([0b3207a](https://github.com/K-Soo/hotel-job-front/commit/0b3207a66d8f3e8dc43f378c0d8f55f1f4f92d31))
+* EmployerSetupCompany 컴포넌트에서 SetupCompanyForm 타입으로 변경 및 제출 핸들러 추가 ([ef900e6](https://github.com/K-Soo/hotel-job-front/commit/ef900e6d8ce90fcc9840ea9d3b89202364318db3))
+* EmployerSetupCompanyContainer에서 단계별 폼 처리 및 사업자 번호 인증 로직 추가 ([31674f5](https://github.com/K-Soo/hotel-job-front/commit/31674f5a1ad713e8f77d5de7c2eedb9489c0b9a1))
+* EmployerSetupCompanyContainer에서 인증 상태 관련 코드 제거 ([7079138](https://github.com/K-Soo/hotel-job-front/commit/7079138c43fbb4fd0f6aaec42569edcc7020a9a6))
+* environment.ts에 국세청 API 키 및 비즈니스 URL 추가 ([c7eb448](https://github.com/K-Soo/hotel-job-front/commit/c7eb4484c1ddab8a3d3bc0e7094e9aacc89fe8af))
+* EXCLUDED_PATHS 상수 제거 ([e6f7f75](https://github.com/K-Soo/hotel-job-front/commit/e6f7f755834cbbbc2a62ea66ad5798dbadcd6da5))
+* FormCheckbox 컴포넌트에 비활성화 상태 지원 추가 ([cd0ce1e](https://github.com/K-Soo/hotel-job-front/commit/cd0ce1ed81f2840f643265d0f3650b3f3d595ea7))
+* FormError 컴포넌트에 오류 유형에 따른 스타일 적용 추가 ([da74ecb](https://github.com/K-Soo/hotel-job-front/commit/da74ecbdd627b81d08ad9ff1a5fd4a20edad22ad))
+* FormInput 컴포넌트에 마스크 입력 및 최대 길이 기능 추가 ([043133e](https://github.com/K-Soo/hotel-job-front/commit/043133ea9ae0ff5f518b1fc11d54a5e239d6b9cf))
+* FormInputB 컴포넌트의 텍스트 색상 스타일 추가 ([ceb99ed](https://github.com/K-Soo/hotel-job-front/commit/ceb99edf6af570160df1acfb905f6cb5992cab52))
+* FormSelect 컴포넌트에 텍스트 색상 스타일 추가 ([29896f2](https://github.com/K-Soo/hotel-job-front/commit/29896f2a6def06f3b28d4ce40d53a75b79bdffa9))
+* GeneralForm 컴포넌트에서 카카오 OAuth URL 구성 방식 변경 ([41af7a1](https://github.com/K-Soo/hotel-job-front/commit/41af7a16731d1d357db4c4210443d96c3e1bffaa))
+* getUserInfo 메서드를 authMe로 이름 변경 및 초기 회사정보 등록 메서드 추가 ([84cb14e](https://github.com/K-Soo/hotel-job-front/commit/84cb14e04efa94cd0455a9ef5fa073c384b630f5))
+* GuardComponent에서 인증 상태에 따라 기업정보 등록 페이지로 이동하는 로직 개선 ([923fbb0](https://github.com/K-Soo/hotel-job-front/commit/923fbb0c774eafe0daf41b4870cb5c5f7646da12))
+* health check ([7674ccd](https://github.com/K-Soo/hotel-job-front/commit/7674ccd87014b37ea12fe32bcec5620bf0b611b5))
+* Kakao 리다이렉트 URL을 로컬호스트로 변경 ([bd8c770](https://github.com/K-Soo/hotel-job-front/commit/bd8c77003a89f7bdaf930666e1387d57a7464f23))
+* Layout 컴포넌트에서 DaumPost 동적 로딩 제거 ([4bf4e27](https://github.com/K-Soo/hotel-job-front/commit/4bf4e27d6ffc66a6ebd411cfe31f6e8c283ab9d9))
+* ManagerInfoForm 컴포넌트에서 SetupCompanyForm 타입으로 변경 및 필드 수정 ([b4935dd](https://github.com/K-Soo/hotel-job-front/commit/b4935dd685751e7cf9d3762964295f40860b9b08))
+* MY_COMPANY 쿼리 키 추가 ([194fd11](https://github.com/K-Soo/hotel-job-front/commit/194fd11b9b9f79732fc91f297b1e0b924336bf11))
+* queryKeys에 USER_INFO 및 REFRESH_COOKIE 추가 ([0e891ef](https://github.com/K-Soo/hotel-job-front/commit/0e891efcbcc1b96afcfebe737aa26630b516d0d2))
+* SignUp 컴포넌트에서 useFormContext를 사용하여 폼 제출 처리 방식 변경 ([21bdada](https://github.com/K-Soo/hotel-job-front/commit/21bdadacdf89802e5b45ea23366a56e26a0caff6))
+* SignUpCompleteForm 컴포넌트 추가 ([764d6a1](https://github.com/K-Soo/hotel-job-front/commit/764d6a1760893e4a8ed4595bc897a2149992c1aa))
+* SignUpGeneralForm 컴포넌트에 사용자 ID 확인 및 동의 항목 추가 ([ead395e](https://github.com/K-Soo/hotel-job-front/commit/ead395efb27c707c6ae4a283e84deddd0f7323ab))
+* SOCIAL_URL 상수 정의를 위한 social.ts 파일 삭제 ([e66d283](https://github.com/K-Soo/hotel-job-front/commit/e66d283194cf2e1600e93896e77aa0612971c6e9))
+* useAlertWithConfirm 훅 추가하여 Recoil 상태 관리 통합 ([a3ed1a7](https://github.com/K-Soo/hotel-job-front/commit/a3ed1a7677d582fa18e5ea96b5e5dbf26836e1cd))
+* useVerificationBusinessNumber 훅 추가하여 사업자 번호 인증 기능 구현 ([dd2cfba](https://github.com/K-Soo/hotel-job-front/commit/dd2cfbab297c2d4bd24158c36bec003d76cb8e24))
+
+
+### Bug Fixes
+
+* 로그아웃 API 호출을 Post에서 Auth로 변경 ([c65ad41](https://github.com/K-Soo/hotel-job-front/commit/c65ad41ba98c70b66e07ee67ba5eefc070b322b9))
+* 로그인 컨테이너에서 환경에 따라 사용자 ID 및 비밀번호 설정 수정 ([4365f27](https://github.com/K-Soo/hotel-job-front/commit/4365f271ce037f721e448ae0c4804d9141026bce))
+* 쿠키 로깅 메시지 수정 ([91539f0](https://github.com/K-Soo/hotel-job-front/commit/91539f0f5d979d5a2d7a9bdaed9ac07812942a34))
+* check-cookies API 응답 형식 수정 및 코드 스타일 통일 ([3233281](https://github.com/K-Soo/hotel-job-front/commit/3233281f4280acef210011f42b973157765e3d84))
+
+
+### Styles
+
+* FormError 컴포넌트에서 패딩 제거 ([278ec34](https://github.com/K-Soo/hotel-job-front/commit/278ec34e709ac4f8c125dd851a8b3c513f73a5d7))
+
+
+### Refactors
+
+* 불필요한 로그 출력 제거 ([e8d11cc](https://github.com/K-Soo/hotel-job-front/commit/e8d11cc224eab3a847f8698671defc5db288a704))
+* 주석 처리된 코드 정리 및 불필요한 에러 핸들링 제거 ([271cb03](https://github.com/K-Soo/hotel-job-front/commit/271cb0337f317e8b7d7fbe92ba52149b6d1e653d))
+
+
+### Updates
+
+* update env file ([10f76e6](https://github.com/K-Soo/hotel-job-front/commit/10f76e6d887425e89a8a011b53ef6410ffd19217))
+
 ### [0.1.13](https://github.com/K-Soo/hotel-job-front/compare/v0.1.12...v0.1.13) (2025-01-02)
 
 
