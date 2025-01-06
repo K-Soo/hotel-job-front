@@ -11,6 +11,8 @@ import AuthenticationComponent from '@/auth/AuthenticationComponent';
 import environment from '@/environment';
 import Maintenance from '@/components/common/Maintenance';
 import { Footer } from '@/components/layout';
+import { useRouter } from 'next/router';
+import path from '@/constants/path';
 
 const commonLayout = (page: React.ReactElement) => <Layout>{page}</Layout>;
 
@@ -27,10 +29,11 @@ const queryClientDefaultOption = {
 
 export default function App({ Component, pageProps }: AppPropsWithLayout) {
   const getLayout = Component.getLayout ?? commonLayout;
+  const router = useRouter();
 
   const [queryClient] = React.useState(() => new QueryClient(queryClientDefaultOption));
 
-  if (environment.isProd) {
+  if (environment.isProd && router.pathname === path.HOME) {
     return (
       <AppThemeProvider>
         <div>
