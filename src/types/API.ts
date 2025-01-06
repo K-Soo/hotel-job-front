@@ -1,6 +1,6 @@
 import * as types from '@/types';
 
-type ResponseStatus = 'success' | 'duplicate' | 'available';
+type ResponseStatus = 'success' | 'duplicate' | 'available' | 'failure';
 export interface defaultResponse {
   error: {
     message: string;
@@ -95,5 +95,12 @@ export interface verificationsEmployerUserIdResponse extends defaultResponse {
 export interface SignUpEmployerResponse extends defaultResponse {
   result: {
     status: ResponseStatus;
+  };
+}
+
+export interface StartCertificationResponse extends defaultResponse {
+  result: {
+    status: ResponseStatus;
+    params: Record<string, string>;
   };
 }
