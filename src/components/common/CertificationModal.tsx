@@ -61,14 +61,11 @@ export default function CertificationModal() {
       if (event.origin !== environment.baseUrl) {
         return;
       }
+      const parsedData = JSON.parse(event.data);
 
-      if (event.data?.type === 'CERTIFICATION_SUCCESS') {
-        const parsedData = JSON.parse(event.data);
-        console.log('parsedData: ', parsedData);
-
+      if (parsedData?.type === 'CERTIFICATION_SUCCESS') {
         const requestData = {
-          ...parsedData.data,
-          ordr_idxx: certStartParams.ordr_idxx,
+          ...parsedData.payload,
         };
 
         const response = await Post.certificationVerify(requestData);
