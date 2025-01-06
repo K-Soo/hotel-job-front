@@ -6,6 +6,7 @@ import Icon from '@/icons/Icon';
 import { useSetRecoilState } from 'recoil';
 import { certificationModalAtom } from '@/recoil/certification';
 import Image from 'next/image';
+import environment from '@/environment';
 
 export default function CertificationModal() {
   const [iframeUrl, setIframeUrl] = React.useState<string | null>(null);
@@ -15,12 +16,11 @@ export default function CertificationModal() {
 
   React.useEffect(() => {
     const handleMessage = (event: MessageEvent) => {
-      alert(JSON.stringify(event.origin));
-      alert(JSON.stringify(event.data));
-      alert(JSON.stringify(event));
-      // if (event.origin !== 'https://www.hotel-job-connect.com') {
-      //   return; // 유효한 출처만 허용
-      // }
+      if (event.origin !== environment.baseUrl) {
+        return;
+      }
+
+      alert(JSON.stringify(event?.type));
 
       // if (event.data.success) {
       //   console.log(event.data.message);
