@@ -11,39 +11,10 @@ import environment from '@/environment';
 export default function CertificationModal() {
   const [iframeUrl, setIframeUrl] = React.useState<string | null>(null);
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
+  const [certStartParams, setCertStartParams] = React.useState<any | null>(null);
+  console.log('certStartParams: ', certStartParams);
 
   const setCertificationModalAtom = useSetRecoilState(certificationModalAtom);
-
-  React.useEffect(() => {
-    const handleMessage = async (event: MessageEvent) => {
-      console.log('event: ', event);
-      // if (event.origin !== environment.baseUrl) {
-      //   return;
-      // }
-
-      const data = JSON.parse(event.data);
-      if (data.type === 'CERTIFICATION_SUCCESS') {
-        const response = await Post.certificationVerify(data.payload);
-        console.log('본인인증 검증 API : ', response);
-      }
-
-      if (data.type === 'CERTIFICATION_FAIL') {
-        alert('본인 인증 실패');
-        setCertificationModalAtom({ isOpen: false });
-      }
-
-      // if (event.data.success) {
-      //   console.log(event.data.message);
-      //   setCertificationModalAtom({ isOpen: false }); // 모달 닫기
-      // }
-    };
-
-    window.addEventListener('message', handleMessage);
-
-    return () => {
-      window.removeEventListener('message', handleMessage);
-    };
-  }, []);
 
   const startCertification = async () => {
     setIsLoading(true);
@@ -57,6 +28,8 @@ export default function CertificationModal() {
 
         return;
       }
+
+      setCertStartParams(response.result.params);
 
       const url = new URL(response.result.params.url);
       const params = response.result.params;
@@ -79,6 +52,43 @@ export default function CertificationModal() {
   React.useEffect(() => {
     startCertification();
     // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  React.useEffect(() => {
+    const handleMessage = async (event: MessageEvent) => {
+      if (event.origin !== environment.baseUrl) {
+        return;
+      }
+
+      if (event?.data?.type === 'CERTIFICATION_SUCCESS') {
+        const data = JSON.parse(event.data);
+        console.log('parse: ', data);
+
+        const requestData = {
+          ...data.payload,
+          ordr_idxx: certStartParams.ordr_idxx,
+        };
+
+        const response = await Post.certificationVerify(requestData);
+        console.log('본인인증 검증 API : ', response);
+      }
+
+      if (event?.data.type === 'CERTIFICATION_FAIL') {
+        alert('본인 인증 실패');
+        setCertificationModalAtom({ isOpen: false });
+      }
+
+      // if (event.data.success) {
+      //   console.log(event.data.message);
+      //   setCertificationModalAtom({ isOpen: false }); // 모달 닫기
+      // }
+    };
+
+    window.addEventListener('message', handleMessage);
+
+    return () => {
+      window.removeEventListener('message', handleMessage);
+    };
   }, []);
 
   return (
