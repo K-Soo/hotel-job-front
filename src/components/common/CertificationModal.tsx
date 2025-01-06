@@ -16,18 +16,18 @@ export default function CertificationModal() {
 
   React.useEffect(() => {
     const handleMessage = async (event: MessageEvent) => {
-      console.log('event: ', event);
-      // if (event.origin !== environment.baseUrl) {
-      //   return;
-      // }
+      if (event.origin !== environment.baseUrl) {
+        return;
+      }
 
-      const data = JSON.parse(event.data);
-      if (data.type === 'CERTIFICATION_SUCCESS') {
+      if (event?.data?.type === 'CERTIFICATION_SUCCESS') {
+        const data = JSON.parse(event.data);
+
         const response = await Post.certificationVerify(data.payload);
         console.log('본인인증 검증 API : ', response);
       }
 
-      if (data.type === 'CERTIFICATION_FAIL') {
+      if (event?.data.type === 'CERTIFICATION_FAIL') {
         alert('본인 인증 실패');
         setCertificationModalAtom({ isOpen: false });
       }
