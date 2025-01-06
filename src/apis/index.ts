@@ -127,8 +127,8 @@ export const Get = {
 };
 
 export const Post = {
-  //cert
-  certHashUp: (body: void) => requests.post<void, any>('/certification/hash-up', body),
+  //certification
+  startCertification: (body: void) => requests.post<void, API.StartCertificationResponse>('/certification/hash-up', body),
 
   //아이디 중복확인
   verificationsEmployerUserId: (body: { userId: string }) =>
