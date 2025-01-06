@@ -21,7 +21,12 @@ export default function CertificationModal() {
       //   return;
       // }
 
-      alert(JSON.stringify(event?.type));
+      const data = JSON.parse(event.data);
+      console.log('data: ', data);
+      if (data.type === 'CERTIFICATION_SUCCESS') {
+        alert('본인 인증에 성공했습니다.');
+        // setCertificationModalAtom({ isOpen: false });
+      }
 
       // if (event.data.success) {
       //   console.log(event.data.message);
