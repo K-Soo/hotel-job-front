@@ -16,9 +16,10 @@ export default function CertificationModal() {
 
   React.useEffect(() => {
     const handleMessage = (event: MessageEvent) => {
-      if (event.origin !== environment.baseUrl) {
-        return;
-      }
+      console.log('event: ', event);
+      // if (event.origin !== environment.baseUrl) {
+      //   return;
+      // }
 
       alert(JSON.stringify(event?.type));
 
