@@ -7,7 +7,7 @@ import Logo from '@/components/common/Logo';
 import Icon from '@/icons/Icon';
 import DropdownTemplate from '@/components/common/DropdownTemplate';
 import React from 'react';
-import { Post } from '@/apis';
+import { Auth } from '@/apis';
 import Link from 'next/link';
 
 export function EmployerHeader() {
@@ -44,7 +44,7 @@ export function EmployerHeader() {
 
   const handleClickSignOut = async () => {
     try {
-      const response = await Post.signOut();
+      const response = await Auth.signOut();
       console.log('로그아웃 API : ', response);
     } catch (error) {
       console.log('error: ', error);

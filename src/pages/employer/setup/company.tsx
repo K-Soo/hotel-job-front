@@ -3,7 +3,7 @@ import Layout, { EmployerMain, EmployerHeader, EmployerFooter } from '@/componen
 import EmployerSetupCompanyContainer from '@/containers/employerSetupCompanyContainer';
 import path from '@/constants/path';
 import { GetServerSideProps, GetServerSidePropsContext } from 'next';
-import { Post } from '@/apis';
+import { Auth } from '@/apis';
 
 export default function EmployerSetupCompanyPage() {
   return <EmployerSetupCompanyContainer />;
@@ -20,10 +20,10 @@ export const getServerSideProps: GetServerSideProps = async (context: GetServerS
   };
 
   try {
-    const responseAccessToken = await Post.requestAccessToken({}, requestHeader);
+    const responseAccessToken = await Auth.requestAccessToken({}, requestHeader);
     if (!responseAccessToken) throw new Error();
 
-    const responseUserInfo = await Post.authMe({}, requestHeader);
+    const responseUserInfo = await Auth.me({}, requestHeader);
     if (!responseUserInfo) throw new Error();
     if (responseUserInfo.result.role !== 'EMPLOYER') {
       return {

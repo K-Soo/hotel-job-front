@@ -54,7 +54,7 @@ instance.interceptors.response.use(
 
     if (notFoundUser) {
       alert('고객센터에 문의해주세요.');
-      Post.signOut();
+      Auth.signOut();
       window.location.href = '/';
     }
 
@@ -78,6 +78,25 @@ export const Internal = {
   checkRefreshCookie: (): Promise<{ result: boolean }> => axios.get('/api/internal/check-cookies').then(responseBody),
 };
 
+export const Auth = {
+  // 사업자 로그인
+  signIn: (body: API.SignInRequest) => requests.post<API.SignInRequest, API.SignInResponse>('/auth/sign-in', body),
+
+  // 사업자 회원가입
+  signUpEmployer: (body: API.SignUpEmployerRequest) =>
+    requests.post<API.SignUpEmployerRequest, API.SignUpEmployerResponse>('/auth/sign-up', body),
+
+  // 유저정보
+  me: (body: {}, config?: AxiosRequestConfig) => requests.post<{}, API.GetUserInfoResponse>('/auth/me', body, config),
+
+  // 엑세스토큰 재요청
+  requestAccessToken: (body: {}, config?: AxiosRequestConfig) =>
+    requests.post<{}, API.RequestAccessTokenResponse>('/auth/refresh', body, config),
+
+  // 로그아웃
+  signOut: (body: void) => requests.post('/auth/sign-out', body),
+};
+
 export const OAuth = {
   // 카카오 로그인
   kakaoSignIn: (body: API.OAuthSignInRequest) => requests.post<API.OAuthSignInRequest, API.OAuthSignInResponse>('/oauth/kakao', body),
@@ -87,10 +106,6 @@ export const Get = {
   getTests: () => requests.get('/tests'),
 
   getHealth: () => requests.get('/health'),
-
-  getUserInfo: () => requests.get('/auth/user-info'),
-
-  getAccessTokenUpdate: () => requests.get('/auth/refresh'),
 
   getAccount: () => requests.get('/account'),
 
@@ -112,26 +127,12 @@ export const Get = {
 };
 
 export const Post = {
+  //certification
+  startCertification: (body: void) => requests.post<void, API.StartCertificationResponse>('/certification/hash-up', body),
+
   //아이디 중복확인
   verificationsEmployerUserId: (body: { userId: string }) =>
     requests.post<{ userId: string }, API.verificationsEmployerUserIdResponse>('/verifications/employer/user-id', body),
-
-  // 사업자 로그인
-  signIn: (body: API.SignInRequest) => requests.post<API.SignInRequest, API.SignInResponse>('/auth/sign-in', body),
-
-  // 사업자 회원가입
-  signUpEmployer: (body: API.SignUpEmployerRequest) =>
-    requests.post<API.SignUpEmployerRequest, API.SignUpEmployerResponse>('/auth/sign-up', body),
-
-  // 유저정보
-  authMe: (body: {}, config?: AxiosRequestConfig) => requests.post<{}, API.GetUserInfoResponse>('/auth/me', body, config),
-
-  // 엑세스토큰 재요청
-  requestAccessToken: (body: {}, config?: AxiosRequestConfig) =>
-    requests.post<{}, API.RequestAccessTokenResponse>('/auth/refresh', body, config),
-
-  // 로그아웃
-  signOut: (body: void) => requests.post('/auth/sign-out', body),
 
   // 초기 회사정보 등록
   setupCompany: (body: API.SetupCompanyRequest) =>

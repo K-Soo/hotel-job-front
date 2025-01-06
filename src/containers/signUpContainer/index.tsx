@@ -7,7 +7,7 @@ import { SignUpForm } from '@/types';
 import FormDevTools from '@/components/common/FormDevTools';
 import SignUpGeneralForm from '@/components/signUp/SignUpGeneralForm';
 import SignUpCompleteForm from '@/components/signUp/SignUpCompleteForm';
-import { Post } from '@/apis';
+import { Post, Auth } from '@/apis';
 import { useRouter } from 'next/router';
 import path from '@/constants/path';
 import useAuth from '@/hooks/useAuth';
@@ -63,7 +63,7 @@ export default function SignUpContainer() {
       emailMarketingAgree: data.emailMarketingAgree,
     };
     try {
-      const response = await Post.signUpEmployer(requestData);
+      const response = await Auth.signUpEmployer(requestData);
       console.log('회원가입 API : ', response);
       setAuthAtomState({
         ...response.result,

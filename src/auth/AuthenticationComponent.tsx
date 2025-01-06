@@ -1,5 +1,5 @@
 import React from 'react';
-import { Internal, Post } from '@/apis';
+import { Internal, Auth } from '@/apis';
 import { useRouter } from 'next/router';
 import useAuth from '@/hooks/useAuth';
 import useFetchQuery from '@/hooks/useFetchQuery';
@@ -31,7 +31,7 @@ export default function AuthenticationComponent() {
   // 사용자 정보 가져오기
   const { data: userInfoData } = useFetchQuery({
     queryKey: [queryKeys.USER_INFO],
-    queryFn: Post.authMe,
+    queryFn: Auth.me,
     options: {
       enabled: !isAuthenticated && !!cookieData?.result && !isExcludedPath,
       staleTime: 60 * 1000 * 5,
