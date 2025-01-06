@@ -1,6 +1,22 @@
 # 변경 로그
 
 프로젝트의 모든 주요 변경 사항
+### [0.1.15](https://github.com/K-Soo/hotel-job-front/compare/v0.1.14...v0.1.15) (2025-01-06)
+
+
+### Features
+
+* 본인 인증 시작 응답 인터페이스 이름 변경 ([81944e4](https://github.com/K-Soo/hotel-job-front/commit/81944e499ed593748b7f35f5a634fe236c2afc5f))
+* 본인인증 API 메서드 이름 변경 및 검증 메서드 추가 ([7839251](https://github.com/K-Soo/hotel-job-front/commit/78392516d127e23a4f321fdc7c83a4b41cbd4ea1))
+* 인증 결과 처리 API 및 페이지 추가 ([cdbc784](https://github.com/K-Soo/hotel-job-front/commit/cdbc7842207fb089678a535652de9301604146d2))
+* 인증 결과 페이지에서 데이터 처리 방식 개선 및 에러 핸들링 추가 ([9a11cdb](https://github.com/K-Soo/hotel-job-front/commit/9a11cdbde2430d654d6230bf26b84dacab3e375d))
+* 인증 결과에 따라 성공 및 실패 메시지 이벤트 핸들링 추가 ([98a7c7b](https://github.com/K-Soo/hotel-job-front/commit/98a7c7b7dadbb874f7709fb79c31d05ff9fa12b6))
+* 인증 모달 및 결과 페이지에서 메시지 이벤트 핸들링 로깅 추가 ([7237647](https://github.com/K-Soo/hotel-job-front/commit/7237647003ba1c3f70e6a3a4a5a9f11f3abeb447))
+* 인증 모달에서 메시지 이벤트 핸들링 비동기 처리 및 본인 인증 검증 API 호출 추가 ([35e91db](https://github.com/K-Soo/hotel-job-front/commit/35e91db650ddab4fabf38a88376ca001348a7e0f))
+* 인증 모달에서 메시지 이벤트 핸들링 시 유효한 출처 확인을 환경 변수로 변경 ([79e77a7](https://github.com/K-Soo/hotel-job-front/commit/79e77a73c73681cfaac89b827a50f679ae584673))
+* 인증 모달에서 메시지 이벤트 핸들링 추가 및 결과 페이지 수정 ([0efcdd6](https://github.com/K-Soo/hotel-job-front/commit/0efcdd689def0248604028de0f943842c089ba02))
+* 인증 모달에서 인증 성공 시 알림 추가 및 이벤트 데이터 로깅 ([2021c61](https://github.com/K-Soo/hotel-job-front/commit/2021c616ffd1ed08d1a839d71615a0086f87309c))
+
 ### [0.1.14](https://github.com/K-Soo/hotel-job-front/compare/v0.1.13...v0.1.14) (2025-01-06)
 
 
