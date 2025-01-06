@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from 'axios';
-import { instance, Post } from '@/apis';
+import { instance, Auth } from '@/apis';
 
 const ALLOW_AUTHENTICATION_PATH = ['/auth/sign-in', '/oauth/kakao', '/auth/refresh'];
 
@@ -18,7 +18,7 @@ const handleSuccessResponse = (config: AxiosResponse) => {
 
 const handleRequestAccessToken = async (originalRequest: any) => {
   try {
-    const response = await Post.requestAccessToken({});
+    const response = await Auth.requestAccessToken({});
     if (!response.success) {
       throw new Error();
     }

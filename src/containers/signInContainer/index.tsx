@@ -10,7 +10,7 @@ import FormDevTools from '@/components/common/FormDevTools';
 import Tabs from '@/components/common/Tabs';
 import CompanyForm from '@/components/signIn/CompanyForm';
 import GeneralForm from '@/components/signIn/GeneralForm';
-import { Post } from '@/apis';
+import { Auth } from '@/apis';
 import useAuth from '@/hooks/useAuth';
 import { ParsedUrlQuery } from 'querystring';
 import { useRouter } from 'next/router';
@@ -59,7 +59,7 @@ export default function SignInContainer() {
 
   const onSubmit: SubmitHandler<SignInForm> = async (data) => {
     try {
-      const response = await Post.signIn({ userId: data.userId, password: data.password });
+      const response = await Auth.signIn({ userId: data.userId, password: data.password });
       console.log('로그인 API : ', response);
       if (!response.success) {
         throw new Error();
