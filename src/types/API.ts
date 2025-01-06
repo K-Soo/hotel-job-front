@@ -98,7 +98,7 @@ export interface SignUpEmployerResponse extends defaultResponse {
   };
 }
 
-export interface StartCertificationResponse extends defaultResponse {
+export interface CertificationStartResponse extends defaultResponse {
   result: {
     status: ResponseStatus;
     params: Record<string, string>;

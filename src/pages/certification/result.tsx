@@ -42,8 +42,9 @@ export default function ResultCertificationPage({ result }: InferGetServerSidePr
   console.log('ResultCertificationPage: ', result);
   React.useEffect(() => {
     if (result) {
-      window.parent?.postMessage(JSON.stringify({ type: 'CERTIFICATION_RESULT', data: result }), environment.baseUrl);
-      window.close();
+      window.parent?.postMessage(JSON.stringify({ type: 'CERTIFICATION_SUCCESS', payload: result }), environment.baseUrl);
+    } else {
+      window.parent?.postMessage(JSON.stringify({ type: 'CERTIFICATION_FAIL', payload: result }), environment.baseUrl);
     }
   }, [result]);
 
