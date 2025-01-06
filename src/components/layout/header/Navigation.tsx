@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import Link from 'next/link';
 import path from '@/constants/path';
-import { Post } from '@/apis';
+import { Auth } from '@/apis';
 import Icon from '@/icons/Icon';
 import Logo from '@/components/common/Logo';
 import useAuth from '@/hooks/useAuth';
@@ -15,7 +15,7 @@ export default function Navigation() {
 
   const handleClickSignOut = async () => {
     try {
-      const response = await Post.signOut();
+      const response = await Auth.signOut();
       console.log('로그아웃 API : ', response);
     } catch (error) {
       console.log('error: ', error);
