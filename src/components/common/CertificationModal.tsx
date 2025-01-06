@@ -13,6 +13,28 @@ export default function CertificationModal() {
 
   const setCertificationModalAtom = useSetRecoilState(certificationModalAtom);
 
+  React.useEffect(() => {
+    const handleMessage = (event: MessageEvent) => {
+      alert(JSON.stringify(event.origin));
+      alert(JSON.stringify(event.data));
+      alert(JSON.stringify(event));
+      // if (event.origin !== 'https://www.hotel-job-connect.com') {
+      //   return; // 유효한 출처만 허용
+      // }
+
+      // if (event.data.success) {
+      //   console.log(event.data.message);
+      //   setCertificationModalAtom({ isOpen: false }); // 모달 닫기
+      // }
+    };
+
+    window.addEventListener('message', handleMessage);
+
+    return () => {
+      window.removeEventListener('message', handleMessage);
+    };
+  }, []);
+
   const startCertification = async () => {
     setIsLoading(true);
     try {
