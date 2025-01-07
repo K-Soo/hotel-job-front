@@ -41,7 +41,7 @@ export default function Confirm({}: ConfirmProps) {
             <Button
               name="positive"
               label={alertWithConfirmSelectorValue.confirmLabel}
-              variant="secondary100"
+              variant="primary"
               maxWidth="200px"
               onClick={() => {
                 alertWithConfirmSelectorValue.onClickConfirm();
@@ -65,7 +65,7 @@ const S = {
     opacity: 0.99;
     aspect-ratio: 16/9;
     margin: 0 auto;
-    width: 550px;
+    width: 480px;
     box-shadow: rgb(0 0 0 / 10%) 0px 4px 16px 0px;
     border-radius: 10px;
     display: flex;
@@ -73,7 +73,7 @@ const S = {
     justify-content: space-between;
     align-items: center;
     will-change: transform;
-    padding: 30px 15px;
+    padding: 30px;
     .image-box {
       position: relative;
       display: flex;
@@ -89,17 +89,17 @@ const S = {
       width: 480px;
     `};
     ${(props) => props.theme.media.mobile`
-      width: 90%;
+      width: 95%;
     `};
   `,
   Content: styled.div`
     position: relative;
     flex: 1;
     .title {
-      color: ${(props) => props.theme.colors.black100};
-      font-size: 28px;
+      color: ${(props) => props.theme.colors.black400};
+      font-size: 24px;
       font-weight: 500;
-      text-align: center;
+      text-align: left;
       ${(props) => props.theme.media.tablet`
         font-size: 24px;
       `};
@@ -114,7 +114,6 @@ const S = {
       font-size: 17px;
       text-align: left;
       line-height: 1.1;
-      padding: 0 20px;
       ${(props) => props.theme.media.mobile`
         font-size: 14px;
         margin-top: 15px;
