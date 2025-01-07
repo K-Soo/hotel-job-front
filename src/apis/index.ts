@@ -123,7 +123,7 @@ export const Get = {
   },
 
   // 사업자 -  회사정보 가져오기
-  getMyCompany: () => requests.get<any>('/employers/company'),
+  getMyCompany: () => requests.get<API.GetMyCompanyResponse>('/employers/company'),
 };
 
 export const Post = {

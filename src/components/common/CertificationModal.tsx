@@ -7,10 +7,14 @@ import { useSetRecoilState } from 'recoil';
 import { certificationModalAtom } from '@/recoil/certification';
 import Image from 'next/image';
 import environment from '@/environment';
+import { useQueryClient } from '@tanstack/react-query';
+import queryKeys from '@/constants/queryKeys';
 
 export default function CertificationModal() {
   const [iframeUrl, setIframeUrl] = React.useState<string | null>(null);
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
+
+  const queryClient = useQueryClient();
 
   const loadingState = isLoading || !iframeUrl;
 
@@ -67,6 +71,8 @@ export default function CertificationModal() {
         }
 
         alert('본인 인증 완료');
+        await queryClient.invalidateQueries({ queryKey: [queryKeys.USER_INFO], refetchType: 'all' });
+
         setCertificationModalAtom({ isOpen: false });
       }
     } catch (error) {

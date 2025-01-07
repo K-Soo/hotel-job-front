@@ -15,7 +15,7 @@ export default function ManagerInfoForm({ children }: ManagerInfoFormProps) {
         <h2 className="title">담당자 기본 정보</h2>
       </S.Header>
 
-      <FormInput<SetupCompanyForm> required label="담당자명" name="managerName" placeholder="담당자명" />
+      <FormInput<SetupCompanyForm> required label="담당자명" name="managerName" placeholder="담당자명" isFocusing />
       <FormInput<SetupCompanyForm> required label="담당자 연락처" name="managerNumber" placeholder="담당자 연락처" mask="999-9999-9999" />
       <FormInput<SetupCompanyForm> required label="담당자 이메일" name="managerEmail" placeholder="담당자 이메일" />
 

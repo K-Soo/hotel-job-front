@@ -20,6 +20,7 @@ export default function BusinessNumberForm({ children }: BusinessNumberFormProps
         placeholder="사업자등록번호"
         mask={'999-99-99999'}
         margin="0 0 10px 0"
+        isFocusing
       />
       <FormInput<SetupCompanyForm> required label="상호명" name="companyName" placeholder="상호명" maxLength={30} />
       <S.ButtonBox>{children}</S.ButtonBox>

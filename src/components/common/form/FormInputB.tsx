@@ -4,6 +4,8 @@ import FormError from '@/components/common/form/FormError';
 import { useFormContext, Path, FieldValues } from 'react-hook-form';
 import { motion } from 'framer-motion';
 import { get } from 'lodash';
+import { useHookFormMask } from 'use-mask-input';
+
 interface FormInputProps<T> {
   name: Path<T>;
   label?: string;
@@ -19,6 +21,7 @@ interface FormInputProps<T> {
   maxWidth?: string;
   minWidth?: string;
   labelFlexBasis?: string;
+  mask?: string | string[];
 }
 
 export default function FormInputB<T extends FieldValues>({
@@ -34,6 +37,7 @@ export default function FormInputB<T extends FieldValues>({
   horizontal,
   width,
   maxWidth,
+  mask,
   minWidth,
   labelFlexBasis,
 }: FormInputProps<T>) {
@@ -44,6 +48,8 @@ export default function FormInputB<T extends FieldValues>({
     watch,
     clearErrors,
   } = useFormContext<T>();
+
+  const registerWithMask = useHookFormMask(register);
 
   const watchValue = watch(name);
 
@@ -81,7 +87,7 @@ export default function FormInputB<T extends FieldValues>({
           type={type || 'text'}
           readOnly={readOnly}
           disabled={disabled}
-          {...register(name)}
+          {...(mask ? registerWithMask(name, mask, { autoUnmask: true, showMaskOnFocus: false, placeholder: '_' }) : register(name))}
         />
         <FormError errors={errors} name={name} style={{ position: 'absolute' }} />
       </div>

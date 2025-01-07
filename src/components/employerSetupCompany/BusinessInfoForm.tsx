@@ -21,7 +21,7 @@ export default function BusinessInfoForm({ children }: BusinessInfoFormProps) {
         <h2 className="title">사업자 기본 정보</h2>
       </S.Header>
 
-      <FormInput<SetupCompanyForm> required label="대표자명" name="businessOwner" placeholder="대표자" />
+      <FormInput<SetupCompanyForm> required label="대표자명" name="businessOwner" placeholder="대표자" isFocusing />
 
       <div className="address-wrapper">
         <FormInput<SetupCompanyForm> required label="업체 주소" name="address" placeholder="주소" disabled />

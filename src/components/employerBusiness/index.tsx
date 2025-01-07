@@ -5,7 +5,6 @@ import FormInputB from '@/components/common/form/FormInputB';
 import HorizontalFormWrapper from '@/components/common/form/HorizontalFormWrapper';
 import Button from '@/components/common/style/Button';
 import { SubmitHandler, useFormContext } from 'react-hook-form';
-import { BusinessForm } from '@/types';
 
 interface EmployerBusinessProps {
   children: React.ReactNode;
@@ -25,7 +24,5 @@ export default function EmployerBusiness({ children }: EmployerBusinessProps) {
 }
 
 const S = {
-  EmployerBusiness: styled.section`
-    /* border: 1px solid red; */
-  `,
+  EmployerBusiness: styled.section``,
 };

@@ -104,3 +104,7 @@ export interface CertificationStartResponse extends defaultResponse {
     params: Record<string, string>;
   };
 }
+
+export interface GetMyCompanyResponse extends defaultResponse {
+  result: types.EmployerBusinessForm;
+}

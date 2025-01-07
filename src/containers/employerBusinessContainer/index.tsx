@@ -6,26 +6,70 @@ import useFetchQuery from '@/hooks/useFetchQuery';
 import queryKeys from '@/constants/queryKeys';
 import { Get } from '@/apis';
 import useAuth from '@/hooks/useAuth';
+import { useForm, FormProvider } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { schema } from '@/utils';
+import { EmployerBusinessForm } from '@/types';
+import SkeletonUI from '@/components/common/SkeletonUI';
 
-// TODO: 리펙토링 및 기능 구현, API 호출
 export default function EmployerBusinessContainer() {
   const { authAtomState, isAuthenticated } = useAuth();
 
-  const { data } = useFetchQuery({
+  const methods = useForm<EmployerBusinessForm>({
+    resolver: yupResolver(schema.businessManagerForm),
+    mode: 'onSubmit',
+    reValidateMode: 'onChange',
+    defaultValues: {
+      address: '',
+      addressDetail: '',
+      businessOwner: '',
+      businessRegistrationNumber: '',
+      companyName: '',
+      managerEmail: '',
+      managerName: '',
+      managerNumber: '',
+    },
+  });
+
+  const { data, isLoading } = useFetchQuery({
     queryKey: [queryKeys.MY_COMPANY, { nickname: authAtomState.nickname }],
     queryFn: Get.getMyCompany,
     options: {
       enabled: isAuthenticated,
-      staleTime: 60 * 1000 * 5,
-      gcTime: 60 * 1000 * 10,
+      throwOnError: true,
+      staleTime: 1000 * 60 * 5,
+      gcTime: 1000 * 60 * 10,
     },
   });
-  console.log('data: ', data);
+
+  console.log('업체정보 API : ', data);
+
+  React.useEffect(() => {
+    if (!isLoading && data) {
+      const { result } = data;
+      methods.setValue('businessOwner', result.businessOwner);
+      methods.setValue('businessRegistrationNumber', result.businessRegistrationNumber);
+      methods.setValue('companyName', result.companyName);
+      methods.setValue('addressDetail', result.addressDetail);
+      methods.setValue('address', result.address);
+
+      methods.setValue('managerName', result.managerName);
+      methods.setValue('managerEmail', result.managerEmail);
+      methods.setValue('managerNumber', result.managerNumber);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [data, isLoading]);
+
+  if (isLoading) {
+    return <SkeletonUI.Document />;
+  }
 
   return (
-    <EmployerBusiness>
-      <EmployerBusinessFormContainer />
-      <EmployerBusinessManagerFormContainer />
-    </EmployerBusiness>
+    <FormProvider {...methods}>
+      <EmployerBusiness>
+        <EmployerBusinessFormContainer />
+        <EmployerBusinessManagerFormContainer />
+      </EmployerBusiness>
+    </FormProvider>
   );
 }

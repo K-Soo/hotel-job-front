@@ -14,16 +14,17 @@ interface LogoProps {
   size: 'large' | 'middle' | 'small';
   margin?: string;
   style?: React.CSSProperties;
+  isEmployer?: boolean;
 }
 
-export default function Logo({ size, margin, style }: LogoProps) {
+export default function Logo({ size, margin, style, isEmployer }: LogoProps) {
   const router = useRouter();
 
   return (
     <S.Logo
       className={roboto.className}
       whileTap={{ scale: 0.99 }}
-      onClick={() => router.push(path.HOME)}
+      onClick={() => router.push(isEmployer ? path.HOME : path.EMPLOYER)}
       size={size}
       $margin={margin}
       style={style}

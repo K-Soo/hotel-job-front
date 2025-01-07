@@ -57,9 +57,11 @@ export function EmployerHeader() {
     <S.EmployerHeader>
       {/* TODO: 분기 처리 */}
       <div className="nav-bar">
-        <Link href={path.EMPLOYER}>로그</Link>
+        <Logo size="small" isEmployer margin="0 70px 0 35px" />
+        {/* <Link href={path.EMPLOYER}>로그</Link> */}
         <Link href={path.SUPPORT_NOTICE}>인재풀</Link>
       </div>
+
       {!isAuthIdle && !isAuthenticated && (
         <Button
           label="로그인"
