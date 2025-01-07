@@ -8,7 +8,7 @@ import Portal from '@/components/common/Portal';
 import Icon from '@/icons/Icon';
 
 export default function DaumPost() {
-  const { setValue } = useFormContext();
+  const { setValue, setFocus } = useFormContext();
 
   const setDaumPostState = useSetRecoilState(daumPostAtom);
   const resetDaumPostAtom = useResetRecoilState(daumPostAtom);
@@ -32,6 +32,7 @@ export default function DaumPost() {
       fullAddress = jibunAddress;
     }
     setValue('address', fullAddress);
+    setFocus('addressDetail');
     resetDaumPostAtom();
   };
 
