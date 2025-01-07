@@ -63,13 +63,14 @@ const signUpSchema = yup.object({
   userIdAvailableState: yup.boolean().default(false),
 });
 
-const businessForm = yup.object({
+const businessManagerForm = yup.object({
   businessRegistrationNumber: yup.string().required(),
   companyName: yup.string().required(),
   businessOwner: yup.string().required(),
-});
 
-const businessManagerForm = yup.object({
+  address: yup.string().required(),
+  addressDetail: yup.string().required(),
+
   managerName: yup.string().required(),
   managerNumber: yup.string().required(),
   managerEmail: yup.string().required(),
@@ -104,7 +105,6 @@ export const schema = {
   signInSchema,
   resumeRegister,
   signUpSchema,
-  businessForm,
   businessManagerForm,
   setupCompanyForm,
   oauthSignInSchema,
