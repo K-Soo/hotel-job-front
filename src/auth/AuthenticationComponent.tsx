@@ -11,7 +11,6 @@ export default function AuthenticationComponent() {
   const router = useRouter();
 
   const { isAuthenticated, setAuthAtomState } = useAuth();
-  console.log('isAuthenticated: ', isAuthenticated);
 
   const isExcludedPath = EXCLUDED_PATHS.includes(router.pathname);
 
@@ -25,8 +24,6 @@ export default function AuthenticationComponent() {
       enabled: !isAuthenticated && !isExcludedPath, // 인증된 사용자와 제외 경로에서는 실행 안 함
     },
   });
-  console.log('cookieData?.result: ', cookieData?.result);
-  console.log('isExcludedPath: ', isExcludedPath);
 
   // 사용자 정보 가져오기
   const { data: userInfoData } = useFetchQuery({
