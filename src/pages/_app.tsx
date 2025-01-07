@@ -23,6 +23,7 @@ const queryClientDefaultOption = {
       gcTime: 60 * 1000 * 5,
       throwOnError: false,
       retry: 0,
+      suspense: false,
     },
   },
 };
@@ -54,7 +55,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
           {Component.authentication &&
             getLayout(
               <GuardComponent allowedRoles={Component.allowedRoles}>
-                <Component {...pageProps} />,
+                <Component {...pageProps} />
               </GuardComponent>,
             )}
           <ReactQueryDevtools initialIsOpen={false} />
