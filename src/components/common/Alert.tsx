@@ -24,29 +24,23 @@ export default function Alert() {
               <Image src="/images/auth.png" fill alt="image" />
             </div>
           )}
-          <Button
-            name="positive"
-            label={alertWithConfirmSelectorValue.confirmLabel}
-            variant="secondary100"
-            maxWidth="200px"
-            margin="15px 0 0 0"
-            onClick={() => {
-              alertWithConfirmSelectorValue.onClickConfirm();
-              resetAlertWithConfirmAtom();
-            }}
-          />
+          <div style={{ width: '100%', display: 'flex', justifyContent: 'flex-end' }}>
+            <Button
+              name="positive"
+              label={alertWithConfirmSelectorValue.confirmLabel}
+              variant="primary"
+              maxWidth="120px"
+              onClick={() => {
+                alertWithConfirmSelectorValue.onClickConfirm();
+                resetAlertWithConfirmAtom();
+              }}
+            />
+          </div>
         </S.Alert>
       </Background>
     </Portal>
   );
 }
-
-const StyledIcon = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: flex-end;
-  margin-bottom: 10px;
-`;
 
 const S = {
   Alert: styled.article`
@@ -58,15 +52,15 @@ const S = {
     opacity: 0.99;
     aspect-ratio: 16/9;
     margin: 0 auto;
-    width: 550px;
+    width: 480px;
     box-shadow: rgb(0 0 0 / 10%) 0px 4px 16px 0px;
-    border-radius: 10px;
+    border-radius: 15px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
     will-change: transform;
-    padding: 30px 15px;
+    padding: 30px;
     .image-box {
       position: relative;
       display: flex;
@@ -82,7 +76,7 @@ const S = {
       width: 480px;
     `};
     ${(props) => props.theme.media.mobile`
-      width: 90%;
+     width: 95%;
     `};
   `,
   Content: styled.div`
@@ -90,10 +84,10 @@ const S = {
     flex: 1;
     .title {
       margin-top: 10px;
-      color: ${(props) => props.theme.colors.black100};
-      font-size: 26px;
+      color: ${(props) => props.theme.colors.black400};
+      font-size: 24px;
       font-weight: 500;
-      text-align: center;
+      text-align: left;
       ${(props) => props.theme.media.tablet`
         font-size: 24px;
       `};
@@ -102,13 +96,12 @@ const S = {
       `};
     }
     .description {
-      color: ${(props) => props.theme.colors.black400};
+      color: ${(props) => props.theme.colors.black500};
       font-weight: 400;
       margin-top: 30px;
       font-size: 18px;
-      text-align: center;
+      text-align: left;
       line-height: 1.1;
-      padding: 0 20px;
       ${(props) => props.theme.media.mobile`
         font-size: 14px;
         margin-top: 15px;
