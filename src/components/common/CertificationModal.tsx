@@ -11,10 +11,18 @@ import environment from '@/environment';
 export default function CertificationModal() {
   const [iframeUrl, setIframeUrl] = React.useState<string | null>(null);
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
-  const [certStartParams, setCertStartParams] = React.useState<any | null>(null);
-  console.log('certStartParams: ', certStartParams);
 
   const setCertificationModalAtom = useSetRecoilState(certificationModalAtom);
+
+  const buildUrlWithParams = (baseUrl: string, params: Record<string, any>) => {
+    const url = new URL(baseUrl);
+    Object.entries(params).forEach(([key, value]) => {
+      if (key !== 'url') {
+        url.searchParams.append(key, value);
+      }
+    });
+    return url.toString();
+  };
 
   const startCertification = async () => {
     setIsLoading(true);
@@ -23,23 +31,12 @@ export default function CertificationModal() {
       console.log('인증요청 API : ', response);
 
       if (response.result.status !== 'success') {
-        alert('인증 요청에 실패했습니다.');
-        setCertificationModalAtom({ isOpen: false });
-
-        return;
+        throw new Error('인증 요청에 실패했습니다.');
       }
 
-      setCertStartParams(response.result.params);
+      const iframeUrl = buildUrlWithParams(response.result.params.url, response.result.params);
 
-      const url = new URL(response.result.params.url);
-      const params = response.result.params;
-
-      Object.entries(params).forEach(([key, value]) => {
-        if (key !== 'url') {
-          url.searchParams.append(key, value);
-        }
-      });
-      setIframeUrl(url.toString());
+      setIframeUrl(iframeUrl);
     } catch (error) {
       alert('인증 요청에 실패했습니다.');
       setCertificationModalAtom({ isOpen: false });
@@ -49,44 +46,46 @@ export default function CertificationModal() {
     }
   };
 
+  const handleCertificationMessage = async (event: MessageEvent) => {
+    if (event.origin !== environment.baseUrl) return;
+
+    try {
+      const parsedData = typeof event.data === 'string' ? JSON.parse(event.data) : event.data;
+
+      if (parsedData.type === 'CERTIFICATION_FAIL') {
+        alert('본인 인증 실패');
+        setCertificationModalAtom({ isOpen: false });
+        return;
+      }
+
+      if (parsedData.type === 'CERTIFICATION_SUCCESS') {
+        const response = await Post.certificationVerify(parsedData.payload);
+        console.log('본인인증 검증 API : ', response);
+
+        if (response.result.status !== 'success') {
+          alert('본인 인증 실패');
+          setCertificationModalAtom({ isOpen: false });
+          return;
+        }
+
+        alert('본인 인증 완료');
+        setCertificationModalAtom({ isOpen: false });
+      }
+    } catch (error) {
+      console.error('Error handling certification message:', error);
+    }
+  };
+
   React.useEffect(() => {
     startCertification();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   React.useEffect(() => {
-    const handleMessage = async (event: MessageEvent) => {
-      console.log('event: ', event);
-      console.log('environment.baseUrl: ', environment.baseUrl);
-      if (event.origin !== environment.baseUrl) {
-        return;
-      }
-      const parsedData = JSON.parse(event.data);
-
-      if (parsedData?.type === 'CERTIFICATION_SUCCESS') {
-        const requestData = {
-          ...parsedData.payload,
-        };
-
-        const response = await Post.certificationVerify(requestData);
-        console.log('본인인증 검증 API : ', response);
-      }
-
-      if (event?.data.type === 'CERTIFICATION_FAIL') {
-        alert('본인 인증 실패');
-        setCertificationModalAtom({ isOpen: false });
-      }
-
-      // if (event.data.success) {
-      //   console.log(event.data.message);
-      //   setCertificationModalAtom({ isOpen: false }); // 모달 닫기
-      // }
-    };
-
-    window.addEventListener('message', handleMessage);
+    window.addEventListener('message', handleCertificationMessage);
 
     return () => {
-      window.removeEventListener('message', handleMessage);
+      window.removeEventListener('message', handleCertificationMessage);
     };
   }, []);
 

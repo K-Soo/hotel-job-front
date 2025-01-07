@@ -25,6 +25,7 @@ export const getServerSideProps: GetServerSideProps = async (context: GetServerS
 
     const responseUserInfo = await Auth.me({}, requestHeader);
     if (!responseUserInfo) throw new Error();
+
     if (responseUserInfo.result.role !== 'EMPLOYER') {
       return {
         redirect: {
@@ -33,6 +34,7 @@ export const getServerSideProps: GetServerSideProps = async (context: GetServerS
         },
       };
     }
+
     if (responseUserInfo.result.companyVerificationStatus === 'VERIFIED') {
       return {
         redirect: {
