@@ -98,18 +98,6 @@ export interface SignUpForm {
   userIdAvailableState: boolean;
 }
 
-export interface BusinessForm {
-  businessRegistrationNumber: string; // 사업자번호
-  companyName: string; // 상호명
-  businessOwner: string; // 사업자명
-}
-
-export interface BusinessManagerForm {
-  managerName: string;
-  managerNumber: string;
-  managerEmail: string;
-}
-
 export interface SetupCompanyForm {
   businessRegistrationNumber: string; // 사업자번호
   companyName: string; // 상호명
@@ -117,6 +105,19 @@ export interface SetupCompanyForm {
 
   address: string; // 주소
   addressDetail: string; // 상세주소
+
+  managerName: string;
+  managerNumber: string;
+  managerEmail: string;
+}
+
+export interface EmployerBusinessForm {
+  businessRegistrationNumber: string; // 사업자번호
+  companyName: string; // 상호명
+  businessOwner: string; // 사업자명
+
+  address: string;
+  addressDetail: string;
 
   managerName: string;
   managerNumber: string;
