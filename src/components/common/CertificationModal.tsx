@@ -12,6 +12,8 @@ export default function CertificationModal() {
   const [iframeUrl, setIframeUrl] = React.useState<string | null>(null);
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
 
+  const loadingState = isLoading || !iframeUrl;
+
   const setCertificationModalAtom = useSetRecoilState(certificationModalAtom);
 
   const buildUrlWithParams = (baseUrl: string, params: Record<string, any>) => {
@@ -24,7 +26,7 @@ export default function CertificationModal() {
     return url.toString();
   };
 
-  const startCertification = async () => {
+  const fetchStartCertification = async () => {
     setIsLoading(true);
     try {
       const response = await Post.certificationStart();
@@ -53,9 +55,7 @@ export default function CertificationModal() {
       const parsedData = typeof event.data === 'string' ? JSON.parse(event.data) : event.data;
 
       if (parsedData.type === 'CERTIFICATION_FAIL') {
-        alert('본인 인증 실패');
-        setCertificationModalAtom({ isOpen: false });
-        return;
+        throw new Error();
       }
 
       if (parsedData.type === 'CERTIFICATION_SUCCESS') {
@@ -63,21 +63,21 @@ export default function CertificationModal() {
         console.log('본인인증 검증 API : ', response);
 
         if (response.result.status !== 'success') {
-          alert('본인 인증 실패');
-          setCertificationModalAtom({ isOpen: false });
-          return;
+          throw new Error();
         }
 
         alert('본인 인증 완료');
         setCertificationModalAtom({ isOpen: false });
       }
     } catch (error) {
+      alert('본인 인증 실패');
+      setCertificationModalAtom({ isOpen: false });
       console.error('Error handling certification message:', error);
     }
   };
 
   React.useEffect(() => {
-    startCertification();
+    fetchStartCertification();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -93,12 +93,12 @@ export default function CertificationModal() {
     <Portal>
       <S.CertificationModal>
         <S.Container>
-          {isLoading && (
+          {loadingState && (
             <div className="loading-box">
               <Image src="/images/spinner200px.gif" width={30} height={30} alt="loading" priority />
             </div>
           )}
-          {!isLoading && iframeUrl && (
+          {iframeUrl && (
             <>
               <div className="header">
                 <Icon name="Close25x25" width="28px" height="28px" onClick={() => setCertificationModalAtom({ isOpen: false })} />
