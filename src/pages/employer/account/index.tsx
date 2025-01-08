@@ -1,7 +1,13 @@
 import Layout, { EmployerMain, EmployerHeader, EmployerFooter } from '@/components/layout';
 import EmployerAccountContainer from '@/containers/employerAccountContainer';
+import { ErrorBoundary, ErrorComponent } from '@/error';
+
 export default function EmployerAccountPage() {
-  return <EmployerAccountContainer />;
+  return (
+    <ErrorBoundary fallback={<ErrorComponent />}>
+      <EmployerAccountContainer />
+    </ErrorBoundary>
+  );
 }
 
 EmployerAccountPage.getLayout = (page: React.ReactElement) => {
