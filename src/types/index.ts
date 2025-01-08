@@ -136,3 +136,19 @@ export interface OAuthSignInForm {
   smsMarketingAgree: boolean;
   emailMarketingAgree: boolean;
 }
+
+export interface EmployerAccountInfoForm {
+  accountStatus: 'ACTIVE';
+  certification: null;
+  certificationStatus: 'UNVERIFIED';
+  companyVerificationStatus: 'VERIFIED';
+  createdAt: '2025-01-03T14:50:54.000Z';
+  id: '5ef779c1-7eed-4fff-b155-1650bc2fe0a1';
+  nickname: '활기찬고양이94896177';
+  password: '$2b$10$4xXDvSN.pWV25S0fxHW2Xuqp5yBdZVOc/mjNx53bjBuGBtWWG41cS';
+  passwordChangedAt: null;
+  provider: 'LOCAL';
+  role: 'EMPLOYER';
+  updatedAt: '2025-01-07T18:01:26.000Z';
+  userId: 'kanabun102';
+}
