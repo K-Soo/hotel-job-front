@@ -92,6 +92,12 @@ export interface verificationsEmployerUserIdResponse extends defaultResponse {
   };
 }
 
+export interface verificationsBusinessNumberCheckResponse extends defaultResponse {
+  result: {
+    status: ResponseStatus;
+  };
+}
+
 export interface SignUpEmployerResponse extends defaultResponse {
   result: {
     status: ResponseStatus;
@@ -107,4 +113,8 @@ export interface CertificationStartResponse extends defaultResponse {
 
 export interface GetMyCompanyResponse extends defaultResponse {
   result: types.EmployerBusinessForm;
+}
+
+export interface AccountInfoResponse extends defaultResponse {
+  result: {} & types.EmployerAccountInfoForm;
 }
