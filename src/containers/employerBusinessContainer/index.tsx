@@ -33,9 +33,8 @@ export default function EmployerBusinessContainer() {
 
   const { data, isLoading } = useFetchQuery({
     queryKey: [queryKeys.MY_COMPANY, { nickname: authAtomState.nickname }],
-    queryFn: Get.getMyCompany,
+    queryFn: Get.employerCompany,
     options: {
-      enabled: isAuthenticated,
       throwOnError: true,
       staleTime: 1000 * 60 * 5,
       gcTime: 1000 * 60 * 10,
@@ -45,7 +44,7 @@ export default function EmployerBusinessContainer() {
   console.log('업체정보 API : ', data);
 
   React.useEffect(() => {
-    if (!isLoading && data) {
+    if (data) {
       const { result } = data;
       methods.setValue('businessOwner', result.businessOwner);
       methods.setValue('businessRegistrationNumber', result.businessRegistrationNumber);
@@ -58,7 +57,7 @@ export default function EmployerBusinessContainer() {
       methods.setValue('managerNumber', result.managerNumber);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [data, isLoading]);
+  }, [data]);
 
   if (isLoading) {
     return <SkeletonUI.Document />;
