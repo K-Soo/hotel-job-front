@@ -56,11 +56,11 @@ export function EmployerHeader() {
   return (
     <S.EmployerHeader>
       {/* TODO: 분기 처리 */}
-      <div className="nav-bar">
-        <Logo size="small" isEmployer margin="0 70px 0 35px" />
+      <nav className="nav-bar">
+        <Logo size="small" isEmployer margin="0 90px 0 0" />
         {/* <Link href={path.EMPLOYER}>로그</Link> */}
         <Link href={path.SUPPORT_NOTICE}>인재풀</Link>
-      </div>
+      </nav>
 
       {!isAuthIdle && !isAuthenticated && (
         <Button
@@ -106,7 +106,7 @@ const S = {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 15px;
+    padding: 0 15px 0 20px;
     border-bottom: 1px solid ${(props) => props.theme.colors.gray200};
     background-color: ${(props) => props.theme.colors.white};
     .nav-bar {
