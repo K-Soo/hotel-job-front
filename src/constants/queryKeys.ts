@@ -3,6 +3,7 @@ const queryKeys = {
   USER_INFO: 'USER_INFO',
   REFRESH_COOKIE: 'REFRESH_COOKIE',
   MY_COMPANY: 'MY_COMPANY',
+  EMPLOYER_ACCOUNT: 'EMPLOYER_ACCOUNT',
 };
 
 export default queryKeys;
