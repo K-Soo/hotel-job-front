@@ -123,7 +123,10 @@ export const Get = {
   },
 
   // 사업자 -  회사정보 가져오기
-  getMyCompany: () => requests.get<API.GetMyCompanyResponse>('/employers/company'),
+  employerCompany: () => requests.get<API.GetMyCompanyResponse>('/employers/company'),
+
+  // 사업자 -  계정정보
+  employerAccountInfo: () => requests.get<API.AccountInfoResponse>('/employers'),
 };
 
 export const Post = {
@@ -135,6 +138,10 @@ export const Post = {
   //아이디 중복확인
   verificationsEmployerUserId: (body: { userId: string }) =>
     requests.post<{ userId: string }, API.verificationsEmployerUserIdResponse>('/verifications/employer/user-id', body),
+
+  //사업자번호 검증
+  businessNumberCheck: (body: { b_no: string }) =>
+    requests.post<{ b_no: string }, API.verificationsBusinessNumberCheckResponse>('/verifications/business-number', body),
 
   // 초기 회사정보 등록
   setupCompany: (body: API.SetupCompanyRequest) =>
