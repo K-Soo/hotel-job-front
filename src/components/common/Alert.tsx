@@ -1,3 +1,4 @@
+import React from 'react';
 import styled from 'styled-components';
 import Portal from '@/components/common/Portal';
 import Background from '@/components/common/Background';
@@ -10,6 +11,25 @@ import { alertWithConfirmSelector, alertWithConfirmAtom } from '@/recoil/alertWi
 export default function Alert() {
   const alertWithConfirmSelectorValue = useRecoilValue(alertWithConfirmSelector);
   const resetAlertWithConfirmAtom = useResetRecoilState(alertWithConfirmAtom);
+
+  React.useEffect(() => {
+    document.documentElement.style.overflow = 'hidden';
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Enter') {
+        event.preventDefault();
+        alertWithConfirmSelectorValue.onClickConfirm();
+        resetAlertWithConfirmAtom();
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      document.documentElement.style.overflow = '';
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [alertWithConfirmSelectorValue, resetAlertWithConfirmAtom]);
 
   return (
     <Portal>
@@ -30,6 +50,7 @@ export default function Alert() {
               label={alertWithConfirmSelectorValue.confirmLabel}
               variant="primary"
               maxWidth="120px"
+              type="button"
               onClick={() => {
                 alertWithConfirmSelectorValue.onClickConfirm();
                 resetAlertWithConfirmAtom();
