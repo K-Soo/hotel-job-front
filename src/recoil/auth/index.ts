@@ -6,7 +6,7 @@ export interface AuthAtom {
   accountStatus?: AccountStatusType;
   nickname?: string;
   status: 'AUTHENTICATED' | 'AUTHENTICATION_FAILURE' | 'IDLE';
-  companyVerificationStatus?: 'NOT_REQUESTED' | 'PENDING' | 'VERIFIED' | 'REJECTED';
+  companyVerificationStatus?: 'NOT_REQUESTED' | 'PUBLISHED' | 'VERIFIED' | 'REJECTED';
 }
 
 export const authAtom = atom<AuthAtom>({
