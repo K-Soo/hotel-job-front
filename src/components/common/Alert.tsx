@@ -35,15 +35,12 @@ export default function Alert() {
     <Portal>
       <Background>
         <S.Alert>
+          {/* {alertWithConfirmSelectorValue.image && <Icon name="Document" width="100px" height="100px" margin="0 0 15px 0" />} */}
           <S.Content>
             <h3 className="title">{alertWithConfirmSelectorValue.title}</h3>
             <p className="description">{alertWithConfirmSelectorValue.subTitle}</p>
           </S.Content>
-          {alertWithConfirmSelectorValue.image && (
-            <div className="image-box">
-              <Image src="/images/auth.png" fill alt="image" />
-            </div>
-          )}
+
           <div style={{ width: '100%', display: 'flex', justifyContent: 'flex-end' }}>
             <Button
               name="positive"
@@ -51,6 +48,7 @@ export default function Alert() {
               variant="primary"
               maxWidth="120px"
               type="button"
+              margin="15px 0 0 0"
               onClick={() => {
                 alertWithConfirmSelectorValue.onClickConfirm();
                 resetAlertWithConfirmAtom();
@@ -73,7 +71,7 @@ const S = {
     opacity: 0.99;
     aspect-ratio: 16/9;
     margin: 0 auto;
-    width: 480px;
+    width: 450px;
     box-shadow: rgb(0 0 0 / 10%) 0px 4px 16px 0px;
     border-radius: 15px;
     display: flex;
@@ -81,7 +79,7 @@ const S = {
     justify-content: space-between;
     align-items: center;
     will-change: transform;
-    padding: 30px;
+    padding: 25px;
     .image-box {
       position: relative;
       display: flex;
@@ -103,10 +101,11 @@ const S = {
   Content: styled.div`
     position: relative;
     flex: 1;
+    width: 100%;
     .title {
       margin-top: 10px;
       color: ${(props) => props.theme.colors.black400};
-      font-size: 24px;
+      font-size: 22px;
       font-weight: 500;
       text-align: left;
       ${(props) => props.theme.media.tablet`
@@ -120,7 +119,7 @@ const S = {
       color: ${(props) => props.theme.colors.black500};
       font-weight: 400;
       margin-top: 30px;
-      font-size: 18px;
+      font-size: 16px;
       text-align: left;
       line-height: 1.1;
       ${(props) => props.theme.media.mobile`
