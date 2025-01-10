@@ -1,5 +1,6 @@
 import * as API from '@/types/API';
 import { careerLevel, licenseStage } from '@/constants/resume';
+import { experienceCondition, recruitmentStatus } from '@/constants/recruitment';
 import { city } from '@/constants/location';
 import { educationLevel, position, salaryType } from '@/constants';
 import { job } from '@/constants/job';
@@ -30,16 +31,24 @@ type TestValueType = keyof typeof test;
 
 export type ResumeType = 'FILE' | 'GENERAL'; //파일, 일반
 export type CareerLevel = keyof typeof careerLevel;
-export type EducationLevel = keyof typeof educationLevel;
+export type EducationLevelKeys = keyof typeof educationLevel;
 export type Job = keyof typeof job;
 export type Position = keyof typeof position;
 export type City = keyof typeof city;
 export type SalaryType = keyof typeof salaryType;
-export type LicenseStage = keyof typeof licenseStage;
+export type LicenseStageKeys = keyof typeof licenseStage;
+export type experienceConditionKeys = keyof typeof experienceCondition;
+export type RecruitmentStatusKeys = keyof typeof recruitmentStatus;
 
 // type CareerLevelType = typeof careerLevel[keyof typeof careerLevel];
 
 export type TalentListItem = {};
+
+export type RecruitmentItem = {
+  id: string;
+  recruitmentTitle: string;
+  recruitmentStatus: RecruitmentStatusKeys;
+};
 
 export type Experience = {
   companyName: string;
@@ -60,7 +69,7 @@ export type Language = {};
 
 export type License = {
   licenseName: string;
-  licenseStage?: LicenseStage | undefined;
+  licenseStage?: LicenseStageKeys | undefined;
   dateOfCompletion: Date;
 };
 
@@ -73,7 +82,7 @@ export interface ResumeRegisterForm {
   careerLevel: CareerLevel;
   title: string;
   summary: string;
-  education: EducationLevel;
+  education: EducationLevelKeys;
   // isGraduated: boolean; //졸업여부
   experiences: Experience[];
   // languages: Language[];
@@ -152,3 +161,55 @@ export interface EmployerAccountInfoForm {
   updatedAt: '2025-01-07T18:01:26.000Z';
   userId: 'kanabun102';
 }
+
+// 공고 등록 폼
+export interface CreateRecruitmentForm {
+  recruitmentTitle: string;
+  recruitmentStatus: RecruitmentStatusKeys;
+  recruitmentInfo: {
+    experienceCondition: experienceConditionKeys;
+    recruitmentCapacity: number;
+    educationCondition: 'NOT_REQUIRED' | EducationLevelKeys;
+    nationality: {
+      korean: boolean;
+      foreigner: boolean;
+      marriageVisa?: string;
+    };
+  };
+}
+
+export interface RecruitmentDetail {
+  id: string;
+  recruitmentTitle: string;
+  recruitmentStatus: RecruitmentStatusKeys;
+  recruitmentInfo: {
+    experienceCondition: experienceConditionKeys;
+    recruitmentCapacity: number;
+    educationCondition: 'NOT_REQUIRED' | EducationLevelKeys;
+    nationality: {
+      korean: boolean;
+      foreigner: boolean;
+      marriageVisa?: string;
+    };
+  };
+  updateAt: Date;
+}
+
+export interface RecruitmentDetailForm extends Omit<RecruitmentDetail, 'id' | 'updateAt'> {}
+
+// export interface RecruitmentDetailForm {
+//   recruitmentTitle: string;
+//   recruitmentStatus: RecruitmentStatusKeys;
+//   recruitmentInfo: {
+//     experienceCondition: experienceConditionKeys;
+//     recruitmentCapacity: number;
+//     educationCondition: 'NOT_REQUIRED' | EducationLevelKeys;
+//     nationality: {
+//       korean: boolean;
+//       foreigner: boolean;
+//       marriageVisa?: string;
+//     };
+//   };
+// }
+
+export interface DraftRecruitmentForm extends RecruitmentDetailForm {}
