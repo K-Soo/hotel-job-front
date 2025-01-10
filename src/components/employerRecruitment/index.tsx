@@ -9,5 +9,9 @@ export default function EmployerRecruitment({ children }: EmployerRecruitmentPro
 }
 
 const S = {
-  EmployerRecruitment: styled.section``,
+  EmployerRecruitment: styled.section`
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  `,
 };
