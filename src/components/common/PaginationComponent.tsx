@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { ParsedUrlQuery } from 'querystring';
 import { PaginationInfo } from '@/types/API';
 import { motion } from 'framer-motion';
 import { useRouter } from 'next/router';
@@ -8,10 +7,6 @@ import usePagination from '@/hooks/usePagination';
 interface PaginationComponentProps {
   margin?: string;
   pagination: PaginationInfo;
-}
-
-interface Query extends ParsedUrlQuery {
-  page?: string;
 }
 
 export default function PaginationComponent({ margin, pagination }: PaginationComponentProps) {
