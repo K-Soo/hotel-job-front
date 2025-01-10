@@ -39,7 +39,6 @@ export const EMPLOYER_ASIDE_MENU = [
     icon: 'UserRounded24x24',
     items: [
       { label: '공고 목록', value: path.EMPLOYER_RECRUITMENT },
-      { label: '지원자 관리', value: path.EMPLOYER_CANDIDATE },
       { label: '일정 관리', value: path.EMPLOYER_SCHEDULE },
     ],
   },
