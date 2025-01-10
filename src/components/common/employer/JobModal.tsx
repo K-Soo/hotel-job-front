@@ -8,7 +8,7 @@ import CheckBox from '@/components/common/style/CheckBox';
 import Icon from '@/icons/Icon';
 import { FieldValues, Path, useFormContext } from 'react-hook-form';
 import { motion } from 'framer-motion';
-
+import FormChipsCheckbox from '@/components/common/form/FormChipsCheckbox';
 interface JobModalProps<T> {
   name: Path<T>;
   setIsOpenJobModal: React.Dispatch<React.SetStateAction<boolean>>;
@@ -16,7 +16,6 @@ interface JobModalProps<T> {
 // TODO : 기능
 export default function JobModal<T extends FieldValues>({ name, setIsOpenJobModal }: JobModalProps<T>) {
   const [selectedJob, setSelectedJob] = React.useState<{ label: string; value: string }[]>([]);
-  console.log('selectedJob: ', selectedJob);
   const [tab, setTab] = React.useState('all');
 
   const { watch } = useFormContext<T>();
@@ -105,21 +104,23 @@ export default function JobModal<T extends FieldValues>({ name, setIsOpenJobModa
           </S.Category>
 
           <S.Content>
-            {tab === 'all' &&
+            {/* {tab === 'all' &&
               Object.entries(job).map(([key, value]) => (
                 <div key={`all-${key}`} className="content-item all">
-                  <CheckBox
-                    checked={selectedJob.some((job) => job.value === key)}
-                    name={value}
-                    label={value}
-                    onChange={handleChangeCheckbox}
-                    fontSize="15px"
-                    value={key}
-                  />
+                  <>
+                    <CheckBox
+                      checked={selectedJob.some((job) => job.value === key)}
+                      name={value}
+                      label={value}
+                      onChange={handleChangeCheckbox}
+                      fontSize="15px"
+                      value={key}
+                    />
+                  </>
                 </div>
-              ))}
+              ))} */}
 
-            {tab === 'hotel' &&
+            {/* {tab === 'hotel' &&
               Object.entries(hotelJob).map(([key, value]) => (
                 <div key={`hotel-${key}`} className="content-item hotel">
                   <CheckBox
@@ -131,9 +132,9 @@ export default function JobModal<T extends FieldValues>({ name, setIsOpenJobModa
                     value={key}
                   />
                 </div>
-              ))}
+              ))} */}
 
-            {tab === 'touristHotel' &&
+            {/* {tab === 'touristHotel' &&
               Object.entries(touristHotel).map(([key, value]) => (
                 <div key={key} className="content-item touristHotel">
                   <CheckBox
@@ -145,18 +146,20 @@ export default function JobModal<T extends FieldValues>({ name, setIsOpenJobModa
                     value={key}
                   />
                 </div>
-              ))}
+              ))} */}
 
             {tab === 'other' &&
               Object.entries(otherJob).map(([key, value]) => (
                 <div key={key} className="content-item other">
-                  <CheckBox
+                  <FormChipsCheckbox name={value} label={value} />
+
+                  {/* <CheckBox
                     checked={selectedJob.some((job) => job.value === key)}
                     name={key}
                     label={value}
                     onChange={handleChangeCheckbox}
                     value={key}
-                  />
+                  /> */}
                 </div>
               ))}
           </S.Content>
