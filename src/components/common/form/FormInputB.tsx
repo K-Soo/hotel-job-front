@@ -22,6 +22,7 @@ interface FormInputProps<T> {
   minWidth?: string;
   labelFlexBasis?: string;
   mask?: string | string[];
+  maxLength?: number;
 }
 
 export default function FormInputB<T extends FieldValues>({
@@ -40,6 +41,7 @@ export default function FormInputB<T extends FieldValues>({
   mask,
   minWidth,
   labelFlexBasis,
+  maxLength,
 }: FormInputProps<T>) {
   const {
     formState: { errors },
@@ -87,6 +89,7 @@ export default function FormInputB<T extends FieldValues>({
           type={type || 'text'}
           readOnly={readOnly}
           disabled={disabled}
+          maxLength={maxLength}
           {...(mask ? registerWithMask(name, mask, { autoUnmask: true, showMaskOnFocus: false, placeholder: '_' }) : register(name))}
         />
         <FormError errors={errors} name={name} style={{ position: 'absolute' }} />
@@ -130,17 +133,36 @@ const StyledMotionInput = styled(motion.input)<{ readOnly?: boolean; disabled?: 
       pointer-events: none;
     `};
 
+  &:disabled {
+    border: 1px solid ${({ theme }) => theme.colors.gray300};
+    background-color: ${(props) => props.theme.colors.gray};
+    pointer-events: none;
+  }
+
   ${(props) =>
     props.readOnly &&
     css`
       background-color: none;
       border: none;
       pointer-events: none;
+
+      /* readOnly일 때 hover 비활성화 */
+      &:hover {
+        background-color: inherit;
+        border: none;
+      }
     `};
 `;
 
 const S = {
-  FormInputB: styled.div<{ $margin?: string; $horizontal?: boolean; $width?: string; $maxWidth?: string; $minWidth?: string }>`
+  FormInputB: styled.div<{
+    $margin?: string;
+    $horizontal?: boolean;
+    $width?: string;
+    $maxWidth?: string;
+    $minWidth?: string;
+    $position?: string;
+  }>`
     margin: ${(props) => (props.$margin ? props.$margin : '0')};
     max-width: ${(props) => (props.$maxWidth ? props.$maxWidth : '100%')};
     min-width: ${(props) => (props.$minWidth ? props.$minWidth : 'auto')};
