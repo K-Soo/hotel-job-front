@@ -25,17 +25,24 @@ export default function FormCheckbox<T extends FieldValues>({
   const {
     register,
     watch,
+    clearErrors,
     formState: { errors },
   } = useFormContext<T>();
 
   const watchValue = watch(name);
   const error = get(errors, name);
 
+  React.useEffect(() => {
+    if (error && watchValue) {
+      clearErrors(name);
+    }
+  }, [error, watchValue]);
+
   return (
     <S.FormCheckbox $margin={margin}>
       <S.CheckBoxContainer $active={!!watchValue}>
         <div>
-          <input id={`FormCheckbox-${name}`} type="checkbox" checked={watchValue} {...register(name)} />
+          <input id={`FormCheckbox-${name}`} type="checkbox" {...register(name)} />
           <label className="form-label" htmlFor={`FormCheckbox-${name}`}>
             <p className="form-label__wrapper">
               {required && <span className="form-label__wrapper--required">[필수]</span>}
@@ -47,7 +54,7 @@ export default function FormCheckbox<T extends FieldValues>({
         {visibleIcon && <S.ViewIcon>보기</S.ViewIcon>}
       </S.CheckBoxContainer>
 
-      {error && <FormError errors={errors} name={name} />}
+      <FormError errors={errors} name={name} style={{ position: 'absolute' }} />
     </S.FormCheckbox>
   );
 }
@@ -72,6 +79,7 @@ const S = {
       background-color: ${(props) => props.theme.colors.blue700};
       border: 2px solid ${(props) => props.theme.colors.blue700};
     }
+
     input[type='checkbox']:checked + label:after {
       content: '';
       position: absolute;
@@ -84,6 +92,17 @@ const S = {
       background-size: contain;
       background-repeat: no-repeat;
       background-position: center;
+    }
+
+    input[type='checkbox']:disabled + label:before {
+      background-color: ${(props) => props.theme.colors.gray};
+      border: 2px solid ${(props) => props.theme.colors.gray300};
+    }
+
+    input[type='checkbox']:disabled:checked + label:before {
+      background-color: ${(props) => props.theme.colors.blue700};
+      border: 2px solid ${(props) => props.theme.colors.blue700};
+      opacity: 0.7;
     }
 
     .form-label {
@@ -132,11 +151,6 @@ const S = {
       border-color: #888;
       background-color: ${(props) => props.theme.colors.blue100};
       border: 2px solid ${(props) => props.theme.colors.blue700};
-    }
-
-    input[type='checkbox']:disabled + label:before {
-      background-color: #ccc;
-      border: 2px solid #ccc;
     }
   `,
   ViewIcon: styled.i`
