@@ -27,6 +27,7 @@ export default function EmployerRecruitmentRegister({ children, setIsOpenJobModa
         <form className="register-container__form">
           <EmployerTemplateForm height="100%">
             <EmployerTemplateForm.SubTitle title="공고 기본 설정" size="large" id="basic" />
+
             <EmployerTemplateForm.Content marginBottom="80px">
               <RecruitmentRegisterBasicForm />
             </EmployerTemplateForm.Content>
@@ -36,7 +37,7 @@ export default function EmployerRecruitmentRegister({ children, setIsOpenJobModa
               <RecruitmentRegisterDetailForm setIsOpenJobModal={setIsOpenJobModal} />
             </EmployerTemplateForm.Content>
 
-            <EmployerTemplateForm.SubTitle title="상세 모집내용" size="large" id="detail" />
+            {/* <EmployerTemplateForm.SubTitle title="상세 모집내용" size="large" id="detail" />
             <EmployerTemplateForm.Content marginBottom="80px">
               <DynamicFormEditor />
             </EmployerTemplateForm.Content>
@@ -54,7 +55,7 @@ export default function EmployerRecruitmentRegister({ children, setIsOpenJobModa
             <EmployerTemplateForm.SubTitle title="인사담당자 정보" size="large" id="manager" />
             <EmployerTemplateForm.Content>
               <RecruitmentRegisterManagerForm />
-            </EmployerTemplateForm.Content>
+            </EmployerTemplateForm.Content> */}
 
             <RecruitmentPolicy />
           </EmployerTemplateForm>
