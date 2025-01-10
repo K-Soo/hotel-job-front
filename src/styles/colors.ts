@@ -30,7 +30,7 @@ const colors = {
   red300: '#ff6d6a',
   red500: '#f20000',
 
-  gray: '#f9fafb',
+  gray: '#f9fafb', //disabled
   gray100: '#f2f4f6',
   gray200: '#e5e8eb',
   gray300: '#d1d6db',
