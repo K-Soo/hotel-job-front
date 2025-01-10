@@ -72,6 +72,8 @@ const requests = {
   get: <Response>(url: string) => instance.get<Response>(url, config).then(responseBody),
   post: <Request, Response>(url: string, body: Request, config?: AxiosRequestConfig) =>
     instance.post<Response>(url, body, config).then(responseBody),
+  patch: <Request, Response>(url: string, body: Request, config?: AxiosRequestConfig) =>
+    instance.patch<Response>(url, body, config).then(responseBody),
 };
 
 export const Internal = {
@@ -172,11 +174,17 @@ export const Post = {
   createRecruitment: (body: API.CreateRecruitmentRequest) =>
     requests.post<API.CreateRecruitmentRequest, API.CreateRecruitmentResponse>('/employers/recruitment', body),
 
-  // 사업자 -  채용 임시 공고를 등록
-  createDraftRecruitment: (body: API.CreateRecruitmentRequest) =>
-    requests.post<API.CreateRecruitmentRequest, API.CreateRecruitmentResponse>('/employers/recruitment', body),
-
   // 사업자 -  공고 임시저장
   draftRecruitment: (body: API.DraftRecruitmentRequest) =>
     requests.post<API.DraftRecruitmentRequest, API.DraftRecruitmentResponse>('/employers/recruitment/draft', body),
+
+  // 사업자 -  채용 공고생성
+  removeRecruitment: (body: { ids: string[] }) =>
+    requests.post<{ ids: string[] }, API.RemoveRecruitmentResponse>('/employers/recruitment/remove', body),
+};
+
+export const Patch = {
+  // 사업자 -  등록된 공고 수정
+  updateRecruitment: (body: API.UpdateRecruitmentRequest) =>
+    requests.patch<API.UpdateRecruitmentRequest, API.UpdateRecruitmentResponse>('/employers/recruitment', body),
 };
