@@ -6,6 +6,8 @@ const environment = {
   baseUrl: process.env.NEXT_PUBLIC_BASE_URL!,
   apiUrl: process.env.NEXT_PUBLIC_API_URL,
 
+  cryptoKey: process.env.NEXT_PUBLIC_CRYPTO_KEY!,
+
   kakaoRedirectUrl: process.env.NEXT_PUBLIC_KAKAO_REDIRECT_URL,
   kakaoClientId: process.env.NEXT_PUBLIC_KAKAO_CLIENT_ID,
 
