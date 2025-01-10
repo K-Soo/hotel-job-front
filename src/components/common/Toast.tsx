@@ -1,10 +1,9 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { motion, AnimatePresence } from 'framer-motion';
-import { toastAtom } from '@/recoil/toast';
+import { ToastAtom, toastAtom } from '@/recoil/toast';
 import { useRecoilState } from 'recoil';
 import React from 'react';
 
-// TODO type별 icon 추가
 export default function Toast() {
   const [toastAtomState, setToastAtomState] = useRecoilState(toastAtom);
 
@@ -25,19 +24,49 @@ export default function Toast() {
           <S.Toast
             layoutId={toast.id}
             key={toast.id}
-            // type={toast.type}
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.99 }}
             transition={{ duration: 0.25 }}
           >
-            {toast.message}
+            <StyledToastIcon type={toast.type}>!</StyledToastIcon>
+            <span>{toast.message}</span>
           </S.Toast>
         ))}
       </AnimatePresence>
     </S.ToastContainer>
   );
 }
+
+const StyledToastIcon = styled.i<{ type: ToastAtom['type'] }>`
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  margin-right: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  ${(props) =>
+    props.type === 'info' &&
+    css`
+      background-color: #3182f6;
+    `};
+  ${(props) =>
+    props.type === 'success' &&
+    css`
+      background-color: #4caf50;
+    `};
+  ${(props) =>
+    props.type === 'error' &&
+    css`
+      background-color: #f44336;
+    `};
+  ${(props) =>
+    props.type === 'warning' &&
+    css`
+      background-color: #ffc55b;
+    `};
+`;
 
 const S = {
   ToastContainer: styled(motion.div)`
@@ -56,8 +85,9 @@ const S = {
     background-color: #ffffff;
     margin-bottom: 10px;
     padding: 10px 20px;
-    width: 300px;
+    min-width: 250px;
     min-height: 50px;
+    font-size: 15px;
     display: flex;
     align-items: center;
     background-color: ${(props) => props.theme.colors.gray700};
