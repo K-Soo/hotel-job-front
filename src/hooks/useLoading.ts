@@ -1,7 +1,9 @@
 import React from 'react';
+import { loadingAtom } from '@/recoil/loading';
+import { useRecoilState } from 'recoil';
 
 export default function useLoading() {
-  const [loading, setLoading] = React.useState(false);
+  const [loadingAtomStatue, setLoadingAtomStatue] = useRecoilState(loadingAtom);
 
-  return { loading, setLoading };
+  return { loadingAtomStatue, setLoadingAtomStatue };
 }
