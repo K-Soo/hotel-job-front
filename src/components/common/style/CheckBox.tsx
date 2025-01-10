@@ -4,6 +4,7 @@ interface CheckBoxProps {
   label?: string;
   name: string;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onClick?: (event: React.MouseEvent<HTMLInputElement>) => void;
   visibleIcon?: boolean;
   margin?: string;
   checked: boolean;
@@ -27,6 +28,7 @@ export default function CheckBox({
   fontSize,
   value,
   disabled,
+  onClick,
 }: CheckBoxProps) {
   return (
     <S.CheckBox $margin={margin}>
@@ -35,6 +37,7 @@ export default function CheckBox({
           id={`checkbox-${name}`}
           type="checkbox"
           onChange={onChange}
+          onClick={onClick}
           name={name}
           checked={checked}
           value={value}
