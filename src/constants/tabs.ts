@@ -9,10 +9,10 @@ export const recruitOrderFilterTabOptions = [
 ] as const;
 
 export const recruitmentStatusTabOptions = [
-  { label: '전체', value: 'all' },
-  { label: '진행중', value: 'progress' },
-  { label: '대기중', value: 'pending' },
-  { label: '마감', value: 'closed' },
-  { label: '확인중', value: 'reviewing' },
-  { label: '미완성', value: 'incomplete' },
+  { label: '전체', value: 'ALL' },
+  { label: '진행중', value: 'PROGRESS' },
+  { label: '대기중', value: 'PUBLISHED' },
+  { label: '마감', value: 'CLOSED' },
+  { label: '확인중', value: 'REVIEWING' },
+  { label: '미완성', value: 'DRAFT' },
 ] as const;
