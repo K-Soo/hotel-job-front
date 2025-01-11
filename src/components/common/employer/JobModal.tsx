@@ -3,44 +3,66 @@ import styled from 'styled-components';
 import Portal from '@/components/common/Portal';
 import Background from '@/components/common/Background';
 import Button from '@/components/common/style/Button';
-import { job, hotelJob, otherJob, touristHotel } from '@/constants/job';
-import CheckBox from '@/components/common/style/CheckBox';
-import Icon from '@/icons/Icon';
-import { FieldValues, Path, useFormContext } from 'react-hook-form';
+import {
+  allJobs,
+  hotelJobs,
+  touristHotelJobs,
+  otherJobs,
+  hotelJobKeyValues,
+  touristHotelJobsKeyValues,
+  otherJobsKeyValues,
+  allJobsKeyValues,
+  AllJobsKeyValuesKeys,
+} from '@/constants/job';
+import ChipsCheckbox from '@/components/common/style/ChipsCheckbox';
+import { FieldValues, useFormContext } from 'react-hook-form';
 import { motion } from 'framer-motion';
-import FormChipsCheckbox from '@/components/common/form/FormChipsCheckbox';
-interface JobModalProps<T> {
-  name: Path<T>;
+import useToast from '@/hooks/useToast';
+
+const jobModalTabOptions = [
+  { label: '전체', value: 'all' },
+  { label: '호텔', value: 'hotel' },
+  { label: '관광호텔', value: 'touristHotel' },
+  { label: '기타', value: 'other' },
+];
+
+export interface JobModalProps {
+  name: string;
   setIsOpenJobModal: React.Dispatch<React.SetStateAction<boolean>>;
 }
-// TODO : 기능
-export default function JobModal<T extends FieldValues>({ name, setIsOpenJobModal }: JobModalProps<T>) {
-  const [selectedJob, setSelectedJob] = React.useState<{ label: string; value: string }[]>([]);
+
+export default function JobModal<T extends FieldValues>({ name, setIsOpenJobModal }: JobModalProps) {
+  const [selectedJob, setSelectedJob] = React.useState<AllJobsKeyValuesKeys[]>([]);
   const [tab, setTab] = React.useState('all');
 
-  const { watch } = useFormContext<T>();
+  const { addToast } = useToast();
+
+  const { watch, setValue } = useFormContext();
 
   const watchValue = watch(name) || [];
 
   React.useEffect(() => {
     setSelectedJob(watchValue);
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleChangeCheckbox = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, checked, value } = event.target;
-    console.log('value: ', value);
+    const { checked, value } = event.target;
 
     if (checked) {
-      const isProcessing = selectedJob.find((job) => job.value === value);
-      if (isProcessing) {
-        return;
+      if (selectedJob.length >= 3) {
+        return addToast({ message: '직무는 최대 3개까지 선택 가능합니다.', type: 'warning' });
       }
 
-      setSelectedJob([...selectedJob, { value, label: name }]);
-    } else {
-      setSelectedJob(selectedJob.filter((item) => item.value !== value));
+      return setSelectedJob((prev) => [...prev, value as AllJobsKeyValuesKeys]);
     }
+    setSelectedJob((prev) => prev.filter((item) => item !== value));
+  };
+
+  const handleSaveSelectedJobs = () => {
+    setValue(name, [...selectedJob]);
+    setIsOpenJobModal(false);
   };
 
   return (
@@ -50,134 +72,106 @@ export default function JobModal<T extends FieldValues>({ name, setIsOpenJobModa
           <S.Title>
             <h2>직무 선택</h2>
           </S.Title>
-          <S.Search>
+          {/* <S.Search>
             <Icon className="search-icon" name="Search24x24" width="24px" height="24px" />
             <input className="search-filed" type="text" placeholder="Search" maxLength={20} />
-          </S.Search>
+          </S.Search> */}
 
           <S.Category>
-            <motion.button
-              type="button"
-              className="item"
-              name="all"
-              onClick={() => setTab('all')}
-              whileHover={{
-                color: '#000',
-              }}
-            >
-              전체
-            </motion.button>
-
-            <motion.button
-              type="button"
-              className="item"
-              name="hotel"
-              onClick={() => setTab('hotel')}
-              whileHover={{
-                color: '#000',
-              }}
-            >
-              호텔
-            </motion.button>
-            <motion.button
-              type="button"
-              className="item"
-              name="touristHotel"
-              onClick={() => setTab('touristHotel')}
-              whileHover={{
-                color: '#000',
-              }}
-            >
-              관광호텔
-            </motion.button>
-            <motion.button
-              type="button"
-              className="item"
-              name="other"
-              onClick={() => setTab('other')}
-              whileHover={{
-                color: '#000',
-              }}
-            >
-              기타
-            </motion.button>
+            {jobModalTabOptions.map((option) => (
+              <motion.button
+                key={option.value}
+                type="button"
+                className="item"
+                name={option.value}
+                onClick={() => setTab(option.value)}
+                animate={{ color: tab === option.value ? '#000' : '#666' }}
+                whileHover={{ color: '#000' }}
+              >
+                <span>{option.label}</span>
+                {tab === option.value && <span className="underline" />}
+              </motion.button>
+            ))}
           </S.Category>
 
           <S.Content>
-            {/* {tab === 'all' &&
-              Object.entries(job).map(([key, value]) => (
+            {tab === 'all' &&
+              Object.entries(allJobsKeyValues).map(([key, value]) => (
                 <div key={`all-${key}`} className="content-item all">
-                  <>
-                    <CheckBox
-                      checked={selectedJob.some((job) => job.value === key)}
-                      name={value}
-                      label={value}
-                      onChange={handleChangeCheckbox}
-                      fontSize="15px"
-                      value={key}
-                    />
-                  </>
+                  <ChipsCheckbox
+                    onChange={handleChangeCheckbox}
+                    name={value}
+                    label={allJobs[value]}
+                    value={key}
+                    checked={selectedJob.includes(key as AllJobsKeyValuesKeys)}
+                  />
                 </div>
-              ))} */}
+              ))}
 
-            {/* {tab === 'hotel' &&
-              Object.entries(hotelJob).map(([key, value]) => (
+            {tab === 'hotel' &&
+              Object.entries(hotelJobKeyValues).map(([key, value]) => (
                 <div key={`hotel-${key}`} className="content-item hotel">
-                  <CheckBox
-                    checked={selectedJob.some((job) => job.value === key)}
-                    name={key}
-                    label={value}
+                  <ChipsCheckbox
                     onChange={handleChangeCheckbox}
-                    fontSize="15px"
+                    name={value}
+                    label={hotelJobs[value]}
                     value={key}
+                    checked={selectedJob.includes(key as AllJobsKeyValuesKeys)}
                   />
                 </div>
-              ))} */}
+              ))}
 
-            {/* {tab === 'touristHotel' &&
-              Object.entries(touristHotel).map(([key, value]) => (
+            {tab === 'touristHotel' &&
+              Object.entries(touristHotelJobsKeyValues).map(([key, value]) => (
                 <div key={key} className="content-item touristHotel">
-                  <CheckBox
-                    checked={selectedJob.some((job) => job.value === key)}
-                    name={key}
-                    label={value}
+                  <ChipsCheckbox
                     onChange={handleChangeCheckbox}
-                    fontSize="15px"
+                    name={value}
+                    label={touristHotelJobs[value]}
                     value={key}
+                    checked={selectedJob.includes(key as AllJobsKeyValuesKeys)}
                   />
                 </div>
-              ))} */}
+              ))}
 
             {tab === 'other' &&
-              Object.entries(otherJob).map(([key, value]) => (
+              Object.entries(otherJobsKeyValues).map(([key, value]) => (
                 <div key={key} className="content-item other">
-                  <FormChipsCheckbox name={value} label={value} />
-
-                  {/* <CheckBox
-                    checked={selectedJob.some((job) => job.value === key)}
-                    name={key}
-                    label={value}
+                  <ChipsCheckbox
                     onChange={handleChangeCheckbox}
+                    name={value}
+                    label={otherJobs[value]}
                     value={key}
-                  /> */}
+                    checked={selectedJob.includes(key as AllJobsKeyValuesKeys)}
+                  />
                 </div>
               ))}
           </S.Content>
 
           <S.SelectedBox>
-            <p>선택한 직군</p>
+            {selectedJob.map((item: AllJobsKeyValuesKeys) => (
+              <ChipsCheckbox
+                key={item}
+                onChange={() => {}}
+                name={item}
+                label={allJobs[item]}
+                value={Object.keys(item)[0]}
+                checked={selectedJob.includes(item as AllJobsKeyValuesKeys)}
+                margin="0 15px 0 0"
+              />
+            ))}
           </S.SelectedBox>
 
           <S.ButtonBox>
             <Button
-              label="닫기"
+              label="취소"
               variant="secondary"
               width="100px"
               height="40px"
-              margin="0 15px 0 0"
+              margin="0 30px 0 0"
               onClick={() => setIsOpenJobModal(false)}
             />
-            <Button label="선택완료" variant="primary" width="100px" height="40px" />
+            <Button label="선택완료" variant="primary" width="100px" height="40px" onClick={handleSaveSelectedJobs} />
           </S.ButtonBox>
         </S.JobModal>
       </Background>
@@ -201,7 +195,7 @@ const S = {
     flex-direction: column;
   `,
   Title: styled.div`
-    font-size: 18px;
+    font-size: 22px;
     color: ${(props) => props.theme.colors.gray800};
     font-weight: 500;
     margin-bottom: 15px;
@@ -233,11 +227,18 @@ const S = {
     height: 40px;
     border-bottom: 1px solid ${({ theme }) => theme.colors.gray500};
     .item {
-      color: ${({ theme }) => theme.colors.gray600};
       width: 100px;
       height: 100%;
       text-align: center;
       cursor: pointer;
+      position: relative;
+    }
+    .underline {
+      position: absolute;
+      left: 0;
+      bottom: -1px;
+      width: 100%;
+      border-bottom: 2px solid #333;
     }
   `,
   Content: styled.div`
@@ -247,8 +248,8 @@ const S = {
     overflow-y: auto;
     padding: 15px;
     .content-item {
-      flex: 0 1 170px;
-      height: auto;
+      /* flex: 0 1 170px; */
+      /* height: auto; */
       margin: 5px;
     }
     .all {
@@ -265,15 +266,18 @@ const S = {
 
     .other {
       flex: 1 1 120px;
+      height: fit-content;
     }
   `,
   SelectedBox: styled.div`
-    height: 80px;
-    padding: 15px;
-    border: 1px solid red;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    border-top: 1px solid ${({ theme }) => theme.colors.gray400};
   `,
   ButtonBox: styled.div`
     display: flex;
     justify-content: flex-end;
+    margin-top: 15px;
   `,
 };
