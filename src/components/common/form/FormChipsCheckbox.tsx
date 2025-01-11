@@ -3,7 +3,6 @@ import { useFormContext, Path, FieldValues } from 'react-hook-form';
 import FormError from '@/components/common/form/FormError';
 import { get } from 'lodash';
 import React from 'react';
-import Icon from '@/icons/Icon';
 
 interface FormChipsCheckboxProps<T> {
   name: Path<T>;
@@ -13,17 +12,14 @@ interface FormChipsCheckboxProps<T> {
 export default function FormChipsCheckbox<T extends FieldValues>({ name, label }: FormChipsCheckboxProps<T>) {
   const {
     register,
-    watch,
     formState: { errors },
   } = useFormContext<T>();
 
-  // const watchValue = watch(name);
   const error = get(errors, name);
 
   return (
     <S.FormChipsCheckbox>
       <S.FormChipsContainer>
-        {/* <Icon name="CheckOn16x17" width="16px" height="16px" /> */}
         <input id={`FormChipsCheckbox-${name}`} type="checkbox" {...register(name)} />
         <label htmlFor={`FormChipsCheckbox-${name}`}>{label}</label>
       </S.FormChipsContainer>
@@ -33,15 +29,14 @@ export default function FormChipsCheckbox<T extends FieldValues>({ name, label }
 }
 
 const S = {
-  FormChipsCheckbox: styled.div`
-    /* border: 1px solid red; */
-  `,
+  FormChipsCheckbox: styled.div``,
   FormChipsContainer: styled.div`
     display: flex;
     align-items: center;
     width: 100%;
     height: 30px;
     user-select: none;
+    white-space: nowrap;
     input[type='checkbox'] {
       display: none;
     }
@@ -55,10 +50,10 @@ const S = {
       display: flex;
       align-items: center;
       border: 1px solid ${(props) => props.theme.colors.gray400};
-      padding: 0 5px 0 30px;
+      padding: 0 25px 0 32px;
+      min-width: 90px;
       max-width: 130px;
-      width: 100%;
-      border-radius: 30px;
+      border-radius: 25px;
       background-color: ${(props) => props.theme.colors.gray200};
       background-color: #ffffff;
       cursor: pointer;
