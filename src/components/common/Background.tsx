@@ -9,9 +9,9 @@ interface BackgroundProps {
 export default function Background({ onClick, children }: BackgroundProps) {
   React.useEffect(() => {
     const targetElement = document.querySelector('html') as HTMLHtmlElement;
-    // targetElement.style.overflow = 'hidden';
+    targetElement.style.overflow = 'hidden';
     return () => {
-      // targetElement.style.overflow = 'visible';
+      targetElement.style.overflow = 'visible';
     };
   }, []);
 
