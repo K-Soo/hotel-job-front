@@ -20,6 +20,7 @@ interface FormNumberInputProps<T> {
   minWidth?: string;
   unit: string;
   maxLength?: number;
+  isComma?: boolean;
 }
 
 export default function FormNumberInput<T extends FieldValues>({
@@ -36,6 +37,7 @@ export default function FormNumberInput<T extends FieldValues>({
   minWidth,
   unit,
   maxLength,
+  isComma,
 }: FormNumberInputProps<T>) {
   const {
     formState: { errors },
@@ -71,7 +73,7 @@ export default function FormNumberInput<T extends FieldValues>({
     const { value } = event.target;
 
     const numberWithoutCommas = parseInt(value.replace(/,/g, ''));
-    const validValue = isNaN(Number(numberWithoutCommas)) ? '0' : String(numberWithoutCommas);
+    const validValue = isNaN(Number(numberWithoutCommas)) ? 0 : numberWithoutCommas;
     setValue(name, validValue as PathValue<T, Path<T>>);
   };
 
@@ -90,10 +92,11 @@ export default function FormNumberInput<T extends FieldValues>({
           type="text"
           readOnly={readOnly}
           disabled={disabled}
-          value={priceComma(value)}
+          value={isComma ? priceComma(value) : value}
           maxLength={maxLength}
           {...register(name, {
             onChange: handleInputChange,
+            valueAsNumber: true,
           })}
         />
         <span className="unit">{unit}</span>
