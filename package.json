@@ -33,6 +33,7 @@
     "react-hook-form": "^7.52.2",
     "react-indiana-drag-scroll": "^2.2.0",
     "react-quill": "^2.0.0",
+    "react-quill-new": "^3.3.3",
     "react-responsive": "^10.0.0",
     "react-spring-bottom-sheet": "^3.4.1",
     "recoil": "^0.7.7",
