@@ -50,14 +50,14 @@ export default function FormInput<T extends FieldValues>({
   } = useFormContext<T>();
 
   const registerWithMask = useHookFormMask(register);
-
   const watchValue = watch(name);
+  const error = get(errors, name);
 
   React.useEffect(() => {
-    if (watchValue && watchValue.length !== 0) {
+    if (error && watchValue && watchValue.length !== 0) {
       clearErrors(name);
     }
-  }, [clearErrors, name, watchValue]);
+  }, [name, watchValue]);
 
   React.useEffect(() => {
     if (isFocusing) {
@@ -65,8 +65,6 @@ export default function FormInput<T extends FieldValues>({
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isFocusing]);
-
-  // const error = get(errors, name);
 
   return (
     <S.FormInput $margin={margin} $horizontal={horizontal} $width={width} $maxWidth={maxWidth} $minWidth={minWidth}>
