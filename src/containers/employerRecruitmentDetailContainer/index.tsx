@@ -44,6 +44,7 @@ export default function EmployerRecruitmentDetailContainer() {
       recruitmentTitle: undefined,
       recruitmentStatus: undefined,
       recruitmentInfo: {
+        jobs: [],
         recruitmentCapacity: undefined,
         educationCondition: undefined,
         experienceCondition: undefined,
@@ -52,6 +53,22 @@ export default function EmployerRecruitmentDetailContainer() {
           korean: false,
           marriageVisa: undefined,
         },
+      },
+      content: '',
+      locationInfo: {
+        roomCount: 0,
+        address: '',
+        addressDetail: '',
+      },
+      managerInfo: {
+        managerName: '',
+        isNamePrivate: false,
+
+        managerNumber: '',
+        isNumberPrivate: false,
+
+        managerEmail: '',
+        isEmailPrivate: false,
       },
     },
   });
@@ -77,12 +94,27 @@ export default function EmployerRecruitmentDetailContainer() {
       const { result } = data;
       methods.setValue('recruitmentTitle', result.recruitmentTitle);
       methods.setValue('recruitmentStatus', result.recruitmentStatus);
+
+      methods.setValue('recruitmentInfo.jobs', result.recruitmentInfo.jobs);
       methods.setValue('recruitmentInfo.recruitmentCapacity', result.recruitmentInfo.recruitmentCapacity);
       methods.setValue('recruitmentInfo.educationCondition', result.recruitmentInfo.educationCondition);
       methods.setValue('recruitmentInfo.experienceCondition', result.recruitmentInfo.experienceCondition);
       methods.setValue('recruitmentInfo.nationality.korean', result.recruitmentInfo.nationality.korean);
       methods.setValue('recruitmentInfo.nationality.foreigner', result.recruitmentInfo.nationality.foreigner);
       methods.setValue('recruitmentInfo.nationality.marriageVisa', result.recruitmentInfo.nationality.marriageVisa);
+
+      methods.setValue('content', result.content);
+
+      methods.setValue('locationInfo.roomCount', result.locationInfo.roomCount);
+      methods.setValue('locationInfo.address', result.locationInfo.address);
+      methods.setValue('locationInfo.addressDetail', result.locationInfo.addressDetail);
+
+      methods.setValue('managerInfo.managerName', result.managerInfo.managerName);
+      methods.setValue('managerInfo.isNamePrivate', result.managerInfo.isNamePrivate);
+      methods.setValue('managerInfo.managerNumber', result.managerInfo.managerNumber);
+      methods.setValue('managerInfo.isNumberPrivate', result.managerInfo.isNumberPrivate);
+      methods.setValue('managerInfo.managerEmail', result.managerInfo.managerEmail);
+      methods.setValue('managerInfo.isEmailPrivate', result.managerInfo.isEmailPrivate);
     }
   }, [isSuccess, data, methods]);
 
@@ -180,6 +212,7 @@ export default function EmployerRecruitmentDetailContainer() {
 
       await queryClient.invalidateQueries({ queryKey: [queryKeys.RECRUITMENT_STATUS], refetchType: 'all' });
       await queryClient.invalidateQueries({ queryKey: [queryKeys.RECRUITMENT_LIST], refetchType: 'all' });
+      await queryClient.invalidateQueries({ queryKey: [queryKeys.RECRUITMENT_DETAIL], refetchType: 'all' });
 
       setAlertWithConfirmAtom((prev) => ({
         ...prev,
@@ -204,7 +237,7 @@ export default function EmployerRecruitmentDetailContainer() {
   if (isSuccess && data?.result) {
     return (
       <FormProvider {...methods}>
-        {isOpenJobModal && <DynamicJobModal name="job" setIsOpenJobModal={setIsOpenJobModal} />}
+        {isOpenJobModal && <DynamicJobModal name="recruitmentInfo.jobs" setIsOpenJobModal={setIsOpenJobModal} />}
         <EmployerRecruitmentDetail setIsOpenJobModal={setIsOpenJobModal}>
           <RecruitmentDetailProgressMenu fetchDraftRecruitment={fetchDraftRecruitment}>
             {/* 임시저장 상태 */}
