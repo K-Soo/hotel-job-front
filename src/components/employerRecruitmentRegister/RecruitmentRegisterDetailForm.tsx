@@ -13,6 +13,7 @@ import Button from '@/components/common/style/Button';
 import { CreateRecruitmentForm } from '@/types';
 import { experienceCondition } from '@/constants/recruitment';
 import React from 'react';
+import FormArrayCheckbox from '@/components/common/form/FormArrayCheckbox';
 
 interface RecruitmentRegisterDetailFormProps {
   setIsOpenJobModal: React.Dispatch<React.SetStateAction<boolean>>;
@@ -34,10 +35,10 @@ export default function RecruitmentRegisterDetailForm({ setIsOpenJobModal }: Rec
 
   return (
     <S.RecruitmentRegisterDetailForm>
-      {/* <HorizontalFormWrapper>
-        <FormInputB<any> required label="직무" name="직무" placeholder="직무" />
+      <HorizontalFormWrapper>
+        <FormArrayCheckbox<CreateRecruitmentForm> label="직무" name="recruitmentInfo.jobs" required />
         <Button label="선택" variant="primary" height="40px" width="100px" margin="0 0 0 15px" onClick={() => setIsOpenJobModal(true)} />
-      </HorizontalFormWrapper> */}
+      </HorizontalFormWrapper>
 
       <HorizontalFormWrapper label="경력" required>
         <FormRadio<CreateRecruitmentForm>
@@ -91,23 +92,18 @@ export default function RecruitmentRegisterDetailForm({ setIsOpenJobModal }: Rec
         />
       </HorizontalFormWrapper>
 
-      {/* <HorizontalFormWrapper label="항목추가">
+      <HorizontalFormWrapper label="항목추가">
         <RecruitmentDetailAdditional />
-      </HorizontalFormWrapper> */}
+      </HorizontalFormWrapper>
 
-      {/* {departmentValue && (
-        <S.AdditionalContainer>
-          {departmentValue && (
-            <FormInput<any> label="근무부서" name="department.value" placeholder="근무하게 될 부서 또는 근무지" isFocusing />
-          )}
-        </S.AdditionalContainer>
-      )}
+      {/* 
+      <S.AdditionalContainer>
+        <FormInput<any> label="근무부서" name="department.value" placeholder="근무하게 될 부서 또는 근무지" isFocusing />
+      </S.AdditionalContainer>
 
-      {positionValue && (
-        <S.AdditionalContainer>
-          {positionValue && <FormSelect name="position" options={optionalPositionOptions} label="직급" />}
-        </S.AdditionalContainer>
-      )} */}
+      <S.AdditionalContainer>
+        <FormSelect name="position" options={optionalPositionOptions} label="직급" />
+      </S.AdditionalContainer> */}
     </S.RecruitmentRegisterDetailForm>
   );
 }
