@@ -24,7 +24,6 @@ export default function FormToggle<T extends FieldValues>({ label, name }: FormT
   } = useFormContext<T>();
 
   const value = watch(name);
-  console.log('value: ', value);
 
   const handleToggleChange = () => {
     setValue(name, !value as PathValue<T, Path<T>>);
