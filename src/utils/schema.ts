@@ -2,12 +2,11 @@ import * as yup from 'yup';
 import { careerLevel, position, licenseStage } from '@/constants/resume';
 import { experienceCondition, recruitmentStatus } from '@/constants/recruitment';
 import { educationLevel, salaryType } from '@/constants';
-import { job } from '@/constants/job';
+import { allJobs, allJobsKeyValues, AllJobsKeyValuesKeys, allJobsKeyValuesKeys } from '@/constants/job';
 import { validation } from '@/utils/validation';
 import {
-  CareerLevel,
-  SalaryType,
-  Job,
+  CareerLevelKeys,
+  SalaryTypeKeys,
   Position,
   EducationLevelKeys,
   LicenseStageKeys,
@@ -15,15 +14,16 @@ import {
   RecruitmentStatusKeys,
 } from '@/types';
 
-const careerLevelKeyValue = Object.keys(careerLevel) as CareerLevel[];
-const salaryTypeKeyValue = Object.keys(salaryType) as SalaryType[];
-const jobKeyValue = Object.keys(job) as Job[];
+const careerLevelKeyValue = Object.keys(careerLevel) as CareerLevelKeys[];
+const salaryTypeKeyValue = Object.keys(salaryType) as SalaryTypeKeys[];
+const jobKeyValue = Object.keys(allJobs) as AllJobsKeyValuesKeys[];
 const positionKeys = Object.keys(position) as Position[];
 const educationLevelKeys = Object.keys(educationLevel) as EducationLevelKeys[];
 const licenseStageKeyValue = Object.keys(licenseStage) as LicenseStageKeys[];
 
 const experienceLevelValue = Object.keys(experienceCondition) as experienceConditionKeys[];
 const recruitmentStatusKeys = Object.keys(recruitmentStatus) as RecruitmentStatusKeys[];
+// const allJobsKeyValuesKeys = Object.keys(allJobsKeyValues) as AllJobsKeyValuesKeys[];
 
 const signInSchema = yup.object({
   userId: validation.USER_ID,
@@ -117,9 +117,14 @@ const oauthSignInSchema = yup.object({
 const recruitmentSchema = yup.object({
   recruitmentTitle: validation.REQUIRED_TEXT_1({ minLength: 5, maxLength: 30 }),
   recruitmentStatus: yup.string().oneOf(recruitmentStatusKeys).required(),
-
   // 모집내용
   recruitmentInfo: yup.object({
+    jobs: yup
+      .array()
+      .of(yup.string().oneOf(allJobsKeyValuesKeys as AllJobsKeyValuesKeys[], '유효하지 않은 직무입니다.'))
+      .required('직무를 선택해야 합니다.')
+      .min(1, '최소 한 개의 직무를 선택해야 합니다.')
+      .max(3, '최대 3개까지 선택 가능합니다.'),
     experienceCondition: yup.string().oneOf(experienceLevelValue).required('필수 선택'),
     recruitmentCapacity: yup.number().min(1, '모집인원을 입력해주세요.').max(3, '최대 3명까지 가능합니다.').required(),
     educationCondition: yup
@@ -147,6 +152,48 @@ const recruitmentSchema = yup.object({
         }
         return true;
       }),
+  }),
+  content: yup.string().required('상세 모집내용을 입력해주세요.'),
+  // 근무조건
+  conditionInfo: yup.object({
+    salaryType: yup.string().oneOf(salaryTypeKeyValue).required('필수 선택'),
+    salaryAmount: yup.number().typeError('급여액은 숫자여야 합니다.').min(10000, '10,000원 이상').default(0).required(),
+    employmentType: yup
+      .object({
+        FULL_TIME: yup.boolean().default(false),
+        CONTRACT: yup.boolean().default(false),
+        DAILY_WORKER: yup.boolean().default(false),
+        INTERN: yup.boolean().default(false),
+        PART_TIME: yup.boolean().default(false),
+      })
+      .test('employmentType-selected', '근무형태를 선택해주세요.!!!', function (value) {
+        const { path, createError } = this;
+        const valid = Object.values(value).every((v) => v === false);
+        if (valid) {
+          return createError({
+            path: `${path}.FULL_TIME`,
+            message: '근무형태를 선택해주세요.',
+          });
+        }
+        return true;
+      }),
+  }),
+  // 근무지 정보
+  locationInfo: yup.object({
+    roomCount: yup.number().min(0, '객실수를 입력해주세요.').required(),
+    address: yup.string().required('주소를 검색해주세요'),
+    addressDetail: yup.string().required(),
+  }),
+
+  managerInfo: yup.object({
+    managerName: validation.REQUIRED_TEXT_2({ minLength: 2, maxLength: 10 }),
+    isNamePrivate: yup.boolean().default(false),
+
+    managerNumber: validation.PHONE,
+    isNumberPrivate: yup.boolean().default(false),
+
+    managerEmail: validation.REQUIRED_EMAIL(),
+    isEmailPrivate: yup.boolean().default(false),
   }),
 });
 
