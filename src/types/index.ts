@@ -1,9 +1,9 @@
 import * as API from '@/types/API';
 import { careerLevel, licenseStage } from '@/constants/resume';
 import { experienceCondition, recruitmentStatus } from '@/constants/recruitment';
-import { city } from '@/constants/location';
+import { AllJobsKeyValuesKeys } from '@/constants/job';
 import { educationLevel, position, salaryType } from '@/constants';
-import { job } from '@/constants/job';
+import { city } from '@/constants/location';
 
 export type ProviderType = 'local' | 'kakao';
 export type RoleType = 'ADMIN' | 'EMPLOYER' | 'JOB_SEEKER';
@@ -22,25 +22,15 @@ export type AccountStatusType =
   | 'WAITING_APPROVAL'
   | 'WAITING_APPROVAL';
 
-const test = {
-  라벨: 'LABEL',
-  아이템: 'ITEM',
-} as const;
-
-type TestValueType = keyof typeof test;
-
 export type ResumeType = 'FILE' | 'GENERAL'; //파일, 일반
-export type CareerLevel = keyof typeof careerLevel;
+export type CareerLevelKeys = keyof typeof careerLevel;
 export type EducationLevelKeys = keyof typeof educationLevel;
-export type Job = keyof typeof job;
 export type Position = keyof typeof position;
 export type City = keyof typeof city;
-export type SalaryType = keyof typeof salaryType;
+export type SalaryTypeKeys = keyof typeof salaryType;
 export type LicenseStageKeys = keyof typeof licenseStage;
 export type experienceConditionKeys = keyof typeof experienceCondition;
 export type RecruitmentStatusKeys = keyof typeof recruitmentStatus;
-
-// type CareerLevelType = typeof careerLevel[keyof typeof careerLevel];
 
 export type TalentListItem = {};
 
@@ -54,12 +44,12 @@ export type Experience = {
   companyName: string;
   isEmployed: boolean; //재직중
   responsibility: string; //담당업무
-  job?: Job | undefined; //직무
+  job: AllJobsKeyValuesKeys | undefined; //직무
   position?: Position; //직급/직책
   startDate: Date;
   endDate: Date;
   // city: City;
-  salaryType?: SalaryType | undefined; //급여 유형
+  salaryType?: SalaryTypeKeys | undefined; //급여 유형
   // baseSalary: number; //급여 금액
   // allowance: number; //수당
   // reasonForLeaving: string; //퇴사사유
@@ -79,7 +69,7 @@ export interface SignInForm extends API.SignInRequest {}
 
 export interface ResumeRegisterForm {
   resumeType: ResumeType;
-  careerLevel: CareerLevel;
+  careerLevel: CareerLevelKeys;
   title: string;
   summary: string;
   education: EducationLevelKeys;
@@ -167,6 +157,7 @@ export interface CreateRecruitmentForm {
   recruitmentTitle: string;
   recruitmentStatus: RecruitmentStatusKeys;
   recruitmentInfo: {
+    jobs: any[];
     experienceCondition: experienceConditionKeys;
     recruitmentCapacity: number;
     educationCondition: 'NOT_REQUIRED' | EducationLevelKeys;
@@ -176,13 +167,42 @@ export interface CreateRecruitmentForm {
       marriageVisa?: string;
     };
   };
+  conditionInfo: {
+    salaryType: SalaryTypeKeys;
+    salaryAmount: number;
+    employmentType: {
+      CONTRACT: boolean;
+      DAILY_WORKER: boolean;
+      FULL_TIME: boolean;
+      INTERN: boolean;
+      PART_TIME: boolean;
+    };
+  };
+  content: string;
+  locationInfo: {
+    roomCount: number;
+    address: string;
+    addressDetail: string;
+  };
+  managerInfo: {
+    managerName: string;
+    isNamePrivate: boolean;
+
+    managerNumber: string;
+    isNumberPrivate: boolean;
+
+    managerEmail: string;
+    isEmailPrivate: boolean;
+  };
 }
 
+// response 공고 상세
 export interface RecruitmentDetail {
   id: string;
   recruitmentTitle: string;
   recruitmentStatus: RecruitmentStatusKeys;
   recruitmentInfo: {
+    jobs: any[];
     experienceCondition: experienceConditionKeys;
     recruitmentCapacity: number;
     educationCondition: 'NOT_REQUIRED' | EducationLevelKeys;
@@ -192,24 +212,23 @@ export interface RecruitmentDetail {
       marriageVisa?: string;
     };
   };
+  content: string;
+  locationInfo: {
+    roomCount: number;
+    address: string;
+    addressDetail: string;
+  };
+  managerInfo: {
+    managerName: string;
+    isNamePrivate: boolean;
+
+    managerNumber: string;
+    isNumberPrivate: boolean;
+
+    managerEmail: string;
+    isEmailPrivate: boolean;
+  };
   updateAt: Date;
 }
 
 export interface RecruitmentDetailForm extends Omit<RecruitmentDetail, 'id' | 'updateAt'> {}
-
-// export interface RecruitmentDetailForm {
-//   recruitmentTitle: string;
-//   recruitmentStatus: RecruitmentStatusKeys;
-//   recruitmentInfo: {
-//     experienceCondition: experienceConditionKeys;
-//     recruitmentCapacity: number;
-//     educationCondition: 'NOT_REQUIRED' | EducationLevelKeys;
-//     nationality: {
-//       korean: boolean;
-//       foreigner: boolean;
-//       marriageVisa?: string;
-//     };
-//   };
-// }
-
-export interface DraftRecruitmentForm extends RecruitmentDetailForm {}
