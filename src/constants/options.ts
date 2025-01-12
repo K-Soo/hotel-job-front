@@ -1,5 +1,5 @@
 import { educationLevel, position, salaryType } from '@/constants';
-import { job } from '@/constants/job';
+import { allJobs } from '@/constants/job';
 
 export const salaryTypeOptions = [
   { label: '선택', value: '' },
@@ -31,7 +31,7 @@ export const educationConditionLevelOptions = [
 
 export const optionalJobOptions = [
   { label: '선택', value: '' },
-  ...Object.entries(job).map(([key, value]) => ({ label: value, value: key })),
+  ...Object.entries(allJobs).map(([key, value]) => ({ label: value, value: key })),
 ];
 
 export const optionalPositionOptions = [
