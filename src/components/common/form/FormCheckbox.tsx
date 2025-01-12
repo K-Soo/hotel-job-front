@@ -36,6 +36,7 @@ export default function FormCheckbox<T extends FieldValues>({
     if (error && watchValue) {
       clearErrors(name);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [error, watchValue]);
 
   return (
