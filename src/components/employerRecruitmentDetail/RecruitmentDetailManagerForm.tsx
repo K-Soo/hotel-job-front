@@ -28,7 +28,7 @@ export default function RecruitmentDetailManagerForm() {
           maxWidth="450px"
           mask="999-9999-9999"
         />
-        <FormCheckbox<CreateRecruitmentForm> label="비공개" name="managerInfo.isNamePrivate" visibleIcon={false} margin="0 0 0 15px" />
+        <FormCheckbox<CreateRecruitmentForm> label="비공개" name="managerInfo.isNumberPrivate" visibleIcon={false} margin="0 0 0 15px" />
       </HorizontalFormWrapper>
 
       <HorizontalFormWrapper>
