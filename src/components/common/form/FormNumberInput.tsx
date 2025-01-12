@@ -39,6 +39,8 @@ export default function FormNumberInput<T extends FieldValues>({
   maxLength,
   isComma,
 }: FormNumberInputProps<T>) {
+  const [inputValue, setInputValue] = React.useState('0');
+
   const {
     formState: { errors },
     register,
@@ -55,6 +57,10 @@ export default function FormNumberInput<T extends FieldValues>({
   const watchValue = watch(name);
 
   React.useEffect(() => {
+    setInputValue(value);
+  }, [watchValue]);
+
+  React.useEffect(() => {
     if (watchValue && watchValue.length !== 0) {
       clearErrors(name);
     }
@@ -69,12 +75,16 @@ export default function FormNumberInput<T extends FieldValues>({
 
   const error = get(errors, name);
 
+  // 내부 상태로 렌더링 값을 관리
+
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
+    console.log('value: ', value);
 
-    const numberWithoutCommas = parseInt(value.replace(/,/g, ''));
-    const validValue = isNaN(Number(numberWithoutCommas)) ? 0 : numberWithoutCommas;
-    setValue(name, validValue as PathValue<T, Path<T>>);
+    const rawValue = event.target.value.replace(/,/g, ''); // 쉼표 제거
+    console.log('rawValue: ', rawValue);
+    setInputValue(isComma ? priceComma(rawValue) : rawValue); // 내부 상태 업데이트
+    setValue(name, rawValue as PathValue<T, Path<T>>); // 폼 상태 업데이트
   };
 
   return (
@@ -92,7 +102,7 @@ export default function FormNumberInput<T extends FieldValues>({
           type="text"
           readOnly={readOnly}
           disabled={disabled}
-          value={isComma ? priceComma(value) : value}
+          value={inputValue}
           maxLength={maxLength}
           {...register(name, {
             onChange: handleInputChange,
