@@ -65,8 +65,8 @@ const S = {
     }
 
     input[type='checkbox']:checked + label {
-      background-color: ${(props) => props.theme.colors.blue600};
-      border: 1px solid ${(props) => props.theme.colors.blue600};
+      background-color: ${(props) => props.theme.colors.blue400};
+      border: 1px solid ${(props) => props.theme.colors.blue400};
       color: #ffffff;
     }
 
