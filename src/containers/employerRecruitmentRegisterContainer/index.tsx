@@ -4,9 +4,8 @@ import { useForm, FormProvider, SubmitHandler, useFormContext } from 'react-hook
 import FormDevTools from '@/components/common/FormDevTools';
 import dynamic from 'next/dynamic';
 import RecruitmentRegisterProgressMenu from '@/components/employerRecruitmentRegister/RecruitmentRegisterProgressMenu';
-import useAuth from '@/hooks/useAuth';
 import { CreateRecruitmentForm } from '@/types';
-import { Post } from '@/apis';
+import { Get, Post } from '@/apis';
 import { schema } from '@/utils';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useRouter } from 'next/router';
@@ -14,12 +13,16 @@ import useToast from '@/hooks/useToast';
 import path from '@/constants/path';
 import { useQueryClient } from '@tanstack/react-query';
 import queryKeys from '@/constants/queryKeys';
-import { DevTool } from '@hookform/devtools';
 import Button from '@/components/common/style/Button';
-import useLoading from '@/hooks/useLoading';
 import useAlertWithConfirm from '@/hooks/useAlertWithConfirm';
+import { QUILL_RECRUITMENT_INIT_TEXT } from '@/constants/quill';
+import { daumPostAtom } from '@/recoil/daumPost';
+import { useRecoilValue } from 'recoil';
+import useFetchQuery from '@/hooks/useFetchQuery';
+import useAuth from '@/hooks/useAuth';
 
-// const DynamicJobModal = dynamic(() => import('@/components/common/employer/JobModal'), { ssr: false });
+const DynamicJobModal = dynamic(() => import('@/components/common/employer/JobModal'), { ssr: false });
+const DynamicDaumPost = dynamic(() => import('@/components/common/DaumPost'), { ssr: false });
 
 export type Person = {
   users: {
@@ -36,9 +39,10 @@ export default function EmployerRecruitmentRegisterContainer() {
   const [isOpenJobModal, setIsOpenJobModal] = React.useState(false);
   const [isDisabled, setIsDisabled] = React.useState(false);
 
+  const { authAtomState } = useAuth();
   const { addToast } = useToast();
-  const { setLoadingAtomStatue } = useLoading();
   const { setAlertWithConfirmAtom } = useAlertWithConfirm();
+  const daumPostAtomValue = useRecoilValue(daumPostAtom);
 
   const router = useRouter();
   const queryClient = useQueryClient();
@@ -55,25 +59,59 @@ export default function EmployerRecruitmentRegisterContainer() {
       recruitmentStatus: 'DRAFT',
       // 모집내용
       recruitmentInfo: {
+        jobs: [],
         experienceCondition: undefined,
         nationality: {
           korean: false,
           foreigner: false,
           marriageVisa: '',
         },
-        recruitmentCapacity: 0,
+        recruitmentCapacity: 1,
         educationCondition: 'NOT_REQUIRED',
       },
 
-      // recruitmentStatus: undefined,
-      // users: [],
-      // job: [],
+      //근무조건
+      conditionInfo: {
+        salaryType: 'MONTHLY', //급여 타입
+        salaryAmount: 0, //급여액
+        employmentType: {
+          CONTRACT: false,
+          DAILY_WORKER: false,
+          FULL_TIME: false,
+          INTERN: false,
+          PART_TIME: false,
+        },
+      },
+
+      // 상세 모집내용
+      content: QUILL_RECRUITMENT_INIT_TEXT,
+
+      // 근무지 정보
+      locationInfo: {
+        roomCount: 0,
+        address: '',
+        addressDetail: '',
+      },
+      managerInfo: {
+        managerName: '',
+        isNamePrivate: false,
+
+        managerNumber: '',
+        isNumberPrivate: false,
+
+        managerEmail: '',
+        isEmailPrivate: false,
+      },
+
       // department: undefined,
       // preferences: undefined, // 우대조건
-      // salaryType: undefined, //급여 타입
+
       // workingDay: undefined, //근무요일
     },
   });
+
+  console.log('@@@@@@@@@@@@@@: ', methods.formState.errors);
+  console.log('값값값값값값값값값: ', methods.watch());
 
   const onSubmit: SubmitHandler<CreateRecruitmentForm> = async (data, event) => {
     event?.preventDefault();
@@ -90,6 +128,7 @@ export default function EmployerRecruitmentRegisterContainer() {
 
       await queryClient.invalidateQueries({ queryKey: [queryKeys.RECRUITMENT_STATUS], refetchType: 'all' });
       await queryClient.invalidateQueries({ queryKey: [queryKeys.RECRUITMENT_LIST], refetchType: 'all' });
+      await queryClient.invalidateQueries({ queryKey: [queryKeys.MY_COMPANY], refetchType: 'all' });
 
       setAlertWithConfirmAtom((prev) => ({
         ...prev,
@@ -100,7 +139,7 @@ export default function EmployerRecruitmentRegisterContainer() {
         onClickConfirm: () => router.replace(path.EMPLOYER_RECRUITMENT),
       }));
     } catch (error) {
-      alert('공고생성 실패');
+      alert('공고생성 중 문제가 발생했습니다. 문제가 지속되면 관리자에게 문의하세요.');
     } finally {
       setIsDisabled(false);
     }
@@ -121,16 +160,43 @@ export default function EmployerRecruitmentRegisterContainer() {
       addToast({ message: '임시저장', type: 'info' });
       await queryClient.invalidateQueries({ queryKey: [queryKeys.RECRUITMENT_LIST], refetchType: 'all' });
       await queryClient.invalidateQueries({ queryKey: [queryKeys.RECRUITMENT_STATUS], refetchType: 'all' });
+      await queryClient.invalidateQueries({ queryKey: [queryKeys.MY_COMPANY], refetchType: 'all' });
 
       router.replace(`${path.EMPLOYER_RECRUITMENT}/${response.result.id}`);
     } catch (error) {
-      alert('임시저장 실패');
+      alert('임시저장 중 문제가 발생했습니다. 문제가 지속되면 관리자에게 문의하세요.');
     }
   };
 
+  const { data: businessData } = useFetchQuery({
+    queryKey: [queryKeys.MY_COMPANY, { nickname: authAtomState.nickname }],
+    queryFn: Get.employerCompany,
+    options: {
+      throwOnError: false,
+      staleTime: 1000 * 60 * 5,
+      gcTime: 1000 * 60 * 10,
+    },
+  });
+
+  React.useEffect(() => {
+    if (businessData && businessData.result) {
+      const { result } = businessData;
+
+      methods.setValue('locationInfo.address', result.address);
+      methods.setValue('locationInfo.addressDetail', result.addressDetail);
+
+      methods.setValue('managerInfo.managerName', result.managerName);
+      methods.setValue('managerInfo.managerNumber', result.managerNumber);
+      methods.setValue('managerInfo.managerEmail', result.managerEmail);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [businessData]);
+
   return (
     <FormProvider {...methods}>
-      {/* {isOpenJobModal && <DynamicJobModal name="job" setIsOpenJobModal={setIsOpenJobModal} />} */}
+      {isOpenJobModal && <DynamicJobModal name="recruitmentInfo.jobs" setIsOpenJobModal={setIsOpenJobModal} />}
+      {daumPostAtomValue.isOpen && <DynamicDaumPost addressName="locationInfo.address" addressDetailName="locationInfo.addressDetail" />}
+
       <EmployerRecruitmentRegister setIsOpenJobModal={setIsOpenJobModal}>
         <RecruitmentRegisterProgressMenu fetchDraftRecruitment={fetchDraftRecruitment}>
           <Button
@@ -143,7 +209,7 @@ export default function EmployerRecruitmentRegisterContainer() {
           />
         </RecruitmentRegisterProgressMenu>
       </EmployerRecruitmentRegister>
-      <DevTool control={methods.control} />
+      <FormDevTools control={methods.control} />
     </FormProvider>
   );
 }
