@@ -1,4 +1,4 @@
-export const hotelJob = {
+export const hotelJobs = {
   CLEANING: '청소',
   COUPLE_TEAM: '부부팀',
   BEDDING: '배팅',
@@ -10,7 +10,14 @@ export const hotelJob = {
   MANAGER: '지배인',
 };
 
-export const touristHotel = {
+type HotelJobsKey = keyof typeof hotelJobs;
+
+export const hotelJobKeyValues = Object.keys(hotelJobs).reduce((acc, key) => {
+  acc[key as HotelJobsKey] = key as HotelJobsKey;
+  return acc;
+}, {} as Record<HotelJobsKey, HotelJobsKey>);
+
+export const touristHotelJobs = {
   GENERAL_MANAGER: '총지배인',
   ROOM_MANAGER: '객실지배인',
   BANQUET_MANAGER: '연회부 지배인',
@@ -36,7 +43,14 @@ export const touristHotel = {
   KIDS_CLUB_STAFF: '키즈 클럽 직원',
 };
 
-export const otherJob = {
+type TouristHotelJobsKey = keyof typeof touristHotelJobs;
+
+export const touristHotelJobsKeyValues = Object.keys(touristHotelJobs).reduce((acc, key) => {
+  acc[key as TouristHotelJobsKey] = key as TouristHotelJobsKey;
+  return acc;
+}, {} as Record<TouristHotelJobsKey, TouristHotelJobsKey>);
+
+export const otherJobs = {
   MAINTENANCE: '시설 관리',
   SECURITY: '보안',
   MANAGEMENT: '경영',
@@ -48,8 +62,24 @@ export const otherJob = {
   OTHER: '기타',
 };
 
-export const job = {
-  ...otherJob,
-  ...touristHotel,
-  ...hotelJob,
+type OtherJobsKey = keyof typeof otherJobs;
+
+export const otherJobsKeyValues = Object.keys(otherJobs).reduce((acc, key) => {
+  acc[key as OtherJobsKey] = key as OtherJobsKey;
+  return acc;
+}, {} as Record<OtherJobsKey, OtherJobsKey>);
+
+export const allJobs = {
+  ...otherJobs,
+  ...touristHotelJobs,
+  ...hotelJobs,
 } as const;
+
+export type AllJobsKeyValuesKeys = keyof typeof allJobs;
+
+export const allJobsKeyValues = Object.keys(allJobs).reduce((acc, key) => {
+  acc[key as AllJobsKeyValuesKeys] = key as AllJobsKeyValuesKeys;
+  return acc;
+}, {} as Record<AllJobsKeyValuesKeys, AllJobsKeyValuesKeys>);
+
+export const allJobsKeyValuesKeys = Object.keys(allJobsKeyValues) as AllJobsKeyValuesKeys[];

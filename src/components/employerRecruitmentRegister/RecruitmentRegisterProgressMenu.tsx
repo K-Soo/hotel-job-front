@@ -3,10 +3,22 @@ import Button from '@/components/common/style/Button';
 import Link from 'next/link';
 import Icon from '@/icons/Icon';
 import React from 'react';
+import { SubmitHandler, useFormContext } from 'react-hook-form';
+import { CreateRecruitmentForm, RecruitmentDetailForm, RecruitmentStatusKeys } from '@/types';
+import { dateFormat } from '@/utils';
 
-interface RecruitmentRegisterProgressMenuProps {}
+interface RecruitmentRegisterProgressMenuProps {
+  fetchDraftRecruitment: () => Promise<void>;
+  children: React.ReactNode;
+}
 
-function RecruitmentRegisterProgressMenu({}: RecruitmentRegisterProgressMenuProps) {
+function RecruitmentRegisterProgressMenu({ fetchDraftRecruitment, children }: RecruitmentRegisterProgressMenuProps) {
+  const { watch, handleSubmit } = useFormContext<CreateRecruitmentForm | RecruitmentDetailForm>();
+
+  // const updatedAtWatchValue = watch('updatedAt');
+  const recruitmentStatusWatchValue = watch('recruitmentStatus');
+  console.log('recruitmentStatusWatchValue: ', recruitmentStatusWatchValue);
+
   return (
     <S.RecruitmentRegisterProgressMenu>
       <S.MenuForm>
@@ -33,11 +45,18 @@ function RecruitmentRegisterProgressMenu({}: RecruitmentRegisterProgressMenuProp
         </div>
       </S.MenuForm>
 
-      <Button label="공고 등록 하기" variant="primary" margin="0 0 10px 0" />
+      {children}
 
       <Button label="미리보기" variant="tertiary" margin="0 0 10px 0" />
 
-      <Button label="임시저장" variant="tertiary" />
+      {recruitmentStatusWatchValue === 'DRAFT' && <Button label="임시저장" variant="tertiary" onClick={fetchDraftRecruitment} />}
+
+      {/* {recruitmentStatusWatchValue === 'DRAFT' && (
+        <S.DraftDateForm>
+          <p>{dateFormat.date4(updatedAtWatchValue)}</p>
+          <span className="text">저장</span>
+        </S.DraftDateForm>
+      )} */}
     </S.RecruitmentRegisterProgressMenu>
   );
 }
@@ -74,6 +93,16 @@ const S = {
         /* justify-content: space-between; */
         color: ${(props) => props.theme.colors.gray600};
       }
+    }
+  `,
+  DraftDateForm: styled.div`
+    margin-top: 10px;
+    font-size: 14px;
+    display: flex;
+    justify-content: flex-end;
+    color: ${(props) => props.theme.colors.black400};
+    .text {
+      padding-left: 5px;
     }
   `,
 };

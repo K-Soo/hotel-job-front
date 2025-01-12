@@ -1,12 +1,12 @@
 import { atom, selector } from 'recoil';
-import { ProviderType, RoleType, AccountStatusType } from '@/types';
+import { ProviderType, RoleType, AccountStatusType, CompanyVerificationStatus } from '@/types';
 export interface AuthAtom {
   provider?: ProviderType;
   role?: RoleType;
   accountStatus?: AccountStatusType;
   nickname?: string;
   status: 'AUTHENTICATED' | 'AUTHENTICATION_FAILURE' | 'IDLE';
-  companyVerificationStatus?: 'NOT_REQUESTED' | 'PENDING' | 'VERIFIED' | 'REJECTED';
+  companyVerificationStatus?: CompanyVerificationStatus | undefined;
 }
 
 export const authAtom = atom<AuthAtom>({

@@ -72,6 +72,8 @@ const requests = {
   get: <Response>(url: string) => instance.get<Response>(url, config).then(responseBody),
   post: <Request, Response>(url: string, body: Request, config?: AxiosRequestConfig) =>
     instance.post<Response>(url, body, config).then(responseBody),
+  patch: <Request, Response>(url: string, body: Request, config?: AxiosRequestConfig) =>
+    instance.patch<Response>(url, body, config).then(responseBody),
 };
 
 export const Internal = {
@@ -122,11 +124,32 @@ export const Get = {
     return requests.get<API.GetTalentListResponse>(url);
   },
 
-  // 사업자 -  회사정보 가져오기
+  // 사업자 -  계정정보
+  employerAccountInfo: () => requests.get<any>('/employers'),
+
+  // 사업자 - 회사정보 가져오기
   employerCompany: () => requests.get<API.GetMyCompanyResponse>('/employers/company'),
 
-  // 사업자 -  계정정보
-  employerAccountInfo: () => requests.get<API.AccountInfoResponse>('/employers'),
+  // 사업자 - 채용공고 상세정보
+  recruitmentDetail: ({ id }: { id: string }) => requests.get<API.RecruitmentDetailResponse>(`/employers/recruitment/${id}`),
+
+  // 사업자 - 채용공고 상태별 수량 집계
+  recruitmentStatusCount: () => requests.get<API.RecruitmentStatusCountResponse>(`/employers/recruitment/status`),
+
+  // TODO - 타입정의
+  // 사업자 - 채용공고 리스트
+  recruitmentList: ({ page, limit, status }: API.RecruitmentListRequest) => {
+    const params = new URLSearchParams();
+    if (page) params.set('page', page);
+    if (limit) params.set('limit', limit);
+    if (status) params.set('status', status);
+
+    const queryString = params.toString();
+    const url = `/employers/recruitment${queryString && `?${queryString}`}`;
+    console.log('url: ', url);
+
+    return requests.get<API.RecruitmentListResponse>(url);
+  },
 };
 
 export const Post = {
@@ -146,4 +169,22 @@ export const Post = {
   // 초기 회사정보 등록
   setupCompany: (body: API.SetupCompanyRequest) =>
     requests.post<API.SetupCompanyRequest, API.SetupCompanyResponse>('/employers/company', body),
+
+  // 사업자 -  채용 공고생성
+  createRecruitment: (body: API.CreateRecruitmentRequest) =>
+    requests.post<API.CreateRecruitmentRequest, API.CreateRecruitmentResponse>('/employers/recruitment', body),
+
+  // 사업자 -  공고 임시저장
+  draftRecruitment: (body: API.DraftRecruitmentRequest) =>
+    requests.post<API.DraftRecruitmentRequest, API.DraftRecruitmentResponse>('/employers/recruitment/draft', body),
+
+  // 사업자 -  채용 공고생성
+  removeRecruitment: (body: { ids: string[] }) =>
+    requests.post<{ ids: string[] }, API.RemoveRecruitmentResponse>('/employers/recruitment/remove', body),
+};
+
+export const Patch = {
+  // 사업자 -  등록된 공고 수정
+  updateRecruitment: (body: API.UpdateRecruitmentRequest) =>
+    requests.patch<API.UpdateRecruitmentRequest, API.UpdateRecruitmentResponse>('/employers/recruitment', body),
 };

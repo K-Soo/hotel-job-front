@@ -2,14 +2,13 @@ import styled from 'styled-components';
 import HorizontalFormWrapper from '@/components/common/form/HorizontalFormWrapper';
 import FormInputB from '@/components/common/form/FormInputB';
 import FormCheckbox from '@/components/common/form/FormCheckbox';
+import { CreateRecruitmentForm } from '@/types';
 
-interface RecruitmentRegisterBasicFormProps {}
-
-export default function RecruitmentRegisterBasicForm({}: RecruitmentRegisterBasicFormProps) {
+export default function RecruitmentRegisterBasicForm() {
   return (
     <S.RecruitmentRegisterBasicForm>
       <HorizontalFormWrapper>
-        <FormInputB<any> required label="공고제목" name="공고제목" placeholder="공고제목" />
+        <FormInputB<CreateRecruitmentForm> required label="공고제목" name="recruitmentTitle" placeholder="공고제목" maxLength={30} />
       </HorizontalFormWrapper>
     </S.RecruitmentRegisterBasicForm>
   );

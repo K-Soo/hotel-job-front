@@ -35,6 +35,7 @@ export default function Confirm({}: ConfirmProps) {
               maxWidth="200px"
               margin="0 15px 0 0"
               onClick={() => {
+                alertWithConfirmSelectorValue.onClickCancel();
                 resetAlertWithConfirmAtom();
               }}
             />
@@ -65,7 +66,7 @@ const S = {
     opacity: 0.99;
     aspect-ratio: 16/9;
     margin: 0 auto;
-    width: 480px;
+    width: 450px;
     box-shadow: rgb(0 0 0 / 10%) 0px 4px 16px 0px;
     border-radius: 10px;
     display: flex;
@@ -97,7 +98,7 @@ const S = {
     flex: 1;
     .title {
       color: ${(props) => props.theme.colors.black400};
-      font-size: 24px;
+      font-size: 22px;
       font-weight: 500;
       text-align: left;
       ${(props) => props.theme.media.tablet`
@@ -111,7 +112,7 @@ const S = {
       color: ${(props) => props.theme.colors.black500};
       font-weight: 400;
       margin-top: 30px;
-      font-size: 17px;
+      font-size: 16px;
       text-align: left;
       line-height: 1.1;
       ${(props) => props.theme.media.mobile`

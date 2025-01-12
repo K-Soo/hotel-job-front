@@ -5,7 +5,9 @@ import { daumPostAtom } from '@/recoil/daumPost';
 import { bottomSheetAtom } from '@/recoil/bottomSheet';
 import Modal from '@/components/common/Modal';
 import { alertWithConfirmSelector } from '@/recoil/alertWithConfirm';
+import { toastAtom } from '@/recoil/toast';
 import dynamic from 'next/dynamic';
+import Toast from '@/components/common/Toast';
 
 export { Footer } from '@/components/layout/footer';
 export { Main } from '@/components/layout/main';
@@ -22,6 +24,7 @@ const DynamicNoSSRDaumPost = dynamic(() => import('@/components/common/DaumPost'
 const DynamicNoSSRAccountBottomSheet = dynamic(() => import('@/components/common/AccountBottomSheet'), { ssr: false });
 const DynamicNoSSRAlert = dynamic(() => import('@/components/common/Alert'), { ssr: false });
 const DynamicNoSSRConfirm = dynamic(() => import('@/components/common/Confirm'), { ssr: false });
+const DynamicNoSSRToast = dynamic(() => import('@/components/common/Toast'), { ssr: false });
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -31,17 +34,17 @@ export default function Layout({ children }: LayoutProps) {
   const loadingAtomValue = useRecoilValue(loadingAtom);
   const daumPostAtomValue = useRecoilValue(daumPostAtom);
   const bottomSheetAtomValue = useRecoilValue(bottomSheetAtom);
+  const toastAtomValue = useRecoilValue(toastAtom);
   const alertWithConfirmSelectorValue = useRecoilValue(alertWithConfirmSelector);
 
   return (
     <S.Layout>
       {loadingAtomValue.isLoading && <DynamicNoSSRLoading />}
-
       {bottomSheetAtomValue.isOpen && <DynamicNoSSRAccountBottomSheet />}
 
       {alertWithConfirmSelectorValue.type === 'ALERT' && <DynamicNoSSRAlert />}
       {alertWithConfirmSelectorValue.type === 'CONFIRM' && <DynamicNoSSRConfirm />}
-
+      {toastAtomValue.length !== 0 && <DynamicNoSSRToast />}
       {children}
     </S.Layout>
   );

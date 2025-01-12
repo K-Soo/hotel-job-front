@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Image from 'next/image';
 import Portal from '@/components/common/Portal';
+import Background from '@/components/common/Background';
 
 interface LoadingProps {
   height?: string;
@@ -10,11 +11,9 @@ interface LoadingProps {
 export default function Loading({ height }: LoadingProps) {
   React.useEffect(() => {
     document.documentElement.style.overflow = 'hidden';
-    document.body.style.overflow = 'hidden';
 
     return () => {
       document.documentElement.style.overflow = '';
-      document.body.style.overflow = '';
     };
   }, []);
 
@@ -29,7 +28,7 @@ export default function Loading({ height }: LoadingProps) {
 
 const S = {
   Loading: styled.div<{ height?: string }>`
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     right: 0;
@@ -38,7 +37,7 @@ const S = {
     align-items: center;
     justify-content: center;
     background-color: rgba(0, 0, 0, 0.1);
-    height: ${({ height }) => height || '100%'};
+    min-height: ${({ height }) => height || '100%'};
     z-index: 15;
   `,
 };

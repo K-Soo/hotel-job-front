@@ -7,7 +7,12 @@ import { daumPostAtom } from '@/recoil/daumPost';
 import Portal from '@/components/common/Portal';
 import Icon from '@/icons/Icon';
 
-export default function DaumPost() {
+interface DaumPostProps {
+  addressName?: string;
+  addressDetailName?: string;
+}
+
+export default function DaumPost({ addressName = 'address', addressDetailName = 'addressDetail' }: DaumPostProps) {
   const { setValue, setFocus } = useFormContext();
 
   const setDaumPostState = useSetRecoilState(daumPostAtom);
@@ -31,14 +36,14 @@ export default function DaumPost() {
     if (addressType === 'J') {
       fullAddress = jibunAddress;
     }
-    setValue('address', fullAddress);
-    setFocus('addressDetail');
+    setValue(addressName, fullAddress);
+    setFocus(addressDetailName);
     resetDaumPostAtom();
   };
 
   return (
     <Portal>
-      <Background>
+      <Background onClick={() => setDaumPostState({ isOpen: false })}>
         <S.DaumPost>
           <S.Header>
             <h1>주소 검색</h1>

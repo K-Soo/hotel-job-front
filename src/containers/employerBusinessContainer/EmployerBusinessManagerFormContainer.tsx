@@ -17,7 +17,13 @@ export default function EmployerBusinessManagerFormContainer() {
       </HorizontalFormWrapper>
 
       <HorizontalFormWrapper>
-        <FormInputB<EmployerBusinessForm> readOnly={!modifyMode} label="담당자 연락처" name="managerNumber" placeholder="담당자 연락처" />
+        <FormInputB<EmployerBusinessForm>
+          readOnly={!modifyMode}
+          label="담당자 연락처"
+          name="managerNumber"
+          placeholder="담당자 연락처"
+          mask="999-9999-9999"
+        />
       </HorizontalFormWrapper>
 
       <HorizontalFormWrapper>

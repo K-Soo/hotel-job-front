@@ -30,6 +30,7 @@ export default function CertificationModal() {
     return url.toString();
   };
 
+  // fetch start certification
   const fetchStartCertification = async () => {
     setIsLoading(true);
     try {
@@ -70,8 +71,8 @@ export default function CertificationModal() {
           throw new Error();
         }
 
-        alert('본인 인증 완료');
         await queryClient.invalidateQueries({ queryKey: [queryKeys.USER_INFO], refetchType: 'all' });
+        alert('본인 인증 완료');
 
         setCertificationModalAtom({ isOpen: false });
       }
@@ -93,6 +94,7 @@ export default function CertificationModal() {
     return () => {
       window.removeEventListener('message', handleCertificationMessage);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

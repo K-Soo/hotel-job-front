@@ -36,6 +36,8 @@ export default function AuthenticationComponent() {
     },
   });
 
+  console.log('ME API : ', userInfoData);
+
   React.useEffect(() => {
     if (!userInfoData) return;
     if (!userInfoData.success) return;

@@ -8,7 +8,6 @@ interface FormRadioProps<T> {
   name: Path<T>;
   label: string;
   value: string;
-  visibleIcon?: boolean;
   margin?: string;
 }
 
@@ -16,22 +15,28 @@ export default function FormRadio<T extends FieldValues>({ label, name, margin, 
   const {
     register,
     watch,
+    clearErrors,
     formState: { errors },
   } = useFormContext<T>();
 
   const watchValue = watch(name);
   const error = get(errors, name);
 
+  React.useEffect(() => {
+    if (error && watchValue) {
+      clearErrors(name);
+    }
+  }, [error, watchValue]);
+
   return (
     <S.FormRadio $margin={margin} $active={watchValue === value}>
-      <div className="wrapper">
+      <div className="form-radio-container">
         <input id={`FormRadio-${name}-${value}`} type="radio" checked={watchValue === value} {...register(name)} value={value} />
         <label htmlFor={`FormRadio-${name}-${value}`}>
           <span>{label}</span>
         </label>
       </div>
-
-      {error && <FormError errors={errors} name={name} />}
+      <FormError errors={errors} name={name} style={{ position: 'absolute', bottom: '-12px' }} />
     </S.FormRadio>
   );
 }
@@ -43,11 +48,9 @@ const S = {
     align-items: center;
     justify-content: space-between;
     user-select: none;
-    font-size: 13px;
     cursor: pointer;
-    border-radius: 4px;
-
-    .wrapper {
+    position: relative;
+    .form-radio-container {
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -71,6 +74,7 @@ const S = {
         display: flex;
         align-items: center;
         font-size: 13px;
+        white-space: nowrap;
         ${(props) =>
           props.$active &&
           `
@@ -115,6 +119,14 @@ const S = {
         border-radius: 50%;
         background-color: ${(props) => props.theme.colors.blue700};
         cursor: pointer;
+      }
+
+      input[type='radio']:disabled:checked + label:before {
+        opacity: 0.7;
+      }
+
+      input[type='radio']:disabled:checked + label:after {
+        opacity: 0.7;
       }
     }
   `,

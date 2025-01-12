@@ -1,12 +1,17 @@
 import React from 'react';
 import EmployerAccount from '@/components/employerAccount';
-import { useForm, FormProvider, SubmitHandler, useFormContext } from 'react-hook-form';
+import { useForm, FormProvider } from 'react-hook-form';
 import queryKeys from '@/constants/queryKeys';
 import { Get } from '@/apis';
 import useFetchQuery from '@/hooks/useFetchQuery';
 import { EmployerAccountInfoForm } from '@/types';
+import CertificationModal from '@/components/common/CertificationModal';
+import { useRecoilState } from 'recoil';
+import { certificationModalAtom } from '@/recoil/certification';
 
 export default function EmployerAccountContainer() {
+  const [certificationModalAtomState, setCertificationModalAtomState] = useRecoilState(certificationModalAtom);
+
   const methods = useForm<EmployerAccountInfoForm>({
     // disabled: disabled,
     mode: 'onSubmit',
@@ -30,6 +35,7 @@ export default function EmployerAccountContainer() {
       methods.setValue('userId', result.userId);
       methods.setValue('nickname', result.nickname);
       methods.setValue('createdAt', result.createdAt);
+      methods.setValue('certification', result.certification);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
@@ -37,8 +43,12 @@ export default function EmployerAccountContainer() {
   console.log('계정정보 API : ', data);
 
   return (
-    <FormProvider {...methods}>
-      <EmployerAccount />
-    </FormProvider>
+    <>
+      {certificationModalAtomState.isOpen && <CertificationModal />}
+
+      <FormProvider {...methods}>
+        <EmployerAccount />
+      </FormProvider>
+    </>
   );
 }

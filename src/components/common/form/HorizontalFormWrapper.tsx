@@ -5,11 +5,13 @@ interface HorizontalFormWrapperProps {
   label?: string;
   required?: boolean;
   border?: string;
+  position?: string;
+  style?: React.CSSProperties;
 }
 
-export default function HorizontalFormWrapper({ label, required, border, children }: HorizontalFormWrapperProps) {
+export default function HorizontalFormWrapper({ label, required, border, children, position, style }: HorizontalFormWrapperProps) {
   return (
-    <S.HorizontalFormWrapper $border={border}>
+    <S.HorizontalFormWrapper $border={border} $position={position} style={style}>
       {label && <S.FormLabel required={required}>{label}</S.FormLabel>}
       {children}
     </S.HorizontalFormWrapper>
@@ -17,10 +19,11 @@ export default function HorizontalFormWrapper({ label, required, border, childre
 }
 
 const S = {
-  HorizontalFormWrapper: styled.div<{ $border?: string }>`
+  HorizontalFormWrapper: styled.div<{ $border?: string; $position?: string }>`
     padding: 15px 0 15px 15px;
     border-bottom: 1px solid ${(props) => props.theme.colors.gray300};
     border-bottom: ${(props) => props.$border};
+    position: ${(props) => props.$position};
     display: flex;
     align-items: center;
     min-height: 70px;

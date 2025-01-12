@@ -6,7 +6,7 @@ import { motion } from 'framer-motion';
 
 interface FormArrayRadioProps<T> {
   name: Path<T>;
-  options: { label: string; value: string }[];
+  options: Record<string, string>;
 }
 
 export default function FormArrayRadio<T extends FieldValues>({ name, options }: FormArrayRadioProps<T>) {
@@ -32,17 +32,19 @@ export default function FormArrayRadio<T extends FieldValues>({ name, options }:
   return (
     <S.FormArrayRadio>
       <div className="salary-list">
-        {options.map((element) => (
-          <motion.div
-            key={element.value}
-            className="item"
-            onClick={() => handleClickOption(element.value)}
-            animate={watchValue === element.value ? { backgroundColor: '#3182f6', color: '#FFFFFF' } : undefined}
-            transition={{ duration: 0 }}
-          >
-            {element.label}
-          </motion.div>
-        ))}
+        {Object.entries(options).map(([key, value]) => {
+          return (
+            <motion.div
+              key={key}
+              className="item"
+              onClick={() => handleClickOption(key)}
+              animate={watchValue === key ? { backgroundColor: '#3182f6', color: '#FFFFFF' } : undefined}
+              transition={{ duration: 0 }}
+            >
+              {value}
+            </motion.div>
+          );
+        })}
       </div>
       <FormError errors={errors} name={name} style={{ position: 'absolute' }} />
     </S.FormArrayRadio>

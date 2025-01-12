@@ -18,6 +18,7 @@ export const SkeletonAnimation = css`
     }
   }
 `;
+
 const Line = ({ style }: { style?: React.CSSProperties }) => {
   return <StyledLine style={style} />;
 };
@@ -55,9 +56,106 @@ const StyledDocument = styled.section`
   }
 `;
 
+const Table = ({ style }: { style?: React.CSSProperties }) => {
+  return (
+    <StyledTable style={style}>
+      <div className="container">
+        <Line style={{ height: '50px', borderRadius: '0', borderBottom: '1px solid #f5f5f5' }} />
+        <Line style={{ height: '50px', borderRadius: '0', borderBottom: '1px solid #f5f5f5' }} />
+        <Line style={{ height: '50px', borderRadius: '0', borderBottom: '1px solid #f5f5f5' }} />
+        <Line style={{ height: '50px', borderRadius: '0', borderBottom: '1px solid #f5f5f5' }} />
+        <Line style={{ height: '50px', borderRadius: '0', borderBottom: '1px solid #f5f5f5' }} />
+        <Line style={{ height: '50px', borderRadius: '0', borderBottom: '1px solid #f5f5f5' }} />
+        <Line style={{ height: '50px', borderRadius: '0', borderBottom: '1px solid #f5f5f5' }} />
+        <Line style={{ height: '50px', borderRadius: '0', borderBottom: '1px solid #f5f5f5' }} />
+        <Line style={{ height: '50px', borderRadius: '0', borderBottom: '1px solid #f5f5f5' }} />
+      </div>
+    </StyledTable>
+  );
+};
+
+const StyledTable = styled.section`
+  height: auto;
+  max-width: 100%;
+  margin: 0 auto;
+  border-top: 1px solid ${(props) => props.theme.colors.gray700};
+  border-bottom: 1px solid ${(props) => props.theme.colors.gray700};
+`;
+
+const Tabs = ({ style }: { style?: React.CSSProperties }) => {
+  return (
+    <StyledTabs style={style}>
+      {new Array(6).fill('').map((_, index) => (
+        <div className="item" key={index}>
+          <span className="item__text"></span>
+        </div>
+      ))}
+    </StyledTabs>
+  );
+};
+
+const StyledTabs = styled.div`
+  display: flex;
+  .item {
+    width: 100px;
+    height: 50px;
+    margin-right: 5px;
+    display: flex;
+    align-items: center;
+    &__text {
+      display: inline-block;
+      ${SkeletonAnimation}
+      height: 30px;
+      width: 80px;
+    }
+  }
+`;
+
+const Recruitment = ({ style }: { style?: React.CSSProperties }) => {
+  return (
+    <StyleRecruitment>
+      <div className="recruitment-container">
+        <div className="content">
+          <Line style={{ height: '50px', borderRadius: '5px', marginBottom: '15px' }} />
+          <Line style={{ height: '50px', borderRadius: '5px', marginBottom: '15px' }} />
+          <Line style={{ height: '50px', borderRadius: '5px', marginBottom: '15px' }} />
+          <Line style={{ height: '50px', borderRadius: '5px', marginBottom: '15px' }} />
+          <Line style={{ height: '50px', borderRadius: '5px', marginBottom: '15px' }} />
+          <Line style={{ height: '50px', borderRadius: '5px', marginBottom: '15px' }} />
+          <Line style={{ height: '50px', borderRadius: '5px', marginBottom: '15px' }} />
+        </div>
+        <div className="side">
+          <Line style={{ height: '50px', borderRadius: '5px', marginBottom: '15px' }} />
+          <Line style={{ height: '50px', borderRadius: '5px' }} />
+        </div>
+      </div>
+    </StyleRecruitment>
+  );
+};
+
+const StyleRecruitment = styled.section`
+  .recruitment-container {
+    margin: 0 auto;
+    max-width: 1024px;
+    /* width: 100%; */
+    display: flex;
+    height: 100%;
+    .content {
+      flex: 1;
+    }
+    .side {
+      width: 250px;
+      margin-left: 30px;
+    }
+  }
+`;
+
 const SkeletonUI = {
   Document,
   Line,
+  Table,
+  Tabs,
+  Recruitment,
 };
 
 export default SkeletonUI;

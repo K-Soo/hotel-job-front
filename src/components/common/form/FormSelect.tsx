@@ -68,7 +68,7 @@ export default function FormSelect<T extends FieldValues>({
 
 const S = {
   FormSelect: styled.div<{ $margin?: string; $horizontal?: boolean; $width?: string; $maxWidth?: string }>`
-    margin: ${(props) => (props.$margin ? props.$margin : '0 0 10px 0')};
+    margin: ${(props) => (props.$margin ? props.$margin : '0')};
     width: ${(props) => (props.$width ? props.$width : '100%')};
     max-width: ${(props) => (props.$maxWidth ? props.$maxWidth : '100%')};
     color: ${({ theme }) => theme.colors.black500};
@@ -128,6 +128,6 @@ const StyledMotionSelect = styled(motion.select)`
     border: 1px solid ${(props) => props.theme.colors.blue500};
   }
   &:disabled {
-    background-color: ${(props) => props.theme.colors.gray100};
+    background-color: ${(props) => props.theme.colors.gray};
   }
 `;
