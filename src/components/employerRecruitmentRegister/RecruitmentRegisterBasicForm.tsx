@@ -4,9 +4,7 @@ import FormInputB from '@/components/common/form/FormInputB';
 import FormCheckbox from '@/components/common/form/FormCheckbox';
 import { CreateRecruitmentForm } from '@/types';
 
-interface RecruitmentRegisterBasicFormProps {}
-
-export default function RecruitmentRegisterBasicForm({}: RecruitmentRegisterBasicFormProps) {
+export default function RecruitmentRegisterBasicForm() {
   return (
     <S.RecruitmentRegisterBasicForm>
       <HorizontalFormWrapper>
