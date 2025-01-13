@@ -1,9 +1,10 @@
 import * as API from '@/types/API';
 import { careerLevel, licenseStage } from '@/constants/resume';
-import { experienceCondition, recruitmentStatus } from '@/constants/recruitment';
+import { experienceCondition, recruitmentStatus, workingDayList } from '@/constants/recruitment';
 import { AllJobsKeyValuesKeys } from '@/constants/job';
 import { educationLevel, position, salaryType } from '@/constants';
 import { city } from '@/constants/location';
+import { benefits } from '@/constants/benefits';
 
 export type ProviderType = 'local' | 'kakao';
 export type RoleType = 'ADMIN' | 'EMPLOYER' | 'JOB_SEEKER';
@@ -31,6 +32,8 @@ export type SalaryTypeKeys = keyof typeof salaryType;
 export type LicenseStageKeys = keyof typeof licenseStage;
 export type experienceConditionKeys = keyof typeof experienceCondition;
 export type RecruitmentStatusKeys = keyof typeof recruitmentStatus;
+export type WorkingDayListKeys = keyof typeof workingDayList;
+export type BenefitsKeys = keyof typeof benefits;
 
 export type TalentListItem = {};
 
@@ -166,10 +169,11 @@ export interface CreateRecruitmentForm {
       foreigner: boolean;
       marriageVisa?: string;
     };
+    preferences: '???'[]; // 우대조건
+    department: string; // 근무부서
+    position: '???' | null; // 직급
   };
   conditionInfo: {
-    salaryType: SalaryTypeKeys;
-    salaryAmount: number;
     employmentType: {
       CONTRACT: boolean;
       DAILY_WORKER: boolean;
@@ -177,6 +181,11 @@ export interface CreateRecruitmentForm {
       INTERN: boolean;
       PART_TIME: boolean;
     };
+    salaryType: SalaryTypeKeys;
+    salaryAmount: number;
+    workingDay: WorkingDayListKeys | null;
+    workingTime: { start: string; end: string };
+    benefits: BenefitsKeys[];
   };
   content: string;
   locationInfo: {
@@ -213,6 +222,20 @@ export interface RecruitmentDetail {
     };
   };
   content: string;
+  conditionInfo: {
+    employmentType: {
+      CONTRACT: boolean;
+      DAILY_WORKER: boolean;
+      FULL_TIME: boolean;
+      INTERN: boolean;
+      PART_TIME: boolean;
+    };
+    salaryType: SalaryTypeKeys;
+    salaryAmount: number;
+    workingDay: WorkingDayListKeys | null;
+    workingTime: { start: string; end: string };
+    benefits: BenefitsKeys[];
+  };
   locationInfo: {
     roomCount: number;
     address: string;
