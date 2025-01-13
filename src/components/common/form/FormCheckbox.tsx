@@ -30,6 +30,7 @@ export default function FormCheckbox<T extends FieldValues>({
   } = useFormContext<T>();
 
   const watchValue = watch(name);
+
   const error = get(errors, name);
 
   React.useEffect(() => {
@@ -39,12 +40,22 @@ export default function FormCheckbox<T extends FieldValues>({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [error, watchValue]);
 
+  React.useEffect(() => {
+    if (error) {
+      const label = document.querySelector(`[for="form-checkbox-${name}"]`);
+      if (label) {
+        (label as HTMLElement).focus();
+      }
+    }
+  }, [error, name]);
+
   return (
     <S.FormCheckbox $margin={margin}>
       <S.CheckBoxContainer $active={!!watchValue}>
         <div>
-          <input id={`FormCheckbox-${name}`} type="checkbox" {...register(name)} />
-          <label className="form-label" htmlFor={`FormCheckbox-${name}`}>
+          <input id={`form-checkbox-${name}`} type="checkbox" {...register(name)} />
+
+          <label className="form-label" htmlFor={`form-checkbox-${name}`} tabIndex={0}>
             <p className="form-label__wrapper">
               {required && <span className="form-label__wrapper--required">[필수]</span>}
               {optional && <span className="form-label__wrapper--optional">[선택]</span>}
