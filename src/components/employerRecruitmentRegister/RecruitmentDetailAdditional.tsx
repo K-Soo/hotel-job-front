@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import { useForm, FormProvider, SubmitHandler, useFormContext, useFieldArray } from 'react-hook-form';
-import { Person } from '@/containers/employerRecruitmentRegisterContainer';
 import { motion } from 'framer-motion';
 
 interface RecruitmentDetailAdditionalProps {
@@ -9,41 +8,7 @@ interface RecruitmentDetailAdditionalProps {
 }
 
 export default function RecruitmentDetailAdditional({ additionalTabs, handleClickToggleButton }: RecruitmentDetailAdditionalProps) {
-  const { control, register, formState, setValue, watch, reset, resetField } = useFormContext();
-
-  const departmentValue = watch('department');
-  const positionValue = watch('position');
-
-  const { append, fields, insert, move, prepend, remove, replace, swap, update } = useFieldArray<Person>({
-    name: 'users',
-  });
-
-  const { append: appendJob, fields: jobFields } = useFieldArray<Person>({
-    name: 'users',
-  });
-
-  const handleToggleFields = () => {
-    if (fields.length === 0) {
-      append({ name: '', age: 0 });
-    } else {
-      // 필드가 있으면 모두 삭제
-      remove(); // 인덱스 없이 호출하면 모든 필드가 삭제됩니다.
-    }
-  };
-
-  const handleToggleDepartment = () => {
-    if (departmentValue) {
-      return setValue('department', undefined);
-    }
-    setValue('department', { label: '근무부서', value: '' });
-  };
-
-  const handleTogglePositionValue = () => {
-    if (positionValue) {
-      return setValue('position', undefined);
-    }
-    setValue('position', { label: '근무부서', value: '' });
-  };
+  // const { control, register, formState, setValue, watch, reset, resetField } = useFormContext();
 
   return (
     <S.RecruitmentDetailAdditional>
