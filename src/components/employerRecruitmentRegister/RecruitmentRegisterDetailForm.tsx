@@ -14,16 +14,43 @@ import { CreateRecruitmentForm } from '@/types';
 import { experienceCondition } from '@/constants/recruitment';
 import React from 'react';
 import FormArrayCheckbox from '@/components/common/form/FormArrayCheckbox';
+import { allJobs } from '@/constants/job';
 
 interface RecruitmentRegisterDetailFormProps {
   setIsOpenJobModal: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
+// preferences: [], // 우대조건
+// department: '', // 근무부서
+// position: null, // 직급
 export default function RecruitmentRegisterDetailForm({ setIsOpenJobModal }: RecruitmentRegisterDetailFormProps) {
-  const { watch, clearErrors } = useFormContext<CreateRecruitmentForm>();
+  const [additionalTabs, setAdditionalTabs] = React.useState<Record<string, boolean>>({
+    department: false,
+    position: false,
+    preferences: false,
+  });
 
-  // const departmentValue = watch('department');
-  // const positionValue = watch('position');
+  const {
+    watch,
+    clearErrors,
+    setValue,
+    setFocus,
+    formState: { isSubmitting, isValidating },
+  } = useFormContext<CreateRecruitmentForm>();
+
+  const handleClickToggleButton = (event: React.MouseEvent<HTMLButtonElement>) => {
+    const { name } = event.currentTarget;
+
+    setAdditionalTabs((prev) => {
+      if (name === 'preferences') setValue('recruitmentInfo.preferences', []);
+      if (name === 'department') setValue('recruitmentInfo.department', '');
+      if (name === 'position') setValue('recruitmentInfo.position', null);
+      return {
+        ...prev,
+        [name]: prev[name] ? false : true,
+      };
+    });
+  };
 
   const isCheckedForeigner = watch('recruitmentInfo.nationality.foreigner');
 
@@ -36,8 +63,16 @@ export default function RecruitmentRegisterDetailForm({ setIsOpenJobModal }: Rec
   return (
     <S.RecruitmentRegisterDetailForm>
       <HorizontalFormWrapper>
-        <FormArrayCheckbox<CreateRecruitmentForm> label="직무" name="recruitmentInfo.jobs" required />
-        <Button label="선택" variant="primary" height="40px" width="100px" margin="0 0 0 15px" onClick={() => setIsOpenJobModal(true)} />
+        <FormArrayCheckbox<CreateRecruitmentForm> label="직무" optionsKeyData={allJobs} name="recruitmentInfo.jobs" required />
+        <Button
+          label="선택"
+          variant="primary"
+          height="40px"
+          width="100px"
+          margin="0 0 0 15px"
+          onClick={() => setIsOpenJobModal(true)}
+          disabled={isSubmitting}
+        />
       </HorizontalFormWrapper>
 
       <HorizontalFormWrapper label="경력" required>
@@ -93,17 +128,41 @@ export default function RecruitmentRegisterDetailForm({ setIsOpenJobModal }: Rec
       </HorizontalFormWrapper>
 
       <HorizontalFormWrapper label="항목추가">
-        <RecruitmentDetailAdditional />
+        <RecruitmentDetailAdditional handleClickToggleButton={handleClickToggleButton} additionalTabs={additionalTabs} />
       </HorizontalFormWrapper>
 
-      {/* 
-      <S.AdditionalContainer>
-        <FormInput<any> label="근무부서" name="department.value" placeholder="근무하게 될 부서 또는 근무지" isFocusing />
-      </S.AdditionalContainer>
+      {additionalTabs.preferences && (
+        <S.AdditionalContainer>
+          <HorizontalFormWrapper label="우대조건">
+            <FormInputB<CreateRecruitmentForm>
+              name="recruitmentInfo.preferences"
+              placeholder="근무하게 될 부서 또는 근무지"
+              maxLength={30}
+            />
+            <Button label="선택" variant="primary" height="40px" width="120px" margin="0 0 0 15px" />
+          </HorizontalFormWrapper>
+        </S.AdditionalContainer>
+      )}
 
-      <S.AdditionalContainer>
-        <FormSelect name="position" options={optionalPositionOptions} label="직급" />
-      </S.AdditionalContainer> */}
+      {additionalTabs.department && (
+        <S.AdditionalContainer>
+          <HorizontalFormWrapper label="근무부서">
+            <FormInputB<CreateRecruitmentForm>
+              name="recruitmentInfo.department"
+              placeholder="근무하게 될 부서 또는 근무지"
+              maxLength={30}
+            />
+          </HorizontalFormWrapper>
+        </S.AdditionalContainer>
+      )}
+
+      {additionalTabs.position && (
+        <S.AdditionalContainer>
+          <HorizontalFormWrapper label="직급">
+            <FormSelect name="recruitmentInfo.position" options={optionalPositionOptions} />
+          </HorizontalFormWrapper>
+        </S.AdditionalContainer>
+      )}
     </S.RecruitmentRegisterDetailForm>
   );
 }
@@ -111,11 +170,7 @@ export default function RecruitmentRegisterDetailForm({ setIsOpenJobModal }: Rec
 const S = {
   RecruitmentRegisterDetailForm: styled.div``,
   AdditionalContainer: styled.div`
-    display: flex;
-    flex-direction: column;
-    justify-content: end;
-    align-items: end;
-    padding: 10px 15px;
     background-color: ${(props) => props.theme.colors.gray};
+    opacity: 0.95;
   `,
 };
