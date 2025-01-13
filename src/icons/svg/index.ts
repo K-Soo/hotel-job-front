@@ -38,8 +38,10 @@ import CheckOn16x17 from './checkOn16x17.svg';
 import Info24x24 from './info24x24.svg';
 import Close25x25 from './close25x25.svg';
 import Document from './document.svg';
+import Dots24x24 from './dots24x24.svg';
 
 export {
+  Dots24x24,
   Document,
   Close25x25,
   Info24x24,
