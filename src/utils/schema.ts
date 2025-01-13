@@ -1,8 +1,9 @@
 import * as yup from 'yup';
 import { careerLevel, position, licenseStage } from '@/constants/resume';
-import { experienceCondition, recruitmentStatus } from '@/constants/recruitment';
+import { experienceCondition, recruitmentStatus, workingDayList } from '@/constants/recruitment';
 import { educationLevel, salaryType } from '@/constants';
 import { allJobs, allJobsKeyValues, AllJobsKeyValuesKeys, allJobsKeyValuesKeys } from '@/constants/job';
+import { benefits } from '@/constants/benefits';
 import { validation } from '@/utils/validation';
 import {
   CareerLevelKeys,
@@ -12,6 +13,8 @@ import {
   LicenseStageKeys,
   experienceConditionKeys,
   RecruitmentStatusKeys,
+  WorkingDayListKeys,
+  BenefitsKeys,
 } from '@/types';
 
 const careerLevelKeyValue = Object.keys(careerLevel) as CareerLevelKeys[];
@@ -21,8 +24,11 @@ const positionKeys = Object.keys(position) as Position[];
 const educationLevelKeys = Object.keys(educationLevel) as EducationLevelKeys[];
 const licenseStageKeyValue = Object.keys(licenseStage) as LicenseStageKeys[];
 
+const workingDayListKeyValue = Object.keys(workingDayList) as WorkingDayListKeys[];
+
 const experienceLevelValue = Object.keys(experienceCondition) as experienceConditionKeys[];
 const recruitmentStatusKeys = Object.keys(recruitmentStatus) as RecruitmentStatusKeys[];
+const benefitsKeys = Object.keys(benefits) as BenefitsKeys[];
 // const allJobsKeyValuesKeys = Object.keys(allJobsKeyValues) as AllJobsKeyValuesKeys[];
 
 const signInSchema = yup.object({
@@ -122,9 +128,9 @@ const recruitmentSchema = yup.object({
     jobs: yup
       .array()
       .of(yup.string().oneOf(allJobsKeyValuesKeys as AllJobsKeyValuesKeys[], '유효하지 않은 직무입니다.'))
-      .required('직무를 선택해야 합니다.')
       .min(1, '최소 한 개의 직무를 선택해야 합니다.')
-      .max(3, '최대 3개까지 선택 가능합니다.'),
+      .max(3, '최대 3개까지 선택 가능합니다.')
+      .required('직무를 선택해야 합니다.'),
     experienceCondition: yup.string().oneOf(experienceLevelValue).required('필수 선택'),
     recruitmentCapacity: yup.number().min(1, '모집인원을 입력해주세요.').max(3, '최대 3명까지 가능합니다.').required(),
     educationCondition: yup
@@ -142,7 +148,6 @@ const recruitmentSchema = yup.object({
         }),
       })
       .test('at-least-one-selected', '내국인 또는 외국인 중 하나는 선택해야 합니다.', function (value) {
-        console.log('value: ', value);
         const { path, createError } = this;
         if (!value || (value.korean === false && value.foreigner === false)) {
           return createError({
@@ -152,12 +157,24 @@ const recruitmentSchema = yup.object({
         }
         return true;
       }),
+    preferences: yup
+      .array()
+      .of(yup.string().oneOf(['???']).strict().required())
+      .default([]),
+    department: yup.string().default(''),
+    position: yup.string().oneOf(['???']).nullable().default(null),
   }),
   content: yup.string().required('상세 모집내용을 입력해주세요.'),
   // 근무조건
   conditionInfo: yup.object({
+    benefits: yup.array().of(yup.string().oneOf(benefitsKeys).strict().required()).default([]),
+    workingDay: yup.string().oneOf(workingDayListKeyValue).nullable().default(null),
     salaryType: yup.string().oneOf(salaryTypeKeyValue).required('필수 선택'),
-    salaryAmount: yup.number().typeError('급여액은 숫자여야 합니다.').min(10000, '10,000원 이상').default(0).required(),
+    workingTime: yup.object({
+      start: yup.string().default(''),
+      end: yup.string().default(''),
+    }),
+    salaryAmount: yup.number().typeError('급여액은 숫자여야 합니다.').min(10000, '10,030원 이상').default(0).required(),
     employmentType: yup
       .object({
         FULL_TIME: yup.boolean().default(false),
