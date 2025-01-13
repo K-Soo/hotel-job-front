@@ -34,6 +34,7 @@ export default function Confirm({}: ConfirmProps) {
               variant="secondary"
               maxWidth="200px"
               margin="0 15px 0 0"
+              height="40px"
               onClick={() => {
                 alertWithConfirmSelectorValue.onClickCancel();
                 resetAlertWithConfirmAtom();
@@ -44,6 +45,7 @@ export default function Confirm({}: ConfirmProps) {
               label={alertWithConfirmSelectorValue.confirmLabel}
               variant="primary"
               maxWidth="200px"
+              height="40px"
               onClick={() => {
                 alertWithConfirmSelectorValue.onClickConfirm();
                 resetAlertWithConfirmAtom();
@@ -74,7 +76,7 @@ const S = {
     justify-content: space-between;
     align-items: center;
     will-change: transform;
-    padding: 30px;
+    padding: 25px;
     .image-box {
       position: relative;
       display: flex;
