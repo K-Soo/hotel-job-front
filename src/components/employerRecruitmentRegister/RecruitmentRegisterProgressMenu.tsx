@@ -3,21 +3,17 @@ import Button from '@/components/common/style/Button';
 import Link from 'next/link';
 import Icon from '@/icons/Icon';
 import React from 'react';
-import { SubmitHandler, useFormContext } from 'react-hook-form';
-import { CreateRecruitmentForm, RecruitmentDetailForm, RecruitmentStatusKeys } from '@/types';
-import { dateFormat } from '@/utils';
+import { useFormContext } from 'react-hook-form';
+import { RecruitmentDetailForm } from '@/types';
 
 interface RecruitmentRegisterProgressMenuProps {
-  fetchDraftRecruitment: () => Promise<void>;
   children: React.ReactNode;
 }
 
-function RecruitmentRegisterProgressMenu({ fetchDraftRecruitment, children }: RecruitmentRegisterProgressMenuProps) {
-  const { watch, handleSubmit } = useFormContext<CreateRecruitmentForm | RecruitmentDetailForm>();
+function RecruitmentRegisterProgressMenu({ children }: RecruitmentRegisterProgressMenuProps) {
+  const { watch } = useFormContext<RecruitmentDetailForm>();
 
-  // const updatedAtWatchValue = watch('updatedAt');
   const recruitmentStatusWatchValue = watch('recruitmentStatus');
-  console.log('recruitmentStatusWatchValue: ', recruitmentStatusWatchValue);
 
   return (
     <S.RecruitmentRegisterProgressMenu>
@@ -44,19 +40,8 @@ function RecruitmentRegisterProgressMenu({ fetchDraftRecruitment, children }: Re
           </Link>
         </div>
       </S.MenuForm>
-
       {children}
-
-      <Button label="미리보기" variant="tertiary" margin="0 0 10px 0" />
-
-      {recruitmentStatusWatchValue === 'DRAFT' && <Button label="임시저장" variant="tertiary" onClick={fetchDraftRecruitment} />}
-
-      {/* {recruitmentStatusWatchValue === 'DRAFT' && (
-        <S.DraftDateForm>
-          <p>{dateFormat.date4(updatedAtWatchValue)}</p>
-          <span className="text">저장</span>
-        </S.DraftDateForm>
-      )} */}
+      <Button label="미리보기" variant="tertiary" />
     </S.RecruitmentRegisterProgressMenu>
   );
 }
