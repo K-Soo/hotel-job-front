@@ -23,22 +23,15 @@ import useAuth from '@/hooks/useAuth';
 
 const DynamicJobModal = dynamic(() => import('@/components/common/employer/JobModal'), { ssr: false });
 const DynamicBenefitsModal = dynamic(() => import('@/components/common/employer/BenefitsModal'), { ssr: false });
-const DynamicDaumPost = dynamic(() => import('@/components/common/DaumPost'), { ssr: false });
+const DynamicPreferencesModal = dynamic(() => import('@/components/common/employer/PreferencesModal'), { ssr: false });
 
-export type Person = {
-  users: {
-    name: string;
-    age: number;
-  }[];
-  job: {
-    name: string;
-    age: number;
-  }[];
-};
+const DynamicDaumPost = dynamic(() => import('@/components/common/DaumPost'), { ssr: false });
 
 export default function EmployerRecruitmentRegisterContainer() {
   const [isOpenJobModal, setIsOpenJobModal] = React.useState(false);
   const [isOpenBenefitsModal, setIsOpenBenefitsModal] = React.useState(false);
+  const [isOpenPreferencesModal, setIsOpenPreferencesModal] = React.useState(false);
+
   const [isDisabled, setIsDisabled] = React.useState(false);
 
   const { authAtomState } = useAuth();
@@ -59,7 +52,7 @@ export default function EmployerRecruitmentRegisterContainer() {
       recruitmentStatus: 'DRAFT',
       // 모집내용
       recruitmentInfo: {
-        // jobs: [],
+        jobs: [],
         experienceCondition: undefined,
         nationality: {
           korean: false,
@@ -68,9 +61,9 @@ export default function EmployerRecruitmentRegisterContainer() {
         },
         recruitmentCapacity: 1,
         educationCondition: 'NOT_REQUIRED',
-        preferences: [], // 우대조건
         department: '', // 근무부서
         position: null, // 직급
+        preferences: [], // 필수/우대조건
       },
       //근무조건
       conditionInfo: {
@@ -105,7 +98,7 @@ export default function EmployerRecruitmentRegisterContainer() {
       },
     },
   });
-  console.log('errors: ', methods.formState.errors);
+  console.log('errors: ', methods.watch());
 
   const onSubmit: SubmitHandler<CreateRecruitmentForm> = async (data, event) => {
     event?.preventDefault();
@@ -153,12 +146,16 @@ export default function EmployerRecruitmentRegisterContainer() {
       if (response.result.status !== 'success') {
         throw new Error();
       }
-      addToast({ message: '임시저장', type: 'info' });
+
       await queryClient.invalidateQueries({ queryKey: [queryKeys.RECRUITMENT_LIST], refetchType: 'all' });
       await queryClient.invalidateQueries({ queryKey: [queryKeys.RECRUITMENT_STATUS], refetchType: 'all' });
       await queryClient.invalidateQueries({ queryKey: [queryKeys.MY_COMPANY], refetchType: 'all' });
 
       router.replace(`${path.EMPLOYER_RECRUITMENT}/${response.result.id}`, undefined, { scroll: false });
+
+      setTimeout(() => {
+        addToast({ message: '임시저장', type: 'info' });
+      }, 1000);
     } catch (error) {
       alert('임시저장 중 문제가 발생했습니다. 문제가 지속되면 관리자에게 문의하세요.');
     } finally {
@@ -220,9 +217,17 @@ export default function EmployerRecruitmentRegisterContainer() {
     <FormProvider {...methods}>
       {isOpenJobModal && <DynamicJobModal name="recruitmentInfo.jobs" setIsOpenJobModal={setIsOpenJobModal} />}
       {isOpenBenefitsModal && <DynamicBenefitsModal name="conditionInfo.benefits" setIsOpenBenefitsModal={setIsOpenBenefitsModal} />}
+      {isOpenPreferencesModal && (
+        <DynamicPreferencesModal name="recruitmentInfo.preferences" setIsOpenPreferencesModal={setIsOpenPreferencesModal} />
+      )}
+
       {daumPostAtomValue.isOpen && <DynamicDaumPost addressName="locationInfo.address" addressDetailName="locationInfo.addressDetail" />}
 
-      <EmployerRecruitmentRegister setIsOpenJobModal={setIsOpenJobModal} setIsOpenBenefitsModal={setIsOpenBenefitsModal}>
+      <EmployerRecruitmentRegister
+        setIsOpenJobModal={setIsOpenJobModal}
+        setIsOpenBenefitsModal={setIsOpenBenefitsModal}
+        setIsOpenPreferencesModal={setIsOpenPreferencesModal}
+      >
         <RecruitmentRegisterProgressMenu>
           <Button
             label="공고 생성"
@@ -236,7 +241,7 @@ export default function EmployerRecruitmentRegisterContainer() {
           <Button label="임시저장" variant="tertiary" onClick={fetchDraftRecruitment} margin="0 0 10px 0" isLoading={isDisabled} />
         </RecruitmentRegisterProgressMenu>
       </EmployerRecruitmentRegister>
-      {/* <FormDevTools control={methods.control} /> */}
+      <FormDevTools control={methods.control} />
     </FormProvider>
   );
 }
