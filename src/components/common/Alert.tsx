@@ -48,6 +48,7 @@ export default function Alert() {
               variant="primary"
               maxWidth="120px"
               type="button"
+              height="40px"
               margin="15px 0 0 0"
               onClick={() => {
                 alertWithConfirmSelectorValue.onClickConfirm();
