@@ -3,7 +3,7 @@ import RecruitmentRegisterBasicForm from '@/components/employerRecruitmentRegist
 import RecruitmentRegisterManagerForm from '@/components/employerRecruitmentRegister/RecruitmentRegisterManagerForm';
 import RecruitmentRegisterWorkPlaceForm from '@/components/employerRecruitmentRegister/RecruitmentRegisterWorkPlaceForm';
 import RecruitmentRegisterJobConditionForm from '@/components/employerRecruitmentRegister/RecruitmentRegisterJobConditionForm';
-import RecruitmentRegisterDetailForm from '@/components/employerRecruitmentRegister/RecruitmentRegisterDetailForm';
+import RegisterInfoForm from '@/components/employerRecruitmentRegister/RegisterInfoForm';
 import EmployerTemplateForm from '@/components/common/employer/EmployerTemplateForm';
 import RecruitmentPolicy from '@/components/common/employer/RecruitmentPolicy';
 import FormEditor from '@/components/common/form/FormEditor';
@@ -12,6 +12,7 @@ import { CreateRecruitmentForm } from '@/types';
 interface EmployerRecruitmentRegisterProps {
   setIsOpenJobModal: React.Dispatch<React.SetStateAction<boolean>>;
   setIsOpenBenefitsModal: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsOpenPreferencesModal: React.Dispatch<React.SetStateAction<boolean>>;
   children: React.ReactNode;
 }
 
@@ -19,6 +20,7 @@ export default function EmployerRecruitmentRegister({
   children,
   setIsOpenJobModal,
   setIsOpenBenefitsModal,
+  setIsOpenPreferencesModal,
 }: EmployerRecruitmentRegisterProps) {
   return (
     <S.EmployerRecruitmentRegister>
@@ -33,7 +35,7 @@ export default function EmployerRecruitmentRegister({
 
             <EmployerTemplateForm.SubTitle title="모집내용" size="large" id="detail" />
             <EmployerTemplateForm.Content marginBottom="80px">
-              <RecruitmentRegisterDetailForm setIsOpenJobModal={setIsOpenJobModal} />
+              <RegisterInfoForm setIsOpenJobModal={setIsOpenJobModal} setIsOpenPreferencesModal={setIsOpenPreferencesModal} />
             </EmployerTemplateForm.Content>
 
             <EmployerTemplateForm.SubTitle title="상세 모집내용" size="large" id="detail" />
