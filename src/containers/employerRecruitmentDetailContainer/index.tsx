@@ -25,11 +25,15 @@ import { daumPostAtom } from '@/recoil/daumPost';
 
 const DynamicJobModal = dynamic(() => import('@/components/common/employer/JobModal'), { ssr: false });
 const DynamicBenefitsModal = dynamic(() => import('@/components/common/employer/BenefitsModal'), { ssr: false });
+const DynamicPreferencesModal = dynamic(() => import('@/components/common/employer/PreferencesModal'), { ssr: false });
+
 const DynamicDaumPost = dynamic(() => import('@/components/common/DaumPost'), { ssr: false });
 
 export default function EmployerRecruitmentDetailContainer() {
   const [isOpenJobModal, setIsOpenJobModal] = React.useState(false);
   const [isOpenBenefitsModal, setIsOpenBenefitsModal] = React.useState(false);
+  const [isOpenPreferencesModal, setIsOpenPreferencesModal] = React.useState(false);
+
   const [isDisabled, setIsDisabled] = React.useState(false);
 
   const { addToast } = useToast();
@@ -51,14 +55,17 @@ export default function EmployerRecruitmentDetailContainer() {
       recruitmentStatus: undefined,
       recruitmentInfo: {
         jobs: [],
-        recruitmentCapacity: undefined,
-        educationCondition: undefined,
         experienceCondition: undefined,
         nationality: {
           foreigner: false,
           korean: false,
           marriageVisa: undefined,
         },
+        recruitmentCapacity: undefined,
+        educationCondition: undefined,
+        department: '',
+        position: null,
+        preferences: [], // 필수/우대조건
       },
       content: '',
       conditionInfo: {
@@ -118,6 +125,9 @@ export default function EmployerRecruitmentDetailContainer() {
       methods.setValue('recruitmentInfo.jobs', result.recruitmentInfo.jobs);
       methods.setValue('recruitmentInfo.recruitmentCapacity', result.recruitmentInfo.recruitmentCapacity);
       methods.setValue('recruitmentInfo.educationCondition', result.recruitmentInfo.educationCondition);
+      methods.setValue('recruitmentInfo.department', result.recruitmentInfo.department);
+      methods.setValue('recruitmentInfo.position', result.recruitmentInfo.position);
+      methods.setValue('recruitmentInfo.preferences', result.recruitmentInfo.preferences);
       methods.setValue('recruitmentInfo.experienceCondition', result.recruitmentInfo.experienceCondition);
       methods.setValue('recruitmentInfo.nationality.korean', result.recruitmentInfo.nationality.korean);
       methods.setValue('recruitmentInfo.nationality.foreigner', result.recruitmentInfo.nationality.foreigner);
@@ -145,7 +155,7 @@ export default function EmployerRecruitmentDetailContainer() {
       methods.setValue('managerInfo.isEmailPrivate', result.managerInfo.isEmailPrivate);
     }
   }, [isSuccess, data, methods]);
-  console.log('methods: ', methods.watch('conditionInfo.workingDay'));
+  console.log('methods: ', methods.watch());
 
   // fetch - 임시저장
   const fetchDraftRecruitment = async () => {
@@ -168,10 +178,7 @@ export default function EmployerRecruitmentDetailContainer() {
       await queryClient.invalidateQueries({ queryKey: [queryKeys.RECRUITMENT_LIST], refetchType: 'all' });
       await queryClient.invalidateQueries({ queryKey: [queryKeys.RECRUITMENT_DETAIL], refetchType: 'all' });
 
-      if (response.result.id !== slug) {
-        router.replace(`${path.EMPLOYER_RECRUITMENT}/${response.result.id}`);
-      }
-      return addToast({ message: '임시저장', type: 'info' });
+      addToast({ message: '임시저장', type: 'info' });
     } catch (error) {
       if (axios.isAxiosError(error)) {
         const errorCode = error.response?.data?.error?.code;
@@ -246,15 +253,11 @@ export default function EmployerRecruitmentDetailContainer() {
       await queryClient.invalidateQueries({ queryKey: [queryKeys.RECRUITMENT_LIST], refetchType: 'all' });
       await queryClient.invalidateQueries({ queryKey: [queryKeys.RECRUITMENT_DETAIL], refetchType: 'all' });
 
-      setAlertWithConfirmAtom((prev) => ({
-        ...prev,
-        type: 'ALERT',
-        title: 'TITLE_5',
-        subTitle: 'DESC_5',
-        confirmLabel: '확인',
-        image: 'Document',
-        onClickConfirm: () => router.replace(path.EMPLOYER_RECRUITMENT),
-      }));
+      router.replace(path.EMPLOYER_RECRUITMENT);
+
+      setTimeout(() => {
+        addToast({ message: '채용공고 수정완료', type: 'success' });
+      }, 800);
     } catch (error) {
       alert('공고 수정 중 문제가 발생했습니다. 문제가 지속되면 관리자에게 문의하세요.');
     } finally {
@@ -271,11 +274,15 @@ export default function EmployerRecruitmentDetailContainer() {
       <FormProvider {...methods}>
         {isOpenJobModal && <DynamicJobModal name="recruitmentInfo.jobs" setIsOpenJobModal={setIsOpenJobModal} />}
         {isOpenBenefitsModal && <DynamicBenefitsModal name="conditionInfo.benefits" setIsOpenBenefitsModal={setIsOpenBenefitsModal} />}
+        {isOpenPreferencesModal && (
+          <DynamicPreferencesModal name="recruitmentInfo.preferences" setIsOpenPreferencesModal={setIsOpenPreferencesModal} />
+        )}
         {daumPostAtomValue.isOpen && <DynamicDaumPost addressName="locationInfo.address" addressDetailName="locationInfo.addressDetail" />}
 
         <EmployerRecruitmentDetail
           setIsOpenJobModal={setIsOpenJobModal}
           setIsOpenBenefitsModal={setIsOpenBenefitsModal}
+          setIsOpenPreferencesModal={setIsOpenPreferencesModal}
           isSuccess={isSuccess}
         >
           <RecruitmentDetailProgressMenu fetchDraftRecruitment={fetchDraftRecruitment}>
@@ -299,6 +306,7 @@ export default function EmployerRecruitmentDetailContainer() {
                 onClick={methods.handleSubmit(fetchUpdateRecruitment)}
                 type="button"
                 isLoading={methods.formState.isSubmitting}
+                disabled={isDisabled}
               />
             )}
 
