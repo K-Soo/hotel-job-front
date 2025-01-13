@@ -33,7 +33,7 @@ export default function EmployerRecruitmentContainer() {
     setCheckedItems([]);
   }, [page]);
 
-  const handleClickCheckBoxItem = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleClickCheckBoxItem = React.useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, checked } = event.target;
 
     if (checked) {
@@ -41,7 +41,7 @@ export default function EmployerRecruitmentContainer() {
     } else {
       setCheckedItems((prev) => prev.filter((item) => item !== name));
     }
-  };
+  }, []);
 
   const fetchDeleteRecruitment = async () => {
     if (checkedItems.length === 0) {
