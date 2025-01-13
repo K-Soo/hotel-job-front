@@ -111,6 +111,7 @@ const StyledMotionInput = styled(motion.input)<{ readOnly?: boolean; disabled?: 
   border-radius: 5px;
   font-size: 16px;
   box-sizing: border-box;
+  background-color: ${({ theme }) => theme.colors.white};
   &:hover {
     background-color: ${(props) => props.theme.colors.blue};
     border: 1px solid ${(props) => props.theme.colors.blue100};
