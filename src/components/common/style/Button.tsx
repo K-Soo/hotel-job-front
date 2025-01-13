@@ -37,6 +37,7 @@ interface ButtonProps {
   iconColor?: string;
   padding?: string;
   isLoading?: boolean;
+  style?: React.CSSProperties;
 }
 
 export default function Button({
@@ -56,9 +57,11 @@ export default function Button({
   iconColor,
   padding,
   isLoading,
+  style,
 }: ButtonProps) {
   return (
     <S.Button
+      style={style}
       type={type ?? 'button'}
       onClick={onClick}
       height={height}
@@ -126,6 +129,7 @@ const S = {
     align-items: center;
     justify-content: center;
     white-space: nowrap;
+    user-select: none;
     padding: ${(props) => (props.$padding ? props.$padding : '0 8px')};
     svg {
       fill: ${(props) => props.$iconColor};
