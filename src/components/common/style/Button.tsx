@@ -72,6 +72,7 @@ export default function Button({
       $maxWidth={maxWidth}
       $iconColor={iconColor}
       $padding={padding}
+      $isLoading={isLoading}
     >
       {!isLoading && icon}
       {isLoading && <Image src="/images/rolling.gif" alt="image" width={30} height={30} />}
@@ -111,6 +112,7 @@ const S = {
     $iconColor?: string;
     $variant: ButtonVariant;
     $padding?: string;
+    $isLoading?: boolean;
   }>`
     box-sizing: border-box;
     cursor: pointer;
@@ -202,6 +204,7 @@ const S = {
         }
         &:disabled {
           cursor: not-allowed;
+          background-color: ${(props) => props.theme.colors.gray200};
         }
       `};
 
