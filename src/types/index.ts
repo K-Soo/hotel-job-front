@@ -5,6 +5,7 @@ import { AllJobsKeyValuesKeys } from '@/constants/job';
 import { educationLevel, position, salaryType } from '@/constants';
 import { city } from '@/constants/location';
 import { benefits } from '@/constants/benefits';
+import { preferences } from '@/constants/preferences';
 
 export type ProviderType = 'local' | 'kakao';
 export type RoleType = 'ADMIN' | 'EMPLOYER' | 'JOB_SEEKER';
@@ -26,7 +27,7 @@ export type AccountStatusType =
 export type ResumeType = 'FILE' | 'GENERAL'; //파일, 일반
 export type CareerLevelKeys = keyof typeof careerLevel;
 export type EducationLevelKeys = keyof typeof educationLevel;
-export type Position = keyof typeof position;
+export type PositionKeys = keyof typeof position;
 export type City = keyof typeof city;
 export type SalaryTypeKeys = keyof typeof salaryType;
 export type LicenseStageKeys = keyof typeof licenseStage;
@@ -34,6 +35,7 @@ export type experienceConditionKeys = keyof typeof experienceCondition;
 export type RecruitmentStatusKeys = keyof typeof recruitmentStatus;
 export type WorkingDayListKeys = keyof typeof workingDayList;
 export type BenefitsKeys = keyof typeof benefits;
+export type PreferencesKeys = keyof typeof preferences;
 
 export type TalentListItem = {};
 
@@ -48,7 +50,7 @@ export type Experience = {
   isEmployed: boolean; //재직중
   responsibility: string; //담당업무
   job: AllJobsKeyValuesKeys | undefined; //직무
-  position?: Position; //직급/직책
+  position?: PositionKeys; //직급/직책
   startDate: Date;
   endDate: Date;
   // city: City;
@@ -169,9 +171,9 @@ export interface CreateRecruitmentForm {
       foreigner: boolean;
       marriageVisa?: string;
     };
-    preferences: '???'[]; // 우대조건
     department: string; // 근무부서
-    position: '???' | null; // 직급
+    position: PositionKeys | null; // 직급
+    preferences: PreferencesKeys[];
   };
   conditionInfo: {
     employmentType: {
@@ -220,6 +222,9 @@ export interface RecruitmentDetail {
       foreigner: boolean;
       marriageVisa?: string;
     };
+    preferences: PreferencesKeys[];
+    department: string; // 근무부서
+    position: PositionKeys | null; // 직급
   };
   content: string;
   conditionInfo: {
