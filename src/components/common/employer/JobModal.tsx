@@ -51,8 +51,8 @@ export default function JobModal<T extends FieldValues>({ name, setIsOpenJobModa
     const { checked, value } = event.target;
 
     if (checked) {
-      if (selectedJob.length >= 3) {
-        return addToast({ message: '직무는 최대 3개까지 선택 가능합니다.', type: 'warning' });
+      if (selectedJob.length >= 5) {
+        return addToast({ message: '직무는 최대 5개까지 선택 가능합니다.', type: 'warning' });
       }
 
       return setSelectedJob((prev) => [...prev, value as AllJobsKeyValuesKeys]);
