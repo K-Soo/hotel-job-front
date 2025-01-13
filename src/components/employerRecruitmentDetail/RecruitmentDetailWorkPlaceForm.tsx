@@ -3,13 +3,16 @@ import HorizontalFormWrapper from '@/components/common/form/HorizontalFormWrappe
 import FormInputB from '@/components/common/form/FormInputB';
 import Button from '@/components/common/style/Button';
 import FormNumberInput from '@/components/common/form/FormNumberInput';
-import { CreateRecruitmentForm } from '@/types';
+import { CreateRecruitmentForm, RecruitmentDetailForm } from '@/types';
 import { useSetRecoilState } from 'recoil';
 import { daumPostAtom } from '@/recoil/daumPost';
+import { useFormContext } from 'react-hook-form';
 
 export default function RecruitmentDetailWorkPlaceForm() {
   const setDaumPostAtom = useSetRecoilState(daumPostAtom);
-
+  const {
+    formState: { isSubmitting },
+  } = useFormContext<RecruitmentDetailForm>();
   return (
     <S.RecruitmentDetailWorkPlaceForm>
       <HorizontalFormWrapper label="객실수">
@@ -25,6 +28,7 @@ export default function RecruitmentDetailWorkPlaceForm() {
           width="100px"
           margin="0 0 0 15px"
           onClick={() => setDaumPostAtom({ isOpen: true })}
+          disabled={isSubmitting}
         />
       </HorizontalFormWrapper>
 
