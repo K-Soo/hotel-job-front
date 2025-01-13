@@ -4,7 +4,6 @@ import FormError from '@/components/common/form/FormError';
 import { useFormContext, Path, FieldValues, useFieldArray } from 'react-hook-form';
 import { get } from 'lodash';
 import ChipsCheckbox from '@/components/common/style/ChipsCheckbox';
-import { allJobs, AllJobsKeyValuesKeys } from '@/constants/job';
 
 interface FormArrayCheckboxProps<T> {
   name: Path<T>;
@@ -22,6 +21,7 @@ interface FormArrayCheckboxProps<T> {
   labelFlexBasis?: string;
   mask?: string | string[];
   maxLength?: number;
+  optionsKeyData: Record<string, string>;
 }
 
 export default function FormArrayCheckbox<T extends FieldValues>({
@@ -40,14 +40,15 @@ export default function FormArrayCheckbox<T extends FieldValues>({
   type,
   width,
   maxWidth,
+  optionsKeyData,
 }: FormArrayCheckboxProps<T>) {
   const {
     formState: { errors },
     watch,
     clearErrors,
+    setFocus,
   } = useFormContext<T>();
 
-  const { fields, remove } = useFieldArray({ name });
   const watchValue = watch(name) || [];
 
   const error = get(errors, name);
@@ -59,27 +60,37 @@ export default function FormArrayCheckbox<T extends FieldValues>({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [watchValue]);
 
+  React.useEffect(() => {
+    if (error) {
+      const label = document.querySelector(`[for="form-input-b-${name}"]`);
+      if (label) {
+        (label as HTMLElement).focus();
+      }
+    }
+  }, [error, name]);
+
   return (
     <S.FormArrayCheckbox $margin={margin} $width={width} $maxWidth={maxWidth} $minWidth={minWidth}>
       {label && (
         <S.FormLabel
           className="input-label"
-          htmlFor={name + '-FormInputB'}
+          htmlFor={'form-input-b-' + name}
           required={required && !readOnly}
           labelFlexBasis={labelFlexBasis}
+          tabIndex={1}
         >
           {label}
         </S.FormLabel>
       )}
       <S.CheckboxContainer>
         <div className="content-list">
-          {watchValue.map((item: AllJobsKeyValuesKeys) => (
+          {watchValue.map((item) => (
             <ChipsCheckbox
               key={item}
-              label={allJobs[item]}
+              label={optionsKeyData[item]}
               name={item}
               onChange={() => {}}
-              margin="0 15px 0 0"
+              margin="3px"
               value={item}
               checked
               disabled={disabled}
@@ -125,16 +136,20 @@ const S = {
       `};
   `,
   CheckboxContainer: styled.div`
-    height: 40px;
+    box-sizing: border-box;
     flex: 1;
+    border: 1px solid ${({ theme }) => theme.colors.gray300};
+    background-color: ${({ theme }) => theme.colors.white};
+    border-radius: 5px;
     .content-list {
+      flex: 1;
+      min-height: 40px;
       box-sizing: border-box;
-      border: 1px solid ${({ theme }) => theme.colors.gray300};
       height: 100%;
-      padding-left: 10px;
-      border-radius: 5px;
       display: flex;
       align-items: center;
+      flex-wrap: wrap;
+      padding: 0 5px;
     }
   `,
 };
