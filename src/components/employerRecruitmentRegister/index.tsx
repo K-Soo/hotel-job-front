@@ -11,10 +11,15 @@ import { CreateRecruitmentForm } from '@/types';
 
 interface EmployerRecruitmentRegisterProps {
   setIsOpenJobModal: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsOpenBenefitsModal: React.Dispatch<React.SetStateAction<boolean>>;
   children: React.ReactNode;
 }
 
-export default function EmployerRecruitmentRegister({ children, setIsOpenJobModal }: EmployerRecruitmentRegisterProps) {
+export default function EmployerRecruitmentRegister({
+  children,
+  setIsOpenJobModal,
+  setIsOpenBenefitsModal,
+}: EmployerRecruitmentRegisterProps) {
   return (
     <S.EmployerRecruitmentRegister>
       <div className="register-container">
@@ -31,14 +36,14 @@ export default function EmployerRecruitmentRegister({ children, setIsOpenJobModa
               <RecruitmentRegisterDetailForm setIsOpenJobModal={setIsOpenJobModal} />
             </EmployerTemplateForm.Content>
 
-            <EmployerTemplateForm.SubTitle title="근무조건" size="large" id="condition" />
-            <EmployerTemplateForm.Content marginBottom="80px">
-              <RecruitmentRegisterJobConditionForm />
-            </EmployerTemplateForm.Content>
-
             <EmployerTemplateForm.SubTitle title="상세 모집내용" size="large" id="detail" />
             <EmployerTemplateForm.Content marginBottom="80px">
               <FormEditor<CreateRecruitmentForm> name="content" />
+            </EmployerTemplateForm.Content>
+
+            <EmployerTemplateForm.SubTitle title="근무조건" size="large" id="condition" />
+            <EmployerTemplateForm.Content marginBottom="80px">
+              <RecruitmentRegisterJobConditionForm setIsOpenBenefitsModal={setIsOpenBenefitsModal} />
             </EmployerTemplateForm.Content>
 
             <EmployerTemplateForm.SubTitle title="근무지 정보" size="large" id="place" />
