@@ -4,6 +4,7 @@ import FormEditor from '@/components/common/form/FormEditor';
 import RecruitmentDetailBasicForm from '@/components/employerRecruitmentDetail/RecruitmentDetailBasicForm';
 import RecruitmentDetailWorkPlaceForm from '@/components/employerRecruitmentDetail/RecruitmentDetailWorkPlaceForm';
 import RecruitmentDetailManagerForm from '@/components/employerRecruitmentDetail/RecruitmentDetailManagerForm';
+import RecruitmentDetailJobConditionForm from '@/components/employerRecruitmentDetail/RecruitmentDetailJobConditionForm';
 
 import RecruitmentRegisterJobConditionForm from '@/components/employerRecruitmentRegister/RecruitmentRegisterJobConditionForm';
 import RecruitmentRegisterDetailForm from '@/components/employerRecruitmentRegister/RecruitmentRegisterDetailForm';
@@ -12,10 +13,17 @@ import RecruitmentPolicy from '@/components/common/employer/RecruitmentPolicy';
 
 interface EmployerRecruitmentDetailProps {
   setIsOpenJobModal: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsOpenBenefitsModal: React.Dispatch<React.SetStateAction<boolean>>;
+  isSuccess: boolean;
   children: React.ReactNode;
 }
 
-export default function EmployerRecruitmentDetail({ children, setIsOpenJobModal }: EmployerRecruitmentDetailProps) {
+export default function EmployerRecruitmentDetail({
+  children,
+  isSuccess,
+  setIsOpenJobModal,
+  setIsOpenBenefitsModal,
+}: EmployerRecruitmentDetailProps) {
   return (
     <S.EmployerRecruitmentDetail>
       <div className="detail-container">
@@ -37,10 +45,10 @@ export default function EmployerRecruitmentDetail({ children, setIsOpenJobModal 
               <FormEditor<RecruitmentDetailForm> name="content" />
             </EmployerTemplateForm.Content>
 
-            {/* <EmployerTemplateForm.SubTitle title="근무조건" size="large" id="condition" />
+            <EmployerTemplateForm.SubTitle title="근무조건" size="large" id="condition" />
             <EmployerTemplateForm.Content marginBottom="80px">
-              <RecruitmentRegisterJobConditionForm />
-            </EmployerTemplateForm.Content> */}
+              <RecruitmentDetailJobConditionForm setIsOpenBenefitsModal={setIsOpenBenefitsModal} isSuccess={isSuccess} />
+            </EmployerTemplateForm.Content>
 
             <EmployerTemplateForm.SubTitle title="근무지 정보" size="large" id="place" />
             <EmployerTemplateForm.Content marginBottom="80px">
