@@ -19,8 +19,7 @@ import { FieldValues, useFormContext } from 'react-hook-form';
 import { motion } from 'framer-motion';
 import useToast from '@/hooks/useToast';
 
-const jobModalTabOptions = [
-  { label: '전체', value: 'all' },
+const MENU_TABS = [
   { label: '호텔', value: 'hotel' },
   { label: '관광호텔', value: 'touristHotel' },
   { label: '기타', value: 'other' },
@@ -31,9 +30,9 @@ export interface JobModalProps {
   setIsOpenJobModal: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export default function JobModal<T extends FieldValues>({ name, setIsOpenJobModal }: JobModalProps) {
+export default function JobModal({ name, setIsOpenJobModal }: JobModalProps) {
   const [selectedJob, setSelectedJob] = React.useState<AllJobsKeyValuesKeys[]>([]);
-  const [tab, setTab] = React.useState('all');
+  const [selectedTab, setSelectedTab] = React.useState<string>('hotel');
 
   const { addToast } = useToast();
 
@@ -61,8 +60,19 @@ export default function JobModal<T extends FieldValues>({ name, setIsOpenJobModa
   };
 
   const handleSaveSelectedJobs = () => {
+    if (selectedJob.length === 0) {
+      addToast({ message: '선택 해제됬습니다.', type: 'info' });
+    }
+    if (selectedJob.length > 0) {
+      addToast({ message: '선택사항이 변경되었습니다.', type: 'info' });
+    }
+
     setValue(name, [...selectedJob]);
     setIsOpenJobModal(false);
+  };
+
+  const handleClickMenuTab = (value: string) => {
+    setSelectedTab(value);
   };
 
   return (
@@ -77,75 +87,63 @@ export default function JobModal<T extends FieldValues>({ name, setIsOpenJobModa
             <input className="search-filed" type="text" placeholder="Search" maxLength={20} />
           </S.Search> */}
 
-          <S.Category>
-            {jobModalTabOptions.map((option) => (
-              <motion.button
-                key={option.value}
-                type="button"
-                className="item"
-                name={option.value}
-                onClick={() => setTab(option.value)}
-                animate={{ color: tab === option.value ? '#000' : '#666' }}
-                whileHover={{ color: '#000' }}
-              >
-                <span>{option.label}</span>
-                {tab === option.value && <span className="underline" />}
-              </motion.button>
-            ))}
-          </S.Category>
-
           <S.Content>
-            {tab === 'all' &&
-              Object.entries(allJobsKeyValues).map(([key, value]) => (
-                <div key={`all-${key}`} className="content-item all">
-                  <ChipsCheckbox
-                    onChange={handleChangeCheckbox}
-                    name={value}
-                    label={allJobs[value]}
-                    value={key}
-                    checked={selectedJob.includes(key as AllJobsKeyValuesKeys)}
-                  />
-                </div>
+            <div className="menu">
+              {MENU_TABS.map((tab) => (
+                <motion.button
+                  className="menu__item"
+                  onClick={() => handleClickMenuTab(tab.value)}
+                  key={tab.value}
+                  whileTap={{ scale: 0.95 }}
+                  animate={{ color: selectedTab === tab.value ? '#3182f6' : '#8b95a1' }}
+                >
+                  {tab.label}
+                </motion.button>
               ))}
+            </div>
 
-            {tab === 'hotel' &&
-              Object.entries(hotelJobKeyValues).map(([key, value]) => (
-                <div key={`hotel-${key}`} className="content-item hotel">
-                  <ChipsCheckbox
-                    onChange={handleChangeCheckbox}
-                    name={value}
-                    label={hotelJobs[value]}
-                    value={key}
-                    checked={selectedJob.includes(key as AllJobsKeyValuesKeys)}
-                  />
-                </div>
-              ))}
+            <div className="list">
+              <div className="list__wrapper">
+                {selectedTab === 'hotel' &&
+                  Object.entries(hotelJobKeyValues).map(([key, value]) => (
+                    <div key={`hotel-${key}`} className="list__item">
+                      <ChipsCheckbox
+                        onChange={handleChangeCheckbox}
+                        name={value}
+                        label={hotelJobs[value]}
+                        value={key}
+                        checked={selectedJob.includes(key as AllJobsKeyValuesKeys)}
+                      />
+                    </div>
+                  ))}
 
-            {tab === 'touristHotel' &&
-              Object.entries(touristHotelJobsKeyValues).map(([key, value]) => (
-                <div key={key} className="content-item touristHotel">
-                  <ChipsCheckbox
-                    onChange={handleChangeCheckbox}
-                    name={value}
-                    label={touristHotelJobs[value]}
-                    value={key}
-                    checked={selectedJob.includes(key as AllJobsKeyValuesKeys)}
-                  />
-                </div>
-              ))}
+                {selectedTab === 'touristHotel' &&
+                  Object.entries(touristHotelJobsKeyValues).map(([key, value]) => (
+                    <div key={key} className="list__item">
+                      <ChipsCheckbox
+                        onChange={handleChangeCheckbox}
+                        name={value}
+                        label={touristHotelJobs[value]}
+                        value={key}
+                        checked={selectedJob.includes(key as AllJobsKeyValuesKeys)}
+                      />
+                    </div>
+                  ))}
 
-            {tab === 'other' &&
-              Object.entries(otherJobsKeyValues).map(([key, value]) => (
-                <div key={key} className="content-item other">
-                  <ChipsCheckbox
-                    onChange={handleChangeCheckbox}
-                    name={value}
-                    label={otherJobs[value]}
-                    value={key}
-                    checked={selectedJob.includes(key as AllJobsKeyValuesKeys)}
-                  />
-                </div>
-              ))}
+                {selectedTab === 'other' &&
+                  Object.entries(otherJobsKeyValues).map(([key, value]) => (
+                    <div key={key} className="list__item">
+                      <ChipsCheckbox
+                        onChange={handleChangeCheckbox}
+                        name={value}
+                        label={otherJobs[value]}
+                        value={key}
+                        checked={selectedJob.includes(key as AllJobsKeyValuesKeys)}
+                      />
+                    </div>
+                  ))}
+              </div>
+            </div>
           </S.Content>
 
           <S.SelectedBox>
@@ -180,15 +178,50 @@ export default function JobModal<T extends FieldValues>({ name, setIsOpenJobModa
 }
 
 const S = {
+  Content: styled.div`
+    flex: 1;
+    display: flex;
+    position: relative;
+    overflow-y: auto;
+    .menu {
+      width: 120px;
+      position: sticky;
+      top: 0;
+      display: flex;
+      flex-direction: column;
+      margin-right: 20px;
+
+      &__item {
+        cursor: pointer;
+        height: 40px;
+        color: ${({ theme }) => theme.colors.gray800};
+      }
+    }
+
+    .list {
+      flex: 1;
+      padding-left: 15px;
+      border-left: 1px solid ${({ theme }) => theme.colors.gray400};
+      &__wrapper {
+        display: flex;
+        align-items: stretch;
+        flex-wrap: wrap;
+        gap: 15px;
+      }
+      &__item {
+        height: fit-content;
+      }
+    }
+  `,
   JobModal: styled.div`
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 700px;
+    aspect-ratio: 16 / 9;
+    height: 550px;
     z-index: 16;
     background-color: ${({ theme }) => theme.colors.white};
-    height: 500px;
     border-radius: 5px;
     padding: 20px;
     display: flex;
@@ -223,56 +256,14 @@ const S = {
       padding-right: 15px;
     }
   `,
-  Category: styled.div`
-    height: 40px;
-    border-bottom: 1px solid ${({ theme }) => theme.colors.gray500};
-    .item {
-      width: 100px;
-      height: 100%;
-      text-align: center;
-      cursor: pointer;
-      position: relative;
-    }
-    .underline {
-      position: absolute;
-      left: 0;
-      bottom: -1px;
-      width: 100%;
-      border-bottom: 2px solid #333;
-    }
-  `,
-  Content: styled.div`
-    flex: 1;
+  SelectedBox: styled.div`
+    min-height: 100px;
+    max-height: 150px;
     display: flex;
     flex-wrap: wrap;
-    overflow-y: auto;
-    padding: 15px;
-    .content-item {
-      /* flex: 0 1 170px; */
-      /* height: auto; */
-      margin: 5px;
-    }
-    .all {
-      flex: 1 1 200px;
-      margin: 10px 5px;
-    }
-    .touristHotel {
-      flex: 1 1 200px;
-      margin: 10px 5px;
-    }
-    .hotel {
-      flex: 1 1 120px;
-    }
-
-    .other {
-      flex: 1 1 120px;
-      height: fit-content;
-    }
-  `,
-  SelectedBox: styled.div`
-    height: 50px;
-    display: flex;
     align-items: center;
+    overflow-y: auto;
+    padding-top: 15px;
     border-top: 1px solid ${({ theme }) => theme.colors.gray400};
   `,
   ButtonBox: styled.div`
