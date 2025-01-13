@@ -15,8 +15,8 @@ import { salaryType } from '@/constants';
 import useDidMountEffect from '@/hooks/useDidMountEffect';
 import FormInputB from '@/components/common/form/FormInputB';
 import { workingDayList } from '@/constants/recruitment';
-import FormArrayCheckbox from '@/components/common/form/FormArrayCheckbox';
 import { benefits } from '@/constants/benefits';
+import FormArrayChipsCheckbox from '@/components/common/form/FormArrayChipsCheckbox';
 
 interface RecruitmentDetailJobConditionFormProps {
   isSuccess: boolean;
@@ -257,7 +257,11 @@ export default function RecruitmentDetailJobConditionForm({ isSuccess, setIsOpen
               disabled={isSubmitting}
             />
           </div>
-          <FormArrayCheckbox<CreateRecruitmentForm> optionsKeyData={benefits} name="conditionInfo.benefits" />
+          <FormArrayChipsCheckbox<CreateRecruitmentForm>
+            optionsKeyData={benefits}
+            name="conditionInfo.benefits"
+            onClickInputForm={() => setIsOpenBenefitsModal(true)}
+          />
         </S.AdditionalContainer>
       )}
     </S.RecruitmentDetailJobConditionForm>
