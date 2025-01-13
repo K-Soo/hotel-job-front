@@ -11,6 +11,7 @@ import { ParsedUrlQuery } from 'querystring';
 import { keepPreviousData } from '@tanstack/react-query';
 import { RecruitmentQueryStatus } from '@/types/API';
 import EmptyComponent from '@/components/common/EmptyComponent';
+import { RecruitmentStatusKeys } from '@/types';
 
 interface Query extends ParsedUrlQuery {
   page?: string;
@@ -26,8 +27,12 @@ export default function RecruitmentListContainer({ checkedItems, handleClickChec
   const router = useRouter();
   const { page = '1', status = 'all' } = router.query as Query;
 
-  const handleClickRecruitmentItem = (id: string) => {
-    router.push(`/employer/recruitment/${id}`);
+  const handleClickRecruitmentItem = (id: string, status: RecruitmentStatusKeys) => {
+    if (status === 'DRAFT') {
+      return router.push(`/employer/recruitment/${id}`);
+    }
+
+    router.push(`/employer/recruitment/${id}/applicant`);
   };
 
   const { data, isLoading, isSuccess } = useFetchQuery({
