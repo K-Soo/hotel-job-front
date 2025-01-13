@@ -12,26 +12,27 @@ export default function RecruitmentStatusTag({ status }: RecruitmentStatusTagPro
 
 const S = {
   RecruitmentStatusTag: styled.span<{ type: RecruitmentStatusKeys }>`
+    user-select: none;
+    cursor: default;
     display: inline-block;
-    font-size: 14px;
+    font-size: 13px;
     width: 100%;
     max-width: 90px;
     color: #343a40;
     border-radius: 30px;
     padding: 5px 5px;
     background-color: #f8f9fa;
-
     ${(props) =>
       props.type === 'PROGRESS' &&
       css`
         color: #6f42c1;
-        background-color: #eae6f9;
+        /* background-color: #eae6f9; */
       `};
     ${(props) =>
       props.type === 'PUBLISHED' &&
       css`
         color: #155724;
-        background-color: #d4edda;
+        /* background-color: #d4edda; */
       `};
     ${(props) =>
       props.type === 'CLOSED' &&
@@ -47,7 +48,7 @@ const S = {
       props.type === 'DRAFT' &&
       css`
         color: #ff8c00;
-        background-color: #fff3e0;
+        /* background-color: #fff3e0; */
       `};
   `,
 };
