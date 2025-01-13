@@ -13,7 +13,7 @@ import {
   workLifeBenefits,
 } from '@/constants/benefits';
 import ChipsCheckbox from '@/components/common/style/ChipsCheckbox';
-import { FieldValues, useFormContext } from 'react-hook-form';
+import { useFormContext } from 'react-hook-form';
 import useToast from '@/hooks/useToast';
 import { BenefitsKeys } from '@/types';
 import { motion } from 'framer-motion';
@@ -33,7 +33,7 @@ const MENU_TABS = [
 ];
 
 export default function BenefitsModal({ name, setIsOpenBenefitsModal }: JobModalProps) {
-  const [selectedBenefits, setSelectedBenefits] = React.useState<BenefitsKeys[]>([]);
+  const [selectedItems, setSelectedItems] = React.useState<BenefitsKeys[]>([]);
   const [selectedTab, setSelectedTab] = React.useState<string>('salaryBenefits');
 
   const { addToast } = useToast();
@@ -43,8 +43,7 @@ export default function BenefitsModal({ name, setIsOpenBenefitsModal }: JobModal
   const watchValue = watch(name) || [];
 
   React.useEffect(() => {
-    setSelectedBenefits(watchValue);
-
+    setSelectedItems(watchValue);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -56,20 +55,20 @@ export default function BenefitsModal({ name, setIsOpenBenefitsModal }: JobModal
     const { checked, value } = event.target;
 
     if (checked) {
-      return setSelectedBenefits((prev) => [...prev, value as BenefitsKeys]);
+      return setSelectedItems((prev) => [...prev, value as BenefitsKeys]);
     }
-    setSelectedBenefits((prev) => prev.filter((item) => item !== value));
+    setSelectedItems((prev) => prev.filter((item) => item !== value));
   };
 
   const handleSaveSelectedJobs = () => {
-    if (selectedBenefits.length === 0) {
+    if (selectedItems.length === 0) {
       addToast({ message: '선택 해제됬습니다.', type: 'info' });
     }
-    if (selectedBenefits.length > 0) {
+    if (selectedItems.length > 0) {
       addToast({ message: '선택사항이 변경되었습니다.', type: 'info' });
     }
 
-    setValue(name, [...selectedBenefits]);
+    setValue(name, [...selectedItems]);
     setIsOpenBenefitsModal(false);
   };
 
@@ -110,7 +109,7 @@ export default function BenefitsModal({ name, setIsOpenBenefitsModal }: JobModal
                           name={key}
                           label={value}
                           value={key}
-                          checked={selectedBenefits.includes(key as BenefitsKeys)}
+                          checked={selectedItems.includes(key as BenefitsKeys)}
                         />
                       </div>
                     ))}
@@ -126,7 +125,7 @@ export default function BenefitsModal({ name, setIsOpenBenefitsModal }: JobModal
                           name={key}
                           label={value}
                           value={key}
-                          checked={selectedBenefits.includes(key as BenefitsKeys)}
+                          checked={selectedItems.includes(key as BenefitsKeys)}
                         />
                       </div>
                     ))}
@@ -142,7 +141,7 @@ export default function BenefitsModal({ name, setIsOpenBenefitsModal }: JobModal
                           name={key}
                           label={value}
                           value={key}
-                          checked={selectedBenefits.includes(key as BenefitsKeys)}
+                          checked={selectedItems.includes(key as BenefitsKeys)}
                         />
                       </div>
                     ))}
@@ -158,7 +157,7 @@ export default function BenefitsModal({ name, setIsOpenBenefitsModal }: JobModal
                           name={key}
                           label={value}
                           value={key}
-                          checked={selectedBenefits.includes(key as BenefitsKeys)}
+                          checked={selectedItems.includes(key as BenefitsKeys)}
                         />
                       </div>
                     ))}
@@ -174,7 +173,7 @@ export default function BenefitsModal({ name, setIsOpenBenefitsModal }: JobModal
                           name={key}
                           label={value}
                           value={key}
-                          checked={selectedBenefits.includes(key as BenefitsKeys)}
+                          checked={selectedItems.includes(key as BenefitsKeys)}
                         />
                       </div>
                     ))}
@@ -190,7 +189,7 @@ export default function BenefitsModal({ name, setIsOpenBenefitsModal }: JobModal
                           name={key}
                           label={value}
                           value={key}
-                          checked={selectedBenefits.includes(key as BenefitsKeys)}
+                          checked={selectedItems.includes(key as BenefitsKeys)}
                         />
                       </div>
                     ))}
@@ -201,14 +200,14 @@ export default function BenefitsModal({ name, setIsOpenBenefitsModal }: JobModal
           </S.Content>
 
           <S.SelectedBox>
-            {selectedBenefits.map((item) => (
+            {selectedItems.map((item) => (
               <ChipsCheckbox
                 key={item}
                 onChange={() => {}}
                 name={item}
                 label={benefits[item]}
                 value={item}
-                checked={selectedBenefits.includes(item)}
+                checked={selectedItems.includes(item)}
                 margin="0 15px 10px 0"
               />
             ))}
