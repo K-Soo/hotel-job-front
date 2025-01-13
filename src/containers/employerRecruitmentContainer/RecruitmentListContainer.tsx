@@ -60,7 +60,7 @@ export default function RecruitmentListContainer({ checkedItems, handleClickChec
       <RecruitmentList>
         <RecruitmentTable>
           <RecruitmentTable.Header />
-          {isEmpty && <EmptyComponent />}
+          {isEmpty && <EmptyComponent message="조건에 맞는 공고를 찾을 수 없습니다." />}
           <RecruitmentTable.Body
             checkedItems={checkedItems}
             handleClickRecruitmentItem={handleClickRecruitmentItem}
