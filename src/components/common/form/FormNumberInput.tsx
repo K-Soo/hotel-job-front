@@ -49,19 +49,9 @@ export default function FormNumberInput<T extends FieldValues>({
     getValues,
   } = useFormContext<T>();
 
-  const {
-    field: { value },
-  } = useController({ name });
-
   const error = get(errors, name);
 
-  const watchValue = watch(name);
-
-  React.useEffect(() => {
-    if (error && watchValue.length !== 0) {
-      clearErrors(name);
-    }
-  }, [clearErrors, name, error, watchValue]);
+  const watchValue = watch(name) ?? 0;
 
   React.useEffect(() => {
     if (isFocusing) {
@@ -69,13 +59,6 @@ export default function FormNumberInput<T extends FieldValues>({
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isFocusing]);
-
-  // React.useEffect(() => {
-  //   const error = get(errors, name);
-  //   if (error) {
-  //     setFocus(name);
-  //   }
-  // }, [errors, name, setFocus]);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     let inputValue = event.target.value;
@@ -125,7 +108,7 @@ export default function FormNumberInput<T extends FieldValues>({
           type="text"
           readOnly={readOnly}
           disabled={disabled}
-          value={isComma ? priceComma(value) : value}
+          value={isComma ? priceComma(watchValue) : watchValue}
           maxLength={maxLength}
           onFocus={handleInputFocus}
           {...register(name, {
