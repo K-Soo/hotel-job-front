@@ -20,17 +20,23 @@ import SkeletonUI from '@/components/common/SkeletonUI';
 import Button from '@/components/common/style/Button';
 import useLoading from '@/hooks/useLoading';
 import useAlertWithConfirm from '@/hooks/useAlertWithConfirm';
+import { useRecoilValue } from 'recoil';
+import { daumPostAtom } from '@/recoil/daumPost';
 
 const DynamicJobModal = dynamic(() => import('@/components/common/employer/JobModal'), { ssr: false });
+const DynamicBenefitsModal = dynamic(() => import('@/components/common/employer/BenefitsModal'), { ssr: false });
+const DynamicDaumPost = dynamic(() => import('@/components/common/DaumPost'), { ssr: false });
 
 export default function EmployerRecruitmentDetailContainer() {
   const [isOpenJobModal, setIsOpenJobModal] = React.useState(false);
+  const [isOpenBenefitsModal, setIsOpenBenefitsModal] = React.useState(false);
   const [isDisabled, setIsDisabled] = React.useState(false);
 
   const { addToast } = useToast();
   const queryClient = useQueryClient();
   const { setLoadingAtomStatue } = useLoading();
   const { setAlertWithConfirmAtom } = useAlertWithConfirm();
+  const daumPostAtomValue = useRecoilValue(daumPostAtom);
 
   const router = useRouter();
   const { slug } = router.query;
@@ -55,6 +61,20 @@ export default function EmployerRecruitmentDetailContainer() {
         },
       },
       content: '',
+      conditionInfo: {
+        benefits: [],
+        employmentType: {
+          FULL_TIME: false,
+          CONTRACT: false,
+          DAILY_WORKER: false,
+          PART_TIME: false,
+          INTERN: false,
+        },
+        salaryType: 'MONTHLY', //급여 타입
+        salaryAmount: 0, //급여액
+        workingDay: null, //근무요일 (optional)
+        workingTime: { start: '', end: '' }, //근무시간 (optional)
+      },
       locationInfo: {
         roomCount: 0,
         address: '',
@@ -105,6 +125,14 @@ export default function EmployerRecruitmentDetailContainer() {
 
       methods.setValue('content', result.content);
 
+      methods.setValue('conditionInfo.employmentType', result.conditionInfo.employmentType);
+      methods.setValue('conditionInfo.salaryType', result.conditionInfo.salaryType);
+      methods.setValue('conditionInfo.salaryAmount', result.conditionInfo.salaryAmount);
+
+      methods.setValue('conditionInfo.workingDay', result.conditionInfo.workingDay);
+      methods.setValue('conditionInfo.workingTime', result.conditionInfo.workingTime);
+      methods.setValue('conditionInfo.benefits', result.conditionInfo.benefits);
+
       methods.setValue('locationInfo.roomCount', result.locationInfo.roomCount);
       methods.setValue('locationInfo.address', result.locationInfo.address);
       methods.setValue('locationInfo.addressDetail', result.locationInfo.addressDetail);
@@ -117,9 +145,11 @@ export default function EmployerRecruitmentDetailContainer() {
       methods.setValue('managerInfo.isEmailPrivate', result.managerInfo.isEmailPrivate);
     }
   }, [isSuccess, data, methods]);
+  console.log('methods: ', methods.watch('conditionInfo.workingDay'));
 
   // fetch - 임시저장
   const fetchDraftRecruitment = async () => {
+    setIsDisabled(true);
     const watchValues = methods.watch();
     try {
       const response = await Post.draftRecruitment({
@@ -150,6 +180,8 @@ export default function EmployerRecruitmentDetailContainer() {
         }
       }
       alert('임시저장 중 문제가 발생했습니다. 문제가 지속되면 관리자에게 문의하세요.');
+    } finally {
+      setIsDisabled(false);
     }
   };
 
@@ -238,7 +270,14 @@ export default function EmployerRecruitmentDetailContainer() {
     return (
       <FormProvider {...methods}>
         {isOpenJobModal && <DynamicJobModal name="recruitmentInfo.jobs" setIsOpenJobModal={setIsOpenJobModal} />}
-        <EmployerRecruitmentDetail setIsOpenJobModal={setIsOpenJobModal}>
+        {isOpenBenefitsModal && <DynamicBenefitsModal name="conditionInfo.benefits" setIsOpenBenefitsModal={setIsOpenBenefitsModal} />}
+        {daumPostAtomValue.isOpen && <DynamicDaumPost addressName="locationInfo.address" addressDetailName="locationInfo.addressDetail" />}
+
+        <EmployerRecruitmentDetail
+          setIsOpenJobModal={setIsOpenJobModal}
+          setIsOpenBenefitsModal={setIsOpenBenefitsModal}
+          isSuccess={isSuccess}
+        >
           <RecruitmentDetailProgressMenu fetchDraftRecruitment={fetchDraftRecruitment}>
             {/* 임시저장 상태 */}
             {data.result.recruitmentStatus === 'DRAFT' && (
@@ -261,6 +300,10 @@ export default function EmployerRecruitmentDetailContainer() {
                 type="button"
                 isLoading={methods.formState.isSubmitting}
               />
+            )}
+
+            {data.result.recruitmentStatus === 'DRAFT' && (
+              <Button label="임시저장" variant="tertiary" onClick={fetchDraftRecruitment} margin="0 0 10px 0" isLoading={isDisabled} />
             )}
           </RecruitmentDetailProgressMenu>
         </EmployerRecruitmentDetail>
