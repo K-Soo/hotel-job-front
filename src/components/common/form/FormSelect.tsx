@@ -1,7 +1,7 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 import FormError from '@/components/common/form/FormError';
-import { useFormContext, Path, FieldValues } from 'react-hook-form';
+import { useFormContext, Path, FieldValues, PathValue } from 'react-hook-form';
 import { motion } from 'framer-motion';
 import { get } from 'lodash';
 import Icon from '@/icons/Icon';
@@ -33,12 +33,11 @@ export default function FormSelect<T extends FieldValues>({
   const {
     formState: { errors },
     register,
-    setFocus,
     watch,
-    clearErrors,
+    setValue,
   } = useFormContext<T>();
 
-  const watchValue = watch(name);
+  const watchValue = watch(name) || '';
 
   const error = get(errors, name);
 
@@ -51,7 +50,18 @@ export default function FormSelect<T extends FieldValues>({
       )}
 
       <div className="form-select-container">
-        <StyledMotionSelect disabled={disabled} {...register(name)} id={name + '-formInput'}>
+        <StyledMotionSelect
+          disabled={disabled}
+          {...(register(name),
+          {
+            onChange: (e) => {
+              const value = e.target.value === '' ? null : e.target.value;
+              setValue(name, value as PathValue<T, Path<T>>);
+            },
+          })}
+          id={name + '-formInput'}
+          value={watchValue}
+        >
           {options.map((option) => (
             <option key={option.value} value={option.value}>
               {option.label}
