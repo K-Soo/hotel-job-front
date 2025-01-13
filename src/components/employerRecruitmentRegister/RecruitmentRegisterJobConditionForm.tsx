@@ -15,8 +15,8 @@ import { salaryType } from '@/constants';
 import useDidMountEffect from '@/hooks/useDidMountEffect';
 import FormInputB from '@/components/common/form/FormInputB';
 import { workingDayList } from '@/constants/recruitment';
-import FormArrayCheckbox from '@/components/common/form/FormArrayCheckbox';
 import { benefits } from '@/constants/benefits';
+import FormArrayChipsCheckbox from '@/components/common/form/FormArrayChipsCheckbox';
 
 interface RecruitmentRegisterJobConditionFormProps {
   setIsOpenBenefitsModal: React.Dispatch<React.SetStateAction<boolean>>;
@@ -44,16 +44,25 @@ export default function RecruitmentRegisterJobConditionForm({ setIsOpenBenefitsM
     const { name } = event.currentTarget;
 
     setAdditionalTabs((prev) => {
-      if (name === 'workingDay') setValue('conditionInfo.workingDay', null);
-      if (name === 'workingTime') setValue('conditionInfo.workingTime.start', '');
-      if (name === 'workingTime') setValue('conditionInfo.workingTime.end', '');
-      if (name === 'benefits') setValue('conditionInfo.benefits', []);
       return {
         ...prev,
         [name]: prev[name] ? false : true,
       };
     });
   };
+
+  React.useEffect(() => {
+    if (!additionalTabs.workingDay) {
+      setValue('conditionInfo.workingDay', null);
+    }
+    if (!additionalTabs.workingTime) {
+      setValue('conditionInfo.workingTime.start', '');
+      setValue('conditionInfo.workingTime.end', '');
+    }
+    if (!additionalTabs.benefits) {
+      setValue('conditionInfo.benefits', []);
+    }
+  }, [additionalTabs.benefits, additionalTabs.workingDay, additionalTabs.workingTime]);
 
   // 근무형태 중 하나라도 선택되면 에러메시지 제거(정규직 필드만 에러 체크했음)
   React.useEffect(() => {
@@ -65,7 +74,6 @@ export default function RecruitmentRegisterJobConditionForm({ setIsOpenBenefitsM
 
   useDidMountEffect(() => {
     setValue('conditionInfo.salaryAmount', 0);
-    setFocus('conditionInfo.salaryAmount');
   }, [salaryTypeValue]);
 
   return (
@@ -125,129 +133,127 @@ export default function RecruitmentRegisterJobConditionForm({ setIsOpenBenefitsM
         <RecruitmentJobConditionAdditional handleClickToggleButton={handleClickToggleButton} additionalTabs={additionalTabs} />
       </HorizontalFormWrapper>
 
-      {additionalTabs.workingDay && (
-        <S.AdditionalContainer>
-          <S.AdditionalTitle>근무요일</S.AdditionalTitle>
-          <div className="day-form">
-            <div>
-              <FormRadio<CreateRecruitmentForm>
-                margin="0 0 10px 0"
-                name="conditionInfo.workingDay"
-                label={workingDayList.WEEKDAYS_5}
-                value="WEEKDAYS_5"
-              />
-              <FormRadio<CreateRecruitmentForm>
-                margin="0 0 10px 0"
-                name="conditionInfo.workingDay"
-                label={workingDayList.WEEKDAYS_6}
-                value="WEEKDAYS_6"
-              />
+      <S.AdditionalContainer style={{ display: additionalTabs.workingDay ? 'block' : 'none' }}>
+        <S.AdditionalTitle>근무요일</S.AdditionalTitle>
+        <div className="day-form">
+          <div>
+            <FormRadio<CreateRecruitmentForm>
+              margin="0 0 10px 0"
+              name="conditionInfo.workingDay"
+              label={workingDayList.WEEKDAYS_5}
+              value="WEEKDAYS_5"
+            />
+            <FormRadio<CreateRecruitmentForm>
+              margin="0 0 10px 0"
+              name="conditionInfo.workingDay"
+              label={workingDayList.WEEKDAYS_6}
+              value="WEEKDAYS_6"
+            />
 
-              <FormRadio margin="0 0 10px 0" name="conditionInfo.workingDay" label={workingDayList.WEEKEND_DAY} value="WEEKEND_DAY" />
-              <FormRadio margin="0 0 10px 0" name="conditionInfo.workingDay" label={workingDayList.WEEKEND_NIGHT} value="WEEKEND_NIGHT" />
-              <FormRadio margin="0 0 10px 0" name="conditionInfo.workingDay" label={workingDayList.NIGHT} value="NIGHT" />
-              <FormRadio margin="0" name="conditionInfo.workingDay" label={workingDayList.TO_BE_DECIDED} value="TO_BE_DECIDED" />
-            </div>
-
-            <div>
-              <FormRadio
-                margin="0 0 10px 0"
-                name="conditionInfo.workingDay"
-                label={workingDayList.TWO_SHIFT_DAY_DAY_NIGHT_NIGHT}
-                value="TWO_SHIFT_DAY_DAY_NIGHT_NIGHT"
-              />
-              <FormRadio
-                margin="0 0 10px 0"
-                name="conditionInfo.workingDay"
-                label={workingDayList.TWO_SHIFT_DAY_NIGHT_OFF_OFF}
-                value="TWO_SHIFT_DAY_NIGHT_OFF_OFF"
-              />
-              <FormRadio
-                margin="0 0 10px 0"
-                name="conditionInfo.workingDay"
-                label={workingDayList.TWO_SHIFT_DAY_NIGHT}
-                value="TWO_SHIFT_DAY_NIGHT"
-              />
-              <FormRadio
-                margin="0 0 10px 0"
-                name="conditionInfo.workingDay"
-                label={workingDayList.THREE_SHIFT_DAY_DAY_NIGHT_NIGHT_OFF_OFF}
-                value="THREE_SHIFT_DAY_DAY_NIGHT_NIGHT_OFF_OFF"
-              />
-              <FormRadio
-                margin="0 0 10px 0"
-                name="conditionInfo.workingDay"
-                label={workingDayList.THREE_SHIFT_DAY_NIGHT_OFF}
-                value="THREE_SHIFT_DAY_NIGHT_OFF"
-              />
-              <FormRadio
-                margin="0"
-                name="conditionInfo.workingDay"
-                label={workingDayList.THREE_SHIFT_MORNING_AFTERNOON_NIGHT}
-                value="THREE_SHIFT_MORNING_AFTERNOON_NIGHT"
-              />
-            </div>
-
-            <div>
-              <FormRadio
-                margin="0 0 10px 0"
-                name="conditionInfo.workingDay"
-                label={workingDayList.ALTERNATE_DAY_SHIFT}
-                value="ALTERNATE_DAY_SHIFT"
-              />
-              <FormRadio
-                margin="0 0 10px 0"
-                name="conditionInfo.workingDay"
-                label={workingDayList.ALTERNATE_NIGHT_SHIFT}
-                value="ALTERNATE_NIGHT_SHIFT"
-              />
-              <FormRadio margin="0" name="conditionInfo.workingDay" label={workingDayList.ALTERNATE_2DAY_OFF} value="ALTERNATE_2DAY_OFF" />
-            </div>
+            <FormRadio margin="0 0 10px 0" name="conditionInfo.workingDay" label={workingDayList.WEEKEND_DAY} value="WEEKEND_DAY" />
+            <FormRadio margin="0 0 10px 0" name="conditionInfo.workingDay" label={workingDayList.WEEKEND_NIGHT} value="WEEKEND_NIGHT" />
+            <FormRadio margin="0 0 10px 0" name="conditionInfo.workingDay" label={workingDayList.NIGHT} value="NIGHT" />
+            <FormRadio margin="0" name="conditionInfo.workingDay" label={workingDayList.TO_BE_DECIDED} value="TO_BE_DECIDED" />
           </div>
-        </S.AdditionalContainer>
-      )}
 
-      {additionalTabs.workingTime && (
-        <S.AdditionalContainer>
-          <div className="time-form">
-            <S.AdditionalTitle>출퇴근 시간</S.AdditionalTitle>
-            <div className="time-form__wrapper">
-              <FormInputB<CreateRecruitmentForm>
-                name="conditionInfo.workingTime.start"
-                placeholder="출근시간"
-                maxLength={30}
-                mask="99:99"
-                maxWidth="100px"
-              />
-              <span className="icon">~</span>
-              <FormInputB<CreateRecruitmentForm>
-                name="conditionInfo.workingTime.end"
-                placeholder="퇴근시간"
-                maxLength={30}
-                mask="99:99"
-                maxWidth="100px"
-              />
-            </div>
-          </div>
-        </S.AdditionalContainer>
-      )}
-
-      {additionalTabs.benefits && (
-        <S.AdditionalContainer>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignContent: 'center', marginBottom: '10px' }}>
-            <S.AdditionalTitle>복리후생</S.AdditionalTitle>
-            <Button
-              label="선택"
-              variant="primary"
-              width="80px"
-              height="30px"
-              onClick={() => setIsOpenBenefitsModal(true)}
-              disabled={isSubmitting}
+          <div>
+            <FormRadio
+              margin="0 0 10px 0"
+              name="conditionInfo.workingDay"
+              label={workingDayList.TWO_SHIFT_DAY_DAY_NIGHT_NIGHT}
+              value="TWO_SHIFT_DAY_DAY_NIGHT_NIGHT"
+            />
+            <FormRadio
+              margin="0 0 10px 0"
+              name="conditionInfo.workingDay"
+              label={workingDayList.TWO_SHIFT_DAY_NIGHT_OFF_OFF}
+              value="TWO_SHIFT_DAY_NIGHT_OFF_OFF"
+            />
+            <FormRadio
+              margin="0 0 10px 0"
+              name="conditionInfo.workingDay"
+              label={workingDayList.TWO_SHIFT_DAY_NIGHT}
+              value="TWO_SHIFT_DAY_NIGHT"
+            />
+            <FormRadio
+              margin="0 0 10px 0"
+              name="conditionInfo.workingDay"
+              label={workingDayList.THREE_SHIFT_DAY_DAY_NIGHT_NIGHT_OFF_OFF}
+              value="THREE_SHIFT_DAY_DAY_NIGHT_NIGHT_OFF_OFF"
+            />
+            <FormRadio
+              margin="0 0 10px 0"
+              name="conditionInfo.workingDay"
+              label={workingDayList.THREE_SHIFT_DAY_NIGHT_OFF}
+              value="THREE_SHIFT_DAY_NIGHT_OFF"
+            />
+            <FormRadio
+              margin="0"
+              name="conditionInfo.workingDay"
+              label={workingDayList.THREE_SHIFT_MORNING_AFTERNOON_NIGHT}
+              value="THREE_SHIFT_MORNING_AFTERNOON_NIGHT"
             />
           </div>
-          <FormArrayCheckbox<CreateRecruitmentForm> optionsKeyData={benefits} name="conditionInfo.benefits" />
-        </S.AdditionalContainer>
-      )}
+
+          <div>
+            <FormRadio
+              margin="0 0 10px 0"
+              name="conditionInfo.workingDay"
+              label={workingDayList.ALTERNATE_DAY_SHIFT}
+              value="ALTERNATE_DAY_SHIFT"
+            />
+            <FormRadio
+              margin="0 0 10px 0"
+              name="conditionInfo.workingDay"
+              label={workingDayList.ALTERNATE_NIGHT_SHIFT}
+              value="ALTERNATE_NIGHT_SHIFT"
+            />
+            <FormRadio margin="0" name="conditionInfo.workingDay" label={workingDayList.ALTERNATE_2DAY_OFF} value="ALTERNATE_2DAY_OFF" />
+          </div>
+        </div>
+      </S.AdditionalContainer>
+
+      <S.AdditionalContainer style={{ display: additionalTabs.workingTime ? 'block' : 'none' }}>
+        <div className="time-form">
+          <S.AdditionalTitle>출퇴근 시간</S.AdditionalTitle>
+          <div className="time-form__wrapper">
+            <FormInputB<CreateRecruitmentForm>
+              name="conditionInfo.workingTime.start"
+              placeholder="출근시간"
+              maxLength={30}
+              mask="99:99"
+              maxWidth="100px"
+            />
+            <span className="icon">~</span>
+            <FormInputB<CreateRecruitmentForm>
+              name="conditionInfo.workingTime.end"
+              placeholder="퇴근시간"
+              maxLength={30}
+              mask="99:99"
+              maxWidth="100px"
+            />
+          </div>
+        </div>
+      </S.AdditionalContainer>
+
+      <S.AdditionalContainer style={{ display: additionalTabs.benefits ? 'block' : 'none' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignContent: 'center', marginBottom: '10px' }}>
+          <S.AdditionalTitle>복리후생</S.AdditionalTitle>
+          <Button
+            label="선택"
+            variant="primary"
+            width="80px"
+            height="30px"
+            onClick={() => setIsOpenBenefitsModal(true)}
+            disabled={isSubmitting}
+          />
+        </div>
+        <FormArrayChipsCheckbox<CreateRecruitmentForm>
+          optionsKeyData={benefits}
+          name="conditionInfo.benefits"
+          onClickInputForm={() => setIsOpenBenefitsModal(true)}
+        />
+      </S.AdditionalContainer>
     </S.RecruitmentRegisterJobConditionForm>
   );
 }
