@@ -11,7 +11,7 @@ export default function Line({ margin, color }: LineProps) {
 
 const S = {
   Line: styled.div<{ $margin?: string; $color?: string }>`
-    border-top: 1px solid ${(props) => (props.$color ? props.$color : props.theme.colors.grayOpacity200)};
+    border-top: 1px solid ${(props) => (props.$color ? props.$color : props.theme.colors.gray300)};
     margin: ${(props) => (props.$margin ? props.$margin : '20px 0')};
   `,
 };
