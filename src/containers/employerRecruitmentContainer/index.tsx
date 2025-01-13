@@ -91,7 +91,7 @@ export default function EmployerRecruitmentContainer() {
       <div>
         <SectionTitle title="공고 목록" />
         <RecruitmentStatusBar />
-        <div style={{ display: 'flex', justifyContent: 'flex-end', margin: '20px 0' }}>
+        <div style={{ display: 'flex', margin: '20px 0' }}>
           <Button label="공고 삭제" variant="tertiary" width="90px" height="35px" fontSize="14px" onClick={fetchDeleteRecruitment} />
         </div>
       </div>
