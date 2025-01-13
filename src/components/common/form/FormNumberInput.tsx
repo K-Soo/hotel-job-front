@@ -39,8 +39,6 @@ export default function FormNumberInput<T extends FieldValues>({
   maxLength,
   isComma,
 }: FormNumberInputProps<T>) {
-  const [inputValue, setInputValue] = React.useState('0');
-
   const {
     formState: { errors },
     register,
@@ -48,23 +46,22 @@ export default function FormNumberInput<T extends FieldValues>({
     watch,
     clearErrors,
     setValue,
+    getValues,
   } = useFormContext<T>();
 
   const {
     field: { value },
   } = useController({ name });
 
+  const error = get(errors, name);
+
   const watchValue = watch(name);
 
   React.useEffect(() => {
-    setInputValue(value);
-  }, [watchValue]);
-
-  React.useEffect(() => {
-    if (watchValue && watchValue.length !== 0) {
+    if (error && watchValue.length !== 0) {
       clearErrors(name);
     }
-  }, [clearErrors, name, watchValue]);
+  }, [clearErrors, name, error, watchValue]);
 
   React.useEffect(() => {
     if (isFocusing) {
@@ -73,45 +70,73 @@ export default function FormNumberInput<T extends FieldValues>({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isFocusing]);
 
-  const error = get(errors, name);
-
-  // 내부 상태로 렌더링 값을 관리
+  // React.useEffect(() => {
+  //   const error = get(errors, name);
+  //   if (error) {
+  //     setFocus(name);
+  //   }
+  // }, [errors, name, setFocus]);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = event.target;
-    console.log('value: ', value);
+    let inputValue = event.target.value;
 
-    const rawValue = event.target.value.replace(/,/g, ''); // 쉼표 제거
-    console.log('rawValue: ', rawValue);
-    setInputValue(isComma ? priceComma(rawValue) : rawValue); // 내부 상태 업데이트
-    setValue(name, rawValue as PathValue<T, Path<T>>); // 폼 상태 업데이트
+    if (isComma) {
+      // isComma가 true인 경우 콤마를 제거
+      inputValue = inputValue.replace(/,/g, '');
+    }
+
+    if (/^0[0-9]+/.test(inputValue)) {
+      inputValue = inputValue.replace(/^0+/, '');
+    }
+
+    const numericValue = inputValue === '' || isNaN(Number(inputValue)) ? 0 : inputValue;
+    setValue(name, numericValue as PathValue<T, Path<T>>); // 상태 저장
+  };
+
+  const handleInputFocus = (event: React.FocusEvent<HTMLInputElement>) => {
+    const inputValue = event.target.value;
+    // 커서를 항상 `0`의 왼쪽으로 이동
+    if (inputValue === '0') {
+      event.target.setSelectionRange(0, 0);
+    }
+  };
+
+  const handleValidation = () => {
+    // 벨리데이션 시 콤마 제거
+    const currentValue = getValues(name);
+    if (isComma) {
+      const numericValue = String(currentValue).replace(/,/g, '');
+      setValue(name, Number(numericValue) as PathValue<T, Path<T>>, { shouldValidate: true });
+    }
   };
 
   return (
     <S.FormNumberInput $margin={margin} $width={width} $maxWidth={maxWidth} $minWidth={minWidth}>
       {label && (
-        <S.FormLabel className="input-label" htmlFor={name + '-FormNumberInput'} required={required && !readOnly}>
+        <S.FormLabel className="input-label" htmlFor={name + '-Form-number-Input'} required={required && !readOnly}>
           {label}
         </S.FormLabel>
       )}
       <div className="input-container">
         <StyledMotionInput
-          id={name + '-FormNumberInput'}
+          id={name + '-Form-number-Input'}
           autoComplete="off"
           placeholder={placeholder}
           type="text"
           readOnly={readOnly}
           disabled={disabled}
-          value={inputValue}
+          value={isComma ? priceComma(value) : value}
           maxLength={maxLength}
+          onFocus={handleInputFocus}
           {...register(name, {
             onChange: handleInputChange,
-            valueAsNumber: true,
+            valueAsNumber: isComma ? false : true,
+            onBlur: handleValidation,
           })}
         />
         <span className="unit">{unit}</span>
       </div>
-      {error && <FormError errors={errors} name={name} style={{ position: 'absolute' }} />}
+      <FormError errors={errors} name={name} style={{ position: 'absolute' }} />
     </S.FormNumberInput>
   );
 }
