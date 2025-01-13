@@ -27,5 +27,4 @@ export const salaryType = {
   MONTHLY: '월급',
   DAILY: '일급',
   HOURLY: '시급',
-  CASE: '건별',
 } as const;
