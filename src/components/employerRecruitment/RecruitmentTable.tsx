@@ -1,7 +1,11 @@
 import styled from 'styled-components';
 import CheckBox from '@/components/common/style/CheckBox';
-import { RecruitmentItem } from '@/types';
+import { RecruitmentItem, RecruitmentStatusKeys } from '@/types';
 import RecruitmentStatusTag from '@/components/employerRecruitment/RecruitmentStatusTag';
+import ApplicantStatusOverview from '@/components/employerRecruitment/ApplicantStatusOverview';
+import ProductOverview from '@/components/employerRecruitment/ProductOverview';
+import RecruitmentOverview from '@/components/employerRecruitment/RecruitmentOverview';
+import ManagementOverview from '@/components/employerRecruitment/ManagementOverview';
 interface RecruitmentTableProps {
   children: React.ReactNode;
 }
@@ -9,7 +13,7 @@ interface RecruitmentTableProps {
 interface RecruitmentTableBodyProps {
   items: RecruitmentItem[];
   checkedItems: string[];
-  handleClickRecruitmentItem: (value: string) => void;
+  handleClickRecruitmentItem: (id: string, status: RecruitmentStatusKeys) => void;
   handleClickCheckBoxItem: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
@@ -21,10 +25,11 @@ function RecruitmentTableHeader() {
   return (
     <S.RecruitmentTableHeader>
       <span className="header-row check"></span>
-      <span className="header-row status">상태</span>
-      <span className="header-row text">공고제목</span>
+      <span className="header-row status">공고 상태</span>
+      <span className="header-row text">공고</span>
+      <span className="header-row product">채용상품</span>
       <span className="header-row candidate">지원자</span>
-      <span className="header-row date">생성/수정일</span>
+      <span className="header-row management">관리</span>
     </S.RecruitmentTableHeader>
   );
 }
@@ -49,21 +54,20 @@ function RecruitmentTableBody({ items, handleClickRecruitmentItem, checkedItems,
             <RecruitmentStatusTag status={item.recruitmentStatus} />
           </div>
 
-          <div className="item__text" onClick={() => handleClickRecruitmentItem(item.id)}>
-            {item.recruitmentTitle}
+          <div className="item__text" onClick={() => handleClickRecruitmentItem(item.id, item.recruitmentStatus)}>
+            <RecruitmentOverview recruitmentTitle={item.recruitmentTitle} />
+          </div>
+
+          <div className="item__product">
+            <ProductOverview status={item.recruitmentStatus} />
           </div>
 
           <div className="item__candidate">
-            <div>
-              <span>지원자 100</span>
-              <span>열람 10</span>
-              <span>미열람 10</span>
-            </div>
+            <ApplicantStatusOverview />
           </div>
 
-          <div className="item__date">
-            <p>2021.09.01</p>
-            <p>2021.09.03</p>
+          <div className="item__management">
+            <ManagementOverview status={item.recruitmentStatus} id={item.id} />
           </div>
         </div>
       ))}
@@ -99,12 +103,16 @@ const S = {
     }
     .text {
       flex-grow: 1;
+      margin: 0 15px;
+    }
+    .product {
+      flex-basis: 220px;
     }
     .candidate {
-      flex-basis: 300px;
+      flex-basis: 220px;
     }
-    .date {
-      flex-basis: 150px;
+    .management {
+      flex-basis: 100px;
     }
   `,
   RecruitmentTableBody: styled.div`
@@ -137,18 +145,16 @@ const S = {
         display: flex;
         align-items: center;
         justify-content: center;
-        cursor: pointer;
-        &:hover {
-          text-decoration: underline;
-        }
+        margin: 0 15px;
+      }
+      &__product {
+        flex-basis: 220px;
       }
       &__candidate {
-        flex-basis: 300px;
+        flex-basis: 220px;
       }
-      &__date {
-        flex-basis: 150px;
-        font-size: 12px;
-        color: ${(props) => props.theme.colors.gray600};
+      &__management {
+        flex-basis: 100px;
       }
     }
   `,
