@@ -3,9 +3,12 @@ import { useForm, FormProvider, SubmitHandler, useFormContext, useFieldArray } f
 import { Person } from '@/containers/employerRecruitmentRegisterContainer';
 import { motion } from 'framer-motion';
 
-interface RecruitmentDetailAdditionalProps {}
+interface RecruitmentDetailAdditionalProps {
+  additionalTabs: Record<string, boolean>;
+  handleClickToggleButton: (event: React.MouseEvent<HTMLButtonElement>) => void;
+}
 
-export default function RecruitmentDetailAdditional({}: RecruitmentDetailAdditionalProps) {
+export default function RecruitmentDetailAdditional({ additionalTabs, handleClickToggleButton }: RecruitmentDetailAdditionalProps) {
   const { control, register, formState, setValue, watch, reset, resetField } = useFormContext();
 
   const departmentValue = watch('department');
@@ -47,8 +50,19 @@ export default function RecruitmentDetailAdditional({}: RecruitmentDetailAdditio
       <motion.button
         className="button-group__item"
         type="button"
-        onClick={handleToggleDepartment}
-        animate={departmentValue ? { backgroundColor: '#3182f6', color: '#FFFFFF' } : undefined}
+        name="preferences"
+        onClick={handleClickToggleButton}
+        animate={additionalTabs.preferences ? { backgroundColor: '#3182f6', color: '#FFFFFF' } : undefined}
+      >
+        우대조건
+      </motion.button>
+
+      <motion.button
+        className="button-group__item"
+        type="button"
+        name="department"
+        onClick={handleClickToggleButton}
+        animate={additionalTabs.department ? { backgroundColor: '#3182f6', color: '#FFFFFF' } : undefined}
       >
         근무부서
       </motion.button>
@@ -56,19 +70,11 @@ export default function RecruitmentDetailAdditional({}: RecruitmentDetailAdditio
       <motion.button
         className="button-group__item"
         type="button"
-        onClick={handleTogglePositionValue}
-        animate={positionValue ? { backgroundColor: '#3182f6', color: '#FFFFFF' } : undefined}
+        name="position"
+        onClick={handleClickToggleButton}
+        animate={additionalTabs.position ? { backgroundColor: '#3182f6', color: '#FFFFFF' } : undefined}
       >
         직급
-      </motion.button>
-
-      <motion.button
-        className="button-group__item"
-        type="button"
-        onClick={handleTogglePositionValue}
-        animate={positionValue ? { backgroundColor: '#3182f6', color: '#FFFFFF' } : undefined}
-      >
-        우대조건
       </motion.button>
     </S.RecruitmentDetailAdditional>
   );
