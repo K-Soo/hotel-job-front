@@ -83,6 +83,7 @@ export default function EmployerRecruitmentDetailContainer() {
         workingTime: { start: '', end: '' }, //근무시간 (optional)
       },
       locationInfo: {
+        hotelName: '',
         roomCount: 0,
         address: '',
         addressDetail: '',
@@ -143,6 +144,7 @@ export default function EmployerRecruitmentDetailContainer() {
       methods.setValue('conditionInfo.workingTime', result.conditionInfo.workingTime);
       methods.setValue('conditionInfo.benefits', result.conditionInfo.benefits);
 
+      methods.setValue('locationInfo.hotelName', result.locationInfo.hotelName);
       methods.setValue('locationInfo.roomCount', result.locationInfo.roomCount);
       methods.setValue('locationInfo.address', result.locationInfo.address);
       methods.setValue('locationInfo.addressDetail', result.locationInfo.addressDetail);
