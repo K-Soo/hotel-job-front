@@ -33,7 +33,7 @@ export default function ManagementOverview({ id, status }: ManagementOverviewPro
   };
 
   if (status === 'DRAFT') {
-    return <S.ManagementOverview>{'-'}</S.ManagementOverview>;
+    return <span>{'-'}</span>;
   }
   return (
     <S.ManagementOverview onBlur={handleBlur} tabIndex={0} ref={managementOverviewRef}>
