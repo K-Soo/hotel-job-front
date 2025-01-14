@@ -183,13 +183,13 @@ const recruitmentSchema = yup.object({
         INTERN: yup.boolean().default(false),
         PART_TIME: yup.boolean().default(false),
       })
-      .test('employmentType-selected', '근무형태를 선택해주세요.!!!', function (value) {
+      .test('employmentType-selected', '고용형태를 선택해주세요.!!!', function (value) {
         const { path, createError } = this;
         const valid = Object.values(value).every((v) => v === false);
         if (valid) {
           return createError({
             path: `${path}.FULL_TIME`,
-            message: '근무형태를 선택해주세요.',
+            message: '고용형태를 선택해주세요.',
           });
         }
         return true;
@@ -197,6 +197,7 @@ const recruitmentSchema = yup.object({
   }),
   // 근무지 정보
   locationInfo: yup.object({
+    hotelName: validation.REQUIRED_TEXT_1({ minLength: 2, maxLength: 20 }),
     roomCount: yup.number().min(0, '객실수를 입력해주세요.').required(),
     address: yup.string().required('주소를 검색해주세요'),
     addressDetail: yup.string().required(),
