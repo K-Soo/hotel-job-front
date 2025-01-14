@@ -1,8 +1,15 @@
+import { RecruitmentStatusKeys } from '@/types';
 import styled from 'styled-components';
 
-interface ApplicantStatusOverviewProps {}
+interface ApplicantStatusOverviewProps {
+  status: RecruitmentStatusKeys;
+}
 
-export default function ApplicantStatusOverview({}: ApplicantStatusOverviewProps) {
+export default function ApplicantStatusOverview({ status }: ApplicantStatusOverviewProps) {
+  if (status === 'DRAFT') {
+    return <span>-</span>;
+  }
+
   return (
     <S.ApplicantStatusOverview>
       <div className="column">
