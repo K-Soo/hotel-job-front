@@ -15,12 +15,22 @@ export default function RecruitmentDetailWorkPlaceForm() {
   } = useFormContext<RecruitmentDetailForm>();
   return (
     <S.RecruitmentDetailWorkPlaceForm>
+      <HorizontalFormWrapper>
+        <FormInputB<CreateRecruitmentForm>
+          required
+          label="호텔명"
+          name="locationInfo.hotelName"
+          placeholder="예) 서울호텔"
+          maxWidth="620px"
+        />
+      </HorizontalFormWrapper>
+
       <HorizontalFormWrapper label="객실수">
-        <FormNumberInput<CreateRecruitmentForm> name="locationInfo.roomCount" maxWidth="100px" unit="개" maxLength={4} />
+        <FormNumberInput<RecruitmentDetailForm> name="locationInfo.roomCount" maxWidth="100px" unit="개" maxLength={4} />
       </HorizontalFormWrapper>
 
       <HorizontalFormWrapper>
-        <FormInputB<CreateRecruitmentForm> required label="기본주소" name="locationInfo.address" placeholder="기본주소" disabled />
+        <FormInputB<RecruitmentDetailForm> required label="기본주소" name="locationInfo.address" placeholder="기본주소" disabled />
         <Button
           label="검색"
           variant="primary"
@@ -33,7 +43,7 @@ export default function RecruitmentDetailWorkPlaceForm() {
       </HorizontalFormWrapper>
 
       <HorizontalFormWrapper>
-        <FormInputB<CreateRecruitmentForm> required label="상세주소" name="locationInfo.addressDetail" placeholder="상세주소" />
+        <FormInputB<RecruitmentDetailForm> required label="상세주소" name="locationInfo.addressDetail" placeholder="상세주소" />
       </HorizontalFormWrapper>
     </S.RecruitmentDetailWorkPlaceForm>
   );
