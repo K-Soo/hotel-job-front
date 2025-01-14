@@ -78,7 +78,7 @@ export default function RecruitmentRegisterJobConditionForm({ setIsOpenBenefitsM
 
   return (
     <S.RecruitmentRegisterJobConditionForm>
-      <HorizontalFormWrapper label="근무형태" required>
+      <HorizontalFormWrapper label="고용형태" required>
         <FormCheckbox<CreateRecruitmentForm>
           label="정규직"
           name="conditionInfo.employmentType.FULL_TIME"
