@@ -16,7 +16,7 @@ export function EmployerMain({ children }: EmployerMainProps) {
   return (
     <S.EmployerMain>
       {!isExcludedAsidePath && <EmployerAside />}
-      {children}
+      <div className="main-container">{children}</div>
     </S.EmployerMain>
   );
 }
@@ -26,11 +26,16 @@ const S = {
     min-height: calc(100vh - 60px - 50px);
     display: flex;
     background-color: ${(props) => props.theme.colors.white};
-    & > section {
-      flex: 1;
-      padding: 30px;
+    .main-container {
       border-left: 1px solid ${(props) => props.theme.colors.gray200};
-      /* overflow-y: auto; */
+      flex: 1;
+      & > section {
+        flex: 1;
+        padding: 30px;
+        max-width: 1280px;
+        margin: 0 auto;
+        /* overflow-y: auto; */
+      }
     }
   `,
 };
