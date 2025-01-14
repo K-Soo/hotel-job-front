@@ -34,7 +34,6 @@ export default function RecruitFilterPanel({}: RecruitFilterPanelProps) {
       <DragScroll>
         <div className="filters">
           <RecruitFilterButton onClick={handleClickFilterButton} name="aa" margin="0 15px 0 0" label="직무" />
-          <RecruitFilterButton onClick={handleClickFilterButton} name="aaa" margin="0 15px 0 0" label="근무형태" />
           <RecruitFilterButton onClick={handleClickFilterButton} name="aaaa" margin="0 15px 0 0" label="급여" />
           <RecruitFilterButton onClick={handleClickFilterButton} name="aaaaa" margin="0 15px 0 0" label="경력/신입" />
           <RecruitFilterButton onClick={handleClickFilterButton} name="aaaaaa" label="고용형태" />
