@@ -84,6 +84,7 @@ export default function EmployerRecruitmentRegisterContainer() {
       content: QUILL_RECRUITMENT_INIT_TEXT,
       // 근무지 정보
       locationInfo: {
+        hotelName: '',
         roomCount: 0,
         address: '',
         addressDetail: '',
