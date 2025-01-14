@@ -4,6 +4,7 @@ type ResponseStatus = 'success' | 'duplicate' | 'available' | 'failure';
 
 // query
 export type RecruitmentQueryStatus = 'ALL' | 'PROGRESS' | 'PUBLISHED' | 'CLOSED' | 'REVIEWING' | 'DRAFT';
+export type RecruitmentApplicantQueryStep = 'ALL' | 'DOCUMENT' | 'INTERVIEW' | 'ACCEPTED' | 'REJECTED';
 
 export interface BaseResponse {
   error: { message: string; code: number } | null;
