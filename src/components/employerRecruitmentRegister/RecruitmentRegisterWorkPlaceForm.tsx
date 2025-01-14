@@ -17,6 +17,16 @@ export default function RecruitmentRegisterWorkPlaceForm() {
 
   return (
     <S.RecruitmentRegisterWorkPlaceForm>
+      <HorizontalFormWrapper>
+        <FormInputB<CreateRecruitmentForm>
+          required
+          label="호텔명"
+          name="locationInfo.hotelName"
+          placeholder="예) 서울호텔"
+          maxWidth="620px"
+        />
+      </HorizontalFormWrapper>
+
       <HorizontalFormWrapper label="객실수">
         <FormNumberInput<CreateRecruitmentForm> name="locationInfo.roomCount" maxWidth="100px" unit="개" maxLength={4} />
       </HorizontalFormWrapper>
