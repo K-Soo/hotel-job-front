@@ -191,6 +191,7 @@ export interface CreateRecruitmentForm {
   };
   content: string;
   locationInfo: {
+    hotelName: string;
     roomCount: number;
     address: string;
     addressDetail: string;
@@ -242,6 +243,7 @@ export interface RecruitmentDetail {
     benefits: BenefitsKeys[];
   };
   locationInfo: {
+    hotelName: string;
     roomCount: number;
     address: string;
     addressDetail: string;
