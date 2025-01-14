@@ -47,16 +47,7 @@ function RecruitmentDetailProgressMenu({ fetchDraftRecruitment, children }: Recr
 
       {children}
 
-      <Button label="미리보기" variant="tertiary" margin="0 0 10px 0" />
-
-      {recruitmentStatusWatchValue === 'DRAFT' && <Button label="임시저장" variant="tertiary" onClick={fetchDraftRecruitment} />}
-
-      {/* {recruitmentStatusWatchValue === 'DRAFT' && (
-        <S.DraftDateForm>
-          <p>{dateFormat.date4(updatedAtWatchValue)}</p>
-          <span className="text">저장</span>
-        </S.DraftDateForm>
-      )} */}
+      <Button label="미리보기" variant="tertiary" />
     </S.RecruitmentDetailProgressMenu>
   );
 }

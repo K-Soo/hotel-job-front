@@ -73,4 +73,12 @@ export const validation = {
       .matches(regex.allSpace, SPACES_VALID_TEXT_1)
       .min(minLength, MORE_TEXT(minLength))
       .max(maxLength, LESS_TEXT(maxLength)),
+  //필수 - 앞뒤 공백체크
+  TEXT_1: ({ minLength, maxLength }: { minLength: number; maxLength: number }) =>
+    yup
+      .string()
+      .matches(regex.FIRST_SPACE, FIRST_SPACES_VALID_TEXT)
+      .matches(regex.LAST_SPACE, LAST_SPACES_VALID_TEXT)
+      .min(minLength, MORE_TEXT(minLength))
+      .max(maxLength, LESS_TEXT(maxLength)),
 };

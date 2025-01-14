@@ -20,7 +20,7 @@ export default function RecruitmentStatusBar() {
   const router = useRouter();
   const { status = 'all' } = router.query as Query;
 
-  const { data, isLoading, isSuccess } = useFetchQuery({
+  const { data, isLoading } = useFetchQuery({
     queryKey: [queryKeys.RECRUITMENT_STATUS],
     queryFn: Get.recruitmentStatusCount,
     options: {
@@ -31,6 +31,7 @@ export default function RecruitmentStatusBar() {
       placeholderData: keepPreviousData,
     },
   });
+
   console.log('상태별 수량 API : ', data?.result);
 
   const handleTabClick = (newStatus: string) => {
@@ -64,10 +65,18 @@ export default function RecruitmentStatusBar() {
                 })
                 .map(([key, value]) => (
                   <button className="tabs__item" key={key} onClick={() => handleTabClick(key)}>
-                    <motion.span whileTap={{ scale: 0.9 }}>
+                    <motion.span
+                      whileTap={{ scale: 0.9 }}
+                      animate={{
+                        color: status.toUpperCase() === key ? '#333' : '#4e5968',
+                        fontWeight: status.toUpperCase() === key ? '600' : '400',
+                      }}
+                    >
                       {recruitmentStatusWithAll[key as keyof typeof recruitmentStatusWithAll]}
                     </motion.span>
-                    <span className="tabs__item--count">{value}</span>
+                    <motion.span className="tabs__item--count" animate={{ color: status.toUpperCase() === key ? '#333' : '#4e5968' }}>
+                      {value}
+                    </motion.span>
                     {status.toUpperCase() === key && <UserLine />}
                   </button>
                 ))}

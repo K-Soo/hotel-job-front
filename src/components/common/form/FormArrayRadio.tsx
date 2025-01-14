@@ -12,7 +12,7 @@ interface FormArrayRadioProps<T> {
 export default function FormArrayRadio<T extends FieldValues>({ name, options }: FormArrayRadioProps<T>) {
   const {
     watch,
-    formState: { errors },
+    formState: { errors, isSubmitting },
     clearErrors,
     setValue,
   } = useFormContext<T>();
@@ -26,6 +26,7 @@ export default function FormArrayRadio<T extends FieldValues>({ name, options }:
   }, [clearErrors, name, watchValue]);
 
   const handleClickOption = (value: string) => {
+    if (isSubmitting) return;
     setValue(name, value as PathValue<T, Path<T>>);
   };
 

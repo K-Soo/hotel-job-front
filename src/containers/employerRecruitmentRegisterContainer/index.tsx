@@ -1,6 +1,6 @@
 import React from 'react';
 import EmployerRecruitmentRegister from '@/components/employerRecruitmentRegister';
-import { useForm, FormProvider, SubmitHandler, useFormContext } from 'react-hook-form';
+import { useForm, FormProvider, SubmitHandler, useFormContext, SubmitErrorHandler, Path } from 'react-hook-form';
 import FormDevTools from '@/components/common/FormDevTools';
 import dynamic from 'next/dynamic';
 import RecruitmentRegisterProgressMenu from '@/components/employerRecruitmentRegister/RecruitmentRegisterProgressMenu';
@@ -22,21 +22,16 @@ import useFetchQuery from '@/hooks/useFetchQuery';
 import useAuth from '@/hooks/useAuth';
 
 const DynamicJobModal = dynamic(() => import('@/components/common/employer/JobModal'), { ssr: false });
-const DynamicDaumPost = dynamic(() => import('@/components/common/DaumPost'), { ssr: false });
+const DynamicBenefitsModal = dynamic(() => import('@/components/common/employer/BenefitsModal'), { ssr: false });
+const DynamicPreferencesModal = dynamic(() => import('@/components/common/employer/PreferencesModal'), { ssr: false });
 
-export type Person = {
-  users: {
-    name: string;
-    age: number;
-  }[];
-  job: {
-    name: string;
-    age: number;
-  }[];
-};
+const DynamicDaumPost = dynamic(() => import('@/components/common/DaumPost'), { ssr: false });
 
 export default function EmployerRecruitmentRegisterContainer() {
   const [isOpenJobModal, setIsOpenJobModal] = React.useState(false);
+  const [isOpenBenefitsModal, setIsOpenBenefitsModal] = React.useState(false);
+  const [isOpenPreferencesModal, setIsOpenPreferencesModal] = React.useState(false);
+
   const [isDisabled, setIsDisabled] = React.useState(false);
 
   const { authAtomState } = useAuth();
@@ -48,10 +43,8 @@ export default function EmployerRecruitmentRegisterContainer() {
   const queryClient = useQueryClient();
 
   const methods = useForm<CreateRecruitmentForm>({
-    resolver: yupResolver(schema.recruitmentSchema, {
-      // abortEarly: false,
-    }),
-    disabled: false,
+    resolver: yupResolver(schema.recruitmentSchema),
+    disabled: isDisabled,
     mode: 'onSubmit',
     reValidateMode: 'onChange',
     defaultValues: {
@@ -68,26 +61,30 @@ export default function EmployerRecruitmentRegisterContainer() {
         },
         recruitmentCapacity: 1,
         educationCondition: 'NOT_REQUIRED',
+        department: '', // 근무부서
+        position: null, // 직급
+        preferences: [], // 필수/우대조건
       },
-
       //근무조건
       conditionInfo: {
-        salaryType: 'MONTHLY', //급여 타입
-        salaryAmount: 0, //급여액
+        benefits: [],
         employmentType: {
+          FULL_TIME: false,
           CONTRACT: false,
           DAILY_WORKER: false,
-          FULL_TIME: false,
-          INTERN: false,
           PART_TIME: false,
+          INTERN: false,
         },
+        salaryType: 'MONTHLY', //급여 타입
+        salaryAmount: 0, //급여액
+        workingDay: null, //근무요일 (optional)
+        workingTime: { start: '', end: '' }, //근무시간 (optional)
       },
-
       // 상세 모집내용
       content: QUILL_RECRUITMENT_INIT_TEXT,
-
       // 근무지 정보
       locationInfo: {
+        hotelName: '',
         roomCount: 0,
         address: '',
         addressDetail: '',
@@ -95,27 +92,19 @@ export default function EmployerRecruitmentRegisterContainer() {
       managerInfo: {
         managerName: '',
         isNamePrivate: false,
-
         managerNumber: '',
         isNumberPrivate: false,
-
         managerEmail: '',
         isEmailPrivate: false,
       },
-
-      // department: undefined,
-      // preferences: undefined, // 우대조건
-
-      // workingDay: undefined, //근무요일
     },
   });
-
-  console.log('@@@@@@@@@@@@@@: ', methods.formState.errors);
-  console.log('값값값값값값값값값: ', methods.watch());
+  console.log('errors: ', methods.watch());
 
   const onSubmit: SubmitHandler<CreateRecruitmentForm> = async (data, event) => {
     event?.preventDefault();
     setIsDisabled(true);
+
     try {
       const response = await Post.createRecruitment({
         ...data,
@@ -147,6 +136,7 @@ export default function EmployerRecruitmentRegisterContainer() {
 
   // fetch - 임시저장
   const fetchDraftRecruitment = async () => {
+    setIsDisabled(true);
     const watchValues = methods.watch();
     try {
       const response = await Post.draftRecruitment({
@@ -157,14 +147,20 @@ export default function EmployerRecruitmentRegisterContainer() {
       if (response.result.status !== 'success') {
         throw new Error();
       }
-      addToast({ message: '임시저장', type: 'info' });
+
       await queryClient.invalidateQueries({ queryKey: [queryKeys.RECRUITMENT_LIST], refetchType: 'all' });
       await queryClient.invalidateQueries({ queryKey: [queryKeys.RECRUITMENT_STATUS], refetchType: 'all' });
       await queryClient.invalidateQueries({ queryKey: [queryKeys.MY_COMPANY], refetchType: 'all' });
 
-      router.replace(`${path.EMPLOYER_RECRUITMENT}/${response.result.id}`);
+      router.replace(`${path.EMPLOYER_RECRUITMENT}/${response.result.id}`, undefined, { scroll: false });
+
+      setTimeout(() => {
+        addToast({ message: '임시저장', type: 'info' });
+      }, 1000);
     } catch (error) {
       alert('임시저장 중 문제가 발생했습니다. 문제가 지속되면 관리자에게 문의하세요.');
+    } finally {
+      setIsDisabled(false);
     }
   };
 
@@ -192,21 +188,58 @@ export default function EmployerRecruitmentRegisterContainer() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [businessData]);
 
+  const findFirstErrorField = (errors: any): string | null => {
+    for (const key in errors) {
+      if (errors[key]?.type) {
+        // 현재 필드가 에러를 가진 경우
+        return key;
+      }
+      if (typeof errors[key] === 'object') {
+        // 중첩된 객체를 재귀적으로 탐색
+        const nestedKey = findFirstErrorField(errors[key]);
+        if (nestedKey) {
+          return `${key}.${nestedKey}`;
+        }
+      }
+    }
+    return null;
+  };
+
+  const onError: SubmitErrorHandler<CreateRecruitmentForm> = (errors) => {
+    const firstErrorField = findFirstErrorField(errors);
+    console.log('firstErrorField: ', firstErrorField);
+
+    if (firstErrorField) {
+      // methods.setFocus(firstErrorField as Path<CreateRecruitmentForm>); // 해당 필드로 포커스 이동
+    }
+  };
+
   return (
     <FormProvider {...methods}>
       {isOpenJobModal && <DynamicJobModal name="recruitmentInfo.jobs" setIsOpenJobModal={setIsOpenJobModal} />}
+      {isOpenBenefitsModal && <DynamicBenefitsModal name="conditionInfo.benefits" setIsOpenBenefitsModal={setIsOpenBenefitsModal} />}
+      {isOpenPreferencesModal && (
+        <DynamicPreferencesModal name="recruitmentInfo.preferences" setIsOpenPreferencesModal={setIsOpenPreferencesModal} />
+      )}
+
       {daumPostAtomValue.isOpen && <DynamicDaumPost addressName="locationInfo.address" addressDetailName="locationInfo.addressDetail" />}
 
-      <EmployerRecruitmentRegister setIsOpenJobModal={setIsOpenJobModal}>
-        <RecruitmentRegisterProgressMenu fetchDraftRecruitment={fetchDraftRecruitment}>
+      <EmployerRecruitmentRegister
+        setIsOpenJobModal={setIsOpenJobModal}
+        setIsOpenBenefitsModal={setIsOpenBenefitsModal}
+        setIsOpenPreferencesModal={setIsOpenPreferencesModal}
+      >
+        <RecruitmentRegisterProgressMenu>
           <Button
             label="공고 생성"
             variant="primary"
             margin="0 0 10px 0"
-            onClick={methods.handleSubmit(onSubmit)}
-            type="button"
+            onClick={methods.handleSubmit(onSubmit, onError)}
+            type="submit"
             isLoading={methods.formState.isSubmitting}
           />
+
+          <Button label="임시저장" variant="tertiary" onClick={fetchDraftRecruitment} margin="0 0 10px 0" isLoading={isDisabled} />
         </RecruitmentRegisterProgressMenu>
       </EmployerRecruitmentRegister>
       <FormDevTools control={methods.control} />

@@ -3,45 +3,82 @@ import styled from 'styled-components';
 import HorizontalFormWrapper from '@/components/common/form/HorizontalFormWrapper';
 import FormCheckbox from '@/components/common/form/FormCheckbox';
 import FormArrayRadio from '@/components/common/form/FormArrayRadio';
-import FormTagBox from '@/components/common/form/FormTagBox';
 import FormRadio from '@/components/common/form/FormRadio';
 import Button from '@/components/common/style/Button';
-import Icon from '@/icons/Icon';
 import RecruitmentJobConditionAdditional from '@/components/employerRecruitmentRegister/RecruitmentJobConditionAdditional';
-import RecruitmentDetailAdditional from '@/components/employerRecruitmentRegister/RecruitmentDetailAdditional';
 import { useFormContext } from 'react-hook-form';
-import { requiredSalaryTypeOptions } from '@/constants/options';
 import { CreateRecruitmentForm, SalaryTypeKeys } from '@/types';
 import FormNumberInput from '@/components/common/form/FormNumberInput';
 import MinimumWage from '@/components/common/employer/MinimumWage';
+import Line from '@/components/common/Line';
 import { salaryType } from '@/constants';
 import useDidMountEffect from '@/hooks/useDidMountEffect';
+import FormInputB from '@/components/common/form/FormInputB';
+import { workingDayList } from '@/constants/recruitment';
+import { benefits } from '@/constants/benefits';
+import FormArrayChipsCheckbox from '@/components/common/form/FormArrayChipsCheckbox';
 
-interface RecruitmentRegisterJobConditionFormProps {}
+interface RecruitmentRegisterJobConditionFormProps {
+  setIsOpenBenefitsModal: React.Dispatch<React.SetStateAction<boolean>>;
+}
 
-export default function RecruitmentRegisterJobConditionForm({}: RecruitmentRegisterJobConditionFormProps) {
-  const { watch, setValue, setFocus, clearErrors } = useFormContext<CreateRecruitmentForm>();
+export default function RecruitmentRegisterJobConditionForm({ setIsOpenBenefitsModal }: RecruitmentRegisterJobConditionFormProps) {
+  const [additionalTabs, setAdditionalTabs] = React.useState<Record<string, boolean>>({
+    workingDay: false,
+    workingTime: false,
+    benefits: false,
+  });
+
+  const {
+    watch,
+    setValue,
+    setFocus,
+    clearErrors,
+    formState: { isValidating, isSubmitting },
+  } = useFormContext<CreateRecruitmentForm>();
 
   const salaryTypeValue = watch('conditionInfo.salaryType') as SalaryTypeKeys;
   const employmentTypeValue = watch('conditionInfo.employmentType');
 
-  // 근무형태 중 하나라도 선택되면 에러메시지 제거(정규직에만 에러 체크했음)
+  const handleClickToggleButton = (event: React.MouseEvent<HTMLButtonElement>) => {
+    const { name } = event.currentTarget;
+
+    setAdditionalTabs((prev) => {
+      return {
+        ...prev,
+        [name]: prev[name] ? false : true,
+      };
+    });
+  };
+
+  React.useEffect(() => {
+    if (!additionalTabs.workingDay) {
+      setValue('conditionInfo.workingDay', null);
+    }
+    if (!additionalTabs.workingTime) {
+      setValue('conditionInfo.workingTime.start', '');
+      setValue('conditionInfo.workingTime.end', '');
+    }
+    if (!additionalTabs.benefits) {
+      setValue('conditionInfo.benefits', []);
+    }
+  }, [additionalTabs.benefits, additionalTabs.workingDay, additionalTabs.workingTime]);
+
+  // 근무형태 중 하나라도 선택되면 에러메시지 제거(정규직 필드만 에러 체크했음)
   React.useEffect(() => {
     const validEmploymentType = Object.values(employmentTypeValue).some((value) => value === true);
     if (validEmploymentType) {
       clearErrors('conditionInfo.employmentType.FULL_TIME');
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [employmentTypeValue]);
+  }, [clearErrors, employmentTypeValue, isValidating]);
 
   useDidMountEffect(() => {
     setValue('conditionInfo.salaryAmount', 0);
-    setFocus('conditionInfo.salaryAmount');
   }, [salaryTypeValue]);
 
   return (
     <S.RecruitmentRegisterJobConditionForm>
-      <HorizontalFormWrapper label="근무형태" required>
+      <HorizontalFormWrapper label="고용형태" required>
         <FormCheckbox<CreateRecruitmentForm>
           label="정규직"
           name="conditionInfo.employmentType.FULL_TIME"
@@ -74,18 +111,6 @@ export default function RecruitmentRegisterJobConditionForm({}: RecruitmentRegis
         />
       </HorizontalFormWrapper>
 
-      {/* <HorizontalFormWrapper label="북리후생" required>
-        <FormTagBox name="ㅁㄴㅇ" placeholder="복리후생" maxWidth="378px" />
-        <Button
-          label="검색"
-          variant="select"
-          width="120px"
-          height="40px"
-          margin="0 0 0 15px"
-          icon={<Icon name="Plus24x24" color="red" margin="0 5px 0 0" width="16px" height="16px" />}
-        />
-      </HorizontalFormWrapper> */}
-
       <HorizontalFormWrapper label="급여" required border="none">
         <FormArrayRadio<CreateRecruitmentForm> options={salaryType} name="conditionInfo.salaryType" />
       </HorizontalFormWrapper>
@@ -96,45 +121,139 @@ export default function RecruitmentRegisterJobConditionForm({}: RecruitmentRegis
           maxWidth="140px"
           unit="원"
           isComma
-          margin="0 0 15px 0"
+          margin="0 0 30px 0"
           maxLength={11}
         />
         <MinimumWage salaryType={salaryTypeValue} />
       </S.PriceBox>
 
-      {/* <HorizontalFormWrapper label="항목추가">
-        <RecruitmentJobConditionAdditional />
-      </HorizontalFormWrapper> */}
+      <Line margin="15px 0 0 0" />
 
-      {/* <HorizontalFormWrapper label="항목추가">
-        <RecruitmentDetailAdditional />
-      </HorizontalFormWrapper> */}
+      <HorizontalFormWrapper label="항목추가" border="none">
+        <RecruitmentJobConditionAdditional handleClickToggleButton={handleClickToggleButton} additionalTabs={additionalTabs} />
+      </HorizontalFormWrapper>
 
-      {/* <S.AdditionalContainer>
-        <div>
-          <FormRadio margin="3px" name="jobWorking" label="주 5일 (월~금)" value="WEEKDAYS_5" />
-          <FormRadio margin="3px" name="jobWorking" label="주 6일 (월~토)" value="WEEKDAYS_6" />
-          <FormRadio margin="3px" name="jobWorking" label="주말 주간 (토, 일)" value="WEEKEND_DAY" />
-          <FormRadio margin="3px" name="jobWorking" label="주말 야간 (토, 일)" value="WEEKEND_NIGHT" />
-          <FormRadio margin="3px" name="jobWorking" label="야간 고정" value="NIGHT" />
-          <FormRadio margin="3px" name="jobWorking" label="면접 후 결정" value="TO_BE_DECIDED" />
+      <S.AdditionalContainer style={{ display: additionalTabs.workingDay ? 'block' : 'none' }}>
+        <S.AdditionalTitle>근무요일</S.AdditionalTitle>
+        <div className="day-form">
+          <div>
+            <FormRadio<CreateRecruitmentForm>
+              margin="0 0 10px 0"
+              name="conditionInfo.workingDay"
+              label={workingDayList.WEEKDAYS_5}
+              value="WEEKDAYS_5"
+            />
+            <FormRadio<CreateRecruitmentForm>
+              margin="0 0 10px 0"
+              name="conditionInfo.workingDay"
+              label={workingDayList.WEEKDAYS_6}
+              value="WEEKDAYS_6"
+            />
+
+            <FormRadio margin="0 0 10px 0" name="conditionInfo.workingDay" label={workingDayList.WEEKEND_DAY} value="WEEKEND_DAY" />
+            <FormRadio margin="0 0 10px 0" name="conditionInfo.workingDay" label={workingDayList.WEEKEND_NIGHT} value="WEEKEND_NIGHT" />
+            <FormRadio margin="0 0 10px 0" name="conditionInfo.workingDay" label={workingDayList.NIGHT} value="NIGHT" />
+            <FormRadio margin="0" name="conditionInfo.workingDay" label={workingDayList.TO_BE_DECIDED} value="TO_BE_DECIDED" />
+          </div>
+
+          <div>
+            <FormRadio
+              margin="0 0 10px 0"
+              name="conditionInfo.workingDay"
+              label={workingDayList.TWO_SHIFT_DAY_DAY_NIGHT_NIGHT}
+              value="TWO_SHIFT_DAY_DAY_NIGHT_NIGHT"
+            />
+            <FormRadio
+              margin="0 0 10px 0"
+              name="conditionInfo.workingDay"
+              label={workingDayList.TWO_SHIFT_DAY_NIGHT_OFF_OFF}
+              value="TWO_SHIFT_DAY_NIGHT_OFF_OFF"
+            />
+            <FormRadio
+              margin="0 0 10px 0"
+              name="conditionInfo.workingDay"
+              label={workingDayList.TWO_SHIFT_DAY_NIGHT}
+              value="TWO_SHIFT_DAY_NIGHT"
+            />
+            <FormRadio
+              margin="0 0 10px 0"
+              name="conditionInfo.workingDay"
+              label={workingDayList.THREE_SHIFT_DAY_DAY_NIGHT_NIGHT_OFF_OFF}
+              value="THREE_SHIFT_DAY_DAY_NIGHT_NIGHT_OFF_OFF"
+            />
+            <FormRadio
+              margin="0 0 10px 0"
+              name="conditionInfo.workingDay"
+              label={workingDayList.THREE_SHIFT_DAY_NIGHT_OFF}
+              value="THREE_SHIFT_DAY_NIGHT_OFF"
+            />
+            <FormRadio
+              margin="0"
+              name="conditionInfo.workingDay"
+              label={workingDayList.THREE_SHIFT_MORNING_AFTERNOON_NIGHT}
+              value="THREE_SHIFT_MORNING_AFTERNOON_NIGHT"
+            />
+          </div>
+
+          <div>
+            <FormRadio
+              margin="0 0 10px 0"
+              name="conditionInfo.workingDay"
+              label={workingDayList.ALTERNATE_DAY_SHIFT}
+              value="ALTERNATE_DAY_SHIFT"
+            />
+            <FormRadio
+              margin="0 0 10px 0"
+              name="conditionInfo.workingDay"
+              label={workingDayList.ALTERNATE_NIGHT_SHIFT}
+              value="ALTERNATE_NIGHT_SHIFT"
+            />
+            <FormRadio margin="0" name="conditionInfo.workingDay" label={workingDayList.ALTERNATE_2DAY_OFF} value="ALTERNATE_2DAY_OFF" />
+          </div>
         </div>
+      </S.AdditionalContainer>
 
-        <div>
-          <FormRadio margin="3px" name="jobWorking" label="2교대 (주주야야)" value="TWO_SHIFT_DAY_DAY_NIGHT_NIGHT" />
-          <FormRadio margin="3px" name="jobWorking" label="2교대 (주야비비)" value="TWO_SHIFT_DAY_NIGHT_OFF_OFF" />
-          <FormRadio margin="3px" name="jobWorking" label="2교대 (주야주야)" value="TWO_SHIFT_DAY_NIGHT" />
-          <FormRadio margin="3px" name="jobWorking" label="3교대 (주주야야비비)" value="THREE_SHIFT_DAY_DAY_NIGHT_NIGHT_OFF_OFF" />
-          <FormRadio margin="3px" name="jobWorking" label="3교대 (주야비)" value="THREE_SHIFT_DAY_NIGHT_OFF" />
-          <FormRadio margin="3px" name="jobWorking" label="3교대 (오전/오후/심야)" value="THREE_SHIFT_MORNING_AFTERNOON_NIGHT" />
+      <S.AdditionalContainer style={{ display: additionalTabs.workingTime ? 'block' : 'none' }}>
+        <div className="time-form">
+          <S.AdditionalTitle>출퇴근 시간</S.AdditionalTitle>
+          <div className="time-form__wrapper">
+            <FormInputB<CreateRecruitmentForm>
+              name="conditionInfo.workingTime.start"
+              placeholder="출근시간"
+              maxLength={30}
+              mask="99:99"
+              maxWidth="100px"
+            />
+            <span className="icon">~</span>
+            <FormInputB<CreateRecruitmentForm>
+              name="conditionInfo.workingTime.end"
+              placeholder="퇴근시간"
+              maxLength={30}
+              mask="99:99"
+              maxWidth="100px"
+            />
+          </div>
         </div>
+      </S.AdditionalContainer>
 
-        <div>
-          <FormRadio margin="3px" name="jobWorking" label="격일제 (24시간 주간 맞교대)" value="ALTERNATE_DAY_SHIFT" />
-          <FormRadio margin="3px" name="jobWorking" label="격일제 (24시간 야간 맞교대)" value="ALTERNATE_NIGHT_SHIFT" />
-          <FormRadio margin="3px" name="jobWorking" label="격일제 (24시간 근무 2일 휴무)" value="ALTERNATE_2DAY_OFF" />
+      <S.AdditionalContainer style={{ display: additionalTabs.benefits ? 'block' : 'none' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignContent: 'center', marginBottom: '10px' }}>
+          <S.AdditionalTitle>복리후생</S.AdditionalTitle>
+          <Button
+            label="선택"
+            variant="primary"
+            width="80px"
+            height="30px"
+            onClick={() => setIsOpenBenefitsModal(true)}
+            disabled={isSubmitting}
+          />
         </div>
-      </S.AdditionalContainer> */}
+        <FormArrayChipsCheckbox<CreateRecruitmentForm>
+          optionsKeyData={benefits}
+          name="conditionInfo.benefits"
+          onClickInputForm={() => setIsOpenBenefitsModal(true)}
+        />
+      </S.AdditionalContainer>
     </S.RecruitmentRegisterJobConditionForm>
   );
 }
@@ -145,11 +264,31 @@ const S = {
     margin-left: 165px;
   `,
   AdditionalContainer: styled.div`
-    display: flex;
-    padding: 10px 15px;
+    padding: 20px 15px;
     background-color: ${(props) => props.theme.colors.gray};
-    & > * {
-      flex: 1;
+    opacity: 0.95;
+    border-bottom: 1px solid ${(props) => props.theme.colors.gray200};
+    .day-form {
+      display: flex;
+      & > div {
+        flex: 1;
+      }
     }
+    .time-form {
+      &__wrapper {
+        display: flex;
+        align-items: center;
+      }
+      .icon {
+        padding: 0 10px;
+      }
+    }
+  `,
+  AdditionalTitle: styled.h6`
+    color: ${(props) => props.theme.colors.gray700};
+    font-size: 14px;
+    height: 30px;
+    display: flex;
+    align-items: center;
   `,
 };

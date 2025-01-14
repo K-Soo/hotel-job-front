@@ -37,7 +37,7 @@ const S = {
     border-radius: 5px;
     width: 100%;
     border: 1px solid ${(props) => props.theme.colors.gray300};
-    padding: 15px;
+    padding: 10px;
     overflow-y: auto;
     z-index: 6;
   `,

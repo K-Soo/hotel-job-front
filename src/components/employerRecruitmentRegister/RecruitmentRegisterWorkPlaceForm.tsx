@@ -6,14 +6,29 @@ import FormNumberInput from '@/components/common/form/FormNumberInput';
 import { CreateRecruitmentForm } from '@/types';
 import { useSetRecoilState } from 'recoil';
 import { daumPostAtom } from '@/recoil/daumPost';
+import { useFormContext } from 'react-hook-form';
 
 export default function RecruitmentRegisterWorkPlaceForm() {
   const setDaumPostAtom = useSetRecoilState(daumPostAtom);
 
+  const {
+    formState: { isSubmitting },
+  } = useFormContext<CreateRecruitmentForm>();
+
   return (
     <S.RecruitmentRegisterWorkPlaceForm>
+      <HorizontalFormWrapper>
+        <FormInputB<CreateRecruitmentForm>
+          required
+          label="호텔명"
+          name="locationInfo.hotelName"
+          placeholder="예) 서울호텔"
+          maxWidth="620px"
+        />
+      </HorizontalFormWrapper>
+
       <HorizontalFormWrapper label="객실수">
-        <FormNumberInput<CreateRecruitmentForm> name="locationInfo.roomCount" maxWidth="100px" unit="개" maxLength={4} isComma />
+        <FormNumberInput<CreateRecruitmentForm> name="locationInfo.roomCount" maxWidth="100px" unit="개" maxLength={4} />
       </HorizontalFormWrapper>
 
       <HorizontalFormWrapper>
@@ -25,6 +40,7 @@ export default function RecruitmentRegisterWorkPlaceForm() {
           width="100px"
           margin="0 0 0 15px"
           onClick={() => setDaumPostAtom({ isOpen: true })}
+          disabled={isSubmitting}
         />
       </HorizontalFormWrapper>
 

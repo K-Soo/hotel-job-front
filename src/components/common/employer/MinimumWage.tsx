@@ -1,24 +1,22 @@
 import styled from 'styled-components';
-import { SalaryType } from '@/types';
+import { SalaryTypeKeys } from '@/types';
 
 interface MinimumWageProps {
-  salaryType: SalaryType;
+  salaryType: SalaryTypeKeys;
 }
 
-export const minimumWageText: Record<SalaryType, string> = {
+export const minimumWageText: Record<SalaryTypeKeys, string> = {
   ANNUAL: '25,155,240원(월 209시간 기준)',
   MONTHLY: '2,096,270원(월 209시간 기준)',
   DAILY: '401,200원(주 40시간 기준)',
   HOURLY: '10,030원',
-  CASE: '10,030원',
 } as const;
 
-export const minimumWageType: Record<SalaryType, string> = {
+export const minimumWageType: Record<SalaryTypeKeys, string> = {
   ANNUAL: '연봉',
   MONTHLY: '월급',
   DAILY: '주급',
   HOURLY: '시급',
-  CASE: '시급',
 } as const;
 
 export default function MinimumWage({ salaryType = 'HOURLY' }: MinimumWageProps) {

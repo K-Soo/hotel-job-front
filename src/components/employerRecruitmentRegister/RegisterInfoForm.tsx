@@ -13,19 +13,47 @@ import Button from '@/components/common/style/Button';
 import { CreateRecruitmentForm } from '@/types';
 import { experienceCondition } from '@/constants/recruitment';
 import React from 'react';
-import FormArrayCheckbox from '@/components/common/form/FormArrayCheckbox';
+import FormArrayChipsCheckbox from '@/components/common/form/FormArrayChipsCheckbox';
+import { allJobs } from '@/constants/job';
+import { preferences } from '@/constants/preferences';
+import useDidMountEffect from '@/hooks/useDidMountEffect';
 
-interface RecruitmentRegisterDetailFormProps {
+interface RegisterInfoFormProps {
   setIsOpenJobModal: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsOpenPreferencesModal: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export default function RecruitmentRegisterDetailForm({ setIsOpenJobModal }: RecruitmentRegisterDetailFormProps) {
-  const { watch, clearErrors } = useFormContext<CreateRecruitmentForm>();
+export default function RegisterInfoForm({ setIsOpenJobModal, setIsOpenPreferencesModal }: RegisterInfoFormProps) {
+  const [additionalTabs, setAdditionalTabs] = React.useState<Record<string, boolean>>({
+    department: false,
+    position: false,
+    preferences: false,
+  });
 
-  // const departmentValue = watch('department');
-  // const positionValue = watch('position');
+  const {
+    watch,
+    clearErrors,
+    formState: { isSubmitting },
+  } = useFormContext<CreateRecruitmentForm>();
 
   const isCheckedForeigner = watch('recruitmentInfo.nationality.foreigner');
+  const departmentValue = watch('recruitmentInfo.department');
+  const positionValue = watch('recruitmentInfo.position');
+
+  const handleClickToggleButton = (event: React.MouseEvent<HTMLButtonElement>) => {
+    const { name } = event.currentTarget;
+    setAdditionalTabs((prev) => ({ ...prev, [name]: prev[name] ? false : true }));
+  };
+
+  // TODO 초기화 버튼으로..
+  React.useEffect(() => {
+    // if (!additionalTabs.department) {
+    //   setValue('recruitmentInfo.department', '');
+    // }
+    // if (!additionalTabs.position) {
+    //   setValue('recruitmentInfo.position', null);
+    // }
+  }, [departmentValue, positionValue]);
 
   React.useEffect(() => {
     if (isCheckedForeigner) {
@@ -34,10 +62,25 @@ export default function RecruitmentRegisterDetailForm({ setIsOpenJobModal }: Rec
   }, [isCheckedForeigner, clearErrors]);
 
   return (
-    <S.RecruitmentRegisterDetailForm>
+    <S.RegisterInfoForm>
       <HorizontalFormWrapper>
-        <FormArrayCheckbox<CreateRecruitmentForm> label="직무" name="recruitmentInfo.jobs" required />
-        <Button label="선택" variant="primary" height="40px" width="100px" margin="0 0 0 15px" onClick={() => setIsOpenJobModal(true)} />
+        <FormArrayChipsCheckbox<CreateRecruitmentForm>
+          name="recruitmentInfo.jobs"
+          label="직무"
+          required
+          onClickInputForm={() => setIsOpenJobModal(true)}
+          optionsKeyData={allJobs}
+          placeholder="직무를 선택해주세요"
+        />
+        <Button
+          label="선택"
+          variant="primary"
+          height="40px"
+          width="100px"
+          margin="0 0 0 15px"
+          disabled={isSubmitting}
+          onClick={() => setIsOpenJobModal(true)}
+        />
       </HorizontalFormWrapper>
 
       <HorizontalFormWrapper label="경력" required>
@@ -93,29 +136,48 @@ export default function RecruitmentRegisterDetailForm({ setIsOpenJobModal }: Rec
       </HorizontalFormWrapper>
 
       <HorizontalFormWrapper label="항목추가">
-        <RecruitmentDetailAdditional />
+        <RecruitmentDetailAdditional handleClickToggleButton={handleClickToggleButton} additionalTabs={additionalTabs} />
       </HorizontalFormWrapper>
 
-      {/* 
-      <S.AdditionalContainer>
-        <FormInput<any> label="근무부서" name="department.value" placeholder="근무하게 될 부서 또는 근무지" isFocusing />
+      <S.AdditionalContainer style={{ display: additionalTabs.preferences ? 'block' : 'none' }}>
+        <HorizontalFormWrapper>
+          <FormArrayChipsCheckbox<CreateRecruitmentForm>
+            name="recruitmentInfo.preferences"
+            label="우대사항"
+            onClickInputForm={() => setIsOpenPreferencesModal(true)}
+            optionsKeyData={preferences}
+            placeholder="우대사항을 선택해주세요"
+          />
+          <Button
+            label="선택"
+            variant="primary"
+            height="40px"
+            width="120px"
+            margin="0 0 0 15px"
+            onClick={() => setIsOpenPreferencesModal(true)}
+          />
+        </HorizontalFormWrapper>
       </S.AdditionalContainer>
 
-      <S.AdditionalContainer>
-        <FormSelect name="position" options={optionalPositionOptions} label="직급" />
-      </S.AdditionalContainer> */}
-    </S.RecruitmentRegisterDetailForm>
+      <S.AdditionalContainer style={{ display: additionalTabs.department ? 'block' : 'none' }}>
+        <HorizontalFormWrapper label="근무부서">
+          <FormInputB<CreateRecruitmentForm> name="recruitmentInfo.department" placeholder="근무하게 될 부서 또는 근무지" maxLength={30} />
+        </HorizontalFormWrapper>
+      </S.AdditionalContainer>
+
+      <S.AdditionalContainer style={{ display: additionalTabs.position ? 'block' : 'none' }}>
+        <HorizontalFormWrapper label="직급">
+          <FormSelect name="recruitmentInfo.position" options={optionalPositionOptions} />
+        </HorizontalFormWrapper>
+      </S.AdditionalContainer>
+    </S.RegisterInfoForm>
   );
 }
 
 const S = {
-  RecruitmentRegisterDetailForm: styled.div``,
+  RegisterInfoForm: styled.div``,
   AdditionalContainer: styled.div`
-    display: flex;
-    flex-direction: column;
-    justify-content: end;
-    align-items: end;
-    padding: 10px 15px;
     background-color: ${(props) => props.theme.colors.gray};
+    opacity: 0.95;
   `,
 };

@@ -9,13 +9,15 @@ interface FormRadioProps<T> {
   label: string;
   value: string;
   margin?: string;
+  isFocusing?: boolean;
 }
 
-export default function FormRadio<T extends FieldValues>({ label, name, margin, value }: FormRadioProps<T>) {
+export default function FormRadio<T extends FieldValues>({ label, name, margin, value, isFocusing }: FormRadioProps<T>) {
   const {
     register,
     watch,
     clearErrors,
+    setFocus,
     formState: { errors },
   } = useFormContext<T>();
 
@@ -28,11 +30,18 @@ export default function FormRadio<T extends FieldValues>({ label, name, margin, 
     }
   }, [error, watchValue]);
 
+  React.useEffect(() => {
+    if (isFocusing) {
+      setFocus(name);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isFocusing]);
+
   return (
     <S.FormRadio $margin={margin} $active={watchValue === value}>
       <div className="form-radio-container">
-        <input id={`FormRadio-${name}-${value}`} type="radio" checked={watchValue === value} {...register(name)} value={value} />
-        <label htmlFor={`FormRadio-${name}-${value}`}>
+        <input id={`FormRadio-${name}-${value}`} type="radio" {...register(name)} value={value} />
+        <label htmlFor={`FormRadio-${name}-${value}`} tabIndex={0}>
           <span>{label}</span>
         </label>
       </div>
@@ -56,6 +65,7 @@ const S = {
       justify-content: space-between;
       line-height: 1.2;
       cursor: pointer;
+
       :hover {
         color: ${(props) => props.theme.colors.blue700};
         cursor: pointer;

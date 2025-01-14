@@ -1,21 +1,46 @@
+import React from 'react';
 import styled from 'styled-components';
-import { useForm, FormProvider, SubmitHandler, useFormContext, useFieldArray } from 'react-hook-form';
-import { Person } from '@/containers/employerRecruitmentRegisterContainer';
 import { motion } from 'framer-motion';
 
-interface RecruitmentJobConditionAdditionalProps {}
+interface RecruitmentJobConditionAdditionalProps {
+  additionalTabs: Record<string, boolean>;
+  handleClickToggleButton: (event: React.MouseEvent<HTMLButtonElement>) => void;
+}
 
-export default function RecruitmentJobConditionAdditional({}: RecruitmentJobConditionAdditionalProps) {
-  const { control, register, formState, setValue, watch, reset, resetField } = useFormContext();
-
+export default function RecruitmentJobConditionAdditional({
+  additionalTabs,
+  handleClickToggleButton,
+}: RecruitmentJobConditionAdditionalProps) {
   return (
     <S.RecruitmentJobConditionAdditional>
-      <motion.button className="item" type="button" animate={false ? { backgroundColor: '#3182f6', color: '#FFFFFF' } : undefined}>
+      <motion.button
+        className="item"
+        name="workingDay"
+        type="button"
+        onClick={handleClickToggleButton}
+        animate={additionalTabs.workingDay ? { backgroundColor: '#3182f6', color: '#FFFFFF' } : undefined}
+      >
         근무요일
       </motion.button>
 
-      <motion.button className="item" type="button" animate={false ? { backgroundColor: '#3182f6', color: '#FFFFFF' } : undefined}>
+      <motion.button
+        className="item"
+        name="workingTime"
+        type="button"
+        onClick={handleClickToggleButton}
+        animate={additionalTabs.workingTime ? { backgroundColor: '#3182f6', color: '#FFFFFF' } : undefined}
+      >
         출퇴근 시간
+      </motion.button>
+
+      <motion.button
+        className="item"
+        name="benefits"
+        type="button"
+        onClick={handleClickToggleButton}
+        animate={additionalTabs.benefits ? { backgroundColor: '#3182f6', color: '#FFFFFF' } : undefined}
+      >
+        복리후생
       </motion.button>
     </S.RecruitmentJobConditionAdditional>
   );

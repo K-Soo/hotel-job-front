@@ -37,6 +37,7 @@ interface ButtonProps {
   iconColor?: string;
   padding?: string;
   isLoading?: boolean;
+  style?: React.CSSProperties;
 }
 
 export default function Button({
@@ -56,9 +57,11 @@ export default function Button({
   iconColor,
   padding,
   isLoading,
+  style,
 }: ButtonProps) {
   return (
     <S.Button
+      style={style}
       type={type ?? 'button'}
       onClick={onClick}
       height={height}
@@ -72,6 +75,7 @@ export default function Button({
       $maxWidth={maxWidth}
       $iconColor={iconColor}
       $padding={padding}
+      $isLoading={isLoading}
     >
       {!isLoading && icon}
       {isLoading && <Image src="/images/rolling.gif" alt="image" width={30} height={30} />}
@@ -111,6 +115,7 @@ const S = {
     $iconColor?: string;
     $variant: ButtonVariant;
     $padding?: string;
+    $isLoading?: boolean;
   }>`
     box-sizing: border-box;
     cursor: pointer;
@@ -124,6 +129,7 @@ const S = {
     align-items: center;
     justify-content: center;
     white-space: nowrap;
+    user-select: none;
     padding: ${(props) => (props.$padding ? props.$padding : '0 8px')};
     svg {
       fill: ${(props) => props.$iconColor};
@@ -202,6 +208,7 @@ const S = {
         }
         &:disabled {
           cursor: not-allowed;
+          background-color: ${(props) => props.theme.colors.gray200};
         }
       `};
 

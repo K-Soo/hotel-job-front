@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { ToastAtom, toastAtom } from '@/recoil/toast';
 import { useRecoilState } from 'recoil';
 import React from 'react';
+import Portal from '@/components/common/Portal';
 
 export default function Toast() {
   const [toastAtomState, setToastAtomState] = useRecoilState(toastAtom);
@@ -18,23 +19,25 @@ export default function Toast() {
   }, [toastAtomState, setToastAtomState]);
 
   return (
-    <S.ToastContainer>
-      <AnimatePresence mode="sync">
-        {toastAtomState.map((toast, index) => (
-          <S.Toast
-            layoutId={toast.id}
-            key={toast.id}
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.99 }}
-            transition={{ duration: 0.25 }}
-          >
-            <StyledToastIcon type={toast.type}>!</StyledToastIcon>
-            <span>{toast.message}</span>
-          </S.Toast>
-        ))}
-      </AnimatePresence>
-    </S.ToastContainer>
+    <Portal>
+      <S.ToastContainer>
+        <AnimatePresence mode="sync">
+          {toastAtomState.map((toast, index) => (
+            <S.Toast
+              layoutId={toast.id}
+              key={toast.id}
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.99 }}
+              transition={{ duration: 0.25 }}
+            >
+              <StyledToastIcon type={toast.type}>!</StyledToastIcon>
+              <span>{toast.message}</span>
+            </S.Toast>
+          ))}
+        </AnimatePresence>
+      </S.ToastContainer>
+    </Portal>
   );
 }
 
