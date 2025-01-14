@@ -14,6 +14,8 @@ interface CheckBoxProps {
   fontSize?: string;
   value?: string;
   disabled?: boolean;
+  style?: React.CSSProperties;
+  className?: string;
 }
 
 export default function CheckBox({
@@ -29,9 +31,11 @@ export default function CheckBox({
   value,
   disabled,
   onClick,
+  style,
+  className,
 }: CheckBoxProps) {
   return (
-    <S.CheckBox $margin={margin}>
+    <S.CheckBox $margin={margin} style={style} className={className}>
       <S.CheckBoxContainer className="wrapper" $fontSize={fontSize} $active={checked}>
         <input
           id={`checkbox-${name}`}
