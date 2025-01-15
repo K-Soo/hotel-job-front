@@ -112,6 +112,76 @@ export const Get = {
 
   getBusinessUser: () => requests.get('/business-user'),
 
+  // 채용공고 스페셜
+  getRecruitSpecialList: ({ page, limit, benefits, employment, experience, jobs }: API.GetRecruitSpecialListRequest) => {
+    const params = new URLSearchParams();
+    params.set('page', page);
+    params.set('limit', limit);
+    if (experience) params.set('experience', experience);
+
+    if (employment) {
+      employment.forEach((item) => params.append('employment', item));
+    }
+    if (benefits) {
+      benefits.forEach((item) => params.append('benefits', item));
+    }
+    if (jobs) {
+      jobs.forEach((item) => params.append('jobs', item));
+    }
+
+    const queryString = params.toString();
+    const url = `/recruit/special${queryString && `?${queryString}`}`;
+
+    return requests.get<API.GetRecruitSpecialListResponse>(url);
+  },
+
+  // 채용공고 급구
+  getRecruitUrgentList: ({ page, limit, benefits, employment, experience, jobs }: API.GetRecruitUrgentListRequest) => {
+    const params = new URLSearchParams();
+    params.set('page', page);
+    params.set('limit', limit);
+    if (experience) params.set('experience', experience);
+
+    if (employment) {
+      employment.forEach((item) => params.append('employment', item));
+    }
+    if (benefits) {
+      benefits.forEach((item) => params.append('benefits', item));
+    }
+    if (jobs) {
+      jobs.forEach((item) => params.append('jobs', item));
+    }
+
+    const queryString = params.toString();
+    const url = `/recruit/urgent${queryString && `?${queryString}`}`;
+
+    return requests.get<API.GetRecruitUgentListResponse>(url);
+  },
+
+  // 채용공고 일반
+  getRecruitBasicList: ({ page, limit, experience, benefits, employment, jobs }: API.GetRecruitBasicListRequest) => {
+    const params = new URLSearchParams();
+    params.set('page', page);
+    params.set('limit', limit);
+
+    if (experience) params.set('experience', experience);
+
+    if (employment) {
+      employment.forEach((item) => params.append('employment', item));
+    }
+    if (benefits) {
+      benefits.forEach((item) => params.append('benefits', item));
+    }
+    if (jobs) {
+      jobs.forEach((item) => params.append('jobs', item));
+    }
+
+    const queryString = params.toString();
+    const url = `/recruit/basic${queryString && `?${queryString}`}`;
+
+    return requests.get<API.GetRecruitBasicListResponse>(url);
+  },
+
   // 인재풀 리스트
   getTalentList: ({ page, limit }: API.GetTalentListRequest) => {
     const params = new URLSearchParams();
