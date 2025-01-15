@@ -228,3 +228,7 @@ export interface GetRecruitBasicListResponse extends BaseResponse {
     pagination: PaginationInfo;
   };
 }
+
+export interface RecruitDetailResponse extends BaseResponse {
+  result: types.IRecruitDetail;
+}
