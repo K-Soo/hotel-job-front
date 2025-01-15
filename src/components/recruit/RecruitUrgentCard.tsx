@@ -1,14 +1,35 @@
+import React from 'react';
 import styled from 'styled-components';
 import Icon from '@/icons/Icon';
 import RecruitPrice from '@/components/recruit/RecruitPrice';
 import Tag from '@/components/common/Tag';
 import { motion } from 'framer-motion';
+import { RecruitListItem } from '@/types';
+import { allJobs } from '@/constants/job';
+import { experienceCondition } from '@/constants/recruitment';
+import { addressFormat, employmentTypeFormat } from '@/utils';
+import IconDimmed from '@/components/common/IconDimmed';
+import { useRouter } from 'next/router';
 
-interface RecruitUrgentCardProps {}
+interface RecruitUrgentCardProps {
+  item: RecruitListItem;
+}
 
-export default function RecruitUrgentCard({}: RecruitUrgentCardProps) {
+export default function RecruitUrgentCard({ item }: RecruitUrgentCardProps) {
+  const router = useRouter();
+  const { sido, sigungu } = addressFormat(item.address);
+
+  const handleClickBlank = (event: React.MouseEvent<HTMLElement>) => {
+    event.stopPropagation();
+    window.open(`/recruit/${item.id}`, '_blank');
+  };
+
   return (
-    <S.RecruitUrgentCard whileTap={{ scale: 0.98 }} whileHover={{ border: '1px solid #b0b8c1' }}>
+    <S.RecruitUrgentCard
+      whileTap={{ scale: 0.98 }}
+      whileHover={{ border: '1px solid #b0b8c1' }}
+      onClick={() => router.push(`/recruit/${item.id}`)}
+    >
       <S.HeaderBox>
         <div className="tags">
           <Tag label="급구" type="URGENT" />
@@ -16,27 +37,36 @@ export default function RecruitUrgentCard({}: RecruitUrgentCardProps) {
       </S.HeaderBox>
       <S.ContentBox>
         <div className="info-box">
-          <h6 className="info-box__title">당직자 구합니다. 휴계시간 많아요.</h6>
+          <h6 className="info-box__title">{item.recruitmentTitle}</h6>
           <div className="info-box__detail">
-            <div className="info-box__detail--company">호텔 더 아무무</div>
-            <address className="info-box__detail--address">서울 송파구</address>
+            <div className="info-box__detail--company">{item.hotelName}</div>
+            <address className="info-box__detail--address">
+              {sido} {sigungu}
+            </address>
           </div>
         </div>
       </S.ContentBox>
 
       <S.infoBox>
         <div className="jobs">
-          <span className="jobs__text">룸메이드</span>
+          {item.jobs.length > 1 ? (
+            <span className="jobs__text">
+              {allJobs[item.jobs[0]]} 외 {item.jobs.length - 1}
+            </span>
+          ) : (
+            <span className="jobs__text">{allJobs[item.jobs[0]]}</span>
+          )}
           <div className="jobs__conditions">
-            <span>경력1년</span>
-            <span>정규직</span>
-            <span>부부팀</span>
+            <span>{experienceCondition[item.experienceCondition]}</span>
+            <span>{employmentTypeFormat(item.employmentType)}</span>
           </div>
         </div>
         <div className="price-wrapper">
-          <RecruitPrice fonSize="13px" />
-          <Icon className="title__icon" name="ExternalLinkB50x50" width="20px" height="20px" />
-          {/* <Icon name="Star24x24" width="16px" height="16px" /> */}
+          <RecruitPrice fonSize="13px" salaryAmount={item.salaryAmount} salary={item.salaryType} />
+
+          <IconDimmed padding="1px" onClick={handleClickBlank}>
+            <Icon className="title__icon" name="ExternalLinkB50x50" width="20px" height="20px" />
+          </IconDimmed>
         </div>
       </S.infoBox>
     </S.RecruitUrgentCard>
@@ -51,6 +81,8 @@ const S = {
     flex-direction: column;
     padding: 10px;
     border: 1px solid ${(props) => props.theme.colors.gray300};
+    cursor: pointer;
+    user-select: none;
     ${(props) => props.theme.media.tablet`
       aspect-ratio: 5 / 3;
       width: calc(50% - 10px);
@@ -134,6 +166,7 @@ const S = {
     .price-wrapper {
       margin-top: 5px;
       display: flex;
+      align-items: center;
       justify-content: space-between;
     }
   `,
