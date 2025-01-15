@@ -12,11 +12,11 @@ import { v4 as uuidv4 } from 'uuid';
 export default function ResumeExperienceForm() {
   const { watch } = useFormContext<ResumeRegisterForm>();
 
-  const experiencesValue = watch('experiences');
+  // const experiencesValue = watch('experiences');
 
   return (
     <S.ResumeExperienceForm>
-      {experiencesValue.map((_, index) => (
+      {/* {experiencesValue.map((_, index) => (
         <div key={uuidv4()} className="experience-item">
           <FormInput<ResumeRegisterForm> name={`experiences.${index}.companyName`} placeholder="회사명" label="회사명" required />
 
@@ -48,7 +48,7 @@ export default function ResumeExperienceForm() {
 
           <FormSelect name={`experiences.${index}.salaryType`} label="급여유형" options={salaryTypeOptions} maxWidth="180px" />
         </div>
-      ))}
+      ))} */}
     </S.ResumeExperienceForm>
   );
 }
