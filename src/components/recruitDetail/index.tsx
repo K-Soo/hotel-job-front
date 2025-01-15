@@ -2,7 +2,8 @@ import styled from 'styled-components';
 import RecruitDetailLocation from '@/components/recruitDetail/RecruitDetailLocation';
 import RecruitDetailPeriod from '@/components/recruitDetail/RecruitDetailPeriod';
 import RecruitDetailDateTime from '@/components/recruitDetail/RecruitDetailDateTime';
-import RecruitDetailJobInformation from '@/components/recruitDetail/RecruitDetailJobInformation';
+import RecruitDetailWorkCondition from '@/components/recruitDetail/RecruitDetailWorkCondition';
+import RecruitDetailInfo from '@/components/recruitDetail/RecruitDetailInfo';
 import RecruitDetailFavoriteShareBar from '@/components/recruitDetail/RecruitDetailFavoriteShareBar';
 import RecruitDetailContent from '@/components/recruitDetail/RecruitDetailContent';
 import { IRecruitDetail } from '@/types';
@@ -33,8 +34,17 @@ export default function RecruitDetail({ data, children }: RecruitDetailProps) {
             <h1 className="title">{data.recruitmentTitle}</h1>
           </S.Header>
 
-          <S.Title>공고 정보</S.Title>
-          <RecruitDetailJobInformation />
+          <S.Title>근무조건</S.Title>
+          <RecruitDetailWorkCondition
+            employment={data.employmentType}
+            workingTime={data.workingTime}
+            workingDay={data.workingDay}
+            salary={data.salaryType}
+            salaryAmount={data.salaryAmount}
+          />
+
+          <S.Title>모집 내용</S.Title>
+          <RecruitDetailInfo jobs={data.jobs} educationCondition={data.educationCondition} recruitmentCapacity={data.recruitmentCapacity} />
 
           <S.Title>상세 내용</S.Title>
           <RecruitDetailContent content={data.content} />
@@ -67,12 +77,13 @@ const S = {
     margin-bottom: 30px;
   `,
   Header: styled.article`
-    /* display: flex; */
-    /* justify-content: space-between; */
-    /* border: 1px solid red; */
     .title {
       font-size: 24px;
       font-weight: 500;
+      line-height: 1.1;
+      ${(props) => props.theme.media.mobile`
+        font-size: 18px;
+      `};
     }
     margin-bottom: 50px;
   `,
@@ -84,16 +95,19 @@ const S = {
     font-size: 22px;
     font-weight: 500;
     margin-bottom: 15px;
+    user-select: none;
+    ${(props) => props.theme.media.mobile`
+      font-size: 20px;
+    `};
   `,
   UtilPanel: styled.article`
     display: flex;
-    align-items: center;
+    align-items: flex-end;
     justify-content: space-between;
     margin-top: 10px;
-    margin-bottom: 5px;
+    margin-bottom: 8px;
     .hotel-name {
       font-size: 18px;
-      font-weight: 500;
     }
   `,
 };
