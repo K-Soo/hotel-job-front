@@ -25,7 +25,7 @@ export default function UserResumeRegisterContainer() {
       education: undefined,
       title: '',
       summary: '',
-      experiences: [],
+      // experiences: [],
       isRequiredAgreement: false,
       isOptionalAgreement: false,
       licenses: [],
@@ -58,25 +58,25 @@ export default function UserResumeRegisterContainer() {
 
   const handleClickAdd = (event: React.MouseEvent<HTMLButtonElement>) => {
     const { name } = event.currentTarget;
-    const getValues = methods.getValues('experiences');
+    // const getValues = methods.getValues('experiences');
 
-    methods.setValue('experiences', [
-      ...getValues,
-      {
-        companyName: '',
-        isEmployed: false,
-        responsibility: '',
-        job: undefined,
-        // city: 'NONE',
-        startDate: new Date(),
-        endDate: new Date(),
-        position: undefined,
-        salaryType: undefined,
-        // baseSalary: 0,
-        // allowance: 0,
-        // reasonForLeaving: '',
-      },
-    ]);
+    // methods.setValue('experiences', [
+    //   ...getValues,
+    //   {
+    //     companyName: '',
+    //     isEmployed: false,
+    //     responsibility: '',
+    //     job: undefined,
+    //     // city: 'NONE',
+    //     startDate: new Date(),
+    //     endDate: new Date(),
+    //     position: undefined,
+    //     salaryType: undefined,
+    //     // baseSalary: 0,
+    //     // allowance: 0,
+    //     // reasonForLeaving: '',
+    //   },
+    // ]);
   };
 
   return (
