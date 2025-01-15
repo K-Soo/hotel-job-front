@@ -282,3 +282,35 @@ export interface RecruitListItem {
     PART_TIME: boolean;
   };
 }
+
+export interface IRecruitDetail {
+  address: string;
+  addressDetail: string;
+  benefits: BenefitsKeys[];
+  content: string;
+  createdAt: string;
+  department: string; //근무부서
+  educationCondition: EducationLevelKeys;
+  employmentType: { INTERN: boolean; CONTRACT: boolean; FULL_TIME: boolean; PART_TIME: boolean; DAILY_WORKER: boolean };
+  experienceCondition: 'NOT_REQUIRED';
+  hotelName: string;
+  id: string;
+  isEmailPrivate: boolean; //비공개 여부
+  isNamePrivate: boolean; //비공개 여부
+  isNumberPrivate: boolean; //비공개 여부
+  jobs: AllJobsKeyValuesKeys[];
+  managerEmail: string;
+  managerName: string;
+  managerNumber: string;
+  position: PositionKeys;
+  preferences: PreferencesKeys[];
+  recruitmentCapacity: number; //모집인원
+  recruitmentStatus: 'PUBLISHED';
+  recruitmentTitle: string;
+  roomCount: number;
+  salaryAmount: number;
+  salaryType: SalaryTypeKeys;
+  updatedAt: string;
+  workingDay: WorkingDayListKeys;
+  workingTime: { end: string; start: string };
+}
