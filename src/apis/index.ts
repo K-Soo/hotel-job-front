@@ -112,22 +112,18 @@ export const Get = {
 
   getBusinessUser: () => requests.get('/business-user'),
 
+  // 채용공고 상세
+  recruitDetail: ({ id }: { id: string }) => requests.get<API.RecruitDetailResponse>(`/recruit/${id}`),
+
   // 채용공고 스페셜
   getRecruitSpecialList: ({ page, limit, benefits, employment, experience, jobs }: API.GetRecruitSpecialListRequest) => {
     const params = new URLSearchParams();
     params.set('page', page);
     params.set('limit', limit);
     if (experience) params.set('experience', experience);
-
-    if (employment) {
-      employment.forEach((item) => params.append('employment', item));
-    }
-    if (benefits) {
-      benefits.forEach((item) => params.append('benefits', item));
-    }
-    if (jobs) {
-      jobs.forEach((item) => params.append('jobs', item));
-    }
+    if (employment) employment.forEach((item) => params.append('employment', item));
+    if (benefits) benefits.forEach((item) => params.append('benefits', item));
+    if (jobs) jobs.forEach((item) => params.append('jobs', item));
 
     const queryString = params.toString();
     const url = `/recruit/special${queryString && `?${queryString}`}`;
@@ -141,16 +137,9 @@ export const Get = {
     params.set('page', page);
     params.set('limit', limit);
     if (experience) params.set('experience', experience);
-
-    if (employment) {
-      employment.forEach((item) => params.append('employment', item));
-    }
-    if (benefits) {
-      benefits.forEach((item) => params.append('benefits', item));
-    }
-    if (jobs) {
-      jobs.forEach((item) => params.append('jobs', item));
-    }
+    if (employment) employment.forEach((item) => params.append('employment', item));
+    if (benefits) benefits.forEach((item) => params.append('benefits', item));
+    if (jobs) jobs.forEach((item) => params.append('jobs', item));
 
     const queryString = params.toString();
     const url = `/recruit/urgent${queryString && `?${queryString}`}`;
@@ -163,18 +152,10 @@ export const Get = {
     const params = new URLSearchParams();
     params.set('page', page);
     params.set('limit', limit);
-
     if (experience) params.set('experience', experience);
-
-    if (employment) {
-      employment.forEach((item) => params.append('employment', item));
-    }
-    if (benefits) {
-      benefits.forEach((item) => params.append('benefits', item));
-    }
-    if (jobs) {
-      jobs.forEach((item) => params.append('jobs', item));
-    }
+    if (employment) employment.forEach((item) => params.append('employment', item));
+    if (benefits) benefits.forEach((item) => params.append('benefits', item));
+    if (jobs) jobs.forEach((item) => params.append('jobs', item));
 
     const queryString = params.toString();
     const url = `/recruit/basic${queryString && `?${queryString}`}`;
