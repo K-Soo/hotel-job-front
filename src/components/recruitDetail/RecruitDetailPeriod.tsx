@@ -1,46 +1,79 @@
 import styled from 'styled-components';
 
-interface RecruitDetailPeriodProps {}
+interface RecruitDetailPeriodProps {
+  managerName: string;
+  managerEmail: string;
+  managerNumber: string;
+}
 
-export default function RecruitDetailPeriod({}: RecruitDetailPeriodProps) {
+export default function RecruitDetailPeriod({ managerEmail, managerName, managerNumber }: RecruitDetailPeriodProps) {
   return (
-    <S.RecruitDetailPeriod>
-      <div className="period">
-        <div></div>
-        <div></div>
-      </div>
-      <div className="info">
-        <div>
-          <span>지원방법</span>
-          <span>입사지원 / 전화</span>
+    <>
+      <S.Title>접수기간 및 담당자</S.Title>
+      <S.RecruitDetailPeriod>
+        <div className="info-box">
+          <div className="info-box__item">
+            <span>담당자</span>
+            <em>{managerName}</em>
+          </div>
+          <div className="info-box__item">
+            <span>담당자 이메일</span>
+            <em>{managerEmail}</em>
+          </div>
+          <div className="info-box__item">
+            <span>담당자 연락처</span>
+            <em>{managerNumber}</em>
+          </div>
         </div>
-        <div>
-          <span>담당자</span>
-          <span>이건호</span>
-        </div>
-        <div>
-          <span>연락처</span>
-          <span>010-1234-1231</span>
-        </div>
-        <div>
-          <span>메일</span>
-          <span>kanabun12asd@naver.com</span>
-        </div>
-      </div>
-    </S.RecruitDetailPeriod>
+      </S.RecruitDetailPeriod>
+    </>
   );
 }
 
 const S = {
   RecruitDetailPeriod: styled.div`
-    display: flex;
-    border: 1px solid red;
+    display: none;
     margin-bottom: 50px;
-    .period {
-      flex: 50%;
+    border-radius: 10px;
+    padding: 20px;
+    background-color: ${(props) => props.theme.colors.gray};
+    ${(props) => props.theme.media.tablet`
+      display: block;
+    `};
+    .info-box {
+      background-color: ${(props) => props.theme.colors.gray};
+      border-radius: 10px;
+      &__item {
+        margin-bottom: 15px;
+        font-size: 15px;
+        display: flex;
+        color: ${(props) => props.theme.colors.black200};
+
+        span {
+          flex: 0 0 140px;
+          display: inline-block;
+        }
+        em {
+          word-break: break-all;
+        }
+        &:last-child {
+          margin-bottom: 0;
+        }
+        ${(props) => props.theme.media.mobile`
+          span {
+            flex: 0 0 110px;
+          }
+        `};
+      }
     }
-    .info {
-      flex: 50%;
-    }
+  `,
+  Title: styled.article`
+    display: none;
+    font-size: 22px;
+    font-weight: 500;
+    margin-bottom: 15px;
+    ${(props) => props.theme.media.tablet`
+      display: block;
+    `};
   `,
 };
