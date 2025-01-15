@@ -7,6 +7,10 @@ const queryKeys = {
   RECRUITMENT_LIST: 'RECRUITMENT_LIST',
   RECRUITMENT_DETAIL: 'RECRUITMENT_DETAIL',
   RECRUITMENT_STATUS: 'RECRUITMENT_STATUS',
+
+  RECRUIT_SPECIAL_LIST: 'recruitSpecialList',
+  RECRUIT_URGENT_LIST: 'recruitUrgentList',
+  RECRUIT_BASIC_LIST: 'recruitBasicList',
 };
 
 export default queryKeys;
