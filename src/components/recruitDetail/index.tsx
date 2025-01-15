@@ -4,61 +4,68 @@ import RecruitDetailPeriod from '@/components/recruitDetail/RecruitDetailPeriod'
 import RecruitDetailDateTime from '@/components/recruitDetail/RecruitDetailDateTime';
 import RecruitDetailJobInformation from '@/components/recruitDetail/RecruitDetailJobInformation';
 import RecruitDetailFavoriteShareBar from '@/components/recruitDetail/RecruitDetailFavoriteShareBar';
+import RecruitDetailContent from '@/components/recruitDetail/RecruitDetailContent';
 import { IRecruitDetail } from '@/types';
-import KakaoMap from '@/components/common/KakaoMap';
 import dynamic from 'next/dynamic';
 
 const DynamicKakaoMap = dynamic(() => import('@/components/common/KakaoMap'), { ssr: false });
 
 interface RecruitDetailProps {
   data: IRecruitDetail;
+  children: React.ReactNode;
 }
 
-export default function RecruitDetail({ data }: RecruitDetailProps) {
-  const locationData = {
-    address: data.address,
-    addressDetail: data.addressDetail,
-  };
-
+export default function RecruitDetail({ data, children }: RecruitDetailProps) {
   return (
     <S.RecruitDetail>
-      <RecruitDetailDateTime />
-      <RecruitDetailFavoriteShareBar />
+      {/* TODO - 업체 이미지 */}
+      {/* <S.Images></S.Images> */}
+      <div className="detail-container">
+        <div className="detail-container__content-form">
+          <RecruitDetailDateTime />
+          <RecruitDetailFavoriteShareBar />
 
-      <S.Header>
-        <div className="left">
-          <div className="left__company">{data.hotelName}</div>
-          <div className="left__title">{data.recruitmentTitle}</div>
+          <S.Header>
+            <div className="left">
+              <div className="left__company">{data.hotelName}</div>
+              <div className="left__title">{data.recruitmentTitle}</div>
+            </div>
+          </S.Header>
+
+          <S.Title>상세 정보</S.Title>
+          <RecruitDetailJobInformation />
+
+          <S.Title>상세 정보</S.Title>
+          <RecruitDetailContent content={data.content} />
+
+          <S.Title>접수기간 및 담당자</S.Title>
+          <RecruitDetailPeriod />
+
+          <S.Title>근무지 위치</S.Title>
+          <RecruitDetailLocation address={data.address} addressDetail={data.addressDetail} />
+          <DynamicKakaoMap address={data.address} addressDetail={data.addressDetail} />
         </div>
-      </S.Header>
-
-      <S.Title>상세 정보</S.Title>
-      <RecruitDetailJobInformation />
-
-      <S.Title>상세 정보</S.Title>
-      <S.Content>
-        <div dangerouslySetInnerHTML={{ __html: data.content }} />
-      </S.Content>
-
-      <S.Title>접수기간 및 담당자</S.Title>
-      <RecruitDetailPeriod />
-
-      <S.Title>근무 위치</S.Title>
-      <RecruitDetailLocation />
-      <DynamicKakaoMap address={data.address} addressDetail={data.addressDetail} />
+        {children}
+      </div>
     </S.RecruitDetail>
   );
 }
 
 const S = {
-  RecruitDetail: styled.section``,
+  RecruitDetail: styled.section`
+    .detail-container {
+      display: flex;
+      &__content-form {
+        flex: 1 1 100%;
+      }
+    }
+  `,
   Images: styled.article`
     height: 350px;
     border-radius: 15px;
     background-color: gray;
     margin-bottom: 30px;
   `,
-
   Header: styled.article`
     display: flex;
     justify-content: space-between;
@@ -81,10 +88,9 @@ const S = {
     min-height: 500px;
     margin-bottom: 50px;
   `,
-
   Title: styled.article`
-    font-size: 20px;
+    font-size: 22px;
     font-weight: 600;
-    margin-bottom: 5px;
+    margin-bottom: 15px;
   `,
 };
