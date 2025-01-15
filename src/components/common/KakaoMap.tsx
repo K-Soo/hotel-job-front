@@ -55,7 +55,7 @@ const S = {
   KakaoMap: styled.div`
     height: 250px;
     border: 1px solid ${({ theme }) => theme.colors.gray300};
-    border-radius: 5px;
+    border-radius: 10px;
     overflow: hidden;
   `,
 };
