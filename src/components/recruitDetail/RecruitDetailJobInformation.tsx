@@ -49,7 +49,10 @@ export default function RecruitDetailJobInformation({}: RecruitDetailJobInformat
 
 const S = {
   RecruitDetailJobInformation: styled.div`
-    border: 1px solid red;
+    margin-bottom: 50px;
+    border-radius: 10px;
+    padding: 20px;
+    background-color: ${(props) => props.theme.colors.gray};
     display: flex;
     margin-bottom: 50px;
     .left {
