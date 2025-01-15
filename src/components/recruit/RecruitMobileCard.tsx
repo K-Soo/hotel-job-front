@@ -1,10 +1,18 @@
 import styled from 'styled-components';
 import Icon from '@/icons/Icon';
 import RecruitPrice from '@/components/recruit/RecruitPrice';
+import { RecruitListItem } from '@/types';
+import { addressFormat, employmentTypeFormat } from '@/utils';
+import { experienceCondition } from '@/constants/recruitment';
+import { allJobs } from '@/constants/job';
 
-interface RecruitMobileCardProps {}
+interface RecruitMobileCardProps {
+  item: RecruitListItem;
+}
 
-export default function RecruitMobileCard({}: RecruitMobileCardProps) {
+export default function RecruitMobileCard({ item }: RecruitMobileCardProps) {
+  const { sido, sigungu } = addressFormat(item.address);
+
   return (
     <S.RecruitMobileCard>
       <S.HeaderBox>
@@ -17,10 +25,12 @@ export default function RecruitMobileCard({}: RecruitMobileCardProps) {
       </S.HeaderBox>
       <S.ContentBox>
         <div className="info-box">
-          <h6 className="info-box__title">청소 이모구합니다. 밥 맛깔나게 잘하시는분 오셨으면 좋겠습니다.</h6>
+          <h6 className="info-box__title">{item.recruitmentTitle}</h6>
           <div className="info-box__detail">
-            <div className="info-box__detail--company">호텔 더 아무무</div>
-            <address className="info-box__detail--address">서울 송파구</address>
+            <div className="info-box__detail--company">{item.hotelName}</div>
+            <address className="info-box__detail--address">
+              {sido} {sigungu}
+            </address>
           </div>
         </div>
         <div className="icon-box">
@@ -29,14 +39,20 @@ export default function RecruitMobileCard({}: RecruitMobileCardProps) {
       </S.ContentBox>
       <S.infoBox>
         <div className="jobs">
-          <span className="jobs__text">룸메이드</span>
+          {item.jobs.length > 1 ? (
+            <span className="jobs__text">
+              {allJobs[item.jobs[0]]} 외 {item.jobs.length - 1}
+            </span>
+          ) : (
+            <span className="jobs__text">{allJobs[item.jobs[0]]} </span>
+          )}
           <div className="jobs__conditions">
-            <span>경력무관</span>
-            <span>경력무관</span>
+            <span>{experienceCondition[item.experienceCondition]}</span>
+            <span>{employmentTypeFormat(item.employmentType)}</span>
           </div>
         </div>
         <div>
-          <RecruitPrice fonSize="13px" />
+          <RecruitPrice fonSize="13px" salary={item.salaryType} salaryAmount={item.salaryAmount} />
         </div>
       </S.infoBox>
     </S.RecruitMobileCard>
