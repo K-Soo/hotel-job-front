@@ -8,7 +8,7 @@ interface KakaoMapProps {
   addressDetail: string;
 }
 
-export default function KakaoMap({ address, addressDetail }: KakaoMapProps) {
+function KakaoMap({ address, addressDetail }: KakaoMapProps) {
   const [position, setPosition] = React.useState({ lat: 33.55635, lng: 126.795841 });
   const [isErrorCoordinates, setIsErrorCoordinates] = React.useState(false);
 
@@ -42,15 +42,20 @@ export default function KakaoMap({ address, addressDetail }: KakaoMapProps) {
 
   return (
     <S.KakaoMap>
-      <Map center={position} style={{ width: '100%', height: '100%' }}>
+      <Map center={position} style={{ width: '100%', height: '100%' }} draggable={true} zoomable={false}>
         <MapMarker position={position} />
       </Map>
     </S.KakaoMap>
   );
 }
 
+export default React.memo(KakaoMap);
+
 const S = {
   KakaoMap: styled.div`
-    height: 360px;
+    height: 250px;
+    border: 1px solid ${({ theme }) => theme.colors.gray300};
+    border-radius: 5px;
+    overflow: hidden;
   `,
 };
