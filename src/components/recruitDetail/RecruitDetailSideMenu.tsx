@@ -10,7 +10,7 @@ interface RecruitDetailSideMenuProps {
 export default function RecruitDetailSideMenu({ managerEmail, managerName, managerNumber }: RecruitDetailSideMenuProps) {
   return (
     <S.RecruitDetailSideMenu>
-      <Button label="지원하기" variant="primary" />
+      <Button label="지원하기" variant="primary" height="50px" borderRadius="10px" />
       <div className="info-box">
         <div className="info-box__item">
           <span>담당자</span>
@@ -39,16 +39,19 @@ const S = {
     height: 400px;
     margin-left: 30px;
     background-color: ${({ theme }) => theme.colors.white};
+    ${(props) => props.theme.media.tablet`
+      display: none;
+    `};
     .info-box {
       margin-top: 30px;
-      background-color: ${(props) => props.theme.colors.gray100};
-      border-radius: 5px;
+      background-color: ${(props) => props.theme.colors.gray};
+      border-radius: 10px;
       padding: 20px;
       &__item {
-        margin-bottom: 10px;
+        margin-bottom: 15px;
         font-size: 15px;
         display: flex;
-        color: ${(props) => props.theme.colors.gray700};
+        color: ${(props) => props.theme.colors.black200};
         span {
           flex: 0 0 100px;
           display: inline-block;
