@@ -23,23 +23,23 @@ export default function RecruitDetail({ data, children }: RecruitDetailProps) {
       <div className="detail-container">
         <div className="detail-container__content-form">
           <RecruitDetailDateTime />
-          <RecruitDetailFavoriteShareBar />
+
+          <S.UtilPanel>
+            <strong className="hotel-name">{data.hotelName}</strong>
+            <RecruitDetailFavoriteShareBar />
+          </S.UtilPanel>
 
           <S.Header>
-            <div className="left">
-              <div className="left__company">{data.hotelName}</div>
-              <div className="left__title">{data.recruitmentTitle}</div>
-            </div>
+            <h1 className="title">{data.recruitmentTitle}</h1>
           </S.Header>
 
-          <S.Title>상세 정보</S.Title>
+          <S.Title>공고 정보</S.Title>
           <RecruitDetailJobInformation />
 
-          <S.Title>상세 정보</S.Title>
+          <S.Title>상세 내용</S.Title>
           <RecruitDetailContent content={data.content} />
 
-          <S.Title>접수기간 및 담당자</S.Title>
-          <RecruitDetailPeriod />
+          <RecruitDetailPeriod managerEmail={data.managerEmail} managerName={data.managerName} managerNumber={data.managerNumber} />
 
           <S.Title>근무지 위치</S.Title>
           <RecruitDetailLocation address={data.address} addressDetail={data.addressDetail} />
@@ -67,30 +67,33 @@ const S = {
     margin-bottom: 30px;
   `,
   Header: styled.article`
-    display: flex;
-    justify-content: space-between;
-    border: 1px solid red;
-    margin-bottom: 50px;
-    .left {
-      &__company {
-        font-size: 18px;
-        color: #333;
-        font-weight: 500;
-        margin-bottom: 5px;
-      }
-      &__title {
-        font-size: 28px;
-        font-weight: 600;
-      }
+    /* display: flex; */
+    /* justify-content: space-between; */
+    /* border: 1px solid red; */
+    .title {
+      font-size: 24px;
+      font-weight: 500;
     }
+    margin-bottom: 50px;
   `,
   Content: styled.article`
     min-height: 500px;
     margin-bottom: 50px;
   `,
-  Title: styled.article`
+  Title: styled.h2`
     font-size: 22px;
-    font-weight: 600;
+    font-weight: 500;
     margin-bottom: 15px;
+  `,
+  UtilPanel: styled.article`
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    .hotel-name {
+      font-size: 18px;
+      font-weight: 500;
+    }
   `,
 };
