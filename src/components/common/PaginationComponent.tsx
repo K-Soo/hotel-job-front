@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { useRouter } from 'next/router';
 import usePagination from '@/hooks/usePagination';
 import Icon from '@/icons/Icon';
+import IconDimmed from '@/components/common/IconDimmed';
 interface PaginationComponentProps {
   margin?: string;
   pagination: PaginationInfo;
@@ -86,6 +87,7 @@ export default function PaginationComponent({ margin, pagination }: PaginationCo
               color: element === currentPage ? '#FFFFFF' : '#8b95a1',
               backgroundColor: element === currentPage ? '#3182f6' : '#FFFFFF',
             }}
+            transition={{ duration: 0.1 }}
           >
             {element}
           </S.Page>
