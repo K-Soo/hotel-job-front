@@ -10,6 +10,7 @@ import { preferences } from '@/constants/preferences';
 export type ProviderType = 'local' | 'kakao';
 export type RoleType = 'ADMIN' | 'EMPLOYER' | 'JOB_SEEKER';
 export type CompanyVerificationStatus = 'NOT_REQUESTED' | 'PENDING' | 'VERIFIED' | 'REJECTED';
+export type EmploymentType = 'FULL_TIME' | 'CONTRACT' | 'DAILY_WORKER' | 'INTERN';
 
 export type AccountStatusType =
   | 'ACTIVE'
@@ -28,7 +29,7 @@ export type ResumeType = 'FILE' | 'GENERAL'; //파일, 일반
 export type CareerLevelKeys = keyof typeof careerLevel;
 export type EducationLevelKeys = keyof typeof educationLevel;
 export type PositionKeys = keyof typeof position;
-export type City = keyof typeof city;
+export type CityKeys = keyof typeof city;
 export type SalaryTypeKeys = keyof typeof salaryType;
 export type LicenseStageKeys = keyof typeof licenseStage;
 export type experienceConditionKeys = keyof typeof experienceCondition;
@@ -53,7 +54,7 @@ export type Experience = {
   position?: PositionKeys; //직급/직책
   startDate: Date;
   endDate: Date;
-  // city: City;
+  // city: CityKeys;
   salaryType?: SalaryTypeKeys | undefined; //급여 유형
   // baseSalary: number; //급여 금액
   // allowance: number; //수당
@@ -79,7 +80,7 @@ export interface ResumeRegisterForm {
   summary: string;
   education: EducationLevelKeys;
   // isGraduated: boolean; //졸업여부
-  experiences: Experience[];
+  // experiences: Experience[];
   // languages: Language[];
   // introduction: string; //자기소개
   licenses: License[];
@@ -262,3 +263,22 @@ export interface RecruitmentDetail {
 }
 
 export interface RecruitmentDetailForm extends Omit<RecruitmentDetail, 'id' | 'updateAt'> {}
+
+export interface RecruitListItem {
+  experienceCondition: experienceConditionKeys;
+  id: string;
+  recruitmentTitle: string;
+  salaryAmount: number;
+  hotelName: string;
+  jobs: AllJobsKeyValuesKeys[];
+  salaryType: SalaryTypeKeys;
+  address: string;
+  addressDetail: string;
+  employmentType: {
+    CONTRACT: boolean;
+    DAILY_WORKER: boolean;
+    FULL_TIME: boolean;
+    INTERN: boolean;
+    PART_TIME: boolean;
+  };
+}
