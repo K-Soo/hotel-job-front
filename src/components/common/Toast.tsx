@@ -18,6 +18,10 @@ export default function Toast() {
     return () => timers.forEach((timer) => clearTimeout(timer));
   }, [toastAtomState, setToastAtomState]);
 
+  const handleToastClick = (id: string) => {
+    setToastAtomState((prev) => prev.filter((toast) => toast.id !== id));
+  };
+
   return (
     <Portal>
       <S.ToastContainer>
@@ -30,6 +34,7 @@ export default function Toast() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.99 }}
               transition={{ duration: 0.25 }}
+              onClick={() => handleToastClick(toast.id)}
             >
               <StyledToastIcon type={toast.type}>!</StyledToastIcon>
               <span>{toast.message}</span>
@@ -45,10 +50,11 @@ const StyledToastIcon = styled.i<{ type: ToastAtom['type'] }>`
   width: 24px;
   height: 24px;
   border-radius: 50%;
-  margin-right: 15px;
+  margin-right: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
+  user-select: none;
   ${(props) =>
     props.type === 'info' &&
     css`
@@ -77,10 +83,16 @@ const S = {
     top: 20px;
     left: 50%;
     transform: translateX(-50%);
-    z-index: 15;
+    z-index: 20;
+    user-select: none;
+    ${(props) => props.theme.media.mobile`
+      top: 5px;
+    `};
   `,
   Toast: styled(motion.div)`
     position: relative; /* 기본 위치 설정 */
+    min-width: 250px;
+    min-height: 50px;
     border-radius: 8px;
     color: #ffffff;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
@@ -88,11 +100,14 @@ const S = {
     background-color: #ffffff;
     margin-bottom: 10px;
     padding: 10px 20px;
-    min-width: 250px;
-    min-height: 50px;
-    font-size: 15px;
+    font-size: 16px;
     display: flex;
     align-items: center;
+    white-space: nowrap;
     background-color: ${(props) => props.theme.colors.gray700};
+    ${(props) => props.theme.media.mobile`
+      width: 100%;
+      min-width: 100%;
+    `};
   `,
 };
