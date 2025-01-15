@@ -4,19 +4,30 @@ import { motion, useAnimationControls } from 'framer-motion';
 import Icon from '@/icons/Icon';
 import Tag from '@/components/common/Tag';
 import RecruitPrice from '@/components/recruit/RecruitPrice';
+import { RecruitListItem } from '@/types';
+import { addressFormat, employmentTypeFormat } from '@/utils';
+import { experienceCondition } from '@/constants/recruitment';
+import { allJobs } from '@/constants/job';
+import { useRouter } from 'next/router';
+import IconDimmed from '@/components/common/IconDimmed';
 
 interface RecruitDesktopCardProps {
   recruitType: 'URGENT' | 'NORMAL';
+  item: RecruitListItem;
 }
 
-export default function RecruitDesktopCard({ recruitType }: RecruitDesktopCardProps) {
+export default function RecruitDesktopCard({ recruitType, item }: RecruitDesktopCardProps) {
   const [isExpanded, setIsExpanded] = React.useState(false);
+
+  const { sido, sigungu } = addressFormat(item.address);
+  const router = useRouter();
 
   const expansionContentRef = React.useRef(null);
   const controls = useAnimationControls();
 
-  const handleClickCard = () => {
-    window.open('/recruit/1', '_blank');
+  const handleClickBlank = (event: React.MouseEvent<HTMLElement>) => {
+    event.stopPropagation();
+    window.open(`/recruit/${item.id}`, '_blank');
   };
 
   const handleClickExpansion = () => {
@@ -36,43 +47,55 @@ export default function RecruitDesktopCard({ recruitType }: RecruitDesktopCardPr
       <S.Body>
         <S.LocationRow>
           <div className="location-box">
-            <span className="city">서울</span>
-            <span className="suburbs">송파구</span>
+            <span className="city">{sido}</span>
+            <span className="suburbs">{sigungu}</span>
           </div>
         </S.LocationRow>
 
-        <S.Summary>
+        <S.Summary onClick={() => router.push(`/recruit/${item.id}`)}>
           <div style={{ display: 'flex' }}>
             {recruitType === 'URGENT' && <Tag label="급구" type="URGENT" />}
             {/* <RecruitTag>숙식제공</RecruitTag> */}
             {/* <RecruitTag>식대제공</RecruitTag> */}
           </div>
           <div className="title">
-            <h5 className="title__text">분당 격일제 당번 채용공고입니다.</h5>
-            <Icon className="title__icon" name="ExternalLinkB50x50" width="24px" height="24px" />
+            <h5 className="title__text">{item.recruitmentTitle}</h5>
           </div>
-          <div className="company">영주온천 관광호텔</div>
+          <div className="company">{item.hotelName}</div>
         </S.Summary>
 
-        <S.Utils
-          onClick={(event) => {
-            event.stopPropagation();
-            handleClickExpansion();
-          }}
-        >
-          <Icon className="icon" name="SearchPlusA24x24" width="24px" height="24px" margin="0" />
+        <S.Utils>
+          <IconDimmed padding="2px">
+            <Icon className="icon" name="ExternalLinkB50x50" onClick={handleClickBlank} width="22px" height="22px" />
+          </IconDimmed>
+
+          <Icon
+            className="icon"
+            name="SearchPlusA24x24"
+            width="18px"
+            height="18px"
+            onClick={(event: React.MouseEvent<HTMLElement>) => {
+              event.stopPropagation();
+              handleClickExpansion();
+            }}
+          />
         </S.Utils>
 
-        <S.JobRow>지배인,당번</S.JobRow>
+        {item.jobs.length > 1 ? (
+          <S.JobRow>
+            {allJobs[item.jobs[0]]} 외 {item.jobs.length - 1}
+          </S.JobRow>
+        ) : (
+          <S.JobRow>{allJobs[item.jobs[0]]}</S.JobRow>
+        )}
 
         <S.InfoRow>
-          <span className="text">경력 무관</span>
-          <span className="text">정규직</span>
-          <span className="text">외국인 무관</span>
+          <span className="text">{experienceCondition[item.experienceCondition]}</span>
+          <span className="text">{employmentTypeFormat(item.employmentType)}</span>
         </S.InfoRow>
 
         <S.PayRow>
-          <RecruitPrice />
+          <RecruitPrice salary={item.salaryType} salaryAmount={item.salaryAmount} />
         </S.PayRow>
 
         <S.DateRow>
@@ -86,9 +109,7 @@ export default function RecruitDesktopCard({ recruitType }: RecruitDesktopCardPr
   );
 }
 
-const ExpansionContent = styled(motion.div)`
-  border: 1px solid red;
-`;
+const ExpansionContent = styled(motion.div)``;
 
 const RecruitTag = styled.span`
   height: 18px;
@@ -116,9 +137,7 @@ const S = {
     color: ${(props) => props.theme.colors.black100};
     border-bottom: 1px solid ${(props) => props.theme.colors.gray300};
     height: auto;
-    cursor: pointer;
     &:hover {
-      /* transition: 0.3s; */
       background-color: ${(props) => props.theme.colors.gray};
     }
   `,
@@ -128,7 +147,7 @@ const S = {
     height: 100px;
   `,
   LocationRow: styled.div`
-    flex: 1 0 12%;
+    flex: 1 1 8%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -156,6 +175,8 @@ const S = {
     justify-content: center;
     height: 100%;
     position: relative;
+    cursor: pointer;
+    padding-left: 10px;
     .icon {
       position: absolute;
       right: 5px;
@@ -169,10 +190,11 @@ const S = {
       color: ${(props) => props.theme.colors.gray800};
       display: flex;
       align-items: center;
+      &:hover {
+        text-decoration: underline;
+      }
       &__text {
-        &:hover {
-          text-decoration: underline;
-        }
+        color: ${(props) => props.theme.colors.gray800};
       }
       &__icon {
         margin-left: 8px;
@@ -186,16 +208,14 @@ const S = {
     }
   `,
   Utils: styled.div`
-    flex: 1 0 4%;
+    flex: 1 0 7%;
     height: 100%;
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
     cursor: pointer;
     svg {
-      width: 22px;
-      height: 22px;
-      color: ${(props) => props.theme.colors.gray400};
+      color: #777;
     }
   `,
   JobRow: styled.div`
@@ -203,14 +223,17 @@ const S = {
     display: flex;
     align-items: center;
     justify-content: center;
+    height: 100%;
   `,
   InfoRow: styled.div`
     flex: 1 1 8%;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     font-size: 13px;
     color: #475067;
+    height: 100%;
     .text {
       padding: 1px 0;
     }
@@ -221,6 +244,8 @@ const S = {
     align-items: center;
     justify-content: center;
     flex-wrap: wrap;
+    height: 100%;
+
     .pay-wrapper {
       background-color: ${(props) => props.theme.colors.gray100};
       padding: 5px 8px;
@@ -240,7 +265,8 @@ const S = {
     }
   `,
   DateRow: styled.div`
-    flex: 1 1 5%;
+    flex: 1 1 8%;
+    height: 100%;
     display: flex;
     flex-direction: column;
     display: flex;
