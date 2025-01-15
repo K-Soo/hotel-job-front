@@ -1,13 +1,6 @@
+import { PaginationInfo } from '@/types/API';
 import { InfiniteData, QueryKey, useInfiniteQuery, UseInfiniteQueryOptions, UseQueryOptions } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
-
-interface PaginatedResponse {
-  data: {
-    page: number;
-    page_size: number;
-    total: number;
-  };
-}
 
 interface UseInfiniteScroll<T, Q> {
   queryKey: QueryKey;
@@ -15,6 +8,12 @@ interface UseInfiniteScroll<T, Q> {
   options?: Omit<UseInfiniteQueryOptions<T, AxiosError, T, T, QueryKey>, 'queryKey' | 'queryFn' | 'getNextPageParam' | 'initialPageParam'>;
   initialPageParam?: number;
   requestQuery?: Omit<Q, 'page'>;
+}
+
+interface PaginatedResponse {
+  result: {
+    pagination: PaginationInfo;
+  };
 }
 
 export default function useInfiniteScroll<T extends PaginatedResponse, Q>({
@@ -59,15 +58,14 @@ export default function useInfiniteScroll<T extends PaginatedResponse, Q>({
     ...options,
     queryFn: ({ pageParam }) => fetcher(pageParam as number),
     initialPageParam: initialPageParam ?? 1,
-    getNextPageParam: (lastPage, _allPages, _lastPageParam, _allPageParams) => {
-      const { page, page_size, total } = lastPage.data;
-      const totalPages = Math.ceil(total / page_size);
-      return page < totalPages ? page + 1 : undefined;
+    getNextPageParam: (lastPage) => {
+      const { nextPage } = lastPage.result.pagination;
+      return nextPage ?? null;
     },
   });
 
   return {
-    result: data as InfiniteData<T> | undefined,
+    data: data as InfiniteData<T> | undefined,
     isPending,
     fetchNextPage,
     fetchPreviousPage,
