@@ -57,5 +57,8 @@ const S = {
     border: 1px solid ${({ theme }) => theme.colors.gray300};
     border-radius: 10px;
     overflow: hidden;
+    ${(props) => props.theme.media.mobile`
+      height: 180px;
+    `};
   `,
 };
