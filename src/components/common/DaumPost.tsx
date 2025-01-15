@@ -19,7 +19,8 @@ export default function DaumPost({ addressName = 'address', addressDetailName = 
   const resetDaumPostAtom = useResetRecoilState(daumPostAtom);
 
   const handleComplete = (data: Address) => {
-    const { address, addressType, buildingName, zonecode, jibunAddress } = data;
+    const { address, addressType, buildingName, zonecode, jibunAddress, sido, sigungu } = data;
+    console.log('data: ', data);
 
     let fullAddress = address;
     let extraAddress = '';
@@ -38,7 +39,7 @@ export default function DaumPost({ addressName = 'address', addressDetailName = 
     }
     setValue(addressName, fullAddress);
     setFocus(addressDetailName);
-    resetDaumPostAtom();
+    // resetDaumPostAtom();
   };
 
   return (
