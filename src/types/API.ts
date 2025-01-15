@@ -1,3 +1,4 @@
+import { AllJobsKeyValuesKeys } from '@/constants/job';
 import * as types from '@/types';
 
 type ResponseStatus = 'success' | 'duplicate' | 'available' | 'failure';
@@ -5,6 +6,7 @@ type ResponseStatus = 'success' | 'duplicate' | 'available' | 'failure';
 // query
 export type RecruitmentQueryStatus = 'ALL' | 'PROGRESS' | 'PUBLISHED' | 'CLOSED' | 'REVIEWING' | 'DRAFT';
 export type RecruitmentApplicantQueryStep = 'ALL' | 'DOCUMENT' | 'INTERVIEW' | 'ACCEPTED' | 'REJECTED';
+export type RecruitTypeQuery = 'special' | 'urgent' | 'basic';
 
 export interface BaseResponse {
   error: { message: string; code: number } | null;
@@ -24,6 +26,15 @@ export interface PaginationInfo {
   currentPage: number;
 }
 
+export interface DefaultRecruitQuery {
+  page: string;
+  limit: string;
+  experience?: types.experienceConditionKeys;
+  employment?: types.EmploymentType[];
+  benefits?: types.BenefitsKeys[];
+  jobs?: AllJobsKeyValuesKeys[];
+}
+
 /************************************* REQUEST **************************************/
 
 export interface SignInRequest {
@@ -32,6 +43,12 @@ export interface SignInRequest {
 }
 
 export interface OAuthSignInRequest extends types.OAuthSignInForm {}
+
+export interface GetRecruitSpecialListRequest extends DefaultRecruitQuery {}
+
+export interface GetRecruitUrgentListRequest extends DefaultRecruitQuery {}
+
+export interface GetRecruitBasicListRequest extends DefaultRecruitQuery {}
 
 export interface GetTalentListRequest {
   page: string;
@@ -188,5 +205,26 @@ export interface UpdateRecruitmentResponse extends BaseResponse {
 export interface RemoveRecruitmentResponse extends BaseResponse {
   result: {
     status: ResponseStatus;
+  };
+}
+
+export interface GetRecruitSpecialListResponse extends BaseResponse {
+  result: {
+    items: types.RecruitListItem[];
+    pagination: PaginationInfo;
+  };
+}
+
+export interface GetRecruitUgentListResponse extends BaseResponse {
+  result: {
+    items: types.RecruitListItem[];
+    pagination: PaginationInfo;
+  };
+}
+
+export interface GetRecruitBasicListResponse extends BaseResponse {
+  result: {
+    items: types.RecruitListItem[];
+    pagination: PaginationInfo;
   };
 }
