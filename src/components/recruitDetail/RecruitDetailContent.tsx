@@ -75,30 +75,36 @@ const S = {
     }
 
     h1 {
-      font-weight: 500;
-      font-size: 18px;
+      font-weight: 450;
+      font-size: 16px;
       margin-bottom: 5px;
     }
     h2 {
-      font-weight: 500;
-      font-size: 18px;
+      font-weight: 450;
+      font-size: 16px;
       margin-bottom: 5px;
     }
     h3 {
-      font-size: 18px;
-      font-weight: 500;
+      font-size: 16px;
+      font-weight: 450;
       margin-bottom: 5px;
     }
     p {
       font-size: 16px;
-      line-height: 1.2;
-      letter-spacing: 0.0057em;
+      line-height: 1.4;
       font-weight: 300;
     }
     ul {
       list-style: disc;
-      padding-left: 15px;
+      padding-left: 25px;
       font-weight: 300;
+      line-height: 1.4;
+    }
+    ol {
+      list-style: decimal;
+      padding-left: 25px;
+      font-weight: 300;
+      line-height: 1.4;
     }
     ul li::marker {
       color: ${({ theme }) => theme.colors.black500};
@@ -108,16 +114,12 @@ const S = {
       color: ${({ theme }) => theme.colors.black500};
       font-size: 15px;
     }
-    ol {
-      list-style: decimal;
-      padding-left: 15px;
-      font-weight: 300;
-    }
+
     ol li::marker {
       font-size: 14px;
     }
     li {
-      line-height: 1.2;
+      /* line-height: 1.4; */
     }
   `,
 };
