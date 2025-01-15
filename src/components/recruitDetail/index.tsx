@@ -4,21 +4,31 @@ import RecruitDetailPeriod from '@/components/recruitDetail/RecruitDetailPeriod'
 import RecruitDetailDateTime from '@/components/recruitDetail/RecruitDetailDateTime';
 import RecruitDetailJobInformation from '@/components/recruitDetail/RecruitDetailJobInformation';
 import RecruitDetailFavoriteShareBar from '@/components/recruitDetail/RecruitDetailFavoriteShareBar';
+import { IRecruitDetail } from '@/types';
+import KakaoMap from '@/components/common/KakaoMap';
+import dynamic from 'next/dynamic';
 
-interface RecruitDetailProps {}
+const DynamicKakaoMap = dynamic(() => import('@/components/common/KakaoMap'), { ssr: false });
 
-export default function RecruitDetail({}: RecruitDetailProps) {
+interface RecruitDetailProps {
+  data: IRecruitDetail;
+}
+
+export default function RecruitDetail({ data }: RecruitDetailProps) {
+  const locationData = {
+    address: data.address,
+    addressDetail: data.addressDetail,
+  };
+
   return (
     <S.RecruitDetail>
-      {true && <S.Images>{/* 이미지 영역 */}</S.Images>}
-
       <RecruitDetailDateTime />
       <RecruitDetailFavoriteShareBar />
 
       <S.Header>
         <div className="left">
-          <div className="left__company">메이호텔</div>
-          <div className="left__title">야간 근무할 담당자 모십니다.</div>
+          <div className="left__company">{data.hotelName}</div>
+          <div className="left__title">{data.recruitmentTitle}</div>
         </div>
       </S.Header>
 
@@ -27,15 +37,15 @@ export default function RecruitDetail({}: RecruitDetailProps) {
 
       <S.Title>상세 정보</S.Title>
       <S.Content>
-        <p>lasdlpsalpdlspaldp</p>
+        <div dangerouslySetInnerHTML={{ __html: data.content }} />
       </S.Content>
 
       <S.Title>접수기간 및 담당자</S.Title>
       <RecruitDetailPeriod />
 
       <S.Title>근무 위치</S.Title>
-
       <RecruitDetailLocation />
+      <DynamicKakaoMap address={data.address} addressDetail={data.addressDetail} />
     </S.RecruitDetail>
   );
 }
@@ -67,7 +77,6 @@ const S = {
       }
     }
   `,
-
   Content: styled.article`
     min-height: 500px;
     margin-bottom: 50px;
