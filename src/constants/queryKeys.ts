@@ -11,6 +11,7 @@ const queryKeys = {
   RECRUIT_SPECIAL_LIST: 'recruitSpecialList',
   RECRUIT_URGENT_LIST: 'recruitUrgentList',
   RECRUIT_BASIC_LIST: 'recruitBasicList',
+  RECRUIT_DETAIL: 'recruitDetail',
 };
 
 export default queryKeys;
