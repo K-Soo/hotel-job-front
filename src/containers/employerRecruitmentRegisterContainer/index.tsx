@@ -99,7 +99,28 @@ export default function EmployerRecruitmentRegisterContainer() {
       },
     },
   });
-  console.log('errors: ', methods.watch());
+
+  const employmentTypeWatchValue = methods.watch(['conditionInfo.employmentType']);
+
+  React.useEffect(() => {
+    const employmentType = employmentTypeWatchValue[0];
+    const employmentTypeEntries = Object.entries(employmentType);
+
+    // `true`인 값의 인덱스 추출
+    const trueKeys = employmentTypeEntries.filter(([, value]) => value === true).map(([key]) => key); // `key`만 추출
+
+    if (trueKeys.length > 2) {
+      // 앞에서 2개의 `true` 값을 유지, 나머지는 `false`로 변경
+      const updatedEmploymentType = employmentTypeEntries.reduce((acc, [key, value]) => {
+        acc[key as keyof typeof employmentType] = trueKeys.includes(key) && trueKeys.indexOf(key) < 2; // 앞 2개만 true
+        return acc;
+      }, {} as typeof employmentType);
+
+      methods.setValue('conditionInfo.employmentType', updatedEmploymentType);
+      addToast({ message: '2개 이상의 고용 형태를 선택할 수 없습니다.', type: 'warning' });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [employmentTypeWatchValue]);
 
   const onSubmit: SubmitHandler<CreateRecruitmentForm> = async (data, event) => {
     event?.preventDefault();
