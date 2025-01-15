@@ -7,9 +7,7 @@ import Image from 'next/image';
 import { useRecoilValue, useSetRecoilState, useResetRecoilState } from 'recoil';
 import { alertWithConfirmSelector, alertWithConfirmAtom } from '@/recoil/alertWithConfirm';
 
-interface ConfirmProps {}
-
-export default function Confirm({}: ConfirmProps) {
+export default function Confirm() {
   const alertWithConfirmSelectorValue = useRecoilValue(alertWithConfirmSelector);
   const resetAlertWithConfirmAtom = useResetRecoilState(alertWithConfirmAtom);
 
@@ -21,20 +19,16 @@ export default function Confirm({}: ConfirmProps) {
             <h3 className="title">{alertWithConfirmSelectorValue.title}</h3>
             <p className="description">{alertWithConfirmSelectorValue.subTitle}</p>
           </S.Content>
-          {alertWithConfirmSelectorValue.image && (
-            <div className="image-box">
-              <Image src="/images/auth.png" fill alt="image" />
-            </div>
-          )}
 
           <S.ButtonBox>
             <Button
               name="positive"
+              className="cancel-button"
               label={alertWithConfirmSelectorValue.cancelLabel}
-              variant="secondary"
+              variant="cancel"
               maxWidth="200px"
               margin="0 15px 0 0"
-              height="40px"
+              height="45px"
               onClick={() => {
                 alertWithConfirmSelectorValue.onClickCancel();
                 resetAlertWithConfirmAtom();
@@ -42,10 +36,11 @@ export default function Confirm({}: ConfirmProps) {
             />
             <Button
               name="positive"
+              className="primary-button"
               label={alertWithConfirmSelectorValue.confirmLabel}
               variant="primary"
               maxWidth="200px"
-              height="40px"
+              height="45px"
               onClick={() => {
                 alertWithConfirmSelectorValue.onClickConfirm();
                 resetAlertWithConfirmAtom();
@@ -68,65 +63,60 @@ const S = {
     opacity: 0.99;
     aspect-ratio: 16/9;
     margin: 0 auto;
-    width: 450px;
+    width: 400px;
     box-shadow: rgb(0 0 0 / 10%) 0px 4px 16px 0px;
-    border-radius: 10px;
+    border-radius: 20px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
     will-change: transform;
-    padding: 25px;
-    .image-box {
-      position: relative;
-      display: flex;
-      justify-content: center;
-      font-size: 0;
-      margin-top: 15px;
-      width: 128px;
-      height: 128px;
-    }
-    ${(props) => props.theme.media.laptop`
-    `};
-    ${(props) => props.theme.media.tablet`
-      width: 480px;
-    `};
+    padding: 35px 25px 25px 25px;
     ${(props) => props.theme.media.mobile`
-      width: 95%;
+      width: 90%;
+      padding: 35px 25px 15px 25px;
     `};
   `,
   Content: styled.div`
     position: relative;
     flex: 1;
+    width: 100%;
     .title {
-      color: ${(props) => props.theme.colors.black400};
-      font-size: 22px;
+      color: ${(props) => props.theme.colors.black100};
+      font-size: 20px;
       font-weight: 500;
-      text-align: left;
-      ${(props) => props.theme.media.tablet`
-        font-size: 24px;
-      `};
+      text-align: center;
       ${(props) => props.theme.media.mobile`
-        font-size: 18px;
+        font-size: 20px;
       `};
     }
     .description {
       color: ${(props) => props.theme.colors.black500};
-      font-weight: 400;
-      margin-top: 30px;
+      font-weight: 300;
+      margin-top: 15px;
       font-size: 16px;
-      text-align: left;
-      line-height: 1.1;
+      text-align: center;
+      line-height: 1.3;
       ${(props) => props.theme.media.mobile`
-        font-size: 14px;
         margin-top: 15px;
+        font-size: 15px;
       `};
     }
   `,
   ButtonBox: styled.div`
-    margin-top: 30px;
     display: flex;
     width: 100%;
     justify-content: center;
+    ${(props) => props.theme.media.mobile`
+      margin-top: 30px;
+      flex-direction: column-reverse;
+      .cancel-button {
+        max-width: 100%;
+        margin: 10px 0 0 0;
+      }
+      .primary-button {
+        max-width: 100%;
+      }
+    `};
   `,
 };
