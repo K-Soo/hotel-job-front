@@ -47,20 +47,20 @@ const resumeRegister = yup.object({
   education: yup.string().oneOf(educationLevelKeys).required(),
   isRequiredAgreement: yup.boolean().default(false).oneOf([true]),
   isOptionalAgreement: yup.boolean().default(false).oneOf([true]),
-  experiences: yup
-    .array(
-      yup.object({
-        companyName: yup.string().required(),
-        salaryType: yup.string().oneOf(salaryTypeKeyValue).default(undefined),
-        job: yup.string().oneOf(jobKeyValue).default(undefined),
-        position: yup.string().oneOf(positionKeys).default(undefined),
-        responsibility: yup.string().default(''),
-        startDate: yup.date().required(),
-        endDate: yup.date().required(),
-        isEmployed: yup.boolean().default(false),
-      }),
-    )
-    .default([]),
+  // experiences: yup
+  //   .array(
+  //     yup.object({
+  //       companyName: yup.string().required(),
+  //       salaryType: yup.string().oneOf(salaryTypeKeyValue).nullable().default(undefined),
+  //       job: yup.string().oneOf(jobKeyValue).nullable().default(undefined),
+  //       position: yup.string().oneOf(positionKeys).default(undefined),
+  //       responsibility: yup.string().default(''),
+  //       startDate: yup.date().required(),
+  //       endDate: yup.date().required(),
+  //       isEmployed: yup.boolean().default(false),
+  //     }),
+  //   )
+  //   .default([]),
   licenses: yup
     .array(
       yup.object({
