@@ -84,14 +84,9 @@ export default function RegisterInfoForm({ setIsOpenJobModal, setIsOpenPreferenc
       </HorizontalFormWrapper>
 
       <HorizontalFormWrapper label="경력" required>
-        <FormRadio<CreateRecruitmentForm>
-          label="경력"
-          name="recruitmentInfo.experienceCondition"
-          margin="0 30px 0 0"
-          value={experienceCondition.EXPERIENCED}
-        />
-        <FormRadio label="신입" name="recruitmentInfo.experienceCondition" margin="0 30px 0 0" value={experienceCondition.NEWBIE} />
-        <FormRadio label="경력무관" name="recruitmentInfo.experienceCondition" value={experienceCondition.NOT_REQUIRED} />
+        <FormRadio<CreateRecruitmentForm> label="경력" name="recruitmentInfo.experienceCondition" margin="0 30px 0 0" value="EXPERIENCED" />
+        <FormRadio label="신입" name="recruitmentInfo.experienceCondition" margin="0 30px 0 0" value="NEWBIE" />
+        <FormRadio label="경력무관" name="recruitmentInfo.experienceCondition" value="NOT_REQUIRED" />
       </HorizontalFormWrapper>
 
       <HorizontalFormWrapper label="국적" required>
