@@ -1,4 +1,5 @@
 export const EDUCATION_LEVEL = {
+  NOT_REQUIRED: '학력무관',
   ELEMENTARY: '초등학교', // 초등학교
   MIDDLE_SCHOOL: '중학교', // 중학교
   HIGH_SCHOOL: '고등학교', // 고등학교
