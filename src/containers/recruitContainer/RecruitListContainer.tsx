@@ -19,7 +19,6 @@ interface Query extends ParsedUrlQuery {
 
 // TODO - LOADING
 export default function RecruitListContainer() {
-  const recruitArray = Array.from({ length: 10 });
   const { isTablet } = useResponsive();
 
   const router = useRouter();
@@ -42,6 +41,8 @@ export default function RecruitListContainer() {
   });
 
   console.log('채용 일반 리스트 API : ', data);
+
+  const isEmpty = isSuccess && data && data.result.items.length === 0;
 
   if (isLoading) {
     return <div>로딩중...</div>;
@@ -67,7 +68,7 @@ export default function RecruitListContainer() {
           }
           return <RecruitDesktopCard recruitType="NORMAL" key={index} item={item} />;
         })}
-        <PaginationComponent pagination={data.result.pagination} />
+        {!isEmpty && <PaginationComponent pagination={data.result.pagination} />}
       </>
     );
   }
