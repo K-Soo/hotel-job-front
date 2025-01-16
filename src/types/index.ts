@@ -313,4 +313,9 @@ export interface IRecruitDetail {
   updatedAt: string;
   workingDay: WorkingDayListKeys;
   workingTime: { end: string; start: string };
+  nationality: {
+    korean: boolean;
+    foreigner: boolean;
+    marriageVisa: string;
+  };
 }
