@@ -6,8 +6,8 @@ import Tag from '@/components/common/Tag';
 import RecruitPrice from '@/components/recruit/RecruitPrice';
 import { RecruitListItem } from '@/types';
 import { addressFormat, employmentTypeFormat } from '@/utils';
-import { experienceCondition } from '@/constants/recruitment';
-import { allJobs } from '@/constants/job';
+import { EXPERIENCE_CONDITION } from '@/constants/recruitment';
+import { ALL_JOBS } from '@/constants/job';
 import { useRouter } from 'next/router';
 import IconDimmed from '@/components/common/IconDimmed';
 
@@ -83,14 +83,14 @@ export default function RecruitDesktopCard({ recruitType, item }: RecruitDesktop
 
         {item.jobs.length > 1 ? (
           <S.JobRow>
-            {allJobs[item.jobs[0]]} 외 {item.jobs.length - 1}
+            {ALL_JOBS[item.jobs[0]]} 외 {item.jobs.length - 1}
           </S.JobRow>
         ) : (
-          <S.JobRow>{allJobs[item.jobs[0]]}</S.JobRow>
+          <S.JobRow>{ALL_JOBS[item.jobs[0]]}</S.JobRow>
         )}
 
         <S.InfoRow>
-          <span className="text">{experienceCondition[item.experienceCondition]}</span>
+          <span className="text">{EXPERIENCE_CONDITION[item.experienceCondition]}</span>
           <span className="text">{employmentTypeFormat(item.employmentType)}</span>
         </S.InfoRow>
 
