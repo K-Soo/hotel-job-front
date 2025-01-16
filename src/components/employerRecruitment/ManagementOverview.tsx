@@ -22,7 +22,6 @@ export default function ManagementOverview({ id, status }: ManagementOverviewPro
   const handleBlur = (event: React.FocusEvent) => {
     event.stopPropagation();
     const relatedTarget = event.relatedTarget as HTMLElement | null;
-    console.log('relatedTarget: ', relatedTarget);
     if (dropdownRef.current?.contains(relatedTarget)) {
       return;
     }
@@ -37,7 +36,7 @@ export default function ManagementOverview({ id, status }: ManagementOverviewPro
   }
   return (
     <S.ManagementOverview onBlur={handleBlur} tabIndex={0} ref={managementOverviewRef}>
-      <IconDimmed>
+      <IconDimmed width="30px" height="30px" margin="0 auto">
         <Icon
           name="Dots24x24"
           width="18px"
