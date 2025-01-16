@@ -4,13 +4,13 @@ import Portal from '@/components/common/Portal';
 import Background from '@/components/common/Background';
 import Button from '@/components/common/style/Button';
 import {
-  benefits,
-  cultureBenefits,
-  salaryBenefits,
-  giftsBenefits,
-  refreshBenefits,
-  supportHeathBenefits,
-  workLifeBenefits,
+  BENEFITS,
+  CULTURE_BENEFITS,
+  SALARY_BENEFITS,
+  GIFTS_BENEFITS,
+  REFRESH_BENEFITS,
+  SUPPORT_HEATH_BENEFITS,
+  WORK_LIFE_BENEFITS,
 } from '@/constants/benefits';
 import ChipsCheckbox from '@/components/common/style/ChipsCheckbox';
 import { useFormContext } from 'react-hook-form';
@@ -102,7 +102,7 @@ export default function BenefitsModal({ name, setIsOpenBenefitsModal }: JobModal
               <div className="list__wrapper">
                 {selectedTab === 'salaryBenefits' && (
                   <>
-                    {Object.entries(salaryBenefits).map(([key, value]) => (
+                    {Object.entries(SALARY_BENEFITS).map(([key, value]) => (
                       <div key={`all-${key}`} className="list__item">
                         <ChipsCheckbox
                           onChange={handleChangeCheckbox}
@@ -118,7 +118,7 @@ export default function BenefitsModal({ name, setIsOpenBenefitsModal }: JobModal
 
                 {selectedTab === 'cultureBenefits' && (
                   <>
-                    {Object.entries(cultureBenefits).map(([key, value]) => (
+                    {Object.entries(CULTURE_BENEFITS).map(([key, value]) => (
                       <div key={`all-${key}`} className="list__item">
                         <ChipsCheckbox
                           onChange={handleChangeCheckbox}
@@ -134,7 +134,7 @@ export default function BenefitsModal({ name, setIsOpenBenefitsModal }: JobModal
 
                 {selectedTab === 'giftsBenefits' && (
                   <>
-                    {Object.entries(giftsBenefits).map(([key, value]) => (
+                    {Object.entries(GIFTS_BENEFITS).map(([key, value]) => (
                       <div key={`all-${key}`} className="list__item">
                         <ChipsCheckbox
                           onChange={handleChangeCheckbox}
@@ -150,7 +150,7 @@ export default function BenefitsModal({ name, setIsOpenBenefitsModal }: JobModal
 
                 {selectedTab === 'workLifeBenefits' && (
                   <>
-                    {Object.entries(workLifeBenefits).map(([key, value]) => (
+                    {Object.entries(WORK_LIFE_BENEFITS).map(([key, value]) => (
                       <div key={`${key}`} className="list__item">
                         <ChipsCheckbox
                           onChange={handleChangeCheckbox}
@@ -166,7 +166,7 @@ export default function BenefitsModal({ name, setIsOpenBenefitsModal }: JobModal
 
                 {selectedTab === 'supportHeathBenefits' && (
                   <>
-                    {Object.entries(supportHeathBenefits).map(([key, value]) => (
+                    {Object.entries(SUPPORT_HEATH_BENEFITS).map(([key, value]) => (
                       <div key={`${key}`} className="list__item">
                         <ChipsCheckbox
                           onChange={handleChangeCheckbox}
@@ -182,7 +182,7 @@ export default function BenefitsModal({ name, setIsOpenBenefitsModal }: JobModal
 
                 {selectedTab === 'refreshBenefits' && (
                   <>
-                    {Object.entries(refreshBenefits).map(([key, value]) => (
+                    {Object.entries(REFRESH_BENEFITS).map(([key, value]) => (
                       <div key={`${key}`} className="list__item">
                         <ChipsCheckbox
                           onChange={handleChangeCheckbox}
@@ -205,7 +205,7 @@ export default function BenefitsModal({ name, setIsOpenBenefitsModal }: JobModal
                 key={item}
                 onChange={() => {}}
                 name={item}
-                label={benefits[item]}
+                label={BENEFITS[item]}
                 value={item}
                 checked={selectedItems.includes(item)}
                 margin="0 15px 10px 0"
