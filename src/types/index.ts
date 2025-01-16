@@ -1,11 +1,11 @@
 import * as API from '@/types/API';
 import { careerLevel, licenseStage } from '@/constants/resume';
-import { experienceCondition, recruitmentStatus, workingDayList } from '@/constants/recruitment';
+import { EXPERIENCE_CONDITION, RECRUITMENT_STATUS, WORKING_DAY_LIST } from '@/constants/recruitment';
 import { AllJobsKeyValuesKeys } from '@/constants/job';
-import { educationLevel, position, salaryType } from '@/constants';
+import { EDUCATION_LEVEL, POSITION, SALARY_TYPE } from '@/constants';
 import { city } from '@/constants/location';
-import { benefits } from '@/constants/benefits';
-import { preferences } from '@/constants/preferences';
+import { BENEFITS } from '@/constants/benefits';
+import { PREFERENCES } from '@/constants/preferences';
 
 export type ProviderType = 'local' | 'kakao';
 export type RoleType = 'ADMIN' | 'EMPLOYER' | 'JOB_SEEKER';
@@ -27,16 +27,16 @@ export type AccountStatusType =
 
 export type ResumeType = 'FILE' | 'GENERAL'; //파일, 일반
 export type CareerLevelKeys = keyof typeof careerLevel;
-export type EducationLevelKeys = keyof typeof educationLevel;
-export type PositionKeys = keyof typeof position;
+export type EducationLevelKeys = keyof typeof EDUCATION_LEVEL;
+export type PositionKeys = keyof typeof POSITION;
 export type CityKeys = keyof typeof city;
-export type SalaryTypeKeys = keyof typeof salaryType;
+export type SalaryTypeKeys = keyof typeof SALARY_TYPE;
 export type LicenseStageKeys = keyof typeof licenseStage;
-export type experienceConditionKeys = keyof typeof experienceCondition;
-export type RecruitmentStatusKeys = keyof typeof recruitmentStatus;
-export type WorkingDayListKeys = keyof typeof workingDayList;
-export type BenefitsKeys = keyof typeof benefits;
-export type PreferencesKeys = keyof typeof preferences;
+export type experienceConditionKeys = keyof typeof EXPERIENCE_CONDITION;
+export type RecruitmentStatusKeys = keyof typeof RECRUITMENT_STATUS;
+export type WorkingDayListKeys = keyof typeof WORKING_DAY_LIST;
+export type BenefitsKeys = keyof typeof BENEFITS;
+export type PreferencesKeys = keyof typeof PREFERENCES;
 
 export type TalentListItem = {};
 
@@ -302,7 +302,7 @@ export interface IRecruitDetail {
   managerEmail: string;
   managerName: string;
   managerNumber: string;
-  position: PositionKeys;
+  position: PositionKeys | null;
   preferences: PreferencesKeys[];
   recruitmentCapacity: number; //모집인원
   recruitmentStatus: 'PUBLISHED';
