@@ -6,7 +6,7 @@ import useResponsive from '@/hooks/useResponsive';
 import { useRouter } from 'next/router';
 import path from '@/constants/path';
 import DropdownTemplate from '@/components/common/DropdownTemplate';
-import { location } from '@/constants/location';
+import { LOCATION } from '@/constants/location';
 import { motion } from 'framer-motion';
 
 export default function RecruitSearchPanel() {
@@ -27,7 +27,7 @@ export default function RecruitSearchPanel() {
 
   // "지역-구" 형태로 데이터 초기화
   const getInitialLocations = React.useCallback((): string[] => {
-    return Object.entries(location).flatMap(([city, suburbs]) => Object.keys(suburbs).map((suburb) => `${city} ${suburb}`));
+    return Object.entries(LOCATION).flatMap(([city, suburbs]) => Object.keys(suburbs).map((suburb) => `${city} ${suburb}`));
   }, []);
 
   React.useEffect(() => {
