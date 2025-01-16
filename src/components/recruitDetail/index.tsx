@@ -49,7 +49,14 @@ export default function RecruitDetail({ data, children }: RecruitDetailProps) {
           />
 
           <S.Title>모집 내용</S.Title>
-          <RecruitDetailInfo jobs={data.jobs} educationCondition={data.educationCondition} recruitmentCapacity={data.recruitmentCapacity} />
+          <RecruitDetailInfo
+            jobs={data.jobs}
+            educationCondition={data.educationCondition}
+            recruitmentCapacity={data.recruitmentCapacity}
+            experience={data.experienceCondition}
+            department={data.department}
+            position={data.position}
+          />
 
           <S.Title>상세 내용</S.Title>
           <RecruitDetailContent content={data.content} />
