@@ -1,4 +1,4 @@
-import { salaryType } from '@/constants';
+import { SALARY_TYPE } from '@/constants';
 import { SalaryTypeKeys } from '@/types';
 import styled, { css } from 'styled-components';
 import { priceComma } from '@/utils';
@@ -11,7 +11,7 @@ interface RecruitPriceProps {
 export default function RecruitPrice({ fonSize, salaryAmount, salary }: RecruitPriceProps) {
   return (
     <S.RecruitPrice $fonSize={fonSize} $salary={salary}>
-      <span className="pay-type">{salaryType[salary]}</span>
+      <span className="pay-type">{SALARY_TYPE[salary]}</span>
       <span className="pay-price">{priceComma(salaryAmount)}</span>
     </S.RecruitPrice>
   );
