@@ -1,3 +1,4 @@
+import React from 'react';
 import styled from 'styled-components';
 import Link from 'next/link';
 import path from '@/constants/path';
@@ -8,21 +9,20 @@ import useAuth from '@/hooks/useAuth';
 import { motion } from 'framer-motion';
 import Button from '@/components/common/style/Button';
 import { useRouter } from 'next/router';
+import SkeletonUI from '@/components/common/SkeletonUI';
 
 export default function Navigation() {
+  const [isVisible, setIsVisible] = React.useState(false);
   const router = useRouter();
-  const { isAuthenticated, role } = useAuth();
+  const { isAuthenticated, isAuthIdle, role } = useAuth();
 
-  const handleClickSignOut = async () => {
-    try {
-      const response = await Auth.signOut();
-      console.log('로그아웃 API : ', response);
-    } catch (error) {
-      console.log('error: ', error);
-    } finally {
-      window.location.href = '/sign-in';
-    }
-  };
+  React.useEffect(() => {
+    const timeout = setTimeout(() => {
+      setIsVisible(true);
+    }, 500);
+
+    return () => clearTimeout(timeout);
+  }, []);
 
   const handleClickUserIcon = () => {
     if (role === 'JOB_SEEKER') {
@@ -52,30 +52,38 @@ export default function Navigation() {
       </S.Menu>
 
       <S.Utility>
+        {/* TODO - loading */}
+        {/* {!isVisible && isAuthIdle && <div>loading</div>} */}
+
+        {/* 로그인 */}
         {isAuthenticated && (
-          <button onClick={handleClickUserIcon}>
+          <button className="user-icon" onClick={handleClickUserIcon}>
             <Icon name="User" />
           </button>
         )}
 
-        {!isAuthenticated && (
-          <Button
-            margin="0 20px 0 0"
-            label="기업회원/채용광고(무료 체험 제공)"
-            variant="secondary200"
-            height="40px"
-            onClick={() => router.push(path.LANDING_EMPLOYER)}
-            fontSize="15px"
-          />
+        {/* 비 로그인 */}
+        {isVisible && !isAuthenticated && !isAuthIdle && (
+          <>
+            <Button
+              margin="0 20px 0 0"
+              label="기업회원/채용광고(무료 체험 제공)"
+              variant="secondary100"
+              height="40px"
+              onClick={() => router.push(path.LANDING_EMPLOYER)}
+              fontSize="15px"
+              width="230px"
+            />
+            <Button
+              label="로그인"
+              variant="tertiary"
+              height="40px"
+              onClick={() => router.push(path.SIGN_IN)}
+              fontSize="15px"
+              width="80px"
+            />
+          </>
         )}
-
-        {!isAuthenticated && (
-          <Button label="로그인" variant="tertiary" height="40px" onClick={() => router.push(path.SIGN_IN)} fontSize="15px" />
-        )}
-
-        {/* {isAuthenticated && (
-          <Button label="SIGN OUT" onClick={() => handleClickSignOut()} variant="primary" height="30px" width="80px" margin="0 0 0 15px" />
-        )} */}
       </S.Utility>
     </S.Navigation>
   );
@@ -115,6 +123,11 @@ const S = {
   Utility: styled.div`
     display: flex;
     align-items: center;
+    justify-content: flex-end;
     height: 100%;
+    /* width: 500px; */
+    .user-icon {
+      font-size: 0;
+    }
   `,
 };
