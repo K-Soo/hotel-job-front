@@ -7,7 +7,7 @@ export default function UserResumeContainer() {
   return (
     <UserResume>
       <UserTemplate>
-        <UserTitle title="이력서 목록" />
+        <UserTitle title="내 이력서" />
       </UserTemplate>
     </UserResume>
   );
