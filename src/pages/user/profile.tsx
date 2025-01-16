@@ -10,7 +10,7 @@ UserProfilePage.getLayout = (page: React.ReactElement) => {
     <Layout>
       <Header>
         <DesktopNavigation />
-        <MobileNavigation />
+        <MobileNavigation title="프로필" />
       </Header>
       <Main>{page}</Main>
       <Footer />
@@ -19,3 +19,4 @@ UserProfilePage.getLayout = (page: React.ReactElement) => {
 };
 
 UserProfilePage.authentication = true;
+UserProfilePage.allowedRoles = ['JOB_SEEKER'];
