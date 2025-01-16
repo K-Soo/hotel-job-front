@@ -1,23 +1,34 @@
 import { AllJobsKeyValuesKeys } from '@/constants/job';
-import { EducationLevelKeys } from '@/types';
+import { EducationLevelKeys, experienceConditionKeys } from '@/types';
 import styled from 'styled-components';
-import { allJobs } from '@/constants/job';
-import { educationLevel } from '@/constants';
+import { ALL_JOBS } from '@/constants/job';
+import { EDUCATION_LEVEL, POSITION } from '@/constants';
+import { EXPERIENCE_CONDITION } from '@/constants/recruitment';
 
 interface RecruitDetailInfoProps {
   jobs: AllJobsKeyValuesKeys[];
   educationCondition: EducationLevelKeys;
   recruitmentCapacity: number;
+  experience: experienceConditionKeys;
+  department: string;
+  position: keyof typeof POSITION | null;
 }
 
-export default function RecruitDetailInfo({ educationCondition, jobs, recruitmentCapacity }: RecruitDetailInfoProps) {
+export default function RecruitDetailInfo({
+  educationCondition,
+  jobs,
+  recruitmentCapacity,
+  experience,
+  department,
+  position,
+}: RecruitDetailInfoProps) {
   return (
     <S.RecruitDetailInfo>
       <div className="info-container">
         <div className="left">
           <S.Row>
             <S.RowLabel>직무</S.RowLabel>
-            <S.RowValue>{jobs.length > 0 ? jobs.map((job) => allJobs[job]).join(', ') : null}</S.RowValue>
+            <S.RowValue>{jobs.length > 0 ? jobs.map((job) => ALL_JOBS[job]).join(', ') : null}</S.RowValue>
           </S.Row>
           <S.Row>
             <S.RowLabel>국적</S.RowLabel>
@@ -31,14 +42,14 @@ export default function RecruitDetailInfo({ educationCondition, jobs, recruitmen
 
           <S.Row>
             <S.RowLabel>근무 부서</S.RowLabel>
-            <S.RowValue>-</S.RowValue>
+            <S.RowValue>{department ? department : '-'}</S.RowValue>
           </S.Row>
         </div>
 
         <div className="right">
           <S.Row>
             <S.RowLabel>경력</S.RowLabel>
-            <S.RowValue>경력 무관</S.RowValue>
+            <S.RowValue>{EXPERIENCE_CONDITION[experience]}</S.RowValue>
           </S.Row>
 
           {/* 외국인 or 국적무관 일때 비자조건 렌더링 */}
@@ -49,12 +60,12 @@ export default function RecruitDetailInfo({ educationCondition, jobs, recruitmen
 
           <S.Row>
             <S.RowLabel>학력조건</S.RowLabel>
-            <S.RowValue>{educationLevel[educationCondition]}</S.RowValue>
+            <S.RowValue>{EDUCATION_LEVEL[educationCondition]}</S.RowValue>
           </S.Row>
 
           <S.Row>
             <S.RowLabel>직급</S.RowLabel>
-            <S.RowValue>-</S.RowValue>
+            <S.RowValue>{position ? POSITION[position] : '-'}</S.RowValue>
           </S.Row>
         </div>
       </div>
