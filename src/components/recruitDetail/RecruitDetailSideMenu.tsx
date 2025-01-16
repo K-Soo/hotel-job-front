@@ -11,7 +11,7 @@ interface RecruitDetailSideMenuProps {
 }
 
 export default function RecruitDetailSideMenu({ managerName, managerNumber }: RecruitDetailSideMenuProps) {
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, isAuthIdle } = useAuth();
   const { addToast } = useToast();
   const router = useRouter();
 
@@ -26,7 +26,7 @@ export default function RecruitDetailSideMenu({ managerName, managerNumber }: Re
     <S.RecruitDetailSideMenu>
       <Button label="지원하기" variant="primary" height="50px" borderRadius="10px" onClick={handleClickApply} />
       <div className="info-box">
-        {!isAuthenticated && (
+        {!isAuthIdle && !isAuthenticated && (
           <Dimmed>
             <Button
               label="로그인/회원가입"
