@@ -23,10 +23,15 @@ export default function RecruitDetail({ data, children }: RecruitDetailProps) {
       {/* <S.Images></S.Images> */}
       <div className="detail-container">
         <div className="detail-container__content-form">
-          <RecruitDetailDateTime />
+          {/* TODO - 날짜 */}
+          {/* <RecruitDetailDateTime /> */}
 
           <S.UtilPanel>
-            <strong className="hotel-name">{data.hotelName}</strong>
+            <div className="wrapper">
+              <strong className="hotel-name">{data.hotelName}</strong>
+              <address className="addr sido">{data.address.split(' ')[0]}</address>
+              <address className="addr sigungu">{data.address.split(' ')[1]}</address>
+            </div>
             <RecruitDetailFavoriteShareBar />
           </S.UtilPanel>
 
@@ -104,10 +109,28 @@ const S = {
     display: flex;
     align-items: flex-end;
     justify-content: space-between;
-    margin-top: 10px;
     margin-bottom: 8px;
-    .hotel-name {
-      font-size: 18px;
+    .wrapper {
+      display: flex;
+      align-items: center;
+      .hotel-name {
+        font-size: 18px;
+      }
+      .addr {
+        font-size: 14px;
+        color: ${(props) => props.theme.colors.gray800};
+      }
+      .sido {
+        padding-right: 3px;
+      }
+      .sido {
+        &::before {
+          content: '∙';
+          padding: 0 8px;
+          font-size: 20px;
+          font-size: 14px;
+        }
+      }
     }
   `,
 };
