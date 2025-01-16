@@ -17,11 +17,7 @@ export default function RecruitDetailInfo({ educationCondition, jobs, recruitmen
         <div className="left">
           <S.Row>
             <S.RowLabel>직무</S.RowLabel>
-            <S.RowValue>
-              {jobs.map((job) => (
-                <span>{allJobs[job]}</span>
-              ))}
-            </S.RowValue>
+            <S.RowValue>{jobs.length > 0 ? jobs.map((job) => allJobs[job]).join(', ') : null}</S.RowValue>
           </S.Row>
           <S.Row>
             <S.RowLabel>국적</S.RowLabel>
