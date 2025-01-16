@@ -24,10 +24,7 @@ export const productUseDateOptions = [
   { label: '21일', value: '21' },
 ];
 
-export const educationConditionLevelOptions = [
-  { label: '학력무관', value: 'NOT_REQUIRED' },
-  ...Object.entries(EDUCATION_LEVEL).map(([key, value]) => ({ label: value, value: key })),
-];
+export const educationConditionLevelOptions = [...Object.entries(EDUCATION_LEVEL).map(([key, value]) => ({ label: value, value: key }))];
 
 export const optionalJobOptions = [
   { label: '선택', value: '' },
