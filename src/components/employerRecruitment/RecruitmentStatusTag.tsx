@@ -1,13 +1,13 @@
 import { RecruitmentStatusKeys } from '@/types';
 import styled, { css } from 'styled-components';
-import { recruitmentStatus } from '@/constants/recruitment';
+import { RECRUITMENT_STATUS } from '@/constants/recruitment';
 
 interface RecruitmentStatusTagProps {
   status: RecruitmentStatusKeys;
 }
 
 export default function RecruitmentStatusTag({ status }: RecruitmentStatusTagProps) {
-  return <S.RecruitmentStatusTag type={status}>{recruitmentStatus[status]}</S.RecruitmentStatusTag>;
+  return <S.RecruitmentStatusTag type={status}>{RECRUITMENT_STATUS[status]}</S.RecruitmentStatusTag>;
 }
 
 const S = {
