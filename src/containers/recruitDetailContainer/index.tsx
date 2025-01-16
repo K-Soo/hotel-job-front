@@ -31,11 +31,7 @@ export default function RecruitDetailContainer() {
   if (isSuccess && data) {
     return (
       <RecruitDetail data={data.result}>
-        <RecruitDetailSideMenu
-          managerName={data.result.managerName}
-          managerEmail={data.result.managerEmail}
-          managerNumber={data.result.managerNumber}
-        />
+        <RecruitDetailSideMenu managerName={data.result.managerName} managerNumber={data.result.managerNumber} />
       </RecruitDetail>
     );
   }
