@@ -7,6 +7,7 @@ import InfiniteScroll from 'react-infinite-scroller';
 import queryKeys from '@/constants/queryKeys';
 import Button from '@/components/common/style/Button';
 import RecruitSectionTitle from '@/components/recruit/RecruitSectionTitle';
+import EmptyComponent from '@/components/common/EmptyComponent';
 
 export default function RecruitUrgentListContainer() {
   const { data, isLoading, isSuccess, fetchNextPage, hasNextPage, isFetching } = useInfiniteScroll({
@@ -26,6 +27,9 @@ export default function RecruitUrgentListContainer() {
 
   const isFirstPage = data?.pages[data.pages.length - 1].result.pagination.currentPage === 1;
 
+  // 페이지 1에서 데이터가 없는지 확인
+  const isEmptyFirstPage = isFirstPage && data?.pages[0]?.result.items.length === 0;
+
   if (isLoading) {
     return <div>loading</div>;
   }
@@ -34,6 +38,8 @@ export default function RecruitUrgentListContainer() {
     return (
       <>
         <RecruitSectionTitle title="🔥 급구채용" />
+        {isEmptyFirstPage && isFirstPage && <EmptyComponent height="200px" />}
+
         <InfiniteScroll
           loadMore={() => {
             if (!isFirstPage) {
@@ -48,7 +54,7 @@ export default function RecruitUrgentListContainer() {
               return page.result.items.map((item) => <RecruitUrgentCard key={item.id} item={item} />);
             })}
           </RecruitUrgentList>
-          {isFirstPage && (
+          {!isEmptyFirstPage && isFirstPage && (
             <div style={{ display: 'flex', justifyContent: 'center' }}>
               <Button label="더보기" variant="primary" width="200px" onClick={() => fetchNextPage()} />
             </div>
