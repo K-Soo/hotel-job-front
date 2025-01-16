@@ -3,10 +3,9 @@ import { motion } from 'framer-motion';
 import Icon from '@/icons/Icon';
 import RecruitPrice from '@/components/recruit/RecruitPrice';
 import { useRouter } from 'next/router';
-import Tag from '@/components/common/Tag';
 import { RecruitListItem } from '@/types';
-import { allJobs } from '@/constants/job';
-import { experienceCondition } from '@/constants/recruitment';
+import { ALL_JOBS } from '@/constants/job';
+import { EXPERIENCE_CONDITION } from '@/constants/recruitment';
 import { addressFormat, employmentTypeFormat } from '@/utils';
 import IconDimmed from '@/components/common/IconDimmed';
 
@@ -59,13 +58,13 @@ export default function RecruitSpecialCard({ item }: RecruitSpecialCardProps) {
         <div className="jobs">
           {item.jobs.length > 1 ? (
             <span className="jobs__text">
-              {allJobs[item.jobs[0]]} 외 {item.jobs.length - 1}
+              {ALL_JOBS[item.jobs[0]]} 외 {item.jobs.length - 1}
             </span>
           ) : (
-            <span className="jobs__text">{allJobs[item.jobs[0]]}</span>
+            <span className="jobs__text">{ALL_JOBS[item.jobs[0]]}</span>
           )}
           <div className="jobs__conditions">
-            <span>{experienceCondition[item.experienceCondition]}</span>
+            <span>{EXPERIENCE_CONDITION[item.experienceCondition]}</span>
             <span>{employmentTypeFormat(item.employmentType)}</span>
           </div>
         </div>
