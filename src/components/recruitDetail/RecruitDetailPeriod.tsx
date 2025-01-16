@@ -75,5 +75,8 @@ const S = {
     ${(props) => props.theme.media.tablet`
       display: block;
     `};
+    ${(props) => props.theme.media.mobile`
+      font-size: 20px;
+    `};
   `,
 };
