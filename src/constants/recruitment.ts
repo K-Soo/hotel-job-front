@@ -17,9 +17,9 @@ export const recruitmentStatusWithAll = {
 
 // 모집 경력
 export const experienceCondition = {
-  NEWBIE: 'NEWBIE', // 신입
-  EXPERIENCED: 'EXPERIENCED', // 경력
-  NOT_REQUIRED: 'NOT_REQUIRED', // 경력 무관
+  NEWBIE: '신입',
+  EXPERIENCED: '경력',
+  NOT_REQUIRED: '경력무관',
 } as const;
 
 export const employmentType = {
