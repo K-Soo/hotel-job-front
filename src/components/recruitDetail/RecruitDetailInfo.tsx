@@ -8,20 +8,39 @@ import { EXPERIENCE_CONDITION } from '@/constants/recruitment';
 interface RecruitDetailInfoProps {
   jobs: AllJobsKeyValuesKeys[];
   educationCondition: EducationLevelKeys;
+  experienceCondition: experienceConditionKeys;
   recruitmentCapacity: number;
-  experience: experienceConditionKeys;
   department: string;
   position: keyof typeof POSITION | null;
+  nationality: {
+    foreigner: boolean;
+    korean: boolean;
+    marriageVisa: string;
+  };
 }
 
 export default function RecruitDetailInfo({
   educationCondition,
   jobs,
   recruitmentCapacity,
-  experience,
+  experienceCondition,
   department,
   position,
+  nationality,
 }: RecruitDetailInfoProps) {
+  const getNationalityStatus = () => {
+    if (nationality.korean && nationality.foreigner) {
+      return '국적 무관';
+    }
+    if (nationality.korean && !nationality.foreigner) {
+      return '내국인';
+    }
+    if (!nationality.korean && nationality.foreigner) {
+      return '외국인';
+    }
+    return '-';
+  };
+
   return (
     <S.RecruitDetailInfo>
       <div className="info-container">
@@ -32,7 +51,7 @@ export default function RecruitDetailInfo({
           </S.Row>
           <S.Row>
             <S.RowLabel>국적</S.RowLabel>
-            <S.RowValue>국적 무관</S.RowValue>
+            <S.RowValue>{getNationalityStatus()}</S.RowValue>
           </S.Row>
 
           <S.Row>
@@ -49,13 +68,13 @@ export default function RecruitDetailInfo({
         <div className="right">
           <S.Row>
             <S.RowLabel>경력</S.RowLabel>
-            <S.RowValue>{EXPERIENCE_CONDITION[experience]}</S.RowValue>
+            <S.RowValue>{EXPERIENCE_CONDITION[experienceCondition]}</S.RowValue>
           </S.Row>
 
           {/* 외국인 or 국적무관 일때 비자조건 렌더링 */}
           <S.Row>
             <S.RowLabel>비자조건</S.RowLabel>
-            <S.RowValue>-</S.RowValue>
+            <S.RowValue>{nationality.marriageVisa ? nationality.marriageVisa : '-'}</S.RowValue>
           </S.Row>
 
           <S.Row>
