@@ -29,7 +29,7 @@ instance.interceptors.response.use(
   async (error) => {
     const originalRequest = error.config;
 
-    const responseData = error.response?.data;
+    const responseData = error.response.data;
 
     // access token 만료 or 누락
     const shouldRefreshToken = responseData?.error?.code === 'ERR-1000' || responseData?.error?.code === 'ERR-1001';
