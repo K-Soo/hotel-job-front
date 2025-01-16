@@ -46,7 +46,7 @@ export const getStaticProps = async (context: GetStaticPropsContext) => {
       queryFn: () => Get.recruitDetail({ id: recruitId as string }),
     });
 
-    console.log('getStaticProps - 채용상세 API : ', response.error);
+    console.log('getStaticProps - 채용상세 API : ', response);
 
     if (!response.success) {
       throw new Error();
