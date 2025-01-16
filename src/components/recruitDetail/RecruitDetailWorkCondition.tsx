@@ -9,13 +9,13 @@ interface RecruitDetailWorkConditionProps {
   workingDay: WorkingDayListKeys;
   workingTime: { end: string; start: string };
   salaryAmount: number;
-  salary: SalaryTypeKeys;
+  salaryType: SalaryTypeKeys;
 }
 
 export default function RecruitDetailWorkCondition({
   employment,
   salaryAmount,
-  salary,
+  salaryType,
   workingDay,
   workingTime,
 }: RecruitDetailWorkConditionProps) {
@@ -41,7 +41,7 @@ export default function RecruitDetailWorkCondition({
           <S.Row>
             <S.RowLabel>급여</S.RowLabel>
             <S.RowValue>
-              {SALARY_TYPE[salary]} {priceComma(salaryAmount)}원
+              {SALARY_TYPE[salaryType]} {priceComma(salaryAmount)}원
             </S.RowValue>
           </S.Row>
           <S.Row>
