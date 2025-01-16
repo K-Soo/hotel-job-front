@@ -3,8 +3,8 @@ import Icon from '@/icons/Icon';
 import RecruitPrice from '@/components/recruit/RecruitPrice';
 import { RecruitListItem } from '@/types';
 import { addressFormat, employmentTypeFormat } from '@/utils';
-import { experienceCondition } from '@/constants/recruitment';
-import { allJobs } from '@/constants/job';
+import { EXPERIENCE_CONDITION } from '@/constants/recruitment';
+import { ALL_JOBS } from '@/constants/job';
 
 interface RecruitMobileCardProps {
   item: RecruitListItem;
@@ -41,13 +41,13 @@ export default function RecruitMobileCard({ item }: RecruitMobileCardProps) {
         <div className="jobs">
           {item.jobs.length > 1 ? (
             <span className="jobs__text">
-              {allJobs[item.jobs[0]]} 외 {item.jobs.length - 1}
+              {ALL_JOBS[item.jobs[0]]} 외 {item.jobs.length - 1}
             </span>
           ) : (
-            <span className="jobs__text">{allJobs[item.jobs[0]]} </span>
+            <span className="jobs__text">{ALL_JOBS[item.jobs[0]]} </span>
           )}
           <div className="jobs__conditions">
-            <span>{experienceCondition[item.experienceCondition]}</span>
+            <span>{EXPERIENCE_CONDITION[item.experienceCondition]}</span>
             <span>{employmentTypeFormat(item.employmentType)}</span>
           </div>
         </div>
