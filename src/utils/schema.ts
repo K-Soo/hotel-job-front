@@ -1,10 +1,10 @@
 import * as yup from 'yup';
 import { careerLevel, position, licenseStage } from '@/constants/resume';
-import { preferences } from '@/constants/preferences';
-import { experienceCondition, recruitmentStatus, workingDayList } from '@/constants/recruitment';
-import { educationLevel, salaryType } from '@/constants';
-import { allJobs, allJobsKeyValues, AllJobsKeyValuesKeys, allJobsKeyValuesKeys } from '@/constants/job';
-import { benefits } from '@/constants/benefits';
+import { PREFERENCES } from '@/constants/preferences';
+import { EXPERIENCE_CONDITION, RECRUITMENT_STATUS, WORKING_DAY_LIST } from '@/constants/recruitment';
+import { EDUCATION_LEVEL, SALARY_TYPE } from '@/constants';
+import { ALL_JOBS, allJobsKeyValues, AllJobsKeyValuesKeys, allJobsKeyValuesKeys } from '@/constants/job';
+import { BENEFITS } from '@/constants/benefits';
 import { validation } from '@/utils/validation';
 import {
   CareerLevelKeys,
@@ -20,18 +20,18 @@ import {
 } from '@/types';
 
 const careerLevelKeyValue = Object.keys(careerLevel) as CareerLevelKeys[];
-const salaryTypeKeyValue = Object.keys(salaryType) as SalaryTypeKeys[];
-const jobKeyValue = Object.keys(allJobs) as AllJobsKeyValuesKeys[];
+const salaryTypeKeyValue = Object.keys(SALARY_TYPE) as SalaryTypeKeys[];
+const jobKeyValue = Object.keys(ALL_JOBS) as AllJobsKeyValuesKeys[];
 const positionKeys = Object.keys(position) as PositionKeys[];
-const educationLevelKeys = Object.keys(educationLevel) as EducationLevelKeys[];
+const educationLevelKeys = Object.keys(EDUCATION_LEVEL) as EducationLevelKeys[];
 const licenseStageKeyValue = Object.keys(licenseStage) as LicenseStageKeys[];
-const preferencesKeyValue = Object.keys(preferences) as PreferencesKeys[];
+const preferencesKeyValue = Object.keys(PREFERENCES) as PreferencesKeys[];
 
-const workingDayListKeyValue = Object.keys(workingDayList) as WorkingDayListKeys[];
+const workingDayListKeyValue = Object.keys(WORKING_DAY_LIST) as WorkingDayListKeys[];
 
-const experienceLevelValue = Object.keys(experienceCondition) as experienceConditionKeys[];
-const recruitmentStatusKeys = Object.keys(recruitmentStatus) as RecruitmentStatusKeys[];
-const benefitsKeys = Object.keys(benefits) as BenefitsKeys[];
+const experienceLevelValue = Object.keys(EXPERIENCE_CONDITION) as experienceConditionKeys[];
+const recruitmentStatusKeys = Object.keys(RECRUITMENT_STATUS) as RecruitmentStatusKeys[];
+const benefitsKeys = Object.keys(BENEFITS) as BenefitsKeys[];
 // const allJobsKeyValuesKeys = Object.keys(allJobsKeyValues) as AllJobsKeyValuesKeys[];
 
 const signInSchema = yup.object({
