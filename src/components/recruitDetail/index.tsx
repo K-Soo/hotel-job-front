@@ -44,7 +44,7 @@ export default function RecruitDetail({ data, children }: RecruitDetailProps) {
             employment={data.employmentType}
             workingTime={data.workingTime}
             workingDay={data.workingDay}
-            salary={data.salaryType}
+            salaryType={data.salaryType}
             salaryAmount={data.salaryAmount}
           />
 
@@ -53,9 +53,10 @@ export default function RecruitDetail({ data, children }: RecruitDetailProps) {
             jobs={data.jobs}
             educationCondition={data.educationCondition}
             recruitmentCapacity={data.recruitmentCapacity}
-            experience={data.experienceCondition}
+            experienceCondition={data.experienceCondition}
             department={data.department}
             position={data.position}
+            nationality={data.nationality}
           />
 
           <S.Title>상세 내용</S.Title>
