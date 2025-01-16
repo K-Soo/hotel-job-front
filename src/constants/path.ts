@@ -29,9 +29,11 @@ const path = {
 
   // USER
   USER: '/user', //마이페이지
+  USER_RESUME: '/user/resume', // 이력서 목록
   USER_RESUME_REGISTER: '/user/resume/register', // 이력서 등록
-  USER_USER: '/user/profile', //프로필 페이지
+  USER_PROFILE: '/user/profile', //프로필 페이지
   USER_POINT: '/user/point', //포인트
+  USER_BOOKMARK: '/user/bookmark', //북마크
 
   // EMPLOYER
   EMPLOYER: '/employer', //기업 - 홈
