@@ -2,57 +2,49 @@ import styled from 'styled-components';
 import React from 'react';
 import useAppRouter from '@/hooks/useAppRouter';
 import { GENERAL_ASIDE_MENU } from '@/constants/menu';
+import Line from '@/components/common/Line';
 import { motion, AnimatePresence } from 'framer-motion';
 import Icon from '@/icons/Icon';
+import { useRouter } from 'next/router';
+import { Auth } from '@/apis';
+import useToast from '@/hooks/useToast';
 
 export default function UserAsideMenu() {
-  const [isOpen, setIsOpen] = React.useState<string | null>(null);
   const appRouter = useAppRouter();
+  const router = useRouter();
+  const { addToast } = useToast();
 
-  const handleClickItem = (value: string) => {
-    appRouter.push(value);
+  const handleClickSignOut = async () => {
+    try {
+      const response = await Auth.signOut();
+      console.log('로그아웃 API : ', response);
+      addToast({ message: '로그아웃 되었습니다.', type: 'success' });
+    } catch (error) {
+      console.log('error: ', error);
+    } finally {
+      setTimeout(() => {
+        window.location.href = '/sign-in';
+      }, 1200);
+    }
   };
 
   return (
     <S.UserAsideMenu>
       {GENERAL_ASIDE_MENU.map((element) => {
         return (
-          <S.Menu key={element.label}>
-            <motion.div
-              className="menu-item"
-              whileTap={{ scale: 0.98 }}
-              onClick={() => setIsOpen((prev) => (prev === element.value ? null : element.value))}
-            >
-              <h6>{element.label}</h6>
-              {element.items.length !== 0 && <Icon name="ArrowRight16x16" width="16px" height="16px" />}
-            </motion.div>
-
-            <AnimatePresence>
-              {isOpen === element.value && (
-                <motion.div
-                  animate={{ height: 'auto', opacity: 1 }}
-                  initial={{ height: 0, opacity: 0 }}
-                  exit={{ height: 0, opacity: 0 }}
-                  transition={{ duration: 0.25, ease: 'easeInOut' }}
-                >
-                  {element.items.map((item) => (
-                    <S.Item
-                      key={item.value}
-                      onClick={() => handleClickItem(item.value)}
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      exit={{ opacity: 0 }}
-                      transition={{ duration: 0.05, ease: 'easeIn' }}
-                    >
-                      <div className="content">{item.label}</div>
-                    </S.Item>
-                  ))}
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </S.Menu>
+          <S.MenuItem key={element.label} whileTap={{ scale: 0.95 }} onClick={() => router.push(element.value)}>
+            <h6>{element.label}</h6>
+          </S.MenuItem>
         );
       })}
+
+      <Line color="#f2f4f6" margin="10px 0" />
+      {/* 
+      <S.MenuItem whileTap={{ scale: 0.95 }} onClick={() => {}}>
+        <h6>로그아웃</h6>
+      </S.MenuItem> */}
+
+      <S.SignOutButton onClick={() => handleClickSignOut()}>로그아웃</S.SignOutButton>
     </S.UserAsideMenu>
   );
 }
@@ -60,61 +52,59 @@ export default function UserAsideMenu() {
 const S = {
   UserAsideMenu: styled.aside`
     position: sticky;
-    top: 65px;
-    width: 220px;
-    margin-right: 30px;
-    font-size: 14px;
-    overflow-y: auto;
+    top: calc(60px + 30px);
     max-height: calc(100vh - 65px);
-    height: 100%;
-    scrollbar-width: thin;
-    scrollbar-color: #eaeaea #0000;
-    scrollbar-gutter: stable;
+    border-right: 1px solid ${(props) => props.theme.colors.gray100};
+    width: 210px;
+    margin-right: 30px;
+    padding-right: 10px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    /* scrollbar-width: thin; */
+    /* scrollbar-color: #eaeaea #0000; */
+    /* scrollbar-gutter: stable; */
     user-select: none;
     ${(props) => props.theme.media.tablet`
       display: none;
     `};
   `,
-  Menu: styled(motion.div)`
-    .menu-item {
-      min-height: 40px;
-      height: 100%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 0 10px;
-      cursor: pointer;
-      border-radius: 5px;
-      font-size: 14px;
-      color: ${(props) => props.theme.colors.gray700};
-      &:hover {
-        background-color: ${(props) => props.theme.colors.grayOpacity100};
-        color: ${(props) => props.theme.colors.black100};
-        transition: all 0.5s;
-      }
+  MenuItem: styled(motion.button)`
+    /* all: unset; */
+    color: ${(props) => props.theme.colors.gray700};
+    height: 45px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 15px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: 350;
+    margin-bottom: 10px;
+    &:last-child {
+      margin-bottom: 0;
+    }
+    &:hover {
+      background-color: ${(props) => props.theme.colors.gray100};
+      color: ${(props) => props.theme.colors.black100};
+      transition: all 0.5s;
     }
   `,
-  Item: styled(motion.div)`
-    height: 40px;
-    padding: 0 10px;
-    display: flex;
-    align-items: center;
+  SignOutButton: styled.button`
+    color: ${(props) => props.theme.colors.gray400};
+    height: 45px;
+    margin-right: 10px;
+    width: 100%;
+    padding: 0 15px;
     cursor: pointer;
-    border-left: 1px solid ${(props) => props.theme.colors.gray500};
-    margin-left: 15px;
-    .content {
-      border-radius: 5px;
-      width: 100%;
-      height: 100%;
-      display: flex;
-      align-items: center;
-      padding-left: 10px;
-      font-size: 14px;
-      color: ${(props) => props.theme.colors.gray700};
-      &:hover {
-        color: ${(props) => props.theme.colors.black100};
-        transition: all 0.5s;
-      }
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: 300;
+    &:hover {
+      background-color: ${(props) => props.theme.colors.gray100};
+      color: ${(props) => props.theme.colors.black300};
+      transition: all 0.5s;
     }
   `,
 };
