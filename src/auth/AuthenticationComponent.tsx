@@ -26,7 +26,7 @@ export default function AuthenticationComponent() {
   });
 
   // 사용자 정보 가져오기
-  const { data: userInfoData } = useFetchQuery({
+  const { data: userInfoData, isLoading } = useFetchQuery({
     queryKey: [queryKeys.USER_INFO],
     queryFn: Auth.me,
     options: {
@@ -39,14 +39,23 @@ export default function AuthenticationComponent() {
   console.log('ME API : ', userInfoData);
 
   React.useEffect(() => {
-    if (!userInfoData) return;
-    if (!userInfoData.success) return;
+    if (isLoading) {
+      return;
+    }
 
-    setAuthAtomState({
-      ...userInfoData.result,
-      status: 'AUTHENTICATED',
-    });
-  }, [userInfoData]);
+    if (!userInfoData) {
+      return setAuthAtomState({
+        status: 'AUTHENTICATION_FAILURE',
+      });
+    }
+
+    if (userInfoData) {
+      setAuthAtomState({
+        ...userInfoData.result,
+        status: 'AUTHENTICATED',
+      });
+    }
+  }, [userInfoData, isLoading]);
 
   return null;
 }
