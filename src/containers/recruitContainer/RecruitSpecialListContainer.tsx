@@ -8,11 +8,9 @@ import queryKeys from '@/constants/queryKeys';
 import Button from '@/components/common/style/Button';
 import useInfiniteScroll from '@/hooks/useInfiniteScroll';
 import { Get } from '@/apis';
+import EmptyComponent from '@/components/common/EmptyComponent';
 
 export default function RecruitSpecialListContainer() {
-  const recruitArray = Array.from({ length: 9 });
-  const { isTablet } = useResponsive();
-
   const { data, isLoading, isSuccess, fetchNextPage, hasNextPage, isFetching } = useInfiniteScroll({
     queryFn: Get.getRecruitSpecialList,
     queryKey: [queryKeys.RECRUIT_SPECIAL_LIST, { limit: '9' }],
@@ -29,16 +27,21 @@ export default function RecruitSpecialListContainer() {
 
   console.log('스페셜 채용 리스트 API : ', data);
 
+  const isFirstPage = data?.pages[data.pages.length - 1].result.pagination.currentPage === 1;
+
+  // 페이지 1에서 데이터가 없는지 확인
+  const isEmptyFirstPage = isFirstPage && data?.pages[0]?.result.items.length === 0;
+
   if (isLoading) {
     return <div>loading</div>;
   }
-
-  const isFirstPage = data?.pages[data.pages.length - 1].result.pagination.currentPage === 1;
 
   if (isSuccess && data) {
     return (
       <>
         <RecruitSectionTitle title="🌟 스페셜 채용" />
+        {isEmptyFirstPage && isFirstPage && <EmptyComponent height="200px" />}
+
         <InfiniteScroll
           loadMore={() => {
             if (!isFirstPage) {
@@ -54,7 +57,7 @@ export default function RecruitSpecialListContainer() {
             })}
           </RecruitSpecialList>
         </InfiniteScroll>
-        {isFirstPage && (
+        {!isEmptyFirstPage && isFirstPage && (
           <div style={{ display: 'flex', justifyContent: 'center' }}>
             <Button label="더보기" variant="primary" width="200px" onClick={() => fetchNextPage()} />
           </div>
