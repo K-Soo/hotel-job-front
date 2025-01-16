@@ -11,11 +11,11 @@ import RecruitmentDetailAdditional from '@/components/employerRecruitmentRegiste
 import { educationConditionLevelOptions, optionalPositionOptions } from '@/constants/options';
 import Button from '@/components/common/style/Button';
 import { CreateRecruitmentForm } from '@/types';
-import { experienceCondition } from '@/constants/recruitment';
+import { EXPERIENCE_CONDITION } from '@/constants/recruitment';
 import React from 'react';
 import FormArrayChipsCheckbox from '@/components/common/form/FormArrayChipsCheckbox';
-import { allJobs } from '@/constants/job';
-import { preferences } from '@/constants/preferences';
+import { ALL_JOBS } from '@/constants/job';
+import { PREFERENCES } from '@/constants/preferences';
 import useDidMountEffect from '@/hooks/useDidMountEffect';
 
 interface RegisterInfoFormProps {
@@ -69,7 +69,7 @@ export default function RegisterInfoForm({ setIsOpenJobModal, setIsOpenPreferenc
           label="직무"
           required
           onClickInputForm={() => setIsOpenJobModal(true)}
-          optionsKeyData={allJobs}
+          optionsKeyData={ALL_JOBS}
           placeholder="직무를 선택해주세요"
         />
         <Button
@@ -140,7 +140,7 @@ export default function RegisterInfoForm({ setIsOpenJobModal, setIsOpenPreferenc
             name="recruitmentInfo.preferences"
             label="우대사항"
             onClickInputForm={() => setIsOpenPreferencesModal(true)}
-            optionsKeyData={preferences}
+            optionsKeyData={PREFERENCES}
             placeholder="우대사항을 선택해주세요"
           />
           <Button
