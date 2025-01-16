@@ -1,4 +1,4 @@
-export const policy = {
+export const POLICY = {
   company: '셀레스타라',
   name: '고원호',
   email: 'help.celestara@gmail.com',
