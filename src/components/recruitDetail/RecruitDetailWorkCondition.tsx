@@ -1,7 +1,7 @@
 import { SalaryTypeKeys, WorkingDayListKeys } from '@/types';
 import styled from 'styled-components';
-import { workingDayList, employmentType } from '@/constants/recruitment';
-import { salaryType } from '@/constants';
+import { WORKING_DAY_LIST, EMPLOYMENT_TYPE } from '@/constants/recruitment';
+import { SALARY_TYPE } from '@/constants';
 import { priceComma, dateFormat } from '@/utils';
 
 interface RecruitDetailWorkConditionProps {
@@ -21,7 +21,7 @@ export default function RecruitDetailWorkCondition({
 }: RecruitDetailWorkConditionProps) {
   const selectedTypes = Object.entries(employment)
     .filter(([, value]) => value)
-    .map(([key]) => employmentType[key as keyof typeof employmentType]);
+    .map(([key]) => EMPLOYMENT_TYPE[key as keyof typeof EMPLOYMENT_TYPE]);
 
   return (
     <S.RecruitDetailWorkCondition>
@@ -33,7 +33,7 @@ export default function RecruitDetailWorkCondition({
           </S.Row>
           <S.Row>
             <S.RowLabel>근무요일</S.RowLabel>
-            <S.RowValue>{workingDay ? workingDayList[workingDay] : '-'}</S.RowValue>
+            <S.RowValue>{workingDay ? WORKING_DAY_LIST[workingDay] : '-'}</S.RowValue>
           </S.Row>
         </div>
 
@@ -41,7 +41,7 @@ export default function RecruitDetailWorkCondition({
           <S.Row>
             <S.RowLabel>급여</S.RowLabel>
             <S.RowValue>
-              {salaryType[salary]} {priceComma(salaryAmount)}원
+              {SALARY_TYPE[salary]} {priceComma(salaryAmount)}원
             </S.RowValue>
           </S.Row>
           <S.Row>
