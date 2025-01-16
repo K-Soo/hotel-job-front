@@ -6,9 +6,7 @@ import useToast from '@/hooks/useToast';
 import useAuth from '@/hooks/useAuth';
 import useShare from '@/hooks/useShare';
 
-interface RecruitDetailFavoriteShareBarProps {}
-
-export default function RecruitDetailFavoriteShareBar({}: RecruitDetailFavoriteShareBarProps) {
+export default function RecruitDetailFavoriteShareBar() {
   const { isAuthenticated } = useAuth();
   const { addToast } = useToast();
 
@@ -17,13 +15,14 @@ export default function RecruitDetailFavoriteShareBar({}: RecruitDetailFavoriteS
     title: 'title',
   });
 
+  // TODO - 북마크 로직 추가
   const handleClickBookmark = (event: React.MouseEvent<HTMLElement>) => {
     event.preventDefault();
     event.stopPropagation();
     if (!isAuthenticated) {
-      // 북마크에 추가되었습니다! 😄
       return addToast({ message: '로그인 후 북마크 기능을 이용해 보세요! 😊', type: 'info' });
     }
+    // 북마크에 추가되었습니다! 😄
   };
   return (
     <S.RecruitDetailFavoriteShareBar>
