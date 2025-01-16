@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import UserTemplate from '@/components/common/user/UserTemplate';
-import UserTitle from '@/components/common/user/UserTitle';
 import UserAsideMenu from '@/components/common/user/UserAsideMenu';
 
 interface UserResumeProps {
