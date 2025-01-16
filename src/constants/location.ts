@@ -1,4 +1,4 @@
-export const location = {
+export const LOCATION = {
   서울특별시: {
     강남구: ['삼성동', '역삼동', '청담동'],
     강동구: ['명일동', '천호동', '둔촌동'],
