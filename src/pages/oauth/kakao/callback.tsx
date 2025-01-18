@@ -10,7 +10,7 @@ import useAppRouter from '@/hooks/useAppRouter';
 import { loadingAtom } from '@/recoil/loading';
 import useAuth from '@/hooks/useAuth';
 import { ParsedUrlQuery } from 'querystring';
-import Loading from '@/components/common/Loading';
+import LoadingOverlay from '@/components/common/LoadingOverlay';
 import Portal from '@/components/common/Portal';
 import { url } from '@/constants/oauth';
 import { useForm, FormProvider, SubmitHandler } from 'react-hook-form';
@@ -151,7 +151,7 @@ export default function KaKaoCallbackPage() {
   if (status === 'IDLE') {
     return (
       <Portal>
-        <Loading />
+        <LoadingOverlay />
       </Portal>
     );
   }
