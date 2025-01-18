@@ -75,23 +75,34 @@ const StyledTextArea = styled.textarea`
   font-size: 16px;
   resize: none;
   padding: 15px;
+  &:hover {
+    background-color: ${(props) => props.theme.colors.blue};
+    border: 1px solid ${(props) => props.theme.colors.blue100};
+  }
+
   &::placeholder {
     color: ${(props) => props.theme.colors.gray400};
     font-size: 14px;
   }
+
   &:disabled {
     background-color: ${(props) => props.theme.colors.gray100};
+  }
+
+  &:focus {
+    transition: 0.3s;
+    border: 1px solid ${(props) => props.theme.colors.blue500};
   }
 `;
 
 const StyledLabel = styled.label<{ required?: boolean }>`
+  color: ${({ theme }) => theme.colors.gray700};
   display: block;
   margin-bottom: 3px;
-  font-size: 15px;
+  font-size: 14px;
   cursor: default;
   white-space: nowrap;
   margin-right: 15px;
-  color: ${({ theme }) => theme.colors.gray700};
   ${(props) =>
     props.required &&
     css`
