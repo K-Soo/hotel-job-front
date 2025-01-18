@@ -38,7 +38,7 @@ export default function Confirm() {
               name="positive"
               className="primary-button"
               label={alertWithConfirmSelectorValue.confirmLabel}
-              variant="primary"
+              variant="primary100"
               maxWidth="200px"
               height="45px"
               onClick={() => {
@@ -87,7 +87,7 @@ const S = {
       font-weight: 500;
       text-align: center;
       ${(props) => props.theme.media.mobile`
-        font-size: 20px;
+        font-size: 18px;
       `};
     }
     .description {
