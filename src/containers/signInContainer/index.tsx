@@ -68,6 +68,7 @@ export default function SignInContainer() {
         ...response.result,
         status: 'AUTHENTICATED',
       });
+
       router.push(path.EMPLOYER);
     } catch (error) {
       methods.setValue('password', '');
