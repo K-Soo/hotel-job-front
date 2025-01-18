@@ -1,24 +1,38 @@
 import styled from 'styled-components';
 import { ResumeRegisterForm } from '@/types';
-import { v4 as uuidv4 } from 'uuid';
+// import { v4 as uuidv4 } from 'uuid';
 import FormInput from '@/components/common/form/FormInput';
 import FormDate from '@/components/common/form/FormDate';
+import ResumeDeleteButton from '@/components/userResumeDetail/ResumeDeleteButton';
+import { useFormContext, useFieldArray } from 'react-hook-form';
+import FormMapSelect from '@/components/common/form/FormMapSelect';
+import { LICENSE_STAGE } from '@/constants/resume';
 
-interface ResumeLicenseFormProps {}
-
-import { useFormContext } from 'react-hook-form';
-
-export default function ResumeLicenseForm({}: ResumeLicenseFormProps) {
-  const { watch } = useFormContext<ResumeRegisterForm>();
-
-  const licensesValue = watch('licenses');
+export default function ResumeLicenseForm() {
+  const { fields, remove } = useFieldArray<ResumeRegisterForm>({ name: 'licenses' });
 
   return (
     <S.ResumeLicenseForm>
-      {licensesValue.map((_, index) => (
-        <div key={uuidv4()} className="license-item">
-          <FormInput<ResumeRegisterForm> name={`licenses.${index}.licenseName`} placeholder="자격증 이름" label="자격증명" required />
-          <FormDate<ResumeRegisterForm> name={`licenses.${index}.dateOfCompletion`} label="취득일" required />
+      {fields.map((field, index) => (
+        <div key={field.id} className="license-item">
+          <FormInput<ResumeRegisterForm>
+            name={`licenses.${index}.licenseName`}
+            placeholder="자격증 명"
+            required
+            maxWidth="250px"
+            margin="0 15px 0 0"
+          />
+          <div className="license-item__stage">
+            {/* <FormDate<ResumeRegisterForm> name={`licenses.${index}.licenseStage`} required width="150px" placeholder="취득일" /> */}
+            <FormMapSelect<ResumeRegisterForm>
+              name={`licenses.${index}.licenseStage`}
+              options={LICENSE_STAGE}
+              required
+              maxWidth="200px"
+              margin="0 15px 0 0"
+            />
+            <ResumeDeleteButton onClick={() => remove(index)} />
+          </div>
         </div>
       ))}
     </S.ResumeLicenseForm>
@@ -26,5 +40,18 @@ export default function ResumeLicenseForm({}: ResumeLicenseFormProps) {
 }
 
 const S = {
-  ResumeLicenseForm: styled.div``,
+  ResumeLicenseForm: styled.div`
+    .license-item {
+      display: flex;
+      &__stage {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      ${(props) => props.theme.media.mobile`
+        flex-direction: column-reverse;
+      `};
+    }
+  `,
 };
