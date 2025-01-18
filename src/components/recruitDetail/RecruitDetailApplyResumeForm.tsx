@@ -23,10 +23,10 @@ export default function RecruitDetailApplyResumeForm({
   setSelectedResume,
   fetchSubmitApply,
 }: RecruitDetailApplyResumeFormProps) {
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, authAtomState } = useAuth();
 
   const { data, isLoading, isSuccess } = useFetchQuery({
-    queryKey: [queryKeys.AVAILABLE_RESUME_LIST],
+    queryKey: [queryKeys.AVAILABLE_RESUME_LIST, { nickname: authAtomState.nickname }],
     queryFn: Get.getAvailableResumeList,
     options: {
       enabled: isAuthenticated,
