@@ -7,9 +7,14 @@ export const GENERAL_ASIDE_MENU = [
     value: path.USER_RESUME,
     items: [],
   },
-  { label: '북마크', value: path.USER_BOOKMARK, items: [] },
-  { label: '받은제안', value: '/user/offer', items: [] },
-  { label: '결제내역', value: '/user/payment', items: [] },
+  {
+    label: '지원현황',
+    value: path.USER_RESUME_HISTORY,
+    items: [],
+  },
+  // { label: '북마크', value: path.USER_BOOKMARK, items: [] },
+  // { label: '받은제안', value: '/user/offer', items: [] },
+  // { label: '결제내역', value: '/user/payment', items: [] },
   {
     label: '회원정보',
     value: path.USER_PROFILE,
