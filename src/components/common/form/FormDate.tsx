@@ -1,9 +1,8 @@
 import styled, { css } from 'styled-components';
-import DatePicker, { registerLocale } from 'react-datepicker';
+import DatePicker, { DatePickerProps, registerLocale } from 'react-datepicker';
 import FormError from '@/components/common/form/FormError';
-import { useFormContext, Path, FieldValues } from 'react-hook-form';
 import { get } from 'lodash';
-
+import { useFormContext, Path, FieldValues, Controller } from 'react-hook-form';
 import 'react-datepicker/dist/react-datepicker.css';
 
 interface FormDateProps<T> {
@@ -14,9 +13,19 @@ interface FormDateProps<T> {
   margin?: string;
   width?: string;
   maxWidth?: string;
+  placeholder?: string;
 }
 
-export default function FormDate<T extends FieldValues>({ name, label, disabled, required, margin, maxWidth, width }: FormDateProps<T>) {
+export default function FormDate<T extends FieldValues>({
+  name,
+  label,
+  disabled,
+  required,
+  margin,
+  maxWidth,
+  width,
+  placeholder,
+}: FormDateProps<T>) {
   const {
     formState: { errors },
     register,
@@ -34,32 +43,67 @@ export default function FormDate<T extends FieldValues>({ name, label, disabled,
           {label}
         </StyledLabel>
       )}
-      <StyledDatePicker
-      // placeholderText="날짜를 선택해주세요."
-      // locale={ko}
-      //  timeIntervals={60}
-      //  selected={selectedDate}
-      //  showTimeSelect={showTimeSelect}
-      //  showYearDropdown
-      // minDate={minDate ? startAt : undefined}
-      // maxDate={maxDate ? endAt : undefined}
-      // dateFormat={showTimeSelect ? 'yyyy-MM-dd HH:mm' : 'yyyy-MM-dd'}
-      // selected={selectedDate}
-      // showTimeSelect={showTimeSelect}
-      // showYearDropdown
+      <Controller
+        name={name}
+        // control={control}
+        render={({ field }) => (
+          <DatePicker
+            {...field}
+            selected={field.value} // React Hook Form의 값 연결
+            onChange={(date) => field.onChange(date)} // 선택한 값 변경
+            placeholderText={placeholder}
+            disabled={disabled}
+            autoComplete="off"
+            // disabled={disabled}
+            // locale={ko}
+            //  timeIntervals={60}
+            //  selected={selectedDate}
+            //  showTimeSelect={showTimeSelect}
+            //  showYearDropdown
+            // minDate={minDate ? startAt : undefined}
+            maxDate={new Date()}
+            dateFormat="yyy.MM.dd"
+            // selected={selectedDate}
+            // showTimeSelect={showTimeSelect}
+            // showYearDropdown
+          />
+        )}
       />
-      {error && <FormError errors={errors} name={name} />}
+      <FormError errors={errors} name={name} style={{ position: 'absolute' }} />
     </S.FormDate>
   );
 }
 
 const S = {
   FormDate: styled.div<{ $margin?: string; $width?: string; $maxWidth?: string }>`
-    margin: ${(props) => (props.$margin ? props.$margin : '0 0 10px 0')};
+    margin: ${(props) => (props.$margin ? props.$margin : '0')};
     width: ${(props) => (props.$width ? props.$width : '100%')};
     max-width: ${(props) => (props.$maxWidth ? props.$maxWidth : '100%')};
+    /* overflow: hidden; */
+    /* padding: 0 15px; */
     .react-datepicker-wrapper {
+      border-radius: 5px;
+      border: 1px solid ${({ theme }) => theme.colors.gray300};
       width: 100%;
+      height: 40px;
+      .react-datepicker__input-container {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        overflow: hidden;
+        input {
+          all: unset;
+          border: none;
+          font-size: 14px;
+          padding-left: 10px;
+          margin: 0;
+          height: 100%;
+          &::placeholder {
+            color: ${(props) => props.theme.colors.gray400};
+            font-size: 14px;
+          }
+        }
+      }
     }
   `,
 };
@@ -84,7 +128,7 @@ const StyledLabel = styled.label<{ required?: boolean }>`
     `};
 `;
 
-const StyledDatePicker = styled(DatePicker)`
+const StyledDatePicker = styled(DatePicker)<DatePickerProps>`
   border: 1px solid ${({ theme }) => theme.colors.gray300};
   height: 40px;
   width: 100%;
@@ -92,7 +136,6 @@ const StyledDatePicker = styled(DatePicker)`
   border-radius: 5px;
   cursor: pointer;
   padding-left: 15px;
-
   &::placeholder {
     color: ${(props) => props.theme.colors.gray400};
     font-size: 14px;
