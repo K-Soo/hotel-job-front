@@ -6,6 +6,7 @@ const TITLE_TEXT = {
   TITLE_3: '채용 공고가 성공적으로 등록되었습니다!',
   TITLE_4: '선택된 공고를 삭제하시겠습니까?',
   TITLE_5: '채용공고 수정완료!',
+  TITLE_6: '이력서를 삭제하시겠습니까?',
 } as const;
 
 const DESCRIPTION_TEXT = {
@@ -15,6 +16,7 @@ const DESCRIPTION_TEXT = {
   DESC_4: '이 작업은 선택한 공고를 영구적으로 삭제합니다.',
   DESC_5: '채용 효과를 높이기 위한 상품을 만나보세요.',
   DESC_6: '지금 본인인증하시겠습니까?',
+  DESC_7: '이력서를 삭제해도 기존 입사지원내역은 유지됩니다.',
 };
 
 type TTextKeys = keyof typeof TITLE_TEXT;
@@ -27,6 +29,7 @@ interface AlertWithConfirmAtom {
   image: 'Document' | undefined;
   confirmLabel: string;
   cancelLabel: string;
+  confirmVariant: 'primary100' | 'cancel' | 'delete';
 
   onClickConfirm: (...args: any) => void;
   onClickCancel: (...args: any) => void;
@@ -41,6 +44,7 @@ export const alertWithConfirmAtom = atom<AlertWithConfirmAtom>({
     image: undefined,
     confirmLabel: '',
     cancelLabel: '',
+    confirmVariant: 'primary100',
 
     onClickConfirm: () => {},
     onClickCancel: () => {},
@@ -57,6 +61,7 @@ export const alertWithConfirmSelector = selector({
       title: getModalState.title && TITLE_TEXT[getModalState.title],
       subTitle: getModalState.subTitle && DESCRIPTION_TEXT[getModalState.subTitle],
       image: getModalState.image,
+      confirmVariant: getModalState.confirmVariant,
 
       confirmLabel: getModalState.confirmLabel,
       cancelLabel: getModalState.cancelLabel,
