@@ -65,6 +65,7 @@ const S = {
         font-size: 16px;
         font-weight: 500;
         color: ${(props) => props.theme.colors.gray700};
+        user-select: none;
       }
       &__required {
         font-size: 13px;
