@@ -1,8 +1,13 @@
 import Layout, { Main, Header, DesktopNavigation, MobileNavigation, Footer } from '@/components/layout';
 import UserProfileContainer from '@/containers/userProfileContainer';
+import { ErrorBoundary, ErrorComponent } from '@/error';
 
 export default function UserProfilePage() {
-  return <UserProfileContainer />;
+  return (
+    <ErrorBoundary fallback={<ErrorComponent />}>
+      <UserProfileContainer />
+    </ErrorBoundary>
+  );
 }
 
 UserProfilePage.getLayout = (page: React.ReactElement) => {
@@ -10,7 +15,7 @@ UserProfilePage.getLayout = (page: React.ReactElement) => {
     <Layout>
       <Header>
         <DesktopNavigation />
-        <MobileNavigation title="프로필" />
+        <MobileNavigation title="회원정보" />
       </Header>
       <Main>{page}</Main>
       <Footer />
