@@ -14,6 +14,7 @@ const DESCRIPTION_TEXT = {
   DESC_3: '채용 상품을 결제하고 공고를 게시하세요! 빠르게 최고의 인재를 만날 준비가 되셨나요? 🚀',
   DESC_4: '이 작업은 선택한 공고를 영구적으로 삭제합니다.',
   DESC_5: '채용 효과를 높이기 위한 상품을 만나보세요.',
+  DESC_6: '지금 본인인증하시겠습니까?',
 };
 
 type TTextKeys = keyof typeof TITLE_TEXT;
