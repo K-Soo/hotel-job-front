@@ -18,7 +18,7 @@ export { EmployerHeader } from '@/components/layout/header/employerHeader';
 export { EmployerAside } from '@/components/layout/aside/EmployerAside';
 export { EmployerFooter } from '@/components/layout/footer/EmployerFooter';
 
-const DynamicNoSSRLoading = dynamic(() => import('@/components/common/Loading'), { ssr: false });
+const DynamicNoSSRLoadingOverlay = dynamic(() => import('@/components/common/LoadingOverlay'), { ssr: false });
 const DynamicNoSSRAccountBottomSheet = dynamic(() => import('@/components/common/AccountBottomSheet'), { ssr: false });
 const DynamicNoSSRAlert = dynamic(() => import('@/components/common/Alert'), { ssr: false });
 const DynamicNoSSRConfirm = dynamic(() => import('@/components/common/Confirm'), { ssr: false });
@@ -50,7 +50,7 @@ export default function Layout({ children }: LayoutProps) {
 
   return (
     <S.Layout>
-      {loadingAtomValue.isLoading && <DynamicNoSSRLoading />}
+      {loadingAtomValue.isLoading && <DynamicNoSSRLoadingOverlay />}
       {bottomSheetAtomValue.isOpen && <DynamicNoSSRAccountBottomSheet />}
 
       {alertWithConfirmSelectorValue.type === 'ALERT' && <DynamicNoSSRAlert />}
