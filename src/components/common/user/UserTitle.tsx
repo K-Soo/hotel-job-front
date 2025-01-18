@@ -17,7 +17,7 @@ const S = {
     font-weight: 500;
     font-size: 24px;
     color: ${(props) => props.theme.colors.black500};
-    margin-bottom: 15px;
+    margin-bottom: 30px;
     ${(props) => props.theme.media.tablet`
       display: none;
     `};
