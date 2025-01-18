@@ -73,6 +73,7 @@ const requests = {
     instance.post<Response>(url, body, config).then(responseBody),
   patch: <Request, Response>(url: string, body: Request, config?: AxiosRequestConfig) =>
     instance.patch<Response>(url, body, config).then(responseBody),
+  delete: <Response>(url: string) => instance.delete<Response>(url, config).then(responseBody),
 };
 
 export const Internal = {
@@ -203,6 +204,10 @@ export const Get = {
   // 사업자 - 채용공고 상태별 수량 집계
   recruitmentStatusCount: () => requests.get<API.RecruitmentStatusCountResponse>(`/employers/recruitment/status`),
 
+  // 사업자 - 채용공고 별 지원자 리스트
+  getRecruitmentDetailApplicantList: ({ recruitmentId }: { recruitmentId: string }) =>
+    requests.get<any>(`/applications/recruitment/${recruitmentId}`),
+
   // TODO - 타입정의
   // 사업자 - 채용공고 리스트
   recruitmentList: ({ page, limit, status }: API.RecruitmentListRequest) => {
@@ -267,4 +272,9 @@ export const Patch = {
   // 사업자 -  등록된 공고 수정
   updateRecruitment: (body: API.UpdateRecruitmentRequest) =>
     requests.patch<API.UpdateRecruitmentRequest, API.UpdateRecruitmentResponse>('/employers/recruitment', body),
+};
+
+export const Delete = {
+  //유저 - 이력서 삭제
+  deleteResume: ({ resumeId }: { resumeId: string }) => requests.delete<API.DeleteResumeResponse>(`/resumes/${resumeId}`),
 };
