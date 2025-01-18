@@ -68,7 +68,7 @@ export default function UserResumeDetailContainer() {
   });
 
   const { data, isLoading, isSuccess } = useFetchQuery({
-    queryKey: [queryKeys.RESUME_DETAIL, { slug }],
+    queryKey: [queryKeys.RESUME_DETAIL, { slug, nickname: authAtomState.nickname }],
     queryFn: Get.getResumeDetail,
     options: {
       enabled: !!slug,
