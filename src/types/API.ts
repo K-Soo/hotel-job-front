@@ -272,3 +272,8 @@ export interface ApplicationApplyCheckResponse extends BaseResponse {
     status: ResponseStatus;
   };
 }
+export interface DeleteResumeResponse extends BaseResponse {
+  result: {
+    status: ResponseStatus;
+  };
+}
