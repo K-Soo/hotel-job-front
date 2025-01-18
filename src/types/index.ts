@@ -319,7 +319,7 @@ export interface ResumeListItem {
   status: ResumeStatusKey;
   sanctionReason: SanctionReasonKey;
   applicationsCount: number;
-  applications: { id: string; status: ApplicationStatus; createdAt: Date }[];
+  applications: { id: string; status: ApplicationStatus; createdAt: Date; applyAt: Date }[];
 }
 
 export interface ResumeRegisterForm {
