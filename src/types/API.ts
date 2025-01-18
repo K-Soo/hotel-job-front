@@ -90,17 +90,20 @@ export interface SignInResponse extends BaseResponse {
   result: {
     accessToken: string;
     role: types.RoleType;
-    provider: types.ProviderType;
+    provider: types.Provider;
+    nickname: string; //new
+    accountStatus: types.AccountStatus; //new
+    certificationStatus: types.CertificationStatus; //new
   };
 }
 
 export interface OAuthSignInResponse extends BaseResponse {
   result: {
     accessToken: string;
-    provider: types.ProviderType;
+    provider: types.Provider;
     role: types.RoleType;
     nickname: string; //new
-    accountStatus: types.AccountStatusType; //new
+    accountStatus: types.AccountStatus; //new
     certificationStatus: types.CertificationStatus; //new
   };
 }
@@ -115,12 +118,16 @@ export interface GetUserInfoResponse extends BaseResponse {
   result: {
     nickname: string;
     accessToken: string;
-    provider: types.ProviderType;
+    provider: types.Provider;
     role: types.RoleType;
-    accountStatus: types.AccountStatusType;
+    accountStatus: types.AccountStatus;
     companyVerificationStatus: types.CompanyVerificationStatus;
     certificationStatus: types.CertificationStatus;
   };
+}
+
+export interface GetApplicantProfileResponse extends BaseResponse {
+  result: types.ApplicantProfile;
 }
 
 export interface GetTalentListResponse extends BaseResponse {
