@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import path from '@/constants/path';
 import useAuth from '@/hooks/useAuth';
 import { RoleType } from '@/types';
-import Loading from '@/components/common/Loading';
+import LoadingOverlay from '@/components/common/LoadingOverlay';
 
 interface GuardComponentProps {
   allowedRoles: RoleType[] | undefined;
@@ -49,7 +49,7 @@ export default function GuardComponent({ allowedRoles, children }: GuardComponen
 
   if (isAuthIdle && showLoading) {
     // if (true) {
-    return <Loading />;
+    return <LoadingOverlay />;
   }
 
   if (isAuthenticated) {
