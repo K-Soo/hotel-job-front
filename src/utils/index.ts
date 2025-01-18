@@ -5,3 +5,4 @@ export { priceComma } from './priceComma';
 export { dateFormat } from './dateFormat';
 export { addressFormat } from './addressFormat';
 export { employmentTypeFormat } from './employmentTypeFormat';
+export { appendQueryParams } from './appendQueryParams';
