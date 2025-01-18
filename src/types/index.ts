@@ -9,14 +9,14 @@ import { PREFERENCES } from '@/constants/preferences';
 import { LANGUAGE_LEVEL, LANGUAGE } from '@/constants/language';
 import { RESUME_STATUS, SANCTION_REASON } from '@/constants/resume';
 
-export type ProviderType = 'local' | 'kakao';
+export type Provider = 'LOCAL' | 'KAKAO' | 'GOOGLE';
 export type RoleType = 'ADMIN' | 'EMPLOYER' | 'JOB_SEEKER';
 export type CompanyVerificationStatus = 'NOT_REQUESTED' | 'PENDING' | 'VERIFIED' | 'REJECTED';
 export type EmploymentType = 'FULL_TIME' | 'CONTRACT' | 'DAILY_WORKER' | 'INTERN';
 export type CertificationStatus = 'PENDING' | 'VERIFIED' | 'REJECTED' | 'UNVERIFIED';
 export type ApplicationStatus = 'APPLIED' | 'CANCELED' | 'ACCEPTED' | 'REJECTED';
 
-export type AccountStatusType =
+export type AccountStatus =
   | 'ACTIVE'
   | 'INACTIVE'
   | 'BLOCKED'
@@ -145,6 +145,24 @@ export interface EmployerAccountInfoForm {
   role: 'EMPLOYER';
   updatedAt: '2025-01-07T18:01:26.000Z';
   userId: 'kanabun102';
+}
+
+export interface ApplicantProfile {
+  accountStatus: AccountStatus;
+  certification: null;
+  certificationStatus: CertificationStatus;
+  consent: {
+    ageAgree: boolean;
+    personalInfoAgree: boolean;
+    serviceTermsAgree: boolean;
+
+    emailMarketingAgree: boolean;
+    smsMarketingAgree: boolean;
+  };
+  email: string;
+  nickname: string;
+  provider: Provider;
+  createdAt: string;
 }
 
 // 공고 등록 폼
