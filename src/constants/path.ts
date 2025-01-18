@@ -30,6 +30,7 @@ const path = {
   // USER
   USER: '/user', //마이페이지
   USER_RESUME: '/user/resume', // 이력서 목록
+  USER_RESUME_HISTORY: '/user/resume/history', // 이력서 지원현황
   USER_RESUME_REGISTER: '/user/resume/register', // 이력서 등록
   USER_PROFILE: '/user/profile', //프로필 페이지
   USER_POINT: '/user/point', //포인트
