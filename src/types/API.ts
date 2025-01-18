@@ -79,6 +79,11 @@ export interface DraftRecruitmentRequest extends Partial<types.CreateRecruitment
   id?: string;
 }
 
+export interface ApplyResumeRequest {
+  resumeId: string;
+  recruitId: string;
+}
+
 /************************************* RESPONSE **************************************/
 
 export interface SignInResponse extends BaseResponse {
@@ -94,6 +99,9 @@ export interface OAuthSignInResponse extends BaseResponse {
     accessToken: string;
     provider: types.ProviderType;
     role: types.RoleType;
+    nickname: string; //new
+    accountStatus: types.AccountStatusType; //new
+    certificationStatus: types.CertificationStatus; //new
   };
 }
 
@@ -111,6 +119,7 @@ export interface GetUserInfoResponse extends BaseResponse {
     role: types.RoleType;
     accountStatus: types.AccountStatusType;
     companyVerificationStatus: types.CompanyVerificationStatus;
+    certificationStatus: types.CertificationStatus;
   };
 }
 
@@ -231,4 +240,29 @@ export interface GetRecruitBasicListResponse extends BaseResponse {
 
 export interface RecruitDetailResponse extends BaseResponse {
   result: types.IRecruitDetail;
+}
+
+export interface CreateResumeResponse extends BaseResponse {
+  result: {
+    status: ResponseStatus;
+    id: string;
+  };
+}
+
+export interface GetResumeEditResponse extends BaseResponse {
+  result: {
+    id: string;
+  };
+}
+
+export interface GetResumeDetailResponse extends BaseResponse {
+  result: types.ResumeDetail;
+}
+
+export interface GetResumeListResponse extends BaseResponse {
+  result: types.ResumeListItem[];
+}
+
+export interface GetAvailableResumeList extends BaseResponse {
+  result: types.ResumeListItem[];
 }
