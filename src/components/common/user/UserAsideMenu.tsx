@@ -55,7 +55,7 @@ const S = {
     top: calc(60px + 30px);
     max-height: calc(100vh - 65px);
     border-right: 1px solid ${(props) => props.theme.colors.gray100};
-    width: 210px;
+    width: 220px;
     margin-right: 30px;
     padding-right: 10px;
     overflow-y: auto;
