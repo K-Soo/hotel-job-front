@@ -27,7 +27,7 @@ export default function AuthenticationComponent() {
 
   // 사용자 정보 가져오기
   const { data: userInfoData, isLoading } = useFetchQuery({
-    queryKey: [queryKeys.USER_INFO],
+    queryKey: [queryKeys.AUTH_ME],
     queryFn: Auth.me,
     options: {
       enabled: !isAuthenticated && !!cookieData?.result && !isExcludedPath,
