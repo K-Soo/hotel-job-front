@@ -38,7 +38,7 @@ export default function Confirm() {
               name="positive"
               className="primary-button"
               label={alertWithConfirmSelectorValue.confirmLabel}
-              variant="primary100"
+              variant={alertWithConfirmSelectorValue.confirmVariant}
               maxWidth="200px"
               height="45px"
               onClick={() => {
