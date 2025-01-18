@@ -144,12 +144,12 @@ export default function EmployerSetupCompanyContainer() {
         window.location.reload();
         return;
       }
-      await queryClient.invalidateQueries({ queryKey: [queryKeys.USER_INFO] });
+      await queryClient.invalidateQueries({ queryKey: [queryKeys.AUTH_ME] });
 
       await queryClient.invalidateQueries({ queryKey: [queryKeys.REFRESH_COOKIE] });
 
       // 데이터 강제 요청 및 대기
-      // await queryClient.ensureQueryData({ queryKey: [queryKeys.USER_INFO] });
+      // await queryClient.ensureQueryData({ queryKey: [queryKeys.AUTH_ME] });
 
       setAlertWithConfirmAtom((prev) => ({
         ...prev,
