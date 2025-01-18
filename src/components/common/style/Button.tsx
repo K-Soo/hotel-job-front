@@ -20,7 +20,8 @@ type ButtonVariant =
   | 'disabled' // 비활성화된 버튼
   | 'loading' // 작업 중 버튼
   | 'checkout' // 결제
-  | 'select'; //검색
+  | 'select' //검색
+  | 'delete'; // 삭제
 
 interface ButtonProps {
   label: string;
@@ -164,6 +165,7 @@ const S = {
         font-weight: 700;
         &:hover {
           color: ${(props) => props.theme.colors.blue700};
+          text-decoration: underline;
         }
         &:disabled {
           background-color: ${(props) => props.theme.colors.blue200};
@@ -282,6 +284,21 @@ const S = {
           height: 100%;
           background-color: #fff;
           animation: ${twinkle} 6s ease-in-out infinite;
+        }
+        &:disabled {
+          cursor: not-allowed;
+        }
+      `};
+
+    ${(props) =>
+      props.$variant === 'delete' &&
+      css`
+        color: ${(props) => props.theme.colors.red400};
+        font-weight: 600;
+        &:hover {
+          transition: 0.3s;
+          color: ${(props) => props.theme.colors.red500};
+          text-decoration: underline;
         }
         &:disabled {
           cursor: not-allowed;
