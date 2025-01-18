@@ -51,14 +51,12 @@ export default function UserResumeContainer() {
     //     cancelLabel: '취소',
     //   }));
     // }
-    // router.push(path.USER_RESUME_REGISTER);
     try {
       const response = await Post.createResume();
       console.log('이력서 생성 API : ', response);
       if (response.result.status !== 'success') {
         throw new Error();
       }
-
       router.push(`/user/resume/${response.result.id}`);
       await queryClient.invalidateQueries({ queryKey: [queryKeys.RESUME_LIST], refetchType: 'all' });
     } catch (error) {
