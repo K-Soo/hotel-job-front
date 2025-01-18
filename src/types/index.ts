@@ -14,6 +14,7 @@ export type RoleType = 'ADMIN' | 'EMPLOYER' | 'JOB_SEEKER';
 export type CompanyVerificationStatus = 'NOT_REQUESTED' | 'PENDING' | 'VERIFIED' | 'REJECTED';
 export type EmploymentType = 'FULL_TIME' | 'CONTRACT' | 'DAILY_WORKER' | 'INTERN';
 export type CertificationStatus = 'PENDING' | 'VERIFIED' | 'REJECTED' | 'UNVERIFIED';
+export type ApplicationStatus = 'APPLIED' | 'CANCELED' | 'ACCEPTED' | 'REJECTED';
 
 export type AccountStatusType =
   | 'ACTIVE'
@@ -317,6 +318,8 @@ export interface ResumeListItem {
   updatedAt: string;
   status: ResumeStatusKey;
   sanctionReason: SanctionReasonKey;
+  applicationsCount: number;
+  applications: { id: string; status: ApplicationStatus; createdAt: Date }[];
 }
 
 export interface ResumeRegisterForm {
