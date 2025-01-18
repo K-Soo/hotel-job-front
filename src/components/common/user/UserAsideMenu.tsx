@@ -39,10 +39,6 @@ export default function UserAsideMenu() {
       })}
 
       <Line color="#f2f4f6" margin="10px 0" />
-      {/* 
-      <S.MenuItem whileTap={{ scale: 0.95 }} onClick={() => {}}>
-        <h6>로그아웃</h6>
-      </S.MenuItem> */}
 
       <S.SignOutButton onClick={() => handleClickSignOut()}>로그아웃</S.SignOutButton>
     </S.UserAsideMenu>
@@ -55,7 +51,7 @@ const S = {
     top: calc(60px + 30px);
     max-height: calc(100vh - 65px);
     border-right: 1px solid ${(props) => props.theme.colors.gray100};
-    width: 220px;
+    width: 280px;
     margin-right: 30px;
     padding-right: 10px;
     overflow-y: auto;
@@ -69,7 +65,6 @@ const S = {
     `};
   `,
   MenuItem: styled(motion.button)`
-    /* all: unset; */
     color: ${(props) => props.theme.colors.gray700};
     height: 45px;
     width: 100%;
@@ -79,8 +74,8 @@ const S = {
     padding: 0 15px;
     cursor: pointer;
     border-radius: 5px;
-    font-size: 16px;
-    font-weight: 350;
+    font-size: 18px;
+    font-weight: 400;
     margin-bottom: 10px;
     &:last-child {
       margin-bottom: 0;
@@ -99,8 +94,8 @@ const S = {
     padding: 0 15px;
     cursor: pointer;
     border-radius: 5px;
-    font-size: 16px;
-    font-weight: 300;
+    font-size: 18px;
+    font-weight: 400;
     &:hover {
       background-color: ${(props) => props.theme.colors.gray100};
       color: ${(props) => props.theme.colors.black300};
