@@ -10,49 +10,6 @@ export default function UserProfile({ children }: UserProfileProps) {
     <S.UserProfile>
       <UserAsideMenu />
       {children}
-      <div>
-        <p>asdasdasdsadasdasd</p>
-        <p>asdasdasdsadasdasd</p>
-        <p>asdasdasdsadasdasd</p>
-        <p>asdasdasdsadasdasd</p>
-        <p>asdasdasdsadasdasd</p>
-        <p>asdasdasdsadasdasd</p>
-        <p>asdasdasdsadasdasd</p>
-        <p>asdasdasdsadasdasd</p>
-        <p>asdasdasdsadasdasd</p>
-        <p>asdasdasdsadasdasd</p>
-        <p>asdasdasdsadasdasd</p>
-        <p>asdasdasdsadasdasd</p>
-        <p>asdasdasdsadasdasd</p>
-        <p>asdasdasdsadasdasd</p>
-        <p>asdasdasdsadasdasd</p>
-        <p>asdasdasdsadasdasd</p>
-        <p>asdasdasdsadasdasd</p>
-        <p>asdasdasdsadasdasd</p>
-        <p>asdasdasdsadasdasd</p>
-        <p>asdasdasdsadasdasd</p>
-        <p>asdasdasdsadasdasd</p>
-        <p>asdasdasdsadasdasd</p>
-        <p>asdasdasdsadasdasd</p>
-        <p>asdasdasdsadasdasd</p>
-        <p>asdasdasdsadasdasd</p>
-        <p>asdasdasdsadasdasd</p>
-        <p>asdasdasdsadasdasd</p>
-        <p>asdasdasdsadasdasd</p>
-        <p>asdasdasdsadasdasd</p>
-        <p>asdasdasdsadasdasd</p>
-        <p>asdasdasdsadasdasd</p>
-        <p>asdasdasdsadasdasd</p>
-        <p>asdasdasdsadasdasd</p>
-        <p>asdasdasdsadasdasd</p>
-        <p>asdasdasdsadasdasd</p>
-        <p>asdasdasdsadasdasd</p>
-        <p>asdasdasdsadasdasd</p>
-        <p>asdasdasdsadasdasd</p>
-        <p>asdasdasdsadasdasd</p>
-        <p>asdasdasdsadasdasd</p>
-        <p>asdasdasdsadasdasd</p>
-      </div>
     </S.UserProfile>
   );
 }
