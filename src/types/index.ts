@@ -1,16 +1,19 @@
 import * as API from '@/types/API';
-import { careerLevel, licenseStage } from '@/constants/resume';
+import { careerLevel, LICENSE_STAGE } from '@/constants/resume';
 import { EXPERIENCE_CONDITION, RECRUITMENT_STATUS, WORKING_DAY_LIST } from '@/constants/recruitment';
 import { AllJobsKeyValuesKeys } from '@/constants/job';
 import { EDUCATION_LEVEL, POSITION, SALARY_TYPE } from '@/constants';
 import { city } from '@/constants/location';
 import { BENEFITS } from '@/constants/benefits';
 import { PREFERENCES } from '@/constants/preferences';
+import { LANGUAGE_LEVEL, LANGUAGE } from '@/constants/language';
+import { RESUME_STATUS, SANCTION_REASON } from '@/constants/resume';
 
 export type ProviderType = 'local' | 'kakao';
 export type RoleType = 'ADMIN' | 'EMPLOYER' | 'JOB_SEEKER';
 export type CompanyVerificationStatus = 'NOT_REQUESTED' | 'PENDING' | 'VERIFIED' | 'REJECTED';
 export type EmploymentType = 'FULL_TIME' | 'CONTRACT' | 'DAILY_WORKER' | 'INTERN';
+export type CertificationStatus = 'PENDING' | 'VERIFIED' | 'REJECTED' | 'UNVERIFIED';
 
 export type AccountStatusType =
   | 'ACTIVE'
@@ -31,12 +34,16 @@ export type EducationLevelKeys = keyof typeof EDUCATION_LEVEL;
 export type PositionKeys = keyof typeof POSITION;
 export type CityKeys = keyof typeof city;
 export type SalaryTypeKeys = keyof typeof SALARY_TYPE;
-export type LicenseStageKeys = keyof typeof licenseStage;
+export type LicenseStageKeys = keyof typeof LICENSE_STAGE;
 export type experienceConditionKeys = keyof typeof EXPERIENCE_CONDITION;
 export type RecruitmentStatusKeys = keyof typeof RECRUITMENT_STATUS;
 export type WorkingDayListKeys = keyof typeof WORKING_DAY_LIST;
 export type BenefitsKeys = keyof typeof BENEFITS;
 export type PreferencesKeys = keyof typeof PREFERENCES;
+export type LanguageKey = keyof typeof LANGUAGE;
+export type LanguageLevelKey = keyof typeof LANGUAGE_LEVEL;
+export type ResumeStatusKey = keyof typeof RESUME_STATUS;
+export type SanctionReasonKey = keyof typeof SANCTION_REASON;
 
 export type TalentListItem = {};
 
@@ -61,33 +68,14 @@ export type Experience = {
   // reasonForLeaving: string; //퇴사사유
 };
 
-export type Language = {};
-
 export type License = {
   licenseName: string;
-  licenseStage?: LicenseStageKeys | undefined;
-  dateOfCompletion: Date;
+  licenseStage: LicenseStageKeys;
 };
 
 export type Military = {};
 
 export interface SignInForm extends API.SignInRequest {}
-
-export interface ResumeRegisterForm {
-  resumeType: ResumeType;
-  careerLevel: CareerLevelKeys;
-  title: string;
-  summary: string;
-  education: EducationLevelKeys;
-  // isGraduated: boolean; //졸업여부
-  // experiences: Experience[];
-  // languages: Language[];
-  // introduction: string; //자기소개
-  licenses: License[];
-  // military: Military;
-  isRequiredAgreement: boolean;
-  isOptionalAgreement: boolean;
-}
 
 export interface SignUpForm {
   userId: string;
@@ -319,3 +307,73 @@ export interface IRecruitDetail {
     marriageVisa: string;
   };
 }
+
+export interface ResumeListItem {
+  id: string;
+  title: string;
+  isVisible: boolean;
+  isDefault: boolean;
+  createdAt: string;
+  updatedAt: string;
+  status: ResumeStatusKey;
+  sanctionReason: SanctionReasonKey;
+}
+
+export interface ResumeRegisterForm {
+  resumeType: ResumeType;
+  careerLevel: CareerLevelKeys;
+  title: string;
+  profileImage: string;
+  name: string;
+  localCode: '01' | '02'; //내국인, 외국인
+  sexCode: '01' | '02';
+  phone: string;
+  birthday: string;
+  summary: string;
+  address: string;
+  addressDetail: string;
+  education: EducationLevelKeys;
+  // isGraduated: boolean; //졸업여부
+  // experiences: Experience[];
+
+  languages: { name: LanguageKey | null; level: LanguageLevelKey | null }[];
+
+  // introduction: string; //자기소개
+  licenses: License[];
+  // military: Military;
+  isRequiredAgreement: boolean;
+  isOptionalAgreement: boolean;
+}
+
+export interface ResumeDetail {
+  id: string;
+  status: ResumeStatusKey;
+  resumeType: ResumeType;
+  careerLevel: CareerLevelKeys;
+  title: string;
+  profileImage: string;
+  name: string;
+  localCode: '01' | '02'; //내국인, 외국인
+  sexCode: '01' | '02';
+  phone: string;
+  birthday: string;
+  email: string;
+  summary: string;
+  address: string;
+  addressDetail: string;
+  education: EducationLevelKeys;
+  // isGraduated: boolean; //졸업여부
+  // experiences: Experience[];
+
+  languages: { name: LanguageKey | null; level: LanguageLevelKey | null }[];
+
+  // introduction: string; //자기소개
+  licenses: License[];
+  // military: Military;
+  isRequiredAgreement: boolean;
+  isOptionalAgreement: boolean;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+export interface ResumeDetailForm extends Omit<ResumeDetail, 'id' | 'createdAt' | 'updatedAt' | 'status'> {}
