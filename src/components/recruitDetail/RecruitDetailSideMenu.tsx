@@ -1,30 +1,24 @@
+import React from 'react';
 import styled from 'styled-components';
 import Button from '@/components/common/style/Button';
 import Dimmed from '@/components/common/Dimmed';
 import useAuth from '@/hooks/useAuth';
 import path from '@/constants/path';
 import { useRouter } from 'next/router';
-import useToast from '@/hooks/useToast';
+
 interface RecruitDetailSideMenuProps {
   managerName: string;
   managerNumber: string;
+  children: React.ReactNode;
 }
 
-export default function RecruitDetailSideMenu({ managerName, managerNumber }: RecruitDetailSideMenuProps) {
+export default function RecruitDetailSideMenu({ managerName, managerNumber, children }: RecruitDetailSideMenuProps) {
   const { isAuthenticated, isAuthIdle } = useAuth();
-  const { addToast } = useToast();
   const router = useRouter();
-
-  // TODO  - 지원하기 클릭 시
-  const handleClickApply = () => {
-    if (!isAuthenticated) {
-      addToast({ message: '로그인 후 이용해주세요.', type: 'info' });
-    }
-  };
 
   return (
     <S.RecruitDetailSideMenu>
-      <Button label="지원하기" variant="primary" height="50px" borderRadius="10px" onClick={handleClickApply} />
+      {children}
       <div className="info-box">
         {!isAuthIdle && !isAuthenticated && (
           <Dimmed>
@@ -47,7 +41,7 @@ export default function RecruitDetailSideMenu({ managerName, managerNumber }: Re
           <em>{managerNumber}</em>
         </div>
       </div>
-      <div className="period-box"></div>
+      {/* <div className="period-box"></div> */}
     </S.RecruitDetailSideMenu>
   );
 }
