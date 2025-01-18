@@ -1,7 +1,7 @@
 import { AllJobsKeyValuesKeys } from '@/constants/job';
 import * as types from '@/types';
 
-type ResponseStatus = 'success' | 'duplicate' | 'available' | 'failure';
+type ResponseStatus = 'success' | 'duplicate' | 'available' | 'failure' | 'available';
 
 // query
 export type RecruitmentQueryStatus = 'ALL' | 'PROGRESS' | 'PUBLISHED' | 'CLOSED' | 'REVIEWING' | 'DRAFT';
@@ -265,4 +265,10 @@ export interface GetResumeListResponse extends BaseResponse {
 
 export interface GetAvailableResumeList extends BaseResponse {
   result: types.ResumeListItem[];
+}
+
+export interface ApplicationApplyCheckResponse extends BaseResponse {
+  result: {
+    status: ResponseStatus;
+  };
 }
