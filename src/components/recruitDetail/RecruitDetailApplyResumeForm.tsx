@@ -11,13 +11,19 @@ import IconDimmed from '@/components/common/IconDimmed';
 import { ResumeStatusKey } from '@/types';
 
 interface RecruitDetailApplyResumeFormProps {
-  isOpenApplyForm: boolean;
+  selectedResume: string | null;
+  setSelectedResume: React.Dispatch<React.SetStateAction<string | null>>;
   setIsOpenApplyForm: React.Dispatch<React.SetStateAction<boolean>>;
+  fetchSubmitApply: () => Promise<void>;
 }
 
-export default function RecruitDetailApplyResumeForm({ isOpenApplyForm, setIsOpenApplyForm }: RecruitDetailApplyResumeFormProps) {
-  const [selectedResume, setSelectedResume] = React.useState<string | null>(null);
-  const { isAuthenticated, isAuthIdle } = useAuth();
+export default function RecruitDetailApplyResumeForm({
+  selectedResume,
+  setIsOpenApplyForm,
+  setSelectedResume,
+  fetchSubmitApply,
+}: RecruitDetailApplyResumeFormProps) {
+  const { isAuthenticated } = useAuth();
 
   const { data, isLoading, isSuccess } = useFetchQuery({
     queryKey: [queryKeys.AVAILABLE_RESUME_LIST],
@@ -69,7 +75,7 @@ export default function RecruitDetailApplyResumeForm({ isOpenApplyForm, setIsOpe
         )}
       </div>
       <div className="bottom">
-        <Button label="제출하기" variant="primary" height="40px" disabled={!selectedResume} />
+        <Button label="제출하기" variant="primary" height="40px" disabled={!selectedResume} onClick={fetchSubmitApply} />
       </div>
     </S.RecruitDetailApplyResumeForm>
   );
