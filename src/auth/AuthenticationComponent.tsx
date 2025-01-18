@@ -44,9 +44,10 @@ export default function AuthenticationComponent() {
     }
 
     if (!userInfoData) {
-      return setAuthAtomState({
+      return setAuthAtomState((prev) => ({
+        ...prev,
         status: 'AUTHENTICATION_FAILURE',
-      });
+      }));
     }
 
     if (userInfoData) {
