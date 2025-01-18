@@ -28,6 +28,7 @@ export default function EmployerRecruitmentApplicantContainer() {
       recruitmentId: slug as string,
     },
   });
+
   console.log('data: ', data);
 
   return (

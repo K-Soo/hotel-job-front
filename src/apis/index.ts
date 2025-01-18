@@ -100,8 +100,8 @@ export const Auth = {
 };
 
 export const OAuth = {
-  // 카카오 로그인
-  kakaoSignIn: (body: API.OAuthSignInRequest) => requests.post<API.OAuthSignInRequest, API.OAuthSignInResponse>('/oauth/kakao', body),
+  kakao: (body: API.OAuthSignInRequest) => requests.post<API.OAuthSignInRequest, API.OAuthSignInResponse>('/oauth/kakao', body),
+  google: (body: API.OAuthSignInRequest) => requests.post<API.OAuthSignInRequest, API.OAuthSignInResponse>('/oauth/google', body),
 };
 
 export const Get = {
@@ -174,6 +174,9 @@ export const Get = {
     const url = `/talents${queryString && `?${queryString}`}`;
     return requests.get<API.GetTalentListResponse>(url);
   },
+
+  // 유저 - 프로필정보
+  getApplicantProfile: () => requests.get<API.GetApplicantProfileResponse>(`/applicants/profile`),
 
   // 유저 - 이력서 상세정보
   getResumeEdit: ({ id }: { id: string }) => requests.get<API.GetResumeEditResponse>(`/resumes/${id}/edit`),
