@@ -32,7 +32,7 @@ export default function UserResumeContainer() {
   const queryClient = useQueryClient();
 
   const { data, isLoading, isError, isSuccess } = useFetchQuery({
-    queryKey: [queryKeys.RESUME_LIST],
+    queryKey: [queryKeys.RESUME_LIST, { nickname: authAtomState.nickname }],
     queryFn: Get.getResumeList,
     options: {
       staleTime: 10 * 60 * 1000,
