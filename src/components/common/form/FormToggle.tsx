@@ -51,7 +51,7 @@ const S = {
     align-items: center;
     .toggle-label {
       font-size: 14px;
-      padding-left: 5px;
+      padding-left: 8px;
       white-space: nowrap;
       color: ${(props) => props.theme.colors.gray700};
     }
@@ -60,7 +60,7 @@ const S = {
       height: 24px;
       margin: 0 auto;
       background-color: rgba(255, 255, 255, 0.4);
-      background-color: ${(props) => props.theme.colors.blue100};
+      background-color: ${(props) => props.theme.colors.gray200};
       display: flex;
       justify-content: flex-start;
       align-items: center;
