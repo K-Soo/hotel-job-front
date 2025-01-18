@@ -22,13 +22,15 @@ import useLoading from '@/hooks/useLoading';
 import useAlertWithConfirm from '@/hooks/useAlertWithConfirm';
 import { useRecoilValue } from 'recoil';
 import { daumPostAtom } from '@/recoil/daumPost';
+import useAuth from '@/hooks/useAuth';
 
 export default function UserResumeEditContainer() {
+  const { authAtomState } = useAuth();
   const router = useRouter();
   const { slug } = router.query;
 
   const { data, isLoading, isSuccess } = useFetchQuery({
-    queryKey: [queryKeys.RESUME_EDIT, { slug }],
+    queryKey: [queryKeys.RESUME_EDIT, { slug, nickname: authAtomState.nickname }],
     queryFn: Get.getResumeEdit,
     options: {
       enabled: !!slug,
