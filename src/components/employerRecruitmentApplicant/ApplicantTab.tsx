@@ -10,7 +10,6 @@ import useFetchQuery from '@/hooks/useFetchQuery';
 import { keepPreviousData } from '@tanstack/react-query';
 import SkeletonUI from '@/components/common/SkeletonUI';
 import { RecruitmentApplicantQueryStep, RecruitmentQueryStatus } from '@/types/API';
-import { RECRUITMENT_STATUS_WITH_ALL } from '@/constants/recruitment';
 
 interface Query extends ParsedUrlQuery {
   step?: RecruitmentApplicantQueryStep;
