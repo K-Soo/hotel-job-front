@@ -5,10 +5,15 @@ import RecruitDetailContainer from '@/containers/recruitDetailContainer';
 import { QueryClient } from '@tanstack/react-query';
 import { GetStaticPaths, GetStaticPropsContext } from 'next';
 import path from '@/constants/path';
+import { ErrorBoundary, ErrorComponent } from '@/error';
 
 // TODO  - SEO 작업
 export default function RecruitDetailPage() {
-  return <RecruitDetailContainer />;
+  return (
+    <ErrorBoundary fallback={<ErrorComponent />}>
+      <RecruitDetailContainer />
+    </ErrorBoundary>
+  );
 }
 
 RecruitDetailPage.getLayout = (page: React.ReactElement) => {
