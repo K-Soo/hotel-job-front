@@ -163,8 +163,7 @@ const S = {
         background-color: ${(props) => props.theme.colors.white};
         font-weight: 700;
         &:hover {
-          background-color: ${(props) => props.theme.colors.blue400};
-          color: ${(props) => props.theme.colors.white};
+          color: ${(props) => props.theme.colors.blue700};
         }
         &:disabled {
           background-color: ${(props) => props.theme.colors.blue200};
@@ -219,12 +218,12 @@ const S = {
     ${(props) =>
       props.$variant === 'cancel' &&
       css`
-        color: ${(props) => props.theme.colors.black};
+        color: ${(props) => props.theme.colors.gray600};
         background-color: ${(props) => props.theme.colors.white};
-        font-weight: 500;
+        font-weight: 700;
         &:hover {
           transition: 0.3s;
-          background-color: ${(props) => props.theme.colors.gray200};
+          color: ${(props) => props.theme.colors.black};
         }
         &:disabled {
           cursor: not-allowed;
