@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { motion } from 'framer-motion';
 
 interface IconDimmedProps {
+  className?: string;
   onClick?: React.MouseEventHandler<HTMLElement> | undefined;
   padding?: string;
   children: React.ReactNode;
@@ -11,9 +12,17 @@ interface IconDimmedProps {
   margin?: string;
 }
 
-export default function IconDimmed({ onClick, padding, height, width, margin, children }: IconDimmedProps) {
+export default function IconDimmed({ className, onClick, padding, height, width, margin, children }: IconDimmedProps) {
   return (
-    <S.IconDimmed onClick={onClick} whileTap={{ scale: 0.95 }} $padding={padding} $width={width} $height={height} $margin={margin}>
+    <S.IconDimmed
+      className={className}
+      onClick={onClick}
+      whileTap={{ scale: 0.95 }}
+      $padding={padding}
+      $width={width}
+      $height={height}
+      $margin={margin}
+    >
       {children}
     </S.IconDimmed>
   );
