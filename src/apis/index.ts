@@ -174,6 +174,18 @@ export const Get = {
     return requests.get<API.GetTalentListResponse>(url);
   },
 
+  // 유저 - 이력서 상세정보
+  getResumeEdit: ({ id }: { id: string }) => requests.get<API.GetResumeEditResponse>(`/resumes/${id}/edit`),
+
+  // 유저 - 이력서 상세정보
+  getResumeDetail: ({ id }: { id: string }) => requests.get<API.GetResumeDetailResponse>(`/resumes/${id}`),
+
+  // 유저 - 이력서 리스트
+  getResumeList: () => requests.get<API.GetResumeListResponse>(`/resumes`),
+
+  // 유저 - 지원가능한 이력서 리스트
+  getAvailableResumeList: () => requests.get<API.GetAvailableResumeList>(`/resumes/available`),
+
   // 사업자 -  계정정보
   employerAccountInfo: () => requests.get<any>('/employers'),
 
@@ -205,8 +217,21 @@ export const Get = {
 export const Post = {
   // 본인인증 요청
   certificationStart: (body: void) => requests.post<void, API.CertificationStartResponse>('/certification/start', body),
+
+  //TODO - 타입정의
   // 본인인증 검증
   certificationVerify: (body: any) => requests.post<any, any>('/certification/verify', body),
+
+  //유저 - 이력서 생성
+  createResume: (body: void) => requests.post<void, API.CreateResumeResponse>('/resumes', body),
+
+  //TODO - 타입정의
+  //유저 - 이력서 작성 완료
+  publishResume: (body: any) => requests.post<void, API.CreateResumeResponse>('/resumes/publish', body),
+
+  //TODO - 타입정의
+  //유저 - 이력서 제출
+  applyResume: (body: API.ApplyResumeRequest) => requests.post<API.ApplyResumeRequest, any>('/resumes/apply', body),
 
   //아이디 중복확인
   verificationsEmployerUserId: (body: { userId: string }) =>
@@ -216,11 +241,11 @@ export const Post = {
   businessNumberCheck: (body: { b_no: string }) =>
     requests.post<{ b_no: string }, API.verificationsBusinessNumberCheckResponse>('/verifications/business-number', body),
 
-  // 초기 회사정보 등록
+  //초기 회사정보 등록
   setupCompany: (body: API.SetupCompanyRequest) =>
     requests.post<API.SetupCompanyRequest, API.SetupCompanyResponse>('/employers/company', body),
 
-  // 사업자 -  채용 공고생성
+  //사업자 -  채용 공고생성
   createRecruitment: (body: API.CreateRecruitmentRequest) =>
     requests.post<API.CreateRecruitmentRequest, API.CreateRecruitmentResponse>('/employers/recruitment', body),
 
