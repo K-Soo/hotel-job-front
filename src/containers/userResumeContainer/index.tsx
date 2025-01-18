@@ -15,8 +15,10 @@ import dynamic from 'next/dynamic';
 import { Post } from '@/apis';
 import useFetchQuery from '@/hooks/useFetchQuery';
 import queryKeys from '@/constants/queryKeys';
-import { Get } from '@/apis';
+import { Get, Delete } from '@/apis';
 import { useQueryClient } from '@tanstack/react-query';
+import { ResumeListItem } from '@/types';
+import useLoading from '@/hooks/useLoading';
 
 const DynamicNoSSRCertificationModal = dynamic(() => import('@/components/common/CertificationModal'), { ssr: false });
 
@@ -24,6 +26,7 @@ export default function UserResumeContainer() {
   const [certificationModalAtomState, setCertificationModalAtomState] = useRecoilState(certificationModalAtom);
   const router = useRouter();
   const { setAlertWithConfirmAtom } = useAlertWithConfirm();
+  const { setLoadingAtomStatue } = useLoading();
   const { addToast } = useToast();
   const { authAtomState } = useAuth();
   const queryClient = useQueryClient();
@@ -64,6 +67,39 @@ export default function UserResumeContainer() {
     }
   };
 
+  const fetchRemoveResume = async (resumeId: string) => {
+    setLoadingAtomStatue({ isLoading: true });
+    try {
+      const response = await Delete.deleteResume({ resumeId });
+      console.log('이력서 삭제 API : ', response);
+      if (response.result.status !== 'success') {
+        throw new Error();
+      }
+      await queryClient.invalidateQueries({ queryKey: [queryKeys.RESUME_LIST], refetchType: 'all' });
+      addToast({ message: '이력서가 삭제되었습니다.', type: 'success' });
+    } catch (error) {
+      console.log('error: ', error);
+    } finally {
+      setLoadingAtomStatue({ isLoading: false });
+    }
+  };
+
+  const handleClickRemoveResume = (resumeListItem: ResumeListItem) => {
+    if (resumeListItem.isDefault) {
+      return addToast({ message: '기본 이력서는 삭제할 수 없습니다.', type: 'error' });
+    }
+    setAlertWithConfirmAtom((prev) => ({
+      ...prev,
+      type: 'CONFIRM',
+      confirmVariant: 'delete',
+      title: 'TITLE_6',
+      subTitle: resumeListItem.applicationsCount === 0 ? undefined : 'DESC_1',
+      onClickConfirm: () => fetchRemoveResume(resumeListItem.id),
+      confirmLabel: '삭제',
+      cancelLabel: '취소',
+    }));
+  };
+
   return (
     <>
       {certificationModalAtomState.isOpen && <DynamicNoSSRCertificationModal />}
@@ -80,7 +116,7 @@ export default function UserResumeContainer() {
           {isSuccess && data && (
             <>
               {data.result.map((item) => (
-                <ResumeCard key={item.id} item={item} />
+                <ResumeCard key={item.id} item={item} handleClickRemoveResume={handleClickRemoveResume} />
               ))}
             </>
           )}
