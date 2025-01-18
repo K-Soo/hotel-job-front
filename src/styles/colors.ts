@@ -27,8 +27,15 @@ const colors = {
   blue800: '#1957c2',
   blue900: '#194aa6',
 
+  red100: '#ffe5e5',
+  red200: '#ffb3b3',
   red300: '#ff6d6a',
+  red400: '#ff4743',
   red500: '#f20000',
+  red600: '#cc0000',
+  red700: '#a30000',
+  red800: '#7a0000',
+  red900: '#4d0000',
 
   gray: '#f9fafb', //disabled
   gray100: '#f2f4f6',
