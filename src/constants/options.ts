@@ -1,4 +1,5 @@
 import { EDUCATION_LEVEL, POSITION, SALARY_TYPE } from '@/constants';
+import { LANGUAGE } from '@/constants/language';
 import { ALL_JOBS } from '@/constants/job';
 
 export const salaryTypeOptions = [
@@ -25,6 +26,18 @@ export const productUseDateOptions = [
 ];
 
 export const educationConditionLevelOptions = [...Object.entries(EDUCATION_LEVEL).map(([key, value]) => ({ label: value, value: key }))];
+
+export const resumeEducationLevelOptions = [
+  { label: '선택', value: '' },
+  ...Object.entries(EDUCATION_LEVEL)
+    .filter(([key]) => key !== 'NOT_REQUIRED') // "NOT_REQUIRED" 필터링
+    .map(([key, value]) => ({ label: value, value: key })),
+];
+
+export const languageOptions = [
+  { label: '선택', value: '' },
+  ...Object.entries(LANGUAGE).map(([key, value]) => ({ label: value, value: key })),
+];
 
 export const optionalJobOptions = [
   { label: '선택', value: '' },
