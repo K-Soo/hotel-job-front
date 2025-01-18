@@ -67,7 +67,7 @@ export default function CertificationModal() {
           throw new Error();
         }
 
-        await queryClient.invalidateQueries({ queryKey: [queryKeys.USER_INFO], refetchType: 'all' });
+        await queryClient.invalidateQueries({ queryKey: [queryKeys.AUTH_ME], refetchType: 'all' });
         alert('본인 인증 완료');
 
         setCertificationModalAtom({ isOpen: false });
