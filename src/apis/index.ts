@@ -184,7 +184,12 @@ export const Get = {
   getResumeList: () => requests.get<API.GetResumeListResponse>(`/resumes`),
 
   // 유저 - 지원가능한 이력서 리스트
+
+  // 유저 - 지원가능한 이력서 리스트
   getAvailableResumeList: () => requests.get<API.GetAvailableResumeList>(`/resumes/available`),
+
+  // 유저 - 지원가능 여부 체크
+  applicationApplyCheck: ({ id }: { id: string }) => requests.get<API.ApplicationApplyCheckResponse>(`/applications/${id}/apply/check`),
 
   // 사업자 -  계정정보
   employerAccountInfo: () => requests.get<any>('/employers'),
@@ -231,7 +236,7 @@ export const Post = {
 
   //TODO - 타입정의
   //유저 - 이력서 제출
-  applyResume: (body: API.ApplyResumeRequest) => requests.post<API.ApplyResumeRequest, any>('/resumes/apply', body),
+  applyResume: (body: API.ApplyResumeRequest) => requests.post<API.ApplyResumeRequest, any>('/applications/apply', body),
 
   //아이디 중복확인
   verificationsEmployerUserId: (body: { userId: string }) =>
