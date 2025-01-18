@@ -8,9 +8,12 @@ const environment = {
 
   cryptoKey: process.env.NEXT_PUBLIC_CRYPTO_KEY!,
 
-  kakaoRedirectUrl: process.env.NEXT_PUBLIC_KAKAO_REDIRECT_URL,
   kakaoClientId: process.env.NEXT_PUBLIC_KAKAO_CLIENT_ID,
+  kakaoRedirectUrl: process.env.NEXT_PUBLIC_KAKAO_REDIRECT_URL,
   kakaoJavascriptKKey: process.env.NEXT_PUBLIC_KAKAO_JAVASCRIPT_KEY!,
+
+  googleClientId: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID,
+  googleRedirectUrl: process.env.NEXT_PUBLIC_GOOGLE_REDIRECT_URL,
 
   nationTextServiceKey: process.env.NEXT_PUBLIC_NATIONAL_TAX_SERVICE_KEY!,
   nationBusinessUrl: process.env.NEXT_PUBLIC_NATIONAL_BUSINESS_URL!,
