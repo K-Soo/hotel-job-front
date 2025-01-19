@@ -8,6 +8,7 @@ import { BENEFITS } from '@/constants/benefits';
 import { PREFERENCES } from '@/constants/preferences';
 import { LANGUAGE_LEVEL, LANGUAGE } from '@/constants/language';
 import { RESUME_STATUS, SANCTION_REASON } from '@/constants/resume';
+import { APPLICATION_STATUS, REVIEW_STAGE_STATUS } from '@/constants/application';
 
 export type Provider = 'LOCAL' | 'KAKAO' | 'GOOGLE';
 export type RoleType = 'ADMIN' | 'EMPLOYER' | 'JOB_SEEKER';
@@ -22,11 +23,10 @@ export type AccountStatus =
   | 'BLOCKED'
   | 'SUSPENDED'
   | 'LOCKED'
-  | 'DELETED'
+  | 'DEACTIVATED'
   | 'PENDING'
   | 'RECOVERY'
   | 'ANONYMIZED'
-  | 'WAITING_APPROVAL'
   | 'WAITING_APPROVAL';
 
 export type ResumeType = 'FILE' | 'GENERAL'; //파일, 일반
@@ -45,6 +45,8 @@ export type LanguageKey = keyof typeof LANGUAGE;
 export type LanguageLevelKey = keyof typeof LANGUAGE_LEVEL;
 export type ResumeStatusKey = keyof typeof RESUME_STATUS;
 export type SanctionReasonKey = keyof typeof SANCTION_REASON;
+export type ApplicationStatusKey = keyof typeof APPLICATION_STATUS;
+export type ReviewStageStatusKey = keyof typeof REVIEW_STAGE_STATUS;
 
 export type TalentListItem = {};
 
@@ -398,3 +400,26 @@ export interface ResumeDetail {
 }
 
 export interface ResumeDetailForm extends Omit<ResumeDetail, 'id' | 'createdAt' | 'updatedAt' | 'status'> {}
+
+export interface ApplicationHistory {
+  id: number;
+  reviewStageStatus: ReviewStageStatusKey;
+  applicationStatus: ApplicationStatusKey;
+  recruitment: {
+    id: string;
+    title: string;
+    hotelName: string;
+    recruitmentStatus: RecruitmentStatusKeys;
+  };
+  resume: {
+    title: string;
+    isDefault: string;
+  };
+  isView: boolean;
+  viewAt: Date | null;
+  rejectAt: Date | null;
+  acceptAt: Date | null;
+  applyAt: Date | null;
+  cancelAt: Date | null;
+  createdAt: Date | null;
+}
