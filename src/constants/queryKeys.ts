@@ -23,6 +23,7 @@ const queryKeys = {
   RESUME_DETAIL: 'RESUME_DETAIL', // 이력서 상세
   RESUME_LIST: 'RESUME_LIST', // 이력서 리스트
   AVAILABLE_RESUME_LIST: 'AVAILABLE_RESUME_LIST', // 지원가능한 이력서 리스트
+  USER_APPLICATION_HISTORY: 'USER_APPLICATION_HISTORY', // 채용공고 지원내역
 };
 
 export default queryKeys;
