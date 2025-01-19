@@ -8,9 +8,10 @@ interface UserProfileProps {
   isLoading: boolean;
   isSuccess: boolean;
   data: ApplicantProfile | undefined;
+  handleClickWithdrawal: () => void;
 }
 
-export default function UserProfile({ isLoading, isSuccess, data }: UserProfileProps) {
+export default function UserProfile({ isLoading, isSuccess, data, handleClickWithdrawal }: UserProfileProps) {
   return (
     <S.UserProfile>
       <UserAsideMenu />
@@ -49,7 +50,7 @@ export default function UserProfile({ isLoading, isSuccess, data }: UserProfileP
             <S.Item>SMS {data.consent.smsMarketingAgree}</S.Item>
           </S.Panel>
 
-          <S.WithdrawalButton>회원탈퇴</S.WithdrawalButton>
+          <S.WithdrawalButton onClick={handleClickWithdrawal}>회원탈퇴</S.WithdrawalButton>
         </div>
       )}
     </S.UserProfile>
