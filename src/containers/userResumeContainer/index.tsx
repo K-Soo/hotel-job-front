@@ -67,6 +67,7 @@ export default function UserResumeContainer() {
     }
   };
 
+  //API - 이력서 삭제
   const fetchRemoveResume = async (resumeId: string) => {
     setLoadingAtomStatue({ isLoading: true });
     try {
@@ -103,7 +104,6 @@ export default function UserResumeContainer() {
   return (
     <>
       {certificationModalAtomState.isOpen && <DynamicNoSSRCertificationModal />}
-
       <UserResume>
         <UserTemplate>
           <UserTitle title="내 이력서" />
