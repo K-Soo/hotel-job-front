@@ -20,6 +20,10 @@ export const dateFormat = {
     if (!value) return;
     return moment(value).format('YY.MM.DD');
   },
+  date6: (value: string | null) => {
+    if (!value) return;
+    return moment(value).format('YY.MM.DD HH:mm');
+  },
   timeRange: (start: string, end: string) => {
     if (!start || !end) return 'unknown';
 
