@@ -213,7 +213,7 @@ export const Get = {
 
   // 사업자 - 채용공고 별 지원자 리스트
   getRecruitmentDetailApplicantList: ({ recruitmentId }: { recruitmentId: string }) =>
-    requests.get<any>(`/applications/recruitment/${recruitmentId}`),
+    requests.get<API.GetRecruitmentDetailApplicantListResponse>(`/applications/recruitment/${recruitmentId}`),
 
   // TODO - 타입정의
   // 사업자 - 채용공고 리스트
