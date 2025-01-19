@@ -294,3 +294,7 @@ export interface DeactivateApplicantUserResponse extends BaseResponse {
     status: ResponseStatus;
   };
 }
+
+export interface GetRecruitmentDetailApplicantListResponse extends BaseResponse {
+  result: types.RecruitmentDetailApplicantListItem[];
+}
