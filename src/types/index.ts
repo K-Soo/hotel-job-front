@@ -54,6 +54,7 @@ export type RecruitmentItem = {
   id: string;
   recruitmentTitle: string;
   recruitmentStatus: RecruitmentStatusKeys;
+  applicationCount: { totalCount: number; viewCount: number; notViewCount: number };
 };
 
 export type Experience = {
@@ -422,4 +423,27 @@ export interface ApplicationHistory {
   applyAt: Date | null;
   cancelAt: Date | null;
   createdAt: Date | null;
+}
+
+export interface RecruitmentDetailApplicantListItem {
+  id: number;
+  applicationStatus: ApplicationStatusKey;
+  reviewStageStatus: ReviewStageStatusKey;
+  isView: boolean;
+  applyAt: Date | null;
+  cancelAt: Date | null;
+  rejectAt: Date | null;
+  acceptAt: Date | null;
+  createdAt: Date | null;
+  viewAt: Date | null;
+  resume: {
+    // resume: 이력서 삭제 시 null
+  };
+  resumeSnapshot: {
+    title: string;
+    name: string;
+    birthday: string;
+    localCode: '01' | '02';
+    sexCode: '01' | '02';
+  };
 }
