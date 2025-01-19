@@ -192,6 +192,10 @@ export const Get = {
   // 유저 - 지원가능한 이력서 리스트
   getAvailableResumeList: () => requests.get<API.GetAvailableResumeList>(`/resumes/available`),
 
+  // TODO - 타입정의
+  // 유저 - 채용공고 재원내역
+  getApplicationHistory: () => requests.get<API.GetApplicationHistoryResponse>(`/applications/history`),
+
   // 유저 - 지원가능 여부 체크
   applicationApplyCheck: ({ id }: { id: string }) => requests.get<API.ApplicationApplyCheckResponse>(`/applications/${id}/apply/check`),
 
@@ -280,4 +284,7 @@ export const Patch = {
 export const Delete = {
   //유저 - 이력서 삭제
   deleteResume: ({ resumeId }: { resumeId: string }) => requests.delete<API.DeleteResumeResponse>(`/resumes/${resumeId}`),
+
+  //유저 - 계정삭제 요청
+  deactivateApplicantUser: () => requests.delete<API.DeactivateApplicantUserResponse>(`/applicants/deactivate`),
 };
