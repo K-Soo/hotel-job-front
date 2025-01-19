@@ -9,7 +9,7 @@ export const GENERAL_ASIDE_MENU = [
   },
   {
     label: '지원현황',
-    value: path.USER_RESUME_HISTORY,
+    value: path.USER_APPLICATION_HISTORY,
     items: [],
   },
   // { label: '북마크', value: path.USER_BOOKMARK, items: [] },
