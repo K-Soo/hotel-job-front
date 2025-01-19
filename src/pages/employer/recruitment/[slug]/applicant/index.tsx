@@ -1,9 +1,9 @@
 import Layout, { EmployerMain, EmployerHeader, EmployerFooter } from '@/components/layout';
 import { ErrorBoundary, ErrorComponent } from '@/error';
-import EmployerRecruitmentApplicantContainer from '@/containers/employerRecruitmentApplicantContainer';
+import EmployerRecruitmentDetailApplicantContainer from '@/containers/employerRecruitmentDetailApplicantContainer';
 
 export default function EmployerRecruitmentApplicantPage() {
-  return <EmployerRecruitmentApplicantContainer />;
+  return <EmployerRecruitmentDetailApplicantContainer />;
 }
 
 EmployerRecruitmentApplicantPage.getLayout = (page: React.ReactElement) => {
