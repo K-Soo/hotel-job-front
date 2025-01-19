@@ -3,9 +3,10 @@ import styled from 'styled-components';
 
 interface ApplicantStatusOverviewProps {
   status: RecruitmentStatusKeys;
+  applicationCount: { totalCount: number; viewCount: number; notViewCount: number };
 }
 
-export default function ApplicantStatusOverview({ status }: ApplicantStatusOverviewProps) {
+export default function ApplicantStatusOverview({ status, applicationCount }: ApplicantStatusOverviewProps) {
   if (status === 'DRAFT') {
     return <span>-</span>;
   }
@@ -14,15 +15,15 @@ export default function ApplicantStatusOverview({ status }: ApplicantStatusOverv
     <S.ApplicantStatusOverview>
       <div className="column">
         <span className="column__title">지원자</span>
-        <strong className="column__count">100</strong>
+        <strong className="column__count">{applicationCount.totalCount}</strong>
       </div>
       <div className="column">
         <span className="column__title">열람</span>
-        <strong className="column__count">50</strong>
+        <strong className="column__count">{applicationCount.viewCount}</strong>
       </div>
       <div className="column">
         <span className="column__title">미열람</span>
-        <strong className="column__count">50</strong>
+        <strong className="column__count">{applicationCount.notViewCount}</strong>
       </div>
     </S.ApplicantStatusOverview>
   );
