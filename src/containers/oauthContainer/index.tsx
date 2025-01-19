@@ -18,6 +18,7 @@ import { schema } from '@/utils';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { OAuthSignInForm } from '@/types';
 import FormDevTools from '@/components/common/FormDevTools';
+import { errorMessages, getErrorCode, errorCode } from '@/error';
 
 export interface UrlQuery extends ParsedUrlQuery {
   code: string;
@@ -103,12 +104,15 @@ export default function OauthContainer({ oauth }: OauthContainerProps) {
       });
       replace(path.HOME);
     } catch (error) {
-      if (axios.isAxiosError(error)) {
-        const isNotFoundUserError = error.response?.data.error.code === 'ERR-2002';
-        if (isNotFoundUserError) {
-          methods.setValue('requestType', 'signUp');
-          return;
-        }
+      const customErrorcode = getErrorCode(error);
+      if (customErrorcode === errorCode.OAUTH_SIGN_IN_NOT_FOUND_USER) {
+        methods.setValue('requestType', 'signUp');
+        return;
+      }
+      if (customErrorcode) {
+        alert(errorMessages[customErrorcode]);
+        window.location.href = path.SIGN_IN;
+        return;
       }
       alert('로그인에 실패했습니다. 다시 시도해주세요.');
       window.location.href = path.SIGN_IN;
