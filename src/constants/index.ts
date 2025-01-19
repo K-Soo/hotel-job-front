@@ -29,3 +29,13 @@ export const SALARY_TYPE = {
   DAILY: '일급',
   HOURLY: '시급',
 } as const;
+
+export const SEX_CODE = {
+  '01': '남',
+  '02': '여',
+} as const;
+
+export const LOCAL_CODE = {
+  '01': '내국인',
+  '02': '외국인',
+} as const;
