@@ -8,7 +8,7 @@ import { BENEFITS } from '@/constants/benefits';
 import { PREFERENCES } from '@/constants/preferences';
 import { LANGUAGE_LEVEL, LANGUAGE } from '@/constants/language';
 import { RESUME_STATUS, SANCTION_REASON } from '@/constants/resume';
-import { APPLICATION_STATUS, REVIEW_STAGE_STATUS } from '@/constants/application';
+import { APPLICATION_STATUS, EMPLOYER_REVIEW_STAGE_STATUS, REVIEW_STAGE_STATUS } from '@/constants/application';
 
 export type Provider = 'LOCAL' | 'KAKAO' | 'GOOGLE';
 export type RoleType = 'ADMIN' | 'EMPLOYER' | 'JOB_SEEKER';
@@ -47,6 +47,7 @@ export type ResumeStatusKey = keyof typeof RESUME_STATUS;
 export type SanctionReasonKey = keyof typeof SANCTION_REASON;
 export type ApplicationStatusKey = keyof typeof APPLICATION_STATUS;
 export type ReviewStageStatusKey = keyof typeof REVIEW_STAGE_STATUS;
+export type EmployerReviewStageStatusKey = keyof typeof EMPLOYER_REVIEW_STAGE_STATUS;
 
 export type TalentListItem = {};
 
@@ -429,6 +430,7 @@ export interface RecruitmentDetailApplicantListItem {
   id: number;
   applicationStatus: ApplicationStatusKey;
   reviewStageStatus: ReviewStageStatusKey;
+  employerReviewStageStatus: EmployerReviewStageStatusKey;
   isView: boolean;
   applyAt: Date | null;
   cancelAt: Date | null;
@@ -439,11 +441,5 @@ export interface RecruitmentDetailApplicantListItem {
   resume: {
     // resume: 이력서 삭제 시 null
   };
-  resumeSnapshot: {
-    title: string;
-    name: string;
-    birthday: string;
-    localCode: '01' | '02';
-    sexCode: '01' | '02';
-  };
+  resumeSnapshot: ResumeDetail;
 }
