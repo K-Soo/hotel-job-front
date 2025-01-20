@@ -208,12 +208,25 @@ export const Get = {
   // 사업자 - 채용공고 상세정보
   recruitmentDetail: ({ id }: { id: string }) => requests.get<API.RecruitmentDetailResponse>(`/employers/recruitment/${id}`),
 
-  // 사업자 - 채용공고 상태별 수량 집계
+  // 사업자 - 채용공고 목록 상태별 수량 집계
   recruitmentStatusCount: () => requests.get<API.RecruitmentStatusCountResponse>(`/employers/recruitment/status`),
 
+  // TODO - 타입정의
+  // 사업자 - 지원자관리 목록 상태별 수량 집계
+  recruitmentApplicationStatusCount: ({ id }: { id: string }) =>
+    requests.get<API.RecruitmentApplicationStatusCountResponse>(`/applications/recruitment/${id}/status`),
+
   // 사업자 - 채용공고 별 지원자 리스트
-  getRecruitmentDetailApplicantList: ({ recruitmentId }: { recruitmentId: string }) =>
-    requests.get<API.GetRecruitmentDetailApplicantListResponse>(`/applications/recruitment/${recruitmentId}`),
+  getRecruitmentDetailApplicantList: ({ recruitmentId, step }: API.GetRecruitmentDetailApplicantListRequest) => {
+    const params = new URLSearchParams();
+    if (step) params.set('step', step);
+
+    const queryString = params.toString();
+
+    const url = `/applications/recruitment/${recruitmentId}${queryString && `?${queryString}`}`;
+
+    return requests.get<API.GetRecruitmentDetailApplicantListResponse>(url);
+  },
 
   // TODO - 타입정의
   // 사업자 - 채용공고 리스트
@@ -225,7 +238,6 @@ export const Get = {
 
     const queryString = params.toString();
     const url = `/employers/recruitment${queryString && `?${queryString}`}`;
-    console.log('url: ', url);
 
     return requests.get<API.RecruitmentListResponse>(url);
   },
@@ -279,6 +291,13 @@ export const Patch = {
   // 사업자 -  등록된 공고 수정
   updateRecruitment: (body: API.UpdateRecruitmentRequest) =>
     requests.patch<API.UpdateRecruitmentRequest, API.UpdateRecruitmentResponse>('/employers/recruitment', body),
+
+  // 사업자 - 지원자의 전형상태 변경
+  updateEmployerReviewStageStatus: (body: API.UpdateEmployerReviewStageStatusRequest) =>
+    requests.patch<API.UpdateEmployerReviewStageStatusRequest, API.UpdateEmployerReviewStageStatusResponse>(
+      '/applications/recruitment/status/review-stage',
+      body,
+    ),
 };
 
 export const Delete = {
