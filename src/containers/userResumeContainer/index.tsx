@@ -19,6 +19,7 @@ import { Get, Delete } from '@/apis';
 import { useQueryClient } from '@tanstack/react-query';
 import { ResumeListItem } from '@/types';
 import useLoading from '@/hooks/useLoading';
+import environment from '@/environment';
 
 const DynamicNoSSRCertificationModal = dynamic(() => import('@/components/common/CertificationModal'), { ssr: false });
 
@@ -43,17 +44,18 @@ export default function UserResumeContainer() {
   console.log('이력서 리스트 API : ', data);
 
   const handleClickCreateResumeButton = async () => {
-    // if (authAtomState.certificationStatus !== 'VERIFIED') {
-    //   return setAlertWithConfirmAtom((prev) => ({
-    //     ...prev,
-    //     type: 'CONFIRM',
-    //     title: 'TITLE_1',
-    //     subTitle: 'DESC_6',
-    //     onClickConfirm: () => setCertificationModalAtomState({ isOpen: true }),
-    //     confirmLabel: '인증하기',
-    //     cancelLabel: '취소',
-    //   }));
-    // }
+    if (environment.isProd && authAtomState.certificationStatus !== 'VERIFIED') {
+      return setAlertWithConfirmAtom((prev) => ({
+        ...prev,
+        type: 'CONFIRM',
+        title: 'TITLE_1',
+        subTitle: 'DESC_6',
+        onClickConfirm: () => setCertificationModalAtomState({ isOpen: true }),
+        confirmLabel: '인증하기',
+        cancelLabel: '취소',
+      }));
+    }
+
     try {
       const response = await Post.createResume();
       console.log('이력서 생성 API : ', response);
