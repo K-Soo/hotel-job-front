@@ -19,7 +19,7 @@ export default function ResumeCard({ item, handleClickRemoveResume }: ResumeCard
   return (
     <S.ResumeCard>
       <div className="top">
-        <div>
+        <div className="top__tags">
           {item.isDefault && <span className="top__default">기본이력서</span>}
           {item.status === 'DRAFT' && <span className="top__draft">미완성</span>}
         </div>
@@ -65,6 +65,10 @@ const S = {
       align-items: center;
       justify-content: space-between;
       font-size: 13px;
+      &__tags {
+        display: flex;
+        align-items: center;
+      }
       &__default {
         display: inline-block;
         padding: 0 5px;
@@ -74,6 +78,7 @@ const S = {
         display: flex;
         align-items: center;
         border-radius: 3px;
+        margin-right: 3px;
       }
       &__draft {
         color: ${(props) => props.theme.colors.red300};
