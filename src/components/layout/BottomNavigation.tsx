@@ -11,7 +11,7 @@ export default function BottomNavigation() {
   const router = useRouter();
   const setBottomSheetAtom = useSetRecoilState(bottomSheetAtom);
 
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, role } = useAuth();
 
   const handleLink = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
@@ -49,12 +49,13 @@ export default function BottomNavigation() {
 
         {isAuthenticated && (
           <div className="item">
-            <S.ButtonLink onClick={handleClickPopUpSheet}>
+            <S.ButtonLink name={role === 'JOB_SEEKER' ? path.USER : path.EMPLOYER} onClick={handleLink}>
               <Icon name="StickerSmileSquare24x24" width="24px" height="24px" />
               <S.IconText $active={router.pathname === path.USER}>MY</S.IconText>
             </S.ButtonLink>
           </div>
         )}
+
         {!isAuthenticated && (
           <div className="item">
             <S.ButtonLink name={path.SIGN_IN} onClick={handleLink}>
