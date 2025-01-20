@@ -104,16 +104,24 @@ export default function OauthContainer({ oauth }: OauthContainerProps) {
       });
       replace(path.HOME);
     } catch (error) {
+      console.error('oauth error: ', error);
       const customErrorcode = getErrorCode(error);
+
       if (customErrorcode === errorCode.OAUTH_SIGN_IN_NOT_FOUND_USER) {
         methods.setValue('requestType', 'signUp');
         return;
       }
+
+      // 계정 권한 에러
       if (customErrorcode) {
-        alert(errorMessages[customErrorcode]);
-        window.location.href = path.SIGN_IN;
-        return;
+        const accountErrorMessage = errorMessages[customErrorcode];
+        if (accountErrorMessage) {
+          alert(accountErrorMessage);
+          window.location.href = path.SIGN_IN;
+          return;
+        }
       }
+
       alert('로그인에 실패했습니다. 다시 시도해주세요.');
       window.location.href = path.SIGN_IN;
     } finally {
