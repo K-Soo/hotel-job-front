@@ -8,6 +8,7 @@ import { useHookFormMask } from 'use-mask-input';
 
 interface FormInputProps<T> {
   name: Path<T>;
+  className?: string;
   label?: string;
   placeholder?: string;
   type?: 'text' | 'password' | 'email' | 'number';
@@ -22,10 +23,12 @@ interface FormInputProps<T> {
   minWidth?: string;
   mask?: string | string[];
   maxLength?: number;
+  errorPosition?: 'absolute' | 'static';
 }
 
 export default function FormInput<T extends FieldValues>({
   name,
+  className,
   label,
   placeholder,
   type,
@@ -40,6 +43,7 @@ export default function FormInput<T extends FieldValues>({
   minWidth,
   mask,
   maxLength,
+  errorPosition = 'absolute',
 }: FormInputProps<T>) {
   const {
     formState: { errors },
@@ -67,7 +71,7 @@ export default function FormInput<T extends FieldValues>({
   }, [isFocusing]);
 
   return (
-    <S.FormInput $margin={margin} $horizontal={horizontal} $width={width} $maxWidth={maxWidth} $minWidth={minWidth}>
+    <S.FormInput $margin={margin} $horizontal={horizontal} $width={width} $maxWidth={maxWidth} $minWidth={minWidth} className={className}>
       {label && (
         <S.FormLabel className="input-label" htmlFor={name + '-formInput'} required={required && !readOnly}>
           {label}
@@ -84,7 +88,7 @@ export default function FormInput<T extends FieldValues>({
         tabIndex={disabled ? -1 : undefined}
         {...(mask ? registerWithMask(name, mask, { autoUnmask: true, showMaskOnFocus: false, placeholder: '_' }) : register(name))}
       />
-      <FormError errors={errors} name={name} />
+      <FormError errors={errors} name={name} style={{ position: errorPosition }} />
     </S.FormInput>
   );
 }
@@ -110,7 +114,8 @@ const StyledMotionInput = styled(motion.input)<{ readOnly?: boolean; disabled?: 
 
   &::placeholder {
     color: ${(props) => props.theme.colors.gray400};
-    font-size: 14px;
+    font-size: 15px;
+    font-weight: 400;
   }
 
   ${(props) =>

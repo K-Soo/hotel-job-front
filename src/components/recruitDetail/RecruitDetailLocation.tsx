@@ -1,16 +1,23 @@
 import styled from 'styled-components';
 
-interface RecruitDetailLocationProps {}
+interface RecruitDetailLocationProps {
+  address: string;
+  addressDetail: string;
+}
 
-export default function RecruitDetailLocation({}: RecruitDetailLocationProps) {
+// TODO - dropdown
+export default function RecruitDetailLocation({ address, addressDetail }: RecruitDetailLocationProps) {
   return (
     <S.RecruitDetailLocation>
-      <div>서울 송파구 올림픽로 602-5</div>
-      <div>지도</div>
+      <div>{address}</div>
+      <div>{addressDetail}</div>
     </S.RecruitDetailLocation>
   );
 }
 
 const S = {
-  RecruitDetailLocation: styled.div``,
+  RecruitDetailLocation: styled.div`
+    margin-bottom: 10px;
+    display: flex;
+  `,
 };

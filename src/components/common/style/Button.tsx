@@ -4,9 +4,11 @@ import Image from 'next/image';
 
 type ButtonVariant =
   | 'primary' // 기본 버튼
+  | 'primary100' // 기본 버튼 2
   | 'secondary' // 보조 버튼
   | 'secondary100' // 보조 버튼
   | 'secondary200' // 보조 버튼
+  | 'cancel' // 보조 버튼
   | 'tertiary' // 중립적 버튼
   | 'danger' // 위험한 작업
   | 'success' // 성공적인 작업
@@ -18,10 +20,12 @@ type ButtonVariant =
   | 'disabled' // 비활성화된 버튼
   | 'loading' // 작업 중 버튼
   | 'checkout' // 결제
-  | 'select'; //검색
+  | 'select' //검색
+  | 'delete'; // 삭제
 
 interface ButtonProps {
   label: string;
+  className?: string;
   name?: string;
   variant: ButtonVariant;
   type?: 'button' | 'submit' | 'reset';
@@ -42,6 +46,7 @@ interface ButtonProps {
 
 export default function Button({
   label,
+  className,
   margin,
   onClick,
   variant,
@@ -61,6 +66,7 @@ export default function Button({
 }: ButtonProps) {
   return (
     <S.Button
+      className={className}
       style={style}
       type={type ?? 'button'}
       onClick={onClick}
@@ -152,6 +158,22 @@ const S = {
       `};
 
     ${(props) =>
+      props.$variant === 'primary100' &&
+      css`
+        color: ${(props) => props.theme.colors.blue500};
+        background-color: ${(props) => props.theme.colors.white};
+        font-weight: 700;
+        &:hover {
+          color: ${(props) => props.theme.colors.blue700};
+          text-decoration: underline;
+        }
+        &:disabled {
+          background-color: ${(props) => props.theme.colors.blue200};
+          cursor: not-allowed;
+        }
+      `};
+
+    ${(props) =>
       props.$variant === 'secondary' &&
       css`
         color: ${(props) => props.theme.colors.gray600};
@@ -189,6 +211,21 @@ const S = {
         &:hover {
           transition: 0.3s;
           background-color: ${(props) => props.theme.colors.gray200};
+        }
+        &:disabled {
+          cursor: not-allowed;
+        }
+      `};
+
+    ${(props) =>
+      props.$variant === 'cancel' &&
+      css`
+        color: ${(props) => props.theme.colors.gray600};
+        background-color: ${(props) => props.theme.colors.white};
+        font-weight: 700;
+        &:hover {
+          transition: 0.3s;
+          color: ${(props) => props.theme.colors.black};
         }
         &:disabled {
           cursor: not-allowed;
@@ -247,6 +284,21 @@ const S = {
           height: 100%;
           background-color: #fff;
           animation: ${twinkle} 6s ease-in-out infinite;
+        }
+        &:disabled {
+          cursor: not-allowed;
+        }
+      `};
+
+    ${(props) =>
+      props.$variant === 'delete' &&
+      css`
+        color: ${(props) => props.theme.colors.red400};
+        font-weight: 600;
+        &:hover {
+          transition: 0.3s;
+          color: ${(props) => props.theme.colors.red500};
+          text-decoration: underline;
         }
         &:disabled {
           cursor: not-allowed;

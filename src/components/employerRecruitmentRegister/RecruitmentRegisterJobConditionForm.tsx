@@ -11,11 +11,11 @@ import { CreateRecruitmentForm, SalaryTypeKeys } from '@/types';
 import FormNumberInput from '@/components/common/form/FormNumberInput';
 import MinimumWage from '@/components/common/employer/MinimumWage';
 import Line from '@/components/common/Line';
-import { salaryType } from '@/constants';
+import { SALARY_TYPE } from '@/constants';
 import useDidMountEffect from '@/hooks/useDidMountEffect';
 import FormInputB from '@/components/common/form/FormInputB';
-import { workingDayList } from '@/constants/recruitment';
-import { benefits } from '@/constants/benefits';
+import { WORKING_DAY_LIST } from '@/constants/recruitment';
+import { BENEFITS } from '@/constants/benefits';
 import FormArrayChipsCheckbox from '@/components/common/form/FormArrayChipsCheckbox';
 
 interface RecruitmentRegisterJobConditionFormProps {
@@ -112,7 +112,7 @@ export default function RecruitmentRegisterJobConditionForm({ setIsOpenBenefitsM
       </HorizontalFormWrapper>
 
       <HorizontalFormWrapper label="급여" required border="none">
-        <FormArrayRadio<CreateRecruitmentForm> options={salaryType} name="conditionInfo.salaryType" />
+        <FormArrayRadio<CreateRecruitmentForm> options={SALARY_TYPE} name="conditionInfo.salaryType" />
       </HorizontalFormWrapper>
 
       <S.PriceBox>
@@ -140,57 +140,57 @@ export default function RecruitmentRegisterJobConditionForm({ setIsOpenBenefitsM
             <FormRadio<CreateRecruitmentForm>
               margin="0 0 10px 0"
               name="conditionInfo.workingDay"
-              label={workingDayList.WEEKDAYS_5}
+              label={WORKING_DAY_LIST.WEEKDAYS_5}
               value="WEEKDAYS_5"
             />
             <FormRadio<CreateRecruitmentForm>
               margin="0 0 10px 0"
               name="conditionInfo.workingDay"
-              label={workingDayList.WEEKDAYS_6}
+              label={WORKING_DAY_LIST.WEEKDAYS_6}
               value="WEEKDAYS_6"
             />
 
-            <FormRadio margin="0 0 10px 0" name="conditionInfo.workingDay" label={workingDayList.WEEKEND_DAY} value="WEEKEND_DAY" />
-            <FormRadio margin="0 0 10px 0" name="conditionInfo.workingDay" label={workingDayList.WEEKEND_NIGHT} value="WEEKEND_NIGHT" />
-            <FormRadio margin="0 0 10px 0" name="conditionInfo.workingDay" label={workingDayList.NIGHT} value="NIGHT" />
-            <FormRadio margin="0" name="conditionInfo.workingDay" label={workingDayList.TO_BE_DECIDED} value="TO_BE_DECIDED" />
+            <FormRadio margin="0 0 10px 0" name="conditionInfo.workingDay" label={WORKING_DAY_LIST.WEEKEND_DAY} value="WEEKEND_DAY" />
+            <FormRadio margin="0 0 10px 0" name="conditionInfo.workingDay" label={WORKING_DAY_LIST.WEEKEND_NIGHT} value="WEEKEND_NIGHT" />
+            <FormRadio margin="0 0 10px 0" name="conditionInfo.workingDay" label={WORKING_DAY_LIST.NIGHT} value="NIGHT" />
+            <FormRadio margin="0" name="conditionInfo.workingDay" label={WORKING_DAY_LIST.TO_BE_DECIDED} value="TO_BE_DECIDED" />
           </div>
 
           <div>
             <FormRadio
               margin="0 0 10px 0"
               name="conditionInfo.workingDay"
-              label={workingDayList.TWO_SHIFT_DAY_DAY_NIGHT_NIGHT}
+              label={WORKING_DAY_LIST.TWO_SHIFT_DAY_DAY_NIGHT_NIGHT}
               value="TWO_SHIFT_DAY_DAY_NIGHT_NIGHT"
             />
             <FormRadio
               margin="0 0 10px 0"
               name="conditionInfo.workingDay"
-              label={workingDayList.TWO_SHIFT_DAY_NIGHT_OFF_OFF}
+              label={WORKING_DAY_LIST.TWO_SHIFT_DAY_NIGHT_OFF_OFF}
               value="TWO_SHIFT_DAY_NIGHT_OFF_OFF"
             />
             <FormRadio
               margin="0 0 10px 0"
               name="conditionInfo.workingDay"
-              label={workingDayList.TWO_SHIFT_DAY_NIGHT}
+              label={WORKING_DAY_LIST.TWO_SHIFT_DAY_NIGHT}
               value="TWO_SHIFT_DAY_NIGHT"
             />
             <FormRadio
               margin="0 0 10px 0"
               name="conditionInfo.workingDay"
-              label={workingDayList.THREE_SHIFT_DAY_DAY_NIGHT_NIGHT_OFF_OFF}
+              label={WORKING_DAY_LIST.THREE_SHIFT_DAY_DAY_NIGHT_NIGHT_OFF_OFF}
               value="THREE_SHIFT_DAY_DAY_NIGHT_NIGHT_OFF_OFF"
             />
             <FormRadio
               margin="0 0 10px 0"
               name="conditionInfo.workingDay"
-              label={workingDayList.THREE_SHIFT_DAY_NIGHT_OFF}
+              label={WORKING_DAY_LIST.THREE_SHIFT_DAY_NIGHT_OFF}
               value="THREE_SHIFT_DAY_NIGHT_OFF"
             />
             <FormRadio
               margin="0"
               name="conditionInfo.workingDay"
-              label={workingDayList.THREE_SHIFT_MORNING_AFTERNOON_NIGHT}
+              label={WORKING_DAY_LIST.THREE_SHIFT_MORNING_AFTERNOON_NIGHT}
               value="THREE_SHIFT_MORNING_AFTERNOON_NIGHT"
             />
           </div>
@@ -199,16 +199,16 @@ export default function RecruitmentRegisterJobConditionForm({ setIsOpenBenefitsM
             <FormRadio
               margin="0 0 10px 0"
               name="conditionInfo.workingDay"
-              label={workingDayList.ALTERNATE_DAY_SHIFT}
+              label={WORKING_DAY_LIST.ALTERNATE_DAY_SHIFT}
               value="ALTERNATE_DAY_SHIFT"
             />
             <FormRadio
               margin="0 0 10px 0"
               name="conditionInfo.workingDay"
-              label={workingDayList.ALTERNATE_NIGHT_SHIFT}
+              label={WORKING_DAY_LIST.ALTERNATE_NIGHT_SHIFT}
               value="ALTERNATE_NIGHT_SHIFT"
             />
-            <FormRadio margin="0" name="conditionInfo.workingDay" label={workingDayList.ALTERNATE_2DAY_OFF} value="ALTERNATE_2DAY_OFF" />
+            <FormRadio margin="0" name="conditionInfo.workingDay" label={WORKING_DAY_LIST.ALTERNATE_2DAY_OFF} value="ALTERNATE_2DAY_OFF" />
           </div>
         </div>
       </S.AdditionalContainer>
@@ -249,7 +249,7 @@ export default function RecruitmentRegisterJobConditionForm({ setIsOpenBenefitsM
           />
         </div>
         <FormArrayChipsCheckbox<CreateRecruitmentForm>
-          optionsKeyData={benefits}
+          optionsKeyData={BENEFITS}
           name="conditionInfo.benefits"
           onClickInputForm={() => setIsOpenBenefitsModal(true)}
         />

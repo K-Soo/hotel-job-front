@@ -4,10 +4,10 @@ import Portal from '@/components/common/Portal';
 import Background from '@/components/common/Background';
 import Button from '@/components/common/style/Button';
 import {
-  allJobs,
-  hotelJobs,
-  touristHotelJobs,
-  otherJobs,
+  ALL_JOBS,
+  HOTEL_JOBS,
+  TOURIST_HOTEL_JOBS,
+  OTHER_JOBS,
   hotelJobKeyValues,
   touristHotelJobsKeyValues,
   otherJobsKeyValues,
@@ -110,7 +110,7 @@ export default function JobModal({ name, setIsOpenJobModal }: JobModalProps) {
                       <ChipsCheckbox
                         onChange={handleChangeCheckbox}
                         name={value}
-                        label={hotelJobs[value]}
+                        label={HOTEL_JOBS[value]}
                         value={key}
                         checked={selectedJob.includes(key as AllJobsKeyValuesKeys)}
                       />
@@ -123,7 +123,7 @@ export default function JobModal({ name, setIsOpenJobModal }: JobModalProps) {
                       <ChipsCheckbox
                         onChange={handleChangeCheckbox}
                         name={value}
-                        label={touristHotelJobs[value]}
+                        label={TOURIST_HOTEL_JOBS[value]}
                         value={key}
                         checked={selectedJob.includes(key as AllJobsKeyValuesKeys)}
                       />
@@ -136,7 +136,7 @@ export default function JobModal({ name, setIsOpenJobModal }: JobModalProps) {
                       <ChipsCheckbox
                         onChange={handleChangeCheckbox}
                         name={value}
-                        label={otherJobs[value]}
+                        label={OTHER_JOBS[value]}
                         value={key}
                         checked={selectedJob.includes(key as AllJobsKeyValuesKeys)}
                       />
@@ -152,7 +152,7 @@ export default function JobModal({ name, setIsOpenJobModal }: JobModalProps) {
                 key={item}
                 onChange={() => {}}
                 name={item}
-                label={allJobs[item]}
+                label={ALL_JOBS[item]}
                 value={Object.keys(item)[0]}
                 checked={selectedJob.includes(item as AllJobsKeyValuesKeys)}
                 margin="0 15px 0 0"

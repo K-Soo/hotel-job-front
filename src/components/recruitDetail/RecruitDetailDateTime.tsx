@@ -5,8 +5,8 @@ interface RecruitDetailDateTimeProps {}
 export default function RecruitDetailDateTime({}: RecruitDetailDateTimeProps) {
   return (
     <S.RecruitDetailDateTime>
-      <span>등록일</span>
-      <span>수정일</span>
+      <span>등록 24.12.12</span>
+      {/* <span>수정일</span> */}
     </S.RecruitDetailDateTime>
   );
 }
@@ -14,5 +14,7 @@ export default function RecruitDetailDateTime({}: RecruitDetailDateTimeProps) {
 const S = {
   RecruitDetailDateTime: styled.div`
     text-align: right;
+    font-size: 12px;
+    color: ${(props) => props.theme.colors.black600};
   `,
 };

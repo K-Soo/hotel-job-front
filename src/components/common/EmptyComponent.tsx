@@ -3,13 +3,14 @@ import Image from 'next/image';
 
 interface EmptyComponentProps {
   message?: string;
+  height?: string;
 }
 
-export default function EmptyComponent({ message }: EmptyComponentProps) {
+export default function EmptyComponent({ message, height }: EmptyComponentProps) {
   return (
-    <S.EmptyComponent>
+    <S.EmptyComponent $height={height}>
       <div className="empty-container">
-        <Image src="/images/box.png" width={100} height={100} alt="box" />
+        <Image src="/images/box.png" width={80} height={80} alt="box" />
         <span className="text">{message || '데이터가 없습니다.'}</span>
       </div>
     </S.EmptyComponent>
@@ -17,8 +18,8 @@ export default function EmptyComponent({ message }: EmptyComponentProps) {
 }
 
 const S = {
-  EmptyComponent: styled.div`
-    height: 400px;
+  EmptyComponent: styled.div<{ $height?: string }>`
+    height: ${(props) => props.$height || '400px'};
     .empty-container {
       height: 100%;
       display: flex;

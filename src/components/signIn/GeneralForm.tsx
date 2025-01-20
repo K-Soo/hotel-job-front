@@ -4,8 +4,10 @@ import { useRouter } from 'next/router';
 import { url } from '@/constants/oauth';
 
 export default function GeneralForm() {
-  const onClickSocialLogin = (type: string) => {
-    //SWIFT 전용
+  const handleClickSocialSignInButton = (event: React.MouseEvent<HTMLButtonElement>) => {
+    const type = event.currentTarget.name as 'KAKAO' | 'GOOGLE';
+
+    //TODO - IOS
     // if (window?.webkit) {
     //   router.push('/oauth/callback/kakao');
     //   return window.webkit?.messageHandlers?.socialType?.postMessage(type);
@@ -14,29 +16,23 @@ export default function GeneralForm() {
     //   return window?.jsToWebviewSocialChannel?.postMessage(JSON.stringify({ message: type })); //KAKAO , APPLE, GOOGLE
     // }
     // window.location.href = SOCIAL_URL[type];
-    const state = encodeURIComponent(JSON.stringify({ requestType: 'signIn' }));
-    const baseUrl = url.KAKAO_OAUTH_URL + `&state=${state}`;
 
+    const state = encodeURIComponent(JSON.stringify({ requestType: 'signIn' }));
+    const baseUrl = url[type] + `&state=${state}`;
     window.location.href = baseUrl;
   };
 
   return (
     <S.GeneralForm>
-      {/* <Image objectFit="cover" width={110} height={136} src="/images/shipper.png" alt="배너" /> */}
-
-      <S.SocialButton name="kakao" onClick={() => onClickSocialLogin('kakao')}>
-        <Image src="/images/social/kakao_icon.svg" width={18} height={18} alt="카카오_아이콘" className="image-icon" />
+      <S.SocialButton name="KAKAO" onClick={handleClickSocialSignInButton}>
+        <Image src="/images/social/kakao_icon.svg" width={18} height={18} alt="kakao" className="image-icon" />
         <span className="text">Sign In with Kakao</span>
       </S.SocialButton>
 
-      {/* <S.SocialButton name="google" onClick={() => onClickSocialLogin('google')}>
-        <Image src="/images/social/google_icon.svg" width={18} height={18} alt="구글_아이콘" className="image-icon" />
+      <S.SocialButton name="GOOGLE" onClick={handleClickSocialSignInButton}>
+        <Image src="/images/social/google_icon.svg" width={18} height={18} alt="google" className="image-icon" />
         <span className="text">Sign In with Google</span>
       </S.SocialButton>
-      <S.SocialButton name="apple" onClick={() => onClickSocialLogin('apple')}>
-        <Image src="/images/social/apple_icon.svg" width={18} height={18} alt="애플_아이콘" className="image-icon" />
-        <span className="text">Sign In with Apple</span>
-      </S.SocialButton> */}
     </S.GeneralForm>
   );
 }
@@ -65,7 +61,7 @@ const S = {
       font-size: 14px;
     }
     ${(props) =>
-      props.name === 'kakao' &&
+      props.name === 'KAKAO' &&
       css`
         background-color: #fee500;
         margin-bottom: 10px;
@@ -76,7 +72,7 @@ const S = {
         }
       `}
     ${(props) =>
-      props.name === 'google' &&
+      props.name === 'GOOGLE' &&
       css`
         background-color: #fff;
         color: #000;

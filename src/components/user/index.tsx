@@ -19,6 +19,5 @@ export default function User({ children }: UserProps) {
 const S = {
   User: styled.section`
     display: flex;
-    border: 1px solid red;
   `,
 };

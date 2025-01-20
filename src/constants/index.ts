@@ -1,4 +1,5 @@
-export const educationLevel = {
+export const EDUCATION_LEVEL = {
+  NOT_REQUIRED: '학력무관',
   ELEMENTARY: '초등학교', // 초등학교
   MIDDLE_SCHOOL: '중학교', // 중학교
   HIGH_SCHOOL: '고등학교', // 고등학교
@@ -8,7 +9,7 @@ export const educationLevel = {
   DOCTORATE: '대학원(박사)', // 대학원(박사)
 } as const;
 
-export const position = {
+export const POSITION = {
   INTERN: '인턴',
   PART_TIME: '알바',
   STAFF: '사원',
@@ -22,9 +23,19 @@ export const position = {
 } as const;
 
 // 급여 유형
-export const salaryType = {
+export const SALARY_TYPE = {
   ANNUAL: '연봉',
   MONTHLY: '월급',
   DAILY: '일급',
   HOURLY: '시급',
+} as const;
+
+export const SEX_CODE = {
+  '01': '남',
+  '02': '여',
+} as const;
+
+export const LOCAL_CODE = {
+  '01': '내국인',
+  '02': '외국인',
 } as const;

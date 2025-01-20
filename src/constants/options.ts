@@ -1,5 +1,6 @@
-import { educationLevel, position, salaryType } from '@/constants';
-import { allJobs } from '@/constants/job';
+import { EDUCATION_LEVEL, POSITION, SALARY_TYPE } from '@/constants';
+import { LANGUAGE } from '@/constants/language';
+import { ALL_JOBS } from '@/constants/job';
 
 export const salaryTypeOptions = [
   { label: '선택', value: '' },
@@ -24,19 +25,28 @@ export const productUseDateOptions = [
   { label: '21일', value: '21' },
 ];
 
-export const educationConditionLevelOptions = [
-  { label: '학력무관', value: 'NOT_REQUIRED' },
-  ...Object.entries(educationLevel).map(([key, value]) => ({ label: value, value: key })),
+export const educationConditionLevelOptions = [...Object.entries(EDUCATION_LEVEL).map(([key, value]) => ({ label: value, value: key }))];
+
+export const resumeEducationLevelOptions = [
+  { label: '선택', value: '' },
+  ...Object.entries(EDUCATION_LEVEL)
+    .filter(([key]) => key !== 'NOT_REQUIRED') // "NOT_REQUIRED" 필터링
+    .map(([key, value]) => ({ label: value, value: key })),
+];
+
+export const languageOptions = [
+  { label: '선택', value: '' },
+  ...Object.entries(LANGUAGE).map(([key, value]) => ({ label: value, value: key })),
 ];
 
 export const optionalJobOptions = [
   { label: '선택', value: '' },
-  ...Object.entries(allJobs).map(([key, value]) => ({ label: value, value: key })),
+  ...Object.entries(ALL_JOBS).map(([key, value]) => ({ label: value, value: key })),
 ];
 
 export const optionalPositionOptions = [
   { label: '선택', value: '' },
-  ...Object.entries(position).map(([key, value]) => ({ label: value, value: key })),
+  ...Object.entries(POSITION).map(([key, value]) => ({ label: value, value: key })),
 ];
 
-export const requiredSalaryTypeOptions = [...Object.entries(salaryType).map(([key, value]) => ({ label: value, value: key }))];
+export const requiredSalaryTypeOptions = [...Object.entries(SALARY_TYPE).map(([key, value]) => ({ label: value, value: key }))];

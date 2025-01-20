@@ -10,7 +10,7 @@ UserResumePage.getLayout = (page: React.ReactElement) => {
     <Layout>
       <Header>
         <DesktopNavigation />
-        <MobileNavigation title="이력서 목록" />
+        <MobileNavigation title="내 이력서" />
       </Header>
       <Main>{page}</Main>
       <Footer />

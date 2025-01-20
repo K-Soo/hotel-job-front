@@ -1,41 +1,53 @@
 import * as API from '@/types/API';
-import { careerLevel, licenseStage } from '@/constants/resume';
-import { experienceCondition, recruitmentStatus, workingDayList } from '@/constants/recruitment';
+import { careerLevel, LICENSE_STAGE } from '@/constants/resume';
+import { EXPERIENCE_CONDITION, RECRUITMENT_STATUS, WORKING_DAY_LIST } from '@/constants/recruitment';
 import { AllJobsKeyValuesKeys } from '@/constants/job';
-import { educationLevel, position, salaryType } from '@/constants';
+import { EDUCATION_LEVEL, POSITION, SALARY_TYPE } from '@/constants';
 import { city } from '@/constants/location';
-import { benefits } from '@/constants/benefits';
-import { preferences } from '@/constants/preferences';
+import { BENEFITS } from '@/constants/benefits';
+import { PREFERENCES } from '@/constants/preferences';
+import { LANGUAGE_LEVEL, LANGUAGE } from '@/constants/language';
+import { RESUME_STATUS, SANCTION_REASON } from '@/constants/resume';
+import { APPLICATION_STATUS, EMPLOYER_REVIEW_STAGE_STATUS, REVIEW_STAGE_STATUS } from '@/constants/application';
 
-export type ProviderType = 'local' | 'kakao';
+export type Provider = 'LOCAL' | 'KAKAO' | 'GOOGLE';
 export type RoleType = 'ADMIN' | 'EMPLOYER' | 'JOB_SEEKER';
 export type CompanyVerificationStatus = 'NOT_REQUESTED' | 'PENDING' | 'VERIFIED' | 'REJECTED';
+export type EmploymentType = 'FULL_TIME' | 'CONTRACT' | 'DAILY_WORKER' | 'INTERN';
+export type CertificationStatus = 'PENDING' | 'VERIFIED' | 'REJECTED' | 'UNVERIFIED';
+export type ApplicationStatus = 'APPLIED' | 'CANCELED' | 'ACCEPTED' | 'REJECTED';
 
-export type AccountStatusType =
+export type AccountStatus =
   | 'ACTIVE'
   | 'INACTIVE'
   | 'BLOCKED'
   | 'SUSPENDED'
   | 'LOCKED'
-  | 'DELETED'
+  | 'DEACTIVATED'
   | 'PENDING'
   | 'RECOVERY'
   | 'ANONYMIZED'
-  | 'WAITING_APPROVAL'
   | 'WAITING_APPROVAL';
 
 export type ResumeType = 'FILE' | 'GENERAL'; //파일, 일반
 export type CareerLevelKeys = keyof typeof careerLevel;
-export type EducationLevelKeys = keyof typeof educationLevel;
-export type PositionKeys = keyof typeof position;
-export type City = keyof typeof city;
-export type SalaryTypeKeys = keyof typeof salaryType;
-export type LicenseStageKeys = keyof typeof licenseStage;
-export type experienceConditionKeys = keyof typeof experienceCondition;
-export type RecruitmentStatusKeys = keyof typeof recruitmentStatus;
-export type WorkingDayListKeys = keyof typeof workingDayList;
-export type BenefitsKeys = keyof typeof benefits;
-export type PreferencesKeys = keyof typeof preferences;
+export type EducationLevelKeys = keyof typeof EDUCATION_LEVEL;
+export type PositionKeys = keyof typeof POSITION;
+export type CityKeys = keyof typeof city;
+export type SalaryTypeKeys = keyof typeof SALARY_TYPE;
+export type LicenseStageKeys = keyof typeof LICENSE_STAGE;
+export type experienceConditionKeys = keyof typeof EXPERIENCE_CONDITION;
+export type RecruitmentStatusKeys = keyof typeof RECRUITMENT_STATUS;
+export type WorkingDayListKeys = keyof typeof WORKING_DAY_LIST;
+export type BenefitsKeys = keyof typeof BENEFITS;
+export type PreferencesKeys = keyof typeof PREFERENCES;
+export type LanguageKey = keyof typeof LANGUAGE;
+export type LanguageLevelKey = keyof typeof LANGUAGE_LEVEL;
+export type ResumeStatusKey = keyof typeof RESUME_STATUS;
+export type SanctionReasonKey = keyof typeof SANCTION_REASON;
+export type ApplicationStatusKey = keyof typeof APPLICATION_STATUS;
+export type ReviewStageStatusKey = keyof typeof REVIEW_STAGE_STATUS;
+export type EmployerReviewStageStatusKey = keyof typeof EMPLOYER_REVIEW_STAGE_STATUS;
 
 export type TalentListItem = {};
 
@@ -43,6 +55,7 @@ export type RecruitmentItem = {
   id: string;
   recruitmentTitle: string;
   recruitmentStatus: RecruitmentStatusKeys;
+  applicationCount: { totalCount: number; viewCount: number; notViewCount: number };
 };
 
 export type Experience = {
@@ -53,40 +66,21 @@ export type Experience = {
   position?: PositionKeys; //직급/직책
   startDate: Date;
   endDate: Date;
-  // city: City;
+  // city: CityKeys;
   salaryType?: SalaryTypeKeys | undefined; //급여 유형
   // baseSalary: number; //급여 금액
   // allowance: number; //수당
   // reasonForLeaving: string; //퇴사사유
 };
 
-export type Language = {};
-
 export type License = {
   licenseName: string;
-  licenseStage?: LicenseStageKeys | undefined;
-  dateOfCompletion: Date;
+  licenseStage: LicenseStageKeys;
 };
 
 export type Military = {};
 
 export interface SignInForm extends API.SignInRequest {}
-
-export interface ResumeRegisterForm {
-  resumeType: ResumeType;
-  careerLevel: CareerLevelKeys;
-  title: string;
-  summary: string;
-  education: EducationLevelKeys;
-  // isGraduated: boolean; //졸업여부
-  experiences: Experience[];
-  // languages: Language[];
-  // introduction: string; //자기소개
-  licenses: License[];
-  // military: Military;
-  isRequiredAgreement: boolean;
-  isOptionalAgreement: boolean;
-}
 
 export interface SignUpForm {
   userId: string;
@@ -155,6 +149,24 @@ export interface EmployerAccountInfoForm {
   role: 'EMPLOYER';
   updatedAt: '2025-01-07T18:01:26.000Z';
   userId: 'kanabun102';
+}
+
+export interface ApplicantProfile {
+  accountStatus: AccountStatus;
+  certification: null;
+  certificationStatus: CertificationStatus;
+  consent: {
+    ageAgree: boolean;
+    personalInfoAgree: boolean;
+    serviceTermsAgree: boolean;
+
+    emailMarketingAgree: boolean;
+    smsMarketingAgree: boolean;
+  };
+  email: string;
+  nickname: string;
+  provider: Provider;
+  createdAt: string;
 }
 
 // 공고 등록 폼
@@ -262,3 +274,172 @@ export interface RecruitmentDetail {
 }
 
 export interface RecruitmentDetailForm extends Omit<RecruitmentDetail, 'id' | 'updateAt'> {}
+
+export interface RecruitListItem {
+  experienceCondition: experienceConditionKeys;
+  id: string;
+  recruitmentTitle: string;
+  salaryAmount: number;
+  hotelName: string;
+  jobs: AllJobsKeyValuesKeys[];
+  salaryType: SalaryTypeKeys;
+  address: string;
+  addressDetail: string;
+  employmentType: {
+    CONTRACT: boolean;
+    DAILY_WORKER: boolean;
+    FULL_TIME: boolean;
+    INTERN: boolean;
+    PART_TIME: boolean;
+  };
+}
+
+export interface IRecruitDetail {
+  address: string;
+  addressDetail: string;
+  benefits: BenefitsKeys[];
+  content: string;
+  createdAt: string;
+  department: string; //근무부서
+  educationCondition: EducationLevelKeys;
+  employmentType: { INTERN: boolean; CONTRACT: boolean; FULL_TIME: boolean; PART_TIME: boolean; DAILY_WORKER: boolean };
+  experienceCondition: 'NOT_REQUIRED';
+  hotelName: string;
+  id: string;
+  isEmailPrivate: boolean; //비공개 여부
+  isNamePrivate: boolean; //비공개 여부
+  isNumberPrivate: boolean; //비공개 여부
+  jobs: AllJobsKeyValuesKeys[];
+  managerEmail: string;
+  managerName: string;
+  managerNumber: string;
+  position: PositionKeys | null;
+  preferences: PreferencesKeys[];
+  recruitmentCapacity: number; //모집인원
+  recruitmentStatus: 'PUBLISHED';
+  recruitmentTitle: string;
+  roomCount: number;
+  salaryAmount: number;
+  salaryType: SalaryTypeKeys;
+  updatedAt: string;
+  workingDay: WorkingDayListKeys;
+  workingTime: { end: string; start: string };
+  nationality: {
+    korean: boolean;
+    foreigner: boolean;
+    marriageVisa: string;
+  };
+}
+
+export interface ResumeListItem {
+  id: string;
+  title: string;
+  isVisible: boolean;
+  isDefault: boolean;
+  createdAt: string;
+  updatedAt: string;
+  status: ResumeStatusKey;
+  sanctionReason: SanctionReasonKey;
+  applicationsCount: number;
+  applications: { id: string; status: ApplicationStatus; createdAt: Date; applyAt: Date }[];
+}
+
+export interface ResumeRegisterForm {
+  resumeType: ResumeType;
+  careerLevel: CareerLevelKeys;
+  title: string;
+  profileImage: string;
+  name: string;
+  localCode: '01' | '02'; //내국인, 외국인
+  sexCode: '01' | '02';
+  phone: string;
+  birthday: string;
+  summary: string;
+  address: string;
+  addressDetail: string;
+  education: EducationLevelKeys;
+  // isGraduated: boolean; //졸업여부
+  // experiences: Experience[];
+
+  languages: { name: LanguageKey | null; level: LanguageLevelKey | null }[];
+
+  // introduction: string; //자기소개
+  licenses: License[];
+  // military: Military;
+  isRequiredAgreement: boolean;
+  isOptionalAgreement: boolean;
+}
+
+export interface ResumeDetail {
+  id: string;
+  status: ResumeStatusKey;
+  resumeType: ResumeType;
+  careerLevel: CareerLevelKeys;
+  title: string;
+  profileImage: string;
+  name: string;
+  localCode: '01' | '02'; //내국인, 외국인
+  sexCode: '01' | '02';
+  phone: string;
+  birthday: string;
+  email: string;
+  summary: string;
+  address: string;
+  addressDetail: string;
+  education: EducationLevelKeys;
+  // isGraduated: boolean; //졸업여부
+  // experiences: Experience[];
+
+  languages: { name: LanguageKey | null; level: LanguageLevelKey | null }[];
+
+  // introduction: string; //자기소개
+  licenses: License[];
+  // military: Military;
+  isRequiredAgreement: boolean;
+  isOptionalAgreement: boolean;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+export interface ResumeDetailForm extends Omit<ResumeDetail, 'id' | 'createdAt' | 'updatedAt' | 'status'> {}
+
+export interface ApplicationHistory {
+  id: number;
+  reviewStageStatus: ReviewStageStatusKey;
+  applicationStatus: ApplicationStatusKey;
+  recruitment: {
+    id: string;
+    title: string;
+    hotelName: string;
+    recruitmentStatus: RecruitmentStatusKeys;
+  };
+  resume: {
+    title: string;
+    isDefault: string;
+  };
+  isView: boolean;
+  viewAt: Date | null;
+  rejectAt: Date | null;
+  acceptAt: Date | null;
+  applyAt: Date | null;
+  cancelAt: Date | null;
+  createdAt: Date | null;
+}
+
+export interface RecruitmentDetailApplicantListItem {
+  id: number;
+  applicationStatus: ApplicationStatusKey;
+  reviewStageStatus: ReviewStageStatusKey;
+  employerReviewStageStatus: EmployerReviewStageStatusKey;
+  isView: boolean;
+  applyAt: Date | null;
+  cancelAt: Date | null;
+  rejectAt: Date | null;
+  acceptAt: Date | null;
+  createdAt: Date | null;
+  viewAt: Date | null;
+  resume: {
+    // resume: 이력서 삭제 시 null
+  };
+  resumeSnapshot: ResumeDetail;
+}

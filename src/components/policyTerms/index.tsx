@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { policy } from '@/constants/policy';
+import { POLICY } from '@/constants/policy';
 
 interface PolicyTermsProps {}
 
@@ -27,7 +27,7 @@ export default function PolicyTerms({}: PolicyTermsProps) {
           <p>
             2. “애플리케이션”이라 함은 회사와 계열사가 이용자에게 서비스를 제공하기 위하여IOS, 안드로이드 등 운영체제와 관계없이 스마트폰
             또는 기타 휴대용 단말기에서 이용할 수 있도록 제작, 운영하는 프로그램을 말합니다. 현재 회사가 운영하는 애플리케이션의 이름은 “
-            {policy.application}“입니다.
+            {POLICY.application}“입니다.
           </p>
 
           <p>

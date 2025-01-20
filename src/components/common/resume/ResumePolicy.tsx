@@ -40,7 +40,7 @@ export default function ResumePolicy({}: ResumePolicyProps) {
         name="isRequiredAgreement"
         required
         label="필수 항목에 대한 개인정보 수집 및 이용 동의"
-        margin="0 0 5px 0"
+        margin="0 0 15px 0"
       />
       <FormCheckbox<ResumeRegisterForm> name="isOptionalAgreement" required label="선택 항목에 대한 개인정보 수집 및 이용 동의" />
     </S.ResumePolicy>

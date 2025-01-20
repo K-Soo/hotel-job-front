@@ -10,7 +10,7 @@ import useFetchQuery from '@/hooks/useFetchQuery';
 import { keepPreviousData } from '@tanstack/react-query';
 import SkeletonUI from '@/components/common/SkeletonUI';
 import { RecruitmentQueryStatus } from '@/types/API';
-import { recruitmentStatusWithAll } from '@/constants/recruitment';
+import { RECRUITMENT_STATUS_WITH_ALL } from '@/constants/recruitment';
 
 interface Query extends ParsedUrlQuery {
   status?: RecruitmentQueryStatus;
@@ -72,7 +72,7 @@ export default function RecruitmentStatusBar() {
                         fontWeight: status.toUpperCase() === key ? '600' : '400',
                       }}
                     >
-                      {recruitmentStatusWithAll[key as keyof typeof recruitmentStatusWithAll]}
+                      {RECRUITMENT_STATUS_WITH_ALL[key as keyof typeof RECRUITMENT_STATUS_WITH_ALL]}
                     </motion.span>
                     <motion.span className="tabs__item--count" animate={{ color: status.toUpperCase() === key ? '#333' : '#4e5968' }}>
                       {value}

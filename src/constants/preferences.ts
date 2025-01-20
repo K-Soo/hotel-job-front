@@ -1,4 +1,4 @@
-export const licensePreferences = {
+export const LICENSE_PREFERENCES = {
   LICENSE_HOTEL_ADMINISTRATOR: '호텔관리사',
   LICENSE_FOOD_SANITATION_MANAGER: '식품위생관리사',
   LICENSE_TOURISM_INTERPRETER_GUIDE: '관광통역안내사',
@@ -11,7 +11,7 @@ export const licensePreferences = {
   LICENSE_CUSTOMER_SERVICE_CERTIFICATE: 'CS Leaders 자격증',
 } as const;
 
-export const languagePreferences = {
+export const LANGUAGE_PREFERENCES = {
   LANGUAGE_KOREAN: '한국어',
   LANGUAGE_ENGLISH: '영어',
   LANGUAGE_SPANISH: '스페인어',
@@ -22,7 +22,7 @@ export const languagePreferences = {
   LANGUAGE_MONGOLIAN: '몽골어',
 } as const;
 
-export const workingConditionsPreferences = {
+export const WORKING_CONDITIONS_PREFERENCES = {
   NEAR_RESIDENT: '인근거주자',
   VEHICLE_OWNER: '차량소지자',
   // OVERSEAS_WORK: '해외근무 가능자',
@@ -35,7 +35,7 @@ export const workingConditionsPreferences = {
   ALTERNATE_SHIFT: '격일근무 가능자',
 };
 
-export const skillsAndAbilitiesPreferences = {
+export const SKILLS_AND_ABILITIES_PREFERENCES = {
   GPA_ABOVE_4: '학점 4.0 이상',
   COMPUTER_SKILLS_EXCELLENT: '컴퓨터활용능력 우수',
   EXCEL_ADVANCED: '엑셀 고급능력자',
@@ -49,7 +49,7 @@ export const skillsAndAbilitiesPreferences = {
   // MAC_EDITING_EXPERT: 'MAC/편집 전문가',
 };
 
-export const facilityManagementPreferences = {
+export const FACILITY_MANAGEMENT_PREFERENCES = {
   SAFETY_MANAGER_CERTIFICATE: '산업안전관리자',
   BOILER_ENGINEER_CERTIFICATE: '보일러기능사',
   ELECTRICIAN_CERTIFICATE: '전기기능사',
@@ -61,10 +61,10 @@ export const facilityManagementPreferences = {
   BUILDING_MAINTENANCE_CERTIFICATE: '건축설비산업기사',
 };
 
-export const preferences = {
-  ...languagePreferences,
-  ...licensePreferences,
-  ...workingConditionsPreferences,
-  ...skillsAndAbilitiesPreferences,
-  ...facilityManagementPreferences,
+export const PREFERENCES = {
+  ...LANGUAGE_PREFERENCES,
+  ...LICENSE_PREFERENCES,
+  ...WORKING_CONDITIONS_PREFERENCES,
+  ...SKILLS_AND_ABILITIES_PREFERENCES,
+  ...FACILITY_MANAGEMENT_PREFERENCES,
 } as const;

@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import path from '@/constants/path';
 import useAuth from '@/hooks/useAuth';
 import { RoleType } from '@/types';
-import Loading from '@/components/common/Loading';
+import LoadingOverlay from '@/components/common/LoadingOverlay';
 import { alertWithConfirmAtom } from '@/recoil/alertWithConfirm';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 
@@ -37,7 +37,7 @@ export default function EmployerGuardComponent({ allowedRoles, children }: Emplo
   }, [router.pathname]);
 
   if (showLoading) {
-    return <Loading />;
+    return <LoadingOverlay />;
   }
 
   if (!showLoading) {

@@ -16,6 +16,7 @@ interface FormSelectProps<T> {
   width?: string;
   maxWidth?: string;
   options: { label: string; value: string }[];
+  errorPosition?: 'absolute' | 'static';
 }
 
 export default function FormSelect<T extends FieldValues>({
@@ -29,17 +30,26 @@ export default function FormSelect<T extends FieldValues>({
   width,
   maxWidth,
   options,
+  errorPosition,
 }: FormSelectProps<T>) {
   const {
     formState: { errors },
     register,
     watch,
     setValue,
+    setError,
+    clearErrors,
   } = useFormContext<T>();
 
   const watchValue = watch(name) || '';
 
   const error = get(errors, name);
+
+  React.useEffect(() => {
+    if (error && watchValue) {
+      clearErrors(name);
+    }
+  }, [error, watchValue]);
 
   return (
     <S.FormSelect $margin={margin} $width={width} $maxWidth={maxWidth}>
@@ -71,7 +81,7 @@ export default function FormSelect<T extends FieldValues>({
         <Icon className="form-select-icon" name="ArrowRight16x16" width="16px" height="16px" />
       </div>
 
-      {error && <FormError errors={errors} name={name} />}
+      <FormError errors={errors} name={name} style={{ position: errorPosition }} />
     </S.FormSelect>
   );
 }

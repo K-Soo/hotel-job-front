@@ -61,7 +61,7 @@ export default function Tag({
       $height={height}
       $type={type}
     >
-      {type === 'URGENT' && '🔥 '}
+      {/* {type === 'URGENT' && '🔥 '} */}
       {label}
     </S.Tag>
   );
@@ -109,7 +109,7 @@ const S = {
         background-color: ${props.theme.colors.red500};
         border: none;
         overflow: hidden;
-        padding: 3px 5px;
+        padding: 3px 6px;
         position: relative;
         &::before {
           position: absolute;

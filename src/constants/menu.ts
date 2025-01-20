@@ -3,24 +3,23 @@ import path from '@/constants/path';
 export const GENERAL_ASIDE_MENU = [
   { label: 'MY홈', value: '/user', items: [], icon: 'Home24x24' },
   {
-    label: '회원정보',
-    value: '',
-    items: [
-      { label: '회원정보 수정', value: '/user/profile' },
-      { label: '메일 수신 설정', value: '/user/email' },
-    ],
+    label: '이력서',
+    value: path.USER_RESUME,
+    items: [],
   },
   {
-    label: '이력서',
-    value: '/resume',
-    items: [
-      { label: '이력서 목록', value: '/user/resume' },
-      { label: '이력서 등록', value: path.USER_RESUME_REGISTER },
-    ],
+    label: '지원현황',
+    value: path.USER_APPLICATION_HISTORY,
+    items: [],
   },
-  { label: '스크랩', value: '/user/scrap', items: [] },
-  { label: '받은제안', value: '/user/offers', items: [] },
-  { label: '결제내역', value: '/user/payments', items: [] },
+  // { label: '북마크', value: path.USER_BOOKMARK, items: [] },
+  // { label: '받은제안', value: '/user/offer', items: [] },
+  // { label: '결제내역', value: '/user/payment', items: [] },
+  {
+    label: '회원정보',
+    value: path.USER_PROFILE,
+    items: [],
+  },
 ];
 
 export const EMPLOYER_ASIDE_MENU = [
@@ -34,13 +33,17 @@ export const EMPLOYER_ASIDE_MENU = [
   },
 
   {
-    label: '지원자 · 공고 관리',
-    value: '',
+    label: '채용공고 · 지원자 관리',
+    value: path.EMPLOYER_RECRUITMENT,
     icon: 'UserRounded24x24',
-    items: [
-      { label: '공고 목록', value: path.EMPLOYER_RECRUITMENT },
-      { label: '일정 관리', value: path.EMPLOYER_SCHEDULE },
-    ],
+    items: [],
+  },
+
+  {
+    label: '일정 관리',
+    value: path.EMPLOYER_SCHEDULE,
+    icon: 'UserRounded24x24',
+    items: [],
   },
 
   {

@@ -4,12 +4,12 @@ import Portal from '@/components/common/Portal';
 import Background from '@/components/common/Background';
 import Button from '@/components/common/style/Button';
 import {
-  licensePreferences,
-  languagePreferences,
-  skillsAndAbilitiesPreferences,
-  workingConditionsPreferences,
-  preferences,
-  facilityManagementPreferences,
+  LANGUAGE_PREFERENCES,
+  LICENSE_PREFERENCES,
+  SKILLS_AND_ABILITIES_PREFERENCES,
+  WORKING_CONDITIONS_PREFERENCES,
+  PREFERENCES,
+  FACILITY_MANAGEMENT_PREFERENCES,
 } from '@/constants/preferences';
 import ChipsCheckbox from '@/components/common/style/ChipsCheckbox';
 import { useFormContext } from 'react-hook-form';
@@ -100,7 +100,7 @@ export default function PreferencesModal({ name, setIsOpenPreferencesModal }: Pr
               <div className="list__wrapper">
                 {selectedTab === 'licensePreferences' && (
                   <>
-                    {Object.entries(licensePreferences).map(([key, value]) => (
+                    {Object.entries(LICENSE_PREFERENCES).map(([key, value]) => (
                       <div key={`all-${key}`} className="list__item">
                         <ChipsCheckbox
                           onChange={handleChangeCheckbox}
@@ -118,7 +118,7 @@ export default function PreferencesModal({ name, setIsOpenPreferencesModal }: Pr
               <div className="list__wrapper">
                 {selectedTab === 'languagePreferences' && (
                   <>
-                    {Object.entries(languagePreferences).map(([key, value]) => (
+                    {Object.entries(LANGUAGE_PREFERENCES).map(([key, value]) => (
                       <div key={`all-${key}`} className="list__item">
                         <ChipsCheckbox
                           onChange={handleChangeCheckbox}
@@ -136,7 +136,7 @@ export default function PreferencesModal({ name, setIsOpenPreferencesModal }: Pr
               <div className="list__wrapper">
                 {selectedTab === 'workingConditionsPreferences' && (
                   <>
-                    {Object.entries(workingConditionsPreferences).map(([key, value]) => (
+                    {Object.entries(WORKING_CONDITIONS_PREFERENCES).map(([key, value]) => (
                       <div key={`all-${key}`} className="list__item">
                         <ChipsCheckbox
                           onChange={handleChangeCheckbox}
@@ -154,7 +154,7 @@ export default function PreferencesModal({ name, setIsOpenPreferencesModal }: Pr
               <div className="list__wrapper">
                 {selectedTab === 'skillsAndAbilitiesPreferences' && (
                   <>
-                    {Object.entries(skillsAndAbilitiesPreferences).map(([key, value]) => (
+                    {Object.entries(SKILLS_AND_ABILITIES_PREFERENCES).map(([key, value]) => (
                       <div key={`all-${key}`} className="list__item">
                         <ChipsCheckbox
                           onChange={handleChangeCheckbox}
@@ -172,7 +172,7 @@ export default function PreferencesModal({ name, setIsOpenPreferencesModal }: Pr
               <div className="list__wrapper">
                 {selectedTab === 'facilityManagementPreferences' && (
                   <>
-                    {Object.entries(facilityManagementPreferences).map(([key, value]) => (
+                    {Object.entries(FACILITY_MANAGEMENT_PREFERENCES).map(([key, value]) => (
                       <div key={`all-${key}`} className="list__item">
                         <ChipsCheckbox
                           onChange={handleChangeCheckbox}
@@ -195,7 +195,7 @@ export default function PreferencesModal({ name, setIsOpenPreferencesModal }: Pr
                 key={item}
                 onChange={() => {}}
                 name={item}
-                label={preferences[item]}
+                label={PREFERENCES[item]}
                 value={item}
                 checked={selectedItems.includes(item)}
                 margin="0 15px 10px 0"

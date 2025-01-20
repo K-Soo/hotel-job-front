@@ -35,7 +35,6 @@ export default function Alert() {
     <Portal>
       <Background>
         <S.Alert>
-          {/* {alertWithConfirmSelectorValue.image && <Icon name="Document" width="100px" height="100px" margin="0 0 15px 0" />} */}
           <S.Content>
             <h3 className="title">{alertWithConfirmSelectorValue.title}</h3>
             <p className="description">{alertWithConfirmSelectorValue.subTitle}</p>
@@ -46,10 +45,9 @@ export default function Alert() {
               name="positive"
               label={alertWithConfirmSelectorValue.confirmLabel}
               variant="primary"
-              maxWidth="120px"
+              maxWidth="100px"
               type="button"
-              height="40px"
-              margin="15px 0 0 0"
+              height="45px"
               onClick={() => {
                 alertWithConfirmSelectorValue.onClickConfirm();
                 resetAlertWithConfirmAtom();
@@ -72,31 +70,17 @@ const S = {
     opacity: 0.99;
     aspect-ratio: 16/9;
     margin: 0 auto;
-    width: 450px;
+    width: 400px;
     box-shadow: rgb(0 0 0 / 10%) 0px 4px 16px 0px;
-    border-radius: 15px;
+    border-radius: 20px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
     will-change: transform;
-    padding: 25px;
-    .image-box {
-      position: relative;
-      display: flex;
-      justify-content: center;
-      font-size: 0;
-      margin-top: 15px;
-      width: 128px;
-      height: 128px;
-    }
-    ${(props) => props.theme.media.laptop`
-    `};
-    ${(props) => props.theme.media.tablet`
-      width: 480px;
-    `};
+    padding: 35px 25px 25px 25px;
     ${(props) => props.theme.media.mobile`
-     width: 95%;
+      width: 90%;
     `};
   `,
   Content: styled.div`
@@ -104,28 +88,24 @@ const S = {
     flex: 1;
     width: 100%;
     .title {
-      margin-top: 10px;
-      color: ${(props) => props.theme.colors.black400};
-      font-size: 22px;
+      color: ${(props) => props.theme.colors.black100};
+      font-size: 20px;
       font-weight: 500;
-      text-align: left;
-      ${(props) => props.theme.media.tablet`
-        font-size: 24px;
-      `};
+      text-align: center;
       ${(props) => props.theme.media.mobile`
         font-size: 18px;
       `};
     }
     .description {
-      color: ${(props) => props.theme.colors.black500};
+      color: ${(props) => props.theme.colors.black600};
       font-weight: 400;
-      margin-top: 30px;
+      margin-top: 15px;
       font-size: 16px;
-      text-align: left;
-      line-height: 1.1;
+      text-align: center;
+      line-height: 1.3;
       ${(props) => props.theme.media.mobile`
-        font-size: 14px;
         margin-top: 15px;
+        font-size: 15px;
       `};
     }
   `,

@@ -9,6 +9,8 @@ import Image from 'next/image';
 import environment from '@/environment';
 import { useQueryClient } from '@tanstack/react-query';
 import queryKeys from '@/constants/queryKeys';
+import { appendQueryParams } from '@/utils';
+import IconDimmed from '@/components/common/IconDimmed';
 
 export default function CertificationModal() {
   const [iframeUrl, setIframeUrl] = React.useState<string | null>(null);
@@ -20,17 +22,7 @@ export default function CertificationModal() {
 
   const setCertificationModalAtom = useSetRecoilState(certificationModalAtom);
 
-  const buildUrlWithParams = (baseUrl: string, params: Record<string, any>) => {
-    const url = new URL(baseUrl);
-    Object.entries(params).forEach(([key, value]) => {
-      if (key !== 'url') {
-        url.searchParams.append(key, value);
-      }
-    });
-    return url.toString();
-  };
-
-  // fetch start certification
+  // fetch - start certification
   const fetchStartCertification = async () => {
     setIsLoading(true);
     try {
@@ -41,7 +33,7 @@ export default function CertificationModal() {
         throw new Error('인증 요청에 실패했습니다.');
       }
 
-      const iframeUrl = buildUrlWithParams(response.result.params.url, response.result.params);
+      const iframeUrl = appendQueryParams(response.result.params.url, response.result.params);
 
       setIframeUrl(iframeUrl);
     } catch (error) {
@@ -53,7 +45,11 @@ export default function CertificationModal() {
     }
   };
 
-  const handleCertificationMessage = async (event: MessageEvent) => {
+  React.useEffect(() => {
+    fetchStartCertification();
+  }, []);
+
+  const processCertificationMessage = async (event: MessageEvent) => {
     if (event.origin !== environment.baseUrl) return;
 
     try {
@@ -71,7 +67,7 @@ export default function CertificationModal() {
           throw new Error();
         }
 
-        await queryClient.invalidateQueries({ queryKey: [queryKeys.USER_INFO], refetchType: 'all' });
+        await queryClient.invalidateQueries({ queryKey: [queryKeys.AUTH_ME], refetchType: 'all' });
         alert('본인 인증 완료');
 
         setCertificationModalAtom({ isOpen: false });
@@ -84,15 +80,10 @@ export default function CertificationModal() {
   };
 
   React.useEffect(() => {
-    fetchStartCertification();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  React.useEffect(() => {
-    window.addEventListener('message', handleCertificationMessage);
+    window.addEventListener('message', processCertificationMessage);
 
     return () => {
-      window.removeEventListener('message', handleCertificationMessage);
+      window.removeEventListener('message', processCertificationMessage);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -109,7 +100,9 @@ export default function CertificationModal() {
           {iframeUrl && (
             <>
               <div className="header">
-                <Icon name="Close25x25" width="28px" height="28px" onClick={() => setCertificationModalAtom({ isOpen: false })} />
+                <IconDimmed width="40px" height="40px">
+                  <Icon name="Close25x25" width="24px" height="24px" onClick={() => setCertificationModalAtom({ isOpen: false })} />
+                </IconDimmed>
               </div>
               <iframe src={iframeUrl} className="iframe"></iframe>
             </>
@@ -149,7 +142,7 @@ const S = {
       display: flex;
       justify-content: flex-end;
       align-items: center;
-      height: 50px;
+      height: 60px;
       padding: 0 10px;
     }
     .loading-box {

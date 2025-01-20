@@ -1,4 +1,4 @@
-export const recruitmentStatus = {
+export const RECRUITMENT_STATUS = {
   PROGRESS: '진행중',
   PUBLISHED: '대기중',
   CLOSED: '마감',
@@ -6,7 +6,7 @@ export const recruitmentStatus = {
   DRAFT: '미완성 공고',
 };
 
-export const recruitmentStatusWithAll = {
+export const RECRUITMENT_STATUS_WITH_ALL = {
   ALL: '전체',
   PROGRESS: '진행중',
   PUBLISHED: '대기중',
@@ -16,13 +16,13 @@ export const recruitmentStatusWithAll = {
 };
 
 // 모집 경력
-export const experienceCondition = {
-  NEWBIE: 'NEWBIE', // 신입
-  EXPERIENCED: 'EXPERIENCED', // 경력
-  NOT_REQUIRED: 'NOT_REQUIRED', // 경력 무관
+export const EXPERIENCE_CONDITION = {
+  NEWBIE: '신입',
+  EXPERIENCED: '경력',
+  NOT_REQUIRED: '경력무관',
 } as const;
 
-export const employmentType = {
+export const EMPLOYMENT_TYPE = {
   FULL_TIME: '정규직',
   CONTRACT: '계약직',
   PART_TIME: '아르바이트',
@@ -30,7 +30,7 @@ export const employmentType = {
   INTERN: '인턴',
 } as const;
 
-export const workingDayList = {
+export const WORKING_DAY_LIST = {
   WEEKDAYS_5: '주 5일',
   WEEKDAYS_6: '주 6일',
   WEEKEND_DAY: '주말 주간 (토, 일)',

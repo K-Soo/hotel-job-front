@@ -22,6 +22,9 @@ const S = {
     ${(props) => props.theme.media.laptop`
       padding: 30px 15px 0 15px;
     `};
+    ${(props) => props.theme.media.tablet`
+      padding: 15px 15px 0 15px;
+    `};
     padding: ${(props) => (props.$padding ? props.$padding : '30px 0 0 0')};
     & > section {
       flex: 1;

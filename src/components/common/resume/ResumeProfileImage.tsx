@@ -50,11 +50,10 @@ export default function ResumeProfileImage<T extends FieldValues>({ name }: Resu
 
 const S = {
   ResumeProfileImage: styled.div<{ $previewImage: string }>`
-    aspect-ratio: 3 / 4;
-    height: 201px;
+    height: 180px;
+    aspect-ratio: 9 / 12;
     border: 1px solid ${(props) => props.theme.colors.gray300};
     border-radius: 5px;
-    margin-right: 30px;
     cursor: pointer;
     position: relative;
     display: flex;
@@ -73,7 +72,7 @@ const S = {
       color: ${(props) => props.theme.colors.gray500};
     }
     &:hover {
-      border: 2px solid ${(props) => props.theme.colors.blue200};
+      border: 1px solid ${(props) => props.theme.colors.blue200};
     }
     ${(props) =>
       props.$previewImage &&

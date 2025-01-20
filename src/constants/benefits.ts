@@ -1,5 +1,5 @@
 //급여제도 SALARY
-export const salaryBenefits = {
+export const SALARY_BENEFITS = {
   SALARY_RETIREMENT_PENSION: '퇴직연금',
   SALARY_INCENTIVE: '인센티브제',
   SALARY_BONUS: '상여금',
@@ -20,7 +20,7 @@ export const salaryBenefits = {
 };
 
 //조직문화 CULTURE
-export const cultureBenefits = {
+export const CULTURE_BENEFITS = {
   // CULTURE_UNLIMITED_ANNUAL_LEAVE: '무제한 연차',
   // CULTURE_LABOR_UNION: '노조/노사협의회',
   CULTURE_FLAT_ORGANIZATION: '수평적 조직문화',
@@ -38,7 +38,7 @@ export const cultureBenefits = {
 };
 
 //선물 GIFTS
-export const giftsBenefits = {
+export const GIFTS_BENEFITS = {
   GIFTS_HOLIDAY_GIFT_OR_EXPENSES: '명절선물/귀향비',
   GIFTS_FOUNDATION_GIFT: '창립일선물지급',
   GIFTS_BIRTHDAY_GIFT_PARTY: '생일선물/파티',
@@ -52,7 +52,7 @@ export const giftsBenefits = {
 };
 
 //출퇴근 WORK_LIFE
-export const workLifeBenefits = {
+export const WORK_LIFE_BENEFITS = {
   WORK_LIFE_DORMITORY_OPERATION: '숙식 제공',
   WORK_LIFE_VEHICLE_FUEL_SUPPORT: '차량유류비지원',
   WORK_LIFE_COMMUTER_BUS: '통근버스 운영',
@@ -76,7 +76,7 @@ export const workLifeBenefits = {
 };
 
 // 지원금/보험 SUPPORT_HEALTH
-export const supportHeathBenefits = {
+export const SUPPORT_HEATH_BENEFITS = {
   SUPPORT_HEALTH_HEALTH_CHECKUP: '건강검진',
   SUPPORT_HEALTH_MEDICAL_SUPPORT_SELF: '의료비지원(본인)',
   SUPPORT_HEALTH_MEDICAL_SUPPORT_FAMILY: '의료비지원(가족)',
@@ -103,7 +103,7 @@ export const supportHeathBenefits = {
 };
 
 //리프레시 REFRESH
-export const refreshBenefits = {
+export const REFRESH_BENEFITS = {
   REFRESH_ANNUAL_LEAVE: '연차',
   REFRESH_SUMMER_LEAVE: '여름휴가',
   REFRESH_FAMILY_EVENT_LEAVE: '경조휴가제',
@@ -123,11 +123,11 @@ export const refreshBenefits = {
   REFRESH_PUBLIC_HOLIDAY_LEAVE: '공휴일 휴무',
 };
 
-export const benefits = {
-  ...cultureBenefits,
-  ...salaryBenefits,
-  ...giftsBenefits,
-  ...refreshBenefits,
-  ...supportHeathBenefits,
-  ...workLifeBenefits,
+export const BENEFITS = {
+  ...CULTURE_BENEFITS,
+  ...SALARY_BENEFITS,
+  ...GIFTS_BENEFITS,
+  ...REFRESH_BENEFITS,
+  ...SUPPORT_HEATH_BENEFITS,
+  ...WORK_LIFE_BENEFITS,
 };

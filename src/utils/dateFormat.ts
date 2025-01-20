@@ -16,4 +16,20 @@ export const dateFormat = {
     if (!value) return;
     return moment(value).format('HH:mm:ss');
   },
+  date5: (value: string | null) => {
+    if (!value) return;
+    return moment(value).format('YY.MM.DD');
+  },
+  date6: (value: string | null) => {
+    if (!value) return;
+    return moment(value).format('YY.MM.DD HH:mm');
+  },
+  timeRange: (start: string, end: string) => {
+    if (!start || !end) return 'unknown';
+
+    const formattedStart = moment(start, 'HHmm').format('HH:mm');
+    const formattedEnd = moment(end, 'HHmm').format('HH:mm');
+
+    return `${formattedStart} ~ ${formattedEnd}`;
+  },
 };

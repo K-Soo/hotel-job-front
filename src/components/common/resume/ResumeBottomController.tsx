@@ -1,37 +1,48 @@
 import styled from 'styled-components';
 import Button from '@/components/common/style/Button';
 import FormInput from '@/components/common/form/FormInput';
-import { ResumeRegisterForm } from '@/types';
+import { ResumeDetailForm, ResumeStatusKey } from '@/types';
 import { SubmitHandler, useFormContext } from 'react-hook-form';
 
 interface ResumeBottomControllerProps {
-  onSubmit: SubmitHandler<ResumeRegisterForm>;
+  status: ResumeStatusKey;
+  onSubmit: SubmitHandler<ResumeDetailForm>;
 }
 
-export default function ResumeBottomController({ onSubmit }: ResumeBottomControllerProps) {
-  const { handleSubmit } = useFormContext<ResumeRegisterForm>();
+export default function ResumeBottomController({ status, onSubmit }: ResumeBottomControllerProps) {
+  const {
+    handleSubmit,
+    formState: { isSubmitting },
+  } = useFormContext<ResumeDetailForm>();
 
   return (
     <S.ResumeBottomController>
       <div className="resume-bottom-controller">
-        <Button
-          maxWidth="130px"
-          height="40px"
-          label="이력서 미리보기"
-          variant="secondary"
-          disabled={false}
-          type="button"
-          margin="0 15px 0 0"
-        />
-        <Button
-          maxWidth="130px"
-          height="40px"
-          label="작성완료"
-          variant="primary"
-          disabled={false}
-          type="button"
-          onClick={handleSubmit(onSubmit)}
-        />
+        {status === 'DRAFT' && (
+          <Button
+            maxWidth="130px"
+            height="40px"
+            label="작성완료"
+            variant="primary"
+            disabled={false}
+            type="button"
+            onClick={handleSubmit(onSubmit)}
+            isLoading={isSubmitting}
+          />
+        )}
+
+        {status === 'PUBLISH' && (
+          <Button
+            maxWidth="130px"
+            height="40px"
+            label="수정하기"
+            variant="primary"
+            disabled={false}
+            type="button"
+            onClick={handleSubmit(onSubmit)}
+            isLoading={isSubmitting}
+          />
+        )}
       </div>
     </S.ResumeBottomController>
   );

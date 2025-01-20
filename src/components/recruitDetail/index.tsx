@@ -2,80 +2,143 @@ import styled from 'styled-components';
 import RecruitDetailLocation from '@/components/recruitDetail/RecruitDetailLocation';
 import RecruitDetailPeriod from '@/components/recruitDetail/RecruitDetailPeriod';
 import RecruitDetailDateTime from '@/components/recruitDetail/RecruitDetailDateTime';
-import RecruitDetailJobInformation from '@/components/recruitDetail/RecruitDetailJobInformation';
+import RecruitDetailWorkCondition from '@/components/recruitDetail/RecruitDetailWorkCondition';
+import RecruitDetailInfo from '@/components/recruitDetail/RecruitDetailInfo';
 import RecruitDetailFavoriteShareBar from '@/components/recruitDetail/RecruitDetailFavoriteShareBar';
+import RecruitDetailContent from '@/components/recruitDetail/RecruitDetailContent';
+import { IRecruitDetail } from '@/types';
+import dynamic from 'next/dynamic';
 
-interface RecruitDetailProps {}
+const DynamicKakaoMap = dynamic(() => import('@/components/common/KakaoMap'), { ssr: false });
 
-export default function RecruitDetail({}: RecruitDetailProps) {
+interface RecruitDetailProps {
+  data: IRecruitDetail;
+  children: React.ReactNode;
+}
+
+export default function RecruitDetail({ data, children }: RecruitDetailProps) {
   return (
     <S.RecruitDetail>
-      {true && <S.Images>{/* 이미지 영역 */}</S.Images>}
+      {/* TODO - 업체 이미지 */}
+      {/* <S.Images></S.Images> */}
+      <div className="detail-container">
+        <div className="detail-container__content-form">
+          {/* TODO - 날짜 */}
+          {/* <RecruitDetailDateTime /> */}
 
-      <RecruitDetailDateTime />
-      <RecruitDetailFavoriteShareBar />
+          <S.UtilPanel>
+            <div className="wrapper">
+              <strong className="hotel-name">{data.hotelName}</strong>
+              <address className="addr sido">{data.address.split(' ')[0]}</address>
+              <address className="addr sigungu">{data.address.split(' ')[1]}</address>
+            </div>
+            <RecruitDetailFavoriteShareBar />
+          </S.UtilPanel>
 
-      <S.Header>
-        <div className="left">
-          <div className="left__company">메이호텔</div>
-          <div className="left__title">야간 근무할 담당자 모십니다.</div>
+          <S.Header>
+            <h1 className="title">{data.recruitmentTitle}</h1>
+          </S.Header>
+
+          <S.Title>근무조건</S.Title>
+          <RecruitDetailWorkCondition
+            employment={data.employmentType}
+            workingTime={data.workingTime}
+            workingDay={data.workingDay}
+            salaryType={data.salaryType}
+            salaryAmount={data.salaryAmount}
+          />
+
+          <S.Title>모집 내용</S.Title>
+          <RecruitDetailInfo
+            jobs={data.jobs}
+            educationCondition={data.educationCondition}
+            recruitmentCapacity={data.recruitmentCapacity}
+            experienceCondition={data.experienceCondition}
+            department={data.department}
+            position={data.position}
+            nationality={data.nationality}
+          />
+
+          <S.Title>상세 내용</S.Title>
+          <RecruitDetailContent content={data.content} />
+
+          <RecruitDetailPeriod managerEmail={data.managerEmail} managerName={data.managerName} managerNumber={data.managerNumber} />
+
+          <S.Title>근무지 위치</S.Title>
+          <RecruitDetailLocation address={data.address} addressDetail={data.addressDetail} />
+          <DynamicKakaoMap address={data.address} addressDetail={data.addressDetail} />
         </div>
-      </S.Header>
-
-      <S.Title>상세 정보</S.Title>
-      <RecruitDetailJobInformation />
-
-      <S.Title>상세 정보</S.Title>
-      <S.Content>
-        <p>lasdlpsalpdlspaldp</p>
-      </S.Content>
-
-      <S.Title>접수기간 및 담당자</S.Title>
-      <RecruitDetailPeriod />
-
-      <S.Title>근무 위치</S.Title>
-
-      <RecruitDetailLocation />
+        {children}
+      </div>
     </S.RecruitDetail>
   );
 }
 
 const S = {
-  RecruitDetail: styled.section``,
+  RecruitDetail: styled.section`
+    .detail-container {
+      display: flex;
+      &__content-form {
+        flex: 1 1 100%;
+      }
+    }
+  `,
   Images: styled.article`
     height: 350px;
     border-radius: 15px;
     background-color: gray;
     margin-bottom: 30px;
   `,
-
   Header: styled.article`
-    display: flex;
-    justify-content: space-between;
-    border: 1px solid red;
-    margin-bottom: 50px;
-    .left {
-      &__company {
+    .title {
+      font-size: 24px;
+      font-weight: 500;
+      line-height: 1.1;
+      ${(props) => props.theme.media.mobile`
         font-size: 18px;
-        color: #333;
-        font-weight: 500;
-        margin-bottom: 5px;
-      }
-      &__title {
-        font-size: 28px;
-        font-weight: 600;
-      }
+      `};
     }
+    margin-bottom: 50px;
   `,
-
   Content: styled.article`
     min-height: 500px;
     margin-bottom: 50px;
   `,
-
-  Title: styled.article`
-    font-size: 20px;
-    font-weight: 600;
-    margin-bottom: 5px;
+  Title: styled.h2`
+    font-size: 22px;
+    font-weight: 500;
+    margin-bottom: 15px;
+    user-select: none;
+    ${(props) => props.theme.media.mobile`
+      font-size: 20px;
+    `};
+  `,
+  UtilPanel: styled.article`
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    .wrapper {
+      display: flex;
+      align-items: center;
+      .hotel-name {
+        font-size: 18px;
+      }
+      .addr {
+        font-size: 14px;
+        color: ${(props) => props.theme.colors.gray800};
+      }
+      .sido {
+        padding-right: 3px;
+      }
+      .sido {
+        &::before {
+          content: '∙';
+          padding: 0 8px;
+          font-size: 20px;
+          font-size: 14px;
+        }
+      }
+    }
   `,
 };

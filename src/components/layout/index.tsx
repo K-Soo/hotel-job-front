@@ -1,13 +1,12 @@
+import React from 'react';
 import styled from 'styled-components';
-import { useRecoilValue } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { loadingAtom } from '@/recoil/loading';
 import { daumPostAtom } from '@/recoil/daumPost';
 import { bottomSheetAtom } from '@/recoil/bottomSheet';
-import Modal from '@/components/common/Modal';
-import { alertWithConfirmSelector } from '@/recoil/alertWithConfirm';
+import { alertWithConfirmSelector, alertWithConfirmAtom } from '@/recoil/alertWithConfirm';
 import { toastAtom } from '@/recoil/toast';
 import dynamic from 'next/dynamic';
-import Toast from '@/components/common/Toast';
 
 export { Footer } from '@/components/layout/footer';
 export { Main } from '@/components/layout/main';
@@ -19,12 +18,12 @@ export { EmployerHeader } from '@/components/layout/header/employerHeader';
 export { EmployerAside } from '@/components/layout/aside/EmployerAside';
 export { EmployerFooter } from '@/components/layout/footer/EmployerFooter';
 
-const DynamicNoSSRLoading = dynamic(() => import('@/components/common/Loading'), { ssr: false });
-const DynamicNoSSRDaumPost = dynamic(() => import('@/components/common/DaumPost'), { ssr: false });
+const DynamicNoSSRLoadingOverlay = dynamic(() => import('@/components/common/LoadingOverlay'), { ssr: false });
 const DynamicNoSSRAccountBottomSheet = dynamic(() => import('@/components/common/AccountBottomSheet'), { ssr: false });
 const DynamicNoSSRAlert = dynamic(() => import('@/components/common/Alert'), { ssr: false });
 const DynamicNoSSRConfirm = dynamic(() => import('@/components/common/Confirm'), { ssr: false });
 const DynamicNoSSRToast = dynamic(() => import('@/components/common/Toast'), { ssr: false });
+const DynamicNoSSRDaumPost = dynamic(() => import('@/components/common/DaumPost'), { ssr: false });
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -36,10 +35,22 @@ export default function Layout({ children }: LayoutProps) {
   const bottomSheetAtomValue = useRecoilValue(bottomSheetAtom);
   const toastAtomValue = useRecoilValue(toastAtom);
   const alertWithConfirmSelectorValue = useRecoilValue(alertWithConfirmSelector);
+  const setAlertWithConfirmSelector = useSetRecoilState(alertWithConfirmAtom);
+
+  // React.useEffect(() => {
+  //   setAlertWithConfirmSelector((prev) => ({
+  //     ...prev,
+  //     type: 'CONFIRM',
+  //     confirmLabel: '확인',
+  //     cancelLabel: '취소',
+  //     title: 'TITLE_4',
+  //     subTitle: 'DESC_4',
+  //   }));
+  // }, []);
 
   return (
     <S.Layout>
-      {loadingAtomValue.isLoading && <DynamicNoSSRLoading />}
+      {loadingAtomValue.isLoading && <DynamicNoSSRLoadingOverlay />}
       {bottomSheetAtomValue.isOpen && <DynamicNoSSRAccountBottomSheet />}
 
       {alertWithConfirmSelectorValue.type === 'ALERT' && <DynamicNoSSRAlert />}

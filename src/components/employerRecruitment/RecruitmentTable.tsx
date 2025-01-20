@@ -63,7 +63,7 @@ function RecruitmentTableBody({ items, handleClickRecruitmentItem, checkedItems,
           </div>
 
           <div className="item__candidate">
-            <ApplicantStatusOverview status={item.recruitmentStatus} />
+            <ApplicantStatusOverview status={item.recruitmentStatus} applicationCount={item.applicationCount} />
           </div>
 
           <div className="item__management">

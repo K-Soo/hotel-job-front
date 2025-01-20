@@ -7,16 +7,18 @@ interface ErrorComponentProps {
   padding?: string;
   height?: string;
   width?: string;
+  message?: string;
+  visibleBackButton?: boolean;
 }
 
-export function ErrorComponent({ height, margin, padding, width }: ErrorComponentProps) {
+export function ErrorComponent({ height, margin, padding, width, message, visibleBackButton = true }: ErrorComponentProps) {
   const router = useRouter();
 
   return (
     <S.ErrorComponent $height={height} $margin={margin} $padding={padding} $width={width}>
       <div className="error-container">
-        <p>오류가 발생했습니다.</p>
-        <Button label="이전" variant="secondary" margin="30px 0 0 0" onClick={() => router.back()} />
+        <p>{message || '오류가 발생했습니다.'}</p>
+        {visibleBackButton && <Button label="이전" variant="secondary" margin="30px 0 0 0" onClick={() => router.back()} />}
       </div>
     </S.ErrorComponent>
   );

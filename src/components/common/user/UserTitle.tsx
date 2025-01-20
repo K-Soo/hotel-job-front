@@ -14,10 +14,10 @@ export default function UserTitle({ title }: UserTitleProps) {
 
 const S = {
   UserTitle: styled.div`
-    font-weight: 600;
-    font-size: 34px;
-    color: ${(props) => props.theme.colors.gray800};
-    margin-bottom: 15px;
+    font-weight: 500;
+    font-size: 24px;
+    color: ${(props) => props.theme.colors.black500};
+    margin-bottom: 30px;
     ${(props) => props.theme.media.tablet`
       display: none;
     `};
