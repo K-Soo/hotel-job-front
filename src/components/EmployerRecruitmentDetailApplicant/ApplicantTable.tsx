@@ -1,18 +1,21 @@
+import React from 'react';
 import styled, { css } from 'styled-components';
 import CheckBox from '@/components/common/style/CheckBox';
 import Button from '@/components/common/style/Button';
-import { RecruitmentDetailApplicantListItem } from '@/types';
+import { EmployerReviewStageStatusKey, RecruitmentDetailApplicantListItem, ResumeDetail } from '@/types';
 import { dateFormat, parseBirthDateAndCalculateAge } from '@/utils';
-import { REVIEW_STAGE_STATUS } from '@/constants/application';
+import { EMPLOYER_REVIEW_STAGE_STATUS, REVIEW_STAGE_STATUS } from '@/constants/application';
 import { SEX_CODE } from '@/constants';
 
 interface ApplicantTableProps {
   children: React.ReactNode;
 }
 interface ApplicantTableBody {
-  data: RecruitmentDetailApplicantListItem[] | undefined;
   isSuccess: boolean;
   isLoading: boolean;
+  data: RecruitmentDetailApplicantListItem[] | undefined;
+  fetchUpdateEmployerReviewStageStatus: (id: number, stage: EmployerReviewStageStatusKey) => Promise<void>;
+  handleClickResumePreview: (data: ResumeDetail) => void;
 }
 
 export default function ApplicantTable({ children }: ApplicantTableProps) {
@@ -43,8 +46,8 @@ function ApplicantTableHeader() {
       <span className="header-row salary">희망/최근급여</span>
       <span className="header-row date">지원일</span>
       <span className="header-row step">전형</span>
-      <span className="header-row remark">메모</span>
-      <span className="header-row class">분류</span>
+      <span className="header-row resume">이력서</span>
+      <span className="header-row class">열람/미열람</span>
     </StyledTableHeader>
   );
 }
@@ -65,13 +68,13 @@ const StyledTableHeader = styled.div`
     height: 100%;
     text-align: center;
     font-size: 14px;
+    white-space: nowrap;
     color: ${(props) => props.theme.colors.gray900};
   }
   .check {
     flex: 0 1 50px;
     display: flex;
     align-items: center;
-    /* border: 1px solid red; */
     .row-check {
       label {
         padding-left: 25px;
@@ -82,7 +85,6 @@ const StyledTableHeader = styled.div`
     ${CommonFlex}
     flex-basis: 10%;
     height: 100%;
-    /* border: 1px solid red; */
   }
   .name {
     ${CommonFlex}
@@ -114,76 +116,35 @@ const StyledTableHeader = styled.div`
     height: 100%;
     /* border: 1px solid red; */
   }
-  .class {
-    ${CommonFlex}
-    flex-basis: 70px;
-    height: 100%;
-    /* border: 1px solid red; */
-  }
+
   .step {
     ${CommonFlex}
     flex-basis: 15%;
     height: 100%;
     /* border: 1px solid red; */
   }
-  .remark {
+  .resume {
     ${CommonFlex}
     flex: 0 1 100px;
     height: 100%;
-    /* border: 1px solid red; */
+  }
+  .class {
+    ${CommonFlex}
+    flex-basis: 100px;
+    height: 100%;
   }
 `;
 
-const RESPONSE = [
-  {
-    id: 1,
-    name: '홍길동',
-    age: 30,
-    career: 5,
-    education: '대졸',
-    salary: '5000/4000',
-    date: '2021-09-01',
-    step: '서류전형',
-    status: '최종합격',
-  },
-  {
-    id: 1,
-    name: '홍길동',
-    age: 30,
-    career: 5,
-    education: '대졸',
-    salary: '5000/4000',
-    date: '2021-09-01',
-    step: '서류전형',
-    status: '서류전형',
-  },
-  {
-    id: 1,
-    name: '홍길동',
-    age: 30,
-    career: 5,
-    education: '대졸',
-    salary: '5000/4000',
-    date: '2021-09-01',
-    step: '서류전형',
-    status: '면접',
-  },
-  {
-    id: 1,
-    name: '홍길동',
-    age: 30,
-    career: 5,
-    education: '대졸',
-    salary: '5000/4000',
-    date: '2021-09-01',
-    step: '서류전형',
-    status: '불합격',
-  },
-];
-
-function ApplicantTableBody({ data, isLoading, isSuccess }: ApplicantTableBody) {
+function ApplicantTableBody({
+  data,
+  isLoading,
+  isSuccess,
+  fetchUpdateEmployerReviewStageStatus,
+  handleClickResumePreview,
+}: ApplicantTableBody) {
   return (
     <StyledTableBody>
+      {isLoading && <div>로딩중...</div>}
       {isSuccess &&
         data &&
         data.map((item) => {
@@ -191,18 +152,18 @@ function ApplicantTableBody({ data, isLoading, isSuccess }: ApplicantTableBody) 
           return (
             <div key={item.id} className="body-row">
               <div className="check">
-                <CheckBox className="row-check" checked={false} name={'ch'} onChange={() => {}} />
+                <CheckBox className="row-check" checked={false} name={''} onChange={() => {}} />
               </div>
               <div className="status">
-                <span>{REVIEW_STAGE_STATUS[item.reviewStageStatus]}</span>
+                <span>{EMPLOYER_REVIEW_STAGE_STATUS[item.employerReviewStageStatus]}</span>
               </div>
 
               <div className="name">
-                <span>
+                <span className="name__top">
                   {item.resumeSnapshot.name} {'/'} {SEX_CODE[item.resumeSnapshot.sexCode]}
                 </span>
-                <span>
-                  {birthYear} {`만${age}`}
+                <span className="name__bottom">
+                  {birthYear} {`${age}세`}
                 </span>
               </div>
               <div className="career">경력</div>
@@ -211,36 +172,45 @@ function ApplicantTableBody({ data, isLoading, isSuccess }: ApplicantTableBody) 
               <div className="date">{item.applyAt ? dateFormat.date6(item.applyAt.toString()) : '-'}</div>
 
               <div className="step">
-                {item.reviewStageStatus === 'DOCUMENT' && (
+                {item.employerReviewStageStatus === 'DOCUMENT' && (
+                  <Button
+                    label="면접전형 이동"
+                    variant="secondary100"
+                    width="90px"
+                    fontSize="13px"
+                    height="30px"
+                    onClick={() => fetchUpdateEmployerReviewStageStatus(item.id, 'INTERVIEW')}
+                  />
+                )}
+
+                {item.employerReviewStageStatus === 'INTERVIEW' && (
                   <>
-                    <Button label="다음 전형 이동" variant="primary" width="110px" fontSize="13px" height="30px" />
+                    <Button label="면접 제안" variant="primary" width="90px" fontSize="13px" height="30px" />
+                    <StyledRollbackButton onClick={() => fetchUpdateEmployerReviewStageStatus(item.id, 'DOCUMENT')}>
+                      전형이동 복구
+                    </StyledRollbackButton>
                   </>
                 )}
 
-                {item.reviewStageStatus === 'INTERVIEW' && (
+                {item.employerReviewStageStatus === 'FINAL_ACCEPT' && (
                   <>
-                    <Button label="면접 제안" variant="primary" width="110px" fontSize="13px" height="30px" />
-                    <span>전형이동 복구</span>
+                    <Button label="합격 통보" variant="primary" width="90px" fontSize="13px" height="30px" />
+                    <StyledRollbackButton>전형이동 복구</StyledRollbackButton>
                   </>
                 )}
 
-                {item.reviewStageStatus === 'FINAL_ACCEPTED' && (
+                {item.employerReviewStageStatus === 'REJECT' && (
                   <>
-                    <Button label="합격 통보" variant="primary" width="110px" fontSize="13px" height="30px" />
-                    <span>전형이동 복구</span>
-                  </>
-                )}
-
-                {item.reviewStageStatus === 'REJECTED' && (
-                  <>
-                    <Button label="불합격 통보" variant="primary" width="110px" fontSize="13px" height="30px" />
-                    <span>전형이동 복구</span>
+                    <Button label="불합격 통보" variant="primary" width="90px" fontSize="13px" height="30px" />
+                    <StyledRollbackButton>전형이동 복구</StyledRollbackButton>
                   </>
                 )}
               </div>
-              <div className="remark">메모</div>
+              <div className="resume">
+                <span onClick={() => handleClickResumePreview(item.resumeSnapshot)}>이력서</span>
+              </div>
               <div className="class">
-                <span>{item.isView ? '열람' : '미열람'} </span>
+                <span>{item.isView ? '열람' : '미열람'}</span>
               </div>
             </div>
           );
@@ -248,6 +218,17 @@ function ApplicantTableBody({ data, isLoading, isSuccess }: ApplicantTableBody) 
     </StyledTableBody>
   );
 }
+
+const StyledRollbackButton = styled.button`
+  margin-top: 8px;
+  color: ${(props) => props.theme.colors.gray800};
+  font-size: 13px;
+  &:hover {
+    cursor: pointer;
+    color: ${(props) => props.theme.colors.black200};
+    text-decoration: underline;
+  }
+`;
 
 const StyledTableBody = styled.div`
   min-height: 400px;
@@ -260,6 +241,7 @@ const StyledTableBody = styled.div`
     height: 100px;
     font-size: 14px;
     /* border: 1px solid red; */
+    white-space: nowrap;
     border-bottom: 1px solid ${(props) => props.theme.colors.gray300};
     .check {
       ${CommonFlex}
@@ -283,7 +265,14 @@ const StyledTableBody = styled.div`
       ${CommonFlex}
       flex-grow: 1;
       height: 100%;
-      /* border: 1px solid red; */
+      font-size: 13px;
+      &__top {
+        padding-bottom: 3px;
+      }
+      &__bottom {
+        color: ${(props) => props.theme.colors.gray600};
+        font-weight: 300;
+      }
     }
     .career {
       ${CommonFlex}
@@ -309,23 +298,32 @@ const StyledTableBody = styled.div`
       height: 100%;
       /* border: 1px solid red; */
     }
-    .class {
-      ${CommonFlex}
-      flex-basis: 70px;
-      height: 100%;
-      /* border: 1px solid red; */
-    }
+
     .step {
       ${CommonFlex}
       flex-basis: 15%;
       height: 100%;
       /* border: 1px solid red; */
     }
-    .remark {
+    .resume {
       ${CommonFlex}
       flex: 0 1 100px;
       height: 100%;
-      /* border: 1px solid red; */
+      color: ${(props) => props.theme.colors.blue600};
+      span {
+        &:hover {
+          text-decoration: underline;
+          color: ${(props) => props.theme.colors.blue800};
+          cursor: pointer;
+        }
+      }
+    }
+    .class {
+      ${CommonFlex}
+      flex-basis: 100px;
+      height: 100%;
+      color: ${(props) => props.theme.colors.gray600};
+      font-weight: 300;
     }
   }
 `;
