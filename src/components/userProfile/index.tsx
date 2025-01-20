@@ -39,9 +39,14 @@ export default function UserProfile({ isLoading, isSuccess, data, handleClickWit
               <p>{data.nickname}</p>
               <Button label="변경" variant="tertiary" height="30px" width="80px" fontSize="14px" />
             </S.Item>
-
             <S.ItemTitle>본인인증</S.ItemTitle>
-            <S.Item>미인증</S.Item>
+            {data.certificationStatus === 'VERIFIED' && <S.Item>인증</S.Item>}
+            {data.certificationStatus !== 'VERIFIED' && (
+              <S.Item>
+                <StyledCertTag>미인증</StyledCertTag>
+                <Button label="인증하기" variant="tertiary" height="30px" width="80px" fontSize="14px" />
+              </S.Item>
+            )}
           </S.Panel>
 
           <ProfileTitle title="광고성 정보 수신" />
@@ -56,6 +61,13 @@ export default function UserProfile({ isLoading, isSuccess, data, handleClickWit
     </S.UserProfile>
   );
 }
+
+const StyledCertTag = styled.span`
+  border: 1px solid red;
+  padding: 2px 10px;
+  font-size: 14px;
+  border-radius: 15px;
+`;
 
 const S = {
   UserProfile: styled.section`
