@@ -61,7 +61,9 @@ export default function UserResumeContainer() {
         throw new Error();
       }
       router.push(`/user/resume/${response.result.id}`);
-      await queryClient.invalidateQueries({ queryKey: [queryKeys.RESUME_LIST], refetchType: 'all' });
+      setTimeout(() => {
+        queryClient.invalidateQueries({ queryKey: [queryKeys.RESUME_LIST], refetchType: 'all' });
+      }, 1000);
     } catch (error) {
       addToast({ message: '이력서 생성에 실패했습니다.', type: 'error' });
     }
