@@ -33,13 +33,17 @@ export const EMPLOYER_ASIDE_MENU = [
   },
 
   {
-    label: '지원자 · 공고 관리',
-    value: '',
+    label: '채용공고 · 지원자 관리',
+    value: path.EMPLOYER_RECRUITMENT,
     icon: 'UserRounded24x24',
-    items: [
-      { label: '공고 목록', value: path.EMPLOYER_RECRUITMENT },
-      { label: '일정 관리', value: path.EMPLOYER_SCHEDULE },
-    ],
+    items: [],
+  },
+
+  {
+    label: '일정 관리',
+    value: path.EMPLOYER_SCHEDULE,
+    icon: 'UserRounded24x24',
+    items: [],
   },
 
   {
