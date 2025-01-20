@@ -69,7 +69,7 @@ export default function CertificationModal() {
 
         await queryClient.invalidateQueries({ queryKey: [queryKeys.AUTH_ME], refetchType: 'all' });
         alert('본인 인증 완료');
-
+        window.location.reload();
         setCertificationModalAtom({ isOpen: false });
       }
     } catch (error) {
