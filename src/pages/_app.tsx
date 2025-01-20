@@ -34,17 +34,6 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
 
   const [queryClient] = React.useState(() => new QueryClient(queryClientDefaultOption));
 
-  if (environment.isProd && router.pathname === path.HOME) {
-    return (
-      <AppThemeProvider>
-        <div>
-          <Maintenance />
-          <Footer />
-        </div>
-      </AppThemeProvider>
-    );
-  }
-
   return (
     <AppThemeProvider>
       <RecoilRoot>
@@ -58,7 +47,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
                 <Component {...pageProps} />
               </GuardComponent>,
             )}
-          <ReactQueryDevtools initialIsOpen={false} />
+          {/* <ReactQueryDevtools initialIsOpen={false} /> */}
         </QueryClientProvider>
       </RecoilRoot>
     </AppThemeProvider>
