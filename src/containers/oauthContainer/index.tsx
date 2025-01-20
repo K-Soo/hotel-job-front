@@ -104,7 +104,7 @@ export default function OauthContainer({ oauth }: OauthContainerProps) {
       });
       replace(path.HOME);
     } catch (error: any) {
-      console.error('oauth error: ', error?.response?.data);
+      console.error('oauth error: ', JSON.stringify(error?.response?.data));
       const customErrorcode = getErrorCode(error);
 
       if (customErrorcode === errorCode.OAUTH_SIGN_IN_NOT_FOUND_USER) {
