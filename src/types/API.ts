@@ -5,7 +5,7 @@ type ResponseStatus = 'success' | 'duplicate' | 'available' | 'failure' | 'avail
 
 // query
 export type RecruitmentQueryStatus = 'ALL' | 'PROGRESS' | 'PUBLISHED' | 'CLOSED' | 'REVIEWING' | 'DRAFT';
-export type RecruitmentApplicantQueryStep = 'ALL' | 'DOCUMENT' | 'INTERVIEW' | 'ACCEPTED' | 'REJECTED';
+export type RecruitmentApplicantQueryStep = 'DOCUMENT' | 'INTERVIEW' | 'ACCEPT' | 'REJECTED';
 export type RecruitTypeQuery = 'special' | 'urgent' | 'basic';
 
 export interface BaseResponse {
@@ -82,6 +82,16 @@ export interface DraftRecruitmentRequest extends Partial<types.CreateRecruitment
 export interface ApplyResumeRequest {
   resumeId: string;
   recruitId: string;
+}
+
+export interface GetRecruitmentDetailApplicantListRequest {
+  recruitmentId: string;
+  step?: RecruitmentApplicantQueryStep;
+}
+
+export interface UpdateEmployerReviewStageStatusRequest {
+  applicationId: number;
+  stage: types.EmployerReviewStageStatusKey;
 }
 
 /************************************* RESPONSE **************************************/
@@ -206,6 +216,16 @@ export interface RecruitmentStatusCountResponse extends BaseResponse {
   };
 }
 
+export interface RecruitmentApplicationStatusCountResponse {
+  result: {
+    TOTAL: number;
+    DOCUMENT: number;
+    INTERVIEW: number;
+    ACCEPT: number;
+    REJECT: number;
+  };
+}
+
 export interface CreateRecruitmentResponse extends BaseResponse {
   result: {
     status: ResponseStatus;
@@ -213,6 +233,11 @@ export interface CreateRecruitmentResponse extends BaseResponse {
 }
 
 export interface UpdateRecruitmentResponse extends BaseResponse {
+  result: {
+    status: ResponseStatus;
+  };
+}
+export interface UpdateEmployerReviewStageStatusResponse extends BaseResponse {
   result: {
     status: ResponseStatus;
   };
