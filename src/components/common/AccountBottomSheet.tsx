@@ -39,7 +39,7 @@ export default function AccountBottomSheet({}: AccountBottomSheetProps) {
             </motion.div>
 
             <AnimatePresence>
-              {true && (
+              {/* {true && (
                 <motion.div
                   animate={{ height: 'auto', opacity: 1 }}
                   initial={{ height: 0, opacity: 0 }}
@@ -59,7 +59,7 @@ export default function AccountBottomSheet({}: AccountBottomSheetProps) {
                     </motion.div>
                   ))}
                 </motion.div>
-              )}
+              )} */}
             </AnimatePresence>
           </div>
         );

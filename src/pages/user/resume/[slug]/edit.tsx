@@ -1,6 +1,5 @@
 import React from 'react';
 import Layout, { Main, Header, DesktopNavigation, MobileNavigation } from '@/components/layout';
-import UserResumeRegisterContainer from '@/containers/userResumeRegisterContainer';
 import useAuth from '@/hooks/useAuth';
 import LoadingOverlay from '@/components/common/LoadingOverlay';
 import SkeletonUI from '@/components/common/SkeletonUI';

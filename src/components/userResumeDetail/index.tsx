@@ -60,9 +60,9 @@ export default function UserResumeDetail({ status, children }: UserResumeDetailP
           <FormSelect<ResumeDetailForm> name="education" options={resumeEducationLevelOptions} maxWidth="220px" />
         </ResumeSection>
 
-        <ResumeSection title="경력" isRequired={true} handleClickAdd={() => {}} name="experiences">
+        {/* <ResumeSection title="경력" isRequired={true} handleClickAdd={() => {}} name="experiences">
           <ResumeExperienceForm />
-        </ResumeSection>
+        </ResumeSection> */}
 
         <ResumeSection title="자격증" handleClickAdd={handleClickAddLicense} name="licenses">
           <ResumeLicenseForm />

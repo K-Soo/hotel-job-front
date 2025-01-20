@@ -16,12 +16,9 @@ export default function ResumeExperienceForm() {
   const { watch } = useFormContext<ResumeRegisterForm>();
   const { fields } = useFieldArray({ name: 'experiences' });
 
-  const experiencesValue = watch('experiences');
-  console.log('experiencesValue: ', experiencesValue);
-
   return (
     <S.ResumeExperienceForm>
-      {fields.map((field, index) => (
+      {/* {fields.map((field, index) => (
         <div key={field.id} className="experience-item">
           <FormInput<ResumeRegisterForm>
             name={`experiences.${index}.companyName`}
@@ -70,7 +67,7 @@ export default function ResumeExperienceForm() {
             onClick={() => setIsOnResignationReason((prev) => !prev)}
           />
         </div>
-      ))}
+      ))} */}
     </S.ResumeExperienceForm>
   );
 }

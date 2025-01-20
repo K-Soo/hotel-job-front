@@ -4,7 +4,6 @@ import queryKeys from '@/constants/queryKeys';
 import { Get } from '@/apis';
 import { useRouter } from 'next/router';
 import UserResumeDetail from '@/components/userResumeDetail';
-import UserResumeRegister from '@/components/userResumeRegister';
 import ResumeBottomController from '@/components/common/resume/ResumeBottomController';
 import SignIn from '@/components/signIn';
 import Logo from '@/components/common/Logo';
