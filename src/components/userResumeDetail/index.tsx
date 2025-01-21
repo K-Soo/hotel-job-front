@@ -11,7 +11,7 @@ import FormInputB from '@/components/common/form/FormInputB';
 import FormSelect from '@/components/common/form/FormSelect';
 import FormMapSelect from '@/components/common/form/FormMapSelect';
 import FormToggle from '@/components/common/form/FormToggle';
-import { educationConditionLevelOptions, languageOptions, resumeEducationLevelOptions, salaryTypeOptions } from '@/constants/options';
+import { educationConditionLevelOptions, languageOptions, resumeEducationLevelOptions } from '@/constants/options';
 import FormArea from '@/components/common/form/FormArea';
 import { LANGUAGE, LANGUAGE_LEVEL } from '@/constants/language';
 import useToast from '@/hooks/useToast';
@@ -45,6 +45,25 @@ export default function UserResumeDetail({ status, children }: UserResumeDetailP
       },
     ]);
   };
+
+  const handleClickExperiences = () => {
+    const values = getValues('experience');
+
+    setValue('experience', [
+      ...values,
+      {
+        companyName: '',
+        startDate: new Date(),
+        endDate: null,
+        isEmployed: false,
+        job: null as any,
+        position: null,
+        responsibility: '',
+        reasonForLeaving: '',
+      },
+    ]);
+  };
+
   return (
     <S.UserResumeDetail>
       <article className="resume-container">
@@ -60,9 +79,9 @@ export default function UserResumeDetail({ status, children }: UserResumeDetailP
           <FormSelect<ResumeDetailForm> name="education" options={resumeEducationLevelOptions} maxWidth="220px" />
         </ResumeSection>
 
-        {/* <ResumeSection title="경력" isRequired={true} handleClickAdd={() => {}} name="experiences">
+        <ResumeSection title="경력" isRequired={true} handleClickAdd={handleClickExperiences} name="experiences">
           <ResumeExperienceForm />
-        </ResumeSection> */}
+        </ResumeSection>
 
         <ResumeSection title="자격증" handleClickAdd={handleClickAddLicense} name="licenses">
           <ResumeLicenseForm />
