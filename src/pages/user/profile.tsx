@@ -15,7 +15,7 @@ UserProfilePage.getLayout = (page: React.ReactElement) => {
     <Layout>
       <Header>
         <DesktopNavigation />
-        <MobileNavigation title="회원정보" />
+        <MobileNavigation title="회원정보" hamburgerIcon />
       </Header>
       <Main>{page}</Main>
       <Footer />
