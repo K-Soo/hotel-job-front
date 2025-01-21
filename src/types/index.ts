@@ -1,5 +1,5 @@
 import * as API from '@/types/API';
-import { careerLevel, LICENSE_STAGE } from '@/constants/resume';
+import { CAREER_LEVEL, LICENSE_STAGE } from '@/constants/resume';
 import { EXPERIENCE_CONDITION, RECRUITMENT_STATUS, WORKING_DAY_LIST } from '@/constants/recruitment';
 import { AllJobsKeyValuesKeys } from '@/constants/job';
 import { EDUCATION_LEVEL, POSITION, SALARY_TYPE } from '@/constants';
@@ -30,7 +30,7 @@ export type AccountStatus =
   | 'WAITING_APPROVAL';
 
 export type ResumeType = 'FILE' | 'GENERAL'; //파일, 일반
-export type CareerLevelKeys = keyof typeof careerLevel;
+export type CareerLevelKeys = keyof typeof CAREER_LEVEL;
 export type EducationLevelKeys = keyof typeof EDUCATION_LEVEL;
 export type PositionKeys = keyof typeof POSITION;
 export type CityKeys = keyof typeof city;
