@@ -4,9 +4,11 @@ import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { loadingAtom } from '@/recoil/loading';
 import { daumPostAtom } from '@/recoil/daumPost';
 import { bottomSheetAtom } from '@/recoil/bottomSheet';
+import { hamburgerNavigationAtom } from '@/recoil/hamburgerNavigation';
 import { alertWithConfirmSelector, alertWithConfirmAtom } from '@/recoil/alertWithConfirm';
 import { toastAtom } from '@/recoil/toast';
 import dynamic from 'next/dynamic';
+import { AnimatePresence } from 'framer-motion';
 
 export { Footer } from '@/components/layout/footer';
 export { Main } from '@/components/layout/main';
@@ -23,6 +25,7 @@ const DynamicNoSSRAccountBottomSheet = dynamic(() => import('@/components/common
 const DynamicNoSSRAlert = dynamic(() => import('@/components/common/Alert'), { ssr: false });
 const DynamicNoSSRConfirm = dynamic(() => import('@/components/common/Confirm'), { ssr: false });
 const DynamicNoSSRToast = dynamic(() => import('@/components/common/Toast'), { ssr: false });
+const DynamicNoSSRHamburgerNavigation = dynamic(() => import('@/components/layout/HamburgerNavigation'), { ssr: false });
 const DynamicNoSSRDaumPost = dynamic(() => import('@/components/common/DaumPost'), { ssr: false });
 
 interface LayoutProps {
@@ -35,6 +38,7 @@ export default function Layout({ children }: LayoutProps) {
   const bottomSheetAtomValue = useRecoilValue(bottomSheetAtom);
   const toastAtomValue = useRecoilValue(toastAtom);
   const alertWithConfirmSelectorValue = useRecoilValue(alertWithConfirmSelector);
+  const hamburgerNavigationAtomValue = useRecoilValue(hamburgerNavigationAtom);
   const setAlertWithConfirmSelector = useSetRecoilState(alertWithConfirmAtom);
 
   // React.useEffect(() => {
@@ -52,6 +56,7 @@ export default function Layout({ children }: LayoutProps) {
     <S.Layout>
       {loadingAtomValue.isLoading && <DynamicNoSSRLoadingOverlay />}
       {bottomSheetAtomValue.isOpen && <DynamicNoSSRAccountBottomSheet />}
+      <AnimatePresence>{hamburgerNavigationAtomValue.isOpen && <DynamicNoSSRHamburgerNavigation />}</AnimatePresence>
 
       {alertWithConfirmSelectorValue.type === 'ALERT' && <DynamicNoSSRAlert />}
       {alertWithConfirmSelectorValue.type === 'CONFIRM' && <DynamicNoSSRConfirm />}
