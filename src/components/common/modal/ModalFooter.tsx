@@ -1,14 +1,16 @@
 import styled from 'styled-components';
 
-interface ModalFooterProps {}
+interface ModalFooterProps {
+  children: React.ReactNode;
+}
 
-export function ModalFooter({}: ModalFooterProps) {
-  return <S.ModalFooter>ModalFooter</S.ModalFooter>;
+export function ModalFooter({ children }: ModalFooterProps) {
+  return <S.ModalFooter>{children}</S.ModalFooter>;
 }
 
 const S = {
-  ModalFooter: styled.div`
-    height: 55px;
+  ModalFooter: styled.article`
+    height: 60px;
     display: flex;
     align-items: center;
     padding: 0 15px;
