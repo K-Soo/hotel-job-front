@@ -56,7 +56,8 @@ export default function UserResumeDetailContainer() {
       education: undefined,
 
       //경력
-      // experiences: [],
+      experience: [],
+
       // 자격증
       licenses: [],
       // 외국어
@@ -65,6 +66,8 @@ export default function UserResumeDetailContainer() {
       isOptionalAgreement: false,
     },
   });
+  console.log('errors: ', methods.formState.errors);
+  console.log('methods: ', methods.watch());
 
   const { data, isLoading, isSuccess } = useFetchQuery({
     queryKey: [queryKeys.RESUME_DETAIL, { slug, nickname: authAtomState.nickname }],
@@ -97,7 +100,13 @@ export default function UserResumeDetailContainer() {
 
       methods.setValue('isRequiredAgreement', data.result.isRequiredAgreement);
       methods.setValue('isOptionalAgreement', data.result.isOptionalAgreement);
+      console.log('@@@@@@@@@@@: ', data.result.experience);
+
+      if (data.result.experience && Array.isArray(data.result.experience)) {
+        methods.setValue('experience', data.result.experience);
+      }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isSuccess, data]);
 
   const onSubmit: SubmitHandler<ResumeDetailForm> = async (data) => {
@@ -112,6 +121,7 @@ export default function UserResumeDetailContainer() {
       await queryClient.invalidateQueries({ queryKey: [queryKeys.RESUME_DETAIL], refetchType: 'all' });
       await queryClient.invalidateQueries({ queryKey: [queryKeys.RESUME_LIST], refetchType: 'all' });
     } catch (error) {
+      addToast({ type: 'error', message: '이력서 등록에 실패했습니다.' });
     } finally {
       setIsDisabled(false);
     }
@@ -128,6 +138,7 @@ export default function UserResumeDetailContainer() {
           <ResumeProgress />
           <ResumeBottomController onSubmit={onSubmit} status={data.result.status} />
         </UserResumeDetail>
+        <FormDevTools control={methods.control} />
       </FormProvider>
     );
   }
