@@ -44,7 +44,7 @@ UserResumeDetailPage.getLayout = (page: React.ReactElement) => {
     <Layout>
       <Header>
         <DesktopNavigation />
-        <MobileNavigation />
+        <MobileNavigation title="이력서" hamburgerIcon />
       </Header>
       <Main>{page}</Main>
       <Footer />
