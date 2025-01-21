@@ -69,7 +69,9 @@ export default function UserResumeDetail({ status, children }: UserResumeDetailP
       <article className="resume-container">
         <ResumeTitleForm name="title" />
 
-        <ResumeProfileSection status={status} />
+        <ResumeSection title="기본정보" visibleAddButton={false}>
+          <ResumeProfileSection status={status} />
+        </ResumeSection>
 
         <ResumeSection title="간단소개" handleClickAdd={() => {}} visibleAddButton={false} name="summary">
           <FormArea<ResumeDetailForm> name="summary" maxLength={200} />
