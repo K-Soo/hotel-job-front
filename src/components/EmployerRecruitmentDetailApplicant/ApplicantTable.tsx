@@ -238,9 +238,6 @@ function ApplicantTableBody({
                     <StyledRollbackButton onClick={() => fetchUpdateEmployerReviewStageStatus(item.id, 'DOCUMENT')}>
                       전형이동 복구
                     </StyledRollbackButton>
-                    <StyledRejectButton onClick={() => fetchUpdateEmployerReviewStageStatus(item.id, 'REJECT')}>
-                      불합격 처리
-                    </StyledRejectButton>
                   </>
                 )}
               </div>
