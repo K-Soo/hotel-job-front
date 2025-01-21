@@ -21,6 +21,7 @@ interface FormNumberInputProps<T> {
   unit: string;
   maxLength?: number;
   isComma?: boolean;
+  errorPosition?: 'absolute' | 'static';
 }
 
 export default function FormNumberInput<T extends FieldValues>({
@@ -38,6 +39,7 @@ export default function FormNumberInput<T extends FieldValues>({
   unit,
   maxLength,
   isComma,
+  errorPosition,
 }: FormNumberInputProps<T>) {
   const {
     formState: { errors },
@@ -119,7 +121,7 @@ export default function FormNumberInput<T extends FieldValues>({
         />
         <span className="unit">{unit}</span>
       </div>
-      <FormError errors={errors} name={name} style={{ position: 'absolute' }} />
+      <FormError errors={errors} name={name} style={{ position: errorPosition }} />
     </S.FormNumberInput>
   );
 }
