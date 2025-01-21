@@ -237,6 +237,13 @@ export interface UpdateRecruitmentResponse extends BaseResponse {
     status: ResponseStatus;
   };
 }
+
+export interface UpdateApplicationResumeView extends BaseResponse {
+  result: {
+    status: ResponseStatus;
+  };
+}
+
 export interface UpdateEmployerReviewStageStatusResponse extends BaseResponse {
   result: {
     status: ResponseStatus;
