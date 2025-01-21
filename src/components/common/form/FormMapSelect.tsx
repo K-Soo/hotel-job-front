@@ -35,11 +35,18 @@ export default function FormMapSelect<T extends FieldValues>({
     register,
     watch,
     setValue,
+    clearErrors,
   } = useFormContext<T>();
-
+  const selectRef = React.useRef<HTMLSelectElement | null>(null);
   const watchValue = watch(name) || '';
 
   const error = get(errors, name);
+
+  React.useEffect(() => {
+    if (error) {
+      selectRef.current?.focus();
+    }
+  }, [error]);
 
   return (
     <S.FormMapSelect $margin={margin} $width={width} $maxWidth={maxWidth}>
@@ -58,10 +65,14 @@ export default function FormMapSelect<T extends FieldValues>({
               const inputValue = e.target.value;
               const value = inputValue === '' ? null : inputValue;
               setValue(name, value as PathValue<T, Path<T>>);
+              if (error) {
+                clearErrors(name);
+              }
             },
           })}
           id={name + '-formInput'}
           value={watchValue}
+          ref={selectRef}
         >
           {Object.entries(options).map(([key, value]) => (
             <option key={key} value={key}>
@@ -71,7 +82,6 @@ export default function FormMapSelect<T extends FieldValues>({
         </StyledMotionSelect>
         <Icon className="form-select-icon" name="ArrowRight16x16" width="16px" height="16px" />
       </div>
-
       {error && <FormError errors={errors} name={name} />}
     </S.FormMapSelect>
   );
