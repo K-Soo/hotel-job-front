@@ -6,16 +6,21 @@ import Icon from '@/icons/Icon';
 import { CAREER_LEVEL } from '@/constants/resume';
 import { EDUCATION_LEVEL } from '@/constants';
 import Line from '@/components/common/Line';
-import { parseBirthDateAndCalculateAge } from '@/utils';
+import { parseBirthDateAndCalculateAge, dateFormat } from '@/utils';
+import { useReactToPrint } from 'react-to-print';
+import { useRef } from 'react';
 
 interface ResumePreviewProps {
   resumePreviewData: ResumeDetail | null;
   closeResume: () => void;
 }
 
+// TODO - 인쇄 스타일 설정
 export default function ResumePreview({ resumePreviewData, closeResume }: ResumePreviewProps) {
-  console.log('resumePreviewData: ', resumePreviewData);
   const { birthYear, age } = parseBirthDateAndCalculateAge(resumePreviewData?.birthday ?? '');
+
+  const contentRef = useRef<HTMLDivElement>(null);
+  const reactToPrintFn = useReactToPrint({ contentRef });
 
   return (
     <Portal>
@@ -23,21 +28,26 @@ export default function ResumePreview({ resumePreviewData, closeResume }: Resume
         <S.ResumePreview>
           <S.PreviewContainer>
             <Icon className="close-icon" name="Close25x25" onClick={closeResume} />
-            <div className="wrapper">
-              <S.DateBox>
-                <span>{resumePreviewData?.createdAt}</span>
-              </S.DateBox>
+            <div className="wrapper" ref={contentRef}>
+              {resumePreviewData?.createdAt && (
+                <S.DateBox>
+                  <span className="text">지원일</span>
+                  <span>{dateFormat.date6(resumePreviewData.createdAt.toString())}</span>
+                </S.DateBox>
+              )}
 
               {/* 프로필*/}
               <S.Profile>
                 <div>
                   <div className="name-box">
                     <span className="name-box__name">{resumePreviewData?.name}</span>
-                    <span className="name-box__career">{CAREER_LEVEL[resumePreviewData?.careerLevel]}</span>
+                    {resumePreviewData?.careerLevel && (
+                      <span className="name-box__career">{CAREER_LEVEL[resumePreviewData.careerLevel]}</span>
+                    )}
                   </div>
 
                   <div className="age-box">
-                    <span>{birthYear}</span>
+                    <span>{birthYear} </span>
                     <span>{age}세</span>
                   </div>
 
@@ -56,18 +66,19 @@ export default function ResumePreview({ resumePreviewData, closeResume }: Resume
                     </div>
                   </div>
                 </div>
-                <div className="profile-image">이미지</div>
+                <div className="profile-image"></div>
               </S.Profile>
+
               <Line color="#e5e8eb" />
 
-              {/* 상단 섹션*/}
+              {/* 상단 섹션 */}
               <S.Dashboard>
                 <div className="item">
                   <h6 className="item__title">경력</h6>
                 </div>
                 <div className="item">
                   <h6 className="item__title">학력</h6>
-                  <p>{EDUCATION_LEVEL[resumePreviewData?.education]}</p>
+                  {resumePreviewData?.education && <p>{EDUCATION_LEVEL[resumePreviewData.education]}</p>}
                 </div>
                 <div className="item">
                   <h6 className="item__title">희망급여</h6>
@@ -96,17 +107,21 @@ export default function ResumePreview({ resumePreviewData, closeResume }: Resume
               </S.Education>
 
               {/* 경력 */}
-              {resumePreviewData?.experience.length === 0 && (
+              {resumePreviewData?.experience.length !== 0 && (
                 <S.Experience>
                   <div className="header">
                     <h6 className="header__title">경력</h6>
                   </div>
-                  <div className="content">
-                    {/* {resumePreviewData?.experience.map((item) => (
-                    <div>
-                      <div>{item.companyName}</div>
-                    </div>
-                  ))} */}
+                  <div className="experience-wrapper">
+                    {resumePreviewData?.experience.map((item, index) => (
+                      <div key={index} className="experience-wrapper__item">
+                        <div>
+                          {/* <span>{item.startDate}</span> */}
+                          {/* <span>{item.endDate}</span> */}
+                        </div>
+                        <div>{item.companyName}</div>
+                      </div>
+                    ))}
                   </div>
                 </S.Experience>
               )}
@@ -118,12 +133,44 @@ export default function ResumePreview({ resumePreviewData, closeResume }: Resume
                 <div className="content"></div>
               </S.Document>
             </div>
+            <StyledResumeUtilBox>
+              <div className="container">
+                <button className="container__print" onClick={() => reactToPrintFn()}>
+                  프린트
+                </button>
+              </div>
+            </StyledResumeUtilBox>
           </S.PreviewContainer>
         </S.ResumePreview>
       </Background>
     </Portal>
   );
 }
+
+const StyledResumeUtilBox = styled.div`
+  height: 50px;
+  border-top: 1px solid ${(props) => props.theme.colors.gray200};
+  width: 100%;
+  overflow: hidden;
+  margin: 0 auto;
+  .container {
+    margin: 0 auto;
+    height: 100%;
+    max-width: 768px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding: 0 15px;
+    &__print {
+      margin-right: 10px;
+      cursor: pointer;
+      color: ${(props) => props.theme.colors.gray800};
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+`;
 
 const S = {
   ResumePreview: styled.div`
@@ -149,6 +196,22 @@ const S = {
       padding: 60px 15px 0 15px;
       margin: 0 auto;
       max-width: 768px;
+      /* 인쇄 스타일 */
+      @media print {
+        /* A4 크기에 맞게 설정 */
+        width: 210mm;
+        height: auto;
+        padding: 20mm;
+        margin: 0 auto;
+        border: none;
+        border-radius: 0;
+        box-shadow: none;
+        background-color: #ffffff;
+
+        /* 페이지가 나뉠 때 요소가 잘리지 않도록 설정 */
+        break-inside: avoid;
+        page-break-inside: avoid;
+      }
     }
   `,
   DateBox: styled.div`
@@ -156,16 +219,21 @@ const S = {
     justify-content: flex-end;
     font-size: 13px;
     margin-bottom: 15px;
+    color: ${(props) => props.theme.colors.gray700};
+    .text {
+      padding-right: 5px;
+    }
   `,
   Profile: styled.div`
     display: flex;
+    justify-content: space-between;
     .profile-image {
+      border: 1px solid ${(props) => props.theme.colors.gray200};
       width: 130px;
       height: 150px;
-      border: 1px solid ${(props) => props.theme.colors.gray200};
+      border-radius: 5px;
     }
     .name-box {
-      /* margin-bottom: 5px; */
       display: flex;
       align-items: center;
       &__name {
@@ -174,14 +242,16 @@ const S = {
         padding-right: 5px;
       }
       &__career {
-        background-color: red;
-        padding: 2px 8px;
+        padding: 3px 10px;
         border-radius: 15px;
+        font-size: 13px;
         color: ${(props) => props.theme.colors.white};
         background-color: ${(props) => props.theme.colors.black400};
       }
     }
     .age-box {
+      margin-top: 3px;
+      margin-bottom: 10px;
       color: ${(props) => props.theme.colors.gray700};
       font-weight: 400;
       font-size: 15px;
@@ -224,8 +294,9 @@ const S = {
       margin-bottom: 5px;
     }
     .text {
-      line-height: 1.3;
+      line-height: 1.6;
       font-size: 15px;
+      color: ${(props) => props.theme.colors.black400};
     }
   `,
   // 학력
@@ -233,7 +304,7 @@ const S = {
     margin: 50px 0;
     border-top: 1px solid ${(props) => props.theme.colors.gray400};
     .header {
-      height: 40px;
+      height: 50px;
       display: flex;
       align-items: center;
       border-bottom: 1px solid ${(props) => props.theme.colors.gray200};
@@ -248,7 +319,7 @@ const S = {
     margin: 50px 0;
     border-top: 1px solid ${(props) => props.theme.colors.gray400};
     .header {
-      height: 40px;
+      height: 50px;
       display: flex;
       align-items: center;
       border-bottom: 1px solid ${(props) => props.theme.colors.gray200};
@@ -257,12 +328,18 @@ const S = {
         font-weight: 500;
       }
     }
+    .experience-wrapper {
+      border: 1px solid red;
+      &__item {
+        display: flex;
+      }
+    }
   `,
   Document: styled.div`
     margin: 50px 0;
     border-top: 1px solid ${(props) => props.theme.colors.gray400};
     .header {
-      height: 40px;
+      height: 50px;
       display: flex;
       align-items: center;
       border-bottom: 1px solid ${(props) => props.theme.colors.gray200};
