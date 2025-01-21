@@ -1,5 +1,5 @@
 import * as API from '@/types/API';
-import { careerLevel, LICENSE_STAGE } from '@/constants/resume';
+import { CAREER_LEVEL, LICENSE_STAGE } from '@/constants/resume';
 import { EXPERIENCE_CONDITION, RECRUITMENT_STATUS, WORKING_DAY_LIST } from '@/constants/recruitment';
 import { AllJobsKeyValuesKeys } from '@/constants/job';
 import { EDUCATION_LEVEL, POSITION, SALARY_TYPE } from '@/constants';
@@ -30,7 +30,7 @@ export type AccountStatus =
   | 'WAITING_APPROVAL';
 
 export type ResumeType = 'FILE' | 'GENERAL'; //파일, 일반
-export type CareerLevelKeys = keyof typeof careerLevel;
+export type CareerLevelKeys = keyof typeof CAREER_LEVEL;
 export type EducationLevelKeys = keyof typeof EDUCATION_LEVEL;
 export type PositionKeys = keyof typeof POSITION;
 export type CityKeys = keyof typeof city;
@@ -62,15 +62,11 @@ export type Experience = {
   companyName: string;
   isEmployed: boolean; //재직중
   responsibility: string; //담당업무
-  job: AllJobsKeyValuesKeys | undefined; //직무
-  position?: PositionKeys; //직급/직책
+  job: AllJobsKeyValuesKeys; //직무
+  position: PositionKeys | null; //직급/직책
   startDate: Date;
-  endDate: Date;
-  // city: CityKeys;
-  salaryType?: SalaryTypeKeys | undefined; //급여 유형
-  // baseSalary: number; //급여 금액
-  // allowance: number; //수당
-  // reasonForLeaving: string; //퇴사사유
+  endDate: Date | null;
+  reasonForLeaving: string; //퇴사사유
 };
 
 export type License = {
@@ -359,7 +355,7 @@ export interface ResumeRegisterForm {
   addressDetail: string;
   education: EducationLevelKeys;
   // isGraduated: boolean; //졸업여부
-  // experiences: Experience[];
+  // experience: Experience[];
 
   languages: { name: LanguageKey | null; level: LanguageLevelKey | null }[];
 
@@ -388,7 +384,7 @@ export interface ResumeDetail {
   addressDetail: string;
   education: EducationLevelKeys;
   // isGraduated: boolean; //졸업여부
-  // experiences: Experience[];
+  experience: Experience[];
 
   languages: { name: LanguageKey | null; level: LanguageLevelKey | null }[];
 

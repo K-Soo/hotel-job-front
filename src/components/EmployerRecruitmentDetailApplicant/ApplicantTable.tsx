@@ -15,7 +15,7 @@ interface ApplicantTableBody {
   isLoading: boolean;
   data: RecruitmentDetailApplicantListItem[] | undefined;
   fetchUpdateEmployerReviewStageStatus: (id: number, stage: EmployerReviewStageStatusKey) => Promise<void>;
-  handleClickResumePreview: (data: ResumeDetail) => void;
+  handleClickResumePreview: (applicationId: number, isView: boolean, data: ResumeDetail) => void;
 }
 
 export default function ApplicantTable({ children }: ApplicantTableProps) {
@@ -41,13 +41,12 @@ function ApplicantTableHeader() {
       </span>
       <span className="header-row status">전형/합격 여부</span>
       <span className="header-row name">이름/나이</span>
-      <span className="header-row career">경력</span>
+      <span className="header-row career">경력/신입</span>
       <span className="header-row education">최종 학력</span>
       <span className="header-row salary">희망/최근급여</span>
-      <span className="header-row date">지원일</span>
       <span className="header-row step">전형</span>
-      <span className="header-row resume">이력서</span>
-      <span className="header-row class">열람/미열람</span>
+      <span className="header-row resume">분류</span>
+      <span className="header-row date">지원일</span>
     </StyledTableHeader>
   );
 }
@@ -110,12 +109,6 @@ const StyledTableHeader = styled.div`
     height: 100%;
     /* border: 1px solid red; */
   }
-  .date {
-    ${CommonFlex}
-    flex-basis: 10%;
-    height: 100%;
-    /* border: 1px solid red; */
-  }
 
   .step {
     ${CommonFlex}
@@ -128,9 +121,9 @@ const StyledTableHeader = styled.div`
     flex: 0 1 100px;
     height: 100%;
   }
-  .class {
+  .date {
     ${CommonFlex}
-    flex-basis: 100px;
+    flex-basis: 8%;
     height: 100%;
   }
 `;
@@ -158,7 +151,7 @@ function ApplicantTableBody({
                 <span>{EMPLOYER_REVIEW_STAGE_STATUS[item.employerReviewStageStatus]}</span>
               </div>
 
-              <div className="name">
+              <div className="name" onClick={() => handleClickResumePreview(item.id, item.isView, item.resumeSnapshot)}>
                 <span className="name__top">
                   {item.resumeSnapshot.name} {'/'} {SEX_CODE[item.resumeSnapshot.sexCode]}
                 </span>
@@ -166,10 +159,12 @@ function ApplicantTableBody({
                   {birthYear} {`${age}세`}
                 </span>
               </div>
+
               <div className="career">경력</div>
+
               <div className="education">대학교 4학년</div>
+
               <div className="salary">3000 ~ 3800</div>
-              <div className="date">{item.applyAt ? dateFormat.date6(item.applyAt.toString()) : '-'}</div>
 
               <div className="step">
                 {item.employerReviewStageStatus === 'DOCUMENT' && (
@@ -186,31 +181,71 @@ function ApplicantTableBody({
                 {item.employerReviewStageStatus === 'INTERVIEW' && (
                   <>
                     <Button label="면접 제안" variant="primary" width="90px" fontSize="13px" height="30px" />
-                    <StyledRollbackButton onClick={() => fetchUpdateEmployerReviewStageStatus(item.id, 'DOCUMENT')}>
-                      전형이동 복구
-                    </StyledRollbackButton>
+                    <Button
+                      label="최종합격 이동"
+                      variant="secondary100"
+                      width="90px"
+                      fontSize="13px"
+                      height="30px"
+                      margin="10px 0 0 0"
+                      onClick={() => fetchUpdateEmployerReviewStageStatus(item.id, 'ACCEPT')}
+                    />
                   </>
                 )}
 
-                {item.employerReviewStageStatus === 'FINAL_ACCEPT' && (
+                {item.employerReviewStageStatus === 'ACCEPT' && (
                   <>
                     <Button label="합격 통보" variant="primary" width="90px" fontSize="13px" height="30px" />
-                    <StyledRollbackButton>전형이동 복구</StyledRollbackButton>
                   </>
                 )}
 
                 {item.employerReviewStageStatus === 'REJECT' && (
                   <>
                     <Button label="불합격 통보" variant="primary" width="90px" fontSize="13px" height="30px" />
-                    <StyledRollbackButton>전형이동 복구</StyledRollbackButton>
                   </>
                 )}
               </div>
+
+              {/* 분류 */}
               <div className="resume">
-                <span onClick={() => handleClickResumePreview(item.resumeSnapshot)}>이력서</span>
+                {item.employerReviewStageStatus === 'DOCUMENT' && (
+                  <StyledRejectButton onClick={() => fetchUpdateEmployerReviewStageStatus(item.id, 'REJECT')} margin="0">
+                    불합격 처리
+                  </StyledRejectButton>
+                )}
+
+                {item.employerReviewStageStatus === 'INTERVIEW' && (
+                  <>
+                    <StyledRollbackButton onClick={() => fetchUpdateEmployerReviewStageStatus(item.id, 'DOCUMENT')}>
+                      전형이동 복구
+                    </StyledRollbackButton>
+                    <StyledRejectButton onClick={() => fetchUpdateEmployerReviewStageStatus(item.id, 'REJECT')}>
+                      불합격 처리
+                    </StyledRejectButton>
+                  </>
+                )}
+
+                {item.employerReviewStageStatus === 'ACCEPT' && (
+                  <>
+                    <StyledRollbackButton onClick={() => fetchUpdateEmployerReviewStageStatus(item.id, 'DOCUMENT')}>
+                      전형이동 복구
+                    </StyledRollbackButton>
+                  </>
+                )}
+
+                {item.employerReviewStageStatus === 'REJECT' && (
+                  <>
+                    <StyledRollbackButton onClick={() => fetchUpdateEmployerReviewStageStatus(item.id, 'DOCUMENT')}>
+                      전형이동 복구
+                    </StyledRollbackButton>
+                  </>
+                )}
               </div>
-              <div className="class">
-                <span>{item.isView ? '열람' : '미열람'}</span>
+
+              <div className="date">
+                <div className="date__text">{item.applyAt ? dateFormat.date6(item.applyAt.toString()) : '-'}</div>
+                {item.isView && <span>열람</span>}
+                {!item.isView && <span style={{ color: '#4593fc' }}>미열람</span>}
               </div>
             </div>
           );
@@ -220,13 +255,24 @@ function ApplicantTableBody({
 }
 
 const StyledRollbackButton = styled.button`
-  margin-top: 8px;
   color: ${(props) => props.theme.colors.gray800};
   font-size: 13px;
+  text-decoration: underline;
   &:hover {
     cursor: pointer;
     color: ${(props) => props.theme.colors.black200};
-    text-decoration: underline;
+  }
+`;
+
+const StyledRejectButton = styled.button<{ margin?: string }>`
+  color: ${(props) => props.theme.colors.gray800};
+  font-size: 13px;
+  cursor: pointer;
+  text-decoration: underline;
+  margin: ${(props) => props.margin || '10px 0 0 0'};
+  &:hover {
+    cursor: pointer;
+    color: ${(props) => props.theme.colors.black200};
   }
 `;
 
@@ -259,13 +305,16 @@ const StyledTableBody = styled.div`
       ${CommonFlex}
       flex-basis: 10%;
       height: 100%;
-      /* border: 1px solid red; */
     }
     .name {
       ${CommonFlex}
       flex-grow: 1;
       height: 100%;
       font-size: 13px;
+      cursor: pointer;
+      &:hover {
+        text-decoration: underline;
+      }
       &__top {
         padding-bottom: 3px;
       }
@@ -292,13 +341,6 @@ const StyledTableBody = styled.div`
       height: 100%;
       /* border: 1px solid red; */
     }
-    .date {
-      ${CommonFlex}
-      flex-basis: 10%;
-      height: 100%;
-      /* border: 1px solid red; */
-    }
-
     .step {
       ${CommonFlex}
       flex-basis: 15%;
@@ -309,21 +351,17 @@ const StyledTableBody = styled.div`
       ${CommonFlex}
       flex: 0 1 100px;
       height: 100%;
-      color: ${(props) => props.theme.colors.blue600};
-      span {
-        &:hover {
-          text-decoration: underline;
-          color: ${(props) => props.theme.colors.blue800};
-          cursor: pointer;
-        }
-      }
     }
-    .class {
+    .date {
       ${CommonFlex}
-      flex-basis: 100px;
+      flex-basis: 8%;
       height: 100%;
+      font-size: 12px;
       color: ${(props) => props.theme.colors.gray600};
       font-weight: 300;
+      &__text {
+        padding-bottom: 5px;
+      }
     }
   }
 `;

@@ -37,13 +37,7 @@ export default function ResumeProfileImage<T extends FieldValues>({ name }: Resu
     <S.ResumeProfileImage {...getRootProps()} $previewImage={previewImage}>
       <input type="text" {...getInputProps()} />
       {previewImage && <Image src={previewImage} className="image" alt="프로필 이미지" fill />}
-      {!previewImage && (
-        <div className="guide-text">
-          이미지 업로드
-          <br />
-          드래그 & 드롭
-        </div>
-      )}
+      {!previewImage && <div className="guide-text">이미지 업로드</div>}
     </S.ResumeProfileImage>
   );
 }
@@ -51,7 +45,7 @@ export default function ResumeProfileImage<T extends FieldValues>({ name }: Resu
 const S = {
   ResumeProfileImage: styled.div<{ $previewImage: string }>`
     height: 180px;
-    aspect-ratio: 9 / 12;
+    width: 150px;
     border: 1px solid ${(props) => props.theme.colors.gray300};
     border-radius: 5px;
     cursor: pointer;
@@ -68,7 +62,7 @@ const S = {
       object-fit: cover;
     }
     .guide-text {
-      font-size: 11px;
+      font-size: 13px;
       color: ${(props) => props.theme.colors.gray500};
     }
     &:hover {
@@ -83,10 +77,10 @@ const S = {
         }
       `};
     ${(props) => props.theme.media.mobile`
-      margin-right: 15px;
-      aspect-ratio: 3 / 4;
-      width: 130px;
-      height: 200px;
+      margin-bottom: 15px;
+      border-radius: 15px;
+      height: 150px;
+      width: 150px;
     `};
   `,
 };

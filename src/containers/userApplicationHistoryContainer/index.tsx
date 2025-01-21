@@ -21,6 +21,7 @@ export default function UserApplicationHistoryContainer() {
       gcTime: 1000 * 60 * 5,
     },
   });
+
   console.log('지원내역 리스트 API : ', data?.result);
 
   return (

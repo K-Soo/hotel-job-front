@@ -27,7 +27,6 @@ export default function UserResumeDetailContainer() {
   const { authAtomState } = useAuth();
   const { addToast } = useToast();
   const queryClient = useQueryClient();
-  const [isUpdateMode, setIsUpdateMode] = React.useState(false);
   const [isEditing, setIsEditing] = React.useState(true);
   const [isDisabled, setIsDisabled] = React.useState(false);
 
@@ -47,8 +46,8 @@ export default function UserResumeDetailContainer() {
       email: '',
       phone: '',
       birthday: '',
-      address: 'ㅇㅇㅇㅇㅇ',
-      addressDetail: 'ㅇㅇㅇㅇ',
+      address: '',
+      addressDetail: '',
       // 간단소개
       summary: '',
 
@@ -56,7 +55,8 @@ export default function UserResumeDetailContainer() {
       education: undefined,
 
       //경력
-      // experiences: [],
+      experience: [],
+
       // 자격증
       licenses: [],
       // 외국어
@@ -65,6 +65,8 @@ export default function UserResumeDetailContainer() {
       isOptionalAgreement: false,
     },
   });
+  console.log('errors: ', methods.formState.errors);
+  console.log('methods: ', methods.watch());
 
   const { data, isLoading, isSuccess } = useFetchQuery({
     queryKey: [queryKeys.RESUME_DETAIL, { slug, nickname: authAtomState.nickname }],
@@ -85,6 +87,7 @@ export default function UserResumeDetailContainer() {
   React.useEffect(() => {
     if (isSuccess && data) {
       methods.setValue('title', data.result.title);
+      methods.setValue('careerLevel', data.result.careerLevel);
       methods.setValue('profileImage', data.result.profileImage);
       methods.setValue('name', data.result.name);
       methods.setValue('localCode', data.result.localCode);
@@ -94,10 +97,17 @@ export default function UserResumeDetailContainer() {
       methods.setValue('sexCode', data.result.sexCode);
       methods.setValue('phone', data.result.phone);
       methods.setValue('summary', data.result.summary);
+      methods.setValue('address', data.result.address);
+      methods.setValue('addressDetail', data.result.addressDetail);
 
       methods.setValue('isRequiredAgreement', data.result.isRequiredAgreement);
       methods.setValue('isOptionalAgreement', data.result.isOptionalAgreement);
+
+      if (data.result.experience && Array.isArray(data.result.experience)) {
+        methods.setValue('experience', data.result.experience);
+      }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isSuccess, data]);
 
   const onSubmit: SubmitHandler<ResumeDetailForm> = async (data) => {
@@ -112,6 +122,7 @@ export default function UserResumeDetailContainer() {
       await queryClient.invalidateQueries({ queryKey: [queryKeys.RESUME_DETAIL], refetchType: 'all' });
       await queryClient.invalidateQueries({ queryKey: [queryKeys.RESUME_LIST], refetchType: 'all' });
     } catch (error) {
+      addToast({ type: 'error', message: '이력서 등록에 실패했습니다.' });
     } finally {
       setIsDisabled(false);
     }
@@ -128,6 +139,7 @@ export default function UserResumeDetailContainer() {
           <ResumeProgress />
           <ResumeBottomController onSubmit={onSubmit} status={data.result.status} />
         </UserResumeDetail>
+        <FormDevTools control={methods.control} />
       </FormProvider>
     );
   }

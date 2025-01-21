@@ -11,7 +11,7 @@ UserPage.getLayout = (page: React.ReactElement) => {
     <Layout>
       <Header>
         <DesktopNavigation />
-        <MobileNavigation title="MY" />
+        <MobileNavigation title="MY" hamburgerIcon />
       </Header>
       <Main>{page}</Main>
       <BottomNavigation />

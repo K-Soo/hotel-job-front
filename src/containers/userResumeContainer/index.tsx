@@ -3,23 +3,20 @@ import UserResume from '@/components/userResume';
 import UserTemplate from '@/components/common/user/UserTemplate';
 import UserTitle from '@/components/common/user/UserTitle';
 import CreateResumeButton from '@/components/userResume/CreateResumeButton';
-import ResumeCard from '@/components/userResume/ResumeCard';
 import useToast from '@/hooks/useToast';
 import useAuth from '@/hooks/useAuth';
-import path from '@/constants/path';
 import { useRouter } from 'next/router';
 import useAlertWithConfirm from '@/hooks/useAlertWithConfirm';
 import { certificationModalAtom } from '@/recoil/certification';
 import { useRecoilState } from 'recoil';
 import dynamic from 'next/dynamic';
 import { Post } from '@/apis';
-import useFetchQuery from '@/hooks/useFetchQuery';
 import queryKeys from '@/constants/queryKeys';
-import { Get, Delete } from '@/apis';
 import { useQueryClient } from '@tanstack/react-query';
 import { ResumeListItem } from '@/types';
-import useLoading from '@/hooks/useLoading';
 import environment from '@/environment';
+import UserResumeListContainer from '@/containers/userResumeContainer/UserResumeListContainer';
+import { ErrorBoundary, ErrorComponent } from '@/error';
 
 const DynamicNoSSRCertificationModal = dynamic(() => import('@/components/common/CertificationModal'), { ssr: false });
 
@@ -27,21 +24,9 @@ export default function UserResumeContainer() {
   const [certificationModalAtomState, setCertificationModalAtomState] = useRecoilState(certificationModalAtom);
   const router = useRouter();
   const { setAlertWithConfirmAtom } = useAlertWithConfirm();
-  const { setLoadingAtomStatue } = useLoading();
   const { addToast } = useToast();
   const { authAtomState } = useAuth();
   const queryClient = useQueryClient();
-
-  const { data, isLoading, isError, isSuccess } = useFetchQuery({
-    queryKey: [queryKeys.RESUME_LIST, { nickname: authAtomState.nickname }],
-    queryFn: Get.getResumeList,
-    options: {
-      staleTime: 10 * 60 * 1000,
-      gcTime: 15 * 60 * 1000,
-    },
-  });
-
-  console.log('이력서 리스트 API : ', data);
 
   const handleClickCreateResumeButton = async () => {
     if (environment.isProd && authAtomState.certificationStatus !== 'VERIFIED') {
@@ -71,40 +56,6 @@ export default function UserResumeContainer() {
     }
   };
 
-  //API - 이력서 삭제
-  const fetchRemoveResume = async (resumeId: string) => {
-    setLoadingAtomStatue({ isLoading: true });
-    try {
-      const response = await Delete.deleteResume({ resumeId });
-      console.log('이력서 삭제 API : ', response);
-      if (response.result.status !== 'success') {
-        throw new Error();
-      }
-      await queryClient.invalidateQueries({ queryKey: [queryKeys.RESUME_LIST], refetchType: 'all' });
-      addToast({ message: '이력서가 삭제되었습니다.', type: 'success' });
-    } catch (error) {
-      console.log('error: ', error);
-    } finally {
-      setLoadingAtomStatue({ isLoading: false });
-    }
-  };
-
-  const handleClickRemoveResume = (resumeListItem: ResumeListItem) => {
-    if (resumeListItem.isDefault) {
-      return addToast({ message: '기본 이력서는 삭제할 수 없습니다.', type: 'error' });
-    }
-    setAlertWithConfirmAtom((prev) => ({
-      ...prev,
-      type: 'CONFIRM',
-      confirmVariant: 'delete',
-      title: 'TITLE_6',
-      subTitle: resumeListItem.applicationsCount === 0 ? undefined : 'DESC_1',
-      onClickConfirm: () => fetchRemoveResume(resumeListItem.id),
-      confirmLabel: '삭제',
-      cancelLabel: '취소',
-    }));
-  };
-
   return (
     <>
       {certificationModalAtomState.isOpen && <DynamicNoSSRCertificationModal />}
@@ -115,15 +66,10 @@ export default function UserResumeContainer() {
             <CreateResumeButton margin="0 15px 0 0" type="new" handleClickCreateResumeButton={handleClickCreateResumeButton} />
             <CreateResumeButton type="file" handleClickCreateResumeButton={handleClickCreateResumeButton} />
           </div>
-          {isLoading && <div>loading</div>}
-          {isError && <div>error</div>}
-          {isSuccess && data && (
-            <>
-              {data.result.map((item) => (
-                <ResumeCard key={item.id} item={item} handleClickRemoveResume={handleClickRemoveResume} />
-              ))}
-            </>
-          )}
+
+          <ErrorBoundary fallback={<ErrorComponent visibleBackButton={false} message="이력서를 불러오지못했습니다." />}>
+            <UserResumeListContainer />
+          </ErrorBoundary>
         </UserTemplate>
       </UserResume>
     </>

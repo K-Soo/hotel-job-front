@@ -1,6 +1,6 @@
-export const careerLevel = {
-  NEWBIE: 'NEWBIE', // 신입
-  EXPERIENCED: 'EXPERIENCED', // 경력
+export const CAREER_LEVEL = {
+  NEWBIE: '신입',
+  EXPERIENCED: '경력',
 } as const;
 
 export const position = {

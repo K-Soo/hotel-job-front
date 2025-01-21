@@ -6,7 +6,7 @@ import { motion } from 'framer-motion';
 import { ResumeListItem } from '@/types';
 import { useRouter } from 'next/router';
 import path from '@/constants/path';
-
+import useModal from '@/hooks/useModal';
 interface ResumeCardProps {
   item: ResumeListItem;
   handleClickRemoveResume: (resume: ResumeListItem) => void;
@@ -15,6 +15,7 @@ interface ResumeCardProps {
 // TODO - 지원내역 모달 추가
 export default function ResumeCard({ item, handleClickRemoveResume }: ResumeCardProps) {
   const router = useRouter();
+  const { setModalAtomState } = useModal();
 
   return (
     <S.ResumeCard>
@@ -41,7 +42,9 @@ export default function ResumeCard({ item, handleClickRemoveResume }: ResumeCard
         {/* <p className="summary__text">희망지역 서울 강남구</p> */}
       </div>
       <div className="bottom">
-        <button className="bottom__history">입사지원내역 {item.applicationsCount}건</button>
+        <button className="bottom__history" onClick={() => setModalAtomState({ isOpen: true })}>
+          입사지원내역 {item.applicationsCount}건
+        </button>
         <Button label="복사" variant="tertiary" width="70px" height="30px" fontSize="14px" onClick={() => alert('복사')} />
       </div>
     </S.ResumeCard>

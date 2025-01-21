@@ -10,15 +10,25 @@ import useAuth from '@/hooks/useAuth';
 import RecruitDetailApplyResumeForm from '@/components/recruitDetail/RecruitDetailApplyResumeForm';
 import Button from '@/components/common/style/Button';
 import { useQueryClient } from '@tanstack/react-query';
+import Modal from '@/components/common/modal';
+import dynamic from 'next/dynamic';
+import useResponsive from '@/hooks/useResponsive';
+import RecruitDetailBottomNavigation from '@/components/recruitDetail/RecruitDetailBottomNavigation';
+import useModal from '@/hooks/useModal';
+
+const DynamicNoSSRModal = dynamic(() => import('@/components/common/modal'), { ssr: false });
 
 export default function RecruitDetailContainer() {
   const [isOpenApplyForm, setIsOpenApplyForm] = React.useState(false);
   const [selectedResume, setSelectedResume] = React.useState<string | null>(null);
   const [applyStatus, setApplyStatus] = React.useState<'available' | 'duplicate' | 'idle'>('idle');
 
+  const { modalAtomState } = useModal();
+  const { isTablet } = useResponsive();
   const { isAuthenticated } = useAuth();
   const { addToast } = useToast();
   const queryClient = useQueryClient();
+
   const router = useRouter();
   const { slug } = router.query;
 
@@ -81,6 +91,7 @@ export default function RecruitDetailContainer() {
       console.log('이력서 제출 API : ', response);
       await queryClient.invalidateQueries({ queryKey: [queryKeys.APPLICATION_APPLY_CHECK], refetchType: 'all' });
       await queryClient.invalidateQueries({ queryKey: [queryKeys.RESUME_LIST], refetchType: 'all' });
+      await queryClient.invalidateQueries({ queryKey: [queryKeys.USER_APPLICATION_HISTORY], refetchType: 'all' });
       addToast({ message: '지원이 완료되었습니다.', type: 'success' });
       setApplyStatus('duplicate');
     } catch (error) {
@@ -101,33 +112,62 @@ export default function RecruitDetailContainer() {
 
   if (isSuccess && data) {
     return (
-      <RecruitDetail data={data.result}>
-        <RecruitDetailSideMenu managerName={data.result.managerName} managerNumber={data.result.managerNumber}>
-          {!isOpenApplyForm && !isApplyCheckError && (
-            <Button
-              label={applyStatus === 'available' ? '지원하기' : '지원완료'}
-              variant="primary"
-              height="50px"
-              borderRadius="10px"
-              onClick={handleClickApply}
-              fontSize="18px"
-              disabled={applyStatus === 'duplicate'}
-              isLoading={isApplyCheckLoading}
-            />
-          )}
+      <>
+        {isTablet && modalAtomState.isOpen && (
+          <DynamicNoSSRModal>
+            <Modal.Header title="지원하기" />
+            <Modal.Content>
+              <RecruitDetailApplyResumeForm
+                selectedResume={selectedResume}
+                setSelectedResume={setSelectedResume}
+                setIsOpenApplyForm={setIsOpenApplyForm}
+                fetchSubmitApply={fetchSubmitApply}
+              />
+            </Modal.Content>
+            <Modal.Footer>
+              <Button
+                label="제출하기"
+                variant="primary"
+                height="40px"
+                borderRadius="5px"
+                onClick={fetchSubmitApply}
+                disabled={!selectedResume}
+              />
+            </Modal.Footer>
+          </DynamicNoSSRModal>
+        )}
 
-          {isApplyCheckError && <Button label="지원불가" variant="secondary" height="50px" borderRadius="10px" fontSize="18px" disabled />}
+        <RecruitDetail data={data.result}>
+          <RecruitDetailSideMenu managerName={data.result.managerName} managerNumber={data.result.managerNumber}>
+            {!isOpenApplyForm && !isApplyCheckError && (
+              <Button
+                label={applyStatus === 'available' ? '지원하기' : '지원완료'}
+                variant="primary"
+                height="50px"
+                borderRadius="10px"
+                onClick={handleClickApply}
+                fontSize="18px"
+                disabled={applyStatus === 'duplicate'}
+                isLoading={isApplyCheckLoading}
+              />
+            )}
 
-          {isOpenApplyForm && (
-            <RecruitDetailApplyResumeForm
-              selectedResume={selectedResume}
-              setSelectedResume={setSelectedResume}
-              setIsOpenApplyForm={setIsOpenApplyForm}
-              fetchSubmitApply={fetchSubmitApply}
-            />
-          )}
-        </RecruitDetailSideMenu>
-      </RecruitDetail>
+            {isApplyCheckError && (
+              <Button label="지원불가" variant="secondary" height="50px" borderRadius="10px" fontSize="18px" disabled />
+            )}
+
+            {isOpenApplyForm && (
+              <RecruitDetailApplyResumeForm
+                selectedResume={selectedResume}
+                setSelectedResume={setSelectedResume}
+                setIsOpenApplyForm={setIsOpenApplyForm}
+                fetchSubmitApply={fetchSubmitApply}
+              />
+            )}
+          </RecruitDetailSideMenu>
+        </RecruitDetail>
+        <RecruitDetailBottomNavigation />
+      </>
     );
   }
 }

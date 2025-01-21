@@ -2,17 +2,24 @@ import styled from 'styled-components';
 import { useRouter } from 'next/router';
 import Logo from '@/components/common/Logo';
 import path from '@/constants/path';
+import Icon from '@/icons/Icon';
+import { useSetRecoilState } from 'recoil';
+import { hamburgerNavigationAtom } from '@/recoil/hamburgerNavigation';
+
 interface MobileNavigationProps {
   backIcon?: boolean;
   profileIcon?: boolean;
+  hamburgerIcon?: boolean;
   logoIcon?: boolean;
   homeIcon?: boolean;
   backUrl?: string;
   title?: string;
 }
 
-export function MobileNavigation({ title, backUrl, backIcon, profileIcon, logoIcon, homeIcon }: MobileNavigationProps) {
+export function MobileNavigation({ title, backUrl, backIcon, profileIcon, logoIcon, homeIcon, hamburgerIcon }: MobileNavigationProps) {
   const router = useRouter();
+
+  const setHamburgerNavigationAtomState = useSetRecoilState(hamburgerNavigationAtom);
 
   const handleClickBack = () => {
     if (!backUrl) return;
@@ -28,7 +35,13 @@ export function MobileNavigation({ title, backUrl, backIcon, profileIcon, logoIc
       </div>
 
       <div className="title">{title && <h3>{title}</h3>}</div>
-      <div className="right">{profileIcon && <i>profile</i>}</div>
+
+      <div className="right">
+        {profileIcon && <i>profile</i>}
+        {hamburgerIcon && (
+          <Icon name="ListA24x24" width="24px" height="24px" onClick={() => setHamburgerNavigationAtomState({ isOpen: true })} />
+        )}
+      </div>
     </S.MobileNavigation>
   );
 }
@@ -61,6 +74,9 @@ const S = {
     .right {
       flex-basis: 50px;
       height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: end;
     }
   `,
 };

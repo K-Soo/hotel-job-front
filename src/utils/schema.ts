@@ -1,5 +1,5 @@
 import * as yup from 'yup';
-import { careerLevel, position, LICENSE_STAGE } from '@/constants/resume';
+import { CAREER_LEVEL, position, LICENSE_STAGE } from '@/constants/resume';
 import { PREFERENCES } from '@/constants/preferences';
 import { EXPERIENCE_CONDITION, RECRUITMENT_STATUS, WORKING_DAY_LIST } from '@/constants/recruitment';
 import { EDUCATION_LEVEL, SALARY_TYPE } from '@/constants';
@@ -22,7 +22,7 @@ import {
 } from '@/types';
 import { LANGUAGE, LANGUAGE_LEVEL } from '@/constants/language';
 
-const careerLevelKeyValue = Object.keys(careerLevel) as CareerLevelKeys[];
+const careerLevelKeyValue = Object.keys(CAREER_LEVEL) as CareerLevelKeys[];
 const salaryTypeKeyValue = Object.keys(SALARY_TYPE) as SalaryTypeKeys[];
 const jobKeyValue = Object.keys(ALL_JOBS) as AllJobsKeyValuesKeys[];
 const positionKeys = Object.keys(position) as PositionKeys[];
@@ -42,61 +42,6 @@ const languageLevelKey = Object.keys(LANGUAGE_LEVEL) as LanguageLevelKey[];
 const signInSchema = yup.object({
   userId: validation.USER_ID,
   password: validation.PASSWORD,
-});
-
-const resumeRegister = yup.object({
-  resumeType: yup.string().oneOf(['FILE', 'GENERAL']).required(),
-  careerLevel: yup.string().oneOf(careerLevelKeyValue).required(),
-
-  title: validation.REQUIRED_TEXT_1({ minLength: 5, maxLength: 30 }),
-  profileImage: yup.string().default(''),
-  name: yup.string().required(),
-  localCode: yup.string().oneOf(['01', '02']).required().default(undefined),
-  sexCode: yup.string().oneOf(['01', '02']).required().default(undefined),
-  phone: yup.string().required(),
-  birthday: yup.string().required(),
-  email: validation.REQUIRED_EMAIL(),
-  address: yup.string().required(),
-  addressDetail: yup.string().required(),
-
-  summary: yup.string().default(''),
-
-  education: yup.string().oneOf(educationLevelKeys).required(),
-
-  // experiences: yup
-  //   .array(
-  //     yup.object({
-  //       companyName: yup.string().required(),
-  //       salaryType: yup.string().oneOf(salaryTypeKeyValue).nullable().default(undefined),
-  //       job: yup.string().oneOf(jobKeyValue).nullable().default(undefined),
-  //       position: yup.string().oneOf(positionKeys).default(undefined),
-  //       responsibility: yup.string().default(''),
-  //       startDate: yup.date().required(),
-  //       endDate: yup.date().required(),
-  //       isEmployed: yup.boolean().default(false),
-  //     }),
-  //   )
-  //   .default([]),
-
-  licenses: yup
-    .array(
-      yup.object({
-        licenseName: yup.string().required(),
-        licenseStage: yup.string().oneOf(licenseStageKeyValue).required(),
-      }),
-    )
-    .default([]),
-
-  languages: yup
-    .array(
-      yup.object({
-        name: yup.string().oneOf(languageKey).nullable().default(null),
-        level: yup.string().oneOf(languageLevelKey).nullable().default(null),
-      }),
-    )
-    .default([]),
-  isRequiredAgreement: yup.boolean().default(false).oneOf([true]),
-  isOptionalAgreement: yup.boolean().default(false).oneOf([true]),
 });
 
 const signUpSchema = yup.object({
@@ -264,6 +209,82 @@ const recruitmentDetailSchema = yup.object({
       }),
     }),
   }),
+});
+
+const resumeRegister = yup.object({
+  resumeType: yup.string().oneOf(['FILE', 'GENERAL']).required(),
+  careerLevel: yup.string().oneOf(careerLevelKeyValue).required(),
+  title: validation.REQUIRED_TEXT_1({ minLength: 5, maxLength: 30 }),
+  profileImage: yup.string().default(''),
+  name: yup.string().required(),
+  localCode: yup.string().oneOf(['01', '02']).required().default(undefined),
+  sexCode: yup.string().oneOf(['01', '02']).required().default(undefined),
+  phone: yup.string().required(),
+  birthday: yup.string().required(),
+  email: validation.REQUIRED_EMAIL(),
+  address: yup.string().required(),
+  addressDetail: yup.string().required(),
+  summary: yup.string().default(''),
+  education: yup.string().oneOf(educationLevelKeys).required(),
+  experience: yup
+    .array(
+      yup.object({
+        companyName: yup.string().required(),
+        job: yup.string().oneOf(jobKeyValue).required(),
+        position: yup.string().oneOf(positionKeys).nullable().default(null),
+        responsibility: yup.string().default(''),
+        startDate: yup.date().default(null).required('필수선택'),
+        endDate: yup
+          .date()
+          .nullable()
+          .default(null)
+          .when('isEmployed', {
+            is: false,
+            then: (schema) => schema.required('재직중이 아닙니다.'),
+            otherwise: (schema) => schema.nullable(),
+          }),
+        isEmployed: yup.boolean().default(false),
+        // .test('clear-endDate-if-employed', '', function (value) {
+        //   const { path, createError } = this;
+
+        //   // isEmployed가 true인 경우 endDate의 에러를 클리어하고 값을 null로 설정
+        //   if (value === true) {
+        //     if (this.parent.endDate) {
+        //       this.parent.endDate = null; // endDate를 null로 초기화
+        //     }
+        //   } else if (!this.parent.endDate) {
+        //     // isEmployed가 false인데 endDate가 비어 있으면 에러 생성
+        //     return createError({
+        //       path: `${path}.endDate`, // endDate 필드에 에러 바인딩
+        //       message: '퇴직일을 입력해야 합니다.',
+        //     });
+        //   }
+
+        //   return true;
+        // }),
+        reasonForLeaving: yup.string().default(''),
+      }),
+    )
+    .default([]),
+
+  licenses: yup
+    .array(
+      yup.object({
+        licenseName: yup.string().required(),
+        licenseStage: yup.string().oneOf(licenseStageKeyValue).required(),
+      }),
+    )
+    .default([]),
+  languages: yup
+    .array(
+      yup.object({
+        name: yup.string().oneOf(languageKey).nullable().default(null),
+        level: yup.string().oneOf(languageLevelKey).nullable().default(null),
+      }),
+    )
+    .default([]),
+  isRequiredAgreement: yup.boolean().default(false).oneOf([true]),
+  isOptionalAgreement: yup.boolean().default(false).oneOf([true]),
 });
 
 export const schema = {

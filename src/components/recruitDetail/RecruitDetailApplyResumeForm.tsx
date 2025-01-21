@@ -85,12 +85,19 @@ const S = {
   RecruitDetailApplyResumeForm: styled.div`
     border: 1px solid ${(props) => props.theme.colors.gray300};
     border-radius: 10px;
+    ${(props) => props.theme.media.tablet`
+      border-radius: 0;
+      border: none;
+    `};
     .header {
       position: relative;
       height: 50px;
       display: flex;
       justify-content: center;
       align-items: center;
+      ${(props) => props.theme.media.tablet`
+        display: none;
+      `};
       border-bottom: 1px solid ${(props) => props.theme.colors.gray300};
       .arrow-icon {
         position: absolute;
@@ -104,9 +111,15 @@ const S = {
       padding: 15px 15px 0 15px;
       max-height: 300px;
       overflow-y: auto;
+      ${(props) => props.theme.media.tablet`
+        padding: 0;
+      `};
     }
     .bottom {
       padding: 15px;
+      ${(props) => props.theme.media.tablet`
+        display: none;
+      `};
     }
   `,
   ResumeItem: styled.div<{ $active: boolean; $isSelected: boolean }>`

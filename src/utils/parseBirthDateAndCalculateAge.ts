@@ -1,7 +1,7 @@
 export function parseBirthDateAndCalculateAge(birthDateString: string): { birthYear: number; age: number } {
   try {
     if (birthDateString.length !== 8 || isNaN(Number(birthDateString))) {
-      throw new Error('Invalid birth date format. Please provide in YYYYMMDD format.');
+      return { birthYear: 0, age: 0 };
     }
 
     const birthYear = parseInt(birthDateString.slice(0, 4), 10);

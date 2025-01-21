@@ -5,7 +5,7 @@ interface ResumeSectionProps {
   title: string;
   isRequired?: boolean;
   guide?: string;
-  handleClickAdd: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  handleClickAdd?: (event: React.MouseEvent<HTMLButtonElement>) => void;
   children: React.ReactNode;
   visibleAddButton?: boolean;
   name?: string;

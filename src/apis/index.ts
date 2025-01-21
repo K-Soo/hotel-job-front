@@ -298,6 +298,10 @@ export const Patch = {
       '/applications/recruitment/status/review-stage',
       body,
     ),
+
+  // 사업자 - 이력서 열람처리
+  updateApplicationResumeView: (body: { applicationId: number }) =>
+    requests.patch<{ applicationId: number }, API.UpdateApplicationResumeView>('/applications/view', body),
 };
 
 export const Delete = {

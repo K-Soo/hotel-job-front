@@ -37,24 +37,31 @@ export default function FormSelect<T extends FieldValues>({
     register,
     watch,
     setValue,
-    setError,
     clearErrors,
   } = useFormContext<T>();
+  const selectRef = React.useRef<HTMLSelectElement | null>(null);
 
   const watchValue = watch(name) || '';
 
   const error = get(errors, name);
 
   React.useEffect(() => {
+    if (error) {
+      selectRef.current?.focus();
+    }
+  }, [error]);
+
+  React.useEffect(() => {
     if (error && watchValue) {
       clearErrors(name);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [error, watchValue]);
 
   return (
     <S.FormSelect $margin={margin} $width={width} $maxWidth={maxWidth}>
       {label && (
-        <StyledLabel className="input-label" htmlFor={name + '-formInput'} required={required && !disabled}>
+        <StyledLabel className="input-label" htmlFor={name + '-form-select'} required={required && !disabled}>
           {label}
         </StyledLabel>
       )}
@@ -69,8 +76,10 @@ export default function FormSelect<T extends FieldValues>({
               setValue(name, value as PathValue<T, Path<T>>);
             },
           })}
-          id={name + '-formInput'}
+          id={name + '-form-select'}
           value={watchValue}
+          tabIndex={0}
+          ref={selectRef}
         >
           {options.map((option) => (
             <option key={option.value} value={option.value}>

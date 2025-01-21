@@ -1,4 +1,5 @@
 import moment from 'moment';
+import 'moment-timezone';
 
 export const dateFormat = {
   date1: (value: string) => {
@@ -21,7 +22,12 @@ export const dateFormat = {
     return moment(value).format('YY.MM.DD');
   },
   date6: (value: string | null) => {
+    console.log('이력서 날짜: ', value);
     if (!value) return;
+    const utcDate = moment.utc(value); // UTC로 파싱한 날짜
+    const localizedDate = utcDate.tz(moment.tz.guess()); // 타임존에 맞게 변환된 날짜
+    // const formattedDate = localizedDate.format('YYYY.MM.DD HH:mm');
+
     return moment(value).format('YY.MM.DD HH:mm');
   },
   timeRange: (start: string, end: string) => {
