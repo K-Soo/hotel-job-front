@@ -81,6 +81,7 @@ export default function RecruitDetailContainer() {
       console.log('이력서 제출 API : ', response);
       await queryClient.invalidateQueries({ queryKey: [queryKeys.APPLICATION_APPLY_CHECK], refetchType: 'all' });
       await queryClient.invalidateQueries({ queryKey: [queryKeys.RESUME_LIST], refetchType: 'all' });
+      await queryClient.invalidateQueries({ queryKey: [queryKeys.USER_APPLICATION_HISTORY], refetchType: 'all' });
       addToast({ message: '지원이 완료되었습니다.', type: 'success' });
       setApplyStatus('duplicate');
     } catch (error) {
