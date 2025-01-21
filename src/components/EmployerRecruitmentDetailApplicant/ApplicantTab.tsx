@@ -35,6 +35,7 @@ export default function ApplicantTab({}: ApplicantTabProps) {
       id: slug as string,
     },
   });
+
   console.log('지원자 상태별 수량 API : ', data);
 
   const handleTabClick = (newStatus: string) => {
@@ -47,10 +48,14 @@ export default function ApplicantTab({}: ApplicantTabProps) {
       searchParams.set('step', lowerCaseStatus);
     }
 
-    router.replace({
-      pathname: router.pathname,
-      query: Object.fromEntries(searchParams),
-    });
+    router.replace(
+      {
+        pathname: router.pathname,
+        query: Object.fromEntries(searchParams),
+      },
+      undefined,
+      { scroll: false },
+    );
   };
 
   return (
