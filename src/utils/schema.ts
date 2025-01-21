@@ -1,5 +1,5 @@
 import * as yup from 'yup';
-import { careerLevel, position, LICENSE_STAGE } from '@/constants/resume';
+import { CAREER_LEVEL, position, LICENSE_STAGE } from '@/constants/resume';
 import { PREFERENCES } from '@/constants/preferences';
 import { EXPERIENCE_CONDITION, RECRUITMENT_STATUS, WORKING_DAY_LIST } from '@/constants/recruitment';
 import { EDUCATION_LEVEL, SALARY_TYPE } from '@/constants';
@@ -22,7 +22,7 @@ import {
 } from '@/types';
 import { LANGUAGE, LANGUAGE_LEVEL } from '@/constants/language';
 
-const careerLevelKeyValue = Object.keys(careerLevel) as CareerLevelKeys[];
+const careerLevelKeyValue = Object.keys(CAREER_LEVEL) as CareerLevelKeys[];
 const salaryTypeKeyValue = Object.keys(SALARY_TYPE) as SalaryTypeKeys[];
 const jobKeyValue = Object.keys(ALL_JOBS) as AllJobsKeyValuesKeys[];
 const positionKeys = Object.keys(position) as PositionKeys[];
