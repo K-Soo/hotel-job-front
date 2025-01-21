@@ -1,15 +1,17 @@
 import styled from 'styled-components';
 import Icon from '@/icons/Icon';
-import IconDimmed from '@/components/common/IconDimmed';
+import useModal from '@/hooks/useModal';
 
 interface ModalHeaderProps {
   title?: string;
 }
 
 export function ModalHeader({ title }: ModalHeaderProps) {
+  const { setModalAtomState } = useModal();
+
   return (
     <S.ModalHeader>
-      <i className="back">
+      <i className="back" onClick={() => setModalAtomState({ isOpen: false })}>
         <Icon name="ArrowLeft24x24" width="24px" height="24px" />
       </i>
       <h2 className="title">{title}</h2>
