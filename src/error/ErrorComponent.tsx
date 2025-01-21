@@ -26,10 +26,10 @@ export function ErrorComponent({ height, margin, padding, width, message, visibl
 
 const S = {
   ErrorComponent: styled.section<{ $height?: string; $margin?: string; $padding?: string; $width?: string }>`
-    padding: ${(props) => (props.$padding ? props.$padding : '0')};
+    padding: ${(props) => (props.$padding ? props.$padding : '30px 0')};
     margin: ${(props) => (props.$margin ? props.$margin : '0')};
     width: ${(props) => (props.$width ? props.$width : '100%')};
-    height: ${(props) => (props.$height ? props.$height : 'auto')};
+    height: ${(props) => (props.$height ? props.$height : '200px')};
     display: flex;
     align-items: center;
     justify-content: center;
