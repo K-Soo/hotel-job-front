@@ -62,15 +62,11 @@ export type Experience = {
   companyName: string;
   isEmployed: boolean; //재직중
   responsibility: string; //담당업무
-  job: AllJobsKeyValuesKeys | undefined; //직무
-  position?: PositionKeys; //직급/직책
+  job: AllJobsKeyValuesKeys; //직무
+  position: PositionKeys | null; //직급/직책
   startDate: Date;
-  endDate: Date;
-  // city: CityKeys;
-  salaryType?: SalaryTypeKeys | undefined; //급여 유형
-  // baseSalary: number; //급여 금액
-  // allowance: number; //수당
-  // reasonForLeaving: string; //퇴사사유
+  endDate: Date | null;
+  reasonForLeaving: string; //퇴사사유
 };
 
 export type License = {
@@ -359,7 +355,7 @@ export interface ResumeRegisterForm {
   addressDetail: string;
   education: EducationLevelKeys;
   // isGraduated: boolean; //졸업여부
-  // experiences: Experience[];
+  // experience: Experience[];
 
   languages: { name: LanguageKey | null; level: LanguageLevelKey | null }[];
 
@@ -388,7 +384,7 @@ export interface ResumeDetail {
   addressDetail: string;
   education: EducationLevelKeys;
   // isGraduated: boolean; //졸업여부
-  // experiences: Experience[];
+  experience: Experience[];
 
   languages: { name: LanguageKey | null; level: LanguageLevelKey | null }[];
 
