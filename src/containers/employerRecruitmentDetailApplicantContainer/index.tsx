@@ -17,6 +17,7 @@ import { EmployerReviewStageStatusKey, ResumeDetail } from '@/types';
 import useToast from '@/hooks/useToast';
 import { useQueryClient } from '@tanstack/react-query';
 import ResumePreview from '@/components/common/resume/ResumePreview';
+import ApplicantNoticeForm from '@/components/EmployerRecruitmentDetailApplicant/ApplicantNoticeForm';
 import { ErrorBoundary, ErrorComponent } from '@/error';
 
 interface Query extends ParsedUrlQuery {
@@ -26,6 +27,8 @@ interface Query extends ParsedUrlQuery {
 // TODO
 export default function EmployerRecruitmentDetailApplicantContainer() {
   const [resumePreviewData, setResumePreviewData] = React.useState<ResumeDetail | null>(null);
+  const [isOpenNoticeForm, setIsOpenNoticeForm] = React.useState(false);
+
   const { addToast } = useToast();
   const router = useRouter();
   const { slug, step } = router.query as Query;
@@ -96,6 +99,8 @@ export default function EmployerRecruitmentDetailApplicantContainer() {
   return (
     <>
       {resumePreviewData && <ResumePreview resumePreviewData={resumePreviewData} closeResume={() => setResumePreviewData(null)} />}
+      {isOpenNoticeForm && <ApplicantNoticeForm />}
+
       <EmployerRecruitmentDetailApplicant>
         <ApplicantStatusPanel />
 
