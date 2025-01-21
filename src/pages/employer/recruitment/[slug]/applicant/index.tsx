@@ -1,5 +1,4 @@
 import Layout, { EmployerMain, EmployerHeader, EmployerFooter } from '@/components/layout';
-import { ErrorBoundary, ErrorComponent } from '@/error';
 import EmployerRecruitmentDetailApplicantContainer from '@/containers/employerRecruitmentDetailApplicantContainer';
 
 export default function EmployerRecruitmentApplicantPage() {
