@@ -23,6 +23,7 @@ export default function ResumeTitleForm({ name }: ResumeTitleFormProps) {
     if (errors[name] && watchValue && watchValue.length !== 0) {
       clearErrors(name);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [name, watchValue]);
 
   return (
