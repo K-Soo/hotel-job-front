@@ -10,10 +10,9 @@ UserApplicationHistoryPage.getLayout = (page: React.ReactElement) => {
     <Layout>
       <Header>
         <DesktopNavigation />
-        <MobileNavigation />
+        <MobileNavigation title="지원현황" hamburgerIcon />
       </Header>
       <Main>{page}</Main>
-      <Footer />
     </Layout>
   );
 };
