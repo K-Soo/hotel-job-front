@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 interface BackgroundProps {
   children: React.ReactNode;
-  onClick?: () => void;
+  onClick?: (...arg: any) => void;
 }
 
 export default function Background({ onClick, children }: BackgroundProps) {
