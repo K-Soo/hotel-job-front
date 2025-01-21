@@ -21,12 +21,14 @@ export default function FormToggle<T extends FieldValues>({ label, name }: FormT
     formState: { errors },
     watch,
     setValue,
+    clearErrors,
   } = useFormContext<T>();
 
   const value = watch(name);
 
   const handleToggleChange = () => {
     setValue(name, !value as PathValue<T, Path<T>>);
+    clearErrors('experience.0.endDate' as Path<T>);
   };
 
   const error = get(errors, name);
@@ -37,7 +39,6 @@ export default function FormToggle<T extends FieldValues>({ label, name }: FormT
         <motion.div className="handle" layout transition={spring} layoutId={name} />
       </div>
       {label && <span className="toggle-label">{label}</span>}
-
       {error && <FormError errors={errors} name={name} />}
     </S.FormToggle>
   );
