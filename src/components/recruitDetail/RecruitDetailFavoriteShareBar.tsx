@@ -5,10 +5,12 @@ import IconDimmed from '@/components/common/IconDimmed';
 import useToast from '@/hooks/useToast';
 import useAuth from '@/hooks/useAuth';
 import useShare from '@/hooks/useShare';
+import useResponsive from '@/hooks/useResponsive';
 
 export default function RecruitDetailFavoriteShareBar() {
   const { isAuthenticated } = useAuth();
   const { addToast } = useToast();
+  const { isTablet } = useResponsive();
 
   // TODO - 공유하기 로직 추가
   const { handleClickShare } = useShare({
@@ -26,9 +28,11 @@ export default function RecruitDetailFavoriteShareBar() {
   };
   return (
     <S.RecruitDetailFavoriteShareBar>
-      <IconDimmed width="36px" height="36px" margin="0 15px 0 0" onClick={handleClickBookmark}>
-        <Icon name="Bookmark24x24" height="24px" width="24px" />
-      </IconDimmed>
+      {!isTablet && (
+        <IconDimmed width="36px" height="36px" margin="0 15px 0 0" onClick={handleClickBookmark}>
+          <Icon name="Bookmark24x24" height="24px" width="24px" />
+        </IconDimmed>
+      )}
       <IconDimmed width="36px" height="36px" onClick={handleClickShare}>
         <Icon name="Share24x24" height="24px" width="24px" />
       </IconDimmed>
