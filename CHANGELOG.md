@@ -1,6 +1,20 @@
 # 변경 로그
 
 프로젝트의 모든 주요 변경 사항
+## [1.0.0](https://github.com/K-Soo/hotel-job-front/compare/v0.1.18...v1.0.0) (2025-01-22)
+
+
+### Features
+
+* 개인정보 처리방침 및 서비스 이용약관 섹션 제목 추가 및 내용 수정 ([7acecb1](https://github.com/K-Soo/hotel-job-front/commit/7acecb1696f41243baad90dd22eb481ca6c1e0c6))
+* 프로덕션 환경이 아닐 때만 헤더 컴포넌트 렌더링 ([ea1e491](https://github.com/K-Soo/hotel-job-front/commit/ea1e4910b28a2108e3536e25963618bd139cfd15))
+* RecruitDetailContainer에서 태블릿 뷰에 맞춰 지원하기 모달 추가 및 동적 로딩 구현 ([3332f90](https://github.com/K-Soo/hotel-job-front/commit/3332f90121703f5f5e9a6ed974c3586d631460bf))
+
+
+### Bug Fixes
+
+* makefile에서 함수 이름 오타 수정 ([0b87677](https://github.com/K-Soo/hotel-job-front/commit/0b8767738f9ec093b9615c07abbf538e382079bb))
+
 ### [0.1.18](https://github.com/K-Soo/hotel-job-front/compare/v0.1.17...v0.1.18) (2025-01-21)
 
 
