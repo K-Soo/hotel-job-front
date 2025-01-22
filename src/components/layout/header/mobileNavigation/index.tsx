@@ -28,8 +28,8 @@ export function MobileNavigation({ title, backUrl, backIcon, profileIcon, logoIc
 
   return (
     <S.MobileNavigation>
-      <div className="left" onClick={handleClickBack}>
-        {backIcon && <i>back</i>}
+      <div className="left">
+        {backIcon && <Icon name="ArrowLeft24x24" width="24px" height="24px" onClick={handleClickBack} />}
         {homeIcon && <i onClick={() => router.push(path.HOME)}>home</i>}
         {logoIcon && <Logo size="small" margin="0" />}
       </div>
