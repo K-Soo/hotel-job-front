@@ -4,11 +4,9 @@ import { POLICY } from '@/constants/policy';
 interface PolicyTermsProps {}
 
 export default function PolicyTerms({}: PolicyTermsProps) {
-  {
-    /* <p>&nbsp;</p> */
-  }
   return (
     <S.PolicyTerms>
+      <S.SectionTitle>서비스 이용약관</S.SectionTitle>
       <S.Title>제 1 장 [총 칙]</S.Title>
       <S.SubTitle>제 1 조 목적</S.SubTitle>
       <S.Content>
@@ -165,7 +163,7 @@ export default function PolicyTerms({}: PolicyTermsProps) {
           있습니다.
         </p>
         <br />
-        <p>1. 이용희망자가 만 20세 미만인 경우</p>
+        <p>1. 이용희망자가 만 19세 미만인 경우</p>
         <p>2. 개인회원 가입 신청 및/또는 실명인증 시에 실명이 아닌 이름을 이용하였거나 타인의 명의를 도용한 경우</p>
         <p>3. 개인회원 가입 신청 시에 개인회원 정보를 허위로 기재한 경우</p>
         <p>4. 가입과 탈퇴를 반복하여 이득을(쿠폰, 포인트 등)취한경우</p>
@@ -468,12 +466,22 @@ export default function PolicyTerms({}: PolicyTermsProps) {
           관할법원으로 지정합니다.
         </p>
       </S.Content>
+
+      <S.SubTitle>부칙</S.SubTitle>
+      <S.Content>
+        <p>본 약관은 2024년 2월 20일부터 시행합니다.</p>
+      </S.Content>
     </S.PolicyTerms>
   );
 }
 
 const S = {
-  PolicyTerms: styled.div``,
+  PolicyTerms: styled.section``,
+  SectionTitle: styled.h1`
+    color: ${(props) => props.theme.colors.gray900};
+    font-size: 20px;
+    font-weight: 600;
+  `,
   Title: styled.h2`
     color: ${(props) => props.theme.colors.gray900};
     font-size: 18px;
@@ -483,16 +491,9 @@ const S = {
   SubTitle: styled.h3`
     color: ${(props) => props.theme.colors.gray700};
     font-size: 15px;
-    margin: 50px 0 20px 0;
+    margin: 40px 0 10px 0;
     font-weight: 600;
   `,
-  Heading: styled.h4`
-    color: ${(props) => props.theme.colors.gray700};
-    font-size: 14px;
-    font-weight: 500;
-    margin: 5px 0 1px 0;
-  `,
-  Section: styled.article``,
   Content: styled.div`
     color: ${(props) => props.theme.colors.gray600};
     font-size: 13px;

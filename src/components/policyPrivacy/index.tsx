@@ -5,7 +5,7 @@ export default function PolicyPrivacy() {
   return (
     <S.PolicyPrivacy>
       <S.Section>
-        <S.Title>개인정보 처리방침</S.Title>
+        <S.SectionTitle>개인정보 처리방침</S.SectionTitle>
         <S.Content>
           <p>
             {POLICY.company}(이하 “회사”)는 「신용정보의 이용 및 보호에 관한 법률」, 「전자금융거래법」, 「전자상거래법」, 「정보통신망
@@ -435,7 +435,7 @@ export default function PolicyPrivacy() {
 
           <br />
 
-          <p>&bull; 개인정보 처리방침 시행일자 : 2024년 12월 19일</p>
+          <p>&bull; 개인정보 처리방침 시행일자 : 2024년 2월 20일</p>
         </S.Content>
       </S.Section>
     </S.PolicyPrivacy>
@@ -478,6 +478,12 @@ const S = {
         }
       }
     }
+  `,
+  SectionTitle: styled.h1`
+    color: ${(props) => props.theme.colors.gray900};
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 20px;
   `,
   Title: styled.h2`
     color: ${(props) => props.theme.colors.gray900};
