@@ -1,14 +1,17 @@
 import styled from 'styled-components';
 import Button from '@/components/common/style/Button';
-import Icon from '@/icons/Icon';
 import useModal from '@/hooks/useModal';
-
+import useAuth from '@/hooks/useAuth';
+import { useRouter } from 'next/router';
+import path from '@/constants/path';
 interface RecruitDetailBottomNavigationProps {
   applyStatus: 'available' | 'duplicate' | 'idle';
 }
 
 export default function RecruitDetailBottomNavigation({ applyStatus }: RecruitDetailBottomNavigationProps) {
   const { setModalAtomState } = useModal();
+  const { isAuthenticated, role } = useAuth();
+  const router = useRouter();
 
   return (
     <S.RecruitDetailBottomNavigation>
@@ -16,14 +19,27 @@ export default function RecruitDetailBottomNavigation({ applyStatus }: RecruitDe
       {/* <S.BookMarkIcon>
         <Icon name="Bookmark24x24" height="32px" width="32px" />
       </S.BookMarkIcon> */}
-      <Button
-        label={applyStatus === 'available' ? '지원하기' : '지원완료'}
-        variant="primary"
-        height="45px"
-        borderRadius="5px"
-        onClick={() => setModalAtomState({ isOpen: true })}
-        disabled={applyStatus === 'duplicate'}
-      />
+
+      {isAuthenticated && (
+        <>
+          {role === 'JOB_SEEKER' && (
+            <Button
+              label={applyStatus === 'available' ? '지원하기' : '지원완료'}
+              variant="primary"
+              height="45px"
+              borderRadius="5px"
+              onClick={() => setModalAtomState({ isOpen: true })}
+              disabled={applyStatus === 'duplicate'}
+            />
+          )}
+
+          {role !== 'JOB_SEEKER' && <Button label="지원자 전용" variant="secondary" height="45px" borderRadius="5px" disabled />}
+        </>
+      )}
+
+      {!isAuthenticated && (
+        <Button label="로그인 후 지원하기" variant="primary" height="45px" borderRadius="5px" onClick={() => router.push(path.SIGN_IN)} />
+      )}
     </S.RecruitDetailBottomNavigation>
   );
 }
