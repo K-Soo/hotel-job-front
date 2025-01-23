@@ -36,7 +36,7 @@ export default function AuthenticationComponent() {
     },
   });
 
-  console.log('ME API : ', userInfoData);
+  // console.log('ME API : ', userInfoData);
 
   React.useEffect(() => {
     if (isLoading) {
