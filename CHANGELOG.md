@@ -1,6 +1,67 @@
 # 변경 로그
 
 프로젝트의 모든 주요 변경 사항
+## [1.1.0](https://github.com/K-Soo/hotel-job-front/compare/v1.0.0...v1.1.0) (2025-01-23)
+
+
+### Features
+
+* 레이아웃 컴포넌트의 패딩 조정 및 미디어 쿼리 수정 ([d79aff5](https://github.com/K-Soo/hotel-job-front/commit/d79aff57deac90bd232b68469f69cdaf177edf65))
+* 모바일 내비게이션에서 뒤로가기 아이콘을 아이콘 컴포넌트로 변경 ([f0d1dd8](https://github.com/K-Soo/hotel-job-front/commit/f0d1dd8fb6b49d97c24d7a88cc99e0274a54ce5f))
+* 버튼 컴포넌트에 'update' 변형 추가 및 글꼴 두께 조정 ([4d136ad](https://github.com/K-Soo/hotel-job-front/commit/4d136adc5b37f0c065f3906537f66677984f684c))
+* 아이콘 호버 컴포넌트 추가 및 스타일링 구현 ([977920e](https://github.com/K-Soo/hotel-job-front/commit/977920eb3fb2605236fd2de6a6153159ba51ac9c))
+* 이력서 목록 아이템 컴포넌트 추가 ([54b0930](https://github.com/K-Soo/hotel-job-front/commit/54b0930970f94b69b6835f8071e1aedccd3cc2f0))
+* 이력서 미리보기에서 날짜 형식 개선 ([4eaf0bf](https://github.com/K-Soo/hotel-job-front/commit/4eaf0bf8831bae44368e0ebfd0d1cd833a168681))
+* 이력서 수정 관련 컴포넌트 삭제 - 불필요한 ResumeDeleteButton 및 관련 컨테이너 제거 ([b96a591](https://github.com/K-Soo/hotel-job-front/commit/b96a59185603ad1dbf8a25c22de202d953ec2284))
+* 이력서 수정일 형식을 'YY.MM.DD'로 변경 ([8c4cdf6](https://github.com/K-Soo/hotel-job-front/commit/8c4cdf660380ecb40d2d4adaaa35ab58a88bc9cd))
+* 이력서 자격증 폼 컴포넌트 수정 및 스타일 개선 ([27378c7](https://github.com/K-Soo/hotel-job-front/commit/27378c76f34118a43dcff079a75c99a9141eded4))
+* 이력서 진행 상황 컴포넌트에서 미리보기 버튼 클릭 핸들러 추가 및 편집 상태에 따른 진행 표시 개선 ([27d3b77](https://github.com/K-Soo/hotel-job-front/commit/27d3b776b80a6ceef0a3c36a4e29e615d1d94088))
+* 이력서 프로필 섹션에서 상태 관련 props 제거 및 코드 정리 ([4dbf6b2](https://github.com/K-Soo/hotel-job-front/commit/4dbf6b24cdbf02e0a82180112812fe23d0c30f82))
+* 지원자 테이블의 날짜 형식을 'YYYY.MM.DD HH:mm'으로 변경 ([2a77b9e](https://github.com/K-Soo/hotel-job-front/commit/2a77b9eb50dd6be94cfc7ad73b3e46f3f2d00ea2))
+* colors.ts 파일 수정 - 새로운 그린 색상 추가 ([16bedfe](https://github.com/K-Soo/hotel-job-front/commit/16bedfece688a12ac6e7e47637ae48a9c6449d15))
+* dateFormat 유틸리티 수정 - 날짜 형식화 함수 통합 및 불필요한 함수 제거 ([d6e0fc3](https://github.com/K-Soo/hotel-job-front/commit/d6e0fc3710b0096b8d432803123e8ce79b1ba821))
+* dots24x24.svg 아이콘 색상 변경 - fill 속성을 currentColor로 수정 ([7c66bc4](https://github.com/K-Soo/hotel-job-front/commit/7c66bc4199569c88a62632773dfb77ce5e80a82a))
+* EditButton 컴포넌트 추가 ([e477219](https://github.com/K-Soo/hotel-job-front/commit/e477219f4a08f8a01f78de270d7f5cee49489901))
+* FormArea 컴포넌트 수정 - 텍스트 영역 최소 높이 조정 및 스타일 개선 ([860da66](https://github.com/K-Soo/hotel-job-front/commit/860da66e3c14884446297ffc5fdf21a5966f298a))
+* FormDate 컴포넌트 수정 - 불필요한 console.log 제거 ([ca3a4b1](https://github.com/K-Soo/hotel-job-front/commit/ca3a4b17c9524b2dc8f808f1c408b4ca71ee7d33))
+* LANGUAGE_LEVEL 상수 수정 - FLUENT 항목 제거 ([f85ea33](https://github.com/K-Soo/hotel-job-front/commit/f85ea3377e7f23a6301f9ce60c760b21a4b1563b))
+* MobileNavigation 제목 변경 - "내 이력서"에서 "이력서 목록"으로 수정 ([54f5a46](https://github.com/K-Soo/hotel-job-front/commit/54f5a4670c389b3f47b7bf87cde3b22097403acb))
+* ModalHeader 컴포넌트 수정 - 반응형 디자인 적용 및 닫기 아이콘 추가 ([1d2c18b](https://github.com/K-Soo/hotel-job-front/commit/1d2c18bf65ecf9590bf9c320a3197b4756fb9585))
+* RecruitDetailBottomNavigation 컴포넌트에 applyStatus prop 추가 및 버튼 상태 변경 ([85513c9](https://github.com/K-Soo/hotel-job-front/commit/85513c900c99b2fe6c78642535819d82d825e102))
+* RecruitDetailContainer 컴포넌트 수정 - 지원 상태에 따라 버튼 레이블 변경 및 하단 내비게이션에 지원 상태 전달 ([4c238e0](https://github.com/K-Soo/hotel-job-front/commit/4c238e0972ec1cc23b8b1c689e8d39ffff4a0f7d))
+* RecruitUrgentCard 컴포넌트의 너비 조정 ([cb07a2e](https://github.com/K-Soo/hotel-job-front/commit/cb07a2ebf16db290e0d9ec06ba103cf7df2e015a))
+* RemoveButton 컴포넌트 추가 ([11b4d87](https://github.com/K-Soo/hotel-job-front/commit/11b4d877e6a099138a27a47aa0987388f763c404))
+* ResumeBottomController 컴포넌트 수정 - 수정 상태에 따른 버튼 및 최근 수정일 표시 기능 추가 ([bf7e1c8](https://github.com/K-Soo/hotel-job-front/commit/bf7e1c8d2d3a3d2a1c06c82f097ccee43958387c))
+* ResumeCard 컴포넌트에 지원내역 클릭 핸들러 추가 및 아이콘 변경 ([671c9b6](https://github.com/K-Soo/hotel-job-front/commit/671c9b6680a7c603ede83d03aab7cda27fa1551d))
+* ResumeExperienceSectionPreview 컴포넌트 추가 - 이력서 경험 섹션 미리보기 기능 구현 ([c144b4d](https://github.com/K-Soo/hotel-job-front/commit/c144b4d941c75f7c27c90de11ab0a15fdaa6b0c6))
+* ResumeHistoryItem 컴포넌트 추가 및 지원일, 지원취소 날짜 표시 기능 구현 ([cba4c1d](https://github.com/K-Soo/hotel-job-front/commit/cba4c1dd4ecd392f0545d0dfe375ee5dca9565b7))
+* ResumeLanguagesSectionPreview 컴포넌트 추가 - 언어 및 수준 미리보기 기능 구현 ([401a4f8](https://github.com/K-Soo/hotel-job-front/commit/401a4f84fb0051b9c0851fdf03dd26e2e27ea1b6))
+* ResumeLicenseSectionPreview 컴포넌트 추가 - 이력서 라이센스 섹션 미리보기 기능 구현 ([a52fc96](https://github.com/K-Soo/hotel-job-front/commit/a52fc965b9d6c8b69d3bdd462733b73af9a92c57))
+* ResumeLstItemApplications 인터페이스 추가 및 applications 타입 수정 ([04469df](https://github.com/K-Soo/hotel-job-front/commit/04469df6aa61698370b3fb13bb120e4838924d42))
+* ResumePrevuesNavigation 컴포넌트 추가 - 이력서 목록으로 돌아가는 내비게이션 구현 ([cb5c965](https://github.com/K-Soo/hotel-job-front/commit/cb5c965e90766e0af3ee69cbe4df3cbdb72f92a1))
+* ResumeProfileSectionPreview 컴포넌트 추가 - 이력서 프로필 섹션 미리보기 기능 구현 ([aa37604](https://github.com/K-Soo/hotel-job-front/commit/aa37604a78c92637c2bcffcfd1c8cf91af996e0a))
+* ResumeProvider 컴포넌트 추가 - 이력서 상태 관리 및 편집 기능 제공 ([dacbaf3](https://github.com/K-Soo/hotel-job-front/commit/dacbaf3feb3a1d8b12aefd727ce041f75676ee0d))
+* resumeRegister 스키마 수정 - 언어 이름과 레벨 필드 필수로 설정 ([8566d1f](https://github.com/K-Soo/hotel-job-front/commit/8566d1f3de9cbc01e8c1e8723b7eb574b8b3de1a))
+* ResumeSummarySectionPreview 컴포넌트 추가 - 이력서 요약 섹션 미리보기 기능 구현 ([952c763](https://github.com/K-Soo/hotel-job-front/commit/952c7638a725f749ddccc15b62df6a36898e0e0a))
+* ResumeTitleForm 컴포넌트 수정 - 편집 모드에 따라 제목 입력 필드 비활성화 기능 추가 ([ddb1872](https://github.com/K-Soo/hotel-job-front/commit/ddb18720fc0cad0e90eda04a89cddfd027bb334e))
+* SEX_CODE 상수 수정 - 성별 코드 값을 '남자'와 '여자'로 변경 ([50fb9de](https://github.com/K-Soo/hotel-job-front/commit/50fb9de102bff0e8a69d5752dc5fa23b0ad62e08))
+* UserResumeContainer 컴포넌트 수정 - 버튼 레이아웃에 여백 추가 ([971969a](https://github.com/K-Soo/hotel-job-front/commit/971969a8814972a33e43bf103d27e530f26ae228))
+* UserResumeDetail 컴포넌트 수정 - 이력서 미리보기 섹션 추가 및 편집 상태에 따른 렌더링 로직 개선 ([dbd5a95](https://github.com/K-Soo/hotel-job-front/commit/dbd5a950d50e9a3a92a34801c5980736d84cf9a7))
+* UserResumeDetailContainer 컴포넌트 수정 - 이력서 미리보기 기능 추가 및 상태 관리 개선 ([459e7ea](https://github.com/K-Soo/hotel-job-front/commit/459e7ead92914ade817f9266f59c50471278e5eb))
+* UserResumeDetailPage 컴포넌트 수정 - 인증 상태에 따라 이력서 등록 경고 및 ResumeProvider 추가 ([63bc534](https://github.com/K-Soo/hotel-job-front/commit/63bc534f47a175f7cfd6940b4415c26b0c767148))
+* UserResumeListContainer 컴포넌트 수정 - 지원 내역 선택 및 모달 기능 추가 ([60df7fb](https://github.com/K-Soo/hotel-job-front/commit/60df7fb412b7b43d9849b8c07320a7cd89b9826a))
+
+
+### Bug Fixes
+
+* 인증 컴포넌트에서 디버깅 로그 주석 처리 ([b70e87a](https://github.com/K-Soo/hotel-job-front/commit/b70e87a2954e0eb37b1614c4112b5de0380d3dd1))
+
+
+### Styles
+
+* 이력서 섹션 제목의 글꼴 색상을 회색에서 검정으로 변경 ([d87d3fd](https://github.com/K-Soo/hotel-job-front/commit/d87d3fd4013457171134e5cb4d26c97d2df1387d))
+* 프로필 이미지 컴포넌트의 글꼴 크기 및 너비 조정 ([325f031](https://github.com/K-Soo/hotel-job-front/commit/325f031d70c4c12d000b8178e0bd9c054f85df1f))
+
 ## [1.0.0](https://github.com/K-Soo/hotel-job-front/compare/v0.1.18...v1.0.0) (2025-01-22)
 
 
