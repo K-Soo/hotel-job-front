@@ -1,14 +1,26 @@
 import styled from 'styled-components';
 import Button from '@/components/common/style/Button';
+import { useResumeContext } from '@/context/ResumeProvider';
+interface ResumeProgressProps {
+  handleClickPreview: () => void;
+}
 
-interface ResumeProgressProps {}
+export default function ResumeProgress({ handleClickPreview }: ResumeProgressProps) {
+  const { isEditing } = useResumeContext();
 
-export default function ResumeProgress({}: ResumeProgressProps) {
   return (
     <S.ResumeProgress>
-      <div className="progress-container"></div>
-      <Button height="45px" label="이력서 미리보기" variant="tertiary" disabled={false} type="button" margin="15px 0 0 0" />
-      <Button height="45px" label="임시저장" variant="tertiary" disabled={false} type="button" margin="15px 0 0 0" />
+      {isEditing && <div className="progress-container"></div>}
+      <Button
+        height="45px"
+        label="이력서 미리보기"
+        variant="tertiary"
+        disabled={false}
+        type="button"
+        margin="15px 0 0 0"
+        onClick={handleClickPreview}
+      />
+      {/* <Button height="45px" label="임시저장" variant="tertiary" disabled={false} type="button" margin="10px 0 0 0" /> */}
     </S.ResumeProgress>
   );
 }
