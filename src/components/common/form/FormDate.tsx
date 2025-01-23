@@ -72,7 +72,6 @@ export default function FormDate<T extends FieldValues>({
         name={name}
         control={control}
         render={({ field }) => {
-          console.log('field: ', field);
           return (
             <DatePicker
               {...field}
