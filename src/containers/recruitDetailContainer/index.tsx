@@ -126,7 +126,7 @@ export default function RecruitDetailContainer() {
             </Modal.Content>
             <Modal.Footer>
               <Button
-                label="제출하기"
+                label={applyStatus === 'available' ? '제출하기' : '지원완료'}
                 variant="primary"
                 height="40px"
                 borderRadius="5px"
@@ -166,7 +166,7 @@ export default function RecruitDetailContainer() {
             )}
           </RecruitDetailSideMenu>
         </RecruitDetail>
-        <RecruitDetailBottomNavigation />
+        <RecruitDetailBottomNavigation applyStatus={applyStatus} />
       </>
     );
   }
