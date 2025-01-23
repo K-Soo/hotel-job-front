@@ -5,30 +5,28 @@ import { Get } from '@/apis';
 import { useRouter } from 'next/router';
 import UserResumeDetail from '@/components/userResumeDetail';
 import ResumeBottomController from '@/components/common/resume/ResumeBottomController';
-import SignIn from '@/components/signIn';
-import Logo from '@/components/common/Logo';
-import { signInTabOptions } from '@/constants/tabs';
 import { useForm, FormProvider, SubmitHandler } from 'react-hook-form';
-import { ResumeDetailForm, ResumeRegisterForm } from '@/types';
+import { ResumeDetail, ResumeDetailForm } from '@/types';
 import { schema } from '@/utils';
 import { yupResolver } from '@hookform/resolvers/yup';
 import FormDevTools from '@/components/common/FormDevTools';
-import CompanyForm from '@/components/signIn/CompanyForm';
-import GeneralForm from '@/components/signIn/GeneralForm';
 import { Post } from '@/apis';
 import useAuth from '@/hooks/useAuth';
 import useToast from '@/hooks/useToast';
 import { useQueryClient } from '@tanstack/react-query';
 import ResumeProgress from '@/components/common/resume/ResumeProgress';
+import { useResumeContext } from '@/context/ResumeProvider';
+import ResumePreview from '@/components/common/resume/ResumePreview';
 
 export default function UserResumeDetailContainer() {
+  const [resumePreviewData, setResumePreviewData] = React.useState<ResumeDetail | null>(null);
   const router = useRouter();
   const { slug } = router.query;
   const { authAtomState } = useAuth();
   const { addToast } = useToast();
   const queryClient = useQueryClient();
-  const [isEditing, setIsEditing] = React.useState(true);
   const [isDisabled, setIsDisabled] = React.useState(false);
+  const { setResumeStatus, isContextLoading, setIsContextLoading, setIsEditing } = useResumeContext();
 
   const methods = useForm<ResumeDetailForm>({
     resolver: yupResolver(schema.resumeRegister),
@@ -48,27 +46,19 @@ export default function UserResumeDetailContainer() {
       birthday: '',
       address: '',
       addressDetail: '',
-      // 간단소개
-      summary: '',
-
-      //최종학력
-      education: undefined,
-
-      //경력
-      experience: [],
-
-      // 자격증
-      licenses: [],
-      // 외국어
-      languages: [],
+      summary: '', // 간단소개
+      education: undefined, //최종학력
+      experience: [], //경력
+      licenses: [], // 자격증
+      languages: [], // 외국어
       isRequiredAgreement: false,
       isOptionalAgreement: false,
     },
   });
-  console.log('errors: ', methods.formState.errors);
-  console.log('methods: ', methods.watch());
 
-  const { data, isLoading, isSuccess } = useFetchQuery({
+  // console.log('methods: ', methods.watch());
+
+  const { data, isLoading, isSuccess, refetch } = useFetchQuery({
     queryKey: [queryKeys.RESUME_DETAIL, { slug, nickname: authAtomState.nickname }],
     queryFn: Get.getResumeDetail,
     options: {
@@ -82,10 +72,23 @@ export default function UserResumeDetailContainer() {
     },
   });
 
-  console.log('이력서 상세 API : ', data);
+  console.log('이력서 상세 API : ', data?.result.status);
+
+  React.useEffect(() => {
+    if (data) {
+      setResumeStatus(data.result.status);
+      setIsEditing(data.result.status === 'DRAFT' ? true : false);
+      setIsContextLoading(false);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [data]);
 
   React.useEffect(() => {
     if (isSuccess && data) {
+      // if (isSuccess && data) {
+      //   methods.reset(data.result); // 한 번에 설정
+      // }
+
       methods.setValue('title', data.result.title);
       methods.setValue('careerLevel', data.result.careerLevel);
       methods.setValue('profileImage', data.result.profileImage);
@@ -105,6 +108,12 @@ export default function UserResumeDetailContainer() {
 
       if (data.result.experience && Array.isArray(data.result.experience)) {
         methods.setValue('experience', data.result.experience);
+      }
+      if (data.result.licenses && Array.isArray(data.result.licenses)) {
+        methods.setValue('licenses', data.result.licenses);
+      }
+      if (data.result.languages && Array.isArray(data.result.languages)) {
+        methods.setValue('languages', data.result.languages);
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -127,17 +136,23 @@ export default function UserResumeDetailContainer() {
       setIsDisabled(false);
     }
   };
+  const handleClickPreview = React.useCallback(() => {
+    if (data?.result) {
+      setResumePreviewData(data.result);
+    }
+  }, [data?.result]);
 
-  if (isLoading) {
+  if (isLoading || isContextLoading) {
     return <div>loading</div>;
   }
 
   if (isSuccess && data) {
     return (
       <FormProvider {...methods}>
-        <UserResumeDetail status={data.result.status}>
-          <ResumeProgress />
-          <ResumeBottomController onSubmit={onSubmit} status={data.result.status} />
+        {resumePreviewData && <ResumePreview resumePreviewData={resumePreviewData} closeResume={() => setResumePreviewData(null)} />}
+        <UserResumeDetail>
+          <ResumeProgress handleClickPreview={handleClickPreview} />
+          <ResumeBottomController onSubmit={onSubmit} refetch={refetch} updatedAt={data.result.updatedAt} />
         </UserResumeDetail>
         <FormDevTools control={methods.control} />
       </FormProvider>
