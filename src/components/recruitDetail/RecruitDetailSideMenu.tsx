@@ -59,7 +59,6 @@ const S = {
     `};
     .info-box {
       position: relative;
-      margin-top: 30px;
       background-color: ${(props) => props.theme.colors.gray};
       border-radius: 10px;
       padding: 20px;
