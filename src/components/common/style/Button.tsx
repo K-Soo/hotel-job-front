@@ -21,7 +21,8 @@ type ButtonVariant =
   | 'loading' // 작업 중 버튼
   | 'checkout' // 결제
   | 'select' //검색
-  | 'delete'; // 삭제
+  | 'delete' // 삭제
+  | 'update'; // 수정하기
 
 interface ButtonProps {
   label: string;
@@ -162,7 +163,7 @@ const S = {
       css`
         color: ${(props) => props.theme.colors.blue500};
         background-color: ${(props) => props.theme.colors.white};
-        font-weight: 700;
+        font-weight: 600;
         &:hover {
           color: ${(props) => props.theme.colors.blue700};
           text-decoration: underline;
@@ -222,7 +223,7 @@ const S = {
       css`
         color: ${(props) => props.theme.colors.gray600};
         background-color: ${(props) => props.theme.colors.white};
-        font-weight: 700;
+        font-weight: 600;
         &:hover {
           transition: 0.3s;
           color: ${(props) => props.theme.colors.black};
@@ -301,6 +302,20 @@ const S = {
           text-decoration: underline;
         }
         &:disabled {
+          cursor: not-allowed;
+        }
+      `};
+
+    ${(props) =>
+      props.$variant === 'update' &&
+      css`
+        color: ${(props) => props.theme.colors.white};
+        background-color: ${(props) => props.theme.colors.green400};
+        &:hover {
+          background-color: ${(props) => props.theme.colors.green600};
+        }
+        &:disabled {
+          background-color: ${(props) => props.theme.colors.green300};
           cursor: not-allowed;
         }
       `};
