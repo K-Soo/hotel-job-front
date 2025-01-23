@@ -61,6 +61,7 @@ const S = {
     .left {
       display: flex;
       align-items: center;
+      padding-top: 20px;
       &__title {
         font-size: 16px;
         font-weight: 500;

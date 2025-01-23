@@ -138,6 +138,8 @@ export default function UserResumeDetailContainer() {
   };
   const handleClickPreview = React.useCallback(() => {
     if (data?.result) {
+      const values = methods.watch();
+
       setResumePreviewData(data.result);
     }
   }, [data?.result]);

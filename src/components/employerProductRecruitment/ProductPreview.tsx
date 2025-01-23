@@ -1,13 +1,13 @@
 import styled from 'styled-components';
 
-interface ProductSectionPreviewProps {}
+interface ProductPreviewProps {}
 
-export default function ProductSectionPreview({}: ProductSectionPreviewProps) {
-  return <S.ProductSectionPreview></S.ProductSectionPreview>;
+export default function ProductPreview({}: ProductPreviewProps) {
+  return <S.ProductPreview>ProductPreview</S.ProductPreview>;
 }
 
 const S = {
-  ProductSectionPreview: styled.div`
+  ProductPreview: styled.div`
     height: 800px;
     flex: 0 0 380px;
     border: 1px solid ${(props) => props.theme.colors.gray500};

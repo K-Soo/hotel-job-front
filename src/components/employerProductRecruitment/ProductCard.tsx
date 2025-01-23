@@ -8,12 +8,12 @@ import { productUseDateOptions } from '@/constants/options';
 import { useSetRecoilState } from 'recoil';
 import { productOptionAsideMenuAtom } from '@/recoil/payment';
 
-interface ProductSectionCardProps {
+interface ProductCardProps {
   margin?: string;
   title: string;
 }
 
-export default function ProductSectionCard({ margin, title }: ProductSectionCardProps) {
+export default function ProductCard({ title, margin }: ProductCardProps) {
   const [isFocus, setIsFocus] = React.useState(false);
 
   const setProductOptionAsideMenuAtom = useSetRecoilState(productOptionAsideMenuAtom);
@@ -24,29 +24,27 @@ export default function ProductSectionCard({ margin, title }: ProductSectionCard
   };
 
   return (
-    <>
-      <S.ProductSectionCard $margin={margin} $isFocus={isFocus} onFocus={() => setIsFocus(true)} onBlur={() => setIsFocus(false)}>
-        <S.Header>
-          <div className="title-box">
-            <h3 className="title-box__title">{title}</h3>
-            <div className="title-box__tags"></div>
-          </div>
-          <div className="feature-box"></div>
-        </S.Header>
-        <S.Option></S.Option>
+    <S.ProductCard $margin={margin} $isFocus={isFocus} onFocus={() => setIsFocus(true)} onBlur={() => setIsFocus(false)}>
+      <S.Header>
+        <div className="title-box">
+          <h3 className="title-box__title">{title}</h3>
+          <div className="title-box__tags"></div>
+        </div>
+        <div className="feature-box"></div>
+      </S.Header>
+      <S.Option></S.Option>
 
-        <Select options={productUseDateOptions} />
+      <Select options={productUseDateOptions} />
 
-        <S.Checkout>
-          <Button label="상품 선택" variant="primary" width="200px" onClick={handleClickProductPurchase} />
-        </S.Checkout>
-      </S.ProductSectionCard>
-    </>
+      <S.Checkout>
+        <Button label="상품 선택" variant="primary" width="200px" onClick={handleClickProductPurchase} />
+      </S.Checkout>
+    </S.ProductCard>
   );
 }
 
 const S = {
-  ProductSectionCard: styled(motion.div)<{ $margin?: string; $isFocus: boolean }>`
+  ProductCard: styled.div<{ $margin?: string; $isFocus: boolean }>`
     height: 200px;
     border: 1px solid ${(props) => props.theme.colors.gray500};
     margin: ${(props) => props.$margin || '0'};

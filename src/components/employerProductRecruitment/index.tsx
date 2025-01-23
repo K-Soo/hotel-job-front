@@ -1,15 +1,15 @@
 import styled from 'styled-components';
-import ProductSectionPreview from '@/components/employerProductSection/ProductSectionPreview';
-import ProductSectionCard from '@/components/employerProductSection/ProductSectionCard';
 import ChoiceDeviceFilter from '@/components/common/employer/ChoiceDeviceFilter';
+import ProductPreview from '@/components/employerProductRecruitment/ProductPreview';
+import ProductCard from '@/components/employerProductRecruitment/ProductCard';
 
-interface EmployerProductSectionProps {
+interface EmployerProductRecruitmentProps {
   children: React.ReactNode;
 }
 
-export default function EmployerProductSection({ children }: EmployerProductSectionProps) {
+export default function EmployerProductRecruitment({ children }: EmployerProductRecruitmentProps) {
   return (
-    <S.EmployerProductSection>
+    <S.EmployerProductRecruitment>
       {children}
       <S.Header>
         <h1 className="title">주목받는 지면 광고 - 채용 페이지</h1>
@@ -17,20 +17,20 @@ export default function EmployerProductSection({ children }: EmployerProductSect
       </S.Header>
 
       <S.ProductFormContainer>
-        <ProductSectionPreview />
+        <ProductPreview />
         <div className="card-container">
           <ChoiceDeviceFilter margin="0 0 15px 0" />
-          <ProductSectionCard title="프리미엄 공고" margin="0 0 15px 0" />
-          <ProductSectionCard title="급구 공고" margin="0 0 15px 0" />
-          <ProductSectionCard title="기본 공고" />
+          <ProductCard title="프리미엄 공고" margin="0 0 15px 0" />
+          <ProductCard title="급구 공고" margin="0 0 15px 0" />
+          <ProductCard title="기본 공고" />
         </div>
       </S.ProductFormContainer>
-    </S.EmployerProductSection>
+    </S.EmployerProductRecruitment>
   );
 }
 
 const S = {
-  EmployerProductSection: styled.section`
+  EmployerProductRecruitment: styled.section`
     width: 100%;
   `,
   Header: styled.div`

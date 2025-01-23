@@ -20,6 +20,7 @@ import ResumeSummarySectionPreview from '@/components/userResumeDetail/ResumeSum
 import ResumeExperienceSectionPreview from '@/components/userResumeDetail/ResumeExperienceSectionPreview';
 import ResumeLicenseSectionPreview from '@/components/userResumeDetail/ResumeLicenseSectionPreview';
 import ResumeLanguagesSectionPreview from '@/components/userResumeDetail/ResumeLanguagesSectionPreview';
+import ResumeEducationSectionPreview from '@/components/userResumeDetail/ResumeEducationSectionPreview';
 import { useResumeContext } from '@/context/ResumeProvider';
 
 interface UserResumeDetailProps {
@@ -94,9 +95,17 @@ export default function UserResumeDetail({ children }: UserResumeDetailProps) {
           </ResumeSection>
         )}
 
-        <ResumeSection title="최종 학력" isRequired={isEditing ? true : false} visibleAddButton={false} name="education">
-          <FormSelect<ResumeDetailForm> name="education" options={resumeEducationLevelOptions} maxWidth="220px" />
-        </ResumeSection>
+        {/* 최종학력 */}
+        {isEditing && (
+          <ResumeSection title="최종 학력" isRequired={isEditing ? true : false} visibleAddButton={false} name="education">
+            <FormSelect<ResumeDetailForm> name="education" options={resumeEducationLevelOptions} maxWidth="220px" />
+          </ResumeSection>
+        )}
+        {!isEditing && (
+          <ResumeSection title="최종 학력" isRequired={false} visibleAddButton={false} name="education">
+            <ResumeEducationSectionPreview />
+          </ResumeSection>
+        )}
 
         {/* 경력 */}
         {isEditing && (
@@ -111,7 +120,7 @@ export default function UserResumeDetail({ children }: UserResumeDetailProps) {
           </ResumeSection>
         )}
         {!isEditing && (
-          <ResumeSection title="경력" isRequired={false} name="experiences" visibleAddButton={true}>
+          <ResumeSection title="경력" isRequired={false} name="experiences" visibleAddButton={false}>
             <ResumeExperienceSectionPreview />
           </ResumeSection>
         )}
@@ -128,6 +137,7 @@ export default function UserResumeDetail({ children }: UserResumeDetailProps) {
           </ResumeSection>
         )}
 
+        {/* 외국어 */}
         {isEditing && (
           <ResumeSection title="외국어" handleClickAdd={handleClickAddLanguage} visibleAddButton={isEditing ? true : false}>
             {fields.map((field, index) => (
@@ -170,7 +180,7 @@ export default function UserResumeDetail({ children }: UserResumeDetailProps) {
 const S = {
   UserResumeDetail: styled.section`
     display: flex;
-    padding-bottom: 100px;
+    padding-bottom: 50px;
     .resume-container {
       flex: 1;
     }

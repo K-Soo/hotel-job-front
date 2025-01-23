@@ -46,8 +46,7 @@ const path = {
   EMPLOYER_RECRUITMENT: '/employer/recruitment', //채용공고
   EMPLOYER_RECRUITMENT_REGISTER: '/employer/recruitment/register', //채용공고 생성
 
-  EMPLOYER_PRODUCT_MAIN: '/employer/product/main', //상품 메인광고
-  EMPLOYER_PRODUCT_SECTION: '/employer/product/section', //상품 섹션광고
+  EMPLOYER_PRODUCT_RECRUITMENT: '/employer/product/recruitment', //상품
   EMPLOYER_PRODUCT_RESUME: '/employer/product/resume', //상품 이력서 열람
   EMPLOYER_PRODUCT_CHECKOUT: '/employer/product/checkout', //기업 - 결제
 
