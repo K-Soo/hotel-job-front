@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import Portal from '@/components/common/Portal';
 import Background from '@/components/common/Background';
-import { ResumeDetail } from '@/types';
+import { ResumeDetail, ResumeDetailForm } from '@/types';
 import Icon from '@/icons/Icon';
 import { CAREER_LEVEL } from '@/constants/resume';
 import { EDUCATION_LEVEL } from '@/constants';
@@ -11,7 +11,7 @@ import { useReactToPrint } from 'react-to-print';
 import { useRef } from 'react';
 
 interface ResumePreviewProps {
-  resumePreviewData: ResumeDetail | null;
+  resumePreviewData: (ResumeDetail & ResumeDetailForm) | null;
   closeResume: () => void;
 }
 
