@@ -5,37 +5,42 @@ import { ErrorBoundary, ErrorComponent } from '@/error';
 import { useRouter } from 'next/router';
 import useAuth from '@/hooks/useAuth';
 import axios from 'axios';
-
+import path from '@/constants/path';
+import { ResumeProvider } from '@/context/ResumeProvider';
 export default function UserResumeDetailPage() {
   const router = useRouter();
   const { authAtomState } = useAuth();
 
   React.useEffect(() => {
     if (authAtomState.certificationStatus !== 'VERIFIED') {
-      // alert('이력서 등록을 위해서는 본인인증이 필요합니다.');
-      // window.location.href = '/user/resume';
+      alert('이력서 등록을 위해서는 본인인증이 필요합니다.');
+      window.location.href = '/user/resume';
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  return (
-    <ErrorBoundary
-      onError={(error) => {
-        if (axios.isAxiosError(error)) {
-          if (error.response?.status === 404) {
-            router.replace('/404');
-          }
-        }
-      }}
-      fallback={<ErrorComponent />}
-    >
-      <UserResumeDetailContainer />
-    </ErrorBoundary>
-  );
-
-  if (authAtomState.certificationStatus !== 'VERIFIED') {
-  }
+  // XXX - loading 처리?
+  // if (authAtomState.certificationStatus !== 'VERIFIED') {
+  //   return <div></div>;
+  // }
 
   if (authAtomState.certificationStatus === 'VERIFIED') {
+    return (
+      <ErrorBoundary
+        onError={(error) => {
+          if (axios.isAxiosError(error)) {
+            if (error.response?.status === 404) {
+              router.replace('/404');
+            }
+          }
+        }}
+        fallback={<ErrorComponent />}
+      >
+        <ResumeProvider>
+          <UserResumeDetailContainer />
+        </ResumeProvider>
+      </ErrorBoundary>
+    );
   }
 }
 
@@ -44,10 +49,9 @@ UserResumeDetailPage.getLayout = (page: React.ReactElement) => {
     <Layout>
       <Header>
         <DesktopNavigation />
-        <MobileNavigation title="이력서" hamburgerIcon />
+        <MobileNavigation hamburgerIcon backIcon backUrl={path.USER_RESUME} />
       </Header>
       <Main>{page}</Main>
-      <Footer />
     </Layout>
   );
 };
