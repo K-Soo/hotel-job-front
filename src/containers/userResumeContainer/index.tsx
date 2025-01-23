@@ -13,7 +13,6 @@ import dynamic from 'next/dynamic';
 import { Post } from '@/apis';
 import queryKeys from '@/constants/queryKeys';
 import { useQueryClient } from '@tanstack/react-query';
-import { ResumeListItem } from '@/types';
 import environment from '@/environment';
 import UserResumeListContainer from '@/containers/userResumeContainer/UserResumeListContainer';
 import { ErrorBoundary, ErrorComponent } from '@/error';
@@ -62,7 +61,7 @@ export default function UserResumeContainer() {
       <UserResume>
         <UserTemplate>
           <UserTitle title="내 이력서" />
-          <div style={{ width: '100%', display: 'flex', justifyContent: 'space-between' }}>
+          <div style={{ width: '100%', display: 'flex', justifyContent: 'space-between', margin: '0 0 15px 0' }}>
             <CreateResumeButton margin="0 15px 0 0" type="new" handleClickCreateResumeButton={handleClickCreateResumeButton} />
             <CreateResumeButton type="file" handleClickCreateResumeButton={handleClickCreateResumeButton} />
           </div>
