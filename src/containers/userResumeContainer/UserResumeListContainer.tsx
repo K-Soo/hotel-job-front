@@ -1,5 +1,6 @@
 import React from 'react';
 import ResumeCard from '@/components/userResume/ResumeCard';
+import ResumeHistoryItem from '@/components/userResume/ResumeHistoryItem';
 import useToast from '@/hooks/useToast';
 import useAuth from '@/hooks/useAuth';
 import useAlertWithConfirm from '@/hooks/useAlertWithConfirm';
@@ -7,17 +8,21 @@ import useFetchQuery from '@/hooks/useFetchQuery';
 import queryKeys from '@/constants/queryKeys';
 import { Get, Delete } from '@/apis';
 import { useQueryClient } from '@tanstack/react-query';
-import { ResumeListItem } from '@/types';
+import { ResumeListItem, ResumeLstItemApplications } from '@/types';
 import useLoading from '@/hooks/useLoading';
 import Modal from '@/components/common/modal';
 import useModal from '@/hooks/useModal';
+import EmptyComponent from '@/components/common/EmptyComponent';
+import SkeletonUI from '@/components/common/SkeletonUI';
 
 export default function UserResumeListContainer() {
+  const [selectedResume, setSelectedSelectedResume] = React.useState<ResumeLstItemApplications[] | []>([]);
+
   const { setAlertWithConfirmAtom } = useAlertWithConfirm();
   const { setLoadingAtomStatue } = useLoading();
   const { addToast } = useToast();
   const { authAtomState } = useAuth();
-  const { modalAtomState } = useModal();
+  const { modalAtomState, setModalAtomState } = useModal();
   const queryClient = useQueryClient();
 
   const { data, isLoading, isSuccess } = useFetchQuery({
@@ -31,6 +36,19 @@ export default function UserResumeListContainer() {
   });
 
   console.log('이력서 리스트 API : ', data);
+
+  React.useEffect(() => {
+    if (!modalAtomState.isOpen) {
+      setSelectedSelectedResume([]);
+    }
+  }, [modalAtomState.isOpen]);
+
+  //handler - 입사지원 내역
+  const handleClickSelectedApplications = React.useCallback((applications: ResumeLstItemApplications[]) => {
+    setSelectedSelectedResume(applications);
+    setModalAtomState({ isOpen: true });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   //API - 이력서 삭제
   const fetchRemoveResume = async (resumeId: string) => {
@@ -50,6 +68,7 @@ export default function UserResumeListContainer() {
     }
   };
 
+  // 이력서 삭제
   const handleClickRemoveResume = (resumeListItem: ResumeListItem) => {
     if (resumeListItem.isDefault) {
       return addToast({ message: '기본 이력서는 삭제할 수 없습니다.', type: 'error' });
@@ -67,7 +86,7 @@ export default function UserResumeListContainer() {
   };
 
   if (isLoading) {
-    return <div>loading</div>;
+    return <SkeletonUI.ResumeListItems />;
   }
 
   if (isSuccess && data) {
@@ -77,54 +96,21 @@ export default function UserResumeListContainer() {
           <Modal>
             <Modal.Header title="입사 지원내역" />
             <Modal.Content>
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem asperiores, quasi reiciendis, laboriosam mollitia sequi
-                quas officiis nisi quisquam recusandae porro doloremque consequatur. Eaque dicta commodi explicabo libero asperiores
-                aperiam!
-              </p>
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem asperiores, quasi reiciendis, laboriosam mollitia sequi
-                quas officiis nisi quisquam recusandae porro doloremque consequatur. Eaque dicta commodi explicabo libero asperiores
-                aperiam!
-              </p>
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem asperiores, quasi reiciendis, laboriosam mollitia sequi
-                quas officiis nisi quisquam recusandae porro doloremque consequatur. Eaque dicta commodi explicabo libero asperiores
-                aperiam!
-              </p>
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem asperiores, quasi reiciendis, laboriosam mollitia sequi
-                quas officiis nisi quisquam recusandae porro doloremque consequatur. Eaque dicta commodi explicabo libero asperiores
-                aperiam!
-              </p>
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem asperiores, quasi reiciendis, laboriosam mollitia sequi
-                quas officiis nisi quisquam recusandae porro doloremque consequatur. Eaque dicta commodi explicabo libero asperiores
-                aperiam!
-              </p>
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem asperiores, quasi reiciendis, laboriosam mollitia sequi
-                quas officiis nisi quisquam recusandae porro doloremque consequatur. Eaque dicta commodi explicabo libero asperiores
-                aperiam!
-              </p>
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem asperiores, quasi reiciendis, laboriosam mollitia sequi
-                quas officiis nisi quisquam recusandae porro doloremque consequatur. Eaque dicta commodi explicabo libero asperiores
-                aperiam!
-              </p>
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem asperiores, quasi reiciendis, laboriosam mollitia sequi
-                quas officiis nisi quisquam recusandae porro doloremque consequatur. Eaque dicta commodi explicabo libero asperiores
-                aperiam!
-              </p>
+              {selectedResume.length === 0 && <EmptyComponent message="지원내역이 없습니다." />}
+              {selectedResume.map((item) => (
+                <ResumeHistoryItem key={item.id} item={item} />
+              ))}
             </Modal.Content>
-            <Modal.Footer>
-              <h1>Modal Header</h1>
-            </Modal.Footer>
           </Modal>
         )}
+
         {data.result.map((item) => (
-          <ResumeCard key={item.id} item={item} handleClickRemoveResume={handleClickRemoveResume} />
+          <ResumeCard
+            key={item.id}
+            item={item}
+            handleClickRemoveResume={handleClickRemoveResume}
+            handleClickSelectedApplications={handleClickSelectedApplications}
+          />
         ))}
       </>
     );

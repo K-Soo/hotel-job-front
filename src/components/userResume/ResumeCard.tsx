@@ -2,18 +2,20 @@ import styled from 'styled-components';
 import Button from '@/components/common/style/Button';
 import Icon from '@/icons/Icon';
 import IconDimmed from '@/components/common/IconDimmed';
+import IconHover from '@/components/common/IconHover';
 import { motion } from 'framer-motion';
-import { ResumeListItem } from '@/types';
+import { ResumeListItem, ResumeLstItemApplications } from '@/types';
 import { useRouter } from 'next/router';
 import path from '@/constants/path';
 import useModal from '@/hooks/useModal';
 interface ResumeCardProps {
   item: ResumeListItem;
   handleClickRemoveResume: (resume: ResumeListItem) => void;
+  handleClickSelectedApplications: (applications: ResumeLstItemApplications[]) => void;
 }
 
 // TODO - 지원내역 모달 추가
-export default function ResumeCard({ item, handleClickRemoveResume }: ResumeCardProps) {
+export default function ResumeCard({ item, handleClickRemoveResume, handleClickSelectedApplications }: ResumeCardProps) {
   const router = useRouter();
   const { setModalAtomState } = useModal();
 
@@ -25,15 +27,16 @@ export default function ResumeCard({ item, handleClickRemoveResume }: ResumeCard
           {item.status === 'DRAFT' && <span className="top__draft">미완성</span>}
         </div>
 
-        <IconDimmed
+        <IconHover
           onClick={(event) => {
             event.stopPropagation();
             handleClickRemoveResume(item);
           }}
         >
-          <Icon name="Dots24x24" width="18px" height="18px" />
-        </IconDimmed>
+          <Icon name="Dots24x24" width="18px" height="18px" style={{ transform: 'rotate(90deg)', color: '#555' }} />
+        </IconHover>
       </div>
+
       <h4 className="title" onClick={() => router.push(`${path.USER_RESUME}/${item.id}`)}>
         {item.title}
       </h4>
@@ -42,10 +45,11 @@ export default function ResumeCard({ item, handleClickRemoveResume }: ResumeCard
         {/* <p className="summary__text">희망지역 서울 강남구</p> */}
       </div>
       <div className="bottom">
-        <button className="bottom__history" onClick={() => setModalAtomState({ isOpen: true })}>
+        <button className="bottom__history" onClick={() => handleClickSelectedApplications(item.applications)}>
           입사지원내역 {item.applicationsCount}건
         </button>
-        <Button label="복사" variant="tertiary" width="70px" height="30px" fontSize="14px" onClick={() => alert('복사')} />
+        {/* TODO - 복사 기능 */}
+        {/* <Button label="복사" variant="tertiary" width="70px" height="30px" fontSize="14px" onClick={() => alert('복사')} /> */}
       </div>
     </S.ResumeCard>
   );
@@ -58,8 +62,9 @@ const S = {
     color: ${({ theme }) => theme.colors.gray500};
     border-radius: 15px;
     margin: 10px 0;
-    padding: 15px;
+    padding: 10px 15px 15px 15px;
     user-select: none;
+    min-height: 100px;
     &:hover {
       border: 1px solid ${({ theme }) => theme.colors.gray300};
     }

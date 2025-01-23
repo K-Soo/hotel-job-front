@@ -278,8 +278,8 @@ const resumeRegister = yup.object({
   languages: yup
     .array(
       yup.object({
-        name: yup.string().oneOf(languageKey).nullable().default(null),
-        level: yup.string().oneOf(languageLevelKey).nullable().default(null),
+        name: yup.string().oneOf(languageKey).default(null).required(),
+        level: yup.string().oneOf(languageLevelKey).default(null).nullable().required(),
       }),
     )
     .default([]),

@@ -243,7 +243,7 @@ function ApplicantTableBody({
               </div>
 
               <div className="date">
-                <div className="date__text">{item.applyAt ? dateFormat.date6(item.applyAt.toString()) : '-'}</div>
+                <div className="date__text">{item.applyAt ? dateFormat.date(item.applyAt, 'YYYY.MM.DD HH:mm') : '-'}</div>
                 {item.isView && <span>열람</span>}
                 {!item.isView && <span style={{ color: '#4593fc' }}>미열람</span>}
               </div>

@@ -150,7 +150,19 @@ const StyleRecruitment = styled.section`
   }
 `;
 
+const ResumeListItems = () => {
+  return (
+    <StyleResumeListItems>
+      <StyledLine style={{ height: '100px', borderRadius: '15px', margin: '10px 0' }} />
+      <StyledLine style={{ height: '100px', borderRadius: '15px', margin: '10px 0' }} />
+    </StyleResumeListItems>
+  );
+};
+
+const StyleResumeListItems = styled.div``;
+
 const SkeletonUI = {
+  ResumeListItems,
   Document,
   Line,
   Table,

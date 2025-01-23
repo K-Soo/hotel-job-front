@@ -62,7 +62,7 @@ const S = {
       object-fit: cover;
     }
     .guide-text {
-      font-size: 13px;
+      font-size: 14px;
       color: ${(props) => props.theme.colors.gray500};
     }
     &:hover {
@@ -80,7 +80,7 @@ const S = {
       margin-bottom: 15px;
       border-radius: 15px;
       height: 150px;
-      width: 150px;
+      width: 130px;
     `};
   `,
 };

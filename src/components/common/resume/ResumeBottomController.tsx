@@ -1,15 +1,21 @@
 import styled from 'styled-components';
 import Button from '@/components/common/style/Button';
-import FormInput from '@/components/common/form/FormInput';
-import { ResumeDetailForm, ResumeStatusKey } from '@/types';
+import { ResumeDetailForm } from '@/types';
 import { SubmitHandler, useFormContext } from 'react-hook-form';
-
+import { useResumeContext } from '@/context/ResumeProvider';
+import { QueryObserverResult, RefetchOptions } from '@tanstack/react-query';
+import { GetResumeDetailResponse } from '@/types/API';
+import { AxiosError } from 'axios';
+import { dateFormat } from '@/utils';
 interface ResumeBottomControllerProps {
-  status: ResumeStatusKey;
   onSubmit: SubmitHandler<ResumeDetailForm>;
+  updatedAt: Date;
+  refetch: (options?: RefetchOptions) => Promise<QueryObserverResult<GetResumeDetailResponse, AxiosError<unknown, any>>>;
 }
 
-export default function ResumeBottomController({ status, onSubmit }: ResumeBottomControllerProps) {
+export default function ResumeBottomController({ onSubmit, updatedAt, refetch }: ResumeBottomControllerProps) {
+  const { isEditing, setIsEditing, resumeStatus } = useResumeContext();
+
   const {
     handleSubmit,
     formState: { isSubmitting },
@@ -18,9 +24,22 @@ export default function ResumeBottomController({ status, onSubmit }: ResumeBotto
   return (
     <S.ResumeBottomController>
       <div className="resume-bottom-controller">
-        {status === 'DRAFT' && (
+        {isEditing && resumeStatus === 'PUBLISH' && (
           <Button
-            maxWidth="130px"
+            maxWidth="110px"
+            height="40px"
+            margin="0 15px 0 0"
+            label="취소"
+            variant="secondary"
+            disabled={false}
+            type="button"
+            onClick={() => refetch()}
+          />
+        )}
+
+        {isEditing && (
+          <Button
+            maxWidth="110px"
             height="40px"
             label="작성완료"
             variant="primary"
@@ -31,17 +50,19 @@ export default function ResumeBottomController({ status, onSubmit }: ResumeBotto
           />
         )}
 
-        {status === 'PUBLISH' && (
-          <Button
-            maxWidth="130px"
-            height="40px"
-            label="수정하기"
-            variant="primary"
-            disabled={false}
-            type="button"
-            onClick={handleSubmit(onSubmit)}
-            isLoading={isSubmitting}
-          />
+        {!isEditing && (
+          <>
+            <S.UpdateTime>최근 수정일: {dateFormat.date(updatedAt, 'MM.DD HH:mm')}</S.UpdateTime>
+            <Button
+              maxWidth="110px"
+              height="40px"
+              label="수정하기"
+              variant="update"
+              disabled={false}
+              type="button"
+              onClick={() => setIsEditing(true)}
+            />
+          </>
         )}
       </div>
     </S.ResumeBottomController>
@@ -70,5 +91,11 @@ const S = {
         padding: 0 15px;
       `};
     }
+  `,
+  UpdateTime: styled.span`
+    padding-top: 15px;
+    margin-right: 15px;
+    font-size: 13px;
+    color: ${(props) => props.theme.colors.gray600};
   `,
 };

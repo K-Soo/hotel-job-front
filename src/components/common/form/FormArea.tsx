@@ -2,7 +2,6 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import FormError from '@/components/common/form/FormError';
 import { useFormContext, Path, FieldValues } from 'react-hook-form';
-import { motion } from 'framer-motion';
 import { get } from 'lodash';
 
 interface FormAreaProps<T> {
@@ -30,11 +29,7 @@ export default function FormArea<T extends FieldValues>({
     formState: { errors },
     register,
     setFocus,
-    watch,
-    clearErrors,
   } = useFormContext<T>();
-
-  const watchValue = watch(name);
 
   React.useEffect(() => {
     if (isFocusing) {
@@ -63,18 +58,25 @@ const S = {
     margin: ${(props) => (props.$margin ? props.$margin : '0 0 10px 0')};
     width: ${(props) => (props.$width ? props.$width : '100%')};
     max-width: ${(props) => (props.$maxWidth ? props.$maxWidth : '100%')};
+    textarea {
+      outline: none;
+      border: 1px solid ${({ theme }) => theme.colors.gray300};
+    }
   `,
 };
 
 const StyledTextArea = styled.textarea`
   border: 1px solid ${({ theme }) => theme.colors.gray300};
   display: block;
-  height: 140px;
+  min-height: 200px;
   width: 100%;
   border-radius: 5px;
   font-size: 16px;
-  resize: none;
+  resize: vertical;
   padding: 15px;
+  color: ${({ theme }) => theme.colors.black500};
+  font-weight: 400;
+
   &:hover {
     background-color: ${(props) => props.theme.colors.blue};
     border: 1px solid ${(props) => props.theme.colors.blue100};

@@ -85,7 +85,7 @@ const S = {
     user-select: none;
     ${(props) => props.theme.media.tablet`
       aspect-ratio: 5 / 3;
-      width: calc(50% - 10px);
+      width: calc(50% - 5px);
     `};
 
     ${(props) => props.theme.media.mobile`

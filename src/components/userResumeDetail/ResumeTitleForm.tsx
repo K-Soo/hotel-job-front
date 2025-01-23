@@ -1,18 +1,19 @@
 import React from 'react';
 import FormError from '@/components/common/form/FormError';
 import styled from 'styled-components';
-import { useFormContext, Path, FieldValues } from 'react-hook-form';
-import { get } from 'lodash';
+import { useFormContext } from 'react-hook-form';
+import { useResumeContext } from '@/context/ResumeProvider';
 
 interface ResumeTitleFormProps {
   name: string;
 }
 
 export default function ResumeTitleForm({ name }: ResumeTitleFormProps) {
+  const { isEditing } = useResumeContext();
+
   const {
     formState: { errors },
     register,
-    setFocus,
     watch,
     clearErrors,
   } = useFormContext();
@@ -28,7 +29,7 @@ export default function ResumeTitleForm({ name }: ResumeTitleFormProps) {
 
   return (
     <S.ResumeTitleForm>
-      <input type="text" className="title-input" placeholder="이력서 제목" maxLength={25} {...register(name)} />
+      <input type="text" className="title-input" placeholder="이력서 제목" maxLength={25} {...register(name)} disabled={!isEditing} />
       <FormError errors={errors} name={name} />
     </S.ResumeTitleForm>
   );

@@ -31,8 +31,8 @@ export const SALARY_TYPE = {
 } as const;
 
 export const SEX_CODE = {
-  '01': '남',
-  '02': '여',
+  '01': '남자',
+  '02': '여자',
 } as const;
 
 export const LOCAL_CODE = {

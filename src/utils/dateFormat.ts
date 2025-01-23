@@ -1,35 +1,23 @@
 import moment from 'moment';
 import 'moment-timezone';
 
-export const dateFormat = {
-  date1: (value: string) => {
-    return moment(value).format('YYYY.MM.DD');
-  },
-  date2: (value: string | null) => {
-    if (!value) return;
-    return moment(value).format('YYYY.MM.DD HH:mm');
-  },
-  date3: (value: string | null) => {
-    if (!value) return;
-    return moment(value).format('YYYY.MM.DD HH:mm:ss');
-  },
-  date4: (value: string | null) => {
-    if (!value) return;
-    return moment(value).format('HH:mm:ss');
-  },
-  date5: (value: string | null) => {
-    if (!value) return;
-    return moment(value).format('YY.MM.DD');
-  },
-  date6: (value: string | null) => {
-    console.log('이력서 날짜: ', value);
-    if (!value) return;
-    const utcDate = moment.utc(value); // UTC로 파싱한 날짜
-    const localizedDate = utcDate.tz(moment.tz.guess()); // 타임존에 맞게 변환된 날짜
-    // const formattedDate = localizedDate.format('YYYY.MM.DD HH:mm');
+type DateFormatType =
+  | 'YYYY.MM.DD'
+  | 'YYYY.MM.DD HH:mm'
+  | 'YYYY.MM.DD HH:mm:ss'
+  | 'HH:mm:ss'
+  | 'YY.MM.DD'
+  | 'YY.MM.DD HH:mm'
+  | 'MM.DD HH:mm';
 
-    return moment(value).format('YY.MM.DD HH:mm');
+export const dateFormat = {
+  date: (value: Date | string | null | undefined, format: DateFormatType) => {
+    if (!value) {
+      return 'unknown';
+    }
+    return moment(value).format(format);
   },
+
   timeRange: (start: string, end: string) => {
     if (!start || !end) return 'unknown';
 

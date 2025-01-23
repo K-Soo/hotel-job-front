@@ -67,7 +67,7 @@ export default function RecruitDetailApplyResumeForm({
                 <div className="meta">
                   {resume.isDefault && <span className="meta__default">기본 이력서</span>}
                   {resume.status === 'DRAFT' && <span>작성중</span>}
-                  <span>수정일 {dateFormat.date5(resume.updatedAt)}</span>
+                  <span>수정일 {dateFormat.date(resume.updatedAt, 'YY.MM.DD')}</span>
                 </div>
               </S.ResumeItem>
             ))}

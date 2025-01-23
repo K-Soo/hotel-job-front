@@ -64,7 +64,7 @@ const S = {
       &__title {
         font-size: 16px;
         font-weight: 500;
-        color: ${(props) => props.theme.colors.gray700};
+        color: ${(props) => props.theme.colors.black300};
         user-select: none;
       }
       &__required {

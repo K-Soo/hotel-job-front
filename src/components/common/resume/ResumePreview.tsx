@@ -32,7 +32,7 @@ export default function ResumePreview({ resumePreviewData, closeResume }: Resume
               {resumePreviewData?.createdAt && (
                 <S.DateBox>
                   <span className="text">지원일</span>
-                  <span>{dateFormat.date6(resumePreviewData.createdAt.toString())}</span>
+                  <span>{dateFormat.date(resumePreviewData.createdAt, 'YY.MM.DD HH:mm')}</span>
                 </S.DateBox>
               )}
 

@@ -3,9 +3,11 @@ import Button from '@/components/common/style/Button';
 import Icon from '@/icons/Icon';
 import useModal from '@/hooks/useModal';
 
-interface RecruitDetailBottomNavigationProps {}
+interface RecruitDetailBottomNavigationProps {
+  applyStatus: 'available' | 'duplicate' | 'idle';
+}
 
-export default function RecruitDetailBottomNavigation({}: RecruitDetailBottomNavigationProps) {
+export default function RecruitDetailBottomNavigation({ applyStatus }: RecruitDetailBottomNavigationProps) {
   const { setModalAtomState } = useModal();
 
   return (
@@ -14,7 +16,14 @@ export default function RecruitDetailBottomNavigation({}: RecruitDetailBottomNav
       {/* <S.BookMarkIcon>
         <Icon name="Bookmark24x24" height="32px" width="32px" />
       </S.BookMarkIcon> */}
-      <Button label="지원하기" variant="primary" height="45px" borderRadius="5px" onClick={() => setModalAtomState({ isOpen: true })} />
+      <Button
+        label={applyStatus === 'available' ? '지원하기' : '지원완료'}
+        variant="primary"
+        height="45px"
+        borderRadius="5px"
+        onClick={() => setModalAtomState({ isOpen: true })}
+        disabled={applyStatus === 'duplicate'}
+      />
     </S.RecruitDetailBottomNavigation>
   );
 }

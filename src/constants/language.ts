@@ -12,6 +12,5 @@ export const LANGUAGE_LEVEL = {
   BEGINNER: '초급',
   INTERMEDIATE: '중급',
   ADVANCED: '고급',
-  FLUENT: '유창함',
   NATIVE: '원어민 수준',
 } as const;

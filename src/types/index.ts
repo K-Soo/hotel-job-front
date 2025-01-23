@@ -327,6 +327,19 @@ export interface IRecruitDetail {
   };
 }
 
+export interface ResumeLstItemApplications {
+  id: string;
+  applicationStatus: ApplicationStatus;
+  createdAt: Date;
+  applyAt: Date;
+  cancelAt: Date | null;
+  reviewStageStatus: ReviewStageStatusKey;
+  recruitment: {
+    id: string;
+    recruitmentTitle: string;
+    hotelName: string;
+  };
+}
 export interface ResumeListItem {
   id: string;
   title: string;
@@ -337,7 +350,7 @@ export interface ResumeListItem {
   status: ResumeStatusKey;
   sanctionReason: SanctionReasonKey;
   applicationsCount: number;
-  applications: { id: string; status: ApplicationStatus; createdAt: Date; applyAt: Date }[];
+  applications: ResumeLstItemApplications[];
 }
 
 export interface ResumeRegisterForm {
@@ -385,9 +398,7 @@ export interface ResumeDetail {
   education: EducationLevelKeys;
   // isGraduated: boolean; //졸업여부
   experience: Experience[];
-
-  languages: { name: LanguageKey | null; level: LanguageLevelKey | null }[];
-
+  languages: { name: LanguageKey; level: LanguageLevelKey }[];
   // introduction: string; //자기소개
   licenses: License[];
   // military: Military;

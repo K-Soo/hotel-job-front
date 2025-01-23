@@ -2,29 +2,14 @@ import styled from 'styled-components';
 import ResumeProfileImage from '@/components/common/resume/ResumeProfileImage';
 import FormInput from '@/components/common/form/FormInput';
 import FormMapSelect from '@/components/common/form/FormMapSelect';
-import Line from '@/components/common/Line';
 import Button from '@/components/common/style/Button';
-import { ResumeDetailForm, ResumeRegisterForm, ResumeStatusKey } from '@/types';
+import { ResumeDetailForm } from '@/types';
 import { useSetRecoilState } from 'recoil';
 import { daumPostAtom } from '@/recoil/daumPost';
-import { useFormContext } from 'react-hook-form';
 import { LOCAL_CODE, SEX_CODE } from '@/constants';
 import { CAREER_LEVEL } from '@/constants/resume';
 
-interface ResumeProfileSectionProps {
-  status: ResumeStatusKey;
-}
-
-export default function ResumeProfileSection({ status }: ResumeProfileSectionProps) {
-  const { register, watch, setValue, getValues } = useFormContext<ResumeDetailForm>();
-  console.log('getValues: ', getValues('name'));
-
-  const nameValue = getValues('name');
-  const localCodeValue = getValues('localCode');
-  const sexCodeValue = getValues('sexCode');
-  const birthdayValue = getValues('birthday');
-  const phoneValue = getValues('phone');
-
+export default function ResumeProfileSection() {
   const setDaumPostState = useSetRecoilState(daumPostAtom);
 
   return (
