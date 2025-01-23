@@ -19,13 +19,13 @@ const S = {
     display: flex;
     flex-direction: column;
     margin: 0 auto;
+    padding: ${(props) => (props.$padding ? props.$padding : '30px 0 30px 0')};
     ${(props) => props.theme.media.laptop`
-      padding: 30px 15px 0 15px;
-    `};
-    ${(props) => props.theme.media.tablet`
       padding: 15px 15px 0 15px;
     `};
-    padding: ${(props) => (props.$padding ? props.$padding : '30px 0 0 0')};
+    ${(props) => props.theme.media.tablet`
+      padding: 15px 15px 100px 15px;
+    `};
     & > section {
       flex: 1;
     }
