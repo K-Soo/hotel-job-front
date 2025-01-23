@@ -48,6 +48,18 @@ const colors = {
   gray800: '#333d4b',
   gray900: '#191f28',
 
+  green: '#f3fcf5', // light green
+  green50: '#e5f7e9',
+  green100: '#c3eccf',
+  green200: '#9fe1b3',
+  green300: '#7bd696',
+  green400: '#51c973', // main
+  green500: '#51b250', // focus
+  green600: '#46a547',
+  green700: '#3a923b',
+  green800: '#2d7e2e',
+  green900: '#1d601f',
+
   grayOpacity: 'rgba(0, 27, 55, 0.1)', //hover
   grayOpacity100: 'rgba(0, 23, 51, 0.02)',
   grayOpacity200: 'rgba(2, 32, 71, 0.05)',
