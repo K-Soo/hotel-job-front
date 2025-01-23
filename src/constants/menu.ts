@@ -51,8 +51,7 @@ export const EMPLOYER_ASIDE_MENU = [
     value: '',
     icon: 'Shop24x24',
     items: [
-      { label: '메인 광고', value: path.EMPLOYER_PRODUCT_MAIN },
-      { label: '지면 광고', value: path.EMPLOYER_PRODUCT_SECTION },
+      { label: '채용광고', value: path.EMPLOYER_PRODUCT_RECRUITMENT },
       { label: '이력서 열람 서비스', value: path.EMPLOYER_PRODUCT_RESUME },
     ],
   },
