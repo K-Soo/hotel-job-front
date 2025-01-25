@@ -1,6 +1,58 @@
 # 변경 로그
 
 프로젝트의 모든 주요 변경 사항
+## [1.2.0](https://github.com/K-Soo/hotel-job-front/compare/v1.1.0...v1.2.0) (2025-01-25)
+
+
+### Features
+
+* 불필요한 컴포넌트 삭제 - ChoiceDeviceFilter, EmployerQuickMenu, ProductOptionAsideMenu, Recruit 페이지 제거 ([4404f21](https://github.com/K-Soo/hotel-job-front/commit/4404f219244cc0df9df58e382eb8ec9876ae2374))
+* 지원 버튼 로직 개선 - 인증 상태 및 역할에 따라 버튼 표시 추가 ([8a73f07](https://github.com/K-Soo/hotel-job-front/commit/8a73f0735217b9f4a5a2e7012c73bdb523492a33))
+* 채용 관련 상수 추가 - 제품 유형, 이름 및 설명 정의 ([230a936](https://github.com/K-Soo/hotel-job-front/commit/230a936b012c80287ecf45c88f260dcf2983e6cc))
+* 채용 상품 관련 상태 관리 및 선택된 옵션 금액 계산 기능 추가 ([94c032c](https://github.com/K-Soo/hotel-job-front/commit/94c032c52fef8a3c7cb6f8db5d9924f5255c7782))
+* arrowBottom14x14.svg 수정 - fill 속성 추가 ([6d0589d](https://github.com/K-Soo/hotel-job-front/commit/6d0589d1399b1f4be54c8c16f6fdca07a51a24af))
+* Button 컴포넌트에 checkoutOutline 변형 추가 및 스타일 정의 ([f00310f](https://github.com/K-Soo/hotel-job-front/commit/f00310f18e49793eadc3abb58453d532fd73e22c))
+* Employer 컴포넌트에서 EmployerQuickMenu 제거 및 구조 단순화 ([014dc56](https://github.com/K-Soo/hotel-job-front/commit/014dc566bed04706028c13ff9bf0810e42b11b97))
+* EMPLOYER_ASIDE_MENU에서 '메인 광고' 항목을 '채용광고'로 변경 ([086c8ca](https://github.com/K-Soo/hotel-job-front/commit/086c8ca51679257269b84d2409dd9947eeeed7dd))
+* EMPLOYER_PRODUCT_RECRUITMENT 경로 추가 - 상품 관련 경로 구조 개선 ([541b52d](https://github.com/K-Soo/hotel-job-front/commit/541b52d21e867c3cd128d2541e5c4620f421c3af))
+* EmployerMain 컴포넌트 수정 - 높이 100% 설정 ([5d095fb](https://github.com/K-Soo/hotel-job-front/commit/5d095fbef8bd32082310ee1ebdc2006dd452b549))
+* EmployerProductMainPage 컴포넌트 삭제 ([5bfbfcb](https://github.com/K-Soo/hotel-job-front/commit/5bfbfcb4014579dc15eb95770968a455b31e334c))
+* EmployerProductRecruitment 컴포넌트 개선 - 로딩 상태 추가 및 광고 유형에 따른 제목 및 설명 동적 변경 ([381b4c7](https://github.com/K-Soo/hotel-job-front/commit/381b4c7bfefdc0280283207c501f1ed19dc86e13))
+* EmployerProductRecruitment 컴포넌트 추가 - 광고 채용 페이지 및 제품 카드 구성 ([8f2b4ed](https://github.com/K-Soo/hotel-job-front/commit/8f2b4edfd4f3658541c4fc3524adade2b0254f37))
+* EmployerProductRecruitmentContainer 수정 - 채용 상품 리스트 가져오기 기능 추가 및 사이드 메뉴 변경 ([19392a7](https://github.com/K-Soo/hotel-job-front/commit/19392a7daa43463ab14144e8ce1b0e08cc86d0eb))
+* EmployerProductRecruitmentContainer 컴포넌트 추가 - 제품 옵션 사이드 메뉴와 빠른 메뉴 통합 ([e675c54](https://github.com/K-Soo/hotel-job-front/commit/e675c54236ba3f0f4ea73091d796457f8df4a061))
+* EmployerProductRecruitmentPage 컴포넌트 추가 - 레이아웃 및 인증 로직 포함 ([01d6f82](https://github.com/K-Soo/hotel-job-front/commit/01d6f82f95f68e475feb76e189d04e99c571277e))
+* employerProductSection 관련 컴포넌트 삭제 - 사용하지 않는 컴포넌트 및 스타일 제거 ([2c9cb46](https://github.com/K-Soo/hotel-job-front/commit/2c9cb46e03eb9e82a513abe66253af30f642e395))
+* getProductRecruitmentList API 메서드 추가 ([0625f62](https://github.com/K-Soo/hotel-job-front/commit/0625f629aba59daaad787d55e3eab25e2fe04870))
+* language.ts 파일 수정 - 새로운 언어 추가 및 정렬 개선 ([3d934d4](https://github.com/K-Soo/hotel-job-front/commit/3d934d4ee54bfc6bfe4928a737e005de93e7ffde))
+* PaymentAtom 수정 - ProductOptionAsideMenuAtom 제거 ([755323b](https://github.com/K-Soo/hotel-job-front/commit/755323b40d8ae28f10c48b41300b6568ffd34547))
+* PRODUCT_RECRUITMENT 상수 추가 - 채용 관련 쿼리 키 정의 ([9a3a7d9](https://github.com/K-Soo/hotel-job-front/commit/9a3a7d97cf56f2557711d0cb9cdd60adc57dbfb1))
+* ProductAsideMenu 컴포넌트 추가 - 상품 정보 및 옵션 선택 기능 구현 ([9f056c4](https://github.com/K-Soo/hotel-job-front/commit/9f056c4dc78b051da2074073a9d79c708f44229c))
+* ProductCard 컴포넌트 개선 - 상품 정보 동적 표시 및 선택 기능 추가 ([409ed2e](https://github.com/K-Soo/hotel-job-front/commit/409ed2e9ac8988893f9843a659aa1ea029b61f13))
+* ProductCard 컴포넌트 추가 - 상품 선택 기능 및 스타일 포함 ([c84282f](https://github.com/K-Soo/hotel-job-front/commit/c84282f1b50817917704866973179ba5be80789b))
+* ProductForm 컴포넌트 추가 - 상품 이용 기간 선택 및 가격 정보 표시 기능 구현 ([99938be](https://github.com/K-Soo/hotel-job-front/commit/99938bea0118a417913710cc75e759b9e8bb846c))
+* ProductOption 컴포넌트 추가 - 상품 옵션 선택 및 가격 정보 표시 기능 구현 ([794fa16](https://github.com/K-Soo/hotel-job-front/commit/794fa160b3e237e531347a52ba0c1c5960b6b66b))
+* ProductPreview 컴포넌트 스타일 개선 - flex 크기 조정 ([b896b26](https://github.com/K-Soo/hotel-job-front/commit/b896b267717a656210c01a977aafdd58cb22363b))
+* ProductPreview 컴포넌트 추가 - 기본 스타일 및 구조 설정 ([2373e33](https://github.com/K-Soo/hotel-job-front/commit/2373e334995453e24a93fa50e0fece0f75086e2a))
+* ProductRecruitmentQuery 및 GetProductRecruitmentList 인터페이스 추가 ([a25a729](https://github.com/K-Soo/hotel-job-front/commit/a25a7291495e805d3f38c48677c41db00b1da766))
+* ProductRecruitmentTab 컴포넌트 추가 - 상품 유형 선택 탭 기능 구현 ([5b8a567](https://github.com/K-Soo/hotel-job-front/commit/5b8a567f6e614db80382e71bf799eb768101ee74))
+* PurchaseActionBar 컴포넌트 추가 - 상품 구매 및 결제 금액 표시 기능 구현 ([333746e](https://github.com/K-Soo/hotel-job-front/commit/333746e5d0228ff3968b593bb5548187776dc0cd))
+* RecruitDetailContainer에서 역할에 따른 지원 버튼 표시 로직 추가 ([e8f765f](https://github.com/K-Soo/hotel-job-front/commit/e8f765f5de518a542c1aadfcde40661cd2579319))
+* Recruitment 관련 타입 및 인터페이스 추가 ([2c99793](https://github.com/K-Soo/hotel-job-front/commit/2c997933b35464031d42a186f56d3cc3a2f96f2c))
+* RecruitmentInfo 컴포넌트 추가 - 채용 정보 표시 기능 구현 ([caf83d9](https://github.com/K-Soo/hotel-job-front/commit/caf83d9b1d6f723789967be0bf61c5da3413c287))
+* ResumeEducationSectionPreview 컴포넌트 추가 - 교육 섹션 미리보기 기능 구현 ([fa21c4e](https://github.com/K-Soo/hotel-job-front/commit/fa21c4e11d7d219e5391c89ef6fb56619eb5b563))
+* ResumeExperienceSectionPreview 컴포넌트 수정 - 경험 섹션 미리보기 기능 추가 및 스타일 개선 ([b5d35f1](https://github.com/K-Soo/hotel-job-front/commit/b5d35f1012e88866996934afa43b953eae4e0e0f))
+* ResumePreview 컴포넌트 수정 - ResumeDetailForm 타입 추가로 데이터 구조 개선 ([bee69d2](https://github.com/K-Soo/hotel-job-front/commit/bee69d2f25a8a9bc6a23619a0244d3364db4a157))
+* ResumeSection 컴포넌트 스타일 개선 - 상단 패딩 추가 ([9f3c90c](https://github.com/K-Soo/hotel-job-front/commit/9f3c90c7756c4ff6d6d7446e660a97fe36289e58))
+* Tag 컴포넌트의 display 속성을 flex로 변경하고 정렬 추가 ([b104598](https://github.com/K-Soo/hotel-job-front/commit/b10459870435a16d269d7b3f2b476150a3bb196f))
+* UserResumeDetail 컴포넌트 수정 - 최종 학력 섹션에 교육 미리보기 추가 및 스타일 조정 ([6d8f653](https://github.com/K-Soo/hotel-job-front/commit/6d8f653b4245443545e7f45730e6b12c0c1486a3))
+* UserResumeDetailContainer 컴포넌트 수정 - 미리보기 클릭 시 폼 데이터 감시 추가 ([28123fa](https://github.com/K-Soo/hotel-job-front/commit/28123faa693b4c0a910721f1bc59acae425f1aba))
+
+
+### Styles
+
+* RecruitDetailSideMenu 컴포넌트 수정 - info-box의 margin-top 제거 ([feecfeb](https://github.com/K-Soo/hotel-job-front/commit/feecfeb7e6f78eeeb78c2a12e5a2aff88d9c7f57))
+
 ## [1.1.0](https://github.com/K-Soo/hotel-job-front/compare/v1.0.0...v1.1.0) (2025-01-23)
 
 
