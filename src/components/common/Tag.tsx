@@ -89,7 +89,9 @@ const S = {
     padding: ${(props) => props.$padding || '3px 8px'};
     width: ${(props) => props.$width || 'auto'};
     height: ${(props) => props.$height || 'auto'};
-    display: inline;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     pointer-events: none;
     user-select: none;
     ${(props) =>
