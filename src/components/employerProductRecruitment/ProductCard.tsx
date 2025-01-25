@@ -2,42 +2,79 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import { motion } from 'framer-motion';
 import Button from '@/components/common/style/Button';
-import Select from '@/components/common/style/Select';
 import Tag from '@/components/common/Tag';
 import { productUseDateOptions } from '@/constants/options';
 import { useSetRecoilState } from 'recoil';
-import { productOptionAsideMenuAtom } from '@/recoil/payment';
-
+import { ProductRecruitmentListItem } from '@/types';
+import { recruitmentProductSideMenuAtom } from '@/recoil/product';
+import { priceComma } from '@/utils';
+import SaleRate from '@/components/common/SaleRate';
+import Icon from '@/icons/Icon';
+import { RECRUITMENT_PRODUCT_DESCRIPTION, RECRUITMENT_PRODUCT_NAME } from '@/constants/product';
+import { selectProductAtom } from '@/recoil/product';
 interface ProductCardProps {
   margin?: string;
-  title: string;
+  product: ProductRecruitmentListItem;
 }
 
-export default function ProductCard({ title, margin }: ProductCardProps) {
+export default function ProductCard({ product, margin }: ProductCardProps) {
   const [isFocus, setIsFocus] = React.useState(false);
-
-  const setProductOptionAsideMenuAtom = useSetRecoilState(productOptionAsideMenuAtom);
+  const [selectedDuration, setSelectedDuration] = React.useState(product.durations[3]);
+  const setRecruitmentProductSideMenuAtom = useSetRecoilState(recruitmentProductSideMenuAtom);
+  const setSelectProductAtom = useSetRecoilState(selectProductAtom);
 
   const handleClickProductPurchase = () => {
-    setIsFocus(false);
-    setProductOptionAsideMenuAtom({ isOpen: true });
+    setSelectProductAtom((prev) => ({
+      ...prev,
+      ...product,
+      selectedDuration,
+    }));
+    setRecruitmentProductSideMenuAtom({ isOpen: true });
+  };
+
+  const onChangeDuration = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const selectedValue = event.target.value;
+
+    const selectedDuration = product.durations.find((duration) => duration.id === selectedValue);
+    if (!selectedDuration) {
+      return;
+    }
+    setSelectedDuration(selectedDuration);
   };
 
   return (
     <S.ProductCard $margin={margin} $isFocus={isFocus} onFocus={() => setIsFocus(true)} onBlur={() => setIsFocus(false)}>
       <S.Header>
         <div className="title-box">
-          <h3 className="title-box__title">{title}</h3>
-          <div className="title-box__tags"></div>
+          <h3 className="title-box__title">{RECRUITMENT_PRODUCT_NAME[product.name]}</h3>
+          <div className="title-box__tags">
+            <Tag label="PC+M" margin="0 0 0" height="28px" width="70px" fontSize="14px" />
+          </div>
         </div>
-        <div className="feature-box"></div>
       </S.Header>
-      <S.Option></S.Option>
 
-      <Select options={productUseDateOptions} />
+      <S.Description>{RECRUITMENT_PRODUCT_DESCRIPTION[product.name]}</S.Description>
+
+      <S.DurationSelect>
+        <select onChange={onChangeDuration} defaultValue={product.durations[3].id}>
+          {product.durations.map((duration) => (
+            <option value={duration.id} key={duration.id}>
+              <span>{duration.duration}일</span>
+              {duration.bonusDays !== 0 && <span>&nbsp;+&nbsp;{`(${duration.bonusDays}일)`}</span>}
+            </option>
+          ))}
+        </select>
+        <Icon className="icon" name="ArrowBottom14x14" width="16px" height="16px" />
+      </S.DurationSelect>
 
       <S.Checkout>
-        <Button label="상품 선택" variant="primary" width="200px" onClick={handleClickProductPurchase} />
+        <S.PriceBox>
+          {selectedDuration.discountRate !== 0 && <SaleRate rate={selectedDuration.discountRate * 100} />}
+          {selectedDuration.discountRate !== 0 && <del>{priceComma(selectedDuration.price)}원</del>}
+          <strong className="salePrice">{priceComma(selectedDuration.price * (1 - selectedDuration.discountRate))}원</strong>
+        </S.PriceBox>
+
+        <Button label="상품 선택" variant="checkoutOutline" width="150px" onClick={handleClickProductPurchase} />
       </S.Checkout>
     </S.ProductCard>
   );
@@ -45,12 +82,13 @@ export default function ProductCard({ title, margin }: ProductCardProps) {
 
 const S = {
   ProductCard: styled.div<{ $margin?: string; $isFocus: boolean }>`
-    height: 200px;
+    /* height: 200px; */
     border: 1px solid ${(props) => props.theme.colors.gray500};
     margin: ${(props) => props.$margin || '0'};
     border-radius: 10px;
     padding: 20px;
     width: 100%;
+    margin-bottom: 30px;
     cursor: pointer;
     ${(props) =>
       props.$isFocus &&
@@ -63,7 +101,7 @@ const S = {
     .title-box {
       display: flex;
       justify-content: space-between;
-      align-items: center;
+      align-items: flex-end;
       &__title {
         font-size: 22px;
         font-weight: 600;
@@ -71,14 +109,59 @@ const S = {
       }
       &__tags {
         display: flex;
+        align-items: center;
         gap: 5px;
       }
     }
   `,
-  Option: styled.div`
-    /* border: 1px solid red; */
+  Description: styled.p`
+    margin: 10px 0;
+    font-size: 14px;
+    color: ${(props) => props.theme.colors.black700};
+  `,
+  PriceBox: styled.div`
+    margin-right: 15px;
+    .salePrice {
+      font-size: 20px;
+      font-weight: 600;
+      color: ${(props) => props.theme.colors.black400};
+    }
   `,
   Checkout: styled.div`
-    /* border: 1px solid red; */
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+  `,
+  DurationSelect: styled.div`
+    height: 40px;
+    border-radius: 5px;
+    margin: 15px 0;
+    max-width: 200px;
+    width: 100%;
+    background-color: white;
+    position: relative;
+    .icon {
+      top: 50%;
+      transform: translateY(-50%);
+      right: 15px;
+      position: absolute;
+      color: ${(props) => props.theme.colors.black600};
+    }
+    select {
+      height: 100%;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      padding-left: 15px;
+      border-radius: inherit;
+      border: 1px solid ${(props) => props.theme.colors.gray300};
+      color: ${(props) => props.theme.colors.black600};
+      &:focus {
+        border: 1px solid ${(props) => props.theme.colors.blue300};
+      }
+      &:hover {
+        border: 1px solid ${(props) => props.theme.colors.blue500};
+      }
+    }
   `,
 };
