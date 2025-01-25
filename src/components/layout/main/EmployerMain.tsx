@@ -34,6 +34,7 @@ const S = {
         padding: 30px;
         max-width: 1280px;
         margin: 0 auto;
+        height: 100%;
         /* overflow-y: auto; */
       }
     }

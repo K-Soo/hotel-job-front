@@ -241,6 +241,18 @@ export const Get = {
 
     return requests.get<API.RecruitmentListResponse>(url);
   },
+
+  // TODO - 타입정의
+  // 사업자 - 채용공고 상품 리스트
+  getProductRecruitmentList: ({ type }: { type: API.ProductRecruitmentQuery }) => {
+    const params = new URLSearchParams();
+    if (type) params.set('type', type);
+
+    const queryString = params.toString();
+    const url = `/products/recruitment${queryString && `?${queryString}`}`;
+
+    return requests.get<API.GetProductRecruitmentList>(url);
+  },
 };
 
 export const Post = {

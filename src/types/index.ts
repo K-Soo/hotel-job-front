@@ -9,6 +9,7 @@ import { PREFERENCES } from '@/constants/preferences';
 import { LANGUAGE_LEVEL, LANGUAGE } from '@/constants/language';
 import { RESUME_STATUS, SANCTION_REASON } from '@/constants/resume';
 import { APPLICATION_STATUS, EMPLOYER_REVIEW_STAGE_STATUS, REVIEW_STAGE_STATUS } from '@/constants/application';
+import { RECRUITMENT_PRODUCT_NAME, RECRUITMENT_PRODUCT_OPTION_NAME } from '@/constants/product';
 
 export type Provider = 'LOCAL' | 'KAKAO' | 'GOOGLE';
 export type RoleType = 'ADMIN' | 'EMPLOYER' | 'JOB_SEEKER';
@@ -16,7 +17,7 @@ export type CompanyVerificationStatus = 'NOT_REQUESTED' | 'PENDING' | 'VERIFIED'
 export type EmploymentType = 'FULL_TIME' | 'CONTRACT' | 'DAILY_WORKER' | 'INTERN';
 export type CertificationStatus = 'PENDING' | 'VERIFIED' | 'REJECTED' | 'UNVERIFIED';
 export type ApplicationStatus = 'APPLIED' | 'CANCELED' | 'ACCEPTED' | 'REJECTED';
-
+export type RecruitmentName = 'PREMIUM' | 'SPECIAL' | 'URGENT' | 'BASIC';
 export type AccountStatus =
   | 'ACTIVE'
   | 'INACTIVE'
@@ -48,6 +49,8 @@ export type SanctionReasonKey = keyof typeof SANCTION_REASON;
 export type ApplicationStatusKey = keyof typeof APPLICATION_STATUS;
 export type ReviewStageStatusKey = keyof typeof REVIEW_STAGE_STATUS;
 export type EmployerReviewStageStatusKey = keyof typeof EMPLOYER_REVIEW_STAGE_STATUS;
+export type RecruitmentProductNameKey = keyof typeof RECRUITMENT_PRODUCT_NAME;
+export type RecruitmentProductOptionNameKey = keyof typeof RECRUITMENT_PRODUCT_OPTION_NAME;
 
 export type TalentListItem = {};
 
@@ -449,4 +452,27 @@ export interface RecruitmentDetailApplicantListItem {
     // resume: 이력서 삭제 시 null
   };
   resumeSnapshot: ResumeDetail;
+}
+
+export type ProductDuration = {
+  bonusDays: number;
+  discountRate: number;
+  duration: number;
+  id: string;
+  price: number;
+};
+
+export interface ProductRecruitmentListItem {
+  id: string;
+  type: 'MAIN' | 'RECRUIT';
+  name: RecruitmentProductNameKey;
+  durations: ProductDuration[];
+  options: {
+    id: string;
+    listUpIntervalHours: number;
+    maxListUpPerDay: number;
+    name: RecruitmentProductOptionNameKey;
+    tags: [];
+    optionDurations: ProductDuration[];
+  }[];
 }

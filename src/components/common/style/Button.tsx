@@ -22,7 +22,8 @@ type ButtonVariant =
   | 'checkout' // 결제
   | 'select' //검색
   | 'delete' // 삭제
-  | 'update'; // 수정하기
+  | 'update' // 수정하기
+  | 'checkoutOutline';
 
 interface ButtonProps {
   label: string;
@@ -286,6 +287,19 @@ const S = {
           background-color: #fff;
           animation: ${twinkle} 6s ease-in-out infinite;
         }
+        &:disabled {
+          cursor: not-allowed;
+        }
+      `};
+
+    ${(props) =>
+      props.$variant === 'checkoutOutline' &&
+      css`
+        position: relative;
+        border: 1px solid #fb4b02;
+        color: #fb4b02;
+        font-weight: 500;
+        background-color: white;
         &:disabled {
           cursor: not-allowed;
         }

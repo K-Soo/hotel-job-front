@@ -7,6 +7,7 @@ type ResponseStatus = 'success' | 'duplicate' | 'available' | 'failure' | 'avail
 export type RecruitmentQueryStatus = 'ALL' | 'PROGRESS' | 'PUBLISHED' | 'CLOSED' | 'REVIEWING' | 'DRAFT';
 export type RecruitmentApplicantQueryStep = 'DOCUMENT' | 'INTERVIEW' | 'ACCEPT' | 'REJECTED';
 export type RecruitTypeQuery = 'special' | 'urgent' | 'basic';
+export type ProductRecruitmentQuery = 'MAIN' | 'RECRUIT';
 
 export interface BaseResponse {
   error: { message: string; code: number } | null;
@@ -329,4 +330,8 @@ export interface DeactivateApplicantUserResponse extends BaseResponse {
 
 export interface GetRecruitmentDetailApplicantListResponse extends BaseResponse {
   result: types.RecruitmentDetailApplicantListItem[];
+}
+
+export interface GetProductRecruitmentList extends BaseResponse {
+  result: types.ProductRecruitmentListItem[];
 }
