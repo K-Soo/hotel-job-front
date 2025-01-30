@@ -2,7 +2,7 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import Button from '@/components/common/style/Button';
 import Tag from '@/components/common/Tag';
-import { useSetRecoilState } from 'recoil';
+import { useSetRecoilState, useRecoilState } from 'recoil';
 import { ProductRecruitmentListItem } from '@/types';
 import { recruitmentProductSideMenuAtom, productFocusAtom } from '@/recoil/product';
 import { priceComma } from '@/utils';
@@ -17,11 +17,10 @@ interface ProductCardProps {
 }
 
 export default function ProductCard({ product, margin }: ProductCardProps) {
-  const [isFocus, setIsFocus] = React.useState(false);
   const [selectedDuration, setSelectedDuration] = React.useState(product.durations[3]);
   const setRecruitmentProductSideMenuAtom = useSetRecoilState(recruitmentProductSideMenuAtom);
-  const setProductFocusAtom = useSetRecoilState(productFocusAtom);
   const setSelectProductAtom = useSetRecoilState(selectProductAtom);
+  const [productFocusAtomState, setProductFocusAtomState] = useRecoilState(productFocusAtom);
 
   const handleClickProductPurchase = () => {
     setSelectProductAtom((prev) => ({
@@ -45,10 +44,8 @@ export default function ProductCard({ product, margin }: ProductCardProps) {
   return (
     <S.ProductCard
       $margin={margin}
-      $isFocus={isFocus}
-      onFocus={() => setIsFocus(true)}
-      onBlur={() => setIsFocus(false)}
-      onClick={() => setProductFocusAtom({ product: product.name })}
+      $isFocus={productFocusAtomState.product === product.name}
+      onClick={() => setProductFocusAtomState({ product: product.name })}
     >
       <S.Header>
         <div className="title-box">
