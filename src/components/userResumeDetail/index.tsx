@@ -75,20 +75,20 @@ export default function UserResumeDetail({ children }: UserResumeDetailProps) {
 
         <ResumeTitleForm name="title" />
 
+        {/* 기본정보 */}
         {isEditing && (
           <ResumeSection title="기본정보" visibleAddButton={false}>
             <ResumeProfileSection />
           </ResumeSection>
         )}
-
         {!isEditing && <ResumeProfileSectionPreview />}
 
+        {/* 간단소개 */}
         {isEditing && (
           <ResumeSection title="간단소개" visibleAddButton={false} name="summary">
             <FormArea<ResumeDetailForm> name="summary" maxLength={500} />
           </ResumeSection>
         )}
-
         {!isEditing && summaryValue.length !== 0 && (
           <ResumeSection title="간단소개" visibleAddButton={false} name="summary">
             <ResumeSummarySectionPreview text={summaryValue} />
