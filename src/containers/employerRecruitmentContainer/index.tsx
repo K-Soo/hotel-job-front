@@ -1,7 +1,6 @@
 import React from 'react';
 import EmployerRecruitment from '@/components/employerRecruitment';
 import RecruitmentStatusBar from '@/components/employerRecruitment/RecruitmentStatusBar';
-import RecruitmentFilterButton from '@/components/employerRecruitment/RecruitmentFilterButton';
 import Button from '@/components/common/style/Button';
 import RecruitmentListContainer from '@/containers/employerRecruitmentContainer/RecruitmentListContainer';
 import SectionTitle from '@/components/common/employer/SectionTitle';
