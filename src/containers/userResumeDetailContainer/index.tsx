@@ -16,7 +16,7 @@ import useToast from '@/hooks/useToast';
 import { useQueryClient } from '@tanstack/react-query';
 import ResumeProgress from '@/components/common/resume/ResumeProgress';
 import { useResumeContext } from '@/context/ResumeProvider';
-import ResumePreview from '@/components/common/resume/ResumePreview';
+import ResumePreview from '@/components/common/resume/resumePreview';
 
 export default function UserResumeDetailContainer() {
   const [resumePreviewData, setResumePreviewData] = React.useState<ResumeDetail | null>(null);
@@ -72,7 +72,7 @@ export default function UserResumeDetailContainer() {
     },
   });
 
-  console.log('이력서 상세 API : ', data?.result.status);
+  console.log('이력서 상세 API : ', data);
 
   React.useEffect(() => {
     if (data) {
@@ -91,7 +91,9 @@ export default function UserResumeDetailContainer() {
 
       methods.setValue('title', data.result.title);
       methods.setValue('careerLevel', data.result.careerLevel);
+
       methods.setValue('profileImage', data.result.profileImage);
+
       methods.setValue('name', data.result.name);
       methods.setValue('localCode', data.result.localCode);
       methods.setValue('birthday', data.result.birthday);
@@ -136,6 +138,7 @@ export default function UserResumeDetailContainer() {
       setIsDisabled(false);
     }
   };
+
   const handleClickPreview = React.useCallback(() => {
     if (data?.result) {
       const values = methods.watch();
