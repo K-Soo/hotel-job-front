@@ -1,12 +1,15 @@
 import { RecruitmentStatusKeys } from '@/types';
 import styled from 'styled-components';
 import Button from '@/components/common/style/Button';
-
+import { useRouter } from 'next/router';
+import path from '@/constants/path';
 interface ProductOverviewProps {
   status: RecruitmentStatusKeys;
 }
 
 export default function ProductOverview({ status }: ProductOverviewProps) {
+  const router = useRouter();
+
   return (
     <S.ProductOverview>
       {status === 'PROGRESS' && (
@@ -18,7 +21,14 @@ export default function ProductOverview({ status }: ProductOverviewProps) {
 
       {status === 'PUBLISHED' && (
         <S.Published>
-          <Button label="상품 신청" variant="secondary100" width="60px" height="25px" fontSize="12px" />
+          <Button
+            label="상품 신청"
+            variant="secondary100"
+            width="60px"
+            height="25px"
+            fontSize="12px"
+            onClick={() => router.push(path.EMPLOYER_PRODUCT_RECRUITMENT)}
+          />
         </S.Published>
       )}
 
