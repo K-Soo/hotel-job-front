@@ -68,7 +68,7 @@ instance.interceptors.response.use(
 const responseBody = <T>(response: AxiosResponse<T>) => response?.data;
 
 const requests = {
-  get: <Response>(url: string) => instance.get<Response>(url, config).then(responseBody),
+  get: <Response>(url: string, config?: AxiosRequestConfig) => instance.get<Response>(url, config).then(responseBody),
   post: <Request, Response>(url: string, body: Request, config?: AxiosRequestConfig) =>
     instance.post<Response>(url, body, config).then(responseBody),
   patch: <Request, Response>(url: string, body: Request, config?: AxiosRequestConfig) =>
@@ -253,6 +253,9 @@ export const Get = {
 
     return requests.get<API.GetProductRecruitmentList>(url);
   },
+  // *************************************** FILE ***************************************
+  //이력서 이미지 가져오기
+  getResumeProfileImage: (key: string, config: AxiosRequestConfig) => requests.get<any>(`/upload/resume/profile/${key}`, config),
 };
 
 export const Post = {
@@ -297,6 +300,11 @@ export const Post = {
   // 사업자 -  채용 공고생성
   removeRecruitment: (body: { ids: string[] }) =>
     requests.post<{ ids: string[] }, API.RemoveRecruitmentResponse>('/employers/recruitment/remove', body),
+
+  // *************************************** FILE UPLOAD ***************************************
+  // 프로필 이미지 업로드
+  // uploadProfileImage: (body: FormData) => requests.post<FormData, API.UploadProfileImageResponse>('/upload/resume/profile', body),
+  uploadProfileImage: (body: FormData) => requests.post<FormData, API.UploadProfileImageResponse>('/upload/resume/profile', body),
 };
 
 export const Patch = {
