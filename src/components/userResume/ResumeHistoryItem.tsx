@@ -15,7 +15,7 @@ export default function ResumeHistoryItem({ item }: ResumeHistoryItemProps) {
   return (
     <S.ResumeHistoryItem>
       <div className="info-box">
-        <div className="info-box__hotel">{item.recruitment.hotelName}</div>
+        <div className="info-box__hotel">{item.recruitment?.hotelName}</div>
         <div
           className="info-box__title"
           onClick={() => {
@@ -23,7 +23,7 @@ export default function ResumeHistoryItem({ item }: ResumeHistoryItemProps) {
             setModalAtomState({ isOpen: false });
           }}
         >
-          {item.recruitment.recruitmentTitle}
+          {item.recruitment?.recruitmentTitle}
         </div>
       </div>
       <div className="date-box">
