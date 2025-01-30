@@ -15,9 +15,7 @@ interface Query extends ParsedUrlQuery {
   slug: string;
 }
 
-interface ApplicantTabProps {}
-
-export default function ApplicantTab({}: ApplicantTabProps) {
+export default function ApplicantTab() {
   const router = useRouter();
   const { step = 'TOTAL', slug } = router.query as Query;
 
