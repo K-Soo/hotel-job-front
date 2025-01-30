@@ -153,20 +153,11 @@ export default function RecruitDetailContainer() {
                     fontSize="18px"
                     disabled={applyStatus === 'duplicate'}
                     isLoading={isApplyCheckLoading}
-                    margin="0 0 30px 0"
                   />
                 )}
 
                 {isApplyCheckError && (
-                  <Button
-                    label="지원불가"
-                    variant="secondary"
-                    height="50px"
-                    borderRadius="10px"
-                    fontSize="18px"
-                    disabled
-                    margin="0 0 30px 0"
-                  />
+                  <Button label="지원불가" variant="secondary" height="50px" borderRadius="10px" fontSize="18px" disabled />
                 )}
 
                 {isOpenApplyForm && (
@@ -181,15 +172,7 @@ export default function RecruitDetailContainer() {
             )}
 
             {role === 'EMPLOYER' && (
-              <Button
-                label="지원자 전용"
-                variant="secondary"
-                height="50px"
-                borderRadius="10px"
-                fontSize="18px"
-                disabled
-                margin="0 0 30px 0"
-              />
+              <Button label="지원자 전용" variant="secondary" height="50px" borderRadius="10px" fontSize="18px" disabled />
             )}
           </RecruitDetailSideMenu>
         </RecruitDetail>
