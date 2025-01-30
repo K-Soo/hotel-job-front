@@ -1,3 +1,4 @@
+import React from 'react';
 import styled from 'styled-components';
 import { useFormContext } from 'react-hook-form';
 import { ResumeDetailForm } from '@/types';
@@ -5,9 +6,13 @@ import { LOCAL_CODE, SEX_CODE } from '@/constants';
 import { CAREER_LEVEL } from '@/constants/resume';
 import useResponsive from '@/hooks/useResponsive';
 import { parseBirthDateAndCalculateAge } from '@/utils';
+import Image from 'next/image';
 
 export default function ResumeProfileSectionPreview() {
+  const [previewImage, setPreviewImage] = React.useState('');
+
   const { getValues } = useFormContext<ResumeDetailForm>();
+  const { isTablet } = useResponsive();
 
   const address = getValues('address');
   const addressDetail = getValues('addressDetail');
@@ -22,6 +27,12 @@ export default function ResumeProfileSectionPreview() {
 
   const { age, birthYear } = parseBirthDateAndCalculateAge(birthday);
 
+  React.useEffect(() => {
+    if (profileImage) {
+      setPreviewImage(profileImage);
+    }
+  }, [profileImage]);
+
   return (
     <S.ResumeProfileSectionPreview>
       <article className="profile-preview-container">
@@ -32,12 +43,42 @@ export default function ResumeProfileSectionPreview() {
           </S.NameWithCareerBox>
 
           <S.CertInfoBox>
-            <span>{LOCAL_CODE[localCode]}</span>&nbsp;•&nbsp;
+            {localCode === '02' && (
+              <>
+                <span>{LOCAL_CODE[localCode]}</span>&nbsp;•&nbsp;
+              </>
+            )}
             <span>{SEX_CODE[sexCode]}</span>&nbsp;•&nbsp;
             <span>{birthYear}</span>
             <span>{`(${age}세)`}</span>
           </S.CertInfoBox>
 
+          {!isTablet && (
+            <>
+              <S.PhoneBox>
+                <span>📞&nbsp;&nbsp;{phone}</span>
+              </S.PhoneBox>
+
+              <S.EmailBox>
+                <span>✉️&nbsp;&nbsp;{email}</span>
+              </S.EmailBox>
+
+              <S.AddressBox>
+                <span>🏠&nbsp;&nbsp;{address}</span>
+                <span>{addressDetail}</span>
+              </S.AddressBox>
+            </>
+          )}
+        </div>
+
+        {previewImage && (
+          <div className="image-info">
+            <Image src={previewImage} className="image" alt="프로필 이미지" fill />
+          </div>
+        )}
+      </article>
+      {isTablet && (
+        <>
           <S.PhoneBox>
             <span>📞&nbsp;&nbsp;{phone}</span>
           </S.PhoneBox>
@@ -50,10 +91,8 @@ export default function ResumeProfileSectionPreview() {
             <span>🏠&nbsp;&nbsp;{address}</span>
             <span>{addressDetail}</span>
           </S.AddressBox>
-        </div>
-
-        {profileImage && <div className="image-info"></div>}
-      </article>
+        </>
+      )}
     </S.ResumeProfileSectionPreview>
   );
 }
@@ -70,8 +109,10 @@ const S = {
         flex-shrink: 0;
         border: 1px solid ${({ theme }) => theme.colors.gray200};
         border-radius: 10px;
-        width: 120px;
-        height: 150px;
+        width: 110px;
+        height: 130px;
+        position: relative;
+        overflow: hidden;
         ${(props) => props.theme.media.mobile`
           margin-right: 15px;
       `};
@@ -113,10 +154,11 @@ const S = {
     margin-bottom: 20px;
   `,
   PhoneBox: styled.div`
-    margin-bottom: 12px;
+    margin: 10px 0;
   `,
   EmailBox: styled.div`
-    margin-bottom: 12px;
+    margin: 10px 0;
+    word-break: break-all;
   `,
   AddressBox: styled.div``,
 };
