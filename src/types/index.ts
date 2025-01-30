@@ -59,6 +59,9 @@ export type RecruitmentItem = {
   recruitmentTitle: string;
   recruitmentStatus: RecruitmentStatusKeys;
   applicationCount: { totalCount: number; viewCount: number; notViewCount: number };
+  jobs: AllJobsKeyValuesKeys[];
+  createdAt: Date;
+  updatedAt: Date;
 };
 
 export type Experience = {
