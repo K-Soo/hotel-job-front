@@ -4,6 +4,7 @@ import ProductRecruitmentTab from '@/components/employerProductRecruitment/Produ
 import { ParsedUrlQuery } from 'querystring';
 import { ProductRecruitmentQuery } from '@/types/API';
 import { useRouter } from 'next/router';
+import SkeletonUI from '@/components/common/SkeletonUI';
 
 interface Query extends ParsedUrlQuery {
   type?: ProductRecruitmentQuery;
@@ -39,8 +40,10 @@ export default function EmployerProductRecruitment({ isLoading, children }: Empl
       </S.Header>
 
       <div className="product-container">
-        <ProductPreview />
-        <div className="product-container__list">{children}</div>
+        {isLoading ? <SkeletonUI.RecruitMentProductPreview /> : <ProductPreview />}
+
+        {isLoading && <SkeletonUI.RecruitMentProductList />}
+        {!isLoading && <div className="product-container__list">{children}</div>}
       </div>
     </S.EmployerProductRecruitment>
   );
