@@ -1,11 +1,15 @@
 import { atom, selector } from 'recoil';
-import { ProductDuration, ProductRecruitmentListItem, RecruitmentProductOptionNameKey } from '@/types';
+import { ProductDuration, ProductRecruitmentListItem, RecruitmentProductNameKey, RecruitmentProductOptionNameKey } from '@/types';
 
-export interface RecruitmentProductSideMenuAtom {
+interface RecruitmentProductSideMenuAtom {
   isOpen: boolean;
 }
 
-export interface SelectProductAtom extends Partial<ProductRecruitmentListItem> {
+interface ProductFocusAtom {
+  product: RecruitmentProductNameKey | 'DEFAULT' | undefined;
+}
+
+interface SelectProductAtom extends Partial<ProductRecruitmentListItem> {
   selectedOptions: {
     id: string;
     listUpIntervalHours: number;
@@ -17,6 +21,13 @@ export interface SelectProductAtom extends Partial<ProductRecruitmentListItem> {
 
   selectedDuration: Partial<ProductDuration>;
 }
+
+export const productFocusAtom = atom<ProductFocusAtom>({
+  key: 'productFocusAtom',
+  default: {
+    product: 'DEFAULT',
+  },
+});
 
 export const recruitmentProductSideMenuAtom = atom<RecruitmentProductSideMenuAtom>({
   key: 'recruitmentProductSideMenuAtom',
