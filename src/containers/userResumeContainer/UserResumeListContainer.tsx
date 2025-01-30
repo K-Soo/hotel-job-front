@@ -97,9 +97,11 @@ export default function UserResumeListContainer() {
             <Modal.Header title="입사 지원내역" />
             <Modal.Content>
               {selectedResume.length === 0 && <EmptyComponent message="지원내역이 없습니다." />}
-              {selectedResume.map((item) => (
-                <ResumeHistoryItem key={item.id} item={item} />
-              ))}
+              {selectedResume.map((item) => {
+                if (item.recruitment) {
+                  return <ResumeHistoryItem key={item.id} item={item} />;
+                }
+              })}
             </Modal.Content>
           </Modal>
         )}
