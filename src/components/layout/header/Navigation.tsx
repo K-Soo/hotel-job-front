@@ -46,9 +46,9 @@ export default function Navigation() {
           인재
         </MotionLink>
 
-        <MotionLink className="item" href={path.TALENT}>
+        {/* <MotionLink className="item" href={path.TALENT}>
           고객센터
-        </MotionLink>
+        </MotionLink> */}
       </S.Menu>
 
       <S.Utility>
