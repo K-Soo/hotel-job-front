@@ -16,6 +16,8 @@ const DragScroll = React.forwardRef<HTMLElement, DragScrollProps>(({ children },
 
 export default DragScroll;
 
+DragScroll.displayName = 'DragScroll';
+
 const StyledScrollContainer = styled(ScrollContainer)`
   width: 100%;
   cursor: grab;
