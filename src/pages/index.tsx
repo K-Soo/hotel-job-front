@@ -15,14 +15,10 @@ export default function HomePage() {
 HomePage.getLayout = (page: React.ReactElement) => {
   return (
     <Layout>
-      {!environment.isProd && (
-        <>
-          <Header>
-            <DesktopNavigation />
-            <MobileNavigation logoIcon />
-          </Header>
-        </>
-      )}
+      <Header>
+        <DesktopNavigation />
+        <MobileNavigation logoIcon />
+      </Header>
       <Main>{page}</Main>
       <Footer />
       <BottomNavigation />
