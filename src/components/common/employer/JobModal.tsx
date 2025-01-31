@@ -11,11 +11,10 @@ import {
   hotelJobKeyValues,
   touristHotelJobsKeyValues,
   otherJobsKeyValues,
-  allJobsKeyValues,
   AllJobsKeyValuesKeys,
 } from '@/constants/job';
 import ChipsCheckbox from '@/components/common/style/ChipsCheckbox';
-import { FieldValues, useFormContext } from 'react-hook-form';
+import { useFormContext } from 'react-hook-form';
 import { motion } from 'framer-motion';
 import useToast from '@/hooks/useToast';
 
