@@ -23,7 +23,7 @@ export default function CompanyForm({ onSubmit, isSubmitError }: CompanyFormProp
   return (
     <S.CompanyForm>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <FormInput<SignInForm> label="아이디" name="userId" placeholder="아이디" isFocusing />
+        <FormInput<SignInForm> label="아이디" name="userId" placeholder="아이디" isFocusing margin="0 0 15px 0" />
         <FormInput<SignInForm> label="비밀번호" name="password" type="password" placeholder="비밀번호" />
 
         <S.ResponseErrorText $isVisible={isSubmitError}>로그인 정보를 확인해주세요.</S.ResponseErrorText>
