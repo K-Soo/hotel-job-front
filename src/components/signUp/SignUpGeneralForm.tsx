@@ -31,9 +31,17 @@ export default function SignUpGeneralForm({ setStep, handleChangeAllAgree, fetch
   return (
     <S.SignUpGeneralForm>
       <h2 className="sign-up-title">회원가입</h2>
+
       <S.Horizontal>
         <div className="wrapper">
-          <FormInput<SignUpForm> required label="아이디" name="userId" placeholder="소문자+숫자, 8~16자" maxLength={16} />
+          <FormInput<SignUpForm>
+            required
+            label="아이디"
+            name="userId"
+            placeholder="소문자+숫자, 8~16자"
+            maxLength={16}
+            errorPosition="static"
+          />
           <Button
             label="확인"
             variant="secondary100"
@@ -45,14 +53,15 @@ export default function SignUpGeneralForm({ setStep, handleChangeAllAgree, fetch
           />
         </div>
       </S.Horizontal>
+
       <FormInput<SignUpForm>
         required
         label="비밀번호"
         name="password"
         placeholder="영문+숫자+특수문자, 8~16자"
-        margin="0 0 5px 0"
         type="password"
         maxLength={16}
+        errorPosition="static"
       />
       <FormInput<SignUpForm>
         required
@@ -65,11 +74,11 @@ export default function SignUpGeneralForm({ setStep, handleChangeAllAgree, fetch
       <S.Subtitle>이용 약관</S.Subtitle>
       <CheckBox name="all" label="전체 동의" checked={allAgreeChecked} onChange={handleChangeAllAgree} disabled={isSubmitting} />
       <Line margin="10px 0" />
-      <FormCheckbox name="ageAgree" required label="만 19세 이상" margin="0 0 10px 0" visibleIcon={false} />
-      <FormCheckbox name="personalInfoAgree" required label="서비스이용 동의" margin="0 0 10px 0" />
-      <FormCheckbox name="serviceTermsAgree" required label="개인정보 수집동의" margin="0 0 10px 0" />
-      <FormCheckbox name="smsMarketingAgree" optional label="SMS 수신 동의" margin="0 0 10px 0" />
-      <FormCheckbox name="emailMarketingAgree" optional label="E-Mail 수신 동의" margin="0 0 10px 0" />
+      <FormCheckbox name="ageAgree" required label="만 19세 이상" margin="0 0 15px 0" visibleIcon={false} />
+      <FormCheckbox name="personalInfoAgree" required label="서비스이용 동의" margin="0 0 15px 0" />
+      <FormCheckbox name="serviceTermsAgree" required label="개인정보 수집동의" margin="0 0 15px 0" />
+      <FormCheckbox name="smsMarketingAgree" optional label="SMS 수신 동의" margin="0 0 15px 0" />
+      <FormCheckbox name="emailMarketingAgree" optional label="E-Mail 수신 동의" margin="0 0 15px 0" />
       <div className="button-group">
         <Button label="이전" variant="secondary" margin="0 15px 0 0" onClick={() => router.push(path.SIGN_IN)} />
         <Button label="가입완료" variant="primary" type="submit" />
