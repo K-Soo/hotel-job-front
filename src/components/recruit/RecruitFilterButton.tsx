@@ -11,7 +11,7 @@ interface RecruitFilterButtonProps {
 
 export default function RecruitFilterButton({ label, name, margin, onClick, isTag }: RecruitFilterButtonProps) {
   return (
-    <S.RecruitFilterButton type="button" $margin={margin} name={name} $isTag={isTag}>
+    <S.RecruitFilterButton type="button" $margin={margin} name={name} $isTag={isTag} onClick={onClick}>
       <span>{label}</span>
       {!isTag && <Icon name="ArrowBottom14x14" width="14px" height="14px" margin="0 0 0 3px" />}
     </S.RecruitFilterButton>
