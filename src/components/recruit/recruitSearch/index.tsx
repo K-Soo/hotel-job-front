@@ -8,8 +8,13 @@ import { allJobsKeyValues, AllJobsKeyValuesKeys, ALL_JOBS } from '@/constants/jo
 import { useRouter } from 'next/router';
 import dynamic from 'next/dynamic';
 import useResponsive from '@/hooks/useResponsive';
+import Modal from '@/components/common/modal';
+import useModal from '@/hooks/useModal';
+import Button from '@/components/common/style/Button';
 
 const DynamicJobModalForm = dynamic(() => import('@/components/recruit/recruitSearch/JobModalForm'), { ssr: false });
+const DynamicLocationModalForm = dynamic(() => import('@/components/recruit/recruitSearch/LocationModalForm'), { ssr: false });
+const DynamicNoSSRModal = dynamic(() => import('@/components/common/modal'), { ssr: false });
 
 interface RecruitSearchProps {}
 
@@ -56,42 +61,71 @@ export default function RecruitSearch({}: RecruitSearchProps) {
   const { job } = router.query as Query;
   const selectedJobs = getJobArray(job);
   const jobObj = getJobObject(job);
+  const { modalAtomState, setModalAtomState } = useModal();
 
   const { isTablet } = useResponsive();
 
   const handleCloseJobModal = () => setIsOpenJobModal(false);
+  const handleCloseLocationModal = () => setIsOpenLocationModal(false);
 
   return (
-    <S.RecruitSearch>
-      <S.JobSearchButton>
-        <motion.div className="wrapper" onClick={() => setIsOpenJobModal((prev) => !prev)}>
-          <motion.div whileTap={{ scale: 0.99 }} whileHover={{ color: '#000000' }}>
-            {Object.values(jobObj).length > 0 ? (
-              <div>
-                <span>{Object.values(jobObj)[0]}</span>
-                {Object.values(jobObj).length > 1 && <span>&nbsp;외&nbsp;{Object.values(jobObj).length - 1}</span>}
-              </div>
-            ) : (
-              <span>업종 · 직무</span>
-            )}
+    <>
+      {isTablet && modalAtomState.isOpen && (
+        <DynamicNoSSRModal>
+          <Modal.Header title="지역" />
+          <Modal.Content>
+            <DynamicLocationModalForm />
+          </Modal.Content>
+          <Modal.Footer>
+            <Button label="초기화" variant="tertiary" height="40px" width="100%" margin="0 15px 0 0" onClick={() => {}} />
+            <Button label="적용" variant="primary" height="40px" width="100%" type="button" onClick={() => {}} />
+          </Modal.Footer>
+        </DynamicNoSSRModal>
+      )}
+
+      <S.RecruitSearch>
+        <S.JobSearchButton>
+          <motion.div className="wrapper" onClick={() => setIsOpenJobModal((prev) => !prev)}>
+            <motion.div whileTap={{ scale: 0.99 }} whileHover={{ color: '#000000' }}>
+              {Object.values(jobObj).length > 0 ? (
+                <div>
+                  <span>{Object.values(jobObj)[0]}</span>
+                  {Object.values(jobObj).length > 1 && <span>&nbsp;외&nbsp;{Object.values(jobObj).length - 1}</span>}
+                </div>
+              ) : (
+                <span>업종 · 직무</span>
+              )}
+            </motion.div>
+            <S.ArrowBottomIcon>
+              <Icon name="ArrowRight16x16" width="16px" height="16px" />
+            </S.ArrowBottomIcon>
           </motion.div>
-          <S.ArrowBottomIcon>
-            <Icon name="ArrowRight16x16" width="16px" height="16px" />
-          </S.ArrowBottomIcon>
-        </motion.div>
 
-        {!isTablet && isOpenJobModal && <DynamicJobModalForm handleCloseJobModal={handleCloseJobModal} />}
-      </S.JobSearchButton>
+          {!isTablet && isOpenJobModal && <DynamicJobModalForm handleCloseJobModal={handleCloseJobModal} />}
+        </S.JobSearchButton>
 
-      <S.LocationSearchButton>
-        <motion.div whileTap={{ scale: 0.99 }} whileHover={{ color: '#000000' }}>
-          <span>지역 · 전국</span>
-        </motion.div>
-        <S.ArrowBottomIcon>
-          <Icon name="ArrowRight16x16" width="16px" height="16px" />
-        </S.ArrowBottomIcon>
-      </S.LocationSearchButton>
-    </S.RecruitSearch>
+        <S.LocationSearchButton>
+          <motion.div
+            className="location-wrapper"
+            onClick={() => {
+              setIsOpenLocationModal((prev) => !prev);
+              if (isTablet) {
+                setModalAtomState({ isOpen: true });
+              }
+            }}
+          >
+            <motion.div whileTap={{ scale: 0.99 }} whileHover={{ color: '#000000' }}>
+              <span>지역 · 전국</span>
+            </motion.div>
+            <S.ArrowBottomIcon>
+              <Icon name="ArrowRight16x16" width="16px" height="16px" />
+            </S.ArrowBottomIcon>
+          </motion.div>
+
+          {!isTablet && isOpenLocationModal && <DynamicLocationModalForm handleCloseLocationModal={handleCloseLocationModal} />}
+        </S.LocationSearchButton>
+      </S.RecruitSearch>
+    </>
   );
 }
 
@@ -101,7 +135,7 @@ const S = {
     margin-top: 15px;
     margin-bottom: 50px;
     color: ${({ theme }) => theme.colors.black300};
-    ${(props) => props.theme.media.tablet`
+    ${(props) => props.theme.media.mobile`
       flex-direction: column;
       margin-bottom: 15px;
     `};
@@ -114,23 +148,26 @@ const S = {
       cursor: pointer;
       font-weight: 600;
       font-size: 26px;
-      ${(props) => props.theme.media.tablet`
-      font-size: 18px;
-    `};
+      ${(props) => props.theme.media.mobile`
+        font-size: 18px;
+      `};
     }
   `,
   LocationSearchButton: styled(motion.div)`
-    font-size: 24px;
-    font-weight: 600;
-    display: flex;
-    align-items: center;
-    margin-left: 30px;
-    cursor: pointer;
-    ${(props) => props.theme.media.tablet`
-      font-size: 18px;
-      margin-top: 8px;
-      margin-left: 0;
-    `};
+    position: relative;
+    .location-wrapper {
+      font-size: 24px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      margin-left: 30px;
+      cursor: pointer;
+      ${(props) => props.theme.media.mobile`
+        font-size: 18px;
+        margin-top: 8px;
+        margin-left: 0;
+      `};
+    }
   `,
   ArrowBottomIcon: styled.i`
     display: inline-flex;
