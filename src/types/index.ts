@@ -3,7 +3,7 @@ import { CAREER_LEVEL, LICENSE_STAGE } from '@/constants/resume';
 import { EXPERIENCE_CONDITION, RECRUITMENT_STATUS, WORKING_DAY_LIST } from '@/constants/recruitment';
 import { AllJobsKeyValuesKeys } from '@/constants/job';
 import { EDUCATION_LEVEL, POSITION, SALARY_TYPE } from '@/constants';
-import { city } from '@/constants/location';
+import { CITY } from '@/constants/location';
 import { BENEFITS } from '@/constants/benefits';
 import { PREFERENCES } from '@/constants/preferences';
 import { LANGUAGE_LEVEL, LANGUAGE } from '@/constants/language';
@@ -34,7 +34,7 @@ export type ResumeType = 'FILE' | 'GENERAL'; //파일, 일반
 export type CareerLevelKeys = keyof typeof CAREER_LEVEL;
 export type EducationLevelKeys = keyof typeof EDUCATION_LEVEL;
 export type PositionKeys = keyof typeof POSITION;
-export type CityKeys = keyof typeof city;
+export type CityKeys = keyof typeof CITY;
 export type SalaryTypeKeys = keyof typeof SALARY_TYPE;
 export type LicenseStageKeys = keyof typeof LICENSE_STAGE;
 export type experienceConditionKeys = keyof typeof EXPERIENCE_CONDITION;
