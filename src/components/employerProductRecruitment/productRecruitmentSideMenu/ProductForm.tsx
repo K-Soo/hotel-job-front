@@ -1,3 +1,4 @@
+import React from 'react';
 import styled from 'styled-components';
 import { RECRUITMENT_PRODUCT_NAME } from '@/constants/product';
 import SaleRate from '@/components/common/SaleRate';
@@ -6,14 +7,10 @@ import { selectProductAtom } from '@/recoil/product';
 import { priceComma } from '@/utils';
 import Icon from '@/icons/Icon';
 
-interface ProductFormProps {}
-
-export default function ProductForm({}: ProductFormProps) {
+export default function ProductForm() {
+  const [isVisibleOption, setIsVisibleOption] = React.useState(false);
   const [selectProductAtomState, setSelectProductAtomState] = useRecoilState(selectProductAtom);
-  console.log('selectProductAtomState: ', selectProductAtomState);
-
   const { selectedDuration, durations } = selectProductAtomState;
-  console.log('selectedDuration: ', selectedDuration);
 
   const onChangeDuration = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedValue = event.target.value;
@@ -23,6 +20,7 @@ export default function ProductForm({}: ProductFormProps) {
     }
 
     const targetDuration = durations.find((duration) => duration.id === selectedValue);
+
     if (!targetDuration) {
       return;
     }
@@ -48,7 +46,7 @@ export default function ProductForm({}: ProductFormProps) {
             <span>+{selectProductAtomState.selectedDuration.bonusDays}일</span>
           </div>
 
-          <StyledChangeButton>옵션변경</StyledChangeButton>
+          <StyledChangeButton onClick={() => setIsVisibleOption((prev) => !prev)}>옵션변경</StyledChangeButton>
         </div>
 
         <div className="price-box">
@@ -71,8 +69,11 @@ export default function ProductForm({}: ProductFormProps) {
         </div>
       </S.PriceInfo>
 
-      {durations && (
+      {isVisibleOption && durations && (
         <StyledDropDown>
+          <h6 className="title">
+            {RECRUITMENT_PRODUCT_NAME[selectProductAtomState.name as keyof typeof RECRUITMENT_PRODUCT_NAME]}공고 기간 변경
+          </h6>
           <S.DurationSelect>
             <select onChange={onChangeDuration} defaultValue={selectedDuration.id}>
               {durations.map((duration) => (
@@ -100,12 +101,18 @@ const StyledChangeButton = styled.button`
   cursor: pointer;
 `;
 
-const StyledDropDown = styled.div``;
+const StyledDropDown = styled.div`
+  padding-top: 15px;
+  padding-bottom: 15px;
+  /* background-color: red; */
+  .title {
+    margin-bottom: 5px;
+    font-size: 14px;
+  }
+`;
 
 const S = {
-  ProductForm: styled.div`
-    /* border: 1px solid red; */
-  `,
+  ProductForm: styled.div``,
   ProductInfo: styled.div`
     display: flex;
     .title {
@@ -116,13 +123,13 @@ const S = {
   PriceInfo: styled.div`
     display: flex;
     justify-content: space-between;
-    align-items: flex-end;
+    align-items: center;
+    height: 33px;
     .duration-box {
       display: flex;
       align-items: center;
       &__text {
         font-size: 16px;
-        /* border: 1px solid red; */
         margin-right: 10px;
         &--label {
           color: ${(props) => props.theme.colors.gray600};
@@ -144,9 +151,8 @@ const S = {
     }
   `,
   DurationSelect: styled.div`
-    height: 35px;
+    height: 40px;
     border-radius: 5px;
-    margin: 15px 0;
     max-width: 190px;
     width: 100%;
     background-color: white;

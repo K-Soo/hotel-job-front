@@ -335,3 +335,10 @@ export interface GetRecruitmentDetailApplicantListResponse extends BaseResponse 
 export interface GetProductRecruitmentList extends BaseResponse {
   result: types.ProductRecruitmentListItem[];
 }
+
+export interface UploadProfileImageResponse extends BaseResponse {
+  result: {
+    status: string;
+    key: string;
+  };
+}

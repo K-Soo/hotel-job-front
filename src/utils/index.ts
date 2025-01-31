@@ -7,3 +7,4 @@ export { addressFormat } from './addressFormat';
 export { employmentTypeFormat } from './employmentTypeFormat';
 export { appendQueryParams } from './appendQueryParams';
 export { parseBirthDateAndCalculateAge } from './parseBirthDateAndCalculateAge';
+export { getImageUrl } from './getImageUrl';

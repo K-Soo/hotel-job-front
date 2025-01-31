@@ -40,13 +40,6 @@ export const EMPLOYER_ASIDE_MENU = [
   },
 
   {
-    label: '일정 관리',
-    value: path.EMPLOYER_SCHEDULE,
-    icon: 'UserRounded24x24',
-    items: [],
-  },
-
-  {
     label: '채용상품',
     value: '',
     icon: 'Shop24x24',

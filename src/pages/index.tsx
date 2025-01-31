@@ -5,9 +5,9 @@ import environment from '@/environment';
 import Maintenance from '@/components/common/Maintenance';
 
 export default function HomePage() {
-  if (environment.isProd) {
-    return <Maintenance />;
-  }
+  // if (environment.isProd) {
+  //   return <Maintenance />;
+  // }
 
   return <HomeContainer />;
 }

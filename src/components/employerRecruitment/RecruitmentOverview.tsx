@@ -1,22 +1,25 @@
+import { ALL_JOBS, AllJobsKeyValuesKeys } from '@/constants/job';
 import styled from 'styled-components';
 
 interface RecruitmentOverviewProps {
   recruitmentTitle: string;
+  jobs: AllJobsKeyValuesKeys[];
 }
 
-export default function RecruitmentOverview({ recruitmentTitle }: RecruitmentOverviewProps) {
+export default function RecruitmentOverview({ recruitmentTitle, jobs }: RecruitmentOverviewProps) {
   return (
     <S.RecruitmentOverview>
       <h5 className="title">{recruitmentTitle}</h5>
       <div className="summary">
         <div className="summary__job-box">
-          <span className="summary__job-box--text">당번</span>
-          <span className="summary__job-box--text">지배인</span>
-          <span className="summary__job-box--text">부부팀</span>
+          {jobs.map((job) => (
+            <span className="summary__job-box--text" key={job}>
+              {ALL_JOBS[job]}
+            </span>
+          ))}
         </div>
         {/* TODO - 현재 년도 비교 후 렌더링  */}
         {/* TODO - 등록 = 수정  */}
-        <time className="summary__date--start">01.24 등록</time>
         <time className="summary__date--update">01.24 수정</time>
       </div>
     </S.RecruitmentOverview>
@@ -33,6 +36,8 @@ const S = {
     width: 100%;
     cursor: pointer;
     .title {
+      width: 100%;
+      text-align: left;
       &:hover {
         text-decoration: underline;
       }
@@ -41,14 +46,11 @@ const S = {
       display: flex;
       padding-top: 3px;
       font-size: 12px;
+      white-space: nowrap;
       color: ${(props) => props.theme.colors.gray800};
       &__job-box {
         color: ${(props) => props.theme.colors.gray800};
         &--text {
-          padding-right: 5px;
-        }
-        &::after {
-          content: '|';
           padding-right: 5px;
         }
       }

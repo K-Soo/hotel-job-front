@@ -34,10 +34,11 @@ const S = {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 3px;
+    padding: 5px 3px;
     border-radius: 5px;
     border: 1px solid ${(props) => props.theme.colors.gray300};
     background-color: ${(props) => props.theme.colors.white};
+    cursor: pointer;
     .column {
       flex: 1;
       display: flex;

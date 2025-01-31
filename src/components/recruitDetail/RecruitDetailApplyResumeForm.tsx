@@ -9,7 +9,7 @@ import useAuth from '@/hooks/useAuth';
 import { dateFormat } from '@/utils';
 import IconDimmed from '@/components/common/IconDimmed';
 import { ResumeStatusKey } from '@/types';
-
+import SkeletonUI from '@/components/common/SkeletonUI';
 interface RecruitDetailApplyResumeFormProps {
   selectedResume: string | null;
   setSelectedResume: React.Dispatch<React.SetStateAction<string | null>>;
@@ -52,8 +52,7 @@ export default function RecruitDetailApplyResumeForm({
       </div>
 
       <div className="content">
-        {/* TODO - loading */}
-        {isLoading && <div>loading</div>}
+        {isLoading && <SkeletonUI.Line style={{ height: '78px' }} />}
         {isSuccess && data && (
           <>
             {data.result.map((resume) => (
@@ -75,7 +74,7 @@ export default function RecruitDetailApplyResumeForm({
         )}
       </div>
       <div className="bottom">
-        <Button label="제출하기" variant="primary" height="40px" disabled={!selectedResume} onClick={fetchSubmitApply} />
+        <Button label="제출하기" variant="primary" height="45px" disabled={!selectedResume} onClick={fetchSubmitApply} />
       </div>
     </S.RecruitDetailApplyResumeForm>
   );

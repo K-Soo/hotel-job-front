@@ -137,7 +137,6 @@ const StyleRecruitment = styled.section`
   .recruitment-container {
     margin: 0 auto;
     max-width: 1024px;
-    /* width: 100%; */
     display: flex;
     height: 100%;
     .content {
@@ -161,6 +160,53 @@ const ResumeListItems = () => {
 
 const StyleResumeListItems = styled.div``;
 
+const RecruitMentProductPreview = () => {
+  return (
+    <StyledRecruitMentProductPreview>
+      <div className="tabs" />
+      <div className="image" />
+    </StyledRecruitMentProductPreview>
+  );
+};
+
+const StyledRecruitMentProductPreview = styled.div`
+  .tabs {
+    ${SkeletonAnimation}
+    height: 50px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+  }
+  .image {
+    ${SkeletonAnimation}
+    border-radius: 5px;
+    width: 370px;
+    height: 730px;
+  }
+`;
+
+const RecruitMentProductList = () => {
+  return (
+    <StyledRecruitMentProductList>
+      <div className="item" />
+      <div className="item" />
+      <div className="item" />
+    </StyledRecruitMentProductList>
+  );
+};
+
+const StyledRecruitMentProductList = styled.div`
+  width: 100%;
+  margin-left: 30px;
+  .item {
+    ${SkeletonAnimation}
+    border-radius: 10px;
+    padding: 20px;
+    width: 100%;
+    margin-bottom: 30px;
+    height: 216px;
+  }
+`;
+
 const SkeletonUI = {
   ResumeListItems,
   Document,
@@ -168,6 +214,8 @@ const SkeletonUI = {
   Table,
   Tabs,
   Recruitment,
+  RecruitMentProductPreview,
+  RecruitMentProductList,
 };
 
 export default SkeletonUI;

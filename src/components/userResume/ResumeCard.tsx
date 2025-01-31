@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import Button from '@/components/common/style/Button';
 import Icon from '@/icons/Icon';
-import IconDimmed from '@/components/common/IconDimmed';
 import IconHover from '@/components/common/IconHover';
 import { motion } from 'framer-motion';
 import { ResumeListItem, ResumeLstItemApplications } from '@/types';

@@ -55,14 +55,14 @@ function RecruitmentTableBody({ items, handleClickRecruitmentItem, checkedItems,
           </div>
 
           <div className="item__text" onClick={() => handleClickRecruitmentItem(item.id, item.recruitmentStatus)}>
-            <RecruitmentOverview recruitmentTitle={item.recruitmentTitle} />
+            <RecruitmentOverview recruitmentTitle={item.recruitmentTitle} jobs={item.jobs} />
           </div>
 
           <div className="item__product">
             <ProductOverview status={item.recruitmentStatus} />
           </div>
 
-          <div className="item__candidate">
+          <div className="item__candidate" onClick={() => handleClickRecruitmentItem(item.id, item.recruitmentStatus)}>
             <ApplicantStatusOverview status={item.recruitmentStatus} applicationCount={item.applicationCount} />
           </div>
 
@@ -86,6 +86,7 @@ const S = {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    white-space: nowrap;
     border-bottom: 1px solid ${(props) => props.theme.colors.gray300};
     .header-row {
       text-align: center;
@@ -116,10 +117,9 @@ const S = {
     }
   `,
   RecruitmentTableBody: styled.div`
-    max-height: 400px;
     background-color: ${(props) => props.theme.colors.blue};
     .item {
-      height: 50px;
+      height: 60px;
       display: flex;
       align-items: center;
       text-align: center;

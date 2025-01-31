@@ -1,27 +1,26 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
-import { motion } from 'framer-motion';
 import Button from '@/components/common/style/Button';
 import Tag from '@/components/common/Tag';
-import { productUseDateOptions } from '@/constants/options';
-import { useSetRecoilState } from 'recoil';
+import { useSetRecoilState, useRecoilState } from 'recoil';
 import { ProductRecruitmentListItem } from '@/types';
-import { recruitmentProductSideMenuAtom } from '@/recoil/product';
+import { recruitmentProductSideMenuAtom, productFocusAtom } from '@/recoil/product';
 import { priceComma } from '@/utils';
 import SaleRate from '@/components/common/SaleRate';
 import Icon from '@/icons/Icon';
 import { RECRUITMENT_PRODUCT_DESCRIPTION, RECRUITMENT_PRODUCT_NAME } from '@/constants/product';
 import { selectProductAtom } from '@/recoil/product';
+
 interface ProductCardProps {
   margin?: string;
   product: ProductRecruitmentListItem;
 }
 
 export default function ProductCard({ product, margin }: ProductCardProps) {
-  const [isFocus, setIsFocus] = React.useState(false);
   const [selectedDuration, setSelectedDuration] = React.useState(product.durations[3]);
   const setRecruitmentProductSideMenuAtom = useSetRecoilState(recruitmentProductSideMenuAtom);
   const setSelectProductAtom = useSetRecoilState(selectProductAtom);
+  const [productFocusAtomState, setProductFocusAtomState] = useRecoilState(productFocusAtom);
 
   const handleClickProductPurchase = () => {
     setSelectProductAtom((prev) => ({
@@ -43,7 +42,11 @@ export default function ProductCard({ product, margin }: ProductCardProps) {
   };
 
   return (
-    <S.ProductCard $margin={margin} $isFocus={isFocus} onFocus={() => setIsFocus(true)} onBlur={() => setIsFocus(false)}>
+    <S.ProductCard
+      $margin={margin}
+      $isFocus={productFocusAtomState.product === product.name}
+      onClick={() => setProductFocusAtomState({ product: product.name })}
+    >
       <S.Header>
         <div className="title-box">
           <h3 className="title-box__title">{RECRUITMENT_PRODUCT_NAME[product.name]}</h3>
@@ -55,6 +58,7 @@ export default function ProductCard({ product, margin }: ProductCardProps) {
 
       <S.Description>{RECRUITMENT_PRODUCT_DESCRIPTION[product.name]}</S.Description>
 
+      <S.DurationSelectTitle className="select-title">기간설정</S.DurationSelectTitle>
       <S.DurationSelect>
         <select onChange={onChangeDuration} defaultValue={product.durations[3].id}>
           {product.durations.map((duration) => (
@@ -71,7 +75,7 @@ export default function ProductCard({ product, margin }: ProductCardProps) {
         <S.PriceBox>
           {selectedDuration.discountRate !== 0 && <SaleRate rate={selectedDuration.discountRate * 100} />}
           {selectedDuration.discountRate !== 0 && <del>{priceComma(selectedDuration.price)}원</del>}
-          <strong className="salePrice">{priceComma(selectedDuration.price * (1 - selectedDuration.discountRate))}원</strong>
+          <strong className="sale-price">{priceComma(selectedDuration.price * (1 - selectedDuration.discountRate))}원</strong>
         </S.PriceBox>
 
         <Button label="상품 선택" variant="checkoutOutline" width="150px" onClick={handleClickProductPurchase} />
@@ -82,7 +86,6 @@ export default function ProductCard({ product, margin }: ProductCardProps) {
 
 const S = {
   ProductCard: styled.div<{ $margin?: string; $isFocus: boolean }>`
-    /* height: 200px; */
     border: 1px solid ${(props) => props.theme.colors.gray500};
     margin: ${(props) => props.$margin || '0'};
     border-radius: 10px;
@@ -121,7 +124,10 @@ const S = {
   `,
   PriceBox: styled.div`
     margin-right: 15px;
-    .salePrice {
+    .sale-price {
+      display: inline-block;
+      padding-left: 10px;
+      padding-bottom: 5px;
       font-size: 20px;
       font-weight: 600;
       color: ${(props) => props.theme.colors.black400};
@@ -132,10 +138,14 @@ const S = {
     align-items: flex-end;
     justify-content: flex-end;
   `,
+  DurationSelectTitle: styled.p`
+    padding-bottom: 2px;
+    font-size: 15px;
+  `,
   DurationSelect: styled.div`
     height: 40px;
     border-radius: 5px;
-    margin: 15px 0;
+    margin-bottom: 10px;
     max-width: 200px;
     width: 100%;
     background-color: white;

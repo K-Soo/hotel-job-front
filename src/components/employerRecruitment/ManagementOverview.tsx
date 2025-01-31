@@ -6,6 +6,7 @@ import DropdownTemplate from '@/components/common/DropdownTemplate';
 import Button from '@/components/common/style/Button';
 import { RecruitmentStatusKeys } from '@/types';
 import { useRouter } from 'next/router';
+import IconHover from '@/components/common/IconHover';
 
 interface ManagementOverviewProps {
   id: string;
@@ -36,21 +37,15 @@ export default function ManagementOverview({ id, status }: ManagementOverviewPro
   }
   return (
     <S.ManagementOverview onBlur={handleBlur} tabIndex={0} ref={managementOverviewRef}>
-      <IconDimmed width="30px" height="30px" margin="0 auto">
-        <Icon
-          name="Dots24x24"
-          width="18px"
-          height="18px"
-          style={{ transform: 'rotate(90deg)' }}
-          onClick={() => setIsDropdownOpen((prev) => !prev)}
-        />
-      </IconDimmed>
+      <IconHover width="30px" height="30px" margin="0 auto" onClick={() => setIsDropdownOpen((prev) => !prev)}>
+        <Icon name="Dots24x24" width="18px" height="18px" style={{ transform: 'rotate(90deg)', color: '#555' }} />
+      </IconHover>
 
       {isDropdownOpen && (
         <DropdownTemplate
           ref={dropdownRef}
           outStyle={{ height: 'auto', paddingTop: '0' }}
-          innerStyle={{ border: 'none', boxShadow: '0 0 10px 0 rgba(0, 0, 0, 0.1)', padding: '15px 10px' }}
+          innerStyle={{ border: 'none', boxShadow: '0 0 5px 0 rgba(0, 0, 0, 0.1)', padding: '15px 10px' }}
         >
           {true && (
             <Button

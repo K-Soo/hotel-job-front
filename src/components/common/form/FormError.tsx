@@ -26,7 +26,6 @@ const S = {
     height: 12px;
     font-size: 11px;
     color: crimson;
-
     ${(props) =>
       props.$type === 'available' &&
       css`

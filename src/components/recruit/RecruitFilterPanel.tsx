@@ -6,25 +6,14 @@ import DragScroll from '@/components/common/DragScroll';
 import { useRouter } from 'next/router';
 import path from '@/constants/path';
 
-interface RecruitFilterPanelProps {}
+interface RecruitFilterPanelProps {
+  handleClickFilterButton: (event: React.MouseEvent<HTMLButtonElement>) => void;
+}
 
-export default function RecruitFilterPanel({}: RecruitFilterPanelProps) {
+export default function RecruitFilterPanel({ handleClickFilterButton }: RecruitFilterPanelProps) {
   const router = useRouter();
   const dragScrollRef = React.useRef<HTMLElement>(null);
   const filterButtonRefs = React.useRef<HTMLLIElement[] | null[]>([]);
-
-  const [pathname, params] = router.asPath.split('?');
-  const urlSearchParams = new URLSearchParams(params);
-
-  const handleClickFilterButton = (event: React.MouseEvent<HTMLButtonElement>) => {
-    const { name, value } = event.currentTarget;
-    const params = Object.fromEntries(urlSearchParams);
-
-    router.replace({
-      pathname: path.RECRUIT,
-      query: params,
-    });
-  };
 
   return (
     <S.RecruitFilterPanel>
@@ -33,10 +22,9 @@ export default function RecruitFilterPanel({}: RecruitFilterPanelProps) {
       </div>
       <DragScroll>
         <div className="filters">
-          <RecruitFilterButton onClick={handleClickFilterButton} name="aa" margin="0 15px 0 0" label="직무" />
-          <RecruitFilterButton onClick={handleClickFilterButton} name="aaaa" margin="0 15px 0 0" label="급여" />
-          <RecruitFilterButton onClick={handleClickFilterButton} name="aaaaa" margin="0 15px 0 0" label="경력/신입" />
-          <RecruitFilterButton onClick={handleClickFilterButton} name="aaaaaa" label="고용형태" />
+          <RecruitFilterButton onClick={handleClickFilterButton} name="salary" margin="0 15px 0 0" label="급여" />
+          <RecruitFilterButton onClick={handleClickFilterButton} name="experience" margin="0 15px 0 0" label="경력/신입" />
+          <RecruitFilterButton onClick={handleClickFilterButton} name="employmentType" label="고용형태" />
         </div>
 
         <div className="line" />

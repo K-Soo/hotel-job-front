@@ -62,6 +62,7 @@ const S = {
       background-color: ${(props) => props.theme.colors.gray};
       border-radius: 10px;
       padding: 20px;
+      margin-top: 20px;
       &__item {
         margin-bottom: 15px;
         font-size: 15px;

@@ -19,12 +19,11 @@ interface LogoProps {
 
 export default function Logo({ size, margin, style, isEmployer }: LogoProps) {
   const router = useRouter();
-
   return (
     <S.Logo
       className={roboto.className}
       whileTap={{ scale: 0.99 }}
-      onClick={() => router.push(isEmployer ? path.HOME : path.EMPLOYER)}
+      onClick={() => router.push(isEmployer ? path.EMPLOYER : path.HOME)}
       size={size}
       $margin={margin}
       style={style}

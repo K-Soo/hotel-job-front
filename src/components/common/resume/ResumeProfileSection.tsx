@@ -36,7 +36,7 @@ export default function ResumeProfileSection() {
           </S.NameBox>
 
           <S.CertBox>
-            <FormMapSelect<ResumeDetailForm>
+            {/* <FormMapSelect<ResumeDetailForm>
               name="localCode"
               options={LOCAL_CODE}
               required
@@ -44,7 +44,7 @@ export default function ResumeProfileSection() {
               disabled
               label="내국인"
               margin="0 15px 0 0"
-            />
+            /> */}
 
             <FormMapSelect<ResumeDetailForm>
               name="sexCode"
@@ -71,7 +71,7 @@ export default function ResumeProfileSection() {
           <FormInput<ResumeDetailForm>
             label="휴대폰"
             name="phone"
-            maxWidth="170px"
+            maxWidth="190px"
             readOnly={false}
             mask="999-9999-9999"
             errorPosition="static"

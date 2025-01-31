@@ -1,6 +1,5 @@
 import React from 'react';
 import EmployerProductRecruitment from '@/components/employerProductRecruitment';
-import ProductAsideMenu from '@/components/employerProductRecruitment/productAsideMenu';
 import { useRecoilValue } from 'recoil';
 import { recruitmentProductSideMenuAtom } from '@/recoil/product';
 import queryKeys from '@/constants/queryKeys';
@@ -11,6 +10,7 @@ import { ProductRecruitmentQuery } from '@/types/API';
 import { useRouter } from 'next/router';
 import ProductCard from '@/components/employerProductRecruitment/ProductCard';
 import { keepPreviousData } from '@tanstack/react-query';
+import ProductRecruitmentSideMenuContainer from '@/containers/employerProductRecruitmentContainer/ProductRecruitmentSideMenuContainer';
 
 interface Query extends ParsedUrlQuery {
   type?: ProductRecruitmentQuery;
@@ -36,11 +36,11 @@ export default function EmployerProductRecruitmentContainer() {
     },
   });
 
-  console.log('상품 리스트: ', data);
+  console.log('상품 리스트 API : ', data);
 
   return (
     <>
-      {recruitmentProductSideMenuAtomValue.isOpen && <ProductAsideMenu />}
+      {recruitmentProductSideMenuAtomValue.isOpen && <ProductRecruitmentSideMenuContainer />}
       <EmployerProductRecruitment isLoading={isLoading}>
         {isSuccess && data && data.result.map((product) => <ProductCard key={product.id} product={product} />)}
       </EmployerProductRecruitment>

@@ -1,36 +1,30 @@
 import styled from 'styled-components';
 import Portal from '@/components/common/Portal';
 import Background from '@/components/common/Background';
-import { useSetRecoilState, useRecoilState, useResetRecoilState, useRecoilValue } from 'recoil';
+import { useSetRecoilState, useResetRecoilState, useRecoilValue } from 'recoil';
 import { recruitmentProductSideMenuAtom } from '@/recoil/product';
 import Icon from '@/icons/Icon';
 import Line from '@/components/common/Line';
 import { selectProductAtom, durationCalcOptionsSelector } from '@/recoil/product';
-import PurchaseActionBar from '@/components/employerProductRecruitment/productAsideMenu/PurchaseActionBar';
-import ProductForm from '@/components/employerProductRecruitment/productAsideMenu/ProductForm';
-import RecruitmentInfo from '@/components/employerProductRecruitment/productAsideMenu/RecruitmentInfo';
-import ProductOption from '@/components/employerProductRecruitment/productAsideMenu/ProductOption';
+import PurchaseActionBar from '@/components/employerProductRecruitment/productRecruitmentSideMenu/PurchaseActionBar';
+import ProductForm from '@/components/employerProductRecruitment/productRecruitmentSideMenu/ProductForm';
+import RecruitmentInfo from '@/components/employerProductRecruitment/productRecruitmentSideMenu/RecruitmentInfo';
+import ProductOption from '@/components/employerProductRecruitment/productRecruitmentSideMenu/ProductOption';
 
-export default function ProductAsideMenu() {
-  const setRecruitmentProductSideMenuAtom = useSetRecoilState(recruitmentProductSideMenuAtom);
-  const resetSelectProductAtomState = useResetRecoilState(selectProductAtom);
-  const resetRecruitmentProductSideMenuAtom = useResetRecoilState(recruitmentProductSideMenuAtom);
+interface ProductRecruitmentSideMenuProps {
+  handleCloseSideMenu: () => void;
+}
 
+export default function ProductRecruitmentSideMenu({ handleCloseSideMenu }: ProductRecruitmentSideMenuProps) {
   const durationCalcOptionsSelectorValue = useRecoilValue(durationCalcOptionsSelector);
-
-  const handleClose = () => {
-    setRecruitmentProductSideMenuAtom({ isOpen: false });
-    resetRecruitmentProductSideMenuAtom();
-    resetSelectProductAtomState();
-  };
 
   return (
     <Portal>
-      <Background onClick={handleClose}>
-        <S.ProductAsideMenu onClick={(e) => e.stopPropagation()}>
+      <Background onClick={handleCloseSideMenu}>
+        <S.ProductRecruitmentSideMenu onClick={(e) => e.stopPropagation()}>
           <S.Header>
             <h4>옵션 선택</h4>
-            <Icon name="CloseA24x24" onClick={handleClose} width="32px" height="32px" />
+            <Icon name="CloseA24x24" onClick={handleCloseSideMenu} width="32px" height="32px" />
           </S.Header>
 
           <S.ContentContainer>
@@ -65,14 +59,14 @@ export default function ProductAsideMenu() {
           </S.ContentContainer>
 
           <PurchaseActionBar />
-        </S.ProductAsideMenu>
+        </S.ProductRecruitmentSideMenu>
       </Background>
     </Portal>
   );
 }
 
 const S = {
-  ProductAsideMenu: styled.div`
+  ProductRecruitmentSideMenu: styled.div`
     position: fixed;
     right: 0;
     height: 100vh;

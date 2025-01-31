@@ -2,9 +2,10 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import CheckBox from '@/components/common/style/CheckBox';
 import Button from '@/components/common/style/Button';
+import DefaultProfileImage from '@/components/common/DefaultProfileImage';
 import { EmployerReviewStageStatusKey, RecruitmentDetailApplicantListItem, ResumeDetail } from '@/types';
 import { dateFormat, parseBirthDateAndCalculateAge } from '@/utils';
-import { EMPLOYER_REVIEW_STAGE_STATUS, REVIEW_STAGE_STATUS } from '@/constants/application';
+import { EMPLOYER_REVIEW_STAGE_STATUS } from '@/constants/application';
 import { SEX_CODE } from '@/constants';
 
 interface ApplicantTableProps {
@@ -152,12 +153,15 @@ function ApplicantTableBody({
               </div>
 
               <div className="name" onClick={() => handleClickResumePreview(item.id, item.isView, item.resumeSnapshot)}>
-                <span className="name__top">
-                  {item.resumeSnapshot.name} {'/'} {SEX_CODE[item.resumeSnapshot.sexCode]}
-                </span>
-                <span className="name__bottom">
-                  {birthYear} {`${age}세`}
-                </span>
+                <DefaultProfileImage imageUrl={item.resumeSnapshot.profileImage} margin="0 10px 0 0" />
+                <div className="name__text">
+                  <span className="name__text--top">
+                    {item.resumeSnapshot.name} {'/'} {SEX_CODE[item.resumeSnapshot.sexCode]}
+                  </span>
+                  <span className="name__text--bottom">
+                    {birthYear} {`${age}세`}
+                  </span>
+                </div>
               </div>
 
               <div className="career">경력</div>
@@ -243,7 +247,7 @@ function ApplicantTableBody({
               </div>
 
               <div className="date">
-                <div className="date__text">{item.applyAt ? dateFormat.date(item.applyAt, 'YYYY.MM.DD HH:mm') : '-'}</div>
+                <div className="date__text">{item.applyAt ? dateFormat.date(item.applyAt, 'YY.MM.DD HH:mm') : '-'}</div>
                 {item.isView && <span>열람</span>}
                 {!item.isView && <span style={{ color: '#4593fc' }}>미열람</span>}
               </div>
@@ -307,7 +311,9 @@ const StyledTableBody = styled.div`
       height: 100%;
     }
     .name {
-      ${CommonFlex}
+      display: flex;
+      align-items: center;
+      justify-content: center;
       flex-grow: 1;
       height: 100%;
       font-size: 13px;
@@ -315,12 +321,16 @@ const StyledTableBody = styled.div`
       &:hover {
         text-decoration: underline;
       }
-      &__top {
-        padding-bottom: 3px;
-      }
-      &__bottom {
-        color: ${(props) => props.theme.colors.gray600};
-        font-weight: 300;
+      &__text {
+        display: flex;
+        flex-direction: column;
+        &--top {
+          padding-bottom: 3px;
+        }
+        &--bottom {
+          color: ${(props) => props.theme.colors.gray800};
+          font-weight: 300;
+        }
       }
     }
     .career {
