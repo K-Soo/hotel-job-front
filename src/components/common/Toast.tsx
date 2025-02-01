@@ -100,7 +100,7 @@ const S = {
     background-color: #ffffff;
     margin-bottom: 10px;
     padding: 10px 20px;
-    font-size: 16px;
+    font-size: 15px;
     display: flex;
     align-items: center;
     white-space: nowrap;

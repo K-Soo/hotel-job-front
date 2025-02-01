@@ -9,19 +9,37 @@ import IconDimmed from '@/components/common/IconDimmed';
 import DragScroll from '@/components/common/DragScroll';
 import { useRouter } from 'next/router';
 import useToast from '@/hooks/useToast';
-import { ParsedUrlQuery } from 'querystring';
 
+const variants = {
+  initial: { backgroundColor: '#ffffff', color: '#444444' },
+  hover: { backgroundColor: '#f2f4f6', color: '#000000' },
+};
 interface LocationModalFormProps {
+  selectedLocations: string[];
+  sidoIndex: string;
+  setSidoIndex: React.Dispatch<React.SetStateAction<string>>;
+  setSelectedLocations: React.Dispatch<React.SetStateAction<string[]>>;
   handleCloseLocationModal?: () => void;
+  handleApplyLocations: () => void;
+  handleClickInitialLocation: () => void;
 }
 
-export default function LocationModalForm({ handleCloseLocationModal }: LocationModalFormProps) {
-  const [selectedLocations, setSelectedLocations] = React.useState<string[]>(['all']);
-  const [sidoIndex, setSidoIndex] = React.useState<number>(0);
-  const sidoKeys = Object.keys(LOCATION);
+export default function LocationModalForm({
+  handleCloseLocationModal,
+  selectedLocations,
+  setSelectedLocations,
+  handleApplyLocations,
+  setSidoIndex,
+  sidoIndex,
+  handleClickInitialLocation,
+}: LocationModalFormProps) {
+  // const [selectedLocations, setSelectedLocations] = React.useState<string[]>(['all']);
+  // const [sidoIndex, setSidoIndex] = React.useState('seoul.all');
 
   const modalRef = React.useRef<HTMLDivElement>(null);
-  const locationsDragScrollRef = React.useRef<HTMLDivElement>(null);
+  const locationsListRef = React.useRef<HTMLDivElement>(null);
+  const sigunguListRef = React.useRef<HTMLDivElement>(null);
+
   const dragScrollRef = React.useRef<HTMLElement>(null);
 
   const SIDO_MAPPING = React.useMemo(() => Object.fromEntries(Object.entries(CITY).map(([kor, eng]) => [eng, kor])), []);
@@ -40,14 +58,13 @@ export default function LocationModalForm({ handleCloseLocationModal }: Location
   const { addToast } = useToast();
 
   React.useEffect(() => {
-    if (!locationsDragScrollRef.current || !dragScrollRef.current) return;
+    if (!locationsListRef.current || !dragScrollRef.current) return;
 
     requestAnimationFrame(() => {
-      const scrollWidth = locationsDragScrollRef.current?.scrollWidth ?? 0;
+      const scrollWidth = locationsListRef.current?.scrollWidth ?? 0;
 
       if (scrollWidth > 0 && dragScrollRef.current) {
         dragScrollRef.current.scrollLeft = scrollWidth;
-        console.log('스크롤 이동:', scrollWidth);
       }
     });
   }, [selectedLocations]);
@@ -72,43 +89,108 @@ export default function LocationModalForm({ handleCloseLocationModal }: Location
     };
   }, [handleCloseLocationModal]);
 
-  const handleClickLocationItem = (value: string) => {
-    console.log('value: ', value);
-    const existJob = selectedLocations.find((item) => item === value);
-
-    if (existJob) {
-      setSelectedLocations((prev) => prev.filter((item) => item !== value));
+  // 시도
+  const handleClickLocationAllItem = (value: string) => {
+    // 전국
+    if (value === 'all') {
+      return setSelectedLocations(['all']);
     }
 
-    if (!existJob) {
-      // if (selectedLocations.length >= 3) {
-      //   return addToast({ message: '최대 3개까지 선택가능합니다.', type: 'info' });
-      // }
-      setSelectedLocations((prev) => [...prev, value]);
+    const existLocation = selectedLocations.find((item) => item === value);
+
+    if (existLocation) {
+      return setSelectedLocations((prev) => prev.filter((item) => item !== value));
+    }
+
+    if (!existLocation) {
+      if (selectedLocations.length > 10) {
+        return addToast({ message: '최대 10개까지 선택가능합니다.', type: 'info' });
+      }
+      setSelectedLocations((prev) => {
+        // 🔹 'all'이 선택된 상태라면 제거 후 추가
+        const updatedLocations = [...prev.filter((item) => item !== 'all'), value];
+
+        return updatedLocations;
+      });
     }
   };
+
+  // 시군구
+  const handleClickLocationItem = (value: string, allValue: string, sigunguCount: number) => {
+    const valueArray = value.split('.');
+    const sido = valueArray[0];
+    const sigungu = valueArray[1];
+
+    // 전체(all) 선택 또는 해제
+    if (sigungu === 'all') {
+      const isExistLocation = selectedLocations.includes(value);
+
+      if (isExistLocation) {
+        // 체크 해제: 전체(all) 선택이 이미 되어 있다면 제거
+        setSelectedLocations((prev) => prev.filter((item) => item !== value));
+      }
+
+      if (!isExistLocation) {
+        // 체크함: 해당 시/도에 해당하는 모든 시/군/구를 제거하고 전체(all) 선택
+        setSelectedLocations((prev) =>
+          [
+            ...prev.filter((item) => {
+              const itemArray = item.split('.');
+              return itemArray[0] !== sido; // 해당 시도의 모든 시군구 제거
+            }),
+            value,
+          ].filter((item) => item !== 'all'),
+        ); // 🔹 전국(all) 자동 해제
+      }
+      return;
+    }
+
+    // 개별 시군구 선택
+    const isExistSigungu = selectedLocations.find((item) => item === value);
+
+    if (isExistSigungu) {
+      //개별 시군구 해제
+      // setSelectedLocations((prev) => prev.filter((item) => item !== value));
+
+      setSelectedLocations((prev) => {
+        const updatedLocations = prev.filter((item) => item !== value);
+
+        // 📌 시군구 중 하나라도 해제되면 전체 선택 해제
+        if (updatedLocations.includes(allValue)) {
+          return updatedLocations.filter((item) => item !== allValue);
+        }
+        return updatedLocations;
+      });
+    }
+
+    if (!isExistSigungu) {
+      if (selectedLocations.length > 10) {
+        return addToast({ message: '최대 10개까지 선택가능합니다.', type: 'info' });
+      }
+
+      setSelectedLocations((prev) => {
+        const updatedLocations = [...prev, value];
+
+        // 🔹 현재 시군구 개수 계산
+        const selectedSigunguCount = updatedLocations.filter((item) => item.startsWith(`${sido}.`) && item !== allValue).length;
+
+        // 🔹 모든 시군구가 선택되면 sido.all 자동 체크
+        if (selectedSigunguCount === sigunguCount) {
+          sigunguListRef.current?.scrollTo({ top: 0, behavior: 'smooth' });
+
+          return [...updatedLocations.filter((item) => !item.startsWith(`${sido}.`)), allValue];
+        }
+
+        // 선택된 시군구 개수가 전체보다 적으면 sido.all 제거
+        const finalLocations = updatedLocations.filter((item) => item !== allValue);
+
+        //전국(all) 자동 해제
+        return finalLocations.filter((item) => item !== 'all');
+      });
+    }
+  };
+
   const handleClickSelectedLocation = (value: string) => setSelectedLocations((prev) => prev.filter((item) => item !== value));
-
-  const handleApplyLocations = () => {
-    if (selectedLocations.length === 0) return;
-
-    const params = new URLSearchParams(router.query as any);
-
-    params.delete('location');
-    selectedLocations.forEach((job) => params.append('job', job));
-
-    router.replace(
-      {
-        pathname: router.pathname,
-        query: params.toString(),
-      },
-      undefined,
-      { shallow: true },
-    );
-    if (handleCloseLocationModal) {
-      handleCloseLocationModal();
-    }
-  };
 
   return (
     <S.LocationModalForm ref={modalRef}>
@@ -121,67 +203,58 @@ export default function LocationModalForm({ handleCloseLocationModal }: Location
       <S.Content>
         <S.LocationContainer>
           <div className="sido-wrapper">
-            <motion.div
-              className="sido-wrapper__item"
-              initial={{ backgroundColor: '#ffffff', color: '#444444' }}
-              whileHover={{
-                backgroundColor: '#f2f4f6',
-                color: '#000000',
-              }}
-            >
-              <h6>전국</h6>
-            </motion.div>
-            {sidoKeys.map((sido, index) => (
+            {Object.entries(CITY).map(([key, value], index) => (
               <motion.div
                 key={index}
                 className="sido-wrapper__item"
-                onClick={() => setSidoIndex(index)}
-                initial={{ backgroundColor: '#ffffff', color: '#444444' }}
-                whileHover={{
-                  backgroundColor: '#f2f4f6',
-                  color: '#000000',
+                onClick={() => {
+                  setSidoIndex(value);
+                  handleClickLocationAllItem(value);
                 }}
+                variants={variants}
+                initial="initial"
+                whileHover="hover"
               >
-                <span>{sido}</span>
+                <span>{key}</span>
               </motion.div>
             ))}
           </div>
+
           {/* 시군구 */}
-          <div className="sigungu-wrapper">
+          <div className="sigungu-wrapper" ref={sigunguListRef}>
             {Object.entries(LOCATION).map(([key, value], index) => {
-              const keyValues = CITY[key as keyof typeof CITY];
-              const allKeyValue = keyValues + '.all';
-              if (sidoIndex !== index) return null;
+              const sidoAllValue = CITY[key as keyof typeof CITY];
+
+              if (sidoIndex !== sidoAllValue) return null;
+
+              const sigunguCount = Object.keys(value).length;
+
               return (
-                <>
+                <React.Fragment key={key + index}>
                   <motion.div
                     className="sigungu-wrapper__item"
-                    initial={{ backgroundColor: '#ffffff', color: '#444444' }}
-                    whileHover={{
-                      backgroundColor: '#f2f4f6',
-                      color: '#000000',
-                    }}
-                    onClick={() => handleClickLocationItem(allKeyValue)}
+                    variants={variants}
+                    initial="initial"
+                    whileHover="hover"
+                    onClick={() => handleClickLocationItem(sidoAllValue, sidoAllValue, sigunguCount)}
                   >
-                    <span>전체</span>
+                    <span>{key} 전체</span>
                     <CircleCheckbox
                       onChange={() => {}}
                       value="all"
-                      name={allKeyValue}
+                      name={sidoAllValue}
                       style={{ pointerEvents: 'none' }}
-                      checked={selectedLocations.includes(allKeyValue)}
+                      checked={selectedLocations.includes(sidoAllValue)}
                     />
                   </motion.div>
                   {Object.entries(value).map(([key, value], i) => (
                     <motion.div
                       key={i}
                       className="sigungu-wrapper__item"
-                      initial={{ backgroundColor: '#ffffff', color: '#444444' }}
-                      whileHover={{
-                        backgroundColor: '#f2f4f6',
-                        color: '#000000',
-                      }}
-                      onClick={() => handleClickLocationItem(value)}
+                      variants={variants}
+                      initial="initial"
+                      whileHover="hover"
+                      onClick={() => handleClickLocationItem(value, sidoAllValue, sigunguCount)}
                     >
                       <span>{key}</span>
                       <CircleCheckbox
@@ -193,26 +266,26 @@ export default function LocationModalForm({ handleCloseLocationModal }: Location
                       />
                     </motion.div>
                   ))}
-                </>
+                </React.Fragment>
               );
             })}
           </div>
         </S.LocationContainer>
         <DragScroll ref={dragScrollRef}>
-          <S.LocationList ref={locationsDragScrollRef}>
+          <S.LocationList ref={locationsListRef}>
             {selectedLocations.map((location, index) => {
               const locationName = location.split('.');
               const sido = locationName[0];
               const sigungu = locationName[1];
-              const sidoInKorean = SIDO_MAPPING[sido] || sido;
 
-              const sigunguKorean = SIGUNGU_MAPPING[`${sido}.${sigungu}`] || '';
+              const sidoInKorean = SIDO_MAPPING[location];
+              const sigunguKorean = SIGUNGU_MAPPING[`${sido}.${sigungu}`];
+
               return (
                 <StyledLocationItem key={index} onClick={() => handleClickSelectedLocation(location)}>
-                  <span>
-                    {sidoInKorean} {sigunguKorean}
-                  </span>
-                  <Icon name="CloseA24x24" width="16px" height="16px" />
+                  {sidoInKorean && <span>{sidoInKorean === '전국' ? sidoInKorean : `${sidoInKorean} 전체`}</span>}
+                  {sigunguKorean && <span>{sigunguKorean}</span>}
+                  <Icon className="icon" name="CloseA24x24" width="16px" height="16px" />
                 </StyledLocationItem>
               );
             })}
@@ -220,14 +293,7 @@ export default function LocationModalForm({ handleCloseLocationModal }: Location
         </DragScroll>
       </S.Content>
       <S.Bottom>
-        <Button
-          label="초기화"
-          variant="tertiary"
-          height="40px"
-          width="100%"
-          margin="0 15px 0 0"
-          onClick={() => setSelectedLocations(['all'])}
-        />
+        <Button label="초기화" variant="tertiary" height="40px" width="100%" margin="0 15px 0 0" onClick={handleClickInitialLocation} />
         <Button label="적용" variant="primary" height="40px" width="100%" type="button" onClick={handleApplyLocations} />
       </S.Bottom>
     </S.LocationModalForm>
@@ -238,15 +304,19 @@ const StyledLocationItem = styled.button`
   display: flex;
   align-items: center;
   flex-wrap: nowrap;
-  background-color: ${({ theme }) => theme.colors.blue300};
-  color: ${({ theme }) => theme.colors.white};
-  font-size: 14px;
-  padding: 5px 8px;
-  border-radius: 4px;
+  background-color: ${({ theme }) => theme.colors.gray200};
+  color: ${({ theme }) => theme.colors.gray600};
+  font-size: 13px;
+  padding: 4px 8px 4px 10px;
+  border-radius: 15px;
+  margin-right: 10px;
   white-space: nowrap;
   cursor: pointer;
+  .icon {
+    margin-left: 5px;
+  }
   &:hover {
-    background-color: ${({ theme }) => theme.colors.blue400};
+    background-color: ${({ theme }) => theme.colors.gray300};
   }
 `;
 
@@ -267,10 +337,11 @@ const S = {
       border-radius: 0;
       width: 100%;
       position: static;
+      height: 430px;
     `};
     ${(props) => props.theme.media.mobile`
-      // max-height: 600px;
-      // height: 100%;
+      max-height: 550px;
+      height: 100%;
     `};
   `,
   Header: styled.div`
@@ -300,14 +371,14 @@ const S = {
     overflow: hidden;
     font-size: 15px;
     font-weight: 400;
-    scrollbar-color: #b0b8c1 #fafafa;
-    &::-webkit-scrollbar {
-      /* display: none; */
-    }
+    border-bottom: 1px solid ${({ theme }) => theme.colors.gray200};
     .sido-wrapper {
       flex-basis: 45%;
       overflow-y: auto;
       border-right: 1px solid ${({ theme }) => theme.colors.gray200};
+      &::-webkit-scrollbar {
+        display: none;
+      }
       &__item {
         display: flex;
         align-items: center;
@@ -325,6 +396,7 @@ const S = {
     .sigungu-wrapper {
       flex-basis: 55%;
       overflow-y: auto;
+      scrollbar-color: #b0b8c1 #fafafa;
       &__item {
         display: flex;
         align-items: center;
@@ -342,8 +414,10 @@ const S = {
     display: flex;
     align-items: center;
     width: 100%;
-    gap: 15px;
     padding: 0 15px;
+    ${(props) => props.theme.media.tablet`
+      padding: 0;
+    `};
   `,
   Bottom: styled.div`
     border-top: 1px solid ${({ theme }) => theme.colors.gray200};
