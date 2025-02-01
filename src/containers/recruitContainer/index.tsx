@@ -4,6 +4,8 @@ import Recruit from '@/components/recruit';
 import RecruitFilterPanel from '@/components/recruit/RecruitFilterPanel';
 import RecruitFilterForm from '@/components/recruit/recruitFilterForm';
 import RecruitSearch from '@/components/recruit/recruitSearch';
+import LocationSearch from '@/components/recruit/recruitSearch/LocationSearch';
+import JobSearch from '@/components/recruit/recruitSearch/JobSearch';
 import RecruitListContainer from '@/containers/recruitContainer/RecruitListContainer';
 import RecruitUrgentListContainer from '@/containers/recruitContainer/RecruitUrgentListContainer';
 import RecruitSpecialListContainer from '@/containers/recruitContainer/RecruitSpecialListContainer';
@@ -30,7 +32,10 @@ export default function RecruitContainer() {
   return (
     <>
       <Recruit>
-        <RecruitSearch />
+        <RecruitSearch>
+          <JobSearch />
+          <LocationSearch />
+        </RecruitSearch>
 
         <RecruitFilterPanel handleClickFilterButton={handleClickFilterButton} />
 
