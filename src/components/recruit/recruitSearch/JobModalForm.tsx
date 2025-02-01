@@ -1,20 +1,9 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 import Button from '@/components/common/style/Button';
-import {
-  ALL_JOBS,
-  HOTEL_JOBS,
-  TOURIST_HOTEL_JOBS,
-  OTHER_JOBS,
-  hotelJobKeyValues,
-  touristHotelJobsKeyValues,
-  otherJobsKeyValues,
-  allJobsKeyValues,
-  AllJobsKeyValuesKeys,
-} from '@/constants/job';
+import { HOTEL_JOBS, TOURIST_HOTEL_JOBS, OTHER_JOBS, allJobsKeyValues, AllJobsKeyValuesKeys } from '@/constants/job';
 import Icon from '@/icons/Icon';
 import { motion } from 'framer-motion';
-import CheckBox from '@/components/common/style/CheckBox';
 import CircleCheckbox from '@/components/common/style/CircleCheckbox';
 import IconDimmed from '@/components/common/IconDimmed';
 import { useRouter } from 'next/router';
@@ -24,7 +13,7 @@ import { ParsedUrlQuery } from 'querystring';
 const getJobArray = (job: string | string[] | undefined): AllJobsKeyValuesKeys[] => {
   if (!job) return [];
 
-  const jobsArray = Array.isArray(job) ? job : [job];
+  const jobsArray = Array.isArray(job) ? job.map((item) => item.toLocaleUpperCase()) : [job.toLocaleUpperCase()];
 
   return jobsArray.filter((j): j is AllJobsKeyValuesKeys => Object.values(allJobsKeyValues).includes(j as AllJobsKeyValuesKeys));
 };
@@ -49,6 +38,8 @@ export default function JobModalForm({ handleCloseJobModal }: JobModalFormProps)
   const [selectedJob, setSelectedJob] = React.useState<AllJobsKeyValuesKeys[]>([]);
 
   const router = useRouter();
+  console.log('router: ', router.query);
+
   const { job } = router.query as Query;
 
   const modalRef = React.useRef<HTMLDivElement>(null);
@@ -101,12 +92,29 @@ export default function JobModalForm({ handleCloseJobModal }: JobModalFormProps)
   };
 
   const handleApplyJobs = () => {
-    if (selectedJob.length === 0) return;
+    if (selectedJob.length === 0) {
+      const params = new URLSearchParams(router.query as any);
+
+      params.delete('job');
+      router.replace(
+        {
+          pathname: router.pathname,
+          query: params.toString(),
+        },
+        undefined,
+        { shallow: true },
+      );
+
+      handleCloseJobModal();
+      return;
+    }
 
     const params = new URLSearchParams(router.query as any);
+    console.log('params: ', params.toString());
 
     params.delete('job');
-    selectedJob.forEach((job) => params.append('job', job));
+    selectedJob.forEach((job) => params.append('job', job.toLocaleLowerCase()));
+    console.log('Object.fromEntries(params): ', Object.fromEntries(params));
 
     router.replace(
       {
