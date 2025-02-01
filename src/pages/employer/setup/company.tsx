@@ -13,9 +13,7 @@ export const getServerSideProps: GetServerSideProps = async (context: GetServerS
   const cookieString = context.req ? context.req.headers?.cookie : undefined;
 
   const requestHeader = {
-    headers: {
-      Cookie: cookieString,
-    },
+    headers: { Cookie: cookieString },
     withCredentials: true,
   };
 
