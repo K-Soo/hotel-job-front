@@ -39,7 +39,7 @@ export default function DaumPost({ addressName = 'address', addressDetailName = 
     }
     setValue(addressName, fullAddress);
     setFocus(addressDetailName);
-    // resetDaumPostAtom();
+    resetDaumPostAtom();
   };
 
   return (
