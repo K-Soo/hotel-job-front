@@ -21,8 +21,9 @@ export default function BusinessNumberForm({ children }: BusinessNumberFormProps
         mask={'999-99-99999'}
         margin="0 0 10px 0"
         isFocusing
+        errorPosition="static"
       />
-      <FormInput<SetupCompanyForm> required label="상호명" name="companyName" placeholder="상호명" maxLength={30} />
+      <FormInput<SetupCompanyForm> required label="상호명" name="companyName" placeholder="상호명" maxLength={30} errorPosition="static" />
       <S.ButtonBox>{children}</S.ButtonBox>
     </S.BusinessNumberForm>
   );
