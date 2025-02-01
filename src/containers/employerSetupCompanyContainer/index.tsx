@@ -65,7 +65,6 @@ export default function EmployerSetupCompanyContainer() {
       }
     }
   };
-  console.log('step: ', step);
 
   // step 1
   const handleClickBusinessNumberForm = async () => {
@@ -168,8 +167,8 @@ export default function EmployerSetupCompanyContainer() {
   return (
     <FormProvider {...methods}>
       {daumPostAtomValue.isOpen && <DynamicDaumPost />}
-      {certificationModalAtomState.isOpen && <CertificationModal />}
-      <button onClick={() => setCertificationModalAtomState({ isOpen: true })}>인증</button>
+      {/* {certificationModalAtomState.isOpen && <CertificationModal />} */}
+      {/* <button onClick={() => setCertificationModalAtomState({ isOpen: true })}>인증</button> */}
       <EmployerSetupCompany onSubmit={onSubmit} handleKeyDown={handleKeyDown}>
         {step === 'step1' && (
           <BusinessNumberForm>
