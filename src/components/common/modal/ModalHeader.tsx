@@ -6,24 +6,27 @@ import IconHover from '@/components/common/IconHover';
 
 interface ModalHeaderProps {
   title?: string;
+  handleCloseModal: () => void;
 }
 
-export function ModalHeader({ title }: ModalHeaderProps) {
+export function ModalHeader({ title, handleCloseModal }: ModalHeaderProps) {
   const { setModalAtomState } = useModal();
-  const { isTablet } = useResponsive();
+  const { isTablet, isMobile } = useResponsive();
 
   return (
     <S.ModalHeader $isTablet={isTablet}>
-      <i className="back" onClick={() => setModalAtomState({ isOpen: false })}>
-        <Icon name="ArrowLeft24x24" width="24px" height="24px" />
+      <i className="back" onClick={() => handleCloseModal()}>
+        {isMobile && <Icon name="ArrowLeft24x24" width="24px" height="24px" />}
       </i>
 
       <h2 className="title">{title}</h2>
 
-      <i className="close" onClick={() => setModalAtomState({ isOpen: false })}>
-        <IconHover onClick={() => setModalAtomState({ isOpen: false })} padding="6px">
-          <Icon name="Close25x25" width="22px" height="22px" />
-        </IconHover>
+      <i className="close" onClick={() => handleCloseModal()}>
+        {!isMobile && (
+          <IconHover onClick={() => handleCloseModal()} padding="6px">
+            <Icon name="Close25x25" width="22px" height="22px" />
+          </IconHover>
+        )}
       </i>
     </S.ModalHeader>
   );
@@ -41,7 +44,6 @@ const S = {
     .back {
       flex-basis: 50px;
       display: flex;
-      visibility: ${(props) => (props.$isTablet ? 'visible' : 'hidden')};
     }
     .title {
       flex: 1;
@@ -53,7 +55,6 @@ const S = {
       flex-basis: 50px;
       display: flex;
       justify-content: flex-end;
-      visibility: ${(props) => (props.$isTablet ? 'hidden' : 'visible')};
     }
   `,
 };
