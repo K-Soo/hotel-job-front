@@ -1,5 +1,5 @@
 import React from 'react';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import Button from '@/components/common/style/Button';
 import Icon from '@/icons/Icon';
 import { motion } from 'framer-motion';
@@ -33,9 +33,6 @@ export default function LocationModalForm({
   sidoIndex,
   handleClickInitialLocation,
 }: LocationModalFormProps) {
-  // const [selectedLocations, setSelectedLocations] = React.useState<string[]>(['all']);
-  // const [sidoIndex, setSidoIndex] = React.useState('seoul.all');
-
   const modalRef = React.useRef<HTMLDivElement>(null);
   const locationsListRef = React.useRef<HTMLDivElement>(null);
   const sigunguListRef = React.useRef<HTMLDivElement>(null);
@@ -54,7 +51,6 @@ export default function LocationModalForm({
     return mapping;
   }, []);
 
-  const router = useRouter();
   const { addToast } = useToast();
 
   React.useEffect(() => {
@@ -150,8 +146,6 @@ export default function LocationModalForm({
 
     if (isExistSigungu) {
       //개별 시군구 해제
-      // setSelectedLocations((prev) => prev.filter((item) => item !== value));
-
       setSelectedLocations((prev) => {
         const updatedLocations = prev.filter((item) => item !== value);
 
@@ -171,10 +165,10 @@ export default function LocationModalForm({
       setSelectedLocations((prev) => {
         const updatedLocations = [...prev, value];
 
-        // 🔹 현재 시군구 개수 계산
+        // 현재 시군구 개수 계산
         const selectedSigunguCount = updatedLocations.filter((item) => item.startsWith(`${sido}.`) && item !== allValue).length;
 
-        // 🔹 모든 시군구가 선택되면 sido.all 자동 체크
+        // 시군구가 선택되면 sido.all 자동 체크
         if (selectedSigunguCount === sigunguCount) {
           sigunguListRef.current?.scrollTo({ top: 0, behavior: 'smooth' });
 
@@ -222,53 +216,60 @@ export default function LocationModalForm({
 
           {/* 시군구 */}
           <div className="sigungu-wrapper" ref={sigunguListRef}>
-            {Object.entries(LOCATION).map(([key, value], index) => {
-              const sidoAllValue = CITY[key as keyof typeof CITY];
+            {selectedLocations?.[0] === 'all' && (
+              <StyledEmptyLocationItem>
+                지역을 선택해서 <br />
+                상세 지역을 확인할 수 있습니다.
+              </StyledEmptyLocationItem>
+            )}
+            {selectedLocations?.[0] !== 'all' &&
+              Object.entries(LOCATION).map(([key, value], index) => {
+                const sidoAllValue = CITY[key as keyof typeof CITY];
 
-              if (sidoIndex !== sidoAllValue) return null;
+                if (sidoIndex !== sidoAllValue) return null;
 
-              const sigunguCount = Object.keys(value).length;
+                const sigunguCount = Object.keys(value).length;
 
-              return (
-                <React.Fragment key={key + index}>
-                  <motion.div
-                    className="sigungu-wrapper__item"
-                    variants={variants}
-                    initial="initial"
-                    whileHover="hover"
-                    onClick={() => handleClickLocationItem(sidoAllValue, sidoAllValue, sigunguCount)}
-                  >
-                    <span>{key} 전체</span>
-                    <CircleCheckbox
-                      onChange={() => {}}
-                      value="all"
-                      name={sidoAllValue}
-                      style={{ pointerEvents: 'none' }}
-                      checked={selectedLocations.includes(sidoAllValue)}
-                    />
-                  </motion.div>
-                  {Object.entries(value).map(([key, value], i) => (
+                return (
+                  <React.Fragment key={key + index}>
                     <motion.div
-                      key={i}
                       className="sigungu-wrapper__item"
                       variants={variants}
                       initial="initial"
                       whileHover="hover"
-                      onClick={() => handleClickLocationItem(value, sidoAllValue, sigunguCount)}
+                      onClick={() => handleClickLocationItem(sidoAllValue, sidoAllValue, sigunguCount)}
                     >
-                      <span>{key}</span>
+                      <span>{key} 전체</span>
                       <CircleCheckbox
-                        checked={selectedLocations.includes(value)}
-                        name={value}
                         onChange={() => {}}
-                        value={value}
+                        value="all"
+                        name={sidoAllValue}
                         style={{ pointerEvents: 'none' }}
+                        checked={selectedLocations.includes(sidoAllValue)}
                       />
                     </motion.div>
-                  ))}
-                </React.Fragment>
-              );
-            })}
+                    {Object.entries(value).map(([key, value], i) => (
+                      <motion.div
+                        key={i}
+                        className="sigungu-wrapper__item"
+                        variants={variants}
+                        initial="initial"
+                        whileHover="hover"
+                        onClick={() => handleClickLocationItem(value, sidoAllValue, sigunguCount)}
+                      >
+                        <span>{key}</span>
+                        <CircleCheckbox
+                          checked={selectedLocations.includes(value)}
+                          name={value}
+                          onChange={() => {}}
+                          value={value}
+                          style={{ pointerEvents: 'none' }}
+                        />
+                      </motion.div>
+                    ))}
+                  </React.Fragment>
+                );
+              })}
           </div>
         </S.LocationContainer>
         <DragScroll ref={dragScrollRef}>
@@ -319,6 +320,15 @@ const StyledLocationItem = styled.button`
     background-color: ${({ theme }) => theme.colors.gray300};
   }
 `;
+const StyledEmptyLocationItem = styled.div`
+  padding-top: 100px;
+  display: flex;
+  justify-content: center;
+  height: 100%;
+  font-size: 15px;
+  color: ${({ theme }) => theme.colors.gray600};
+  line-height: 1.5;
+`;
 
 const S = {
   LocationModalForm: styled.div`
@@ -340,7 +350,7 @@ const S = {
       height: 430px;
     `};
     ${(props) => props.theme.media.mobile`
-      max-height: 550px;
+      // max-height: 550px;
       height: 100%;
     `};
   `,
@@ -372,6 +382,9 @@ const S = {
     font-size: 15px;
     font-weight: 400;
     border-bottom: 1px solid ${({ theme }) => theme.colors.gray200};
+    ${(props) => props.theme.media.tablet`
+      border-bottom: none;
+    `};
     .sido-wrapper {
       flex-basis: 45%;
       overflow-y: auto;
@@ -416,6 +429,7 @@ const S = {
     width: 100%;
     padding: 0 15px;
     ${(props) => props.theme.media.tablet`
+      height: 100%;
       padding: 0;
     `};
   `,
