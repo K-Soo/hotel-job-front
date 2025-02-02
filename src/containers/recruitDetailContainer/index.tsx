@@ -22,6 +22,7 @@ export default function RecruitDetailContainer() {
   const [isOpenApplyForm, setIsOpenApplyForm] = React.useState(false);
   const [selectedResume, setSelectedResume] = React.useState<string | null>(null);
   const [applyStatus, setApplyStatus] = React.useState<'available' | 'duplicate' | 'idle'>('idle');
+  const [isOpenModal, setIsOpenModal] = React.useState(false);
 
   const { modalAtomState } = useModal();
   const { isTablet } = useResponsive();
@@ -114,8 +115,8 @@ export default function RecruitDetailContainer() {
     return (
       <>
         {isTablet && modalAtomState.isOpen && (
-          <DynamicNoSSRModal>
-            <Modal.Header title="지원하기" />
+          <DynamicNoSSRModal handleCloseModal={() => setIsOpenModal(false)}>
+            <Modal.Header title="지원하기" handleCloseModal={() => setIsOpenModal(false)} />
             <Modal.Content>
               <RecruitDetailApplyResumeForm
                 selectedResume={selectedResume}
