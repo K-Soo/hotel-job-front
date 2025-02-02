@@ -1,6 +1,50 @@
 # 변경 로그
 
 프로젝트의 모든 주요 변경 사항
+## [1.4.0](https://github.com/K-Soo/hotel-job-front/compare/v1.3.0...v1.4.0) (2025-02-02)
+
+
+### Features
+
+* JobContentForm 컴포넌트 추가 및 비즈니스 타입에 따른 직무 선택 기능 구현 ([1cc80ef](https://github.com/K-Soo/hotel-job-front/commit/1cc80ef41e2ff9fa82f8d67ef459c963d33867c3))
+* JobSearch 컴포넌트 추가 및 직무 선택 기능 구현 ([7c505b7](https://github.com/K-Soo/hotel-job-front/commit/7c505b765a1137ac013df079e5e66470e6384d13))
+* LocationSearch 컴포넌트 추가 및 지역 선택 기능 구현 ([dfa2526](https://github.com/K-Soo/hotel-job-front/commit/dfa252643bb00c5a5c176c16472d81aa1bdcd65a))
+* **RecruitDetailContainer.tsx:** 지원하기 모달 상태 관리 추가 ([15dd686](https://github.com/K-Soo/hotel-job-front/commit/15dd686666ebefacd8598129ad38555a98424bb8))
+* RecruitSearch 컴포넌트에 JobSearch 및 LocationSearch 추가 ([c163acb](https://github.com/K-Soo/hotel-job-front/commit/c163acb94b8d256b46ad5d30f2ca8cbb25d735e0))
+* **RecruitSearch.tsx:**  JobSearch 및 LocationSearch 기능 통합 ([f15b6f3](https://github.com/K-Soo/hotel-job-front/commit/f15b6f3c297f4e0d59fd8cce7ead3221a97ab09a))
+
+
+### Bug Fixes
+
+* 유효성 검사에서 이메일 형식 및 공백 규칙 추가 ([4dc082c](https://github.com/K-Soo/hotel-job-front/commit/4dc082c6a20d93d393fd6b4bb4ddf922345960b2))
+* 인증 모달 관련 코드 주석 처리 ([c134061](https://github.com/K-Soo/hotel-job-front/commit/c134061872ca41c16b0daa575f5d4147c70e5997))
+* 코드 정리 - requestHeader의 headers 속성 간소화 ([4da70a7](https://github.com/K-Soo/hotel-job-front/commit/4da70a77387049c468a52d64473b6c055435e3a6))
+* addressDetail 필드의 유효성 검사 규칙을 업데이트하여 최소 및 최대 길이 설정 ([5c0e664](https://github.com/K-Soo/hotel-job-front/commit/5c0e664931e2f6c146148d04d4ed82d05132cf41))
+* BusinessInfoForm에서 업체 주소 입력 필드의 오류 위치 및 스타일 속성 추가 ([63fc40c](https://github.com/K-Soo/hotel-job-front/commit/63fc40c1f247e548a84b2b7f9f58352a63694a58))
+* BusinessNumberForm에서 상호명 입력 필드의 오류 위치 스타일 속성 추가 ([0452236](https://github.com/K-Soo/hotel-job-front/commit/0452236d6e049e4cdb9f931e00c4b52929382d44))
+* DaumPost 컴포넌트에서 resetDaumPostAtom 호출 추가 ([b2f488c](https://github.com/K-Soo/hotel-job-front/commit/b2f488cc13f0af604602af3f9c0f3ebcdcd667ad))
+* DragScroll 컴포넌트의 displayName 추가 ([2d57487](https://github.com/K-Soo/hotel-job-front/commit/2d5748754706578047640989df37a94de23f2597))
+* FormInput 컴포넌트에 inputStyle 속성 추가 ([8284184](https://github.com/K-Soo/hotel-job-front/commit/82841845374d43e8d36632b03cc9443db0058506))
+* Header 컴포넌트를 항상 렌더링하도록 수정 ([5fed9b8](https://github.com/K-Soo/hotel-job-front/commit/5fed9b84c67dca99626bbbcb4e469cf077a214f3))
+* JobModalForm 컴포넌트에서 props 구조 조정 및 비즈니스 타입 선택 기능 개선 ([5b2acc8](https://github.com/K-Soo/hotel-job-front/commit/5b2acc839f3722df8ae70a27c2a833fe157c0e92))
+* JobModalForm에서 직무 선택 시 대문자 변환 및 쿼리 파라미터 처리 개선 ([6091060](https://github.com/K-Soo/hotel-job-front/commit/609106002a997bb609bbb7150151ed028d796106))
+* JobModalForm을 JobContentForm으로 변경하고 모바일 뷰에 따른 모달 처리 개선 ([4c70173](https://github.com/K-Soo/hotel-job-front/commit/4c70173b4b491d129629dcaa01dd8369d4a7f5a4))
+* LOCATION 및 CITY 상수의 지역 코드 수정 ([1f1693e](https://github.com/K-Soo/hotel-job-front/commit/1f1693e54d7b8828fc603b659eb6d5fe294600a2))
+* **LocationSearch.tsx:** 지역 선택 기능 개선 및 모바일 뷰 지원 추가 ([e2dd258](https://github.com/K-Soo/hotel-job-front/commit/e2dd25843cca3e1b9aeef07e1e69b6da69659259))
+* ManagerInfoForm에서 담당자 연락처 및 이메일 필드의 오류 위치 스타일 속성 추가 ([a6d3486](https://github.com/K-Soo/hotel-job-front/commit/a6d348636f124c5062b250913b3f57506a2a5b0a))
+* MobileNavigation 컴포넌트에서 home 아이콘을 FontAwesome 아이콘으로 변경 ([e69e1d9](https://github.com/K-Soo/hotel-job-front/commit/e69e1d9dc96a3821b76cc25d72dd4e6b7e9495b6))
+* Modal 컴포넌트에 handleCloseModal 속성 추가 및 ModalContent에 padding 속성 지원 ([bc04090](https://github.com/K-Soo/hotel-job-front/commit/bc04090b26d12b147553c3fe06218d499bb959ee))
+* ModalHeader 컴포넌트에 handleCloseModal 속성 추가 및 모바일 뷰에 따른 아이콘 표시 조정 ([6c9dc78](https://github.com/K-Soo/hotel-job-front/commit/6c9dc785727c7f9b228ae41ebf01a44d23fc5d9f))
+* Navigation 컴포넌트에서 고객센터 링크 주석 처리 ([6f286da](https://github.com/K-Soo/hotel-job-front/commit/6f286da04820402c9fe4447da393f529f2918afd))
+* ProductCard에서 기본 선택 기간을 변경하고 ProductOption의 너비를 조정 ([ca0d2c1](https://github.com/K-Soo/hotel-job-front/commit/ca0d2c1c0cafe4ffc01541009b12f9c3cb04456a))
+* Toast 컴포넌트의 글꼴 크기를 15px로 수정 ([32ad257](https://github.com/K-Soo/hotel-job-front/commit/32ad2572724124bad2cb59bd4d1af99c9034b49f))
+
+
+### Refactors
+
+* **RecruitContainer.tsx:** 불필요한 주석 및 동적 모달 임포트 제거 ([a9bdfa4](https://github.com/K-Soo/hotel-job-front/commit/a9bdfa4d2a1039fb783e5efa377fe424822f83ee))
+* RecruitSearch 컴포넌트의 구조 단순화 및 children prop 추가 ([744022c](https://github.com/K-Soo/hotel-job-front/commit/744022cb3010a81c979732160d42a759145dfcf8))
+
 ## [1.3.0](https://github.com/K-Soo/hotel-job-front/compare/v1.2.0...v1.3.0) (2025-01-31)
 
 
