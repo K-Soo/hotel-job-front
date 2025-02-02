@@ -30,7 +30,7 @@ export function MobileNavigation({ title, backUrl, backIcon, profileIcon, logoIc
     <S.MobileNavigation>
       <div className="left">
         {backIcon && <Icon name="ArrowLeft24x24" width="24px" height="24px" onClick={handleClickBack} />}
-        {homeIcon && <i onClick={() => router.push(path.HOME)}>home</i>}
+        {homeIcon && <Icon name="Home24x24" width="24px" height="24px" onClick={() => router.push(path.HOME)} />}
         {logoIcon && <Logo size="small" margin="0" />}
       </div>
 
