@@ -7,22 +7,22 @@ import useModal from '@/hooks/useModal';
 
 interface ModalProps {
   width?: string;
+  handleCloseModal: () => void;
   children: React.ReactNode;
 }
 
 interface ModalContentProps {
+  padding?: string;
   children: React.ReactNode;
 }
 
-export default function Modal({ width, children }: ModalProps) {
-  const { setModalAtomState } = useModal();
-
+export default function Modal({ width, handleCloseModal, children }: ModalProps) {
   return (
     <Portal>
       <Background
         onClick={(event: any) => {
           event.stopPropagation();
-          setModalAtomState({ isOpen: false });
+          handleCloseModal();
         }}
       >
         <S.Modal
@@ -38,13 +38,13 @@ export default function Modal({ width, children }: ModalProps) {
   );
 }
 
-function ModalContent({ children }: ModalContentProps) {
-  return <StyledModalContent>{children}</StyledModalContent>;
+function ModalContent({ padding, children }: ModalContentProps) {
+  return <StyledModalContent padding={padding}>{children}</StyledModalContent>;
 }
 
-const StyledModalContent = styled.div`
+const StyledModalContent = styled.div<{ padding?: string }>`
   flex: 1;
-  padding: 15px;
+  padding: ${(props) => props.padding || '15px'};
   overflow-y: auto;
 `;
 

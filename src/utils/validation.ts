@@ -27,7 +27,7 @@ const LAST_SPACES_VALID_TEXT = '뒤 공백 있음';
 const SPECIAL_VALID_TEXT_1 = '특수문자는 허용되지않습니다';
 const NUMBER_VALID_TEXT = '숫자만 입력 가능합니다.';
 
-const SPACES_VALID_TEXT_1 = '공백불가';
+const SPACES_VALID_TEXT_1 = '공백';
 
 export const validation = {
   USER_ID: yup
@@ -49,6 +49,7 @@ export const validation = {
       .string()
       .required()
       .email(EMAIL_VALID_TEXT)
+      .matches(/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/, '유효한 이메일을 입력해주세요.')
       .matches(regex.FIRST_SPACE, FIRST_SPACES_VALID_TEXT)
       .matches(regex.LAST_SPACE, LAST_SPACES_VALID_TEXT)
       .min(5, MORE_TEXT(5))
@@ -67,10 +68,10 @@ export const validation = {
     yup
       .string()
       .required()
+      .matches(regex.allSpace, SPACES_VALID_TEXT_1)
       .matches(regex.gather, KO_VALID_TEXT_1)
       .matches(regex.consonant, KO_VALID_TEXT_2)
       .matches(regex.korean, KO_VALID_TEXT)
-      .matches(regex.allSpace, SPACES_VALID_TEXT_1)
       .min(minLength, MORE_TEXT(minLength))
       .max(maxLength, LESS_TEXT(maxLength)),
   //필수 - 앞뒤 공백체크

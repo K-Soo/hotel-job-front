@@ -1,58 +1,40 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
-import Button from '@/components/common/style/Button';
-import { HOTEL_JOBS, TOURIST_HOTEL_JOBS, OTHER_JOBS, allJobsKeyValues, AllJobsKeyValuesKeys } from '@/constants/job';
+import { AllJobsKeyValuesKeys } from '@/constants/job';
 import Icon from '@/icons/Icon';
 import { motion } from 'framer-motion';
 import CircleCheckbox from '@/components/common/style/CircleCheckbox';
 import IconDimmed from '@/components/common/IconDimmed';
-import { useRouter } from 'next/router';
-import useToast from '@/hooks/useToast';
 import { ParsedUrlQuery } from 'querystring';
 
-const getJobArray = (job: string | string[] | undefined): AllJobsKeyValuesKeys[] => {
-  if (!job) return [];
-
-  const jobsArray = Array.isArray(job) ? job.map((item) => item.toLocaleUpperCase()) : [job.toLocaleUpperCase()];
-
-  return jobsArray.filter((j): j is AllJobsKeyValuesKeys => Object.values(allJobsKeyValues).includes(j as AllJobsKeyValuesKeys));
-};
-
 interface JobModalFormProps {
+  tabIndex: number;
+  selectedJob: AllJobsKeyValuesKeys[];
+  businessType: [string, string][];
   handleCloseJobModal: () => void;
+  handleClickBusiness: (value: string) => void;
+  handleClickJobItem: (value: string) => void;
+  setSelectedJob: React.Dispatch<React.SetStateAction<AllJobsKeyValuesKeys[]>>;
+  children: React.ReactNode;
 }
 
 const BUSINESS_DATA = [
-  { label: '업종 전체', value: 'all' },
+  { label: '전체', value: 'all' },
   { label: '호텔', value: 'hotel' },
   { label: '관광호텔', value: 'touristHotel' },
   { label: '기타', value: 'other' },
 ];
 
-interface Query extends ParsedUrlQuery {
-  job?: string | string[];
-}
-
-export default function JobModalForm({ handleCloseJobModal }: JobModalFormProps) {
-  const [businessType, setBusinessType] = React.useState<[string, string][]>([]);
-  const [selectedJob, setSelectedJob] = React.useState<AllJobsKeyValuesKeys[]>([]);
-
-  const router = useRouter();
-  console.log('router: ', router.query);
-
-  const { job } = router.query as Query;
-
+export default function JobModalForm({
+  tabIndex,
+  handleCloseJobModal,
+  selectedJob,
+  businessType,
+  handleClickBusiness,
+  handleClickJobItem,
+  children,
+}: JobModalFormProps) {
   const modalRef = React.useRef<HTMLDivElement>(null);
-
-  const { addToast } = useToast();
-
-  React.useEffect(() => {
-    const selectedJobs = getJobArray(job);
-
-    if (selectedJobs.length > 0) {
-      setSelectedJob(selectedJobs);
-    }
-  }, []);
 
   React.useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
@@ -67,71 +49,6 @@ export default function JobModalForm({ handleCloseJobModal }: JobModalFormProps)
     };
   }, [handleCloseJobModal]);
 
-  const handleClickBusiness = (value: string) => {
-    if (value === 'all') {
-      return;
-    }
-    if (value === 'hotel') return setBusinessType(Object.entries(HOTEL_JOBS));
-    if (value === 'touristHotel') return setBusinessType(Object.entries(TOURIST_HOTEL_JOBS));
-    if (value === 'other') return setBusinessType(Object.entries(OTHER_JOBS));
-  };
-
-  const handleClickJobItem = (value: string) => {
-    const existJob = selectedJob.find((item) => item === (value as AllJobsKeyValuesKeys));
-
-    if (existJob) {
-      setSelectedJob((prev) => prev.filter((item) => item !== value));
-    }
-
-    if (!existJob) {
-      if (selectedJob.length >= 3) {
-        return addToast({ message: '최대 3개까지 선택가능합니다.', type: 'info' });
-      }
-      setSelectedJob((prev) => [...prev, value as AllJobsKeyValuesKeys]);
-    }
-  };
-
-  const handleApplyJobs = () => {
-    if (selectedJob.length === 0) {
-      const params = new URLSearchParams(router.query as any);
-
-      params.delete('job');
-      router.replace(
-        {
-          pathname: router.pathname,
-          query: params.toString(),
-        },
-        undefined,
-        { shallow: true },
-      );
-
-      handleCloseJobModal();
-      return;
-    }
-
-    const params = new URLSearchParams(router.query as any);
-    console.log('params: ', params.toString());
-
-    params.delete('job');
-    selectedJob.forEach((job) => params.append('job', job.toLocaleLowerCase()));
-    console.log('Object.fromEntries(params): ', Object.fromEntries(params));
-
-    router.replace(
-      {
-        pathname: router.pathname,
-        query: params.toString(),
-      },
-      undefined,
-      { shallow: true },
-    );
-
-    handleCloseJobModal();
-  };
-
-  const handleInitializeJobs = () => {
-    setSelectedJob([]);
-  };
-
   return (
     <S.JobModalForm ref={modalRef}>
       <S.Header>
@@ -142,7 +59,7 @@ export default function JobModalForm({ handleCloseJobModal }: JobModalFormProps)
       </S.Header>
       <S.Content>
         <div className="business">
-          {BUSINESS_DATA.map((item) => (
+          {BUSINESS_DATA.map((item, index) => (
             <motion.div
               className="business__item"
               key={item.value}
@@ -151,6 +68,7 @@ export default function JobModalForm({ handleCloseJobModal }: JobModalFormProps)
                 backgroundColor: '#f2f4f6',
                 color: '#000000',
               }}
+              animate={tabIndex === index ? { color: '#444444', backgroundColor: '#f2f4f6' } : { color: '#b0b8c1' }}
               onClick={() => handleClickBusiness(item.value)}
             >
               <h6>{item.label}</h6>
@@ -159,6 +77,12 @@ export default function JobModalForm({ handleCloseJobModal }: JobModalFormProps)
           ))}
         </div>
         <div className="job">
+          {businessType.length === 0 && (
+            <StyledEmpty>
+              업종을 선택해서 <br />
+              직무를 확인할 수 있습니다.
+            </StyledEmpty>
+          )}
           {businessType.map(([key, value]) => (
             <motion.div
               className="job__item"
@@ -182,16 +106,24 @@ export default function JobModalForm({ handleCloseJobModal }: JobModalFormProps)
           ))}
         </div>
       </S.Content>
+
       <S.Bottom>
         <StyledCountText active={selectedJob.length !== 0}>선택 {selectedJob.length}</StyledCountText>
-        <div className="wrapper">
-          <Button label="초기화" variant="tertiary" height="40px" width="100px" margin="0 15px 0 0" onClick={handleInitializeJobs} />
-          <Button label="적용" variant="primary" height="40px" width="215px" type="button" onClick={handleApplyJobs} />
-        </div>
+        <div className="wrapper">{children}</div>
       </S.Bottom>
     </S.JobModalForm>
   );
 }
+
+const StyledEmpty = styled.p`
+  padding-top: 80px;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  line-height: 1.4;
+  color: ${(props) => props.theme.colors.gray600};
+`;
 
 const StyledCountText = styled.span<{ active: boolean }>`
   font-size: 15px;

@@ -64,7 +64,7 @@ const businessManagerForm = yup.object({
   businessOwner: yup.string().required(),
 
   address: yup.string().required(),
-  addressDetail: yup.string().required(),
+  addressDetail: validation.REQUIRED_TEXT_1({ minLength: 2, maxLength: 50 }),
 
   managerName: yup.string().required(),
   managerNumber: yup.string().required(),
@@ -77,7 +77,7 @@ const setupCompanyForm = yup.object({
   businessOwner: validation.REQUIRED_TEXT_2({ minLength: 2, maxLength: 10 }),
 
   address: yup.string().required('주소를 검색해주세요'),
-  addressDetail: validation.REQUIRED_TEXT_1({ minLength: 2, maxLength: 30 }),
+  addressDetail: validation.REQUIRED_TEXT_1({ minLength: 2, maxLength: 50 }),
 
   managerName: validation.REQUIRED_TEXT_2({ minLength: 2, maxLength: 10 }),
   managerNumber: validation.PHONE,
@@ -173,7 +173,7 @@ const recruitmentSchema = yup.object({
     hotelName: validation.REQUIRED_TEXT_1({ minLength: 2, maxLength: 20 }),
     roomCount: yup.number().min(0, '객실수를 입력해주세요.').required(),
     address: yup.string().required('주소를 검색해주세요'),
-    addressDetail: yup.string().required(),
+    addressDetail: validation.REQUIRED_TEXT_1({ minLength: 2, maxLength: 50 }),
   }),
 
   managerInfo: yup.object({
@@ -223,7 +223,7 @@ const resumeRegister = yup.object({
   birthday: yup.string().required(),
   email: validation.REQUIRED_EMAIL(),
   address: yup.string().required(),
-  addressDetail: yup.string().required(),
+  addressDetail: validation.REQUIRED_TEXT_1({ minLength: 2, maxLength: 50 }),
   summary: yup.string().default(''),
   education: yup.string().oneOf(educationLevelKeys).required(),
   experience: yup

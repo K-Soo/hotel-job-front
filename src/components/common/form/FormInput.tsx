@@ -24,6 +24,7 @@ interface FormInputProps<T> {
   mask?: string | string[];
   maxLength?: number;
   errorPosition?: 'absolute' | 'static';
+  inputStyle?: React.CSSProperties;
 }
 
 export default function FormInput<T extends FieldValues>({
@@ -44,6 +45,7 @@ export default function FormInput<T extends FieldValues>({
   mask,
   maxLength,
   errorPosition = 'absolute',
+  inputStyle,
 }: FormInputProps<T>) {
   const {
     formState: { errors },
@@ -85,6 +87,7 @@ export default function FormInput<T extends FieldValues>({
         readOnly={readOnly}
         disabled={disabled}
         maxLength={maxLength}
+        style={inputStyle}
         tabIndex={disabled ? -1 : undefined}
         {...(mask ? registerWithMask(name, mask, { autoUnmask: true, showMaskOnFocus: false, placeholder: '_' }) : register(name))}
       />

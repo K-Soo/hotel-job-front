@@ -17,7 +17,7 @@ interface ProductCardProps {
 }
 
 export default function ProductCard({ product, margin }: ProductCardProps) {
-  const [selectedDuration, setSelectedDuration] = React.useState(product.durations[3]);
+  const [selectedDuration, setSelectedDuration] = React.useState(product.durations[2]);
   const setRecruitmentProductSideMenuAtom = useSetRecoilState(recruitmentProductSideMenuAtom);
   const setSelectProductAtom = useSetRecoilState(selectProductAtom);
   const [productFocusAtomState, setProductFocusAtomState] = useRecoilState(productFocusAtom);
@@ -60,7 +60,7 @@ export default function ProductCard({ product, margin }: ProductCardProps) {
 
       <S.DurationSelectTitle className="select-title">기간설정</S.DurationSelectTitle>
       <S.DurationSelect>
-        <select onChange={onChangeDuration} defaultValue={product.durations[3].id}>
+        <select onChange={onChangeDuration} defaultValue={product.durations[2].id}>
           {product.durations.map((duration) => (
             <option value={duration.id} key={duration.id}>
               <span>{duration.duration}일</span>

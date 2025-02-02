@@ -169,7 +169,7 @@ const S = {
   DurationSelect: styled.div`
     display: flex;
     align-items: center;
-    width: 100px;
+    width: 140px;
     height: 35px;
     cursor: pointer;
     position: relative;
