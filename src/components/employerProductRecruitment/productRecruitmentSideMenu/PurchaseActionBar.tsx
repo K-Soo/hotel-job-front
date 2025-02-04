@@ -11,10 +11,9 @@ export default function PurchaseActionBar() {
   const router = useRouter();
 
   const amountSelectorValue = useRecoilValue(amountSelector);
-  console.log('amountSelectorValue: ', amountSelectorValue);
 
   const handleClickCheckout = () => {
-    router.push(path.EMPLOYER_PRODUCT_CHECKOUT);
+    router.push(path.EMPLOYER_CHECKOUT);
   };
 
   return (

@@ -22,6 +22,8 @@ const environment = {
   messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
   appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
   vapiKey: process.env.NEXT_PUBLIC_FIREBASE_VAPID_KEY,
+
+  tossClientKey: process.env.NEXT_PUBLIC_TOSS_CLIENT_KEY!,
 };
 
 export default environment;

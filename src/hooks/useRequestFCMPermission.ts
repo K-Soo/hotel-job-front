@@ -3,9 +3,9 @@ import { firebaseMessaging } from '@/lib/firebase-client';
 import { getToken } from 'firebase/messaging';
 import environment from '@/environment';
 import { Post } from '@/apis';
-import useAuth from '@/hooks/useAuth';
 import { appAtom } from '@/recoil/app';
 import { useRecoilValue } from 'recoil';
+
 // 1. 알림 권한을 확인
 async function permissionGranted(): Promise<boolean> {
   const permission = await Notification.requestPermission();

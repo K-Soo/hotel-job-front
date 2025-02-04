@@ -11,7 +11,6 @@ export default function AppComponent() {
   const { isAuthenticated } = useAuth();
 
   // TODO : FCM 토큰 요청 로그인으로
-
   React.useEffect(() => {
     const parser = new UAParser();
     const result = parser.getResult();
