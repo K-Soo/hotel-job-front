@@ -14,6 +14,7 @@ import Maintenance from '@/components/common/Maintenance';
 import { Footer } from '@/components/layout';
 import { useRouter } from 'next/router';
 import path from '@/constants/path';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 import '@/recoil';
 
 const commonLayout = (page: React.ReactElement) => <Layout>{page}</Layout>;
@@ -38,6 +39,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
 
   return (
     <AppThemeProvider>
+      <SpeedInsights />
       <RecoilRoot>
         <QueryClientProvider client={queryClient}>
           <AuthenticationComponent />
