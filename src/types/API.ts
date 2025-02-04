@@ -95,6 +95,11 @@ export interface UpdateEmployerReviewStageStatusRequest {
   stage: types.EmployerReviewStageStatusKey;
 }
 
+export interface SaveFcmTokenRequest {
+  token: string;
+  isPWA: boolean;
+}
+
 /************************************* RESPONSE **************************************/
 
 export interface SignInResponse extends BaseResponse {
@@ -340,5 +345,10 @@ export interface UploadProfileImageResponse extends BaseResponse {
   result: {
     status: string;
     key: string;
+  };
+}
+export interface SaveFcmTokenResponse extends BaseResponse {
+  result: {
+    status: ResponseStatus;
   };
 }
