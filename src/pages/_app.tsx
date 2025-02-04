@@ -14,6 +14,7 @@ import Maintenance from '@/components/common/Maintenance';
 import { Footer } from '@/components/layout';
 import { useRouter } from 'next/router';
 import path from '@/constants/path';
+import '@/recoil';
 
 const commonLayout = (page: React.ReactElement) => <Layout>{page}</Layout>;
 
