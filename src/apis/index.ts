@@ -305,6 +305,10 @@ export const Post = {
   // 프로필 이미지 업로드
   // uploadProfileImage: (body: FormData) => requests.post<FormData, API.UploadProfileImageResponse>('/upload/resume/profile', body),
   uploadProfileImage: (body: FormData) => requests.post<FormData, API.UploadProfileImageResponse>('/upload/resume/profile', body),
+
+  // *************************************** PUSH  ***************************************
+  // FCM 토큰 저장
+  saveFcmToken: (body: API.SaveFcmTokenRequest) => requests.post<API.SaveFcmTokenRequest, API.SaveFcmTokenResponse>('/push/token', body),
 };
 
 export const Patch = {
