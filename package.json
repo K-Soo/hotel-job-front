@@ -20,6 +20,7 @@
     "@tanstack/react-query-devtools": "^5.51.23",
     "@tosspayments/tosspayments-sdk": "^2.3.4",
     "@types/ua-parser-js": "^0.7.39",
+    "@vercel/speed-insights": "^1.1.0",
     "axios": "^1.7.4",
     "crypto-js": "^4.2.0",
     "date-fns": "^4.1.0",
