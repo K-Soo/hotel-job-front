@@ -8,6 +8,7 @@ import React from 'react';
 import GuardComponent from '@/auth/GuardComponent';
 import EmployerGuardComponent from '@/auth/EmployerGuardComponent';
 import AuthenticationComponent from '@/auth/AuthenticationComponent';
+import AppComponent from '@/auth/AppComponent';
 import environment from '@/environment';
 import Maintenance from '@/components/common/Maintenance';
 import { Footer } from '@/components/layout';
@@ -39,6 +40,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
       <RecoilRoot>
         <QueryClientProvider client={queryClient}>
           <AuthenticationComponent />
+          <AppComponent />
           {!Component.authentication && getLayout(<Component {...pageProps} />)}
 
           {Component.authentication &&
