@@ -1,4 +1,4 @@
-import Layout, { Main, Header, DesktopNavigation, MobileNavigation, Footer } from '@/components/layout';
+import Layout, { Main, Header, DesktopNavigation, MobileNavigation } from '@/components/layout';
 import UserApplicationHistoryContainer from '@/containers/userApplicationHistoryContainer';
 
 export default function UserApplicationHistoryPage() {
@@ -10,7 +10,7 @@ UserApplicationHistoryPage.getLayout = (page: React.ReactElement) => {
     <Layout>
       <Header>
         <DesktopNavigation />
-        <MobileNavigation title="지원현황" hamburgerIcon />
+        <MobileNavigation title="지원현황" hamburgerIcon homeIcon />
       </Header>
       <Main>{page}</Main>
     </Layout>
