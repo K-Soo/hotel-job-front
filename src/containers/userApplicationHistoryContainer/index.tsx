@@ -8,11 +8,12 @@ import HistoryCard from '@/components/userApplicationHistory/HistoryCard';
 import HistoryStatus from '@/components/userApplicationHistory/HistoryStatus';
 import UserTemplate from '@/components/common/user/UserTemplate';
 import UserTitle from '@/components/common/user/UserTitle';
+import { ErrorComponent } from '@/error';
 
 export default function UserApplicationHistoryContainer() {
   const { isAuthenticated, authAtomState } = useAuth();
 
-  const { data, isLoading, isSuccess } = useFetchQuery({
+  const { data, isLoading, isSuccess, isError } = useFetchQuery({
     queryKey: [queryKeys.USER_APPLICATION_HISTORY, { nickname: authAtomState.nickname }],
     queryFn: Get.getApplicationHistory,
     options: {
@@ -23,6 +24,17 @@ export default function UserApplicationHistoryContainer() {
   });
 
   console.log('지원내역 리스트 API : ', data?.result);
+
+  if (isError) {
+    return (
+      <UserApplicationHistory>
+        <UserTemplate>
+          <UserTitle title="지원현황" />
+          <ErrorComponent visibleBackButton={false} />
+        </UserTemplate>
+      </UserApplicationHistory>
+    );
+  }
 
   return (
     <UserApplicationHistory>
