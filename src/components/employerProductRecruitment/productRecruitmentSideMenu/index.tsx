@@ -37,14 +37,14 @@ export default function ProductRecruitmentSideMenu({ handleCloseSideMenu }: Prod
 
             <Line margin="30px 0" color="#e8f3ff" />
 
-            <S.ContentTitle>
+            {/* <S.ContentTitle>
               <h6>채용공고 선택</h6>
             </S.ContentTitle>
             <S.ContentWrapper>
               <RecruitmentInfo />
-            </S.ContentWrapper>
+            </S.ContentWrapper> */}
 
-            <Line margin="30px 0" color="#e8f3ff" />
+            {/* <Line margin="30px 0" color="#e8f3ff" /> */}
 
             <S.ContentTitle>
               <h6>효과 플러스 옵션</h6>
