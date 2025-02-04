@@ -3,6 +3,7 @@ import EmployerCheckout from '@/components/employerCheckout';
 import environment from '@/environment';
 import { loadTossPayments, ANONYMOUS, TossPaymentsWidgets } from '@tosspayments/tosspayments-sdk';
 // import uuid from 'uuid';
+import Button from '@/components/common/style/Button';
 
 export default function EmployerCheckoutContainer() {
   const [widgets, setWidgets] = React.useState<TossPaymentsWidgets | null>(null);
@@ -34,6 +35,7 @@ export default function EmployerCheckoutContainer() {
       }
       // ------ 주문의 결제 금액 설정 ------
       await widgets.setAmount(amount);
+
       await Promise.all([
         // ------  결제 UI 렌더링 ------
         widgets.renderPaymentMethods({
@@ -51,5 +53,31 @@ export default function EmployerCheckoutContainer() {
     renderPaymentWidgets();
   }, [widgets]);
 
-  return <EmployerCheckout />;
+  const handlePayment = async () => {
+    if (widgets == null) {
+      return;
+    }
+    try {
+      // ------ 결제 요청 ------
+      await widgets.requestPayment({
+        orderId: '1FkqW9OmF8EmfvyqlMv-b',
+        orderName: '토스 티셔츠 외 2건',
+        successUrl: window.location.origin + '/success',
+        failUrl: window.location.origin + '/fail',
+        customerEmail: 'kanabun102@gmail.com',
+        customerName: '김영배',
+        customerMobilePhone: '01002040102',
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  return (
+    <>
+      <EmployerCheckout>
+        <Button label="결제" variant="primary" onClick={handlePayment} />
+      </EmployerCheckout>
+    </>
+  );
 }
