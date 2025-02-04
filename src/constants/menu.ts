@@ -45,7 +45,7 @@ export const EMPLOYER_ASIDE_MENU = [
     icon: 'Shop24x24',
     items: [
       { label: '채용광고', value: path.EMPLOYER_PRODUCT_RECRUITMENT },
-      { label: '이력서 열람 서비스', value: path.EMPLOYER_PRODUCT_RESUME },
+      // { label: '이력서 열람 서비스', value: path.EMPLOYER_PRODUCT_RESUME },
     ],
   },
 
