@@ -2,7 +2,6 @@ import { ResumeLstItemApplications } from '@/types';
 import styled from 'styled-components';
 import { dateFormat } from '@/utils';
 import { useRouter } from 'next/router';
-import useModal from '@/hooks/useModal';
 
 interface ResumeHistoryItemProps {
   item: ResumeLstItemApplications;
@@ -10,7 +9,6 @@ interface ResumeHistoryItemProps {
 
 export default function ResumeHistoryItem({ item }: ResumeHistoryItemProps) {
   const router = useRouter();
-  const { setModalAtomState } = useModal();
 
   return (
     <S.ResumeHistoryItem>
@@ -20,7 +18,6 @@ export default function ResumeHistoryItem({ item }: ResumeHistoryItemProps) {
           className="info-box__title"
           onClick={() => {
             router.push(`/recruit/${item.recruitment.id}`);
-            setModalAtomState({ isOpen: false });
           }}
         >
           {item.recruitment?.recruitmentTitle}

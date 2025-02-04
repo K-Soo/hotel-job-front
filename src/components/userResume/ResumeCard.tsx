@@ -16,7 +16,6 @@ interface ResumeCardProps {
 // TODO - 지원내역 모달 추가
 export default function ResumeCard({ item, handleClickRemoveResume, handleClickSelectedApplications }: ResumeCardProps) {
   const router = useRouter();
-  const { setModalAtomState } = useModal();
 
   return (
     <S.ResumeCard>

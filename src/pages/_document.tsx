@@ -31,7 +31,8 @@ export default class MyDocument extends Document {
     return (
       <Html>
         <Head>
-          <link rel="icon" href="/favicon/favicon.ico" sizes="any" />
+          <link rel="manifest" href="/manifest.json" />
+          <link rel="icon" href="/favicon.ico" sizes="any" />
           <style />
         </Head>
         <body>

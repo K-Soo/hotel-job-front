@@ -15,10 +15,13 @@ const environment = {
   googleClientId: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID,
   googleRedirectUrl: process.env.NEXT_PUBLIC_GOOGLE_REDIRECT_URL,
 
-  nationTextServiceKey: process.env.NEXT_PUBLIC_NATIONAL_TAX_SERVICE_KEY!,
-  nationBusinessUrl: process.env.NEXT_PUBLIC_NATIONAL_BUSINESS_URL!,
-
-  test: process.env.TEST,
+  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
+  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
+  vapiKey: process.env.NEXT_PUBLIC_FIREBASE_VAPID_KEY,
 };
 
 export default environment;

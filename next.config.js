@@ -1,8 +1,19 @@
-import withInterceptStdout from 'next-intercept-stdout';
+const runtimeCaching = require('next-pwa/cache');
+// import withInterceptStdout from 'next-intercept-stdout';
+// import withPWA from 'next-pwa';
+
+const withPWA = require('next-pwa')({
+  dest: 'public',
+  disable: process.env.NODE_ENV === 'development',
+  register: true,
+  skipWaiting: true,
+  runtimeCaching,
+  // buildExcludes: [/middleware-manifest.json$/],
+});
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: false,
+  reactStrictMode: true,
   compiler: {
     styledComponents: true,
   },
@@ -25,6 +36,7 @@ const nextConfig = {
       },
     ],
   },
+
   webpack: (config) => {
     config.module.rules.push({
       test: /\.svg$/i,
@@ -44,4 +56,4 @@ const nextConfig = {
   // },
 };
 
-export default withInterceptStdout(nextConfig, (text) => (text.includes('Duplicate atom key') ? '' : text));
+module.exports = withPWA(nextConfig);

@@ -28,7 +28,7 @@ export default function Logo({ size, margin, style, isEmployer }: LogoProps) {
       $margin={margin}
       style={style}
     >
-      <span className="hotel-word">HOTEL</span>
+      <span className="hotel-word">H</span>
       <span className="job-word">JOB</span>
     </S.Logo>
   );
@@ -47,7 +47,7 @@ const S = {
       color: #68a4ee;
     }
     .job-word {
-      padding-left: 4px;
+      padding-left: 1px;
       color: #1663c0;
     }
     ${(props) =>

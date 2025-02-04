@@ -17,6 +17,7 @@ import SkeletonUI from '@/components/common/SkeletonUI';
 
 export default function UserResumeListContainer() {
   const [selectedResume, setSelectedSelectedResume] = React.useState<ResumeLstItemApplications[] | []>([]);
+  const [isOpenModal, setIsOpenModal] = React.useState(false);
 
   const { setAlertWithConfirmAtom } = useAlertWithConfirm();
   const { setLoadingAtomStatue } = useLoading();
@@ -43,10 +44,12 @@ export default function UserResumeListContainer() {
     }
   }, [modalAtomState.isOpen]);
 
+  const handleCloseModal = () => setIsOpenModal(false);
+
   //handler - 입사지원 내역
   const handleClickSelectedApplications = React.useCallback((applications: ResumeLstItemApplications[]) => {
     setSelectedSelectedResume(applications);
-    setModalAtomState({ isOpen: true });
+    setIsOpenModal(true);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -92,9 +95,9 @@ export default function UserResumeListContainer() {
   if (isSuccess && data) {
     return (
       <>
-        {modalAtomState.isOpen && (
-          <Modal>
-            <Modal.Header title="입사 지원내역" />
+        {isOpenModal && (
+          <Modal handleCloseModal={handleCloseModal}>
+            <Modal.Header title="입사 지원내역" handleCloseModal={handleCloseModal} />
             <Modal.Content>
               {selectedResume.length === 0 && <EmptyComponent message="지원내역이 없습니다." />}
               {selectedResume.map((item) => {
