@@ -1,22 +1,100 @@
+import React from 'react';
 import styled from 'styled-components';
 import Portal from '@/components/common/Portal';
 import Background from '@/components/common/Background';
-import { useSetRecoilState, useResetRecoilState, useRecoilValue } from 'recoil';
-import { recruitmentProductSideMenuAtom } from '@/recoil/product';
+import { useRecoilValue } from 'recoil';
 import Icon from '@/icons/Icon';
 import Line from '@/components/common/Line';
-import { selectProductAtom, durationCalcOptionsSelector } from '@/recoil/product';
+import { selectProductAtom, durationCalcOptionsSelector, selectRecruitmentIdAtom } from '@/recoil/product';
 import PurchaseActionBar from '@/components/employerProductRecruitment/productRecruitmentSideMenu/PurchaseActionBar';
 import ProductForm from '@/components/employerProductRecruitment/productRecruitmentSideMenu/ProductForm';
 import RecruitmentInfo from '@/components/employerProductRecruitment/productRecruitmentSideMenu/RecruitmentInfo';
 import ProductOption from '@/components/employerProductRecruitment/productRecruitmentSideMenu/ProductOption';
+import { Get } from '@/apis';
+import queryKeys from '@/constants/queryKeys';
+import useFetchQuery from '@/hooks/useFetchQuery';
+import { useRouter } from 'next/router';
+import path from '@/constants/path';
+import { Post } from '@/apis';
+import Button from '@/components/common/style/Button';
+import SkeletonUI from '@/components/common/SkeletonUI';
+import useToast from '@/hooks/useToast';
 
 interface ProductRecruitmentSideMenuProps {
   handleCloseSideMenu: () => void;
 }
 
 export default function ProductRecruitmentSideMenu({ handleCloseSideMenu }: ProductRecruitmentSideMenuProps) {
+  const [isLoadingPayment, setIsLoadingPayment] = React.useState(false);
+  const [isErrorPayment, setIsErrorPayment] = React.useState(false);
+  const router = useRouter();
+
   const durationCalcOptionsSelectorValue = useRecoilValue(durationCalcOptionsSelector);
+  const selectProductAtomValue = useRecoilValue(selectProductAtom);
+  const { recruitmentId } = useRecoilValue(selectRecruitmentIdAtom);
+  const { addToast } = useToast();
+
+  const { data, isLoading, isSuccess } = useFetchQuery({
+    queryKey: [queryKeys.RECRUITMENT_PUBLISHED_LIST],
+    queryFn: Get.getPublishedRecruitmentList,
+    options: {
+      enabled: true,
+      throwOnError: true,
+      staleTime: 0,
+      gcTime: 60 * 1000 * 10,
+    },
+  });
+
+  console.log('채용공고 API : ', data);
+
+  const isEmptyRecruitmentList = isSuccess && data && data.result.length === 0;
+
+  const handleClickCheckout = async () => {
+    if (!recruitmentId) {
+      if (isEmptyRecruitmentList) {
+        return addToast({ message: '채용공고를 먼저 등록해주세요.', type: 'info' });
+      }
+      return addToast({ message: '채용공고가 선택되지 않았습니다.', type: 'info' });
+    }
+    const options = selectProductAtomValue.selectedOptions.map((selectedOption) => {
+      return {
+        id: selectedOption.id,
+        name: selectedOption.name,
+        listUpIntervalHours: selectedOption.listUpIntervalHours,
+        maxListUpPerDay: selectedOption.maxListUpPerDay,
+        tags: selectedOption.tags,
+        bonusDays: selectedOption.selectedOptionDuration.bonusDays,
+        discountRate: selectedOption.selectedOptionDuration.discountRate,
+        duration: selectedOption.selectedOptionDuration.duration,
+        price: selectedOption.selectedOptionDuration.price,
+      };
+    });
+
+    const requestData = {
+      id: selectProductAtomValue.id,
+      recruitmentId,
+      name: selectProductAtomValue.name,
+      type: selectProductAtomValue.type,
+      duration: selectProductAtomValue.selectedDuration,
+      options,
+    };
+
+    try {
+      setIsLoadingPayment(true);
+      const response = await Post.paymentRecruitmentInitiate(requestData);
+      console.log('초기화 API : ', response);
+      if (response.result.status !== 'success') {
+        throw new Error('초기화 API 실패');
+      }
+      router.push(`${path.EMPLOYER_CHECKOUT_RECRUITMENT}/${response.result.orderId}`);
+    } catch (error: any) {
+      console.log('error: ', error.message);
+      setIsErrorPayment(true);
+      alert('주문 생성에 실패했습니다. 고객센터에 문의 바랍니다.');
+    } finally {
+      setIsLoadingPayment(false);
+    }
+  };
 
   return (
     <Portal>
@@ -37,14 +115,17 @@ export default function ProductRecruitmentSideMenu({ handleCloseSideMenu }: Prod
 
             <Line margin="30px 0" color="#e8f3ff" />
 
-            {/* <S.ContentTitle>
+            <S.ContentTitle>
               <h6>채용공고 선택</h6>
             </S.ContentTitle>
-            <S.ContentWrapper>
-              <RecruitmentInfo />
-            </S.ContentWrapper> */}
+            {isLoading && <SkeletonUI.Line style={{ height: '65px' }} />}
+            {isSuccess && data && (
+              <S.ContentWrapper>
+                <RecruitmentInfo items={data.result} />
+              </S.ContentWrapper>
+            )}
 
-            {/* <Line margin="30px 0" color="#e8f3ff" /> */}
+            <Line margin="30px 0" color="#e8f3ff" />
 
             <S.ContentTitle>
               <h6>효과 플러스 옵션</h6>
@@ -58,7 +139,19 @@ export default function ProductRecruitmentSideMenu({ handleCloseSideMenu }: Prod
             </S.ContentWrapper>
           </S.ContentContainer>
 
-          <PurchaseActionBar />
+          <PurchaseActionBar>
+            <Button
+              label={isEmptyRecruitmentList ? '채용공고를 먼저 등록해주세요' : '상품 주문'}
+              variant="checkout"
+              height="50px"
+              fontSize="20px"
+              borderRadius="3px"
+              margin="15px 0 0 0"
+              onClick={handleClickCheckout}
+              disabled={isErrorPayment || isEmptyRecruitmentList}
+              isLoading={isLoading || isLoadingPayment}
+            />
+          </PurchaseActionBar>
         </S.ProductRecruitmentSideMenu>
       </Background>
     </Portal>
@@ -70,7 +163,6 @@ const S = {
     position: fixed;
     right: 0;
     height: 100vh;
-    /* background-color: ${(props) => props.theme.colors.blue}; */
     background-color: white;
     z-index: 20;
     width: 500px;
@@ -90,8 +182,7 @@ const S = {
   `,
   ContentContainer: styled.div`
     flex: 1;
-    /* background-color: ${(props) => props.theme.colors.blue50}; */
-    background-color: white;
+    background-color: ${(props) => props.theme.colors.gray100};
     padding: 20px;
     overflow-y: auto;
   `,
@@ -112,7 +203,6 @@ const S = {
   ContentWrapper: styled.div`
     padding: 0 10px;
     background-color: ${(props) => props.theme.colors.white};
-    /* border: 1px solid ${(props) => props.theme.colors.gray200}; */
-    /* background-color: red; */
+    border-radius: 5px;
   `,
 };
