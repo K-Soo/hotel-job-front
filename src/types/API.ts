@@ -10,7 +10,7 @@ export type RecruitTypeQuery = 'special' | 'urgent' | 'basic';
 export type ProductRecruitmentQuery = 'MAIN' | 'RECRUIT';
 
 export interface BaseResponse {
-  error: { message: string; code: number } | null;
+  error: { message: string; code: string } | null;
   success: boolean;
   timestamp: Date;
 }
@@ -336,6 +336,9 @@ export interface DeactivateApplicantUserResponse extends BaseResponse {
 export interface GetRecruitmentDetailApplicantListResponse extends BaseResponse {
   result: types.RecruitmentDetailApplicantListItem[];
 }
+export interface GetPublishedRecruitmentListResponse extends BaseResponse {
+  result: types.GetPublishedRecruitmentListItem[];
+}
 
 export interface GetProductRecruitmentList extends BaseResponse {
   result: types.ProductRecruitmentListItem[];
@@ -351,4 +354,15 @@ export interface SaveFcmTokenResponse extends BaseResponse {
   result: {
     status: ResponseStatus;
   };
+}
+
+export interface PaymentRecruitmentInitiateResponse extends BaseResponse {
+  result: {
+    status: ResponseStatus;
+    orderId: string;
+  };
+}
+
+export interface GetPaymentRecruitmentDetailResponse extends BaseResponse {
+  result: types.PaymentRecruitmentDetail;
 }
