@@ -227,6 +227,9 @@ export const Get = {
 
     return requests.get<API.GetRecruitmentDetailApplicantListResponse>(url);
   },
+  // TODO - 타입정의
+  // 사업자 - 채용공고 상품 리스트
+  getPublishedRecruitmentList: () => requests.get<API.GetPublishedRecruitmentListResponse>(`/employers/recruitment/published`),
 
   // TODO - 타입정의
   // 사업자 - 채용공고 리스트
@@ -256,6 +259,12 @@ export const Get = {
   // *************************************** FILE ***************************************
   //이력서 이미지 가져오기
   getResumeProfileImage: (key: string, config: AxiosRequestConfig) => requests.get<any>(`/upload/resume/profile/${key}`, config),
+
+  // *************************************** PAYMENT  ***************************************
+  // TODO - type 정의
+  // 채용공고 결제 초기요청
+  getPaymentRecruitmentDetail: ({ orderId }: { orderId: string }) =>
+    requests.get<API.GetPaymentRecruitmentDetailResponse>(`/payment/recruitment/${orderId}`),
 };
 
 export const Post = {
@@ -309,6 +318,12 @@ export const Post = {
   // *************************************** PUSH  ***************************************
   // FCM 토큰 저장
   saveFcmToken: (body: API.SaveFcmTokenRequest) => requests.post<API.SaveFcmTokenRequest, API.SaveFcmTokenResponse>('/push/token', body),
+
+  // *************************************** PAYMENT  ***************************************
+  // TODO - type 정의
+  // 채용공고 결제 초기요청
+  paymentRecruitmentInitiate: (body: any) =>
+    requests.post<any, API.PaymentRecruitmentInitiateResponse>('/payment/recruitment/initiate', body),
 };
 
 export const Patch = {
