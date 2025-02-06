@@ -100,6 +100,12 @@ export interface SaveFcmTokenRequest {
   isPWA: boolean;
 }
 
+export interface PaymentRecruitmentConfirmRequest {
+  orderId: string;
+  paymentKey: string;
+  amount: string;
+}
+
 /************************************* RESPONSE **************************************/
 
 export interface SignInResponse extends BaseResponse {
