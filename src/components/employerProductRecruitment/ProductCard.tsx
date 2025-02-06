@@ -4,7 +4,7 @@ import Button from '@/components/common/style/Button';
 import Tag from '@/components/common/Tag';
 import { useSetRecoilState, useRecoilState } from 'recoil';
 import { ProductRecruitmentListItem } from '@/types';
-import { recruitmentProductSideMenuAtom, productFocusAtom } from '@/recoil/product';
+import { productFocusAtom } from '@/recoil/product';
 import { priceComma } from '@/utils';
 import SaleRate from '@/components/common/SaleRate';
 import Icon from '@/icons/Icon';
@@ -14,11 +14,11 @@ import { selectProductAtom } from '@/recoil/product';
 interface ProductCardProps {
   margin?: string;
   product: ProductRecruitmentListItem;
+  setIsOpenSideMenu: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export default function ProductCard({ product, margin }: ProductCardProps) {
+export default function ProductCard({ product, margin, setIsOpenSideMenu }: ProductCardProps) {
   const [selectedDuration, setSelectedDuration] = React.useState(product.durations[2]);
-  const setRecruitmentProductSideMenuAtom = useSetRecoilState(recruitmentProductSideMenuAtom);
   const setSelectProductAtom = useSetRecoilState(selectProductAtom);
   const [productFocusAtomState, setProductFocusAtomState] = useRecoilState(productFocusAtom);
 
@@ -28,7 +28,7 @@ export default function ProductCard({ product, margin }: ProductCardProps) {
       ...product,
       selectedDuration,
     }));
-    setRecruitmentProductSideMenuAtom({ isOpen: true });
+    setIsOpenSideMenu(true);
   };
 
   const onChangeDuration = (event: React.ChangeEvent<HTMLSelectElement>) => {
