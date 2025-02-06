@@ -47,7 +47,7 @@ const path = {
 
   EMPLOYER_PRODUCT_RECRUITMENT: '/employer/product/recruitment', //상품
   EMPLOYER_PRODUCT_RESUME: '/employer/product/resume', //상품 이력서 열람
-  EMPLOYER_CHECKOUT: '/employer/checkout', //기업 - 결제
+  EMPLOYER_CHECKOUT_RECRUITMENT: '/employer/checkout/recruitment', //기업 - 채용공고 결제
 
   EMPLOYER_ACCOUNT: '/employer/account', // 계정 · 업체정보
   EMPLOYER_ACCOUNT_ACCOUNT: '/employer/account/policy', // 이용동의 관리
