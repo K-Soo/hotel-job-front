@@ -1,10 +1,6 @@
 import { atom, selector } from 'recoil';
 import { ProductDuration, ProductRecruitmentListItem, RecruitmentProductNameKey, RecruitmentProductOptionNameKey } from '@/types';
 
-interface RecruitmentProductSideMenuAtom {
-  isOpen: boolean;
-}
-
 interface ProductFocusAtom {
   product: RecruitmentProductNameKey | 'DEFAULT' | undefined;
 }
@@ -26,13 +22,6 @@ export const productFocusAtom = atom<ProductFocusAtom>({
   key: 'productFocusAtom',
   default: {
     product: 'DEFAULT',
-  },
-});
-
-export const recruitmentProductSideMenuAtom = atom<RecruitmentProductSideMenuAtom>({
-  key: 'recruitmentProductSideMenuAtom',
-  default: {
-    isOpen: false,
   },
 });
 
