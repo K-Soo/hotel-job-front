@@ -324,6 +324,11 @@ export const Post = {
   // 채용공고 결제 초기요청
   paymentRecruitmentInitiate: (body: any) =>
     requests.post<any, API.PaymentRecruitmentInitiateResponse>('/payment/recruitment/initiate', body),
+
+  // TODO - type
+  // 채용공고 결제 승인요청
+  paymentRecruitmentConfirm: (body: API.PaymentRecruitmentConfirmRequest) =>
+    requests.post<API.PaymentRecruitmentConfirmRequest, any>('/payment/recruitment/confirm', body),
 };
 
 export const Patch = {
