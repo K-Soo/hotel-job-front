@@ -1,7 +1,6 @@
 import React from 'react';
 import EmployerProductRecruitment from '@/components/employerProductRecruitment';
 import { useRecoilValue } from 'recoil';
-import { recruitmentProductSideMenuAtom } from '@/recoil/product';
 import queryKeys from '@/constants/queryKeys';
 import { Get } from '@/apis';
 import useFetchQuery from '@/hooks/useFetchQuery';
@@ -17,7 +16,7 @@ interface Query extends ParsedUrlQuery {
 }
 
 export default function EmployerProductRecruitmentContainer() {
-  const recruitmentProductSideMenuAtomValue = useRecoilValue(recruitmentProductSideMenuAtom);
+  const [isOpenSideMenu, setIsOpenSideMenu] = React.useState(false);
 
   const router = useRouter();
   const { type = 'MAIN' } = router.query as Query;
@@ -40,9 +39,11 @@ export default function EmployerProductRecruitmentContainer() {
 
   return (
     <>
-      {recruitmentProductSideMenuAtomValue.isOpen && <ProductRecruitmentSideMenuContainer />}
+      {isOpenSideMenu && <ProductRecruitmentSideMenuContainer setIsOpenSideMenu={setIsOpenSideMenu} />}
       <EmployerProductRecruitment isLoading={isLoading}>
-        {isSuccess && data && data.result.map((product) => <ProductCard key={product.id} product={product} />)}
+        {isSuccess &&
+          data &&
+          data.result.map((product) => <ProductCard key={product.id} product={product} setIsOpenSideMenu={setIsOpenSideMenu} />)}
       </EmployerProductRecruitment>
     </>
   );
