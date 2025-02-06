@@ -1,5 +1,6 @@
 import Layout, { EmployerMain, EmployerHeader, EmployerFooter } from '@/components/layout';
 import EmployerCheckoutRecruitmentContainer from '@/containers/employerCheckoutRecruitmentContainer';
+import dynamic from 'next/dynamic';
 
 export default function EmployerCheckoutRecruitmentPage() {
   return <EmployerCheckoutRecruitmentContainer />;
