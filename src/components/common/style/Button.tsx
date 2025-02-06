@@ -285,10 +285,11 @@ const S = {
           width: 30px;
           height: 100%;
           background-color: #fff;
-          animation: ${twinkle} 6s ease-in-out infinite;
+          animation: ${twinkle} 8s ease-in-out infinite;
         }
         &:disabled {
           cursor: not-allowed;
+          background: ${(props) => props.theme.colors.red300};
         }
       `};
 
