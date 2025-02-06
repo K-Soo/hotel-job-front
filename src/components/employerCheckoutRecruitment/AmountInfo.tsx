@@ -7,11 +7,10 @@ import SkeletonUI from '@/components/common/SkeletonUI';
 interface AmountInfoProps {
   amountInfo: PaymentRecruitmentDetailAmountInfo | undefined;
   isLoading: boolean;
-  isSuccess: boolean;
   children: React.ReactNode;
 }
 
-export default function AmountInfo({ amountInfo, isLoading, isSuccess, children }: AmountInfoProps) {
+export default function AmountInfo({ amountInfo, isLoading, children }: AmountInfoProps) {
   return (
     <S.AmountInfo>
       <h2 className="title">결제 정보</h2>
@@ -24,7 +23,7 @@ export default function AmountInfo({ amountInfo, isLoading, isSuccess, children 
           <SkeletonUI.Line style={{ height: '35px', marginBottom: '30px' }} />
         </>
       )}
-      {!isLoading && (
+      {!isLoading && amountInfo && (
         <S.AmountContainer>
           <div className="item">
             <span className="item__title">주문금액</span>
@@ -34,7 +33,7 @@ export default function AmountInfo({ amountInfo, isLoading, isSuccess, children 
           <div className="item">
             <span className="item__title">상품할인</span>
             <p className="item__discount">
-              <span className="item__discount--text">{amountInfo?.productDiscountAmount === 0 ? '' : '-'}</span>
+              <span className="item__discount--text">{amountInfo.productDiscountAmount === 0 ? '' : '-'}</span>
               <span className="item__discount--text">{priceComma(amountInfo?.productDiscountAmount)}</span>원
             </p>
           </div>
@@ -42,24 +41,26 @@ export default function AmountInfo({ amountInfo, isLoading, isSuccess, children 
           <div className="item">
             <span className="item__title">멤버십 할인</span>
             <p className="item__discount">
-              <span className="item__discount--text">{amountInfo?.membershipDiscountAmount === 0 ? '' : '-'}</span>
+              <span className="item__discount--text">{amountInfo.membershipDiscountAmount === 0 ? '' : '-'}</span>
               <span className="item__discount--text">{priceComma(amountInfo?.membershipDiscountAmount)}</span>원
             </p>
           </div>
 
-          <div className="item">
-            <span className="item__title">쿠폰 할인</span>
-            <p className="item__discount">
-              <span className="item__discount--text">{amountInfo?.couponDiscountAmount === 0 ? '' : '-'}</span>
-              <span className="item__discount--text">{priceComma(amountInfo?.couponDiscountAmount)}</span>원
-            </p>
-          </div>
+          {amountInfo.couponDiscountAmount !== 0 && (
+            <div className="item">
+              <span className="item__title">쿠폰 할인</span>
+              <p className="item__discount">
+                <span className="item__discount--text">{amountInfo.couponDiscountAmount === 0 ? '' : '-'}</span>
+                <span className="item__discount--text">{priceComma(amountInfo?.couponDiscountAmount)}</span>원
+              </p>
+            </div>
+          )}
 
           <div className="item">
             <span className="item__title">최종 할인금액</span>
             <p className="item__discount">
               <span className="item__discount--text">-</span>
-              <span className="item__discount--text">{priceComma(amountInfo?.totalDiscountAmount)}</span>원
+              <span className="item__discount--text">{priceComma(amountInfo.totalDiscountAmount)}</span>원
             </p>
           </div>
 
@@ -67,7 +68,7 @@ export default function AmountInfo({ amountInfo, isLoading, isSuccess, children 
 
           <div className="total-amount">
             <span>결제금액</span>
-            <strong>{priceComma(amountInfo?.finalTotalAmount)}원</strong>
+            <strong className="total-amount__price">{priceComma(amountInfo?.finalTotalAmount)}</strong>
           </div>
         </S.AmountContainer>
       )}
@@ -111,6 +112,12 @@ const S = {
       justify-content: space-between;
       font-weight: 600;
       font-size: 20px;
+      &__price {
+        &::after {
+          content: '원';
+          padding-left: 2px;
+        }
+      }
     }
   `,
 };
