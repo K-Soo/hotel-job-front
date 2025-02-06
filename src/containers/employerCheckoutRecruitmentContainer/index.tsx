@@ -1,6 +1,6 @@
 import React from 'react';
 import EmployerCheckoutRecruitment from '@/components/employerCheckoutRecruitment';
-import { loadTossPayments, ANONYMOUS, TossPaymentsWidgets } from '@tosspayments/tosspayments-sdk';
+import { loadTossPayments, TossPaymentsWidgets } from '@tosspayments/tosspayments-sdk';
 import useFetchQuery from '@/hooks/useFetchQuery';
 import { Get } from '@/apis';
 import queryKeys from '@/constants/queryKeys';
@@ -69,6 +69,10 @@ export default function EmployerCheckoutRecruitmentContainer() {
       if (responseErrorCode === errorCode.PAYMENT_EMPTY_ORDER_ITEMS) {
         alert('상품 정보를 찾을 수 없습니다. 새로운 주문을 생성해주세요.');
         router.replace(path.EMPLOYER_PRODUCT_RECRUITMENT);
+      }
+      if (responseErrorCode === errorCode.PAYMENT_NOT_CERT_USER) {
+        alert('본인인증 정보가 없습니다. 계정관리 페이지로 이동합니다.');
+        router.replace(path.EMPLOYER_ACCOUNT);
       }
     }
   }, [error]);
@@ -146,10 +150,10 @@ export default function EmployerCheckoutRecruitmentContainer() {
     <EmployerCheckoutRecruitment>
       <ProductInfo productInfo={data?.result.productInfo} isLoading={isLoading} />
       <RecruitmentInfo recruitmentInfo={data?.result.recruitmentInfo} isLoading={isLoading} />
-      <DiscountInfo finalTotalAmount={data?.result.amountInfo.finalTotalAmount} />
+      <DiscountInfo finalTotalAmount={data?.result.amountInfo.finalTotalAmount} isLoading={isLoading} />
       <TossPaymentInfo />
       <AmountInfo amountInfo={data?.result.amountInfo} isLoading={isLoading} isSuccess={isSuccess}>
-        <Button label="결제" variant="primary" onClick={handlePayment} />
+        <Button label="결제" variant="primary" onClick={handlePayment} isLoading={isLoading} />
       </AmountInfo>
     </EmployerCheckoutRecruitment>
   );
