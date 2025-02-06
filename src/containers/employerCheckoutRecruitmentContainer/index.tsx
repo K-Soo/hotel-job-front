@@ -6,7 +6,7 @@ import { Get } from '@/apis';
 import queryKeys from '@/constants/queryKeys';
 import { useRouter } from 'next/router';
 import Button from '@/components/common/style/Button';
-import { errorCode } from '@/error';
+import { errorCode, errorMessages } from '@/error';
 import path from '@/constants/path';
 import AmountInfo from '@/components/employerCheckoutRecruitment/AmountInfo';
 import environment from '@/environment';
@@ -15,20 +15,18 @@ import RecruitmentInfo from '@/components/employerCheckoutRecruitment/Recruitmen
 import TossPaymentInfo from '@/components/employerCheckoutRecruitment/TossPaymentInfo';
 import DiscountInfo from '@/components/employerCheckoutRecruitment/DiscountInfo';
 import { v4 as uuidv4 } from 'uuid';
-import useAuth from '@/hooks/useAuth';
 
 export default function EmployerCheckoutRecruitmentContainer() {
   const [widgets, setWidgets] = React.useState<TossPaymentsWidgets | null>(null);
   const [ready, setReady] = React.useState(false);
-  const { authAtomState } = useAuth();
   const router = useRouter();
   const { query } = router;
   const [amount, setAmount] = React.useState({
     currency: 'KRW',
-    value: 50_000,
+    value: 0,
   });
 
-  const { data, isLoading, isSuccess, isError, error } = useFetchQuery({
+  const { data, isLoading, error } = useFetchQuery({
     queryKey: [queryKeys.PAYMENT_RECRUITMENT_DETAIL, { orderId: query.slug }],
     queryFn: Get.getPaymentRecruitmentDetail,
     options: {
@@ -44,36 +42,40 @@ export default function EmployerCheckoutRecruitmentContainer() {
   console.log('주문 상세정보 API  : ', data);
 
   React.useEffect(() => {
+    if (data) {
+      setAmount({
+        currency: 'KRW',
+        value: data.result.amountInfo.finalTotalAmount,
+      });
+    }
+  }, [data]);
+  const test = errorMessages['ERR-80018'];
+  console.log('test: ', test);
+
+  React.useEffect(() => {
     if (error) {
-      const responseErrorCode = error.response?.data?.error?.code;
+      const responseErrorCode = error.response?.data?.error?.code ?? null;
+
       if (!responseErrorCode) {
-        alert('알 수 없는 오류가 발생했습니다. 잠시 후 다시 시도해주세요.');
         router.push(path.EMPLOYER);
+        alert('알 수 없는 오류가 발생했습니다. 잠시 후 다시 시도해주세요.');
+        return;
       }
-      if (responseErrorCode === errorCode.PAYMENT_EXPIRED_ORDER) {
-        alert('주문 시간이 만료되었습니다. 새로운 주문을 생성해주세요.');
-        router.replace(path.EMPLOYER_PRODUCT_RECRUITMENT);
-      }
-      if (responseErrorCode === errorCode.PAYMENT_NOT_FOUND_ORDER) {
-        alert('주문을 찾을 수 없습니다. 새로운 주문을 생성해주세요.');
-        router.replace(path.EMPLOYER_PRODUCT_RECRUITMENT);
-      }
-      if (responseErrorCode === errorCode.PAYMENT_INVALID_STATUS) {
-        alert('주문 상태가 유효하지 않습니다. 새로운 주문을 생성해주세요.');
-        router.replace(path.EMPLOYER_PRODUCT_RECRUITMENT);
-      }
-      if (responseErrorCode === errorCode.PAYMENT_INVALID_TOTAL_AMOUNT) {
-        alert('주문 금액 정보가 유효하지 않습니다. 새로운 주문을 생성해주세요.');
-        router.replace(path.EMPLOYER_PRODUCT_RECRUITMENT);
-      }
-      if (responseErrorCode === errorCode.PAYMENT_EMPTY_ORDER_ITEMS) {
-        alert('상품 정보를 찾을 수 없습니다. 새로운 주문을 생성해주세요.');
-        router.replace(path.EMPLOYER_PRODUCT_RECRUITMENT);
-      }
+
       if (responseErrorCode === errorCode.PAYMENT_NOT_CERT_USER) {
-        alert('본인인증 정보가 없습니다. 계정관리 페이지로 이동합니다.');
+        alert(errorMessages[responseErrorCode]);
         router.replace(path.EMPLOYER_ACCOUNT);
+        return;
       }
+
+      if (errorMessages[responseErrorCode]) {
+        alert(errorMessages[responseErrorCode]);
+        router.replace(path.EMPLOYER_PRODUCT_RECRUITMENT);
+        return;
+      }
+
+      router.push(path.EMPLOYER);
+      alert('알 수 없는 오류가 발생했습니다. 잠시 후 다시 시도해주세요.');
     }
   }, [error]);
 
@@ -104,6 +106,10 @@ export default function EmployerCheckoutRecruitmentContainer() {
         return;
       }
 
+      if (!data) {
+        return;
+      }
+
       await widgets.setAmount(amount);
 
       await Promise.all([
@@ -127,22 +133,34 @@ export default function EmployerCheckoutRecruitmentContainer() {
     if (widgets == null) {
       return;
     }
+
     if (!data) {
       return;
     }
+
     try {
-      // ------ 결제 요청 ------
+      if (data.result.amountInfo.finalTotalAmount === 0) {
+        throw new Error('결제 금액이 0원입니다.');
+      }
+
+      const productName = data.result.productInfo.name;
+      const optionCount = data.result.productInfo.options.length;
+
       await widgets.requestPayment({
         orderId: data.result.orderId,
-        orderName: '토스 티셔츠 외 2건',
-        successUrl: window.location.origin + '/success',
-        failUrl: window.location.origin + '/fail',
-        customerEmail: 'kanabun102@gmail.com',
-        customerName: '김영배',
-        customerMobilePhone: '01002040102',
+        orderName: `${productName} ${optionCount > 0 ? `외 옵션 ${optionCount}건` : ''}`,
+        successUrl: window.location.origin + '/employer/checkout/recruitment/success',
+        failUrl: window.location.origin + '/employer/checkout/recruitment/fail',
+        customerEmail: data.result.certificationInfo?.managerEmail || 'unknown',
+        customerName: data.result.certificationInfo?.userName || 'unknown',
+        // customerMobilePhone: data.result.certificationInfo?.phone || 'unknown', // 가상계좌 안내, 퀵계좌이체
       });
-    } catch (error) {
-      console.error(error);
+    } catch (error: any) {
+      console.log('error: ', error.message);
+      if (error.message === '취소되었습니다.') {
+        return;
+      }
+      alert(error.message || '결제에 실패했습니다. 잠시 후 다시 시도해주세요.');
     }
   };
 
@@ -152,7 +170,7 @@ export default function EmployerCheckoutRecruitmentContainer() {
       <RecruitmentInfo recruitmentInfo={data?.result.recruitmentInfo} isLoading={isLoading} />
       <DiscountInfo finalTotalAmount={data?.result.amountInfo.finalTotalAmount} isLoading={isLoading} />
       <TossPaymentInfo />
-      <AmountInfo amountInfo={data?.result.amountInfo} isLoading={isLoading} isSuccess={isSuccess}>
+      <AmountInfo amountInfo={data?.result.amountInfo} isLoading={isLoading}>
         <Button label="결제" variant="primary" onClick={handlePayment} isLoading={isLoading} />
       </AmountInfo>
     </EmployerCheckoutRecruitment>
