@@ -15,8 +15,9 @@ export default function EmployerCheckoutRecruitment({ children }: EmployerChecko
         {childrenArray[0]}
         {childrenArray[1]}
         {childrenArray[2]}
+        {childrenArray[3]}
       </S.PaymentContainer>
-      <div className="amount-container">{childrenArray[3]}</div>
+      <div className="amount-container">{childrenArray[4]}</div>
     </S.EmployerCheckoutRecruitment>
   );
 }
@@ -24,14 +25,14 @@ export default function EmployerCheckoutRecruitment({ children }: EmployerChecko
 const S = {
   EmployerCheckoutRecruitment: styled.section`
     display: flex;
+    white-space: nowrap;
     .amount-container {
-      flex-basis: 330px;
+      flex-basis: 300px;
       margin-left: 30px;
     }
   `,
   PaymentContainer: styled.div`
     border-right: 1px solid ${(props) => props.theme.colors.gray300};
-    /* border: 1px solid red; */
     flex: 1;
   `,
 };
