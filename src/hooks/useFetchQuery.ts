@@ -12,6 +12,8 @@ export interface UseFetchQuery<T, Q = undefined> {
   options?: Omit<UseQueryOptions<any, AxiosError<unknown, any>, any, QueryKey>, 'queryKey' | 'queryFn'>;
   requestQuery?: Q;
 }
+type TErrorTypes = { error: { message: string; code: string } | null };
+// ✅ 에러 타입 정의
 
 export default function useFetchQuery<T, Q = undefined>({ queryKey, queryFn, options, requestQuery }: UseFetchQuery<T, Q>) {
   const {
@@ -47,7 +49,7 @@ export default function useFetchQuery<T, Q = undefined>({ queryKey, queryFn, opt
   return {
     data,
     dataUpdatedAt,
-    error,
+    error: error as AxiosError<TErrorTypes, any> | null,
     errorUpdatedAt,
     failureCount,
     failureReason,
