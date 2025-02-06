@@ -2,6 +2,7 @@ import { PaymentRecruitmentInfo } from '@/types';
 import styled from 'styled-components';
 import { dateFormat } from '@/utils';
 import { ALL_JOBS } from '@/constants/job';
+import SkeletonUI from '@/components/common/SkeletonUI';
 interface RecruitmentInfoProps {
   recruitmentInfo: PaymentRecruitmentInfo | undefined;
   isLoading: boolean;
@@ -11,7 +12,7 @@ export default function RecruitmentInfo({ recruitmentInfo, isLoading }: Recruitm
   return (
     <S.RecruitmentInfo>
       <h2 className="title">적용공고</h2>
-      {isLoading && <div>로딩중...</div>}
+      {isLoading && <SkeletonUI.Line style={{ height: '80px' }} />}
       {!isLoading && recruitmentInfo && (
         <S.RecruitmentContainer>
           <S.RecruitmentHeader>
@@ -41,7 +42,7 @@ export default function RecruitmentInfo({ recruitmentInfo, isLoading }: Recruitm
 
 const S = {
   RecruitmentInfo: styled.div`
-    padding: 15px 30px;
+    padding: 30px;
     .title {
       font-size: 20px;
       font-weight: 600;
@@ -77,8 +78,8 @@ const S = {
     font-size: 14px;
     .content-title {
       flex: 1;
-      text-align: left;
       padding-left: 20px;
+      text-align: center;
     }
     .content-job {
       flex-basis: 250px;
