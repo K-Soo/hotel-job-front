@@ -16,7 +16,7 @@ interface SelectProductAtom extends Partial<ProductRecruitmentListItem> {
     maxListUpPerDay: number;
     name: RecruitmentProductOptionNameKey;
     tags: [];
-    targetValue: ProductDuration;
+    selectedOptionDuration: ProductDuration;
   }[];
 
   selectedDuration: Partial<ProductDuration>;
@@ -33,6 +33,13 @@ export const recruitmentProductSideMenuAtom = atom<RecruitmentProductSideMenuAto
   key: 'recruitmentProductSideMenuAtom',
   default: {
     isOpen: false,
+  },
+});
+
+export const selectRecruitmentIdAtom = atom<{ recruitmentId?: string }>({
+  key: 'selectRecruitmentIdAtom',
+  default: {
+    recruitmentId: undefined,
   },
 });
 
@@ -104,15 +111,15 @@ export const amountSelector = selector({
 
     // 선택된 옵션들의 총 금액
     const optionsPrice = selectedOptions.reduce((total, option) => {
-      // 각 옵션의 targetValue(price) 합산
-      const optionPrice = option.targetValue?.price || 0;
+      // 각 옵션의 selectedOptionDuration(price) 합산
+      const optionPrice = option.selectedOptionDuration?.price || 0;
       return total + optionPrice;
     }, 0);
 
     // 옵션별 할인 금액 합산
     const optionsDiscountAmount = selectedOptions.reduce((total, option) => {
-      const optionPrice = option.targetValue?.price || 0;
-      const optionDiscountRate = option.targetValue?.discountRate || 0;
+      const optionPrice = option.selectedOptionDuration?.price || 0;
+      const optionDiscountRate = option.selectedOptionDuration?.discountRate || 0;
 
       return total + optionPrice * optionDiscountRate;
     }, 0);
