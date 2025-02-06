@@ -9,7 +9,7 @@ import { PREFERENCES } from '@/constants/preferences';
 import { LANGUAGE_LEVEL, LANGUAGE } from '@/constants/language';
 import { RESUME_STATUS, SANCTION_REASON } from '@/constants/resume';
 import { APPLICATION_STATUS, EMPLOYER_REVIEW_STAGE_STATUS, REVIEW_STAGE_STATUS } from '@/constants/application';
-import { RECRUITMENT_PRODUCT_NAME, RECRUITMENT_PRODUCT_OPTION_NAME } from '@/constants/product';
+import { RECRUITMENT_PRODUCT_NAME, RECRUITMENT_PRODUCT_OPTION_NAME, RECRUITMENT_PRODUCT_TYPE } from '@/constants/product';
 
 export type Provider = 'LOCAL' | 'KAKAO' | 'GOOGLE';
 export type RoleType = 'ADMIN' | 'EMPLOYER' | 'JOB_SEEKER';
@@ -51,6 +51,7 @@ export type ReviewStageStatusKey = keyof typeof REVIEW_STAGE_STATUS;
 export type EmployerReviewStageStatusKey = keyof typeof EMPLOYER_REVIEW_STAGE_STATUS;
 export type RecruitmentProductNameKey = keyof typeof RECRUITMENT_PRODUCT_NAME;
 export type RecruitmentProductOptionNameKey = keyof typeof RECRUITMENT_PRODUCT_OPTION_NAME;
+export type RecruitmentProductTypeKey = keyof typeof RECRUITMENT_PRODUCT_TYPE;
 
 export type TalentListItem = {};
 
@@ -501,8 +502,16 @@ export type ProductInfoItem = {
   discountRate: number;
   duration: number;
   id: string;
-  name: 'PREMIUM';
-  options: [];
+  name: RecruitmentName;
+  type: RecruitmentProductTypeKey;
+  options: {
+    bonusDays: number;
+    price: number;
+    discountRate: number;
+    duration: number;
+    id: string;
+    name: RecruitmentProductOptionNameKey;
+  }[];
   price: number;
 };
 
@@ -510,6 +519,7 @@ export type PaymentRecruitmentInfo = {
   id: string;
   recruitmentTitle: string;
   jobs: AllJobsKeyValuesKeys[];
+  createdAt: Date;
 };
 
 export interface PaymentRecruitmentDetail {
