@@ -457,6 +457,13 @@ export interface RecruitmentDetailApplicantListItem {
   resumeSnapshot: ResumeDetail;
 }
 
+export interface GetPublishedRecruitmentListItem {
+  id: string;
+  recruitmentTitle: string;
+  recruitmentStatus: RecruitmentStatusKeys;
+  jobs: AllJobsKeyValuesKeys[];
+}
+
 export type ProductDuration = {
   bonusDays: number;
   discountRate: number;
@@ -478,4 +485,38 @@ export interface ProductRecruitmentListItem {
     tags: [];
     optionDurations: ProductDuration[];
   }[];
+}
+
+export type PaymentRecruitmentDetailAmountInfo = {
+  couponDiscountAmount: number;
+  membershipDiscountAmount: number;
+  originalAmount: number;
+  productDiscountAmount: number;
+  totalDiscountAmount: number;
+  finalTotalAmount: number;
+};
+
+export type ProductInfoItem = {
+  bonusDays: number;
+  discountRate: number;
+  duration: number;
+  id: string;
+  name: 'PREMIUM';
+  options: [];
+  price: number;
+};
+
+export type PaymentRecruitmentInfo = {
+  id: string;
+  recruitmentTitle: string;
+  jobs: AllJobsKeyValuesKeys[];
+};
+
+export interface PaymentRecruitmentDetail {
+  orderId: string;
+  paymentStatus: 'PAYMENT_PENDING';
+  expiresAt: string;
+  amountInfo: PaymentRecruitmentDetailAmountInfo;
+  productInfo: ProductInfoItem;
+  recruitmentInfo: PaymentRecruitmentInfo;
 }
