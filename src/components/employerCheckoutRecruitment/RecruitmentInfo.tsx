@@ -27,7 +27,9 @@ export default function RecruitmentInfo({ recruitmentInfo, isLoading }: Recruitm
             </div>
             <div className="content-job">
               {recruitmentInfo.jobs.map((job) => (
-                <span className="content-job__text">{ALL_JOBS[job]}</span>
+                <span className="content-job__text" key={job}>
+                  {ALL_JOBS[job]}
+                </span>
               ))}
             </div>
             <div className="created-at">
