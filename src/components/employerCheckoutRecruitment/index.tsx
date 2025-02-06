@@ -26,6 +26,7 @@ const S = {
   EmployerCheckoutRecruitment: styled.section`
     display: flex;
     white-space: nowrap;
+    min-height: 1100px;
     .amount-container {
       flex-basis: 300px;
       margin-left: 30px;
