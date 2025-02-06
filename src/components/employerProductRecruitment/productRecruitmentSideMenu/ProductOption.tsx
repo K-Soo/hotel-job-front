@@ -28,11 +28,29 @@ export default function ProductOption({ option }: ProductOptionProps) {
 
   const isCheck = selectProductAtomState.selectedOptions.some((selectedOption) => selectedOption.id === option.id);
 
-  React.useEffect(() => {
-    if (option) {
-      setSelectedDuration(option.optionDurations[0]);
+  const handleChangeCheckbox = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { checked } = event.target;
+    const { optionDurations, ...rest } = option;
+
+    if (checked) {
+      const checkedOptionData = {
+        ...rest,
+        selectedOptionDuration: {
+          ...selectedDuration,
+        },
+      };
+      setSelectProductAtom((prev) => ({
+        ...prev,
+        selectedOptions: [...prev.selectedOptions, checkedOptionData],
+      }));
+      return;
     }
-  }, [option]);
+
+    setSelectProductAtom((prev) => ({
+      ...prev,
+      selectedOptions: prev.selectedOptions.filter((selectedOption) => selectedOption.id !== option.id),
+    }));
+  };
 
   const handleChangeSelect = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const targetValue = event.target.value;
@@ -44,33 +62,21 @@ export default function ProductOption({ option }: ProductOptionProps) {
     }
 
     setSelectedDuration(existingDuration);
-  };
 
-  const handleChangeCheckbox = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { checked } = event.target;
+    setSelectProductAtom((prev) => {
+      const isOptionSelected = prev.selectedOptions.some((selectedOption) => selectedOption.id === option.id);
 
-    const { optionDurations, ...rest } = option;
+      if (isOptionSelected) {
+        return {
+          ...prev,
+          selectedOptions: prev.selectedOptions.map((selectedOption) =>
+            selectedOption.id === option.id ? { ...selectedOption, selectedOptionDuration: existingDuration } : selectedOption,
+          ),
+        };
+      }
 
-    if (checked) {
-      const checkedOptionData = {
-        ...rest,
-        targetValue: {
-          ...selectedDuration,
-        },
-      };
-
-      setSelectProductAtom((prev) => ({
-        ...prev,
-        selectedOptions: [...prev.selectedOptions, checkedOptionData],
-      }));
-    }
-
-    if (!checked) {
-      setSelectProductAtom((prev) => ({
-        ...prev,
-        selectedOptions: prev.selectedOptions.filter((selectedOption) => selectedOption.id !== option.id),
-      }));
-    }
+      return prev;
+    });
   };
 
   return (
