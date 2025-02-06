@@ -67,6 +67,9 @@ export default function AmountInfo({ amountInfo, isLoading, isSuccess, children 
 
 const S = {
   AmountInfo: styled.div`
+    position: sticky;
+    top: 70px;
+    height: 500px;
     .title {
       font-size: 20px;
       font-weight: 600;
@@ -86,7 +89,7 @@ const S = {
       }
       &__discount {
         &--text {
-          color: ${(props) => props.theme.colors.red500};
+          color: ${(props) => props.theme.colors.blue500};
           padding-right: 2px;
         }
       }
