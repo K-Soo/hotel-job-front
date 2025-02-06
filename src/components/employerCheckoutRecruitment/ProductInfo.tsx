@@ -30,53 +30,53 @@ export default function ProductInfo({ productInfo, isLoading }: ProductInfoProps
 
           <S.ProductContent>
             <div className="product-item">
-              <p className="product-item__text type">
+              <div className="product-item__text type">
                 {productInfo?.type && (
                   <>
                     <Tag label="PC+M" margin="0 5px 0 0" height="18px" width="40px" fontSize="11px" />
                     <span>{RECRUITMENT_PRODUCT_TYPE[productInfo.type]}&nbsp;페이지</span>
                   </>
                 )}
-              </p>
-              <p className="product-item__text">
+              </div>
+              <div className="product-item__text">
                 {productInfo?.name && <span>{RECRUITMENT_PRODUCT_NAME[productInfo.name]}</span>}&nbsp;공고
-              </p>
-              <p className="product-item__text duration">
+              </div>
+              <div className="product-item__text duration">
                 {productInfo?.duration && (
                   <>
                     <div style={{ width: '60px' }}>
                       <span>{productInfo?.duration}일</span>
-                      {productInfo?.bonusDays && <span>&nbsp;{`(+${productInfo.bonusDays}일)`}</span>}
+                      {productInfo?.bonusDays !== 0 && <span>&nbsp;{`(+${productInfo.bonusDays}일)`}</span>}
                     </div>
                     <span className="product-item__text--date">
                       {dateFormat.dateRange(new Date(), productInfo.duration + (productInfo?.bonusDays ?? 0))}
                     </span>
                   </>
                 )}
-              </p>
-              <p className="product-item__text">
+              </div>
+              <div className="product-item__text">
                 <span>{priceComma(price)}원</span>
-              </p>
+              </div>
             </div>
             {productInfo?.options.map((option) => (
               <div className="option-item">
-                <p className="option-item__text type">
+                <div className="option-item__text type">
                   <StyledCorner />
                   <span>옵션</span>
-                </p>
+                </div>
                 <p className="option-item__text">
                   <span>{RECRUITMENT_PRODUCT_OPTION_NAME[option.name]}</span>
                 </p>
-                <p className="option-item__text duration">
+                <div className="option-item__text duration">
                   <div style={{ width: '60px', textAlign: 'right' }}>
                     <span>{option?.duration}일</span>
                     {option?.bonusDays && <span>&nbsp;{`(+${option.bonusDays}일)`}</span>}
                   </div>
                   <span className="option-item__text--date"> {dateFormat.dateRange(new Date(), option.duration + option.bonusDays)}</span>
-                </p>
-                <p className="option-item__text">
+                </div>
+                <div className="option-item__text">
                   {priceComma(option.price)}원 {option.bonusDays}
-                </p>
+                </div>
               </div>
             ))}
           </S.ProductContent>
@@ -138,10 +138,9 @@ const S = {
         display: flex;
         align-items: center;
         justify-content: center;
-
         &--date {
           color: ${({ theme }) => theme.colors.gray600};
-          padding-left: 12px;
+          padding-left: 5px;
         }
       }
       .duration {
