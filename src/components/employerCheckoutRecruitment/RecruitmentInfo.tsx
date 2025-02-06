@@ -1,27 +1,95 @@
-import styled from 'styled-components';
 import { PaymentRecruitmentInfo } from '@/types';
-
+import styled from 'styled-components';
+import { dateFormat } from '@/utils';
+import { ALL_JOBS } from '@/constants/job';
 interface RecruitmentInfoProps {
   recruitmentInfo: PaymentRecruitmentInfo | undefined;
+  isLoading: boolean;
 }
 
-export default function RecruitmentInfo({ recruitmentInfo }: RecruitmentInfoProps) {
+export default function RecruitmentInfo({ recruitmentInfo, isLoading }: RecruitmentInfoProps) {
   return (
     <S.RecruitmentInfo>
-      <div>
-        <div>{recruitmentInfo?.recruitmentTitle}</div>
-        <div>
-          {recruitmentInfo?.jobs.map((el) => (
-            <div>{el}</div>
-          ))}
-        </div>
-      </div>
+      <h2 className="title">적용공고</h2>
+      {isLoading && <div>로딩중...</div>}
+      {!isLoading && recruitmentInfo && (
+        <S.RecruitmentContainer>
+          <S.RecruitmentHeader>
+            <span className="header-title">공고제목</span>
+            <span className="job">직무</span>
+            <span className="created-at">생성일</span>
+          </S.RecruitmentHeader>
+
+          <S.RecruitmentContent>
+            <div className="content-title">
+              <p>{recruitmentInfo.recruitmentTitle}</p>
+            </div>
+            <div className="content-job">
+              {recruitmentInfo.jobs.map((job) => (
+                <span className="content-job__text">{ALL_JOBS[job]}</span>
+              ))}
+            </div>
+            <div className="created-at">
+              <p>{dateFormat.date(recruitmentInfo.createdAt, 'YY.MM.DD')}</p>
+            </div>
+          </S.RecruitmentContent>
+        </S.RecruitmentContainer>
+      )}
     </S.RecruitmentInfo>
   );
 }
 
 const S = {
   RecruitmentInfo: styled.div`
-    padding: 30px;
+    padding: 15px 30px;
+    .title {
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 10px;
+      color: ${({ theme }) => theme.colors.gray800};
+    }
+  `,
+  RecruitmentContainer: styled.div`
+    border-top: 1px solid ${({ theme }) => theme.colors.black400};
+    border-bottom: 1px solid ${({ theme }) => theme.colors.black400};
+  `,
+  RecruitmentHeader: styled.div`
+    display: flex;
+    align-items: center;
+    text-align: center;
+    height: 40px;
+    border-bottom: 1px solid ${({ theme }) => theme.colors.gray300};
+    font-size: 14px;
+    .header-title {
+      flex: 1;
+    }
+    .job {
+      flex-basis: 250px;
+    }
+    .created-at {
+      flex-basis: 200px;
+    }
+  `,
+  RecruitmentContent: styled.div`
+    display: flex;
+    align-items: center;
+    height: 40px;
+    font-size: 14px;
+    .content-title {
+      flex: 1;
+      text-align: left;
+      padding-left: 20px;
+    }
+    .content-job {
+      flex-basis: 250px;
+      text-align: center;
+      &__text {
+        padding: 0 3px;
+      }
+    }
+    .created-at {
+      flex-basis: 200px;
+      text-align: center;
+    }
   `,
 };
