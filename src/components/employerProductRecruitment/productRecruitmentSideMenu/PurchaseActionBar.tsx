@@ -1,20 +1,14 @@
 import styled from 'styled-components';
-import Button from '@/components/common/style/Button';
-import { useRouter } from 'next/router';
-import path from '@/constants/path';
-import { selectProductAtom, amountSelector } from '@/recoil/product';
+import { amountSelector } from '@/recoil/product';
 import { useRecoilValue } from 'recoil';
-import { RECRUITMENT_PRODUCT_NAME, RECRUITMENT_PRODUCT_TYPE, RECRUITMENT_PRODUCT_OPTION_NAME } from '@/constants/product';
 import { priceComma } from '@/utils';
 
-export default function PurchaseActionBar() {
-  const router = useRouter();
+interface PurchaseActionBarProps {
+  children: React.ReactNode;
+}
 
+export default function PurchaseActionBar({ children }: PurchaseActionBarProps) {
   const amountSelectorValue = useRecoilValue(amountSelector);
-
-  const handleClickCheckout = () => {
-    router.push(path.EMPLOYER_CHECKOUT);
-  };
 
   return (
     <S.PurchaseActionBar>
@@ -24,7 +18,7 @@ export default function PurchaseActionBar() {
       </S.TotalPrice>
 
       <S.TotalPrice>
-        <span>총 할인금액</span>
+        <span>상품 할인금액</span>
         <span>{priceComma(amountSelectorValue.totalDiscountPrice)}원</span>
       </S.TotalPrice>
 
@@ -33,15 +27,7 @@ export default function PurchaseActionBar() {
         <p>{priceComma(amountSelectorValue.totalPaymentAmount)}원</p>
       </S.TotalPaymentAmount>
 
-      <Button
-        label="상품 구매"
-        variant="checkout"
-        height="50px"
-        fontSize="20px"
-        borderRadius="3px"
-        margin="15px 0 0 0"
-        onClick={handleClickCheckout}
-      />
+      {children}
     </S.PurchaseActionBar>
   );
 }
