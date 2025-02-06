@@ -1,17 +1,17 @@
 import React from 'react';
 import ProductRecruitmentSideMenu from '@/components/employerProductRecruitment/productRecruitmentSideMenu';
 import { useSetRecoilState, useResetRecoilState, useRecoilValue } from 'recoil';
-import { recruitmentProductSideMenuAtom } from '@/recoil/product';
 import { selectProductAtom, durationCalcOptionsSelector } from '@/recoil/product';
 
-export default function ProductRecruitmentSideMenuContainer() {
-  const setRecruitmentProductSideMenuAtom = useSetRecoilState(recruitmentProductSideMenuAtom);
+interface ProductRecruitmentSideMenuContainerProps {
+  setIsOpenSideMenu: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export default function ProductRecruitmentSideMenuContainer({ setIsOpenSideMenu }: ProductRecruitmentSideMenuContainerProps) {
   const resetSelectProductAtomState = useResetRecoilState(selectProductAtom);
-  const resetRecruitmentProductSideMenuAtom = useResetRecoilState(recruitmentProductSideMenuAtom);
 
   const handleCloseSideMenu = () => {
-    setRecruitmentProductSideMenuAtom({ isOpen: false });
-    resetRecruitmentProductSideMenuAtom();
+    setIsOpenSideMenu(false);
     resetSelectProductAtomState();
   };
 
