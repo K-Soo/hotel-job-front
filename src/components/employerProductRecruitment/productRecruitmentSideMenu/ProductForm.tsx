@@ -104,7 +104,6 @@ const StyledChangeButton = styled.button`
 const StyledDropDown = styled.div`
   padding-top: 15px;
   padding-bottom: 15px;
-  /* background-color: red; */
   .title {
     margin-bottom: 5px;
     font-size: 14px;
@@ -112,7 +111,9 @@ const StyledDropDown = styled.div`
 `;
 
 const S = {
-  ProductForm: styled.div``,
+  ProductForm: styled.div`
+    padding: 15px 0;
+  `,
   ProductInfo: styled.div`
     display: flex;
     .title {
