@@ -15,51 +15,63 @@ export default function AmountInfo({ amountInfo, isLoading, isSuccess, children 
   return (
     <S.AmountInfo>
       <h2 className="title">결제 정보</h2>
-      <S.AmountContainer>
-        <div className="item">
-          <span className="item__title">주문금액</span>
-          <p>{priceComma(amountInfo?.originalAmount)}원</p>
-        </div>
+      {isLoading && (
+        <>
+          <SkeletonUI.Line style={{ height: '35px', marginBottom: '5px' }} />
+          <SkeletonUI.Line style={{ height: '35px', marginBottom: '5px' }} />
+          <SkeletonUI.Line style={{ height: '35px', marginBottom: '5px' }} />
+          <SkeletonUI.Line style={{ height: '35px', marginBottom: '5px' }} />
+          <SkeletonUI.Line style={{ height: '35px', marginBottom: '30px' }} />
+        </>
+      )}
+      {!isLoading && (
+        <S.AmountContainer>
+          <div className="item">
+            <span className="item__title">주문금액</span>
+            <p>{priceComma(amountInfo?.originalAmount)}원</p>
+          </div>
 
-        <div className="item">
-          <span className="item__title">상품할인</span>
-          <p className="item__discount">
-            <span className="item__discount--text">{amountInfo?.productDiscountAmount === 0 ? '' : '-'}</span>
-            <span className="item__discount--text">{priceComma(amountInfo?.productDiscountAmount)}</span>원
-          </p>
-        </div>
+          <div className="item">
+            <span className="item__title">상품할인</span>
+            <p className="item__discount">
+              <span className="item__discount--text">{amountInfo?.productDiscountAmount === 0 ? '' : '-'}</span>
+              <span className="item__discount--text">{priceComma(amountInfo?.productDiscountAmount)}</span>원
+            </p>
+          </div>
 
-        <div className="item">
-          <span className="item__title">멤버십 할인</span>
-          <p className="item__discount">
-            <span className="item__discount--text">{amountInfo?.membershipDiscountAmount === 0 ? '' : '-'}</span>
-            <span className="item__discount--text">{priceComma(amountInfo?.membershipDiscountAmount)}</span>원
-          </p>
-        </div>
+          <div className="item">
+            <span className="item__title">멤버십 할인</span>
+            <p className="item__discount">
+              <span className="item__discount--text">{amountInfo?.membershipDiscountAmount === 0 ? '' : '-'}</span>
+              <span className="item__discount--text">{priceComma(amountInfo?.membershipDiscountAmount)}</span>원
+            </p>
+          </div>
 
-        <div className="item">
-          <span className="item__title">쿠폰 할인</span>
-          <p className="item__discount">
-            <span className="item__discount--text">{amountInfo?.couponDiscountAmount === 0 ? '' : '-'}</span>
-            <span className="item__discount--text">{priceComma(amountInfo?.couponDiscountAmount)}</span>원
-          </p>
-        </div>
+          <div className="item">
+            <span className="item__title">쿠폰 할인</span>
+            <p className="item__discount">
+              <span className="item__discount--text">{amountInfo?.couponDiscountAmount === 0 ? '' : '-'}</span>
+              <span className="item__discount--text">{priceComma(amountInfo?.couponDiscountAmount)}</span>원
+            </p>
+          </div>
 
-        <div className="item">
-          <span className="item__title">최종 할인금액</span>
-          <p className="item__discount">
-            <span className="item__discount--text">-</span>
-            <span className="item__discount--text">{priceComma(amountInfo?.totalDiscountAmount)}</span>원
-          </p>
-        </div>
+          <div className="item">
+            <span className="item__title">최종 할인금액</span>
+            <p className="item__discount">
+              <span className="item__discount--text">-</span>
+              <span className="item__discount--text">{priceComma(amountInfo?.totalDiscountAmount)}</span>원
+            </p>
+          </div>
 
-        <Line margin="20px 0" />
+          <Line margin="20px 0" />
 
-        <div className="total-amount">
-          <span>결제금액</span>
-          <strong>{priceComma(amountInfo?.finalTotalAmount)}원</strong>
-        </div>
-      </S.AmountContainer>
+          <div className="total-amount">
+            <span>결제금액</span>
+            <strong>{priceComma(amountInfo?.finalTotalAmount)}원</strong>
+          </div>
+        </S.AmountContainer>
+      )}
+
       {children}
     </S.AmountInfo>
   );
