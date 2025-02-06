@@ -526,6 +526,11 @@ export interface PaymentRecruitmentDetail {
   orderId: string;
   paymentStatus: 'PAYMENT_PENDING';
   expiresAt: string;
+  certificationInfo: {
+    phone: string;
+    userName: string;
+    managerEmail: string;
+  };
   amountInfo: PaymentRecruitmentDetailAmountInfo;
   productInfo: ProductInfoItem;
   recruitmentInfo: PaymentRecruitmentInfo;
