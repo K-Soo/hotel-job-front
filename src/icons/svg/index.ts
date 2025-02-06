@@ -42,8 +42,10 @@ import Dots24x24 from './dots24x24.svg';
 import Share24x24 from './share24x24.svg';
 import ArrowLeft24x24 from './arrowLeft24x24.svg';
 import ListA24x24 from './listA24x24.svg';
+import CornerLeftUp24x24 from './cornerLeftUp24x24.svg';
 
 export {
+  CornerLeftUp24x24,
   ListA24x24,
   ArrowLeft24x24,
   Share24x24,
