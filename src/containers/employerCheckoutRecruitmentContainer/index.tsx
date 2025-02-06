@@ -10,10 +10,10 @@ import { errorCode } from '@/error';
 import path from '@/constants/path';
 import AmountInfo from '@/components/employerCheckoutRecruitment/AmountInfo';
 import environment from '@/environment';
-import { PaymentRecruitmentDetail } from '@/types';
 import ProductInfo from '@/components/employerCheckoutRecruitment/ProductInfo';
 import RecruitmentInfo from '@/components/employerCheckoutRecruitment/RecruitmentInfo';
 import TossPaymentInfo from '@/components/employerCheckoutRecruitment/TossPaymentInfo';
+import DiscountInfo from '@/components/employerCheckoutRecruitment/DiscountInfo';
 import { v4 as uuidv4 } from 'uuid';
 import useAuth from '@/hooks/useAuth';
 
@@ -144,8 +144,9 @@ export default function EmployerCheckoutRecruitmentContainer() {
 
   return (
     <EmployerCheckoutRecruitment>
-      <ProductInfo productInfo={data?.result.productInfo} />
-      <RecruitmentInfo recruitmentInfo={data?.result.recruitmentInfo} />
+      <ProductInfo productInfo={data?.result.productInfo} isLoading={isLoading} />
+      <RecruitmentInfo recruitmentInfo={data?.result.recruitmentInfo} isLoading={isLoading} />
+      <DiscountInfo finalTotalAmount={data?.result.amountInfo.finalTotalAmount} />
       <TossPaymentInfo />
       <AmountInfo amountInfo={data?.result.amountInfo} isLoading={isLoading} isSuccess={isSuccess}>
         <Button label="결제" variant="primary" onClick={handlePayment} />
