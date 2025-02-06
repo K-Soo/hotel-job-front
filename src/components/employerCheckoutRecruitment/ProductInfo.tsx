@@ -5,6 +5,8 @@ import { priceComma } from '@/utils';
 import { RECRUITMENT_PRODUCT_NAME, RECRUITMENT_PRODUCT_OPTION_NAME, RECRUITMENT_PRODUCT_TYPE } from '@/constants/product';
 import Tag from '@/components/common/Tag';
 import { dateFormat } from '@/utils';
+import SkeletonUI from '@/components/common/SkeletonUI';
+
 interface ProductInfoProps {
   productInfo: ProductInfoItem | undefined;
   isLoading: boolean;
@@ -16,65 +18,70 @@ export default function ProductInfo({ productInfo, isLoading }: ProductInfoProps
   return (
     <S.ProductInfo>
       <h2 className="title">주문상품</h2>
-      <S.ProductContainer>
-        <S.ProductHeader>
-          <span className="text type">상품타입</span>
-          <span className="text">상품명</span>
-          <span className="text">기간</span>
-          <span className="text">상품금액</span>
-        </S.ProductHeader>
+      {isLoading && <SkeletonUI.Line style={{ height: '80px' }} />}
+      {!isLoading && productInfo && (
+        <S.ProductContainer>
+          <S.ProductHeader>
+            <span className="text type">상품타입</span>
+            <span className="text">상품명</span>
+            <span className="text">기간</span>
+            <span className="text">상품금액</span>
+          </S.ProductHeader>
 
-        <S.ProductContent>
-          <div className="product-item">
-            <p className="product-item__text type">
-              {productInfo?.type && (
-                <>
-                  <Tag label="PC+M" margin="0 5px 0 0" height="18px" width="40px" fontSize="11px" />
-                  <span>{RECRUITMENT_PRODUCT_TYPE[productInfo.type]}&nbsp;페이지</span>
-                </>
-              )}
-            </p>
-            <p className="product-item__text">{productInfo?.name && <span>{RECRUITMENT_PRODUCT_NAME[productInfo.name]}</span>}&nbsp;공고</p>
-            <p className="product-item__text duration">
-              {productInfo?.duration && (
-                <>
-                  <div style={{ width: '60px' }}>
-                    <span>{productInfo?.duration}일</span>
-                    {productInfo?.bonusDays && <span>&nbsp;{`(+${productInfo.bonusDays}일)`}</span>}
-                  </div>
-                  <span className="product-item__text--date">
-                    {dateFormat.dateRange(new Date(), productInfo.duration + (productInfo?.bonusDays ?? 0))}
-                  </span>
-                </>
-              )}
-            </p>
-            <p className="product-item__text">
-              <span>{priceComma(price)}원</span>
-            </p>
-          </div>
-          {productInfo?.options.map((option) => (
-            <div className="option-item">
-              <p className="option-item__text type">
-                <StyledCorner />
-                <span>옵션</span>
+          <S.ProductContent>
+            <div className="product-item">
+              <p className="product-item__text type">
+                {productInfo?.type && (
+                  <>
+                    <Tag label="PC+M" margin="0 5px 0 0" height="18px" width="40px" fontSize="11px" />
+                    <span>{RECRUITMENT_PRODUCT_TYPE[productInfo.type]}&nbsp;페이지</span>
+                  </>
+                )}
               </p>
-              <p className="option-item__text">
-                <span>{RECRUITMENT_PRODUCT_OPTION_NAME[option.name]}</span>
+              <p className="product-item__text">
+                {productInfo?.name && <span>{RECRUITMENT_PRODUCT_NAME[productInfo.name]}</span>}&nbsp;공고
               </p>
-              <p className="option-item__text duration">
-                <div style={{ width: '60px', textAlign: 'right' }}>
-                  <span>{option?.duration}일</span>
-                  {option?.bonusDays && <span>&nbsp;{`(+${option.bonusDays}일)`}</span>}
-                </div>
-                <span className="option-item__text--date"> {dateFormat.dateRange(new Date(), option.duration + option.bonusDays)}</span>
+              <p className="product-item__text duration">
+                {productInfo?.duration && (
+                  <>
+                    <div style={{ width: '60px' }}>
+                      <span>{productInfo?.duration}일</span>
+                      {productInfo?.bonusDays && <span>&nbsp;{`(+${productInfo.bonusDays}일)`}</span>}
+                    </div>
+                    <span className="product-item__text--date">
+                      {dateFormat.dateRange(new Date(), productInfo.duration + (productInfo?.bonusDays ?? 0))}
+                    </span>
+                  </>
+                )}
               </p>
-              <p className="option-item__text">
-                {priceComma(option.price)}원 {option.bonusDays}
+              <p className="product-item__text">
+                <span>{priceComma(price)}원</span>
               </p>
             </div>
-          ))}
-        </S.ProductContent>
-      </S.ProductContainer>
+            {productInfo?.options.map((option) => (
+              <div className="option-item">
+                <p className="option-item__text type">
+                  <StyledCorner />
+                  <span>옵션</span>
+                </p>
+                <p className="option-item__text">
+                  <span>{RECRUITMENT_PRODUCT_OPTION_NAME[option.name]}</span>
+                </p>
+                <p className="option-item__text duration">
+                  <div style={{ width: '60px', textAlign: 'right' }}>
+                    <span>{option?.duration}일</span>
+                    {option?.bonusDays && <span>&nbsp;{`(+${option.bonusDays}일)`}</span>}
+                  </div>
+                  <span className="option-item__text--date"> {dateFormat.dateRange(new Date(), option.duration + option.bonusDays)}</span>
+                </p>
+                <p className="option-item__text">
+                  {priceComma(option.price)}원 {option.bonusDays}
+                </p>
+              </div>
+            ))}
+          </S.ProductContent>
+        </S.ProductContainer>
+      )}
     </S.ProductInfo>
   );
 }
@@ -89,7 +96,7 @@ const StyledCorner = styled.span`
 
 const S = {
   ProductInfo: styled.div`
-    padding: 0 30px 15px 30px;
+    padding: 0 30px 30px 30px;
     .title {
       font-size: 20px;
       font-weight: 600;
