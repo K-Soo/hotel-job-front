@@ -54,8 +54,7 @@ export const EMPLOYER_ASIDE_MENU = [
     value: '',
     icon: 'Card24x24',
     items: [
-      { label: '상품이용 내역', value: path.EMPLOYER },
-      { label: '결제내역', value: path.EMPLOYER },
+      { label: '상품결제 내역', value: path.EMPLOYER },
       { label: '쿠폰', value: path.EMPLOYER },
       { label: '포인트', value: path.EMPLOYER },
     ],
