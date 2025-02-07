@@ -8,6 +8,7 @@ const TITLE_TEXT = {
   TITLE_5: '채용공고 수정완료!',
   TITLE_6: '이력서를 삭제하시겠습니까?',
   TITLE_7: '정말 탈퇴하시겠습니까?',
+  TITLE_8: '진행중인 공고입니다. 수정하시겠습니까?',
 } as const;
 
 const DESCRIPTION_TEXT = {
@@ -20,6 +21,7 @@ const DESCRIPTION_TEXT = {
   DESC_7: '이력서를 삭제해도 기존 입사지원내역은 유지됩니다.',
   DESC_8:
     '계정을 삭제하면 등록된 정보와 이력, 혜택이 30일 뒤 모두 삭제되며 복구가 불가능합니다.\n 또한, 동일 계정으로 다시 가입할 수 없습니다. 신중하게 결정해주세요.',
+  DESC_9: '채용공고를 수정하신 내용은 저장 후 최대 10분 이내에 채용공고 페이지에 반영됩니다.',
 };
 
 type TTextKeys = keyof typeof TITLE_TEXT;
