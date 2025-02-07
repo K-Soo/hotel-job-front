@@ -26,7 +26,6 @@ interface ProductRecruitmentSideMenuProps {
 
 export default function ProductRecruitmentSideMenu({ handleCloseSideMenu }: ProductRecruitmentSideMenuProps) {
   const [isLoadingPayment, setIsLoadingPayment] = React.useState(false);
-  const [isErrorPayment, setIsErrorPayment] = React.useState(false);
   const router = useRouter();
 
   const durationCalcOptionsSelectorValue = useRecoilValue(durationCalcOptionsSelector);
@@ -89,7 +88,6 @@ export default function ProductRecruitmentSideMenu({ handleCloseSideMenu }: Prod
       router.push(`${path.EMPLOYER_CHECKOUT_RECRUITMENT}/${response.result.orderId}`);
     } catch (error: any) {
       console.log('error: ', error.message);
-      setIsErrorPayment(true);
       alert('주문 생성에 실패했습니다. 고객센터에 문의 바랍니다.');
     } finally {
       setIsLoadingPayment(false);
@@ -148,7 +146,7 @@ export default function ProductRecruitmentSideMenu({ handleCloseSideMenu }: Prod
               borderRadius="3px"
               margin="15px 0 0 0"
               onClick={handleClickCheckout}
-              disabled={isErrorPayment || isEmptyRecruitmentList}
+              disabled={isEmptyRecruitmentList}
               isLoading={isLoading || isLoadingPayment}
             />
           </PurchaseActionBar>
