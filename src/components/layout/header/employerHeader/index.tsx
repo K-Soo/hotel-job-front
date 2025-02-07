@@ -9,6 +9,7 @@ import DropdownTemplate from '@/components/common/DropdownTemplate';
 import React from 'react';
 import { Auth } from '@/apis';
 import Link from 'next/link';
+import { motion } from 'framer-motion';
 
 export function EmployerHeader() {
   const [isDropdownOpen, setIsDropdownOpen] = React.useState(false);
@@ -23,7 +24,6 @@ export function EmployerHeader() {
   const handleBlur = (event: React.FocusEvent) => {
     event.stopPropagation();
     const relatedTarget = event.relatedTarget as HTMLElement | null;
-    // input 또는 dropdown 내부 클릭인 경우 blur 무시
     if (dropdownRef.current?.contains(relatedTarget)) {
       return;
     }
@@ -32,12 +32,11 @@ export function EmployerHeader() {
 
   const handleFocus = (event: React.FocusEvent<HTMLDivElement>) => {
     event.stopPropagation();
-    console.log('111');
-    setIsDropdownOpen(true);
+    // setIsDropdownOpen(true);
   };
 
   const handleClickToggle = () => {
-    // setIsDropdownOpen((prev) => !prev);
+    setIsDropdownOpen((prev) => !prev);
   };
 
   const handleClickDropdownItem = (value: string) => {};
@@ -86,8 +85,22 @@ export function EmployerHeader() {
           </S.UserInfo>
 
           {isDropdownOpen && (
-            <DropdownTemplate ref={dropdownRef} tabIndex={0}>
-              <div onClick={handleClickSignOut}>로그아웃</div>
+            <DropdownTemplate ref={dropdownRef} tabIndex={0} outStyle={{ height: 'auto' }}>
+              <StyledDropDownItem
+                initial={{ backgroundColor: '#FFFFFF' }}
+                whileHover={{ backgroundColor: '#f2f4f6', color: '#4593fc' }}
+                onClick={() => router.push(path.RECRUIT)}
+              >
+                채용페이지 바로가기
+              </StyledDropDownItem>
+
+              <StyledDropDownItem
+                onClick={handleClickSignOut}
+                initial={{ backgroundColor: '#FFFFFF' }}
+                whileHover={{ backgroundColor: '#f2f4f6', color: '#4593fc' }}
+              >
+                로그아웃
+              </StyledDropDownItem>
             </DropdownTemplate>
           )}
         </div>
@@ -95,6 +108,19 @@ export function EmployerHeader() {
     </S.EmployerHeader>
   );
 }
+
+const StyledDropDownItem = styled(motion.div)`
+  height: 45px;
+  margin: 0;
+  padding: 0 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 14px;
+  font-weight: 400;
+`;
 
 const S = {
   EmployerHeader: styled.div`
