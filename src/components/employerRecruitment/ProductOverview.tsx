@@ -1,25 +1,35 @@
-import { RecruitmentStatusKeys } from '@/types';
+import { RecruitmentItem, RecruitmentStatusKeys } from '@/types';
 import styled from 'styled-components';
 import Button from '@/components/common/style/Button';
 import { useRouter } from 'next/router';
 import path from '@/constants/path';
+import { RECRUITMENT_PRODUCT_NAME, RECRUITMENT_PRODUCT_OPTION_NAME } from '@/constants/product';
+import { dateFormat } from '@/utils';
 interface ProductOverviewProps {
-  status: RecruitmentStatusKeys;
+  item: RecruitmentItem;
 }
 
-export default function ProductOverview({ status }: ProductOverviewProps) {
+export default function ProductOverview({ item }: ProductOverviewProps) {
   const router = useRouter();
 
   return (
     <S.ProductOverview>
-      {status === 'PROGRESS' && (
+      {item.recruitmentStatus === 'PROGRESS' && item.paymentRecruitment && (
         <S.Progress>
-          <div className="content">프리미엄(메인) | 2024.12.31 마감</div>
-          <div className="option">끌어올림 | 형광펜 | 태그</div>
+          <div className="content">
+            <span>{RECRUITMENT_PRODUCT_NAME[item.paymentRecruitment.name]}상품</span>
+            {' | '}
+            {item.postingEndDate && <span>{dateFormat.date(item.postingEndDate, 'YY.MM.DD')} 마감</span>}
+          </div>
+          {item.paymentRecruitment.options.map((option) => (
+            <span className="option" key={option.id}>
+              {RECRUITMENT_PRODUCT_OPTION_NAME[option.name]}
+            </span>
+          ))}
         </S.Progress>
       )}
 
-      {status === 'PUBLISHED' && (
+      {item.recruitmentStatus === 'PUBLISHED' && (
         <S.Published>
           <Button
             label="상품 신청"
@@ -32,11 +42,11 @@ export default function ProductOverview({ status }: ProductOverviewProps) {
         </S.Published>
       )}
 
-      {status === 'CLOSED' && <S.Closed>마감된 공고</S.Closed>}
+      {item.recruitmentStatus === 'CLOSED' && <S.Closed>마감된 공고</S.Closed>}
 
-      {status === 'REVIEWING' && <S.Reviewing>확인중</S.Reviewing>}
+      {item.recruitmentStatus === 'REVIEWING' && <S.Reviewing>확인중</S.Reviewing>}
 
-      {status === 'DRAFT' && <S.Draft>-</S.Draft>}
+      {item.recruitmentStatus === 'DRAFT' && <S.Draft>-</S.Draft>}
     </S.ProductOverview>
   );
 }
@@ -53,6 +63,7 @@ const S = {
     .option {
       padding-top: 3px;
       font-size: 11px;
+      padding-right: 3px;
       color: ${(props) => props.theme.colors.gray700};
     }
   `,
