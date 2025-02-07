@@ -4,26 +4,21 @@ import styled from 'styled-components';
 import { dateFormat } from '@/utils';
 
 interface RecruitmentOverviewProps {
-  recruitmentTitle: string;
-  jobs: AllJobsKeyValuesKeys[];
   item: RecruitmentItem;
 }
 
-export default function RecruitmentOverview({ recruitmentTitle, jobs, item }: RecruitmentOverviewProps) {
+export default function RecruitmentOverview({ item }: RecruitmentOverviewProps) {
   return (
     <S.RecruitmentOverview>
-      <h5 className="title">{recruitmentTitle}</h5>
+      <h5 className="title">{item.recruitmentTitle}</h5>
       <div className="summary">
         <div className="summary__job-box">
-          {jobs.map((job) => (
+          {item.jobs.map((job) => (
             <span className="summary__job-box--text" key={job}>
               {ALL_JOBS[job]}
             </span>
           ))}
         </div>
-        {/* TODO - 현재 년도 비교 후 렌더링  */}
-        {/* TODO - 등록 = 수정  */}
-
         {item.recruitmentStatus === 'PROGRESS' && (
           <time className="summary__date--update">{dateFormat.date(item.updatedAt, 'YY.MM.DD HH:mm')} 수정</time>
         )}
