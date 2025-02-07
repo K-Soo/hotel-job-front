@@ -16,9 +16,11 @@ export const errorMessages: Record<string, string> = {
   'ERR-4015': '주문 금액 정보가 유효하지 않습니다. 새로운 주문을 생성해주세요.',
   'ERR-4016': '상품 정보를 찾을 수 없습니다. 새로운 주문을 생성해주세요.',
   'ERR-4020': '본인인증 정보가 없습니다. 계정관리 페이지로 이동합니다.',
+  'ERR-4023': '이미 처리된 주문입니다.',
 
   'ERR-NOT_FOUND_PAYMENT_SESSION': '결제 시간이 만료되어 결제 진행 데이터가 존재하지 않습니다.',
   'ERR-REJECT_CARD_COMPANY': '카드사에서 해당 카드를 거절했거나 카드사에 문제가 있습니다.',
   'ERR-FORBIDDEN_REQUEST': '최초 결제 요청한 값과 일치하지않습니다.',
   'ERR-UNAUTHORIZED_KEY': '인증되지 않은 결제 요청입니다.',
+  'ERR-ALREADY_PROCESSED_PAYMENT': '이미 처리된 결제 입니다.',
 };
