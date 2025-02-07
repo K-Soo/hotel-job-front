@@ -1,6 +1,6 @@
 import React from 'react';
 import EmployerRecruitmentDetail from '@/components/employerRecruitmentDetail';
-import { useForm, FormProvider, SubmitHandler, useFormContext } from 'react-hook-form';
+import { useForm, FormProvider, SubmitHandler } from 'react-hook-form';
 import FormDevTools from '@/components/common/FormDevTools';
 import dynamic from 'next/dynamic';
 import RecruitmentDetailProgressMenu from '@/components/employerRecruitmentDetail/RecruitmentDetailProgressMenu';
@@ -18,7 +18,6 @@ import axios from 'axios';
 import useToast from '@/hooks/useToast';
 import SkeletonUI from '@/components/common/SkeletonUI';
 import Button from '@/components/common/style/Button';
-import useLoading from '@/hooks/useLoading';
 import useAlertWithConfirm from '@/hooks/useAlertWithConfirm';
 import { useRecoilValue } from 'recoil';
 import { daumPostAtom } from '@/recoil/daumPost';
@@ -38,7 +37,6 @@ export default function EmployerRecruitmentDetailContainer() {
 
   const { addToast } = useToast();
   const queryClient = useQueryClient();
-  const { setLoadingAtomStatue } = useLoading();
   const { setAlertWithConfirmAtom } = useAlertWithConfirm();
   const daumPostAtomValue = useRecoilValue(daumPostAtom);
 
@@ -239,7 +237,7 @@ export default function EmployerRecruitmentDetailContainer() {
 
       setAlertWithConfirmAtom((prev) => ({
         ...prev,
-        type: 'ALERT',
+        type: 'CONFIRM',
         title: 'TITLE_3',
         subTitle: 'DESC_3',
         confirmLabel: '확인',
@@ -262,7 +260,7 @@ export default function EmployerRecruitmentDetailContainer() {
       const response = await Patch.updateRecruitment({
         ...watchData,
         id: data.result.id,
-        recruitmentStatus: 'PUBLISHED',
+        recruitmentStatus: data.result.recruitmentStatus === 'PUBLISHED' ? 'PUBLISHED' : 'PROGRESS',
       });
 
       console.log('채용공고 수정 API : ', response);
@@ -287,6 +285,18 @@ export default function EmployerRecruitmentDetailContainer() {
     } finally {
       setIsDisabled(false);
     }
+  };
+
+  const handleClickUpdateProgressRecruitment = () => {
+    setAlertWithConfirmAtom((prev) => ({
+      ...prev,
+      type: 'CONFIRM',
+      title: 'TITLE_8',
+      subTitle: 'DESC_9',
+      confirmLabel: '확인',
+      cancelLabel: '취소',
+      onClickConfirm: methods.handleSubmit(fetchUpdateRecruitment),
+    }));
   };
 
   if (isLoading) {
@@ -328,6 +338,18 @@ export default function EmployerRecruitmentDetailContainer() {
                 variant="primary"
                 margin="0 0 10px 0"
                 onClick={methods.handleSubmit(fetchUpdateRecruitment)}
+                type="button"
+                isLoading={methods.formState.isSubmitting}
+                disabled={isDisabled}
+              />
+            )}
+
+            {data.result.recruitmentStatus === 'PROGRESS' && (
+              <Button
+                label="공고 수정"
+                variant="primary"
+                margin="0 0 10px 0"
+                onClick={() => handleClickUpdateProgressRecruitment()}
                 type="button"
                 isLoading={methods.formState.isSubmitting}
                 disabled={isDisabled}
