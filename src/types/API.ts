@@ -372,3 +372,7 @@ export interface PaymentRecruitmentInitiateResponse extends BaseResponse {
 export interface GetPaymentRecruitmentDetailResponse extends BaseResponse {
   result: types.PaymentRecruitmentDetail;
 }
+
+export interface PaymentRecruitmentConfirmResponse extends BaseResponse {
+  result: types.PaymentRecruitmentConfirmData;
+}
