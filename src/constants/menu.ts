@@ -77,11 +77,4 @@ export const EMPLOYER_ASIDE_MENU = [
       { label: '비밀번호 변경', value: path.EMPLOYER_ACCOUNT_AUTHENTICATION },
     ],
   },
-
-  {
-    label: '로그아웃',
-    value: '',
-    icon: 'Logout24x24',
-    items: [],
-  },
 ];
