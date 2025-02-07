@@ -175,7 +175,7 @@ export default function EmployerCheckoutRecruitmentContainer() {
       <DiscountInfo finalTotalAmount={data?.result.amountInfo.finalTotalAmount} isLoading={isLoading} />
       <TossPaymentInfo />
       <AmountInfo amountInfo={data?.result.amountInfo} isLoading={isLoading}>
-        <Button label="결제" variant="primary" onClick={handlePayment} isLoading={isLoading} />
+        <Button label="결제" variant="primary" onClick={handlePayment} isLoading={isLoading || !widgets} />
       </AmountInfo>
     </EmployerCheckoutRecruitment>
   );
