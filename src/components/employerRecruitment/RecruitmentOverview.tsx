@@ -1,12 +1,15 @@
 import { ALL_JOBS, AllJobsKeyValuesKeys } from '@/constants/job';
+import { RecruitmentItem } from '@/types';
 import styled from 'styled-components';
+import { dateFormat } from '@/utils';
 
 interface RecruitmentOverviewProps {
   recruitmentTitle: string;
   jobs: AllJobsKeyValuesKeys[];
+  item: RecruitmentItem;
 }
 
-export default function RecruitmentOverview({ recruitmentTitle, jobs }: RecruitmentOverviewProps) {
+export default function RecruitmentOverview({ recruitmentTitle, jobs, item }: RecruitmentOverviewProps) {
   return (
     <S.RecruitmentOverview>
       <h5 className="title">{recruitmentTitle}</h5>
@@ -20,7 +23,10 @@ export default function RecruitmentOverview({ recruitmentTitle, jobs }: Recruitm
         </div>
         {/* TODO - 현재 년도 비교 후 렌더링  */}
         {/* TODO - 등록 = 수정  */}
-        <time className="summary__date--update">01.24 수정</time>
+
+        {item.recruitmentStatus === 'PROGRESS' && (
+          <time className="summary__date--update">{dateFormat.date(item.updatedAt, 'YY.MM.DD HH:mm')} 수정</time>
+        )}
       </div>
     </S.RecruitmentOverview>
   );
