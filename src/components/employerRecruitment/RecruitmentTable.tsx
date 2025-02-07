@@ -55,11 +55,11 @@ function RecruitmentTableBody({ items, handleClickRecruitmentItem, checkedItems,
           </div>
 
           <div className="item__text" onClick={() => handleClickRecruitmentItem(item.id, item.recruitmentStatus)}>
-            <RecruitmentOverview recruitmentTitle={item.recruitmentTitle} jobs={item.jobs} />
+            <RecruitmentOverview recruitmentTitle={item.recruitmentTitle} jobs={item.jobs} item={item} />
           </div>
 
           <div className="item__product">
-            <ProductOverview status={item.recruitmentStatus} />
+            <ProductOverview item={item} />
           </div>
 
           <div className="item__candidate" onClick={() => handleClickRecruitmentItem(item.id, item.recruitmentStatus)}>
