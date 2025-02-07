@@ -18,6 +18,7 @@ export type EmploymentType = 'FULL_TIME' | 'CONTRACT' | 'DAILY_WORKER' | 'INTERN
 export type CertificationStatus = 'PENDING' | 'VERIFIED' | 'REJECTED' | 'UNVERIFIED';
 export type ApplicationStatus = 'APPLIED' | 'CANCELED' | 'ACCEPTED' | 'REJECTED';
 export type RecruitmentName = 'PREMIUM' | 'SPECIAL' | 'URGENT' | 'BASIC';
+export type MembershipLevel = 'FAMILY' | 'BRONZE' | 'SILVER' | 'GOLD' | 'VIP';
 export type AccountStatus =
   | 'ACTIVE'
   | 'INACTIVE'
@@ -63,6 +64,26 @@ export type RecruitmentItem = {
   jobs: AllJobsKeyValuesKeys[];
   createdAt: Date;
   updatedAt: Date;
+  postingEndDate: Date | null;
+  postingStartDate: Date | null;
+  paymentRecruitment: {
+    bonusDays: number;
+    discountRate: number;
+    duration: number;
+    id: string;
+    name: RecruitmentName;
+    price: number;
+    type: RecruitmentProductTypeKey;
+    options: {
+      duration: 5;
+      id: string;
+      listUpIntervalHours: number;
+      maxListUpPerDay: number;
+      name: RecruitmentProductOptionNameKey;
+      price: number;
+      tags: [];
+    }[];
+  } | null;
 };
 
 export type Experience = {
@@ -534,4 +555,25 @@ export interface PaymentRecruitmentDetail {
   amountInfo: PaymentRecruitmentDetailAmountInfo;
   productInfo: ProductInfoItem;
   recruitmentInfo: PaymentRecruitmentInfo;
+}
+
+export interface PaymentRecruitmentConfirmData {
+  paymentInfo: {
+    orderId: string;
+    totalAmount: number;
+  };
+  pointInfo: {
+    earnedPoint: number;
+    totalPoint: number;
+  };
+  membershipInfo: {
+    previousScore: number;
+    addedScore: number;
+    currentScore: number;
+    currentLevel: MembershipLevel;
+    previousLevel: MembershipLevel;
+    isUpgraded: boolean;
+    previousMinScore: number;
+    previousMaxScore: number;
+  };
 }
