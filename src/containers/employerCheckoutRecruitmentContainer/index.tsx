@@ -15,6 +15,7 @@ import RecruitmentInfo from '@/components/employerCheckoutRecruitment/Recruitmen
 import TossPaymentInfo from '@/components/employerCheckoutRecruitment/TossPaymentInfo';
 import DiscountInfo from '@/components/employerCheckoutRecruitment/DiscountInfo';
 import { v4 as uuidv4 } from 'uuid';
+import { RECRUITMENT_PRODUCT_NAME, RECRUITMENT_PRODUCT_TYPE } from '@/constants/product';
 
 export default function EmployerCheckoutRecruitmentContainer() {
   const [widgets, setWidgets] = React.useState<TossPaymentsWidgets | null>(null);
@@ -144,11 +145,14 @@ export default function EmployerCheckoutRecruitmentContainer() {
       }
 
       const productName = data.result.productInfo.name;
+      const type = data.result.productInfo.type;
       const optionCount = data.result.productInfo.options.length;
 
       await widgets.requestPayment({
         orderId: data.result.orderId,
-        orderName: `${productName} ${optionCount > 0 ? `외 옵션 ${optionCount}건` : ''}`,
+        orderName: `${RECRUITMENT_PRODUCT_TYPE[type]}-${RECRUITMENT_PRODUCT_NAME[productName]} ${
+          optionCount > 0 ? `외 옵션 ${optionCount}건` : ''
+        }`,
         successUrl: window.location.origin + '/employer/checkout/recruitment/success',
         failUrl: window.location.origin + '/employer/checkout/recruitment/fail',
         customerEmail: data.result.certificationInfo?.managerEmail || 'unknown',
