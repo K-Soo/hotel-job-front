@@ -328,7 +328,7 @@ export const Post = {
   // TODO - type
   // 채용공고 결제 승인요청
   paymentRecruitmentConfirm: (body: API.PaymentRecruitmentConfirmRequest) =>
-    requests.post<API.PaymentRecruitmentConfirmRequest, any>('/payment/recruitment/confirm', body),
+    requests.post<API.PaymentRecruitmentConfirmRequest, API.PaymentRecruitmentConfirmResponse>('/payment/recruitment/confirm', body),
 };
 
 export const Patch = {
