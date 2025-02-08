@@ -12,6 +12,7 @@ import { keepPreviousData } from '@tanstack/react-query';
 import RecruitSectionTitle from '@/components/recruit/RecruitSectionTitle';
 import Tabs from '@/components/common/Tabs';
 import { recruitOrderFilterTabOptions } from '@/constants/tabs';
+import SkeletonUI from '@/components/common/SkeletonUI';
 
 interface Query extends ParsedUrlQuery {
   page?: string;
@@ -45,9 +46,16 @@ export default function RecruitListContainer() {
   const isEmpty = isSuccess && data && data.result.items.length === 0;
 
   if (isLoading) {
-    return <div>로딩중...</div>;
+    return (
+      <>
+        <div style={{ display: 'flex', justifyContent: 'flex-end', margin: '0' }}>
+          <SkeletonUI.Line style={{ height: '35px', width: '180px' }} />
+        </div>
+        <SkeletonUI.Line style={{ height: '24px', width: '147px', marginBottom: '10px' }} />
+        <SkeletonUI.RecruitBasicList count={2} />
+      </>
+    );
   }
-
   if (isSuccess && data) {
     return (
       <>
@@ -61,7 +69,7 @@ export default function RecruitListContainer() {
             backgroundColor="#FFFFFF"
           />
         </div>
-        <RecruitSectionTitle title="일반채용" count={data.result.pagination.totalItems} />
+        <RecruitSectionTitle title="일반채용" count={data.result.pagination.totalItems} margin="0" />
         {data.result.items.map((item, index) => {
           if (isTablet) {
             return <RecruitMobileCard key={index} item={item} />;
