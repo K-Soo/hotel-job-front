@@ -75,7 +75,7 @@ export default function RecruitUrgentCard({ item }: RecruitUrgentCardProps) {
 
 const S = {
   RecruitUrgentCard: styled(motion.div)`
-    width: calc(25% - 8px);
+    width: calc(25% - 7.5px);
     aspect-ratio: 4 / 3;
     display: flex;
     flex-direction: column;
@@ -86,9 +86,6 @@ const S = {
     ${(props) => props.theme.media.tablet`
       aspect-ratio: 5 / 3;
       width: calc(50% - 5px);
-    `};
-
-    ${(props) => props.theme.media.mobile`
     `};
   `,
   HeaderBox: styled.div`
