@@ -9,6 +9,7 @@ import Button from '@/components/common/style/Button';
 import useInfiniteScroll from '@/hooks/useInfiniteScroll';
 import { Get } from '@/apis';
 import EmptyComponent from '@/components/common/EmptyComponent';
+import SkeletonUI from '@/components/common/SkeletonUI';
 
 export default function RecruitSpecialListContainer() {
   const { data, isLoading, isSuccess, fetchNextPage, hasNextPage, isFetching } = useInfiniteScroll({
@@ -34,7 +35,12 @@ export default function RecruitSpecialListContainer() {
   const isEmptyFirstPage = isFirstPage && data?.pages[0]?.result.items.length === 0;
 
   if (isLoading) {
-    return <div>loading</div>;
+    return (
+      <>
+        <SkeletonUI.Line style={{ height: '24px', width: '147px', marginBottom: '10px' }} />
+        <SkeletonUI.RecruitSpecialList count={3} />
+      </>
+    );
   }
 
   if (isSuccess && data) {
