@@ -21,23 +21,21 @@ const S = {
     color: #343a40;
     border-radius: 30px;
     padding: 5px 5px;
-    background-color: #f8f9fa;
+    font-weight: 500;
     ${(props) =>
       props.type === 'PROGRESS' &&
       css`
-        color: #6f42c1;
-        /* background-color: #eae6f9; */
+        color: #4caf50;
       `};
     ${(props) =>
       props.type === 'PUBLISHED' &&
       css`
-        color: #155724;
-        /* background-color: #d4edda; */
+        color: ${props.theme.colors.blue500};
       `};
     ${(props) =>
       props.type === 'CLOSED' &&
       css`
-        color: #dc3545;
+        color: ${props.theme.colors.gray600};
       `};
     ${(props) =>
       props.type === 'REVIEWING' &&
@@ -47,8 +45,7 @@ const S = {
     ${(props) =>
       props.type === 'DRAFT' &&
       css`
-        color: #ff8c00;
-        /* background-color: #fff3e0; */
+        color: ${props.theme.colors.red300};
       `};
   `,
 };
