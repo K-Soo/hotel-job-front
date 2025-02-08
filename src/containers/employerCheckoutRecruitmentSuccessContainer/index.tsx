@@ -41,11 +41,11 @@ export default function EmployerCheckoutRecruitmentSuccessContainer() {
       // 파악한 에러 코드가 있을경우
       if (errorMessage) {
         alert(errorMessage);
-        // window.location.href = '/employer/checkout/recruitment';
+        window.location.href = '/employer/checkout/recruitment';
         return;
       }
       alert('결제 승인에 실패했습니다. 다시 시도해주세요.');
-      // window.location.href = '/employer/checkout/recruitment';
+      window.location.href = '/employer/checkout/recruitment';
       return;
     } finally {
       setIsLoading(false);
@@ -94,5 +94,9 @@ export default function EmployerCheckoutRecruitmentSuccessContainer() {
     );
   }
 
-  return <EmployerCheckoutRecruitmentSuccess confirmForm={confirmForm} />;
+  if (confirmForm) {
+    return <EmployerCheckoutRecruitmentSuccess confirmForm={confirmForm} />;
+  }
+
+  return null;
 }
