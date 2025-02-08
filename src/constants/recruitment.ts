@@ -3,7 +3,7 @@ export const RECRUITMENT_STATUS = {
   PUBLISHED: '대기중',
   CLOSED: '마감',
   REVIEWING: '확인중',
-  DRAFT: '미완성 공고',
+  DRAFT: '미완성',
 };
 
 export const RECRUITMENT_STATUS_WITH_ALL = {
