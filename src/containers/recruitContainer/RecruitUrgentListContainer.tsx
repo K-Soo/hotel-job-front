@@ -8,6 +8,7 @@ import queryKeys from '@/constants/queryKeys';
 import Button from '@/components/common/style/Button';
 import RecruitSectionTitle from '@/components/recruit/RecruitSectionTitle';
 import EmptyComponent from '@/components/common/EmptyComponent';
+import SkeletonUI from '@/components/common/SkeletonUI';
 
 export default function RecruitUrgentListContainer() {
   const { data, isLoading, isSuccess, fetchNextPage, hasNextPage, isFetching } = useInfiniteScroll({
@@ -32,13 +33,18 @@ export default function RecruitUrgentListContainer() {
   const isEmptyFirstPage = isFirstPage && data?.pages[0]?.result.items.length === 0;
 
   if (isLoading) {
-    return <div>loading</div>;
+    return (
+      <>
+        <SkeletonUI.Line style={{ height: '24px', width: '147px', marginBottom: '10px' }} />
+        <SkeletonUI.RecruitUrgentList count={4} />
+      </>
+    );
   }
 
   if (isSuccess && data) {
     return (
       <>
-        <RecruitSectionTitle title="🔥 급구채용" />
+        <RecruitSectionTitle title="급구채용" />
         {isEmptyFirstPage && isFirstPage && <EmptyComponent height="200px" />}
 
         <InfiniteScroll
