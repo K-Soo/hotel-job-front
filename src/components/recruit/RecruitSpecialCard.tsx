@@ -99,7 +99,7 @@ const RecruitTag = styled.span`
 
 const S = {
   RecruitSpecialCard: styled(motion.div)`
-    width: calc(33.3% - 6.5px);
+    width: calc(33.333% - 6.7px);
     aspect-ratio: 5/3;
     border-radius: 10px;
     padding: 15px;
@@ -108,10 +108,6 @@ const S = {
     display: flex;
     user-select: none;
     flex-direction: column;
-    ${(props) => props.theme.media.laptop`
-      aspect-ratio: 4/3;
-    `};
-
     ${(props) => props.theme.media.tablet`
       aspect-ratio: 5 / 3;
       width: calc(50% - 5px);
