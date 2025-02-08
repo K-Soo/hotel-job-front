@@ -59,7 +59,7 @@ export default function ProductInfo({ productInfo, isLoading }: ProductInfoProps
               </div>
             </div>
             {productInfo?.options.map((option) => (
-              <div className="option-item">
+              <div className="option-item" key={option.id}>
                 <div className="option-item__text type">
                   <StyledCorner />
                   <span>옵션</span>
