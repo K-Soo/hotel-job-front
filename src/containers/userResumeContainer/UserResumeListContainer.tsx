@@ -88,8 +88,14 @@ export default function UserResumeListContainer() {
     }));
   };
 
+  const isEmptyResume = !isLoading && isSuccess && data && data.result.length === 0;
+
   if (isLoading) {
     return <SkeletonUI.ResumeListItems />;
+  }
+
+  if (isEmptyResume) {
+    return <EmptyComponent message="첫번째 이력서를 작성해보세요! 😀" />;
   }
 
   if (isSuccess && data) {
