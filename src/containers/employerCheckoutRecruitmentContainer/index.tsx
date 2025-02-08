@@ -50,8 +50,6 @@ export default function EmployerCheckoutRecruitmentContainer() {
       });
     }
   }, [data]);
-  const test = errorMessages['ERR-80018'];
-  console.log('test: ', test);
 
   React.useEffect(() => {
     if (error) {
@@ -147,12 +145,12 @@ export default function EmployerCheckoutRecruitmentContainer() {
       const productName = data.result.productInfo.name;
       const type = data.result.productInfo.type;
       const optionCount = data.result.productInfo.options.length;
+      const orderName = `${RECRUITMENT_PRODUCT_TYPE[type]}-${RECRUITMENT_PRODUCT_NAME[productName]}`;
+      const orderOptionName = optionCount > 0 ? ` 외 옵션 ${optionCount}건` : '';
 
       await widgets.requestPayment({
         orderId: data.result.orderId,
-        orderName: `${RECRUITMENT_PRODUCT_TYPE[type]}-${RECRUITMENT_PRODUCT_NAME[productName]} ${
-          optionCount > 0 ? `외 옵션 ${optionCount}건` : ''
-        }`,
+        orderName: `${orderName}${orderOptionName}`,
         successUrl: window.location.origin + '/employer/checkout/recruitment/success',
         failUrl: window.location.origin + '/employer/checkout/recruitment/fail',
         customerEmail: data.result.certificationInfo?.managerEmail || 'unknown',
