@@ -1,6 +1,5 @@
 import React from 'react';
 import EmployerRecruitmentDetailApplicant from '@/components/EmployerRecruitmentDetailApplicant';
-import ApplicantStatusPanel from '@/components/EmployerRecruitmentDetailApplicant/ApplicantStatusPanel';
 import ApplicantTab from '@/components/EmployerRecruitmentDetailApplicant/ApplicantTab';
 import ApplicantController from '@/components/EmployerRecruitmentDetailApplicant/ApplicantController';
 import { ParsedUrlQuery } from 'querystring';
@@ -9,6 +8,7 @@ import { ResumeDetail } from '@/types';
 import ResumePreview from '@/components/common/resume/resumePreview';
 import ApplicantNoticeForm from '@/components/EmployerRecruitmentDetailApplicant/ApplicantNoticeForm';
 import ApplicantListContainer from '@/containers/employerRecruitmentDetailApplicantContainer/ApplicantListContainer';
+import ApplicationCountContainer from '@/containers/employerRecruitmentDetailApplicantContainer/ApplicationCountContainer';
 import { ErrorBoundary, ErrorComponent } from '@/error';
 import { Patch } from '@/apis';
 import queryKeys from '@/constants/queryKeys';
@@ -42,18 +42,18 @@ export default function EmployerRecruitmentDetailApplicantContainer() {
         throw new Error();
       }
       await queryClient.invalidateQueries({ queryKey: [queryKeys.RECRUITMENT_LIST], refetchType: 'all' });
+      await queryClient.invalidateQueries({ queryKey: [queryKeys.RECRUITMENT_APPLICANT_COUNT], refetchType: 'all' });
     } catch (error) {
       console.log('error: ', error);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
   return (
     <>
       {resumePreviewData && <ResumePreview resumePreviewData={resumePreviewData} closeResume={() => setResumePreviewData(null)} />}
 
       <EmployerRecruitmentDetailApplicant>
-        <ApplicantStatusPanel />
+        <ApplicationCountContainer />
 
         <ApplicantTab />
 
