@@ -27,7 +27,7 @@ export default function RecruitListContainer() {
 
   const { data, isLoading, isSuccess, isFetching } = useFetchQuery({
     queryFn: Get.getRecruitBasicList,
-    queryKey: [queryKeys.RECRUIT_BASIC_LIST, { limit: '20', page }],
+    queryKey: [queryKeys.RECRUIT_BASIC_LIST, { limit: '20', type: 'BASIC', page }],
     options: {
       enabled: true,
       staleTime: 60 * 1000 * 5,
@@ -38,10 +38,11 @@ export default function RecruitListContainer() {
     requestQuery: {
       page,
       limit: '20',
+      type: 'RECRUIT',
     },
   });
 
-  console.log('채용 일반 리스트 API : ', data);
+  console.log('일반 리스트 API : ', data);
 
   const isEmpty = isSuccess && data && data.result.items.length === 0;
 
