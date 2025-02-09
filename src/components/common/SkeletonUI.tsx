@@ -64,7 +64,6 @@ const StyledDocument = styled.section`
   max-width: 100%;
   margin: 0 auto;
   .container {
-    margin: 0 auto;
     max-width: 1024px;
   }
 `;
