@@ -117,10 +117,13 @@ export const Get = {
   recruitDetail: ({ id }: { id: string }) => requests.get<API.RecruitDetailResponse>(`/recruit/${id}`),
 
   // 채용공고 스페셜
-  getRecruitSpecialList: ({ page, limit, benefits, employment, experience, jobs }: API.GetRecruitSpecialListRequest) => {
+  getRecruitSpecialList: ({ page, limit, benefits, employment, experience, jobs, type }: API.GetRecruitSpecialListRequest) => {
     const params = new URLSearchParams();
     params.set('page', page);
     params.set('limit', limit);
+    params.set('type', type);
+
+    if (type) params.set('type', type);
     if (experience) params.set('experience', experience);
     if (employment) employment.forEach((item) => params.append('employment', item));
     if (benefits) benefits.forEach((item) => params.append('benefits', item));
@@ -133,10 +136,13 @@ export const Get = {
   },
 
   // 채용공고 급구
-  getRecruitUrgentList: ({ page, limit, benefits, employment, experience, jobs }: API.GetRecruitUrgentListRequest) => {
+  getRecruitUrgentList: ({ page, limit, benefits, employment, experience, jobs, type }: API.GetRecruitUrgentListRequest) => {
     const params = new URLSearchParams();
     params.set('page', page);
     params.set('limit', limit);
+    params.set('type', type);
+
+    if (type) params.set('type', type);
     if (experience) params.set('experience', experience);
     if (employment) employment.forEach((item) => params.append('employment', item));
     if (benefits) benefits.forEach((item) => params.append('benefits', item));
@@ -149,10 +155,13 @@ export const Get = {
   },
 
   // 채용공고 일반
-  getRecruitBasicList: ({ page, limit, experience, benefits, employment, jobs }: API.GetRecruitBasicListRequest) => {
+  getRecruitBasicList: ({ page, limit, experience, benefits, employment, jobs, type }: API.GetRecruitBasicListRequest) => {
     const params = new URLSearchParams();
     params.set('page', page);
     params.set('limit', limit);
+    params.set('type', type);
+
+    if (type) params.set('type', type);
     if (experience) params.set('experience', experience);
     if (employment) employment.forEach((item) => params.append('employment', item));
     if (benefits) benefits.forEach((item) => params.append('benefits', item));
@@ -200,7 +209,7 @@ export const Get = {
   applicationApplyCheck: ({ id }: { id: string }) => requests.get<API.ApplicationApplyCheckResponse>(`/applications/${id}/apply/check`),
 
   // 사업자 -  계정정보
-  employerAccountInfo: () => requests.get<any>('/employers'),
+  employerAccountInfo: () => requests.get<API.EmployerAccountInfoResponse>('/employers'),
 
   // 사업자 - 회사정보 가져오기
   employerCompany: () => requests.get<API.GetMyCompanyResponse>('/employers/company'),
@@ -227,6 +236,12 @@ export const Get = {
 
     return requests.get<API.GetRecruitmentDetailApplicantListResponse>(url);
   },
+
+  // TODO - 타입정의
+  // 사업자 - 채용공고 총지원자, 열람, 미열람 상세정보 카운트
+  getRecruitmentDetailApplicationCount: ({ recruitmentId }: { recruitmentId: string }) =>
+    requests.get<API.GetRecruitmentDetailApplicationCountResponse>(`/employers/recruitment/${recruitmentId}/applications/count`),
+
   // TODO - 타입정의
   // 사업자 - 채용공고 상품 리스트
   getPublishedRecruitmentList: () => requests.get<API.GetPublishedRecruitmentListResponse>(`/employers/recruitment/published`),
@@ -265,6 +280,9 @@ export const Get = {
   // 채용공고 결제 초기요청
   getPaymentRecruitmentDetail: ({ orderId }: { orderId: string }) =>
     requests.get<API.GetPaymentRecruitmentDetailResponse>(`/payment/recruitment/${orderId}`),
+
+  // 사업자 - 상품 결제 내역
+  getEmployerPaymentList: () => requests.get<API.GetEmployerPaymentListResponse>(`/payment`),
 };
 
 export const Post = {
