@@ -13,6 +13,7 @@ import RecruitSectionTitle from '@/components/recruit/RecruitSectionTitle';
 import Tabs from '@/components/common/Tabs';
 import { recruitOrderFilterTabOptions } from '@/constants/tabs';
 import SkeletonUI from '@/components/common/SkeletonUI';
+import EmptyComponent from '@/components/common/EmptyComponent';
 
 interface Query extends ParsedUrlQuery {
   page?: string;
@@ -44,8 +45,6 @@ export default function RecruitListContainer() {
 
   console.log('일반 리스트 API : ', data);
 
-  const isEmpty = isSuccess && data && data.result.items.length === 0;
-
   if (isLoading) {
     return (
       <>
@@ -57,7 +56,19 @@ export default function RecruitListContainer() {
       </>
     );
   }
+
   if (isSuccess && data) {
+    const isEmpty = data.result.pagination.totalItems === 0;
+
+    if (isEmpty) {
+      return (
+        <>
+          <RecruitSectionTitle title="급구채용" />
+          <EmptyComponent height="200px" />
+        </>
+      );
+    }
+
     return (
       <>
         <div style={{ display: 'flex', justifyContent: 'flex-end', margin: '0' }}>
