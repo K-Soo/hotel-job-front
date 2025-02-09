@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { motion, useAnimationControls } from 'framer-motion';
 import Icon from '@/icons/Icon';
 import Tag from '@/components/common/Tag';
@@ -17,6 +17,8 @@ interface RecruitDesktopCardProps {
 }
 
 export default function RecruitDesktopCard({ recruitType, item }: RecruitDesktopCardProps) {
+  const [isBold, setIsBold] = React.useState(false);
+  const [isHighlight, setIsHighlight] = React.useState(false);
   const [isExpanded, setIsExpanded] = React.useState(false);
 
   const { sido, sigungu } = addressFormat(item.address);
@@ -24,6 +26,28 @@ export default function RecruitDesktopCard({ recruitType, item }: RecruitDesktop
 
   const expansionContentRef = React.useRef(null);
   const controls = useAnimationControls();
+
+  const { hasBoldEffect, hasHighlightEffect } = React.useMemo(() => {
+    const currentDate = new Date();
+    let hasBoldEffect = false;
+    let hasHighlightEffect = false;
+
+    item.paymentRecruitment?.[0]?.options?.forEach((option) => {
+      const postingEndDate = option.postingEndDate ? new Date(option.postingEndDate) : null;
+
+      if (postingEndDate && currentDate <= postingEndDate) {
+        if (option.name === 'LIST_UP') hasBoldEffect = true;
+        if (option.name === 'HIGHLIGHT') hasHighlightEffect = true;
+      }
+    });
+
+    return { hasBoldEffect, hasHighlightEffect };
+  }, [item.paymentRecruitment]);
+
+  React.useEffect(() => {
+    setIsBold(hasBoldEffect);
+    setIsHighlight(hasHighlightEffect);
+  }, [hasBoldEffect, hasHighlightEffect]);
 
   const handleClickBlank = (event: React.MouseEvent<HTMLElement>) => {
     event.stopPropagation();
@@ -54,13 +78,13 @@ export default function RecruitDesktopCard({ recruitType, item }: RecruitDesktop
 
         <S.Summary onClick={() => router.push(`/recruit/${item.id}`)}>
           <div style={{ display: 'flex' }}>
-            {recruitType === 'URGENT' && <Tag label="급구" type="URGENT" />}
+            {/* {recruitType === 'URGENT' && <Tag label="급구" type="URGENT" />} */}
             {/* <RecruitTag>숙식제공</RecruitTag> */}
             {/* <RecruitTag>식대제공</RecruitTag> */}
           </div>
-          <div className="title">
-            <h5 className="title__text">{item.recruitmentTitle}</h5>
-          </div>
+          <StyledTitle className="title__text" $isBold={isBold} $isHighlight={isHighlight}>
+            {item.recruitmentTitle}
+          </StyledTitle>
           <div className="company">{item.hotelName}</div>
         </S.Summary>
 
@@ -108,6 +132,24 @@ export default function RecruitDesktopCard({ recruitType, item }: RecruitDesktop
     </S.RecruitDesktopCard>
   );
 }
+const StyledTitle = styled.h5<{ $isBold: boolean; $isHighlight: boolean }>`
+  color: ${(props) => props.theme.colors.gray800};
+  font-weight: ${(props) => (props.$isBold ? 600 : 400)};
+  padding: 2px 3px 2px 2px;
+  width: fit-content;
+  margin-bottom: 1px;
+  &:hover {
+    color: ${(props) => props.theme.colors.black};
+  }
+
+  ${(props) =>
+    props.$isHighlight &&
+    css`
+      background: linear-gradient(135deg, #c9e2ff 30%, transparent 70%), linear-gradient(-45deg, #e8f3ff 30%, transparent 70%);
+      background-blend-mode: multiply;
+      border-radius: 2px;
+    `};
+`;
 
 const ExpansionContent = styled(motion.div)``;
 
@@ -183,28 +225,11 @@ const S = {
       bottom: 0;
       fill: ${(props) => props.theme.colors.gray300};
     }
-    .title {
-      font-weight: 500;
-      font-size: 16px;
-      margin-bottom: 3px;
-      color: ${(props) => props.theme.colors.gray800};
-      display: flex;
-      align-items: center;
-      &:hover {
-        text-decoration: underline;
-      }
-      &__text {
-        color: ${(props) => props.theme.colors.gray800};
-      }
-      &__icon {
-        margin-left: 8px;
-        fill: ${(props) => props.theme.colors.gray500};
-      }
-    }
     .company {
       font-size: 14px;
       font-weight: 300;
       color: ${(props) => props.theme.colors.gray800};
+      padding-left: 2px;
     }
   `,
   Utils: styled.div`
