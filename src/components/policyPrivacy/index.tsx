@@ -372,7 +372,7 @@ export default function PolicyPrivacy() {
           </p>
           <S.Heading>개인정보 보호책임자 및 신용정보관리·보호인</S.Heading>
           <p>&bull; {POLICY.name}</p>
-          <p>&bull; {POLICY.phone}</p>
+          {/* <p>&bull; {POLICY.phone}</p> */}
           <p>&bull; {POLICY.email}</p>
         </S.Content>
       </S.Section>
