@@ -53,7 +53,7 @@ export default function EmployerRecruitmentRegister({
               <RecruitmentRegisterWorkPlaceForm />
             </EmployerTemplateForm.Content>
 
-            <EmployerTemplateForm.SubTitle title="인사담당자 정보" size="large" id="manager" />
+            <EmployerTemplateForm.SubTitle title="담당자 정보" size="large" id="manager" />
             <EmployerTemplateForm.Content>
               <RecruitmentRegisterManagerForm />
             </EmployerTemplateForm.Content>
