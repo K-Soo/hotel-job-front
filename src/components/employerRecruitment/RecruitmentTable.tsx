@@ -25,11 +25,11 @@ function RecruitmentTableHeader() {
   return (
     <S.RecruitmentTableHeader>
       <span className="header-row check"></span>
-      <span className="header-row status">공고 상태</span>
+      <span className="header-row status">상태</span>
       <span className="header-row text">공고</span>
-      <span className="header-row product">채용상품</span>
+      <span className="header-row product">상품/마감일</span>
       <span className="header-row candidate">지원자</span>
-      <span className="header-row management">관리</span>
+      <span className="header-row management"></span>
     </S.RecruitmentTableHeader>
   );
 }
