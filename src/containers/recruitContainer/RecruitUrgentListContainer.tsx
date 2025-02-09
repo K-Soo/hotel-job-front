@@ -27,12 +27,6 @@ export default function RecruitUrgentListContainer() {
 
   console.log('급구 채용 리스트 API : ', data);
 
-  const isFirstPage = data?.pages[data.pages.length - 1].result.pagination.currentPage === 1;
-  const nextPage = data?.pages[data.pages.length - 1].result.pagination.nextPage;
-
-  // 페이지 1에서 데이터가 없는지 확인
-  const isEmptyFirstPage = isFirstPage && data?.pages[0]?.result.items.length === 0;
-
   if (isLoading) {
     return (
       <>
@@ -43,6 +37,12 @@ export default function RecruitUrgentListContainer() {
   }
 
   if (isSuccess && data) {
+    // 페이지 1에서 데이터가 없는지 확인
+
+    const isFirstPage = data?.pages[data.pages.length - 1].result.pagination.currentPage === 1;
+    const nextPage = data?.pages[data.pages.length - 1].result.pagination.nextPage;
+    const isEmptyFirstPage = isFirstPage && data?.pages[0]?.result.items.length === 0;
+
     return (
       <>
         <RecruitSectionTitle title="급구채용" />
