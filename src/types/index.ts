@@ -10,6 +10,7 @@ import { LANGUAGE_LEVEL, LANGUAGE } from '@/constants/language';
 import { RESUME_STATUS, SANCTION_REASON } from '@/constants/resume';
 import { APPLICATION_STATUS, EMPLOYER_REVIEW_STAGE_STATUS, REVIEW_STAGE_STATUS } from '@/constants/application';
 import { RECRUITMENT_PRODUCT_NAME, RECRUITMENT_PRODUCT_OPTION_NAME, RECRUITMENT_PRODUCT_TYPE } from '@/constants/product';
+import { PAYMENT_STATUS, PAYMENT_TYPE } from '@/constants/payment';
 
 export type Provider = 'LOCAL' | 'KAKAO' | 'GOOGLE';
 export type RoleType = 'ADMIN' | 'EMPLOYER' | 'JOB_SEEKER';
@@ -53,6 +54,8 @@ export type EmployerReviewStageStatusKey = keyof typeof EMPLOYER_REVIEW_STAGE_ST
 export type RecruitmentProductNameKey = keyof typeof RECRUITMENT_PRODUCT_NAME;
 export type RecruitmentProductOptionNameKey = keyof typeof RECRUITMENT_PRODUCT_OPTION_NAME;
 export type RecruitmentProductTypeKey = keyof typeof RECRUITMENT_PRODUCT_TYPE;
+export type PaymentStatusKey = keyof typeof PAYMENT_STATUS;
+export type PaymentTypeKey = keyof typeof PAYMENT_TYPE;
 
 export type TalentListItem = {};
 
@@ -159,20 +162,21 @@ export interface OAuthSignInForm {
   emailMarketingAgree: boolean;
 }
 
-export interface EmployerAccountInfoForm {
-  accountStatus: 'ACTIVE';
-  certification: null;
-  certificationStatus: 'UNVERIFIED';
-  companyVerificationStatus: 'VERIFIED';
-  createdAt: '2025-01-03T14:50:54.000Z';
-  id: '5ef779c1-7eed-4fff-b155-1650bc2fe0a1';
-  nickname: '활기찬고양이94896177';
-  password: '$2b$10$4xXDvSN.pWV25S0fxHW2Xuqp5yBdZVOc/mjNx53bjBuGBtWWG41cS';
-  passwordChangedAt: null;
-  provider: 'LOCAL';
-  role: 'EMPLOYER';
-  updatedAt: '2025-01-07T18:01:26.000Z';
-  userId: 'kanabun102';
+export interface EmployerAccountInfo {
+  accountStatus: AccountStatus;
+  certificationStatus: CertificationStatus;
+  companyVerificationStatus: CompanyVerificationStatus;
+  createdAt: string;
+  nickname: string;
+  totalPoint: number;
+  totalScore: number;
+  passwordChangedAt: Date | null;
+  membership: {
+    discountRate: number;
+    maxScore: string;
+    membershipLevel: MembershipLevel;
+    minScore: string;
+  };
 }
 
 export interface ApplicantProfile {
@@ -576,4 +580,35 @@ export interface PaymentRecruitmentConfirmData {
     previousMinScore: number;
     previousMaxScore: number;
   };
+}
+
+export interface RecruitmentDetailApplicationCount {
+  notViewCount: number;
+  totalCount: number;
+  viewCount: number;
+  recruitmentStatus: RecruitmentStatusKeys;
+}
+
+export interface EmployerPaymentItem {
+  id: string;
+  orderId: string;
+  createdAt: Date;
+  totalAmount: number;
+  paymentStatus: PaymentStatusKey;
+  paymentType: PaymentTypeKey;
+  recruitment: {
+    id: string;
+    recruitmentTitle: string;
+  };
+  transactions: {
+    id: string;
+    totalAmount: number;
+    cardType: '신용' | '체크' | '기프트' | '미확인'; //카드종류
+    method: string; //결제수단
+    orderName: string;
+    installmentPlanMonths: number; //할부 개월
+    number: string; //카드번호
+    approvedAt: Date; //승인일시
+    orderId: string;
+  }[];
 }
