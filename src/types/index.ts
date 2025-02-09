@@ -303,25 +303,6 @@ export interface RecruitmentDetail {
 
 export interface RecruitmentDetailForm extends Omit<RecruitmentDetail, 'id' | 'updateAt'> {}
 
-export interface RecruitListItem {
-  experienceCondition: experienceConditionKeys;
-  id: string;
-  recruitmentTitle: string;
-  salaryAmount: number;
-  hotelName: string;
-  jobs: AllJobsKeyValuesKeys[];
-  salaryType: SalaryTypeKeys;
-  address: string;
-  addressDetail: string;
-  employmentType: {
-    CONTRACT: boolean;
-    DAILY_WORKER: boolean;
-    FULL_TIME: boolean;
-    INTERN: boolean;
-    PART_TIME: boolean;
-  };
-}
-
 export interface IRecruitDetail {
   address: string;
   addressDetail: string;
@@ -611,4 +592,40 @@ export interface EmployerPaymentItem {
     approvedAt: Date; //승인일시
     orderId: string;
   }[];
+}
+
+export type PaymentRecruitmentOptions = {
+  bonusDays: number;
+  duration: number;
+  id: string;
+  listUpIntervalHours: number;
+  maxListUpPerDay: number;
+  name: RecruitmentProductOptionNameKey;
+  postingEndDate: string;
+};
+
+export type PaymentRecruitment = {
+  type: RecruitmentProductNameKey;
+  name: RecruitmentName;
+  options: PaymentRecruitmentOptions[];
+};
+
+export interface RecruitListItem {
+  experienceCondition: experienceConditionKeys;
+  id: string;
+  recruitmentTitle: string;
+  salaryAmount: number;
+  hotelName: string;
+  jobs: AllJobsKeyValuesKeys[];
+  salaryType: SalaryTypeKeys;
+  address: string;
+  addressDetail: string;
+  paymentRecruitment: PaymentRecruitment[];
+  employmentType: {
+    CONTRACT: boolean;
+    DAILY_WORKER: boolean;
+    FULL_TIME: boolean;
+    INTERN: boolean;
+    PART_TIME: boolean;
+  };
 }
