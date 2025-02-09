@@ -10,8 +10,8 @@ export default function EmptyComponent({ message, height }: EmptyComponentProps)
   return (
     <S.EmptyComponent $height={height}>
       <div className="empty-container">
-        <Image src="/images/box.png" width={80} height={80} alt="box" />
-        <span className="text">{message || '데이터가 없습니다.'}</span>
+        <Image src="/images/box.png" width={60} height={60} alt="box" />
+        <span className="text">{message || '등록된 정보가 없습니다.'}</span>
       </div>
     </S.EmptyComponent>
   );
@@ -27,8 +27,10 @@ const S = {
       align-items: center;
       justify-content: center;
       .text {
-        margin-top: 15px;
-        color: ${(props) => props.theme.colors.gray700};
+        margin-top: 20px;
+        color: ${(props) => props.theme.colors.gray500};
+        font-size: 16px;
+        font-weight: 500;
       }
     }
   `,
