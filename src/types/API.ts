@@ -30,6 +30,7 @@ export interface PaginationInfo {
 export interface DefaultRecruitQuery {
   page: string;
   limit: string;
+  type: ProductRecruitmentQuery;
   experience?: types.experienceConditionKeys;
   employment?: types.EmploymentType[];
   benefits?: types.BenefitsKeys[];
@@ -375,4 +376,16 @@ export interface GetPaymentRecruitmentDetailResponse extends BaseResponse {
 
 export interface PaymentRecruitmentConfirmResponse extends BaseResponse {
   result: types.PaymentRecruitmentConfirmData;
+}
+
+export interface GetRecruitmentDetailApplicationCountResponse extends BaseResponse {
+  result: types.RecruitmentDetailApplicationCount;
+}
+
+export interface GetEmployerPaymentListResponse extends BaseResponse {
+  result: types.EmployerPaymentItem[];
+}
+
+export interface EmployerAccountInfoResponse extends BaseResponse {
+  result: types.EmployerAccountInfo;
 }

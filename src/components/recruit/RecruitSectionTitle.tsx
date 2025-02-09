@@ -25,8 +25,8 @@ const S = {
     display: flex;
     align-items: end;
     margin: ${(props) => props.$margin ?? '0 0 10px 0'};
-    font-weight: 500;
     color: ${(props) => props.theme.colors.black400};
+    font-weight: 500;
     .title {
       font-size: 24px;
       padding-right: 8px;

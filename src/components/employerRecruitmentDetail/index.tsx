@@ -55,7 +55,7 @@ export default function EmployerRecruitmentDetail({
               <RecruitmentDetailWorkPlaceForm />
             </EmployerTemplateForm.Content>
 
-            <EmployerTemplateForm.SubTitle title="인사담당자 정보" size="large" id="manager" />
+            <EmployerTemplateForm.SubTitle title="담당자 정보" size="large" id="manager" />
             <EmployerTemplateForm.Content>
               <RecruitmentDetailManagerForm />
             </EmployerTemplateForm.Content>

@@ -11,7 +11,6 @@ import EmptyComponent from '@/components/common/EmptyComponent';
 import { EmployerReviewStageStatusKey, ResumeDetail } from '@/types';
 import useToast from '@/hooks/useToast';
 import { useQueryClient } from '@tanstack/react-query';
-import ApplicantNoticeFormContainer from '@/containers/employerRecruitmentDetailApplicantContainer/ApplicantNoticeFormContainer';
 
 interface Query extends ParsedUrlQuery {
   step?: RecruitmentApplicantQueryStep;
@@ -32,7 +31,7 @@ export default function ApplicantListContainer({ handleClickResumePreview }: App
   const { addToast } = useToast();
 
   const { data, isLoading, isSuccess } = useFetchQuery({
-    queryKey: [queryKeys.RECRUITMENT_LIST, { slug, step }].filter(Boolean),
+    queryKey: [queryKeys.RECRUITMENT_APPLICANT_LIST, { slug, step }].filter(Boolean),
     queryFn: Get.getRecruitmentDetailApplicantList,
     options: {
       enabled: !!slug,

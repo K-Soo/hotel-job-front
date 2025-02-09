@@ -4,7 +4,7 @@ import { ErrorBoundary, ErrorComponent } from '@/error';
 export default function EmployerRecruitmentRegisterPage() {
   return (
     <ErrorBoundary fallback={<ErrorComponent />}>
-      <EmployerRecruitmentRegisterContainer />;
+      <EmployerRecruitmentRegisterContainer />
     </ErrorBoundary>
   );
 }

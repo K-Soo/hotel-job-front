@@ -13,7 +13,7 @@ import SkeletonUI from '@/components/common/SkeletonUI';
 export default function RecruitUrgentListContainer() {
   const { data, isLoading, isSuccess, fetchNextPage, hasNextPage, isFetching } = useInfiniteScroll({
     queryFn: Get.getRecruitUrgentList,
-    queryKey: [queryKeys.RECRUIT_URGENT_LIST, { limit: '12' }],
+    queryKey: [queryKeys.RECRUIT_URGENT_LIST, { limit: '12', type: 'RECRUIT' }],
     options: {
       throwOnError: true,
       staleTime: 60 * 1000 * 5,
@@ -21,6 +21,7 @@ export default function RecruitUrgentListContainer() {
     },
     requestQuery: {
       limit: '12',
+      type: 'RECRUIT',
     },
   });
 
@@ -35,7 +36,7 @@ export default function RecruitUrgentListContainer() {
   if (isLoading) {
     return (
       <>
-        <SkeletonUI.Line style={{ height: '24px', width: '147px', marginBottom: '10px' }} />
+        <SkeletonUI.Line style={{ height: '24px', width: '147px', marginBottom: '15px' }} />
         <SkeletonUI.RecruitUrgentList count={4} />
       </>
     );

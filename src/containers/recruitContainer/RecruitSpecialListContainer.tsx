@@ -10,11 +10,12 @@ import useInfiniteScroll from '@/hooks/useInfiniteScroll';
 import { Get } from '@/apis';
 import EmptyComponent from '@/components/common/EmptyComponent';
 import SkeletonUI from '@/components/common/SkeletonUI';
+import Image from 'next/image';
 
 export default function RecruitSpecialListContainer() {
   const { data, isLoading, isSuccess, fetchNextPage, hasNextPage, isFetching } = useInfiniteScroll({
     queryFn: Get.getRecruitSpecialList,
-    queryKey: [queryKeys.RECRUIT_SPECIAL_LIST, { limit: '9' }],
+    queryKey: [queryKeys.RECRUIT_SPECIAL_LIST, { limit: '9', type: 'RECRUIT' }],
     options: {
       enabled: true,
       throwOnError: true,
@@ -23,6 +24,7 @@ export default function RecruitSpecialListContainer() {
     },
     requestQuery: {
       limit: '9',
+      type: 'RECRUIT',
     },
   });
 
@@ -47,6 +49,7 @@ export default function RecruitSpecialListContainer() {
     return (
       <>
         <RecruitSectionTitle title="🌟 스페셜 채용" />
+
         {isEmptyFirstPage && isFirstPage && <EmptyComponent height="200px" />}
 
         <InfiniteScroll

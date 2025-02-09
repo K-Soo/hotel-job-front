@@ -49,8 +49,12 @@ const path = {
   EMPLOYER_PRODUCT_RESUME: '/employer/product/resume', //상품 이력서 열람
   EMPLOYER_CHECKOUT_RECRUITMENT: '/employer/checkout/recruitment', //기업 - 채용공고 결제
 
+  EMPLOYER_PAYMENT: '/employer/payment', // 상품결제내역
+  EMPLOYER_POINT: '/employer/point', // 포인트
+  EMPLOYER_COUPON: '/employer/coupon', // 쿠폰
+
   EMPLOYER_ACCOUNT: '/employer/account', // 계정 · 업체정보
-  EMPLOYER_ACCOUNT_ACCOUNT: '/employer/account/policy', // 이용동의 관리
+  EMPLOYER_ACCOUNT_NOTIFICATION: '/employer/account/notification', // 알림설정
   EMPLOYER_ACCOUNT_AUTHENTICATION: '/employer/account/authentication', // 비밀번호 변경
 
   // ACCOUNT_RECOVER_RESET_SUCCESS: '/account/recover/reset/success', //비밀번호 찾기 결과

@@ -11,7 +11,7 @@ interface RecruitmentInfoProps {
 export default function RecruitmentInfo({ recruitmentInfo, isLoading }: RecruitmentInfoProps) {
   return (
     <S.RecruitmentInfo>
-      <h2 className="title">적용공고</h2>
+      <h2 className="title">공고정보</h2>
       {isLoading && <SkeletonUI.Line style={{ height: '80px' }} />}
       {!isLoading && recruitmentInfo && (
         <S.RecruitmentContainer>

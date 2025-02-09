@@ -54,9 +54,9 @@ export const EMPLOYER_ASIDE_MENU = [
     value: '',
     icon: 'Card24x24',
     items: [
-      { label: '상품결제 내역', value: path.EMPLOYER },
-      { label: '쿠폰', value: path.EMPLOYER },
-      { label: '포인트', value: path.EMPLOYER },
+      { label: '상품 결제내역', value: path.EMPLOYER_PAYMENT },
+      { label: '쿠폰', value: path.EMPLOYER_COUPON },
+      { label: '포인트', value: path.EMPLOYER_POINT },
     ],
   },
 
@@ -73,7 +73,7 @@ export const EMPLOYER_ASIDE_MENU = [
     icon: 'Settings24x24',
     items: [
       { label: '계정정보', value: path.EMPLOYER_ACCOUNT },
-      { label: '이용 동의 관리', value: path.EMPLOYER_ACCOUNT_ACCOUNT },
+      { label: '알림설정', value: path.EMPLOYER_ACCOUNT_NOTIFICATION },
       { label: '비밀번호 변경', value: path.EMPLOYER_ACCOUNT_AUTHENTICATION },
     ],
   },

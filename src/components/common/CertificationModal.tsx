@@ -47,6 +47,7 @@ export default function CertificationModal() {
 
   React.useEffect(() => {
     fetchStartCertification();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const processCertificationMessage = async (event: MessageEvent) => {
@@ -97,6 +98,7 @@ export default function CertificationModal() {
               <Image src="/images/spinner200px.gif" width={30} height={30} alt="loading" priority />
             </div>
           )}
+
           {iframeUrl && (
             <>
               <div className="header">
