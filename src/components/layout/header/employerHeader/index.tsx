@@ -10,6 +10,7 @@ import React from 'react';
 import { Auth } from '@/apis';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
+import { QueryClient } from '@tanstack/react-query';
 
 export function EmployerHeader() {
   const [isDropdownOpen, setIsDropdownOpen] = React.useState(false);
@@ -18,6 +19,8 @@ export function EmployerHeader() {
   const inputRef = React.useRef(null);
 
   const router = useRouter();
+
+  const queryClient = new QueryClient();
 
   const { isAuthenticated, authAtomState, isAuthIdle } = useAuth();
 
@@ -45,6 +48,7 @@ export function EmployerHeader() {
     try {
       const response = await Auth.signOut();
       console.log('로그아웃 API : ', response);
+      await queryClient.invalidateQueries();
     } catch (error) {
       console.log('error: ', error);
     } finally {
@@ -118,8 +122,9 @@ const StyledDropDownItem = styled(motion.div)`
   justify-content: space-between;
   cursor: pointer;
   border-radius: 5px;
-  font-size: 14px;
-  font-weight: 400;
+  font-size: 15px;
+  font-weight: 500;
+  color: ${(props) => props.theme.colors.gray700};
 `;
 
 const S = {
