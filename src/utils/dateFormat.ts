@@ -40,4 +40,12 @@ export const dateFormat = {
 
     return `${formatWithDay(start)} ~ ${formatWithDay(end)}`;
   },
+  dateOrToday: (value: Date | string | null | undefined) => {
+    if (!value) return 'unknown';
+
+    const date = moment(value);
+    const today = moment().startOf('day');
+
+    return date.isSame(today, 'day') ? 'TODAY' : date.format('MM.DD');
+  },
 };
