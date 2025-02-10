@@ -10,6 +10,7 @@ import { EXPERIENCE_CONDITION } from '@/constants/recruitment';
 import { ALL_JOBS } from '@/constants/job';
 import { useRouter } from 'next/router';
 import IconDimmed from '@/components/common/IconDimmed';
+import { priceComma, dateFormat } from '@/utils';
 
 interface RecruitDesktopCardProps {
   recruitType: 'URGENT' | 'NORMAL';
@@ -19,6 +20,7 @@ interface RecruitDesktopCardProps {
 export default function RecruitDesktopCard({ recruitType, item }: RecruitDesktopCardProps) {
   const [isBold, setIsBold] = React.useState(false);
   const [isHighlight, setIsHighlight] = React.useState(false);
+  const [isTag, setIsTag] = React.useState(false);
   const [isExpanded, setIsExpanded] = React.useState(false);
 
   const { sido, sigungu } = addressFormat(item.address);
@@ -27,10 +29,11 @@ export default function RecruitDesktopCard({ recruitType, item }: RecruitDesktop
   const expansionContentRef = React.useRef(null);
   const controls = useAnimationControls();
 
-  const { hasBoldEffect, hasHighlightEffect } = React.useMemo(() => {
+  const { hasBoldEffect, hasHighlightEffect, hasTagEffect } = React.useMemo(() => {
     const currentDate = new Date();
     let hasBoldEffect = false;
     let hasHighlightEffect = false;
+    let hasTagEffect = false;
 
     item.paymentRecruitment?.[0]?.options?.forEach((option) => {
       const postingEndDate = option.postingEndDate ? new Date(option.postingEndDate) : null;
@@ -38,16 +41,18 @@ export default function RecruitDesktopCard({ recruitType, item }: RecruitDesktop
       if (postingEndDate && currentDate <= postingEndDate) {
         if (option.name === 'LIST_UP') hasBoldEffect = true;
         if (option.name === 'HIGHLIGHT') hasHighlightEffect = true;
+        if (option.name === 'TAG') hasHighlightEffect = true;
       }
     });
 
-    return { hasBoldEffect, hasHighlightEffect };
+    return { hasBoldEffect, hasHighlightEffect, hasTagEffect };
   }, [item.paymentRecruitment]);
 
   React.useEffect(() => {
     setIsBold(hasBoldEffect);
     setIsHighlight(hasHighlightEffect);
-  }, [hasBoldEffect, hasHighlightEffect]);
+    setIsTag(hasTagEffect);
+  }, [hasBoldEffect, hasHighlightEffect, hasTagEffect]);
 
   const handleClickBlank = (event: React.MouseEvent<HTMLElement>) => {
     event.stopPropagation();
@@ -77,13 +82,9 @@ export default function RecruitDesktopCard({ recruitType, item }: RecruitDesktop
         </S.LocationRow>
 
         <S.Summary onClick={() => router.push(`/recruit/${item.id}`)}>
-          <div style={{ display: 'flex' }}>
-            {/* {recruitType === 'URGENT' && <Tag label="급구" type="URGENT" />} */}
-            {/* <RecruitTag>숙식제공</RecruitTag> */}
-            {/* <RecruitTag>식대제공</RecruitTag> */}
-          </div>
-          <StyledTitle className="title__text" $isBold={isBold} $isHighlight={isHighlight}>
-            {item.recruitmentTitle}
+          <StyledTitle $isBold={isBold} $isHighlight={isHighlight}>
+            {isTag && <Tag label="급구" type="URGENT" width="32px" margin="0 5px 0 0" fontSize="11px" height="17px" />}
+            <h5 className="text">{item.recruitmentTitle}</h5>
           </StyledTitle>
           <div className="company">{item.hotelName}</div>
         </S.Summary>
@@ -93,7 +94,7 @@ export default function RecruitDesktopCard({ recruitType, item }: RecruitDesktop
             <Icon className="icon" name="ExternalLinkB50x50" onClick={handleClickBlank} width="22px" height="22px" />
           </IconDimmed>
 
-          <Icon
+          {/* <Icon
             className="icon"
             name="SearchPlusA24x24"
             width="18px"
@@ -102,15 +103,19 @@ export default function RecruitDesktopCard({ recruitType, item }: RecruitDesktop
               event.stopPropagation();
               handleClickExpansion();
             }}
-          />
+          /> */}
         </S.Utils>
 
         {item.jobs.length > 1 ? (
           <S.JobRow>
-            {ALL_JOBS[item.jobs[0]]} 외 {item.jobs.length - 1}
+            <span>
+              {ALL_JOBS[item.jobs[0]]} 외 {item.jobs.length - 1}
+            </span>
           </S.JobRow>
         ) : (
-          <S.JobRow>{ALL_JOBS[item.jobs[0]]}</S.JobRow>
+          <S.JobRow>
+            <span>{ALL_JOBS[item.jobs[0]]}</span>
+          </S.JobRow>
         )}
 
         <S.InfoRow>
@@ -123,32 +128,40 @@ export default function RecruitDesktopCard({ recruitType, item }: RecruitDesktop
         </S.PayRow>
 
         <S.DateRow>
-          <span>TODAY</span>
+          {dateFormat.dateOrToday(item.priorityDate) === 'TODAY' ? (
+            <span className="today">TODAY</span>
+          ) : (
+            <span>{dateFormat.dateOrToday(item.priorityDate)}</span>
+          )}
         </S.DateRow>
       </S.Body>
-      <ExpansionContent initial={{ height: 0, opacity: 0 }} animate={controls} ref={expansionContentRef}>
+      {/* TODO - 드롭다운 */}
+      {/* <ExpansionContent initial={{ height: 0, opacity: 0 }} animate={controls} ref={expansionContentRef}>
         asd
-      </ExpansionContent>
+      </ExpansionContent> */}
     </S.RecruitDesktopCard>
   );
 }
-const StyledTitle = styled.h5<{ $isBold: boolean; $isHighlight: boolean }>`
-  color: ${(props) => props.theme.colors.gray800};
-  font-weight: ${(props) => (props.$isBold ? 600 : 400)};
-  padding: 2px 3px 2px 2px;
+const StyledTitle = styled.div<{ $isBold: boolean; $isHighlight: boolean }>`
   width: fit-content;
   margin-bottom: 1px;
-  &:hover {
-    color: ${(props) => props.theme.colors.black};
+  display: flex;
+  align-items: center;
+  .text {
+    padding: 1px 3px 1px 2px;
+    color: ${(props) => props.theme.colors.gray800};
+    font-weight: ${(props) => (props.$isBold ? 600 : 400)};
+    ${(props) =>
+      props.$isHighlight &&
+      css`
+        background: linear-gradient(135deg, #c9e2ff 30%, transparent 70%), linear-gradient(-45deg, #e8f3ff 30%, transparent 70%);
+        background-blend-mode: multiply;
+        border-radius: 2px;
+      `};
+    &:hover {
+      color: ${(props) => props.theme.colors.black};
+    }
   }
-
-  ${(props) =>
-    props.$isHighlight &&
-    css`
-      background: linear-gradient(135deg, #c9e2ff 30%, transparent 70%), linear-gradient(-45deg, #e8f3ff 30%, transparent 70%);
-      background-blend-mode: multiply;
-      border-radius: 2px;
-    `};
 `;
 
 const ExpansionContent = styled(motion.div)``;
@@ -249,6 +262,10 @@ const S = {
     align-items: center;
     justify-content: center;
     height: 100%;
+    font-size: 13px;
+    span {
+      text-align: center;
+    }
   `,
   InfoRow: styled.div`
     flex: 1 1 8%;
@@ -270,24 +287,6 @@ const S = {
     justify-content: center;
     flex-wrap: wrap;
     height: 100%;
-
-    .pay-wrapper {
-      background-color: ${(props) => props.theme.colors.gray100};
-      padding: 5px 8px;
-      border-radius: 5px;
-      &__type {
-        letter-spacing: 1px;
-        padding-right: 5px;
-        color: #ff501b; //월급
-        /* color: #00b0a6; //시급 */
-        /* color: #8050c8; //일급 */
-        /* color: #00a1ef; //연봉 */
-      }
-      &__price {
-        letter-spacing: 0.3px;
-        font-weight: 500;
-      }
-    }
   `,
   DateRow: styled.div`
     flex: 1 1 8%;
@@ -297,5 +296,12 @@ const S = {
     display: flex;
     align-items: center;
     justify-content: center;
+    letter-spacing: 0.2px;
+    color: #475067;
+    font-size: 13px;
+    font-weight: 400;
+    .today {
+      color: ${(props) => props.theme.colors.blue500};
+    }
   `,
 };
