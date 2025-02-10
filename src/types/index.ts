@@ -621,6 +621,7 @@ export interface RecruitListItem {
   address: string;
   addressDetail: string;
   paymentRecruitment: PaymentRecruitment[];
+  priorityDate: Date;
   employmentType: {
     CONTRACT: boolean;
     DAILY_WORKER: boolean;
