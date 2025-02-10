@@ -42,7 +42,7 @@ const S = {
     height: ${(props) => props.$height || 'auto'};
     margin: ${(props) => props.$margin || '0'};
     &:hover {
-      background-color: rgba(242, 244, 246, 0.5);
+      background-color: rgba(242, 244, 246, 1);
       transition: background-color 0.2s;
     }
   `,
