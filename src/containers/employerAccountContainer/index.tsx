@@ -12,6 +12,7 @@ import Modal from '@/components/common/modal';
 import dynamic from 'next/dynamic';
 import Button from '@/components/common/style/Button';
 import NicknameForm from '@/components/employerAccount/NicknameForm';
+import useAuth from '@/hooks/useAuth';
 
 const DynamicNoSSRModal = dynamic(() => import('@/components/common/modal'), { ssr: false });
 
@@ -19,8 +20,10 @@ export default function EmployerAccountContainer() {
   const [isOpenNicknameModal, setIsOpenNicknameModal] = React.useState(false);
   const [certificationModalAtomState, setCertificationModalAtomState] = useRecoilState(certificationModalAtom);
 
+  const { authAtomState } = useAuth();
+
   const { data, isLoading, isSuccess } = useFetchQuery({
-    queryKey: [queryKeys.EMPLOYER_ACCOUNT],
+    queryKey: [queryKeys.EMPLOYER_ACCOUNT, { nickname: authAtomState.nickname }],
     queryFn: Get.employerAccountInfo,
     options: {
       throwOnError: true,
