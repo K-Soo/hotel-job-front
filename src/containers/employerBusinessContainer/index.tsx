@@ -4,15 +4,8 @@ import useFetchQuery from '@/hooks/useFetchQuery';
 import queryKeys from '@/constants/queryKeys';
 import { Get } from '@/apis';
 import useAuth from '@/hooks/useAuth';
-import { useForm, FormProvider } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { schema } from '@/utils';
-import { EmployerBusinessForm } from '@/types';
 import SkeletonUI from '@/components/common/SkeletonUI';
 import SectionTitle from '@/components/common/employer/SectionTitle';
-import Modal from '@/components/common/modal';
-import dynamic from 'next/dynamic';
-import Button from '@/components/common/style/Button';
 
 export default function EmployerBusinessContainer() {
   const { authAtomState } = useAuth();
