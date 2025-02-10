@@ -69,7 +69,7 @@ export default function SignInContainer() {
         status: 'AUTHENTICATED',
       });
 
-      router.push(path.EMPLOYER);
+      window.location.href = '/employer';
     } catch (error) {
       methods.setValue('password', '');
       setIsSubmitError(true);
