@@ -1,6 +1,6 @@
 import styled, { css, keyframes } from 'styled-components';
 
-type TagType = 'BEST' | 'URGENT';
+type TagType = 'BEST' | 'URGENT' | 'VERIFIED' | 'UNVERIFIED';
 
 interface TagProps {
   label: string;
@@ -124,6 +124,28 @@ const S = {
           background-color: #fff;
           animation: ${twinkle} 6s ease-in-out infinite;
         }
+      `};
+
+    ${(props) =>
+      props.$type === 'VERIFIED' &&
+      css`
+        color: ${props.theme.colors.white};
+        background-color: ${props.theme.colors.gray800};
+        border: none;
+        border-radius: 10px;
+        font-weight: 400;
+        font-size: 12px;
+      `};
+
+    ${(props) =>
+      props.$type === 'UNVERIFIED' &&
+      css`
+        color: ${props.theme.colors.white};
+        background-color: ${props.theme.colors.gray600};
+        border: none;
+        border-radius: 10px;
+        font-weight: 400;
+        font-size: 12px;
       `};
   `,
 };
