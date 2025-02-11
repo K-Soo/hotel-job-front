@@ -389,3 +389,7 @@ export interface GetEmployerPaymentListResponse extends BaseResponse {
 export interface EmployerAccountInfoResponse extends BaseResponse {
   result: types.EmployerAccountInfo;
 }
+
+export interface GetEmployerCouponList extends BaseResponse {
+  result: types.EmployerCouponListItem[];
+}
