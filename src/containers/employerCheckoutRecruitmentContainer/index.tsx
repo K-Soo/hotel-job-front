@@ -46,7 +46,7 @@ export default function EmployerCheckoutRecruitmentContainer() {
     if (data) {
       setAmount({
         currency: 'KRW',
-        value: data.result.amountInfo.finalTotalAmount,
+        value: data.result.amountInfo.TotalAmount,
       });
     }
   }, [data]);
@@ -138,7 +138,7 @@ export default function EmployerCheckoutRecruitmentContainer() {
     }
 
     try {
-      if (data.result.amountInfo.finalTotalAmount === 0) {
+      if (data.result.amountInfo.TotalAmount === 0) {
         throw new Error('결제 금액이 0원입니다.');
       }
 
@@ -170,7 +170,7 @@ export default function EmployerCheckoutRecruitmentContainer() {
     <EmployerCheckoutRecruitment>
       <ProductInfo productInfo={data?.result.productInfo} isLoading={isLoading} />
       <RecruitmentInfo recruitmentInfo={data?.result.recruitmentInfo} isLoading={isLoading} />
-      <DiscountInfo finalTotalAmount={data?.result.amountInfo.finalTotalAmount} isLoading={isLoading} />
+      <DiscountInfo TotalAmount={data?.result.amountInfo.TotalAmount} isLoading={isLoading} />
       <TossPaymentInfo />
       <AmountInfo amountInfo={data?.result.amountInfo} isLoading={isLoading}>
         <Button label="결제" variant="primary" onClick={handlePayment} isLoading={isLoading || !widgets} />
