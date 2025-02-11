@@ -49,7 +49,7 @@ const S = {
     width: 100%;
     border-top: 1px solid ${(props) => props.theme.colors.gray700};
     border-bottom: 1px solid ${(props) => props.theme.colors.gray700};
-    min-height: 300px;
+    height: auto;
   `,
   RecruitmentTableHeader: styled.div`
     height: 50px;
