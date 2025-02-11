@@ -28,8 +28,8 @@ export default function CompanyInfo({ data, certificationStatus }: CompanyInfoPr
       <div className="bottom">
         <p className="bottom__owner">
           <span>{data?.businessOwner ?? 'unknown'}</span>
-          {certificationStatus === 'VERIFIED' && <Tag type="VERIFIED" label="인증완료" margin="0 0 0 5px" />}
-          {certificationStatus !== 'VERIFIED' && <Tag type="UNVERIFIED" label="미 인증" margin="0 0 0 5px" />}
+          {certificationStatus === 'VERIFIED' && <Tag type="VERIFIED" label="인증완료" margin="0 0 0 10px" />}
+          {certificationStatus !== 'VERIFIED' && <Tag type="UNVERIFIED" label="미 인증" margin="0 0 0 10px" />}
         </p>
         <IconHover onClick={() => router.push(path.EMPLOYER_ACCOUNT)}>
           <Icon name="Settings24x24" width="18px" height="18px" />
@@ -75,6 +75,7 @@ const S = {
     .bottom {
       display: flex;
       align-items: center;
+      justify-content: space-between;
       font-size: 18px;
       &__owner {
         margin-right: 30px;
