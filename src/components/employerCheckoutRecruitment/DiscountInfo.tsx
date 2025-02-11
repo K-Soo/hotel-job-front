@@ -5,11 +5,11 @@ import { priceComma } from '@/utils';
 import SkeletonUI from '@/components/common/SkeletonUI';
 
 interface DiscountInfoProps {
-  finalTotalAmount: number | undefined;
+  TotalAmount: number | undefined;
   isLoading: boolean;
 }
 
-export default function DiscountInfo({ finalTotalAmount, isLoading }: DiscountInfoProps) {
+export default function DiscountInfo({ TotalAmount, isLoading }: DiscountInfoProps) {
   return (
     <S.DiscountInfo>
       <h2 className="title">할인선택</h2>
@@ -18,7 +18,7 @@ export default function DiscountInfo({ finalTotalAmount, isLoading }: DiscountIn
         <S.DiscountContainer>
           <S.DiscountItem>
             <span className="discount-text">결제 예정금액</span>
-            <div className="discount-content">{priceComma(finalTotalAmount)}원</div>
+            <div className="discount-content">{priceComma(TotalAmount)}원</div>
           </S.DiscountItem>
 
           <Line margin="0" />
