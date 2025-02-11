@@ -1,26 +1,50 @@
+import React from 'react';
 import { EmployerAccountInfo } from '@/types';
 import styled from 'styled-components';
+import dynamic from 'next/dynamic';
+import Modal from '@/components/common/modal';
+import MembershipModalForm from '@/components/employer/MembershipModalForm';
+import { MEMBERSHIP } from '@/constants/membership';
+
+const DynamicNoSSRModal = dynamic(() => import('@/components/common/modal'), { ssr: false });
 
 interface SupportInfoProps {
   data: EmployerAccountInfo;
 }
 
 export default function SupportInfo({ data }: SupportInfoProps) {
+  const [isOpenModal, setIsOpenModal] = React.useState(false);
+
   return (
-    <S.SupportInfo>
-      <div className="item">
-        <span className="item__title">멤버십</span>
-        <span className="item__content">{data.membership.membershipLevel}</span>
-      </div>
-      <div className="item">
-        <span className="item__title">보유포인트</span>
-        <span className="item__content">{data.totalPoint}P</span>
-      </div>
-      <div className="item">
-        <span className="item__title">보유쿠폰</span>
-        <span className="item__content">{3}</span>
-      </div>
-    </S.SupportInfo>
+    <>
+      {isOpenModal && (
+        <DynamicNoSSRModal handleCloseModal={() => setIsOpenModal(false)}>
+          <Modal.Header title="멤버십 안내" handleCloseModal={() => setIsOpenModal(false)} />
+          <Modal.Content padding="0">
+            <MembershipModalForm />
+          </Modal.Content>
+        </DynamicNoSSRModal>
+      )}
+
+      <S.SupportInfo>
+        <div className="item">
+          <span className="item__title">멤버십</span>
+          <span className="item__content" onClick={() => setIsOpenModal(true)}>
+            {data.membership.membershipLevel}
+          </span>
+        </div>
+
+        <div className="item">
+          <span className="item__title">보유포인트</span>
+          <span className="item__content">{data.totalPoint}P</span>
+        </div>
+
+        <div className="item">
+          <span className="item__title">보유쿠폰</span>
+          <span className="item__content">{3}</span>
+        </div>
+      </S.SupportInfo>
+    </>
   );
 }
 
@@ -47,6 +71,13 @@ const S = {
         font-size: 24px;
         font-weight: 500;
         color: ${({ theme }) => theme.colors.black500};
+        cursor: pointer;
+        width: 100%;
+        text-align: center;
+        &:hover {
+          color: ${({ theme }) => theme.colors.black100};
+          text-decoration: underline;
+        }
       }
     }
   `,
