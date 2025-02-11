@@ -1,7 +1,8 @@
 import Layout, { EmployerMain, EmployerHeader, EmployerFooter } from '@/components/layout';
+import EmployerCouponContainer from '@/containers/employerCouponContainer';
 
 export default function EmployerCouponPage() {
-  return <>index</>;
+  return <EmployerCouponContainer />;
 }
 
 EmployerCouponPage.getLayout = (page: React.ReactElement) => {
