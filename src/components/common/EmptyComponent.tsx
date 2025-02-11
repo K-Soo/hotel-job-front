@@ -19,7 +19,7 @@ export default function EmptyComponent({ message, height }: EmptyComponentProps)
 
 const S = {
   EmptyComponent: styled.div<{ $height?: string }>`
-    height: ${(props) => props.$height || '400px'};
+    height: ${(props) => props.$height || '300px'};
     .empty-container {
       height: 100%;
       display: flex;
@@ -28,9 +28,9 @@ const S = {
       justify-content: center;
       .text {
         margin-top: 20px;
-        color: ${(props) => props.theme.colors.gray500};
+        color: ${(props) => props.theme.colors.gray600};
         font-size: 16px;
-        font-weight: 500;
+        font-weight: 400;
       }
     }
   `,
