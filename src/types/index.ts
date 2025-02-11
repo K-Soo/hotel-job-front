@@ -495,12 +495,14 @@ export interface ProductRecruitmentListItem {
 }
 
 export type PaymentRecruitmentDetailAmountInfo = {
-  couponDiscountAmount: number;
-  membershipDiscountAmount: number;
   originalAmount: number;
-  productDiscountAmount: number;
+  discountAmount: number;
+
+  membershipDiscountAmount: number;
+  couponDiscountAmount: number;
   totalDiscountAmount: number;
-  finalTotalAmount: number;
+
+  TotalAmount: number;
 };
 
 export type ProductInfoItem = {
@@ -629,4 +631,20 @@ export interface RecruitListItem {
     INTERN: boolean;
     PART_TIME: boolean;
   };
+}
+
+export interface EmployerCouponListItem {
+  createdAt: string;
+  description: string;
+  discountAmount: number;
+  discountRate: number;
+  discountType: 'FIXED';
+  expiresAt: string;
+  id: string;
+  isExpired: boolean;
+  isUsed: boolean;
+  issuedAt: string;
+  maxDiscountAmount: number;
+  minOrderAmount: number;
+  usedAt: null;
 }
