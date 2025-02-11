@@ -283,6 +283,11 @@ export const Get = {
 
   // 사업자 - 상품 결제 내역
   getEmployerPaymentList: () => requests.get<API.GetEmployerPaymentListResponse>(`/payment`),
+
+  // *************************************** COUPON  ***************************************
+
+  // 사업자 - 쿠폰 리스트
+  getEmployerCouponList: () => requests.get<API.GetEmployerCouponList>('/coupon/employer'),
 };
 
 export const Post = {
