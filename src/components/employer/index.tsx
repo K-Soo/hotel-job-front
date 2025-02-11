@@ -14,12 +14,12 @@ interface EmployerProps {
 }
 
 export default function Employer({ isLoading, data }: EmployerProps) {
-  console.log('data: ', data);
   return (
     <S.Employer>
       <S.TopDashboard>
         {isLoading && <SkeletonUI.Line style={{ height: '180px', flex: '1', borderRadius: '10px' }} />}
-        {data && <RecruitmentCount />}
+        {!isLoading && data && <RecruitmentCount />}
+
         <CompanyInfoContainer certificationStatus={data?.certificationStatus} />
       </S.TopDashboard>
 
