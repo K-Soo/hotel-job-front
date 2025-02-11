@@ -33,8 +33,8 @@ export default function AmountInfo({ amountInfo, isLoading, children }: AmountIn
           <div className="item">
             <span className="item__title">상품할인</span>
             <p className="item__discount">
-              <span className="item__discount--text">{amountInfo.productDiscountAmount === 0 ? '' : '-'}</span>
-              <span className="item__discount--text">{priceComma(amountInfo?.productDiscountAmount)}</span>원
+              <span className="item__discount--text">{amountInfo.discountAmount === 0 ? '' : '-'}</span>
+              <span className="item__discount--text">{priceComma(amountInfo.discountAmount)}</span>원
             </p>
           </div>
 
@@ -68,7 +68,7 @@ export default function AmountInfo({ amountInfo, isLoading, children }: AmountIn
 
           <div className="total-amount">
             <span>결제금액</span>
-            <strong className="total-amount__price">{priceComma(amountInfo?.finalTotalAmount)}</strong>
+            <strong className="total-amount__price">{priceComma(amountInfo.TotalAmount)}</strong>
           </div>
         </S.AmountContainer>
       )}
