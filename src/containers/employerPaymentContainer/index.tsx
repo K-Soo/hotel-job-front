@@ -13,6 +13,7 @@ import dynamic from 'next/dynamic';
 import Modal from '@/components/common/modal';
 import { EmployerPaymentItem } from '@/types';
 import SkeletonUI from '@/components/common/SkeletonUI';
+import EmptyComponent from '@/components/common/EmptyComponent';
 
 const DynamicNoSSRModal = dynamic(() => import('@/components/common/modal'), { ssr: false });
 
@@ -63,6 +64,7 @@ export default function EmployerPaymentContainer() {
   }
 
   if (isSuccess && data) {
+    const isEmpty = data.result.length === 0;
     return (
       <>
         {isOpenModal && selectedPayment && (
@@ -78,7 +80,8 @@ export default function EmployerPaymentContainer() {
           <SectionTitle title="상품 결제내역" />
           <EmployerPaymentTable>
             <EmployerPaymentTable.Header />
-            <EmployerPaymentTable.Body data={data.result} handleClickPaymentItem={handleClickPaymentItem} />
+            {isEmpty && <EmptyComponent message="결제내역이 없습니다." />}
+            {!isEmpty && <EmployerPaymentTable.Body data={data.result} handleClickPaymentItem={handleClickPaymentItem} />}
           </EmployerPaymentTable>
         </EmployerPayment>
       </>
