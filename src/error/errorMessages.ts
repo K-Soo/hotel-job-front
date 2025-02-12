@@ -18,6 +18,10 @@ export const errorMessages: Record<string, string> = {
   'ERR-4023': '이미 처리된 주문입니다.',
   'ERR-4026': '결제가 완료된 주문건입니다.',
 
+  'ERR-4050': '존재하지 않는 쿠폰입니다.',
+  'ERR-4051': '이미 사용된 쿠폰입니다.',
+  'ERR-4052': '만료된 쿠폰입니다.',
+
   'ERR-NOT_FOUND_PAYMENT_SESSION': '결제 시간이 만료되어 결제 진행 데이터가 존재하지 않습니다.',
   'ERR-REJECT_CARD_COMPANY': '카드사에서 해당 카드를 거절했거나 카드사에 문제가 있습니다.',
   'ERR-FORBIDDEN_REQUEST': '최초 결제 요청한 값과 일치하지않습니다.',
