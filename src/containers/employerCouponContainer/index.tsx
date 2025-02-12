@@ -9,16 +9,29 @@ import SectionTitle from '@/components/common/employer/SectionTitle';
 import CouponTab from '@/components/employerCoupon/CouponTab';
 import CouponList from '@/components/employerCoupon/CouponList';
 import EmptyComponent from '@/components/common/EmptyComponent';
+import { ParsedUrlQuery } from 'querystring';
+import { useRouter } from 'next/router';
+import { keepPreviousData } from '@tanstack/react-query';
+
+export interface UrlQuery extends ParsedUrlQuery {
+  use?: 'Y' | 'N';
+}
 
 export default function EmployerCouponContainer() {
   const { authAtomState } = useAuth();
+  const router = useRouter();
+  const { use = 'N' } = router.query as UrlQuery;
 
   const { data, isLoading, isSuccess } = useFetchQuery({
-    queryKey: [queryKeys.COUPON_LIST, { nickname: authAtomState.nickname }],
+    queryKey: [queryKeys.COUPON_LIST, { nickname: authAtomState.nickname, use }],
     queryFn: Get.getEmployerCouponList,
     options: {
       staleTime: 1000 * 60 * 5,
       gcTime: 1000 * 60 * 10,
+      placeholderData: keepPreviousData,
+    },
+    requestQuery: {
+      use,
     },
   });
 
