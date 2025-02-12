@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import dynamic from 'next/dynamic';
 import Modal from '@/components/common/modal';
 import MembershipModalForm from '@/components/employer/MembershipModalForm';
-import { MEMBERSHIP } from '@/constants/membership';
 
 const DynamicNoSSRModal = dynamic(() => import('@/components/common/modal'), { ssr: false });
 
