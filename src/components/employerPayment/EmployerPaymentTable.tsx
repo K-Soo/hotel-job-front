@@ -20,7 +20,7 @@ function EmployerPaymentTableHeader() {
   return (
     <S.RecruitmentTableHeader>
       <span className="header-row">주문번호</span>
-      <span className="header-row">상품정보</span>
+      <span className="header-row">결제상품</span>
       <span className="header-row">주문상태</span>
       <span className="header-row">결제금액</span>
       <span className="header-row">주문요청일</span>
@@ -31,15 +31,19 @@ function EmployerPaymentTableHeader() {
 function EmployerPaymentTableBody({ data, handleClickPaymentItem }: EmployerPaymentTableBodyProps) {
   return (
     <S.RecruitmentTableBody>
-      {data.map((item) => (
-        <div key={item.id} className="body-row" onClick={() => handleClickPaymentItem(item)}>
-          <div className="body-row__item">{item.orderId}</div>
-          <div className="body-row__item">{item.transactions[0].orderName}</div>
-          <div className="body-row__item">{PAYMENT_STATUS[item.paymentStatus]}</div>
-          <div className="body-row__item">{priceComma(item.totalAmount)}원</div>
-          <div className="body-row__item">{dateFormat.date(item.createdAt, 'YY.MM.DD HH:mm')}</div>
-        </div>
-      ))}
+      {data.map((item) => {
+        const isCoupon = item.paymentMethod === '쿠폰';
+
+        return (
+          <div key={item.id} className="body-row" onClick={() => handleClickPaymentItem(item)}>
+            <div className="body-row__item">{item.orderId}</div>
+            <div className="body-row__item">{isCoupon ? '무료쿠폰' : item.transactions[0].orderName}</div>
+            <div className="body-row__item">{PAYMENT_STATUS[item.paymentStatus]}</div>
+            <div className="body-row__item">{priceComma(item.totalAmount)}원</div>
+            <div className="body-row__item">{dateFormat.date(item.createdAt, 'YY.MM.DD HH:mm')}</div>
+          </div>
+        );
+      })}
     </S.RecruitmentTableBody>
   );
 }
