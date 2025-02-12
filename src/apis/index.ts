@@ -276,18 +276,24 @@ export const Get = {
   getResumeProfileImage: (key: string, config: AxiosRequestConfig) => requests.get<any>(`/upload/resume/profile/${key}`, config),
 
   // *************************************** PAYMENT  ***************************************
-  // TODO - type 정의
-  // 채용공고 결제 초기요청
+  // 사업자 채용공고 결제 초기요청
   getPaymentRecruitmentDetail: ({ orderId }: { orderId: string }) =>
     requests.get<API.GetPaymentRecruitmentDetailResponse>(`/payment/recruitment/${orderId}`),
-
   // 사업자 - 상품 결제 내역
   getEmployerPaymentList: () => requests.get<API.GetEmployerPaymentListResponse>(`/payment`),
 
   // *************************************** COUPON  ***************************************
-
   // 사업자 - 쿠폰 리스트
-  getEmployerCouponList: () => requests.get<API.GetEmployerCouponList>('/coupon/employer'),
+  getEmployerCouponList: ({ use }: { use: 'Y' | 'N' }) => {
+    const params = new URLSearchParams();
+    if (use) params.set('use', use);
+
+    const queryString = params.toString();
+
+    const url = `/coupon/employer${queryString && `?${queryString}`}`;
+
+    return requests.get<API.GetEmployerCouponList>(url);
+  },
 };
 
 export const Post = {
@@ -348,10 +354,29 @@ export const Post = {
   paymentRecruitmentInitiate: (body: any) =>
     requests.post<any, API.PaymentRecruitmentInitiateResponse>('/payment/recruitment/initiate', body),
 
-  // TODO - type
   // 채용공고 결제 승인요청
   paymentRecruitmentConfirm: (body: API.PaymentRecruitmentConfirmRequest) =>
     requests.post<API.PaymentRecruitmentConfirmRequest, API.PaymentRecruitmentConfirmResponse>('/payment/recruitment/confirm', body),
+
+  // 채용공고 무료 승인요청
+  paymentFreeRecruitmentConfirm: (body: API.PaymentRecruitmentFreeConfirmRequest) =>
+    requests.post<API.PaymentRecruitmentFreeConfirmRequest, API.PaymentRecruitmentConfirmResponse>(
+      '/payment/recruitment/confirm/free',
+      body,
+    ),
+
+  // 채용공고 사용가능한 쿠폰리스트
+  availableCouponList: (body: { orderId: string }) =>
+    requests.post<{ orderId: string }, API.AvailableCouponListResponse>('/payment/recruitment/coupon', body),
+
+  // 채용공고 쿠폰 적용
+  applyCoupon: (body: { orderId: string; couponId: string }) =>
+    requests.post<{ orderId: string; couponId: string }, API.ApplyCouponResponse>('/payment/recruitment/coupon/apply', body),
+
+  // TODO - type 정의
+  // 채용공고 쿠폰 적용 취소
+  cancelCoupon: (body: { orderId: string; couponId: string }) =>
+    requests.post<{ orderId: string; couponId: string }, any>('/payment/recruitment/coupon/cancel', body),
 };
 
 export const Patch = {
