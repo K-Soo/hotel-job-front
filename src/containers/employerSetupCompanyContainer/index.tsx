@@ -17,9 +17,6 @@ import useAlertWithConfirm from '@/hooks/useAlertWithConfirm';
 import path from '@/constants/path';
 import { useQueryClient } from '@tanstack/react-query';
 import queryKeys from '@/constants/queryKeys';
-import CertificationModal from '@/components/common/CertificationModal';
-import { useRecoilState } from 'recoil';
-import { certificationModalAtom } from '@/recoil/certification';
 
 const DynamicDaumPost = dynamic(() => import('@/components/common/DaumPost'), { ssr: false });
 
@@ -28,8 +25,6 @@ export default function EmployerSetupCompanyContainer() {
   const [submitCount, setSubmitCount] = React.useState<number>(0);
   const [isSuccessVerified, setIsSuccessVerified] = React.useState<boolean>(false);
   const [loading, setLoading] = React.useState<boolean>(false);
-
-  const [certificationModalAtomState, setCertificationModalAtomState] = useRecoilState(certificationModalAtom);
 
   const queryClient = useQueryClient();
   const daumPostAtomValue = useRecoilValue(daumPostAtom);
@@ -167,8 +162,6 @@ export default function EmployerSetupCompanyContainer() {
   return (
     <FormProvider {...methods}>
       {daumPostAtomValue.isOpen && <DynamicDaumPost />}
-      {/* {certificationModalAtomState.isOpen && <CertificationModal />} */}
-      {/* <button onClick={() => setCertificationModalAtomState({ isOpen: true })}>인증</button> */}
       <EmployerSetupCompany onSubmit={onSubmit} handleKeyDown={handleKeyDown}>
         {step === 'step1' && (
           <BusinessNumberForm>
