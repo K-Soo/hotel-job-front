@@ -27,7 +27,7 @@ export default function AmountInfo({ amountInfo, isLoading, children }: AmountIn
         <S.AmountContainer>
           <div className="item">
             <span className="item__title">주문금액</span>
-            <p>{priceComma(amountInfo?.originalAmount)}원</p>
+            <p style={{ fontSize: '14px' }}>{priceComma(amountInfo?.originalAmount)}원</p>
           </div>
 
           <div className="item">
@@ -68,7 +68,8 @@ export default function AmountInfo({ amountInfo, isLoading, children }: AmountIn
 
           <div className="total-amount">
             <span>결제금액</span>
-            <strong className="total-amount__price">{priceComma(amountInfo.TotalAmount)}</strong>
+            {amountInfo.TotalAmount === 0 && <strong className="total-amount__free">무료</strong>}
+            {amountInfo.TotalAmount !== 0 && <strong className="total-amount__price">{priceComma(amountInfo.TotalAmount)}</strong>}
           </div>
         </S.AmountContainer>
       )}
@@ -94,15 +95,17 @@ const S = {
     .item {
       display: flex;
       justify-content: space-between;
-      padding: 5px 0;
+      padding: 8px 0;
       color: ${(props) => props.theme.colors.black400};
       font-weight: 500;
       &__title {
         color: ${(props) => props.theme.colors.gray700};
+        font-size: 14px;
       }
       &__discount {
+        font-size: 14px;
         &--text {
-          color: ${(props) => props.theme.colors.blue500};
+          color: ${(props) => props.theme.colors.red400};
           padding-right: 2px;
         }
       }
@@ -112,11 +115,16 @@ const S = {
       justify-content: space-between;
       font-weight: 600;
       font-size: 20px;
+      color: ${(props) => props.theme.colors.black400};
       &__price {
+        color: ${(props) => props.theme.colors.red400};
         &::after {
           content: '원';
           padding-left: 2px;
         }
+      }
+      &__free {
+        color: ${(props) => props.theme.colors.red400};
       }
     }
   `,
