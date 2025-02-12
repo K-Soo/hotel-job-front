@@ -44,7 +44,7 @@ export default function PaymentDetailForm({ selectedPayment }: PaymentDetailForm
                     cursor: 'pointer',
                     textDecoration: 'underline',
                   }}
-                  onClick={() => router.push(`${path.EMPLOYER_RECRUITMENT}/${selectedPayment.recruitment.id}`)}
+                  onClick={() => router.push(`${path.EMPLOYER_RECRUITMENT}/${selectedPayment.recruitment.id}/applicant`)}
                 >
                   {selectedPayment.recruitment.recruitmentTitle}
                 </motion.span>
