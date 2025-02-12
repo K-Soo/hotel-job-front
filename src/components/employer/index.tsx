@@ -18,7 +18,7 @@ export default function Employer({ isLoading, data }: EmployerProps) {
     <S.Employer>
       <S.TopDashboard>
         {isLoading && <SkeletonUI.Line style={{ height: '180px', flex: '1', borderRadius: '10px' }} />}
-        {!isLoading && data && <RecruitmentCount />}
+        {!isLoading && data && <RecruitmentCount certificationStatus={data.certificationStatus} />}
 
         <CompanyInfoContainer certificationStatus={data?.certificationStatus} />
       </S.TopDashboard>
@@ -37,8 +37,6 @@ export default function Employer({ isLoading, data }: EmployerProps) {
           </>
         )}
       </S.MiddleDashboard>
-
-      <RecentlyRecruitment />
     </S.Employer>
   );
 }
