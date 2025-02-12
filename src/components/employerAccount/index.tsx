@@ -51,7 +51,7 @@ export default function EmployerAccount({ data, setIsOpenNicknameModal, children
             <S.Content>
               <p className="title">보유 포인트</p>
               <div className="wrapper">
-                <p className="wrapper__text">{data.totalPoint} P</p>
+                <p className="wrapper__text">{data.totalPoint}P</p>
               </div>
             </S.Content>
 
