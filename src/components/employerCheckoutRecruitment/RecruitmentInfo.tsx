@@ -1,3 +1,4 @@
+import React from 'react';
 import { PaymentRecruitmentInfo } from '@/types';
 import styled from 'styled-components';
 import { dateFormat } from '@/utils';
@@ -8,7 +9,7 @@ interface RecruitmentInfoProps {
   isLoading: boolean;
 }
 
-export default function RecruitmentInfo({ recruitmentInfo, isLoading }: RecruitmentInfoProps) {
+const RecruitmentInfo = ({ recruitmentInfo, isLoading }: RecruitmentInfoProps) => {
   return (
     <S.RecruitmentInfo>
       <h2 className="title">공고정보</h2>
@@ -40,7 +41,9 @@ export default function RecruitmentInfo({ recruitmentInfo, isLoading }: Recruitm
       )}
     </S.RecruitmentInfo>
   );
-}
+};
+
+export default React.memo(RecruitmentInfo);
 
 const S = {
   RecruitmentInfo: styled.div`
