@@ -9,6 +9,8 @@ import { PaymentRecruitmentConfirmData } from '@/types';
 import SkeletonUI from '@/components/common/SkeletonUI';
 import LoadingOverlay from '@/components/common/LoadingOverlay';
 import useAuth from '@/hooks/useAuth';
+import queryKeys from '@/constants/queryKeys';
+import { useQueryClient } from '@tanstack/react-query';
 
 interface Query extends ParsedUrlQuery {
   paymentType?: 'NORMAL';
@@ -21,7 +23,9 @@ export default function EmployerCheckoutRecruitmentSuccessContainer() {
   const [isLoading, setIsLoading] = React.useState(true);
   const [confirmForm, setConfirmForm] = React.useState<PaymentRecruitmentConfirmData | null>(null);
   const [hasFetched, setHasFetched] = React.useState(false);
+
   const { isAuthenticated } = useAuth();
+  const queryClient = useQueryClient();
 
   const router = useRouter();
 
@@ -36,6 +40,7 @@ export default function EmployerCheckoutRecruitmentSuccessContainer() {
         throw new Error();
       }
       setConfirmForm(response.result);
+      await queryClient.invalidateQueries({ queryKey: [queryKeys.COUPON_LIST], refetchType: 'all' });
     } catch (error: any) {
       const customErrorcode = error.response?.data?.error?.code;
       const errorMessage = errorMessages[customErrorcode];
