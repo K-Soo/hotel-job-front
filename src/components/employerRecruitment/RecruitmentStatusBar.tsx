@@ -40,8 +40,10 @@ export default function RecruitmentStatusBar() {
 
     if (lowerCaseStatus === 'all') {
       searchParams.delete('status');
+      searchParams.delete('page');
     } else {
       searchParams.set('status', lowerCaseStatus);
+      searchParams.delete('page');
     }
 
     router.replace({
