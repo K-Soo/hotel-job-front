@@ -20,6 +20,7 @@ export type CertificationStatus = 'PENDING' | 'VERIFIED' | 'REJECTED' | 'UNVERIF
 export type ApplicationStatus = 'APPLIED' | 'CANCELED' | 'ACCEPTED' | 'REJECTED';
 export type RecruitmentName = 'PREMIUM' | 'SPECIAL' | 'URGENT' | 'BASIC';
 export type MembershipLevel = 'FAMILY' | 'BRONZE' | 'SILVER' | 'GOLD' | 'VIP';
+export type CouponDiscountType = 'FIXED' | 'PERCENTAGE';
 export type AccountStatus =
   | 'ACTIVE'
   | 'INACTIVE'
@@ -534,6 +535,7 @@ export interface PaymentRecruitmentDetail {
   orderId: string;
   paymentStatus: 'PAYMENT_PENDING';
   expiresAt: string;
+  appliedCouponId: string | null;
   certificationInfo: {
     phone: string;
     userName: string;
@@ -579,6 +581,7 @@ export interface EmployerPaymentItem {
   totalAmount: number;
   paymentStatus: PaymentStatusKey;
   paymentType: PaymentTypeKey;
+  paymentMethod: '카드' | '가상계좌' | '간편결제' | '휴대폰' | '쿠폰';
   recruitment: {
     id: string;
     recruitmentTitle: string;
@@ -638,13 +641,18 @@ export interface EmployerCouponListItem {
   description: string;
   discountAmount: number;
   discountRate: number;
-  discountType: 'FIXED';
+  discountType: CouponDiscountType;
   expiresAt: string;
   id: string;
-  isExpired: boolean;
   isUsed: boolean;
-  issuedAt: string;
   maxDiscountAmount: number;
   minOrderAmount: number;
   usedAt: null;
+  reason?: string;
+}
+
+export interface AvailableCouponList {
+  availableCoupons: EmployerCouponListItem[];
+  unavailableCoupons: EmployerCouponListItem[];
+  totalCouponCount: number;
 }
