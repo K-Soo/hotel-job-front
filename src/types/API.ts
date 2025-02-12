@@ -104,8 +104,10 @@ export interface SaveFcmTokenRequest {
 export interface PaymentRecruitmentConfirmRequest {
   orderId: string;
   paymentKey: string;
-  amount: string;
+  amount: number; // XXX
 }
+
+export interface PaymentRecruitmentFreeConfirmRequest extends Pick<PaymentRecruitmentConfirmRequest, 'orderId' | 'amount'> {}
 
 /************************************* RESPONSE **************************************/
 
@@ -392,4 +394,14 @@ export interface EmployerAccountInfoResponse extends BaseResponse {
 
 export interface GetEmployerCouponList extends BaseResponse {
   result: types.EmployerCouponListItem[];
+}
+
+export interface AvailableCouponListResponse extends BaseResponse {
+  result: types.AvailableCouponList;
+}
+
+export interface ApplyCouponResponse extends BaseResponse {
+  result: {
+    status: ResponseStatus;
+  };
 }
