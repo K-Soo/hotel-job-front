@@ -19,10 +19,12 @@ export default function CompanyInfo({ data, certificationStatus }: CompanyInfoPr
     <S.CompanyInfo>
       <div className="top">
         <p className="top__company">{data?.companyName ?? 'unknown'}</p>
-        <button className="top__register" onClick={() => router.push(path.EMPLOYER_RECRUITMENT_REGISTER)}>
-          <strong className="top__register--move">공고 등록</strong>
-          <span>으로 시작</span>
-        </button>
+        {certificationStatus === 'VERIFIED' && (
+          <button className="top__register" onClick={() => router.push(path.EMPLOYER_RECRUITMENT_REGISTER)}>
+            <strong className="top__register--move">공고 등록</strong>
+            <span>으로 시작</span>
+          </button>
+        )}
       </div>
       <Line />
       <div className="bottom">
