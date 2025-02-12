@@ -34,7 +34,7 @@ export default function EmployerCheckoutRecruitmentSuccessContainer() {
   // API - 결제 승인요청
   const fetchPaymentConfirm = async (orderId: string, paymentKey: string, amount: string) => {
     try {
-      const response = await Post.paymentRecruitmentConfirm({ orderId, paymentKey, amount });
+      const response = await Post.paymentRecruitmentConfirm({ orderId, paymentKey, amount: Number(amount) });
       console.log('결제 승인요청 API : ', response);
       if (!response.result) {
         throw new Error();
