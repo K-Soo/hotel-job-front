@@ -4,9 +4,10 @@ import RecentlyRecruitment from '@/components/employer/RecentlyRecruitment';
 import { Get } from '@/apis';
 import useFetchQuery from '@/hooks/useFetchQuery';
 import queryKeys from '@/constants/queryKeys';
+import { ErrorComponent } from '@/error';
 
 export default function EmployerContainer() {
-  const { data, isLoading, isSuccess } = useFetchQuery({
+  const { data, isLoading, isError } = useFetchQuery({
     queryKey: [queryKeys.EMPLOYER_ACCOUNT],
     queryFn: Get.employerAccountInfo,
     options: {
@@ -18,9 +19,14 @@ export default function EmployerContainer() {
 
   console.log('계정정보 API : ', data);
 
+  if (isError) {
+    return <ErrorComponent visibleBackButton={false} />;
+  }
+
   return (
     <Employer isLoading={isLoading} data={data?.result}>
-      <RecentlyRecruitment />
+      <></>
+      {/* <RecentlyRecruitment /> */}
     </Employer>
   );
 }
