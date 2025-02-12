@@ -1,8 +1,29 @@
+import { CertificationStatus } from '@/types';
 import styled from 'styled-components';
+import Button from '@/components/common/style/Button';
+import path from '@/constants/path';
+import { useRouter } from 'next/router';
+interface RecruitmentCountProps {
+  certificationStatus: CertificationStatus;
+}
 
-interface RecruitmentCountProps {}
+export default function RecruitmentCount({ certificationStatus }: RecruitmentCountProps) {
+  const router = useRouter();
 
-export default function RecruitmentCount({}: RecruitmentCountProps) {
+  if (certificationStatus !== 'VERIFIED') {
+    return (
+      <S.RecruitmentCount>
+        <S.RecruitmentGuidContainer>
+          <div className="text-wrapper">
+            <h3 className="text-wrapper__title">첫 채용공고 무료등록!</h3>
+            <p>본인인증 후 무료 채용공고 쿠폰을 받아보세요!</p>
+          </div>
+          <Button label="본인인증 페이지로 이동" variant="primary" width="220px" onClick={() => router.push(path.EMPLOYER_ACCOUNT)} />
+        </S.RecruitmentGuidContainer>
+      </S.RecruitmentCount>
+    );
+  }
+
   return (
     <S.RecruitmentCount>
       <S.RecruitmentCountContainer>
@@ -37,6 +58,19 @@ const S = {
     padding: 30px;
     display: flex;
     flex-direction: column;
+  `,
+  RecruitmentGuidContainer: styled.div`
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    .text-wrapper {
+      flex: 1;
+      &__title {
+        font-size: 22px;
+        margin-bottom: 5px;
+        font-weight: 500;
+      }
+    }
   `,
   RecruitmentCountContainer: styled.div`
     flex: 1;
