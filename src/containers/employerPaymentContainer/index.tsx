@@ -50,6 +50,9 @@ export default function EmployerPaymentContainer() {
   }, []);
 
   const handleClickPaymentItem = React.useCallback((payment: EmployerPaymentItem) => {
+    if (payment.paymentMethod === '쿠폰') {
+      return;
+    }
     setSelectedPayment(payment);
     setIsOpenModal(true);
   }, []);
