@@ -30,7 +30,10 @@ export default function MembershipModalForm({}: MembershipModalFormProps) {
               </p>
 
               <p>{membership.discountRate * 100}%</p>
-              <p>1회 무료쿠폰</p>
+              <p className="benefit-box">
+                <span className="benefit-box__text">기본 채용공고 10일권</span>
+                <span className="benefit-box__text">1회 무료쿠폰</span>
+              </p>
             </S.MembershipItem>
           );
         })}
@@ -47,7 +50,7 @@ const S = {
     display: flex;
     .item {
       flex: 1;
-      height: 50px;
+      height: 40px;
       background-color: ${({ theme }) => theme.colors.gray100};
       display: flex;
       align-items: center;
@@ -67,6 +70,14 @@ const S = {
     }
     p {
       flex: 1;
+    }
+    .benefit-box {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      .benefit-box__text {
+        padding: 2px 0;
+      }
     }
   `,
 };
