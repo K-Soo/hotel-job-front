@@ -28,7 +28,7 @@ export default function CouponList({ items }: CouponListProps) {
                   <span> {priceComma(item.minOrderAmount)}원</span>
                 </p>
               )}
-              <p className="content-box__date">{dateFormat.date(item.issuedAt, 'YYYY.MM.DD')}까지</p>
+              <p className="content-box__date">{dateFormat.date(item.expiresAt, 'YYYY.MM.DD')}까지</p>
             </div>
           </div>
         </S.CouponItem>
@@ -54,7 +54,7 @@ const S = {
     .price-box {
       font-size: 18px;
       font-weight: 500;
-      color: ${({ theme }) => theme.colors.red300};
+      color: ${({ theme }) => theme.colors.red400};
     }
     .content-box {
       flex: 1;
