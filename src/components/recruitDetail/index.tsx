@@ -39,7 +39,7 @@ export default function RecruitDetail({ data, children }: RecruitDetailProps) {
             <h1 className="title">{data.recruitmentTitle}</h1>
           </S.Header>
 
-          <S.Title>근무조건</S.Title>
+          <S.Title>근무 조건</S.Title>
           <RecruitDetailWorkCondition
             employment={data.employmentType}
             workingTime={data.workingTime}
