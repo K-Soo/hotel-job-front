@@ -70,7 +70,6 @@ export default function ApplicantListContainer({ handleClickResumePreview }: App
 
   return (
     <>
-      {/* <ApplicantNoticeFormContainer /> */}
       <ApplicantTable>
         <ApplicantTable.Header />
         {data?.result.length === 0 && <EmptyComponent message="해당 전형에 데이터가 없어요." />}
