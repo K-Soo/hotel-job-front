@@ -1,4 +1,5 @@
-import styled from 'styled-components';
+import React from 'react';
+import styled, { css } from 'styled-components';
 import { motion } from 'framer-motion';
 import Icon from '@/icons/Icon';
 import RecruitPrice from '@/components/recruit/RecruitPrice';
@@ -8,15 +9,45 @@ import { ALL_JOBS } from '@/constants/job';
 import { EXPERIENCE_CONDITION } from '@/constants/recruitment';
 import { addressFormat, employmentTypeFormat } from '@/utils';
 import IconDimmed from '@/components/common/IconDimmed';
+import Tag from '@/components/common/Tag';
 
 interface RecruitSpecialCardProps {
   item: RecruitListItem;
 }
 
 export default function RecruitSpecialCard({ item }: RecruitSpecialCardProps) {
+  const [isBold, setIsBold] = React.useState(false);
+  const [isHighlight, setIsHighlight] = React.useState(false);
+  const [isTag, setIsTag] = React.useState(false);
+
   const router = useRouter();
 
   const { sido, sigungu } = addressFormat(item.address);
+
+  const { hasBoldEffect, hasHighlightEffect, hasTagEffect } = React.useMemo(() => {
+    const currentDate = new Date();
+    let hasBoldEffect = false;
+    let hasHighlightEffect = false;
+    let hasTagEffect = false;
+
+    item.paymentRecruitment?.[0]?.options?.forEach((option) => {
+      const postingEndDate = option.postingEndDate ? new Date(option.postingEndDate) : null;
+
+      if (postingEndDate && currentDate <= postingEndDate) {
+        if (option.name === 'LIST_UP') hasBoldEffect = true;
+        if (option.name === 'HIGHLIGHT') hasHighlightEffect = true;
+        if (option.name === 'TAG') hasHighlightEffect = true;
+      }
+    });
+
+    return { hasBoldEffect, hasHighlightEffect, hasTagEffect };
+  }, [item.paymentRecruitment]);
+
+  React.useEffect(() => {
+    setIsBold(hasBoldEffect);
+    setIsHighlight(hasHighlightEffect);
+    setIsTag(hasTagEffect);
+  }, [hasBoldEffect, hasHighlightEffect, hasTagEffect]);
 
   const handleClickBlank = (event: React.MouseEvent<HTMLElement>) => {
     event.stopPropagation();
@@ -33,18 +64,16 @@ export default function RecruitSpecialCard({ item }: RecruitSpecialCardProps) {
     >
       <S.HeaderBox>
         <div className="tags">
-          <RecruitTag>숙식제공</RecruitTag>
-          <RecruitTag>수당</RecruitTag>
-          <RecruitTag>수당</RecruitTag>
+          {true && <Tag label="급구" type="URGENT" width="32px" margin="0 5px 0 0" fontSize="11px" height="17px" />}
         </div>
-        {/* <Icon name="Star24x24" width="16px" height="16px" /> */}
       </S.HeaderBox>
 
       <S.ContentBox>
         <div className="info-box">
-          <div className="info-box__title">
-            <h5 className="info-box__title--text">{item.recruitmentTitle}</h5>
-          </div>
+          <StyledTitle $isBold={isBold} $isHighlight={isHighlight}>
+            <h5 className="text">{item.recruitmentTitle}</h5>
+          </StyledTitle>
+
           <div className="info-box__detail">
             <div className="info-box__detail--company">호텔 더 아무무</div>
             <address className="info-box__detail--address">
@@ -78,6 +107,29 @@ export default function RecruitSpecialCard({ item }: RecruitSpecialCardProps) {
     </S.RecruitSpecialCard>
   );
 }
+
+const StyledTitle = styled.div<{ $isBold: boolean; $isHighlight: boolean }>`
+  margin-bottom: 5px;
+  width: fit-content;
+  .text {
+    padding: 1px 3px 1px 0;
+    color: ${(props) => props.theme.colors.gray800};
+    font-weight: ${(props) => (props.$isBold ? 600 : 400)};
+    width: fit-content;
+    display: inline;
+    line-height: 1.35;
+    ${(props) =>
+      props.$isHighlight &&
+      css`
+        background: linear-gradient(135deg, #c9e2ff 30%, transparent 70%), linear-gradient(-45deg, #e8f3ff 30%, transparent 70%);
+        background-blend-mode: multiply;
+        border-radius: 2px;
+      `};
+    &:hover {
+      color: ${(props) => props.theme.colors.black};
+    }
+  }
+`;
 
 const RecruitTag = styled.span`
   height: 18px;
@@ -122,7 +174,7 @@ const S = {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 10px;
+    margin-bottom: 4px;
     .tags {
       display: flex;
       flex-wrap: wrap;
@@ -133,7 +185,6 @@ const S = {
     display: flex;
     .info-box {
       flex: 1;
-
       &__title {
         display: flex;
         align-items: center;
