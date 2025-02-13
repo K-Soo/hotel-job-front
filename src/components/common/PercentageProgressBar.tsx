@@ -29,10 +29,10 @@ export default function MembershipProgressBar({ membershipInfo }: MembershipProg
 
   return (
     <S.ProgressBarWrapper ref={ref}>
-      <S.LevelContainer>
+      {/* <S.LevelContainer>
         <S.LevelBadge>{previousLevel}</S.LevelBadge>
         <S.LevelBadge>{currentLevel}</S.LevelBadge>
-      </S.LevelContainer>
+      </S.LevelContainer> */}
 
       <S.ProgressBar>
         <S.StaticBar style={{ width: `${startPercentage}%` }} />
