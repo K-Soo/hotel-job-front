@@ -13,11 +13,10 @@ import IconDimmed from '@/components/common/IconDimmed';
 import { priceComma, dateFormat } from '@/utils';
 
 interface RecruitDesktopCardProps {
-  recruitType: 'URGENT' | 'NORMAL';
   item: RecruitListItem;
 }
 
-export default function RecruitDesktopCard({ recruitType, item }: RecruitDesktopCardProps) {
+export default function RecruitDesktopCard({ item }: RecruitDesktopCardProps) {
   const [isBold, setIsBold] = React.useState(false);
   const [isHighlight, setIsHighlight] = React.useState(false);
   const [isTag, setIsTag] = React.useState(false);
