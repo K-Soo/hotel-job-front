@@ -1,5 +1,4 @@
 import React from 'react';
-import useResponsive from '@/hooks/useResponsive';
 import RecruitSpecialList from '@/components/recruit/RecruitSpecialList';
 import RecruitSpecialCard from '@/components/recruit/RecruitSpecialCard';
 import RecruitSectionTitle from '@/components/recruit/RecruitSectionTitle';
@@ -67,6 +66,7 @@ export default function RecruitSpecialListContainer() {
             })}
           </RecruitSpecialList>
         </InfiniteScroll>
+
         {!isEmptyFirstPage && isFirstPage && nextPage && (
           <div style={{ display: 'flex', justifyContent: 'center' }}>
             <Button label="더보기" variant="tertiary" width="200px" onClick={() => fetchNextPage()} margin="0 0 30px 0" />
