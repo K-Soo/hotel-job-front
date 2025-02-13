@@ -17,8 +17,7 @@ export default function Employer({ isLoading, data }: EmployerProps) {
   return (
     <S.Employer>
       <S.TopDashboard>
-        {isLoading && <SkeletonUI.Line style={{ height: '180px', flex: '1', borderRadius: '10px' }} />}
-        {!isLoading && data && <RecruitmentCount certificationStatus={data.certificationStatus} />}
+        <RecruitmentCount certificationStatus={data?.certificationStatus} />
 
         <CompanyInfoContainer certificationStatus={data?.certificationStatus} />
       </S.TopDashboard>
