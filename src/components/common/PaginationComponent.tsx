@@ -71,7 +71,7 @@ export default function PaginationComponent({ margin, pagination }: PaginationCo
           name="ArrowRight16x16"
           width="16px"
           height="16px"
-          style={{ transform: 'rotate(180deg)', color: prevPage ? '#000' : '#999' }}
+          style={{ transform: 'rotate(180deg)', color: prevPage ? '#000' : '#999', cursor: prevPage ? 'pointer' : 'default' }}
         />
       </button>
 
@@ -95,7 +95,12 @@ export default function PaginationComponent({ margin, pagination }: PaginationCo
       </S.PageNumbers>
 
       <button className="arrow" disabled={currentPage === totalPages} onClick={handleClickNextArrow}>
-        <Icon name="ArrowRight16x16" width="16px" height="16px" style={{ color: currentPage === totalPages ? '#999' : '#000' }} />
+        <Icon
+          name="ArrowRight16x16"
+          width="16px"
+          height="16px"
+          style={{ color: currentPage === totalPages ? '#999' : '#000', cursor: currentPage === totalPages ? 'default' : 'pointer' }}
+        />
       </button>
     </S.PaginationComponent>
   );
