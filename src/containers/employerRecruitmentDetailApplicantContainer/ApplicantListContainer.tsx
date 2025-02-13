@@ -1,5 +1,5 @@
 import React from 'react';
-import ApplicantTable from '@/components/EmployerRecruitmentDetailApplicant/ApplicantTable';
+import ApplicantTable from '@/components/EmployerRecruitmentDetailApplicant/applicantTable';
 import useFetchQuery from '@/hooks/useFetchQuery';
 import { Get, Patch } from '@/apis';
 import queryKeys from '@/constants/queryKeys';
@@ -11,6 +11,9 @@ import EmptyComponent from '@/components/common/EmptyComponent';
 import { EmployerReviewStageStatusKey, ResumeDetail } from '@/types';
 import useToast from '@/hooks/useToast';
 import { useQueryClient } from '@tanstack/react-query';
+import { ErrorComponent } from '@/error';
+import LoadingSpinner from '@/components/common/LoadingSpinner';
+import ApplicantNoticeFormContainer from '@/containers/employerRecruitmentDetailApplicantContainer/ApplicantNoticeFormContainer';
 
 interface Query extends ParsedUrlQuery {
   step?: RecruitmentApplicantQueryStep;
@@ -30,7 +33,7 @@ export default function ApplicantListContainer({ handleClickResumePreview }: App
   const queryClient = useQueryClient();
   const { addToast } = useToast();
 
-  const { data, isLoading, isSuccess } = useFetchQuery({
+  const { data, isLoading, isSuccess, isError } = useFetchQuery({
     queryKey: [queryKeys.RECRUITMENT_APPLICANT_LIST, { slug, step }].filter(Boolean),
     queryFn: Get.getRecruitmentDetailApplicantList,
     options: {
@@ -51,16 +54,14 @@ export default function ApplicantListContainer({ handleClickResumePreview }: App
   //API - 채용공고 지원자 전형 변경
   const fetchUpdateEmployerReviewStageStatus = React.useCallback(async (id: number, stage: EmployerReviewStageStatusKey) => {
     try {
-      const response = await Patch.updateEmployerReviewStageStatus({
-        applicationId: id,
-        stage,
-      });
+      const response = await Patch.updateEmployerReviewStageStatus({ applicationId: id, stage });
       console.log('지원자 전형 변경 API : ', response);
       if (response.result.status !== 'success') {
         throw new Error();
       }
       await queryClient.invalidateQueries({ queryKey: [queryKeys.RECRUITMENT_LIST], refetchType: 'all' });
       await queryClient.invalidateQueries({ queryKey: [queryKeys.APPLICATION_RECRUITMENT_STATUS_COUNT], refetchType: 'all' });
+      await queryClient.invalidateQueries({ queryKey: [queryKeys.RECRUITMENT_APPLICANT_LIST], refetchType: 'all' });
       addToast({ type: 'success', message: '전형변경 완료' });
     } catch (error) {
       addToast({ type: 'error', message: '에러가 발생했습니다.' });
@@ -68,19 +69,42 @@ export default function ApplicantListContainer({ handleClickResumePreview }: App
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  return (
-    <>
+  const handleOpenNoticeForm = () => setIsOpenNoticeForm(true);
+  const handleCloseNoticeForm = () => setIsOpenNoticeForm(false);
+
+  if (isLoading) {
+    return (
       <ApplicantTable>
         <ApplicantTable.Header />
-        {data?.result.length === 0 && <EmptyComponent message="해당 전형에 데이터가 없어요." />}
-        <ApplicantTable.Body
-          data={data?.result}
-          isLoading={isLoading}
-          isSuccess={isSuccess}
-          fetchUpdateEmployerReviewStageStatus={fetchUpdateEmployerReviewStageStatus}
-          handleClickResumePreview={handleClickResumePreview}
-        />
+        {isLoading && <LoadingSpinner height="250px" />}
       </ApplicantTable>
-    </>
-  );
+    );
+  }
+
+  if (isError) {
+    return (
+      <ApplicantTable>
+        <ApplicantTable.Header />
+        <ErrorComponent visibleBackButton={false} />;
+      </ApplicantTable>
+    );
+  }
+
+  if (isSuccess && data) {
+    return (
+      <>
+        {isOpenNoticeForm && <ApplicantNoticeFormContainer handleCloseNoticeForm={handleCloseNoticeForm} />}
+        <ApplicantTable>
+          <ApplicantTable.Header />
+          {data.result.length === 0 && <EmptyComponent message="해당 전형에 데이터가 없어요." />}
+          <ApplicantTable.Body
+            data={data.result}
+            fetchUpdateEmployerReviewStageStatus={fetchUpdateEmployerReviewStageStatus}
+            handleClickResumePreview={handleClickResumePreview}
+            handleOpenNoticeForm={handleOpenNoticeForm}
+          />
+        </ApplicantTable>
+      </>
+    );
+  }
 }
