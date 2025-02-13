@@ -3,9 +3,11 @@ import Portal from '@/components/common/Portal';
 import Background from '@/components/common/Background';
 import Button from '@/components/common/style/Button';
 
-interface ApplicantNoticeFormProps {}
+interface ApplicantNoticeFormProps {
+  handleCloseNoticeForm: () => void;
+}
 
-export default function ApplicantNoticeForm({}: ApplicantNoticeFormProps) {
+export default function ApplicantNoticeForm({ handleCloseNoticeForm }: ApplicantNoticeFormProps) {
   return (
     <Portal>
       <Background>
@@ -17,7 +19,7 @@ export default function ApplicantNoticeForm({}: ApplicantNoticeFormProps) {
             <div>발표 문구</div>
           </S.Content>
           <S.Bottom>
-            <Button label="취소" variant="secondary" />
+            <Button label="취소" variant="secondary" onClick={handleCloseNoticeForm} />
             <Button label="알림 보내기" variant="primary" margin="0 0 0 15px" />
           </S.Bottom>
         </S.ApplicantNoticeForm>
@@ -28,7 +30,7 @@ export default function ApplicantNoticeForm({}: ApplicantNoticeFormProps) {
 
 const S = {
   ApplicantNoticeForm: styled.div`
-    z-index: 15;
+    z-index: 20;
     position: fixed;
     top: 0;
     right: 0;
