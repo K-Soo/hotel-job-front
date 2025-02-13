@@ -7,7 +7,7 @@ import { EmployerReviewStageStatusKey, RecruitmentDetailApplicantListItem, Resum
 import { dateFormat, parseBirthDateAndCalculateAge } from '@/utils';
 import { EMPLOYER_REVIEW_STAGE_STATUS } from '@/constants/application';
 import { SEX_CODE } from '@/constants';
-
+import LoadingSpinner from '@/components/common/LoadingSpinner';
 interface ApplicantTableProps {
   children: React.ReactNode;
 }
@@ -138,7 +138,7 @@ function ApplicantTableBody({
 }: ApplicantTableBody) {
   return (
     <StyledTableBody>
-      {isLoading && <div>로딩중...</div>}
+      {isLoading && <LoadingSpinner height="150px" />}
       {isSuccess &&
         data &&
         data.map((item) => {
@@ -230,19 +230,15 @@ function ApplicantTableBody({
                 )}
 
                 {item.employerReviewStageStatus === 'ACCEPT' && (
-                  <>
-                    <StyledRollbackButton onClick={() => fetchUpdateEmployerReviewStageStatus(item.id, 'DOCUMENT')}>
-                      전형이동 복구
-                    </StyledRollbackButton>
-                  </>
+                  <StyledRollbackButton onClick={() => fetchUpdateEmployerReviewStageStatus(item.id, 'DOCUMENT')}>
+                    전형이동 복구
+                  </StyledRollbackButton>
                 )}
 
                 {item.employerReviewStageStatus === 'REJECT' && (
-                  <>
-                    <StyledRollbackButton onClick={() => fetchUpdateEmployerReviewStageStatus(item.id, 'DOCUMENT')}>
-                      전형이동 복구
-                    </StyledRollbackButton>
-                  </>
+                  <StyledRollbackButton onClick={() => fetchUpdateEmployerReviewStageStatus(item.id, 'DOCUMENT')}>
+                    전형이동 복구
+                  </StyledRollbackButton>
                 )}
               </div>
 
