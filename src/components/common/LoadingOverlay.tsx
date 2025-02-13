@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import Image from 'next/image';
 import Portal from '@/components/common/Portal';
-import Background from '@/components/common/Background';
 
 interface LoadingProps {
   height?: string;
