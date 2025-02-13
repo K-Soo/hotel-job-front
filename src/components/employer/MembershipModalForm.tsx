@@ -1,17 +1,17 @@
 import styled from 'styled-components';
 import { MEMBERSHIP } from '@/constants/membership';
 import { formatToManWon } from '@/utils';
-
+import { priceComma } from '@/utils';
 interface MembershipModalFormProps {}
 
 export default function MembershipModalForm({}: MembershipModalFormProps) {
   return (
     <S.MembershipModalForm>
       <S.FormHeader>
-        <p className="item">등급</p>
-        <p className="item">등급기준</p>
-        <p className="item">즉시할인</p>
-        <p className="item">회원혜택</p>
+        <p className="item level">등급</p>
+        <p className="item score">등급기준</p>
+        <p className="item discount">즉시할인</p>
+        <p className="item benefit-box">회원혜택</p>
       </S.FormHeader>
 
       <S.MembershipContent>
@@ -23,16 +23,20 @@ export default function MembershipModalForm({}: MembershipModalFormProps) {
             <S.MembershipItem key={membership.discountRate}>
               <p className="level">{membership.membershipLevel}</p>
 
-              <p>
+              <p className="score">
                 {isFamily ? <span>신규</span> : <span>{formatToManWon(membership.minScore)}만원</span>}
                 <span> ~ </span>
                 {!isVip && <span>{formatToManWon(membership.maxScore)}만원</span>}
               </p>
 
-              <p>{membership.discountRate * 100}%</p>
+              {isFamily ? <p className="discount">-</p> : <p className="discount">{membership.discountRate * 100}%</p>}
+
               <p className="benefit-box">
-                <span className="benefit-box__text">기본 채용공고 10일권</span>
-                <span className="benefit-box__text">1회 무료쿠폰</span>
+                {membership.description.map((desc, index) => (
+                  <span key={index} className="benefit-box__text">
+                    {desc}
+                  </span>
+                ))}
               </p>
             </S.MembershipItem>
           );
@@ -49,12 +53,24 @@ const S = {
   FormHeader: styled.div`
     display: flex;
     .item {
-      flex: 1;
       height: 40px;
       background-color: ${({ theme }) => theme.colors.gray100};
       display: flex;
       align-items: center;
       justify-content: space-around;
+    }
+    .level {
+      font-weight: 400;
+      flex-basis: 100px;
+    }
+    .score {
+      flex-basis: 120px;
+    }
+    .discount {
+      flex-basis: 80px;
+    }
+    .benefit-box {
+      flex: 1;
     }
   `,
   MembershipContent: styled.div``,
@@ -66,12 +82,17 @@ const S = {
     text-align: center;
     border-bottom: 1px solid ${({ theme }) => theme.colors.gray200};
     .level {
-      font-weight: 500;
+      font-weight: 400;
+      flex-basis: 100px;
     }
-    p {
-      flex: 1;
+    .score {
+      flex-basis: 120px;
+    }
+    .discount {
+      flex-basis: 80px;
     }
     .benefit-box {
+      flex: 1;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
