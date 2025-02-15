@@ -71,6 +71,7 @@ export default function RecruitDesktopCard({ item }: RecruitDesktopCardProps) {
       onClick={(event) => {
         event.stopPropagation();
       }}
+      $isClosed={item.recruitmentStatus === 'CLOSED'}
     >
       <S.Body>
         <S.LocationRow>
@@ -163,26 +164,8 @@ const StyledTitle = styled.div<{ $isBold: boolean; $isHighlight: boolean }>`
   }
 `;
 
-const ExpansionContent = styled(motion.div)``;
-
-const RecruitTag = styled.span`
-  height: 18px;
-  width: fit-content;
-  display: flex;
-  align-items: center;
-  padding: 0px 5px;
-  border-radius: 3px;
-  margin: 0 10px 5px 0;
-  background-color: ${(props) => props.theme.colors.blue50};
-  font-size: 13px;
-  font-weight: 300;
-  color: ${(props) => props.theme.colors.blue800};
-  /* color: gray; */
-  letter-spacing: 0.8px;
-`;
-
 const S = {
-  RecruitDesktopCard: styled.article`
+  RecruitDesktopCard: styled.article<{ $isClosed: boolean }>`
     width: 100%;
     font-size: 14px;
     display: flex;
@@ -192,8 +175,14 @@ const S = {
     border-bottom: 1px solid ${(props) => props.theme.colors.gray300};
     height: auto;
     &:hover {
-      background-color: ${(props) => props.theme.colors.gray};
+      /* background-color: ${(props) => props.theme.colors.gray}; */
+      background-color: ${(props) => (props.$isClosed ? 'none' : props.theme.colors.gray)};
     }
+    ${(props) =>
+      props.$isClosed &&
+      css`
+        background-color: ${props.theme.colors.gray};
+      `};
   `,
   Body: styled.div`
     display: flex;
