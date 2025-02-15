@@ -34,7 +34,7 @@ export interface DefaultRecruitQuery {
   experience?: types.experienceConditionKeys;
   employment?: types.EmploymentType[];
   benefits?: types.BenefitsKeys[];
-  jobs?: AllJobsKeyValuesKeys[];
+  job?: AllJobsKeyValuesKeys | AllJobsKeyValuesKeys[];
 }
 
 /************************************* REQUEST **************************************/
@@ -108,6 +108,8 @@ export interface PaymentRecruitmentConfirmRequest {
 }
 
 export interface PaymentRecruitmentFreeConfirmRequest extends Pick<PaymentRecruitmentConfirmRequest, 'orderId' | 'amount'> {}
+
+export interface CreateApplicationsAnnouncementRequest extends types.CreateApplicationsAnnouncementForm {}
 
 /************************************* RESPONSE **************************************/
 
