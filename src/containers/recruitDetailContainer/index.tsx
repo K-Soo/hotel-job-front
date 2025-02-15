@@ -15,6 +15,7 @@ import dynamic from 'next/dynamic';
 import useResponsive from '@/hooks/useResponsive';
 import RecruitDetailBottomNavigation from '@/components/recruitDetail/RecruitDetailBottomNavigation';
 import useModal from '@/hooks/useModal';
+import useFetchApplyCheck from '@/hooks/useFetchApplyCheck';
 
 const DynamicNoSSRModal = dynamic(() => import('@/components/common/modal'), { ssr: false });
 
@@ -46,22 +47,8 @@ export default function RecruitDetailContainer() {
     },
   });
 
-  const {
-    data: applyCheckData,
-    isLoading: isApplyCheckLoading,
-    isError: isApplyCheckError,
-  } = useFetchQuery({
-    queryKey: [queryKeys.APPLICATION_APPLY_CHECK, { slug, role }],
-    queryFn: Get.applicationApplyCheck,
-    options: {
-      enabled: !!slug && role === 'JOB_SEEKER',
-      staleTime: 10 * 60 * 1000,
-      gcTime: 15 * 60 * 1000,
-    },
-    requestQuery: {
-      id: slug as string,
-    },
-  });
+  // API - 지원여부 체크
+  const { applyCheckData, isApplyCheckLoading, isApplyCheckError } = useFetchApplyCheck({ recruitmentId: data?.result?.id });
 
   React.useEffect(() => {
     if (applyCheckData) {
@@ -141,43 +128,24 @@ export default function RecruitDetailContainer() {
         )}
 
         <RecruitDetail data={data.result}>
-          <RecruitDetailSideMenu managerName={data.result.managerName} managerNumber={data.result.managerNumber}>
-            {role === 'JOB_SEEKER' && (
-              <>
-                {!isOpenApplyForm && !isApplyCheckError && (
-                  <Button
-                    label={applyStatus === 'available' ? '지원하기' : '지원완료'}
-                    variant="primary"
-                    height="50px"
-                    borderRadius="10px"
-                    onClick={handleClickApply}
-                    fontSize="18px"
-                    disabled={applyStatus === 'duplicate'}
-                    isLoading={isApplyCheckLoading}
-                  />
-                )}
-
-                {isApplyCheckError && (
-                  <Button label="지원불가" variant="secondary" height="50px" borderRadius="10px" fontSize="18px" disabled />
-                )}
-
-                {isOpenApplyForm && (
-                  <RecruitDetailApplyResumeForm
-                    selectedResume={selectedResume}
-                    setSelectedResume={setSelectedResume}
-                    setIsOpenApplyForm={setIsOpenApplyForm}
-                    fetchSubmitApply={fetchSubmitApply}
-                  />
-                )}
-              </>
-            )}
-
-            {role === 'EMPLOYER' && (
-              <Button label="지원자 전용" variant="secondary" height="50px" borderRadius="10px" fontSize="18px" disabled />
-            )}
-          </RecruitDetailSideMenu>
+          <RecruitDetailSideMenu
+            managerName={data.result.managerName}
+            managerNumber={data.result.managerNumber}
+            recruitmentStatus={data.result.recruitmentStatus}
+            handleClickApply={handleClickApply}
+            isOpenApplyForm={isOpenApplyForm}
+            isApplyCheckError={isApplyCheckError}
+            applyStatus={applyStatus}
+            isApplyCheckLoading={isApplyCheckLoading}
+            selectedResume={selectedResume}
+            setSelectedResume={setSelectedResume}
+            setIsOpenApplyForm={setIsOpenApplyForm}
+            fetchSubmitApply={fetchSubmitApply}
+          ></RecruitDetailSideMenu>
         </RecruitDetail>
-        <RecruitDetailBottomNavigation applyStatus={applyStatus} />
+
+        {/* MOBILE BOTTOM */}
+        <RecruitDetailBottomNavigation applyStatus={applyStatus} recruitmentStatus={data.result.recruitmentStatus} />
       </>
     );
   }
