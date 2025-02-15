@@ -4,16 +4,18 @@ import { motion } from 'framer-motion';
 import Icon from '@/icons/Icon';
 interface SelectProps {
   margin?: string;
-  options: { label: string; value: string }[];
+  options: Record<string, string>;
+  name: string;
+  onChange: (event: React.ChangeEvent<any>) => void;
 }
 
-export default function Select({ margin, options }: SelectProps) {
+export default function Select({ margin, options, name, onChange }: SelectProps) {
   return (
     <S.Select $margin={margin}>
-      <StyledSelect name="">
-        {options.map((option) => (
-          <option key={option.value} value={option.value}>
-            {option.label}
+      <StyledSelect name={name} onChange={onChange}>
+        {Object.entries(options).map(([key, value]) => (
+          <option key={key} value={key}>
+            {value}
           </option>
         ))}
       </StyledSelect>
