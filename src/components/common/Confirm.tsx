@@ -84,14 +84,17 @@ const S = {
       font-size: 20px;
       font-weight: 500;
       text-align: center;
+      white-space: pre-line;
+      word-wrap: break-word;
+      max-width: 100%;
       ${(props) => props.theme.media.mobile`
         font-size: 18px;
       `};
     }
     .description {
       color: ${(props) => props.theme.colors.black500};
-      font-weight: 300;
-      margin-top: 15px;
+      font-weight: 400;
+      margin-top: 30px;
       font-size: 16px;
       text-align: center;
       line-height: 1.3;
