@@ -211,6 +211,7 @@ function ApplicantTableBody({
               id={item.id}
               employerReviewStageStatus={item.employerReviewStageStatus}
               fetchUpdateEmployerReviewStageStatus={fetchUpdateEmployerReviewStageStatus}
+              announcementRecipients={item.announcementRecipients}
             />
           </div>
         );
