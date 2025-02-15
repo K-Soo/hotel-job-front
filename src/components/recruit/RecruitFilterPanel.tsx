@@ -12,49 +12,88 @@ interface RecruitFilterPanelProps {
 
 export default function RecruitFilterPanel({ handleClickFilterButton }: RecruitFilterPanelProps) {
   const router = useRouter();
+  const [pathname, params] = router.asPath.split('?');
+
   const dragScrollRef = React.useRef<HTMLElement>(null);
   const filterButtonRefs = React.useRef<HTMLLIElement[] | null[]>([]);
 
   const handleClickTagButton = (event: React.MouseEvent<HTMLButtonElement>) => {
-    const { value } = event.currentTarget;
-    console.log('value: ', value);
-    const { pathname, query } = router;
-    const { tag } = query;
-    // const tags = tag ? tag.split(',') : [];
+    const { value, name } = event.currentTarget;
 
-    // if (tags.includes(value)) {
-    //   const newTags = tags.filter((item) => item !== value);
-    //   router.push({
-    //     pathname,
-    //     query: { ...query, tag: newTags.join(',') },
-    //   });
-    // } else {
-    //   router.push({
-    //     pathname,
-    //     query: { ...query, tag: [...tags, value].join(',') },
-    //   });
-    // }
+    const urlSearchParams = new URLSearchParams(params);
+
+    const existingValues = urlSearchParams.getAll(name);
+
+    if (existingValues.includes(value)) {
+      urlSearchParams.delete(name);
+      existingValues.filter((item) => item !== value).forEach((item) => urlSearchParams.append(name, item));
+    } else {
+      urlSearchParams.append(name, value);
+    }
+
+    router.replace(
+      {
+        pathname,
+        query: {
+          ...router.query,
+          [name]: urlSearchParams.getAll(name),
+        },
+      },
+      undefined,
+      { scroll: false },
+    );
   };
 
   return (
     <S.RecruitFilterPanel>
-      <div>
+      {/* <div>
         <RecruitFilterButton isTag margin="0 15px 0 0" label="전체 태그" />
-      </div>
+      </div> */}
       <DragScroll>
-        <div className="filters">
+        {/* <div className="filters">
           <RecruitFilterButton onClick={handleClickFilterButton} name="salary" margin="0 15px 0 0" label="급여" />
           <RecruitFilterButton onClick={handleClickFilterButton} name="experience" margin="0 15px 0 0" label="경력/신입" />
           <RecruitFilterButton onClick={handleClickFilterButton} name="employmentType" label="고용형태" />
-        </div>
+        </div> */}
 
-        <div className="line" />
+        {/* <div className="line" /> */}
 
         <div className="tags">
-          <RecruitTagButton margin="0 15px 0 0" label="파출" value="AL" onClick={handleClickTagButton} />
-          <RecruitTagButton margin="0 15px 0 0" label="부부팀 구인" value="" onClick={handleClickTagButton} />
-          <RecruitTagButton margin="0 15px 0 0" label="숙식제공" value="" onClick={handleClickTagButton} />
-          <RecruitTagButton margin="0 15px 0 0" label="식대제공" value="" onClick={handleClickTagButton} />
+          <RecruitTagButton
+            name="job"
+            margin="0 15px 0 0"
+            label="부부팀"
+            value={'CLEANING_TEAM'.toLocaleLowerCase()}
+            onClick={handleClickTagButton}
+          />
+          <RecruitTagButton
+            name="job"
+            margin="0 15px 0 0"
+            label="캐셔"
+            value={'CASHIER'.toLocaleLowerCase()}
+            onClick={handleClickTagButton}
+          />
+          <RecruitTagButton
+            name="employmentType"
+            margin="0 15px 0 0"
+            label="파출"
+            value={'CONTRACT'.toLocaleLowerCase()}
+            onClick={handleClickTagButton}
+          />
+          <RecruitTagButton
+            name="benefits"
+            margin="0 15px 0 0"
+            label="숙식제공"
+            value={'WORK_LIFE_DORMITORY_OPERATION'.toLocaleLowerCase()}
+            onClick={handleClickTagButton}
+          />
+          <RecruitTagButton
+            name="workingDay"
+            margin="0 15px 0 0"
+            label="주말"
+            value={'WEEKEND_DAY'.toLocaleLowerCase()}
+            onClick={handleClickTagButton}
+          />
         </div>
       </DragScroll>
     </S.RecruitFilterPanel>
