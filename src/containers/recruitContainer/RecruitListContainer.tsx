@@ -50,9 +50,9 @@ export default function RecruitListContainer() {
   if (isLoading) {
     return (
       <>
-        <div style={{ display: 'flex', justifyContent: 'flex-end', margin: '0' }}>
+        {/* <div style={{ display: 'flex', justifyContent: 'flex-end', margin: '0' }}>
           <SkeletonUI.Line style={{ height: '35px', width: '180px' }} />
-        </div>
+        </div> */}
         <SkeletonUI.Line style={{ height: '24px', width: '147px', marginBottom: '10px' }} />
         <SkeletonUI.RecruitBasicList count={2} />
       </>
@@ -73,7 +73,7 @@ export default function RecruitListContainer() {
 
     return (
       <>
-        <div style={{ display: 'flex', justifyContent: 'flex-end', margin: '0' }}>
+        {/* <div style={{ display: 'flex', justifyContent: 'flex-end', margin: '0' }}>
           <Tabs
             tabsOptions={recruitOrderFilterTabOptions}
             width="180px"
@@ -82,8 +82,8 @@ export default function RecruitListContainer() {
             fontColor="gray"
             backgroundColor="#FFFFFF"
           />
-        </div>
-        <RecruitSectionTitle title="일반채용" count={data.result.pagination.totalItems} margin="0" />
+        </div> */}
+        <RecruitSectionTitle title="일반채용" count={data.result.pagination.totalItems} />
         {data.result.items.map((item, index) => {
           if (isTablet) {
             return <RecruitMobileCard key={index} item={item} />;
