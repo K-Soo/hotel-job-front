@@ -33,8 +33,6 @@ export default class MyDocument extends Document {
         <Head>
           <link rel="manifest" href="/manifest.json" />
           <link rel="icon" href="/favicon.ico" sizes="any" />
-          <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport" />
-          <meta name="format-detection" content="telephone=no" />
           <style />
         </Head>
         <body>
