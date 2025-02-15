@@ -6,11 +6,12 @@ interface RecruitTagButtonProps {
   name?: string;
   margin?: string;
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  value: string;
 }
 
-export default function RecruitTagButton({ label, name, margin, onClick }: RecruitTagButtonProps) {
+export default function RecruitTagButton({ label, name, margin, onClick, value }: RecruitTagButtonProps) {
   return (
-    <S.RecruitTagButton type="button" $margin={margin} name={name}>
+    <S.RecruitTagButton type="button" $margin={margin} name={name} onClick={onClick} value={value}>
       <span>{label}</span>
     </S.RecruitTagButton>
   );
