@@ -56,16 +56,16 @@ export const EMPLOYER_ASIDE_MENU = [
     items: [
       { label: '결제내역', value: path.EMPLOYER_PAYMENT },
       { label: '쿠폰', value: path.EMPLOYER_COUPON },
-      { label: '포인트', value: path.EMPLOYER_POINT },
+      // { label: '포인트', value: path.EMPLOYER_POINT },
     ],
   },
 
-  {
-    label: '문의',
-    value: '',
-    icon: 'Question24x24',
-    items: [],
-  },
+  // {
+  //   label: '문의',
+  //   value: '',
+  //   icon: 'Question24x24',
+  //   items: [],
+  // },
 
   {
     label: '계정설정',
@@ -73,8 +73,8 @@ export const EMPLOYER_ASIDE_MENU = [
     icon: 'Settings24x24',
     items: [
       { label: '계정정보', value: path.EMPLOYER_ACCOUNT },
-      { label: '알림설정', value: path.EMPLOYER_ACCOUNT_NOTIFICATION },
-      { label: '비밀번호 변경', value: path.EMPLOYER_ACCOUNT_AUTHENTICATION },
+      // { label: '알림설정', value: path.EMPLOYER_ACCOUNT_NOTIFICATION },
+      // { label: '비밀번호 변경', value: path.EMPLOYER_ACCOUNT_AUTHENTICATION },
     ],
   },
 ];
