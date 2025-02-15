@@ -43,6 +43,7 @@ export default function EmployerRecruitmentDetailApplicantContainer() {
       }
       await queryClient.invalidateQueries({ queryKey: [queryKeys.RECRUITMENT_LIST], refetchType: 'all' });
       await queryClient.invalidateQueries({ queryKey: [queryKeys.RECRUITMENT_APPLICANT_COUNT], refetchType: 'all' });
+      await queryClient.invalidateQueries({ queryKey: [queryKeys.RECRUITMENT_APPLICANT_LIST], refetchType: 'all' });
     } catch (error) {
       console.log('error: ', error);
     }
