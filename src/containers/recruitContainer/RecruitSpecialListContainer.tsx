@@ -10,20 +10,33 @@ import { Get } from '@/apis';
 import EmptyComponent from '@/components/common/EmptyComponent';
 import SkeletonUI from '@/components/common/SkeletonUI';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
+import { ParsedUrlQuery } from 'querystring';
+import { keepPreviousData } from '@tanstack/react-query';
+
+interface Query extends ParsedUrlQuery {
+  page?: string;
+  job?: any;
+}
 
 export default function RecruitSpecialListContainer() {
+  const router = useRouter();
+  const { page = '1', location, job } = router.query as Query;
+
   const { data, isLoading, isSuccess, fetchNextPage, hasNextPage, isFetching } = useInfiniteScroll({
     queryFn: Get.getRecruitSpecialList,
-    queryKey: [queryKeys.RECRUIT_SPECIAL_LIST, { limit: '9', type: 'RECRUIT' }],
+    queryKey: [queryKeys.RECRUIT_SPECIAL_LIST, { limit: '9', type: 'RECRUIT', job }],
     options: {
       enabled: true,
       throwOnError: true,
       staleTime: 60 * 1000 * 5,
       gcTime: 60 * 1000 * 10,
+      placeholderData: keepPreviousData,
     },
     requestQuery: {
       limit: '9',
       type: 'RECRUIT',
+      job,
     },
   });
 
@@ -49,7 +62,7 @@ export default function RecruitSpecialListContainer() {
       <>
         <RecruitSectionTitle title="🌟 스페셜 채용" />
 
-        {isEmptyFirstPage && isFirstPage && <EmptyComponent height="200px" />}
+        {isEmptyFirstPage && isFirstPage && <EmptyComponent height="150px" message="해당하는 공고가 없어요." isVisibleImage={false} />}
 
         <InfiniteScroll
           loadMore={() => {
