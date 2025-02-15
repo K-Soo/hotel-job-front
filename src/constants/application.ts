@@ -1,7 +1,19 @@
 export const REVIEW_STAGE_STATUS = {
   DOCUMENT: '서류전형',
   INTERVIEW: '면접전형',
-  FINAL_ACCEPT: '최종합격',
+  ACCEPT: '최종합격',
+  REJECT: '불합격',
+} as const;
+
+export const ANNOUNCE_ACCEPT_REVIEW_STAGE_STATUS = {
+  DOCUMENT: '서류전형',
+  INTERVIEW: '면접전형',
+  ACCEPT: '최종합격',
+} as const;
+
+export const ANNOUNCE_REJECT_REVIEW_STAGE_STATUS = {
+  DOCUMENT: '서류전형',
+  INTERVIEW: '면접전형',
   REJECT: '불합격',
 } as const;
 
