@@ -14,21 +14,22 @@ import Tabs from '@/components/common/Tabs';
 import { recruitOrderFilterTabOptions } from '@/constants/tabs';
 import SkeletonUI from '@/components/common/SkeletonUI';
 import EmptyComponent from '@/components/common/EmptyComponent';
+import { AllJobsKeyValuesKeys } from '@/constants/job';
 
 interface Query extends ParsedUrlQuery {
   page?: string;
+  job?: any;
 }
 
-// TODO - LOADING
 export default function RecruitListContainer() {
   const { isTablet } = useResponsive();
 
   const router = useRouter();
-  const { page = '1' } = router.query as Query;
+  const { page = '1', location, job } = router.query as Query;
 
-  const { data, isLoading, isSuccess, isFetching } = useFetchQuery({
+  const { data, isLoading, isSuccess } = useFetchQuery({
     queryFn: Get.getRecruitBasicList,
-    queryKey: [queryKeys.RECRUIT_BASIC_LIST, { limit: '20', type: 'BASIC', page }],
+    queryKey: [queryKeys.RECRUIT_BASIC_LIST, { limit: '20', type: 'BASIC', page, job }],
     options: {
       enabled: true,
       staleTime: 60 * 1000 * 5,
@@ -40,6 +41,7 @@ export default function RecruitListContainer() {
       page,
       limit: '20',
       type: 'RECRUIT',
+      job,
     },
   });
 
@@ -86,6 +88,7 @@ export default function RecruitListContainer() {
           if (isTablet) {
             return <RecruitMobileCard key={index} item={item} />;
           }
+
           return <RecruitDesktopCard key={index} item={item} />;
         })}
         {!isEmpty && <PaginationComponent pagination={data.result.pagination} />}
