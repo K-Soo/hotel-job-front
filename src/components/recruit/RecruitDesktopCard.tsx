@@ -11,6 +11,7 @@ import { ALL_JOBS } from '@/constants/job';
 import { useRouter } from 'next/router';
 import IconDimmed from '@/components/common/IconDimmed';
 import { priceComma, dateFormat } from '@/utils';
+import { CITY_KOREAN_MAP } from '@/constants/location';
 
 interface RecruitDesktopCardProps {
   item: RecruitListItem;
@@ -40,7 +41,7 @@ export default function RecruitDesktopCard({ item }: RecruitDesktopCardProps) {
       if (postingEndDate && currentDate <= postingEndDate) {
         if (option.name === 'LIST_UP') hasBoldEffect = true;
         if (option.name === 'HIGHLIGHT') hasHighlightEffect = true;
-        if (option.name === 'TAG') hasHighlightEffect = true;
+        if (option.name === 'TAG') hasTagEffect = true;
       }
     });
 
@@ -76,7 +77,7 @@ export default function RecruitDesktopCard({ item }: RecruitDesktopCardProps) {
       <S.Body>
         <S.LocationRow>
           <div className="location-box">
-            <span className="city">{sido}</span>
+            <span className="city">{CITY_KOREAN_MAP[sido as keyof typeof CITY_KOREAN_MAP]}</span>
             <span className="suburbs">{sigungu}</span>
           </div>
         </S.LocationRow>
@@ -144,7 +145,7 @@ export default function RecruitDesktopCard({ item }: RecruitDesktopCardProps) {
 }
 const StyledTitle = styled.div<{ $isBold: boolean; $isHighlight: boolean }>`
   width: fit-content;
-  margin-bottom: 1px;
+  margin-bottom: 4px;
   display: flex;
   align-items: center;
   .text {
@@ -203,7 +204,7 @@ const S = {
       align-items: center;
       justify-content: center;
       .city {
-        padding-bottom: 5px;
+        margin-bottom: 5px;
         color: ${(props) => props.theme.colors.gray800};
       }
       .suburbs {
