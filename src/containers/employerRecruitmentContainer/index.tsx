@@ -66,18 +66,14 @@ export default function EmployerRecruitmentContainer() {
         throw new Error();
       }
       await queryClient.invalidateQueries({ queryKey: [queryKeys.RECRUITMENT_STATUS], refetchType: 'all' });
-      await queryClient.invalidateQueries({
-        queryKey: [queryKeys.RECRUITMENT_LIST],
-        refetchType: 'all',
-      });
+      await queryClient.invalidateQueries({ queryKey: [queryKeys.RECRUITMENT_LIST], refetchType: 'all' });
       router.replace(path.EMPLOYER_RECRUITMENT);
       addToast({ type: 'info', message: '삭제가 완료되었습니다.' });
-    } catch (error) {
-      if (axios.isAxiosError(error)) {
-        const errorCode = error.response?.data?.error?.code;
-        if (errorCode === 'ERR-4001') {
-          addToast({ type: 'error', message: '진행중인 공고는 삭제할 수 없습니다.' });
-        }
+    } catch (error: any) {
+      const errorCode = error.response?.data?.error?.code;
+      if (errorCode === 'ERR-4001') {
+        addToast({ type: 'error', message: '삭제할 수 없는 공고가 포함되어 있습니다.' });
+        return;
       }
       alert('삭제 중 문제가 발생했습니다. 문제가 지속되면 관리자에게 문의하세요.');
     } finally {

@@ -126,5 +126,11 @@ const S = {
   `,
   RowValue: styled.div`
     color: ${(props) => props.theme.colors.black};
+    word-wrap: break-word;
+    word-break: break-all;
+    max-width: 200px;
+    ${(props) => props.theme.media.tablet`
+      max-width: 100%;
+    `};
   `,
 };

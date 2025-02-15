@@ -3,11 +3,12 @@ import styled from 'styled-components';
 interface RecruitSectionTitleProps {
   title: string;
   count?: number;
+  margin?: string;
 }
 
-export default function RecruitSectionTitle({ title, count = 0 }: RecruitSectionTitleProps) {
+export default function RecruitSectionTitle({ title, margin, count = 0 }: RecruitSectionTitleProps) {
   return (
-    <S.RecruitSectionTitle>
+    <S.RecruitSectionTitle $margin={margin}>
       <h3 className="title">{title}</h3>
       {count !== 0 && (
         <span className="count-box">
@@ -20,14 +21,14 @@ export default function RecruitSectionTitle({ title, count = 0 }: RecruitSection
 }
 
 const S = {
-  RecruitSectionTitle: styled.div`
+  RecruitSectionTitle: styled.div<{ $margin?: string }>`
     display: flex;
     align-items: end;
-    margin-bottom: 10px;
-    font-weight: 500;
+    margin: ${(props) => props.$margin ?? '0 0 10px 0'};
     color: ${(props) => props.theme.colors.black400};
+    font-weight: 500;
     .title {
-      font-size: 26px;
+      font-size: 24px;
       padding-right: 8px;
     }
     .count-box {

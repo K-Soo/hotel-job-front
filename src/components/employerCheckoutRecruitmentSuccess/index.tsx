@@ -55,7 +55,7 @@ export default function EmployerCheckoutRecruitmentSuccess({ confirmForm }: Empl
             fontSize="16px"
             margin="80px 0 0 0"
             borderRadius="30px"
-            onClick={() => router.replace(path.EMPLOYER_RECRUITMENT)}
+            onClick={() => router.replace(`${path.EMPLOYER_RECRUITMENT}?status=progress`)}
           />
         </S.SuccessContainer>
       </div>

@@ -21,7 +21,6 @@ export default function LocationSearch() {
   const [isOpenModal, setIsOpenModal] = React.useState(false);
 
   const { isTablet, isMobile } = useResponsive();
-  const { modalAtomState, setModalAtomState } = useModal();
 
   const router = useRouter();
   const { location } = router.query;
@@ -43,17 +42,17 @@ export default function LocationSearch() {
       ? [router.query.location]
       : [];
 
-    // 🔹 쿼리 값이 없거나 "all"이 포함되면 "지역 · 전국"
+    // 쿼리 값이 없거나 "all"이 포함되면 "지역 · 전국"
     if (queryLocations.length === 0 || queryLocations.includes('all')) return '지역 · 전국';
 
-    // 🔹 "서울 전체" 같은 시/도 전체 값 먼저 확인
+    // "서울 전체" 같은 시/도 전체 값 먼저 확인
     for (const [sido, engValue] of Object.entries(CITY)) {
       if (queryLocations.includes(engValue)) {
         return queryLocations.length === 1 ? `${sido} 전체` : `${sido} 전체 외 ${queryLocations.length - 1}건`;
       }
     }
 
-    // 🔹 개별 지역이 하나만 선택된 경우
+    // 개별 지역이 하나만 선택된 경우
     if (queryLocations.length === 1) {
       for (const [sido, sigunguObj] of Object.entries(LOCATION)) {
         for (const [sigungu, engValue] of Object.entries(sigunguObj)) {
@@ -65,7 +64,7 @@ export default function LocationSearch() {
       return '지역 선택';
     }
 
-    // 🔹 여러 개 선택된 경우 (첫 번째 지역 + 외 N)
+    // 여러 개 선택된 경우 (첫 번째 지역 + 외 N)
     let firstSelected = '';
     for (const [sido, sigunguObj] of Object.entries(LOCATION)) {
       for (const [sigungu, engValue] of Object.entries(sigunguObj)) {
@@ -95,7 +94,7 @@ export default function LocationSearch() {
       );
 
       handleCloseLocationModal();
-      setModalAtomState({ isOpen: false });
+      setIsOpenModal(false);
       return;
     }
 
@@ -117,7 +116,7 @@ export default function LocationSearch() {
     );
 
     handleCloseLocationModal();
-    setModalAtomState({ isOpen: false });
+    setIsOpenModal(false);
   };
 
   // 지역 선택 초기화
@@ -166,7 +165,7 @@ export default function LocationSearch() {
           onClick={() => {
             setIsOpenLocationModal((prev) => !prev);
             if (isTablet) {
-              setModalAtomState({ isOpen: true });
+              setIsOpenModal(true);
             }
           }}
         >

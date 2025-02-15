@@ -1,5 +1,4 @@
 import React from 'react';
-import useResponsive from '@/hooks/useResponsive';
 import RecruitSpecialList from '@/components/recruit/RecruitSpecialList';
 import RecruitSpecialCard from '@/components/recruit/RecruitSpecialCard';
 import RecruitSectionTitle from '@/components/recruit/RecruitSectionTitle';
@@ -9,19 +8,35 @@ import Button from '@/components/common/style/Button';
 import useInfiniteScroll from '@/hooks/useInfiniteScroll';
 import { Get } from '@/apis';
 import EmptyComponent from '@/components/common/EmptyComponent';
+import SkeletonUI from '@/components/common/SkeletonUI';
+import Image from 'next/image';
+import { useRouter } from 'next/router';
+import { ParsedUrlQuery } from 'querystring';
+import { keepPreviousData } from '@tanstack/react-query';
+
+interface Query extends ParsedUrlQuery {
+  page?: string;
+  job?: any;
+}
 
 export default function RecruitSpecialListContainer() {
+  const router = useRouter();
+  const { page = '1', location, job } = router.query as Query;
+
   const { data, isLoading, isSuccess, fetchNextPage, hasNextPage, isFetching } = useInfiniteScroll({
     queryFn: Get.getRecruitSpecialList,
-    queryKey: [queryKeys.RECRUIT_SPECIAL_LIST, { limit: '9' }],
+    queryKey: [queryKeys.RECRUIT_SPECIAL_LIST, { limit: '9', type: 'RECRUIT', job }],
     options: {
       enabled: true,
       throwOnError: true,
       staleTime: 60 * 1000 * 5,
       gcTime: 60 * 1000 * 10,
+      placeholderData: keepPreviousData,
     },
     requestQuery: {
       limit: '9',
+      type: 'RECRUIT',
+      job,
     },
   });
 
@@ -34,14 +49,20 @@ export default function RecruitSpecialListContainer() {
   const isEmptyFirstPage = isFirstPage && data?.pages[0]?.result.items.length === 0;
 
   if (isLoading) {
-    return <div>loading</div>;
+    return (
+      <>
+        <SkeletonUI.Line style={{ height: '24px', width: '147px', marginBottom: '10px' }} />
+        <SkeletonUI.RecruitSpecialList count={3} />
+      </>
+    );
   }
 
   if (isSuccess && data) {
     return (
       <>
         <RecruitSectionTitle title="🌟 스페셜 채용" />
-        {isEmptyFirstPage && isFirstPage && <EmptyComponent height="200px" />}
+
+        {isEmptyFirstPage && isFirstPage && <EmptyComponent height="150px" message="해당하는 공고가 없어요." isVisibleImage={false} />}
 
         <InfiniteScroll
           loadMore={() => {
@@ -58,6 +79,7 @@ export default function RecruitSpecialListContainer() {
             })}
           </RecruitSpecialList>
         </InfiniteScroll>
+
         {!isEmptyFirstPage && isFirstPage && nextPage && (
           <div style={{ display: 'flex', justifyContent: 'center' }}>
             <Button label="더보기" variant="tertiary" width="200px" onClick={() => fetchNextPage()} margin="0 0 30px 0" />

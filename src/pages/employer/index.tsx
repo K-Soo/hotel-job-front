@@ -1,7 +1,7 @@
 import Layout, { EmployerMain, EmployerHeader, EmployerFooter } from '@/components/layout';
 import EmployerContainer from '@/containers/employerContainer';
 import { GetServerSideProps, InferGetServerSidePropsType, GetServerSidePropsContext } from 'next';
-import { Post, Auth } from '@/apis';
+import { Auth } from '@/apis';
 import path from '@/constants/path';
 
 export default function EmployerPage() {
@@ -36,12 +36,13 @@ export const getServerSideProps: GetServerSideProps = async (context: GetServerS
     if (!responseAccessToken) throw new Error();
 
     const responseUserInfo = await Auth.me({}, requestHeader);
+
     if (!responseUserInfo) throw new Error();
 
     if (responseUserInfo.result.role !== 'EMPLOYER') {
       return {
         redirect: {
-          destination: path.HOME,
+          destination: path.SIGN_IN,
           permanent: false,
         },
       };

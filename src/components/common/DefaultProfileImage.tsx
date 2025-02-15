@@ -5,12 +5,12 @@ interface DefaultProfileImageProps {
   imageUrl: string;
   margin?: string;
 }
-
+// TODO - 이미지 에러 예외처리
 export default function DefaultProfileImage({ imageUrl, margin }: DefaultProfileImageProps) {
   return (
     <S.DefaultProfileImage margin={margin}>
-      {/* <Image src={imageUrl} fill alt="profile" /> */}
-      <Image src={'/images/user.png'} fill alt="profile" />
+      {imageUrl && <Image src={imageUrl} fill alt="profile" />}
+      {!imageUrl && <Image src={'/images/profile.png'} fill alt="profile" />}
     </S.DefaultProfileImage>
   );
 }
@@ -23,7 +23,6 @@ const S = {
     border-radius: 50%;
     overflow: hidden;
     margin: ${({ margin }) => margin};
-    border: 1px solid red;
     img {
       object-fit: cover;
       width: 100%;

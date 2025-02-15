@@ -15,6 +15,7 @@ interface RecruitmentTableBodyProps {
   checkedItems: string[];
   handleClickRecruitmentItem: (id: string, status: RecruitmentStatusKeys) => void;
   handleClickCheckBoxItem: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  handleCloseRecruitment: (recruitmentId: string) => Promise<void>;
 }
 
 export default function RecruitmentTable({ children }: RecruitmentTableProps) {
@@ -25,16 +26,22 @@ function RecruitmentTableHeader() {
   return (
     <S.RecruitmentTableHeader>
       <span className="header-row check"></span>
-      <span className="header-row status">공고 상태</span>
+      <span className="header-row status">상태</span>
       <span className="header-row text">공고</span>
-      <span className="header-row product">채용상품</span>
+      <span className="header-row product">상품/마감일</span>
       <span className="header-row candidate">지원자</span>
-      <span className="header-row management">관리</span>
+      <span className="header-row management"></span>
     </S.RecruitmentTableHeader>
   );
 }
 
-function RecruitmentTableBody({ items, handleClickRecruitmentItem, checkedItems, handleClickCheckBoxItem }: RecruitmentTableBodyProps) {
+function RecruitmentTableBody({
+  items,
+  handleClickRecruitmentItem,
+  checkedItems,
+  handleClickCheckBoxItem,
+  handleCloseRecruitment,
+}: RecruitmentTableBodyProps) {
   return (
     <S.RecruitmentTableBody>
       {items.map((item) => (
@@ -67,7 +74,7 @@ function RecruitmentTableBody({ items, handleClickRecruitmentItem, checkedItems,
           </div>
 
           <div className="item__management">
-            <ManagementOverview status={item.recruitmentStatus} id={item.id} />
+            <ManagementOverview status={item.recruitmentStatus} id={item.id} handleCloseRecruitment={handleCloseRecruitment} />
           </div>
         </div>
       ))}

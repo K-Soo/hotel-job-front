@@ -20,7 +20,7 @@ export default function DaumPost({ addressName = 'address', addressDetailName = 
 
   const handleComplete = (data: Address) => {
     const { address, addressType, buildingName, zonecode, jibunAddress, sido, sigungu } = data;
-    console.log('data: ', data);
+    console.log('@@@@@@@@@@@@@@: ', data);
 
     let fullAddress = address;
     let extraAddress = '';
@@ -30,6 +30,7 @@ export default function DaumPost({ addressName = 'address', addressDetailName = 
         extraAddress = buildingName;
       }
       if (extraAddress !== '') {
+        //XXX - 빌딩네임
         fullAddress += ` (${extraAddress})`;
       }
     }
@@ -37,7 +38,9 @@ export default function DaumPost({ addressName = 'address', addressDetailName = 
     if (addressType === 'J') {
       fullAddress = jibunAddress;
     }
+
     setValue(addressName, fullAddress);
+
     setFocus(addressDetailName);
     resetDaumPostAtom();
   };

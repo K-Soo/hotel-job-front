@@ -117,14 +117,23 @@ export const Get = {
   recruitDetail: ({ id }: { id: string }) => requests.get<API.RecruitDetailResponse>(`/recruit/${id}`),
 
   // 채용공고 스페셜
-  getRecruitSpecialList: ({ page, limit, benefits, employment, experience, jobs }: API.GetRecruitSpecialListRequest) => {
+  getRecruitSpecialList: ({ page, limit, benefits, employment, experience, job, type }: API.GetRecruitSpecialListRequest) => {
     const params = new URLSearchParams();
     params.set('page', page);
     params.set('limit', limit);
+    params.set('type', type);
+
+    if (type) params.set('type', type);
     if (experience) params.set('experience', experience);
     if (employment) employment.forEach((item) => params.append('employment', item));
     if (benefits) benefits.forEach((item) => params.append('benefits', item));
-    if (jobs) jobs.forEach((item) => params.append('jobs', item));
+    if (job) {
+      if (Array.isArray(job)) {
+        job.forEach((item) => params.append('job', item.toLocaleUpperCase()));
+      } else {
+        params.set('job', job.toLocaleUpperCase());
+      }
+    }
 
     const queryString = params.toString();
     const url = `/recruit/special${queryString && `?${queryString}`}`;
@@ -133,14 +142,23 @@ export const Get = {
   },
 
   // 채용공고 급구
-  getRecruitUrgentList: ({ page, limit, benefits, employment, experience, jobs }: API.GetRecruitUrgentListRequest) => {
+  getRecruitUrgentList: ({ page, limit, benefits, employment, experience, job, type }: API.GetRecruitUrgentListRequest) => {
     const params = new URLSearchParams();
     params.set('page', page);
     params.set('limit', limit);
+    params.set('type', type);
+
+    if (type) params.set('type', type);
     if (experience) params.set('experience', experience);
     if (employment) employment.forEach((item) => params.append('employment', item));
     if (benefits) benefits.forEach((item) => params.append('benefits', item));
-    if (jobs) jobs.forEach((item) => params.append('jobs', item));
+    if (job) {
+      if (Array.isArray(job)) {
+        job.forEach((item) => params.append('job', item.toLocaleUpperCase()));
+      } else {
+        params.set('job', job.toLocaleUpperCase());
+      }
+    }
 
     const queryString = params.toString();
     const url = `/recruit/urgent${queryString && `?${queryString}`}`;
@@ -149,14 +167,26 @@ export const Get = {
   },
 
   // 채용공고 일반
-  getRecruitBasicList: ({ page, limit, experience, benefits, employment, jobs }: API.GetRecruitBasicListRequest) => {
+  getRecruitBasicList: ({ page, limit, experience, benefits, employment, job, type }: API.GetRecruitBasicListRequest) => {
     const params = new URLSearchParams();
     params.set('page', page);
     params.set('limit', limit);
+    params.set('type', type);
+
+    if (type) params.set('type', type);
     if (experience) params.set('experience', experience);
+
     if (employment) employment.forEach((item) => params.append('employment', item));
+
     if (benefits) benefits.forEach((item) => params.append('benefits', item));
-    if (jobs) jobs.forEach((item) => params.append('jobs', item));
+
+    if (job) {
+      if (Array.isArray(job)) {
+        job.forEach((item) => params.append('job', item.toLocaleUpperCase()));
+      } else {
+        params.set('job', job.toLocaleUpperCase());
+      }
+    }
 
     const queryString = params.toString();
     const url = `/recruit/basic${queryString && `?${queryString}`}`;
@@ -200,7 +230,7 @@ export const Get = {
   applicationApplyCheck: ({ id }: { id: string }) => requests.get<API.ApplicationApplyCheckResponse>(`/applications/${id}/apply/check`),
 
   // 사업자 -  계정정보
-  employerAccountInfo: () => requests.get<any>('/employers'),
+  employerAccountInfo: () => requests.get<API.EmployerAccountInfoResponse>('/employers'),
 
   // 사업자 - 회사정보 가져오기
   employerCompany: () => requests.get<API.GetMyCompanyResponse>('/employers/company'),
@@ -227,6 +257,12 @@ export const Get = {
 
     return requests.get<API.GetRecruitmentDetailApplicantListResponse>(url);
   },
+
+  // TODO - 타입정의
+  // 사업자 - 채용공고 총지원자, 열람, 미열람 상세정보 카운트
+  getRecruitmentDetailApplicationCount: ({ recruitmentId }: { recruitmentId: string }) =>
+    requests.get<API.GetRecruitmentDetailApplicationCountResponse>(`/employers/recruitment/${recruitmentId}/applications/count`),
+
   // TODO - 타입정의
   // 사업자 - 채용공고 상품 리스트
   getPublishedRecruitmentList: () => requests.get<API.GetPublishedRecruitmentListResponse>(`/employers/recruitment/published`),
@@ -261,10 +297,24 @@ export const Get = {
   getResumeProfileImage: (key: string, config: AxiosRequestConfig) => requests.get<any>(`/upload/resume/profile/${key}`, config),
 
   // *************************************** PAYMENT  ***************************************
-  // TODO - type 정의
-  // 채용공고 결제 초기요청
+  // 사업자 채용공고 결제 초기요청
   getPaymentRecruitmentDetail: ({ orderId }: { orderId: string }) =>
     requests.get<API.GetPaymentRecruitmentDetailResponse>(`/payment/recruitment/${orderId}`),
+  // 사업자 - 상품 결제 내역
+  getEmployerPaymentList: () => requests.get<API.GetEmployerPaymentListResponse>(`/payment`),
+
+  // *************************************** COUPON  ***************************************
+  // 사업자 - 쿠폰 리스트
+  getEmployerCouponList: ({ use }: { use: 'Y' | 'N' }) => {
+    const params = new URLSearchParams();
+    if (use) params.set('use', use);
+
+    const queryString = params.toString();
+
+    const url = `/coupon/employer${queryString && `?${queryString}`}`;
+
+    return requests.get<API.GetEmployerCouponList>(url);
+  },
 };
 
 export const Post = {
@@ -290,6 +340,7 @@ export const Post = {
   verificationsEmployerUserId: (body: { userId: string }) =>
     requests.post<{ userId: string }, API.verificationsEmployerUserIdResponse>('/verifications/employer/user-id', body),
 
+  // *************************************** EMPLOYER ***************************************
   //사업자번호 검증
   businessNumberCheck: (body: { b_no: string }) =>
     requests.post<{ b_no: string }, API.verificationsBusinessNumberCheckResponse>('/verifications/business-number', body),
@@ -298,37 +349,60 @@ export const Post = {
   setupCompany: (body: API.SetupCompanyRequest) =>
     requests.post<API.SetupCompanyRequest, API.SetupCompanyResponse>('/employers/company', body),
 
-  //사업자 -  채용 공고생성
+  //채용 공고생성
   createRecruitment: (body: API.CreateRecruitmentRequest) =>
     requests.post<API.CreateRecruitmentRequest, API.CreateRecruitmentResponse>('/employers/recruitment', body),
 
-  // 사업자 -  공고 임시저장
+  // 공고 임시저장
   draftRecruitment: (body: API.DraftRecruitmentRequest) =>
     requests.post<API.DraftRecruitmentRequest, API.DraftRecruitmentResponse>('/employers/recruitment/draft', body),
 
-  // 사업자 -  채용 공고생성
+  // 채용공고 삭제
   removeRecruitment: (body: { ids: string[] }) =>
     requests.post<{ ids: string[] }, API.RemoveRecruitmentResponse>('/employers/recruitment/remove', body),
 
+  // *************************************** EMPLOYER APPLICATIONS ***************************************
+  // 합격자 발표
+  createApplicationsAnnouncement: (body: API.CreateApplicationsAnnouncementRequest) =>
+    requests.post<API.CreateApplicationsAnnouncementRequest, any>('/applications/announcements', body),
+
   // *************************************** FILE UPLOAD ***************************************
   // 프로필 이미지 업로드
-  // uploadProfileImage: (body: FormData) => requests.post<FormData, API.UploadProfileImageResponse>('/upload/resume/profile', body),
   uploadProfileImage: (body: FormData) => requests.post<FormData, API.UploadProfileImageResponse>('/upload/resume/profile', body),
 
   // *************************************** PUSH  ***************************************
   // FCM 토큰 저장
   saveFcmToken: (body: API.SaveFcmTokenRequest) => requests.post<API.SaveFcmTokenRequest, API.SaveFcmTokenResponse>('/push/token', body),
 
-  // *************************************** PAYMENT  ***************************************
+  // *************************************** EMPLOYER PAYMENT  ***************************************
   // TODO - type 정의
   // 채용공고 결제 초기요청
   paymentRecruitmentInitiate: (body: any) =>
     requests.post<any, API.PaymentRecruitmentInitiateResponse>('/payment/recruitment/initiate', body),
 
-  // TODO - type
   // 채용공고 결제 승인요청
   paymentRecruitmentConfirm: (body: API.PaymentRecruitmentConfirmRequest) =>
     requests.post<API.PaymentRecruitmentConfirmRequest, API.PaymentRecruitmentConfirmResponse>('/payment/recruitment/confirm', body),
+
+  // 채용공고 무료 승인요청
+  paymentFreeRecruitmentConfirm: (body: API.PaymentRecruitmentFreeConfirmRequest) =>
+    requests.post<API.PaymentRecruitmentFreeConfirmRequest, API.PaymentRecruitmentConfirmResponse>(
+      '/payment/recruitment/confirm/free',
+      body,
+    ),
+
+  // 채용공고 사용가능한 쿠폰리스트
+  availableCouponList: (body: { orderId: string }) =>
+    requests.post<{ orderId: string }, API.AvailableCouponListResponse>('/payment/recruitment/coupon', body),
+
+  // 채용공고 쿠폰 적용
+  applyCoupon: (body: { orderId: string; couponId: string }) =>
+    requests.post<{ orderId: string; couponId: string }, API.ApplyCouponResponse>('/payment/recruitment/coupon/apply', body),
+
+  // TODO - type 정의
+  // 채용공고 쿠폰 적용 취소
+  cancelCoupon: (body: { orderId: string; couponId: string }) =>
+    requests.post<{ orderId: string; couponId: string }, any>('/payment/recruitment/coupon/cancel', body),
 };
 
 export const Patch = {
@@ -346,6 +420,10 @@ export const Patch = {
   // 사업자 - 이력서 열람처리
   updateApplicationResumeView: (body: { applicationId: number }) =>
     requests.patch<{ applicationId: number }, API.UpdateApplicationResumeView>('/applications/view', body),
+
+  // 채용공고 마감
+  closedRecruitment: (body: { recruitmentId: string }) =>
+    requests.patch<{ recruitmentId: string }, API.RemoveRecruitmentResponse>('/employers/recruitment/close', body),
 };
 
 export const Delete = {

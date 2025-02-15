@@ -2,10 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 import Portal from '@/components/common/Portal';
 import Background from '@/components/common/Background';
-import { useRecoilValue } from 'recoil';
+import { useRecoilValue, useResetRecoilState } from 'recoil';
 import Icon from '@/icons/Icon';
 import Line from '@/components/common/Line';
-import { selectProductAtom, durationCalcOptionsSelector, selectRecruitmentIdAtom } from '@/recoil/product';
+import { selectProductAtom, durationCalcOptionsSelector, selectRecruitmentIdAtom, productFocusAtom } from '@/recoil/product';
 import PurchaseActionBar from '@/components/employerProductRecruitment/productRecruitmentSideMenu/PurchaseActionBar';
 import ProductForm from '@/components/employerProductRecruitment/productRecruitmentSideMenu/ProductForm';
 import RecruitmentInfo from '@/components/employerProductRecruitment/productRecruitmentSideMenu/RecruitmentInfo';
@@ -33,6 +33,10 @@ export default function ProductRecruitmentSideMenu({ handleCloseSideMenu }: Prod
   const { recruitmentId } = useRecoilValue(selectRecruitmentIdAtom);
   const { addToast } = useToast();
 
+  const restProductFocusAtom = useResetRecoilState(productFocusAtom);
+  const resetSelectProductAtom = useResetRecoilState(selectProductAtom);
+  const resetSelectRecruitmentIdAtom = useResetRecoilState(selectRecruitmentIdAtom);
+
   const { data, isLoading, isSuccess } = useFetchQuery({
     queryKey: [queryKeys.RECRUITMENT_PUBLISHED_LIST],
     queryFn: Get.getPublishedRecruitmentList,
@@ -55,6 +59,7 @@ export default function ProductRecruitmentSideMenu({ handleCloseSideMenu }: Prod
       }
       return addToast({ message: '채용공고가 선택되지 않았습니다.', type: 'info' });
     }
+
     const options = selectProductAtomValue.selectedOptions.map((selectedOption) => {
       return {
         id: selectedOption.id,
@@ -85,7 +90,12 @@ export default function ProductRecruitmentSideMenu({ handleCloseSideMenu }: Prod
       if (response.result.status !== 'success') {
         throw new Error('초기화 API 실패');
       }
-      router.push(`${path.EMPLOYER_CHECKOUT_RECRUITMENT}/${response.result.orderId}`);
+
+      await router.push(`${path.EMPLOYER_CHECKOUT_RECRUITMENT}/${response.result.orderId}`);
+
+      resetSelectProductAtom();
+      restProductFocusAtom();
+      resetSelectRecruitmentIdAtom();
     } catch (error: any) {
       console.log('error: ', error.message);
       alert('주문 생성에 실패했습니다. 고객센터에 문의 바랍니다.');

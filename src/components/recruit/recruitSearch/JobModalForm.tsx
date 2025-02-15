@@ -68,7 +68,7 @@ export default function JobModalForm({
                 backgroundColor: '#f2f4f6',
                 color: '#000000',
               }}
-              animate={tabIndex === index ? { color: '#444444', backgroundColor: '#f2f4f6' } : { color: '#b0b8c1' }}
+              animate={tabIndex === index ? { color: '#222222', backgroundColor: '#f2f4f6' } : { color: '#555555' }}
               onClick={() => handleClickBusiness(item.value)}
             >
               <h6>{item.label}</h6>

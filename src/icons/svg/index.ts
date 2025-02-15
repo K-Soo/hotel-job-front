@@ -43,8 +43,12 @@ import Share24x24 from './share24x24.svg';
 import ArrowLeft24x24 from './arrowLeft24x24.svg';
 import ListA24x24 from './listA24x24.svg';
 import CornerLeftUp24x24 from './cornerLeftUp24x24.svg';
+import Profile from './profile.svg';
+import NoticeA24x24 from './notice_a_24x24.svg';
 
 export {
+  NoticeA24x24,
+  Profile,
   CornerLeftUp24x24,
   ListA24x24,
   ArrowLeft24x24,

@@ -47,6 +47,7 @@ export default function CertificationModal() {
 
   React.useEffect(() => {
     fetchStartCertification();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const processCertificationMessage = async (event: MessageEvent) => {
@@ -68,9 +69,10 @@ export default function CertificationModal() {
         }
 
         await queryClient.invalidateQueries({ queryKey: [queryKeys.AUTH_ME], refetchType: 'all' });
+        await queryClient.invalidateQueries({ queryKey: [queryKeys.EMPLOYER_ACCOUNT], refetchType: 'all' });
+        setCertificationModalAtom({ isOpen: false });
         alert('본인 인증 완료');
         window.location.reload();
-        setCertificationModalAtom({ isOpen: false });
       }
     } catch (error) {
       alert('본인 인증 실패');
@@ -97,6 +99,7 @@ export default function CertificationModal() {
               <Image src="/images/spinner200px.gif" width={30} height={30} alt="loading" priority />
             </div>
           )}
+
           {iframeUrl && (
             <>
               <div className="header">

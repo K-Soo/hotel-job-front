@@ -14,7 +14,7 @@ import Summary from '@/components/common/resume/resumePreview/Summary';
 import Experience from '@/components/common/resume/resumePreview/Experience';
 import License from '@/components/common/resume/resumePreview/License';
 import Languages from '@/components/common/resume/resumePreview/Languages';
-
+import IconDimmed from '@/components/common/IconDimmed';
 interface ResumePreviewProps {
   resumePreviewData: ResumeDetail & ResumeDetailForm;
   closeResume: () => void;
@@ -22,8 +22,6 @@ interface ResumePreviewProps {
 
 // TODO - 인쇄 스타일 설정
 export default function ResumePreview({ resumePreviewData, closeResume }: ResumePreviewProps) {
-  const { birthYear, age } = parseBirthDateAndCalculateAge(resumePreviewData?.birthday ?? '');
-
   const contentRef = useRef<HTMLDivElement>(null);
   const reactToPrintFn = useReactToPrint({ contentRef });
 
@@ -31,7 +29,7 @@ export default function ResumePreview({ resumePreviewData, closeResume }: Resume
     <Portal>
       <Background>
         <S.ResumePreview>
-          <Icon className="close-icon" name="Close25x25" onClick={closeResume} />
+          <Icon className="close-icon" name="CloseA24x24" onClick={closeResume} width="45px" height="45px" />
           <div className="preview-container" ref={contentRef}>
             <Profile resumePreviewData={resumePreviewData} />
             {resumePreviewData.summary && <Summary resumePreviewData={resumePreviewData} />}
@@ -73,12 +71,13 @@ const S = {
     min-height: 100%;
     height: 100%;
     width: 100%;
-    background-color: #ffffff;
     overflow-y: auto;
     .close-icon {
-      position: absolute;
-      top: 15px;
-      right: 30px;
+      position: fixed;
+      top: 10px;
+      right: 15px;
+      z-index: 1;
+      color: #f6f6f6;
     }
     .preview-container {
       width: 100%;
@@ -88,7 +87,9 @@ const S = {
       position: relative;
       padding: 60px 15px 160px 15px;
       max-width: 210mm;
-      /* border: 1px solid red; */
+      overflow-y: auto;
+      background-color: #ffffff;
+      user-select: text;
     }
     @media print {
       position: static; /* 인쇄 시 고정 위치 해제 */

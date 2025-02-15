@@ -10,7 +10,7 @@ export default function RecruitDetailLocation({ address, addressDetail }: Recrui
   return (
     <S.RecruitDetailLocation>
       <div>{address}</div>
-      <div>{addressDetail}</div>
+      <div className="address-detail">{addressDetail}</div>
     </S.RecruitDetailLocation>
   );
 }
@@ -19,5 +19,8 @@ const S = {
   RecruitDetailLocation: styled.div`
     margin-bottom: 10px;
     display: flex;
+    .address-detail {
+      padding-left: 5px;
+    }
   `,
 };

@@ -4,11 +4,13 @@ import { ParsedUrlQuery } from 'querystring';
 import { useRouter } from 'next/router';
 import { queryKeyChecker } from '@/utils';
 import { Post } from '@/apis';
-import axios from 'axios';
 import { errorMessages } from '@/error';
 import { PaymentRecruitmentConfirmData } from '@/types';
 import SkeletonUI from '@/components/common/SkeletonUI';
 import LoadingOverlay from '@/components/common/LoadingOverlay';
+import useAuth from '@/hooks/useAuth';
+import queryKeys from '@/constants/queryKeys';
+import { useQueryClient } from '@tanstack/react-query';
 
 interface Query extends ParsedUrlQuery {
   paymentType?: 'NORMAL';
@@ -20,6 +22,10 @@ interface Query extends ParsedUrlQuery {
 export default function EmployerCheckoutRecruitmentSuccessContainer() {
   const [isLoading, setIsLoading] = React.useState(true);
   const [confirmForm, setConfirmForm] = React.useState<PaymentRecruitmentConfirmData | null>(null);
+  const [hasFetched, setHasFetched] = React.useState(false);
+
+  const { isAuthenticated } = useAuth();
+  const queryClient = useQueryClient();
 
   const router = useRouter();
 
@@ -28,12 +34,13 @@ export default function EmployerCheckoutRecruitmentSuccessContainer() {
   // API - 결제 승인요청
   const fetchPaymentConfirm = async (orderId: string, paymentKey: string, amount: string) => {
     try {
-      const response = await Post.paymentRecruitmentConfirm({ orderId, paymentKey, amount });
+      const response = await Post.paymentRecruitmentConfirm({ orderId, paymentKey, amount: Number(amount) });
       console.log('결제 승인요청 API : ', response);
       if (!response.result) {
         throw new Error();
       }
       setConfirmForm(response.result);
+      await queryClient.invalidateQueries({ queryKey: [queryKeys.COUPON_LIST], refetchType: 'all' });
     } catch (error: any) {
       const customErrorcode = error.response?.data?.error?.code;
       const errorMessage = errorMessages[customErrorcode];
@@ -41,11 +48,11 @@ export default function EmployerCheckoutRecruitmentSuccessContainer() {
       // 파악한 에러 코드가 있을경우
       if (errorMessage) {
         alert(errorMessage);
-        window.location.href = '/employer/checkout/recruitment';
+        window.location.href = '/employer/recruitment';
         return;
       }
       alert('결제 승인에 실패했습니다. 다시 시도해주세요.');
-      window.location.href = '/employer/checkout/recruitment';
+      window.location.href = '/employer/recruitment';
       return;
     } finally {
       setIsLoading(false);
@@ -54,34 +61,22 @@ export default function EmployerCheckoutRecruitmentSuccessContainer() {
 
   React.useEffect(() => {
     if (!router.isReady) return;
+    if (!isAuthenticated) return;
+    if (hasFetched) return;
+
     const isValidQuery = queryKeyChecker({ query: router.query, allow: ['paymentType', 'orderId', 'paymentKey', 'amount'] });
 
     const isReadyForApi = [orderId, paymentKey, amount, paymentType].every(Boolean);
 
-    try {
-      if (!isValidQuery || paymentType !== 'NORMAL' || !isReadyForApi) {
-        throw new Error('Invalid query parameters');
-      }
-      fetchPaymentConfirm(orderId!, paymentKey!, amount!);
-    } catch (error) {
+    if (!isValidQuery || paymentType !== 'NORMAL' || !isReadyForApi) {
       router.replace('/404');
+      return;
     }
-  }, [amount, orderId, paymentKey, paymentType, router]);
 
-  React.useEffect(() => {
-    const handleBackButton = (event: PopStateEvent) => {
-      event.preventDefault();
-      // 홈으로 리다이렉트
-      window.location.replace('/employer/dashboard');
-    };
-
-    // 뒤로 가기 감지
-    window.addEventListener('popstate', handleBackButton);
-
-    return () => {
-      window.removeEventListener('popstate', handleBackButton);
-    };
-  }, []);
+    setHasFetched(true);
+    fetchPaymentConfirm(orderId!, paymentKey!, amount!);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [router.isReady, isAuthenticated, orderId, paymentKey, amount, paymentType, hasFetched]);
 
   if (isLoading && !confirmForm) {
     return (

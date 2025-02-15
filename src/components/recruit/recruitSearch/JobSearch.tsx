@@ -53,7 +53,7 @@ export default function JobSearch() {
 
     const jobsArray = Array.isArray(job) ? job.map((item) => item.toUpperCase()) : [job.toUpperCase()];
     setSelectedJob(jobsArray as AllJobsKeyValuesKeys[]);
-  }, []);
+  }, [job]);
 
   const jobObj = getJobObject(job);
 
@@ -61,7 +61,6 @@ export default function JobSearch() {
 
   const handleClickBusiness = (value: string) => {
     if (value === 'all') {
-      console.log('value: ', value);
       setTabIndex(0);
       setSelectedJob([]);
       setBusinessType([]);
@@ -120,8 +119,8 @@ export default function JobSearch() {
       {
         pathname: path.RECRUIT,
         query: {
-          ...router.query, // 기존 쿼리 유지
-          job: params.getAll('job'), // ✅ 배열 형태 유지
+          ...router.query,
+          job: params.getAll('job'), // 배열 형태 유지
         },
       },
       undefined,

@@ -1,7 +1,7 @@
 import React from 'react';
 import RecruitmentTable from '@/components/employerRecruitment/RecruitmentTable';
 import { useRouter } from 'next/router';
-import { Get } from '@/apis';
+import { Get, Patch } from '@/apis';
 import queryKeys from '@/constants/queryKeys';
 import useFetchQuery from '@/hooks/useFetchQuery';
 import SkeletonUI from '@/components/common/SkeletonUI';
@@ -12,6 +12,10 @@ import { keepPreviousData } from '@tanstack/react-query';
 import { RecruitmentQueryStatus } from '@/types/API';
 import EmptyComponent from '@/components/common/EmptyComponent';
 import { RecruitmentStatusKeys } from '@/types';
+import useAlertWithConfirm from '@/hooks/useAlertWithConfirm';
+import useLoading from '@/hooks/useLoading';
+import useToast from '@/hooks/useToast';
+import { useQueryClient } from '@tanstack/react-query';
 
 interface Query extends ParsedUrlQuery {
   page?: string;
@@ -26,6 +30,12 @@ interface RecruitmentListContainerProps {
 export default function RecruitmentListContainer({ checkedItems, handleClickCheckBoxItem }: RecruitmentListContainerProps) {
   const router = useRouter();
   const { page = '1', status = 'all' } = router.query as Query;
+
+  const queryClient = useQueryClient();
+
+  const { setAlertWithConfirmAtom } = useAlertWithConfirm();
+  const { setLoadingAtomStatue } = useLoading();
+  const { addToast } = useToast();
 
   const handleClickRecruitmentItem = (id: string, status: RecruitmentStatusKeys) => {
     if (status === 'DRAFT') {
@@ -54,6 +64,36 @@ export default function RecruitmentListContainer({ checkedItems, handleClickChec
 
   console.log('채용공고 리스트 API : ', data);
 
+  const fetchCloseRecruitment = async (recruitmentId: string) => {
+    setLoadingAtomStatue({ isLoading: true });
+    try {
+      const response = await Patch.closedRecruitment({ recruitmentId });
+      console.log('채용공고 마감 API : ', response);
+      addToast({ type: 'success', message: '성공적으로 마감되었습니다.' });
+
+      await queryClient.invalidateQueries({ queryKey: [queryKeys.RECRUITMENT_LIST], refetchType: 'all' });
+      await queryClient.invalidateQueries({ queryKey: [queryKeys.RECRUITMENT_STATUS], refetchType: 'all' });
+    } catch (error) {
+      console.log('error: ', error);
+      addToast({ type: 'error', message: '채용공고 마감에 실패했습니다.' });
+    } finally {
+      setLoadingAtomStatue({ isLoading: false });
+    }
+  };
+
+  const handleCloseRecruitment = async (recruitmentId: string) => {
+    setAlertWithConfirmAtom((prev) => ({
+      ...prev,
+      type: 'CONFIRM',
+      confirmVariant: 'delete',
+      confirmLabel: '마감',
+      cancelLabel: '취소',
+      title: 'TITLE_11',
+      subTitle: 'DESC_12',
+      onClickConfirm: () => fetchCloseRecruitment(recruitmentId),
+    }));
+  };
+
   if (isLoading) {
     return <SkeletonUI.Table />;
   }
@@ -71,6 +111,7 @@ export default function RecruitmentListContainer({ checkedItems, handleClickChec
             handleClickRecruitmentItem={handleClickRecruitmentItem}
             items={data.result.items}
             handleClickCheckBoxItem={handleClickCheckBoxItem}
+            handleCloseRecruitment={handleCloseRecruitment}
           />
         </RecruitmentTable>
         <PaginationComponent pagination={data.result.pagination} />

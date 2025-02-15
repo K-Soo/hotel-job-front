@@ -9,7 +9,6 @@ import RecruitUrgentListContainer from '@/containers/recruitContainer/RecruitUrg
 import RecruitSpecialListContainer from '@/containers/recruitContainer/RecruitSpecialListContainer';
 import Line from '@/components/common/Line';
 import { ErrorBoundary, ErrorComponent } from '@/error';
-import Modal from '@/components/common/modal';
 import useModal from '@/hooks/useModal';
 
 export default function RecruitContainer() {

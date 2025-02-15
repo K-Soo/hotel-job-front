@@ -19,6 +19,11 @@ function RecruitmentRegisterProgressMenu({ children }: RecruitmentRegisterProgre
     <S.RecruitmentRegisterProgressMenu>
       <S.MenuForm>
         <div className="list-container">
+          <Link className="list-container__item" href="#default">
+            <Icon name="CheckOn16x17" width="16px" height="17px" margin="0 5px 0 0" />
+            <span>공고 제목</span>
+          </Link>
+
           <Link className="list-container__item" href="#basic">
             <Icon name="CheckOn16x17" width="16px" height="17px" margin="0 5px 0 0" />
             <span>모집 내용</span>
@@ -65,7 +70,7 @@ const S = {
     padding: 0 15px;
     margin-bottom: 15px;
     svg {
-      fill: red;
+      /* fill: ${(props) => props.theme.colors.blue400}; */
     }
     .list-container {
       display: flex;

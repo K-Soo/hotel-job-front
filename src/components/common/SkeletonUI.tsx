@@ -3,20 +3,33 @@ import styled, { css } from 'styled-components';
 export const SkeletonAnimation = css`
   width: 100%;
   height: 30px;
-  background-color: #f2f2f2;
+  background-color: ${(props) => props.theme.colors.gray100};
   position: relative;
   overflow: hidden;
   border-radius: 4px;
   animation: skeleton-gradient 1.5s infinite ease-in-out;
+  opacity: 0.7;
+
   @keyframes skeleton-gradient {
     0%,
     100% {
-      background-color: rgba(165, 165, 165, 0.1);
+      background-color: ${(props) => props.theme.colors.gray100};
     }
     50% {
-      background-color: rgba(165, 165, 165, 0.3);
+      background-color: ${(props) => props.theme.colors.gray};
     }
   }
+
+  /* // 오른쪽으로 갈수록 투명
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to right, rgba(255, 255, 255, 0) 70%, rgba(255, 255, 255, 1) 100%);
+  } */
 `;
 
 const Line = ({ style }: { style?: React.CSSProperties }) => {
@@ -51,7 +64,6 @@ const StyledDocument = styled.section`
   max-width: 100%;
   margin: 0 auto;
   .container {
-    margin: 0 auto;
     max-width: 1024px;
   }
 `;
@@ -207,6 +219,89 @@ const StyledRecruitMentProductList = styled.div`
   }
 `;
 
+const RecruitSpecialList = ({ count }: { count: number }) => {
+  return (
+    <StyledRecruitSpecialList>
+      {Array.from({ length: count }, (_, index) => (
+        <div key={index} className="item"></div>
+      ))}
+    </StyledRecruitSpecialList>
+  );
+};
+
+const StyledRecruitSpecialList = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 50px;
+  .item {
+    ${SkeletonAnimation}
+    width: calc(33.333% - 6.7px);
+    border-radius: 10px;
+    aspect-ratio: 5/3;
+    height: 100%;
+    ${(props) => props.theme.media.tablet`
+      aspect-ratio: 5 / 3;
+      width: calc(50% - 5px);
+    `};
+    ${(props) => props.theme.media.mobile`
+      width: 100%;
+      aspect-ratio: 2 / 1;
+    `};
+  }
+`;
+
+const RecruitUrgentList = ({ count }: { count: number }) => {
+  return (
+    <StyledRecruitUrgentList>
+      {Array.from({ length: count }, (_, index) => (
+        <div key={index} className="item"></div>
+      ))}
+    </StyledRecruitUrgentList>
+  );
+};
+
+const StyledRecruitUrgentList = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 50px;
+  .item {
+    ${SkeletonAnimation}
+    width: calc(25% - 7.5px);
+    aspect-ratio: 4 / 3;
+    height: 100%;
+    ${(props) => props.theme.media.tablet`
+      aspect-ratio: 5 / 3;
+      width: calc(50% - 5px);
+    `};
+  }
+`;
+
+const RecruitBasicList = ({ count }: { count: number }) => {
+  return (
+    <StyledRecruitBasicList>
+      {Array.from({ length: count }, (_, index) => (
+        <div key={index} className="item"></div>
+      ))}
+    </StyledRecruitBasicList>
+  );
+};
+
+const StyledRecruitBasicList = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 50px;
+  .item {
+    ${SkeletonAnimation}
+    height: 100px;
+    ${(props) => props.theme.media.tablet`
+      height: 160px;
+    `};
+  }
+`;
+
 const SkeletonUI = {
   ResumeListItems,
   Document,
@@ -216,6 +311,9 @@ const SkeletonUI = {
   Recruitment,
   RecruitMentProductPreview,
   RecruitMentProductList,
+  RecruitSpecialList,
+  RecruitUrgentList,
+  RecruitBasicList,
 };
 
 export default SkeletonUI;

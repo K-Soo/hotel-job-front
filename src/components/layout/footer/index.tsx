@@ -28,9 +28,7 @@ export function Footer() {
           <h6 className="company">{POLICY.company}</h6>
           <p className="info-text">고원호 | 사업자등록번호: {POLICY.businessNumber}</p>
           <p className="info-text">통신판매업 신고번호: {POLICY.mailOrderNumber}</p>
-          <p className="info-text">
-            {POLICY.email} | {POLICY.phone}
-          </p>
+          <p className="info-text">{POLICY.email}</p>
           <p className="info-text">{POLICY.address}</p>
           <p className="info-text">COPYRIGHT ⓒ CELESTARA ALL RIGHTS RESERVED.</p>
         </S.Information>

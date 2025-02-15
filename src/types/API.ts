@@ -30,10 +30,11 @@ export interface PaginationInfo {
 export interface DefaultRecruitQuery {
   page: string;
   limit: string;
+  type: ProductRecruitmentQuery;
   experience?: types.experienceConditionKeys;
   employment?: types.EmploymentType[];
   benefits?: types.BenefitsKeys[];
-  jobs?: AllJobsKeyValuesKeys[];
+  job?: AllJobsKeyValuesKeys | AllJobsKeyValuesKeys[];
 }
 
 /************************************* REQUEST **************************************/
@@ -103,8 +104,12 @@ export interface SaveFcmTokenRequest {
 export interface PaymentRecruitmentConfirmRequest {
   orderId: string;
   paymentKey: string;
-  amount: string;
+  amount: number; // XXX
 }
+
+export interface PaymentRecruitmentFreeConfirmRequest extends Pick<PaymentRecruitmentConfirmRequest, 'orderId' | 'amount'> {}
+
+export interface CreateApplicationsAnnouncementRequest extends types.CreateApplicationsAnnouncementForm {}
 
 /************************************* RESPONSE **************************************/
 
@@ -375,4 +380,30 @@ export interface GetPaymentRecruitmentDetailResponse extends BaseResponse {
 
 export interface PaymentRecruitmentConfirmResponse extends BaseResponse {
   result: types.PaymentRecruitmentConfirmData;
+}
+
+export interface GetRecruitmentDetailApplicationCountResponse extends BaseResponse {
+  result: types.RecruitmentDetailApplicationCount;
+}
+
+export interface GetEmployerPaymentListResponse extends BaseResponse {
+  result: types.EmployerPaymentItem[];
+}
+
+export interface EmployerAccountInfoResponse extends BaseResponse {
+  result: types.EmployerAccountInfo;
+}
+
+export interface GetEmployerCouponList extends BaseResponse {
+  result: types.EmployerCouponListItem[];
+}
+
+export interface AvailableCouponListResponse extends BaseResponse {
+  result: types.AvailableCouponList;
+}
+
+export interface ApplyCouponResponse extends BaseResponse {
+  result: {
+    status: ResponseStatus;
+  };
 }

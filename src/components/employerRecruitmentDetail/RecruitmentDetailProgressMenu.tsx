@@ -24,22 +24,22 @@ function RecruitmentDetailProgressMenu({ fetchDraftRecruitment, children }: Recr
       <S.MenuForm>
         <div className="list-container">
           <Link className="list-container__item" href="#basic">
-            <Icon name="CheckOn16x17" width="16px" height="17px" margin="0 5px 0 0" />
+            {/* <Icon name="CheckOn16x17" width="16px" height="17px" margin="0 5px 0 0" /> */}
             <span>모집 내용</span>
           </Link>
 
           <Link className="list-container__item" href="#condition" scroll={true}>
-            <Icon name="CheckOn16x17" width="16px" height="17px" margin="0 5px 0 0" />
+            {/* <Icon name="CheckOn16x17" width="16px" height="17px" margin="0 5px 0 0" /> */}
             <span>근무조건</span>
           </Link>
 
           <Link className="list-container__item" href="#place" scroll={true}>
-            <Icon name="CheckOn16x17" width="16px" height="17px" margin="0 5px 0 0" />
+            {/* <Icon name="CheckOn16x17" width="16px" height="17px" margin="0 5px 0 0" /> */}
             <span>근무지 정보</span>
           </Link>
 
           <Link className="list-container__item" href="#manager" scroll={true}>
-            <Icon name="CheckOn16x17" width="16px" height="17px" margin="0 5px 0 0" />
+            {/* <Icon name="CheckOn16x17" width="16px" height="17px" margin="0 5px 0 0" /> */}
             <span>담당자 정보</span>
           </Link>
         </div>

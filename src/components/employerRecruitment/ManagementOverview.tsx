@@ -11,9 +11,10 @@ import IconHover from '@/components/common/IconHover';
 interface ManagementOverviewProps {
   id: string;
   status: RecruitmentStatusKeys;
+  handleCloseRecruitment: (recruitmentId: string) => void;
 }
 
-export default function ManagementOverview({ id, status }: ManagementOverviewProps) {
+export default function ManagementOverview({ id, status, handleCloseRecruitment }: ManagementOverviewProps) {
   const [isDropdownOpen, setIsDropdownOpen] = React.useState(false);
 
   const router = useRouter();
@@ -32,7 +33,7 @@ export default function ManagementOverview({ id, status }: ManagementOverviewPro
     setIsDropdownOpen(false);
   };
 
-  if (status === 'DRAFT') {
+  if (status === 'DRAFT' || status === 'CLOSED') {
     return <span>{'-'}</span>;
   }
   return (
@@ -47,18 +48,25 @@ export default function ManagementOverview({ id, status }: ManagementOverviewPro
           outStyle={{ height: 'auto', paddingTop: '0' }}
           innerStyle={{ border: 'none', boxShadow: '0 0 5px 0 rgba(0, 0, 0, 0.1)', padding: '15px 10px' }}
         >
-          {true && (
+          <Button
+            variant="secondary100"
+            height="28px"
+            label="수정"
+            fontSize="13px"
+            type="button"
+            onClick={() => router.push(`/employer/recruitment/${id}`)}
+          />
+
+          {status === 'PROGRESS' && (
             <Button
-              variant="tertiary"
+              variant="checkoutOutline"
               height="28px"
-              label="수정"
+              label="마감"
               fontSize="13px"
-              type="button"
-              onClick={() => router.push(`/employer/recruitment/${id}`)}
+              margin="8px 0 0 0"
+              onClick={() => handleCloseRecruitment(id)}
             />
           )}
-
-          {status === 'PROGRESS' && <Button variant="tertiary" height="28px" label="마감" fontSize="13px" margin="8px 0 0 0" />}
         </DropdownTemplate>
       )}
     </S.ManagementOverview>

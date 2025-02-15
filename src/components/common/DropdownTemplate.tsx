@@ -10,7 +10,6 @@ interface DropdownTemplateProps {
   children: React.ReactNode;
 }
 
-// forwardRef를 사용하여 ref를 전달할 수 있도록 수정
 const DropdownTemplate = forwardRef<HTMLDivElement, DropdownTemplateProps>(
   ({ width, outStyle, tabIndex, innerStyle, children }: DropdownTemplateProps, ref) => {
     return (

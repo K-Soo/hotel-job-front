@@ -2,9 +2,7 @@ import styled from 'styled-components';
 import Portal from '@/components/common/Portal';
 import Background from '@/components/common/Background';
 import Button from '@/components/common/style/Button';
-import Icon from '@/icons/Icon';
-import Image from 'next/image';
-import { useRecoilValue, useSetRecoilState, useResetRecoilState } from 'recoil';
+import { useRecoilValue, useResetRecoilState } from 'recoil';
 import { alertWithConfirmSelector, alertWithConfirmAtom } from '@/recoil/alertWithConfirm';
 
 export default function Confirm() {
@@ -86,14 +84,17 @@ const S = {
       font-size: 20px;
       font-weight: 500;
       text-align: center;
+      white-space: pre-line;
+      word-wrap: break-word;
+      max-width: 100%;
       ${(props) => props.theme.media.mobile`
         font-size: 18px;
       `};
     }
     .description {
       color: ${(props) => props.theme.colors.black500};
-      font-weight: 300;
-      margin-top: 15px;
+      font-weight: 400;
+      margin-top: 30px;
       font-size: 16px;
       text-align: center;
       line-height: 1.3;

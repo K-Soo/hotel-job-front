@@ -46,7 +46,7 @@ export default function ProductForm() {
             <span>+{selectProductAtomState.selectedDuration.bonusDays}일</span>
           </div>
 
-          <StyledChangeButton onClick={() => setIsVisibleOption((prev) => !prev)}>옵션변경</StyledChangeButton>
+          <StyledChangeButton onClick={() => setIsVisibleOption((prev) => !prev)}>기간변경</StyledChangeButton>
         </div>
 
         <div className="price-box">
@@ -71,9 +71,7 @@ export default function ProductForm() {
 
       {isVisibleOption && durations && (
         <StyledDropDown>
-          <h6 className="title">
-            {RECRUITMENT_PRODUCT_NAME[selectProductAtomState.name as keyof typeof RECRUITMENT_PRODUCT_NAME]}공고 기간 변경
-          </h6>
+          <h6 className="title">기간 변경</h6>
           <S.DurationSelect>
             <select onChange={onChangeDuration} defaultValue={selectedDuration.id}>
               {durations.map((duration) => (

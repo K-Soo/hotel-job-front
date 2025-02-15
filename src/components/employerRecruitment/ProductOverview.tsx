@@ -18,7 +18,7 @@ export default function ProductOverview({ item }: ProductOverviewProps) {
         <S.Progress $isClosed={item.recruitmentStatus === 'CLOSED'}>
           <div className="content">
             <div className="content__product">
-              <span>{`(${RECRUITMENT_PRODUCT_TYPE[item.paymentRecruitment.type]})`}</span>
+              <span>{`${RECRUITMENT_PRODUCT_TYPE[item.paymentRecruitment.type]} `}</span>
               <span>{RECRUITMENT_PRODUCT_NAME[item.paymentRecruitment.name]}상품</span>
             </div>
 

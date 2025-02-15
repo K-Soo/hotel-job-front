@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { motion, useAnimationControls } from 'framer-motion';
 import Icon from '@/icons/Icon';
 import Tag from '@/components/common/Tag';
@@ -10,13 +10,17 @@ import { EXPERIENCE_CONDITION } from '@/constants/recruitment';
 import { ALL_JOBS } from '@/constants/job';
 import { useRouter } from 'next/router';
 import IconDimmed from '@/components/common/IconDimmed';
+import { priceComma, dateFormat } from '@/utils';
+import { CITY_KOREAN_MAP } from '@/constants/location';
 
 interface RecruitDesktopCardProps {
-  recruitType: 'URGENT' | 'NORMAL';
   item: RecruitListItem;
 }
 
-export default function RecruitDesktopCard({ recruitType, item }: RecruitDesktopCardProps) {
+export default function RecruitDesktopCard({ item }: RecruitDesktopCardProps) {
+  const [isBold, setIsBold] = React.useState(false);
+  const [isHighlight, setIsHighlight] = React.useState(false);
+  const [isTag, setIsTag] = React.useState(false);
   const [isExpanded, setIsExpanded] = React.useState(false);
 
   const { sido, sigungu } = addressFormat(item.address);
@@ -24,6 +28,31 @@ export default function RecruitDesktopCard({ recruitType, item }: RecruitDesktop
 
   const expansionContentRef = React.useRef(null);
   const controls = useAnimationControls();
+
+  const { hasBoldEffect, hasHighlightEffect, hasTagEffect } = React.useMemo(() => {
+    const currentDate = new Date();
+    let hasBoldEffect = false;
+    let hasHighlightEffect = false;
+    let hasTagEffect = false;
+
+    item.paymentRecruitment?.[0]?.options?.forEach((option) => {
+      const postingEndDate = option.postingEndDate ? new Date(option.postingEndDate) : null;
+
+      if (postingEndDate && currentDate <= postingEndDate) {
+        if (option.name === 'LIST_UP') hasBoldEffect = true;
+        if (option.name === 'HIGHLIGHT') hasHighlightEffect = true;
+        if (option.name === 'TAG') hasTagEffect = true;
+      }
+    });
+
+    return { hasBoldEffect, hasHighlightEffect, hasTagEffect };
+  }, [item.paymentRecruitment]);
+
+  React.useEffect(() => {
+    setIsBold(hasBoldEffect);
+    setIsHighlight(hasHighlightEffect);
+    setIsTag(hasTagEffect);
+  }, [hasBoldEffect, hasHighlightEffect, hasTagEffect]);
 
   const handleClickBlank = (event: React.MouseEvent<HTMLElement>) => {
     event.stopPropagation();
@@ -43,24 +72,21 @@ export default function RecruitDesktopCard({ recruitType, item }: RecruitDesktop
       onClick={(event) => {
         event.stopPropagation();
       }}
+      $isClosed={item.recruitmentStatus === 'CLOSED'}
     >
       <S.Body>
         <S.LocationRow>
           <div className="location-box">
-            <span className="city">{sido}</span>
+            <span className="city">{CITY_KOREAN_MAP[sido as keyof typeof CITY_KOREAN_MAP]}</span>
             <span className="suburbs">{sigungu}</span>
           </div>
         </S.LocationRow>
 
         <S.Summary onClick={() => router.push(`/recruit/${item.id}`)}>
-          <div style={{ display: 'flex' }}>
-            {recruitType === 'URGENT' && <Tag label="급구" type="URGENT" />}
-            {/* <RecruitTag>숙식제공</RecruitTag> */}
-            {/* <RecruitTag>식대제공</RecruitTag> */}
-          </div>
-          <div className="title">
-            <h5 className="title__text">{item.recruitmentTitle}</h5>
-          </div>
+          <StyledTitle $isBold={isBold} $isHighlight={isHighlight}>
+            {isTag && <Tag label="급구" type="URGENT" width="32px" margin="0 5px 0 0" fontSize="11px" height="17px" />}
+            <h5 className="text">{item.recruitmentTitle}</h5>
+          </StyledTitle>
           <div className="company">{item.hotelName}</div>
         </S.Summary>
 
@@ -69,7 +95,7 @@ export default function RecruitDesktopCard({ recruitType, item }: RecruitDesktop
             <Icon className="icon" name="ExternalLinkB50x50" onClick={handleClickBlank} width="22px" height="22px" />
           </IconDimmed>
 
-          <Icon
+          {/* <Icon
             className="icon"
             name="SearchPlusA24x24"
             width="18px"
@@ -78,15 +104,19 @@ export default function RecruitDesktopCard({ recruitType, item }: RecruitDesktop
               event.stopPropagation();
               handleClickExpansion();
             }}
-          />
+          /> */}
         </S.Utils>
 
         {item.jobs.length > 1 ? (
           <S.JobRow>
-            {ALL_JOBS[item.jobs[0]]} 외 {item.jobs.length - 1}
+            <span>
+              {ALL_JOBS[item.jobs[0]]} 외 {item.jobs.length - 1}
+            </span>
           </S.JobRow>
         ) : (
-          <S.JobRow>{ALL_JOBS[item.jobs[0]]}</S.JobRow>
+          <S.JobRow>
+            <span>{ALL_JOBS[item.jobs[0]]}</span>
+          </S.JobRow>
         )}
 
         <S.InfoRow>
@@ -99,36 +129,44 @@ export default function RecruitDesktopCard({ recruitType, item }: RecruitDesktop
         </S.PayRow>
 
         <S.DateRow>
-          <span>TODAY</span>
+          {dateFormat.dateOrToday(item.priorityDate) === 'TODAY' ? (
+            <span className="today">TODAY</span>
+          ) : (
+            <span>{dateFormat.dateOrToday(item.priorityDate)}</span>
+          )}
         </S.DateRow>
       </S.Body>
-      <ExpansionContent initial={{ height: 0, opacity: 0 }} animate={controls} ref={expansionContentRef}>
+      {/* TODO - 드롭다운 */}
+      {/* <ExpansionContent initial={{ height: 0, opacity: 0 }} animate={controls} ref={expansionContentRef}>
         asd
-      </ExpansionContent>
+      </ExpansionContent> */}
     </S.RecruitDesktopCard>
   );
 }
-
-const ExpansionContent = styled(motion.div)``;
-
-const RecruitTag = styled.span`
-  height: 18px;
+const StyledTitle = styled.div<{ $isBold: boolean; $isHighlight: boolean }>`
   width: fit-content;
+  margin-bottom: 4px;
   display: flex;
   align-items: center;
-  padding: 0px 5px;
-  border-radius: 3px;
-  margin: 0 10px 5px 0;
-  background-color: ${(props) => props.theme.colors.blue50};
-  font-size: 13px;
-  font-weight: 300;
-  color: ${(props) => props.theme.colors.blue800};
-  /* color: gray; */
-  letter-spacing: 0.8px;
+  .text {
+    padding: 1px 3px 1px 2px;
+    color: ${(props) => props.theme.colors.gray800};
+    font-weight: ${(props) => (props.$isBold ? 600 : 400)};
+    ${(props) =>
+      props.$isHighlight &&
+      css`
+        background: linear-gradient(135deg, #c9e2ff 30%, transparent 70%), linear-gradient(-45deg, #e8f3ff 30%, transparent 70%);
+        background-blend-mode: multiply;
+        border-radius: 2px;
+      `};
+    &:hover {
+      color: ${(props) => props.theme.colors.black};
+    }
+  }
 `;
 
 const S = {
-  RecruitDesktopCard: styled.article`
+  RecruitDesktopCard: styled.article<{ $isClosed: boolean }>`
     width: 100%;
     font-size: 14px;
     display: flex;
@@ -138,8 +176,14 @@ const S = {
     border-bottom: 1px solid ${(props) => props.theme.colors.gray300};
     height: auto;
     &:hover {
-      background-color: ${(props) => props.theme.colors.gray};
+      /* background-color: ${(props) => props.theme.colors.gray}; */
+      background-color: ${(props) => (props.$isClosed ? 'none' : props.theme.colors.gray)};
     }
+    ${(props) =>
+      props.$isClosed &&
+      css`
+        background-color: ${props.theme.colors.gray};
+      `};
   `,
   Body: styled.div`
     display: flex;
@@ -160,7 +204,7 @@ const S = {
       align-items: center;
       justify-content: center;
       .city {
-        padding-bottom: 5px;
+        margin-bottom: 5px;
         color: ${(props) => props.theme.colors.gray800};
       }
       .suburbs {
@@ -183,28 +227,11 @@ const S = {
       bottom: 0;
       fill: ${(props) => props.theme.colors.gray300};
     }
-    .title {
-      font-weight: 500;
-      font-size: 16px;
-      margin-bottom: 3px;
-      color: ${(props) => props.theme.colors.gray800};
-      display: flex;
-      align-items: center;
-      &:hover {
-        text-decoration: underline;
-      }
-      &__text {
-        color: ${(props) => props.theme.colors.gray800};
-      }
-      &__icon {
-        margin-left: 8px;
-        fill: ${(props) => props.theme.colors.gray500};
-      }
-    }
     .company {
       font-size: 14px;
       font-weight: 300;
       color: ${(props) => props.theme.colors.gray800};
+      padding-left: 2px;
     }
   `,
   Utils: styled.div`
@@ -224,6 +251,10 @@ const S = {
     align-items: center;
     justify-content: center;
     height: 100%;
+    font-size: 13px;
+    span {
+      text-align: center;
+    }
   `,
   InfoRow: styled.div`
     flex: 1 1 8%;
@@ -245,24 +276,6 @@ const S = {
     justify-content: center;
     flex-wrap: wrap;
     height: 100%;
-
-    .pay-wrapper {
-      background-color: ${(props) => props.theme.colors.gray100};
-      padding: 5px 8px;
-      border-radius: 5px;
-      &__type {
-        letter-spacing: 1px;
-        padding-right: 5px;
-        color: #ff501b; //월급
-        /* color: #00b0a6; //시급 */
-        /* color: #8050c8; //일급 */
-        /* color: #00a1ef; //연봉 */
-      }
-      &__price {
-        letter-spacing: 0.3px;
-        font-weight: 500;
-      }
-    }
   `,
   DateRow: styled.div`
     flex: 1 1 8%;
@@ -272,5 +285,12 @@ const S = {
     display: flex;
     align-items: center;
     justify-content: center;
+    letter-spacing: 0.2px;
+    color: #475067;
+    font-size: 13px;
+    font-weight: 400;
+    .today {
+      color: ${(props) => props.theme.colors.blue500};
+    }
   `,
 };
