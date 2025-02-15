@@ -11,6 +11,7 @@ import { RESUME_STATUS, SANCTION_REASON } from '@/constants/resume';
 import { APPLICATION_STATUS, EMPLOYER_REVIEW_STAGE_STATUS, REVIEW_STAGE_STATUS } from '@/constants/application';
 import { RECRUITMENT_PRODUCT_NAME, RECRUITMENT_PRODUCT_OPTION_NAME, RECRUITMENT_PRODUCT_TYPE } from '@/constants/product';
 import { PAYMENT_STATUS, PAYMENT_TYPE } from '@/constants/payment';
+import { ANNOUNCEMENT_TYPE } from '@/constants/announcement';
 
 export type Provider = 'LOCAL' | 'KAKAO' | 'GOOGLE';
 export type RoleType = 'ADMIN' | 'EMPLOYER' | 'JOB_SEEKER';
@@ -57,6 +58,7 @@ export type RecruitmentProductOptionNameKey = keyof typeof RECRUITMENT_PRODUCT_O
 export type RecruitmentProductTypeKey = keyof typeof RECRUITMENT_PRODUCT_TYPE;
 export type PaymentStatusKey = keyof typeof PAYMENT_STATUS;
 export type PaymentTypeKey = keyof typeof PAYMENT_TYPE;
+export type AnnouncementTypeKey = keyof typeof ANNOUNCEMENT_TYPE;
 
 export type TalentListItem = {};
 
@@ -447,6 +449,17 @@ export interface ApplicationHistory {
   createdAt: Date | null;
 }
 
+export type AnnouncementType = {
+  announcedAt: string;
+  announcementType: AnnouncementTypeKey;
+  id: number;
+  isSent: boolean;
+  message: string;
+  reviewStage: ReviewStageStatusKey;
+  sentAt: null;
+  title: string;
+};
+
 export interface RecruitmentDetailApplicantListItem {
   id: number;
   applicationStatus: ApplicationStatusKey;
@@ -459,10 +472,9 @@ export interface RecruitmentDetailApplicantListItem {
   acceptAt: Date | null;
   createdAt: Date | null;
   viewAt: Date | null;
-  resume: {
-    // resume: 이력서 삭제 시 null
-  };
+  recruitmentSnapshot: RecruitmentDetail;
   resumeSnapshot: ResumeDetail;
+  announcementRecipients: { id: number; announcement: AnnouncementType }[];
 }
 
 export interface GetPublishedRecruitmentListItem {
@@ -627,6 +639,7 @@ export interface RecruitListItem {
   addressDetail: string;
   paymentRecruitment: PaymentRecruitment[];
   priorityDate: Date;
+  recruitmentStatus: RecruitmentStatusKeys;
   employmentType: {
     CONTRACT: boolean;
     DAILY_WORKER: boolean;
@@ -655,4 +668,13 @@ export interface AvailableCouponList {
   availableCoupons: EmployerCouponListItem[];
   unavailableCoupons: EmployerCouponListItem[];
   totalCouponCount: number;
+}
+
+export interface CreateApplicationsAnnouncementForm {
+  title: string;
+  message: string;
+  announcementType: AnnouncementTypeKey;
+  recruitmentId: string;
+  recipientApplicationIds: number[];
+  reviewStage: ReviewStageStatusKey;
 }
