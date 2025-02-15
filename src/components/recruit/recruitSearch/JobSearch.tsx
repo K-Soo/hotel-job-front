@@ -53,7 +53,7 @@ export default function JobSearch() {
 
     const jobsArray = Array.isArray(job) ? job.map((item) => item.toUpperCase()) : [job.toUpperCase()];
     setSelectedJob(jobsArray as AllJobsKeyValuesKeys[]);
-  }, []);
+  }, [job]);
 
   const jobObj = getJobObject(job);
 
