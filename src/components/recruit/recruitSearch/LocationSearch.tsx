@@ -19,7 +19,6 @@ export default function LocationSearch() {
   const [sidoIndex, setSidoIndex] = React.useState('seoul.all');
   const [isOpenLocationModal, setIsOpenLocationModal] = React.useState(false);
   const [isOpenModal, setIsOpenModal] = React.useState(false);
-  console.log('isOpenModal: ', isOpenModal);
 
   const { isTablet, isMobile } = useResponsive();
 
