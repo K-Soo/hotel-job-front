@@ -10,7 +10,7 @@ export default function DefaultProfileImage({ imageUrl, margin }: DefaultProfile
   return (
     <S.DefaultProfileImage margin={margin}>
       {imageUrl && <Image src={imageUrl} fill alt="profile" />}
-      {/* <Image src={'/images/user.png'} fill alt="profile" /> */}
+      {!imageUrl && <Image src={'/images/profile.png'} fill alt="profile" />}
     </S.DefaultProfileImage>
   );
 }
