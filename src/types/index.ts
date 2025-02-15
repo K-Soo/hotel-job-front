@@ -174,6 +174,7 @@ export interface EmployerAccountInfo {
   totalPoint: number;
   totalScore: number;
   passwordChangedAt: Date | null;
+  availableCouponCount: number;
   membership: {
     discountRate: number;
     maxScore: string;
@@ -328,7 +329,7 @@ export interface IRecruitDetail {
   position: PositionKeys | null;
   preferences: PreferencesKeys[];
   recruitmentCapacity: number; //모집인원
-  recruitmentStatus: 'PUBLISHED';
+  recruitmentStatus: RecruitmentStatusKeys;
   recruitmentTitle: string;
   roomCount: number;
   salaryAmount: number;
