@@ -42,9 +42,9 @@ export default function Navigation() {
           채용정보
         </MotionLink>
 
-        <MotionLink className="item" href={path.TALENT}>
+        {/* <MotionLink className="item" href={path.TALENT}>
           인재
-        </MotionLink>
+        </MotionLink> */}
 
         {/* <MotionLink className="item" href={path.TALENT}>
           고객센터
