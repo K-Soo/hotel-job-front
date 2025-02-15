@@ -319,6 +319,7 @@ export const Post = {
   verificationsEmployerUserId: (body: { userId: string }) =>
     requests.post<{ userId: string }, API.verificationsEmployerUserIdResponse>('/verifications/employer/user-id', body),
 
+  // *************************************** EMPLOYER ***************************************
   //사업자번호 검증
   businessNumberCheck: (body: { b_no: string }) =>
     requests.post<{ b_no: string }, API.verificationsBusinessNumberCheckResponse>('/verifications/business-number', body),
@@ -327,28 +328,32 @@ export const Post = {
   setupCompany: (body: API.SetupCompanyRequest) =>
     requests.post<API.SetupCompanyRequest, API.SetupCompanyResponse>('/employers/company', body),
 
-  //사업자 -  채용 공고생성
+  //채용 공고생성
   createRecruitment: (body: API.CreateRecruitmentRequest) =>
     requests.post<API.CreateRecruitmentRequest, API.CreateRecruitmentResponse>('/employers/recruitment', body),
 
-  // 사업자 -  공고 임시저장
+  // 공고 임시저장
   draftRecruitment: (body: API.DraftRecruitmentRequest) =>
     requests.post<API.DraftRecruitmentRequest, API.DraftRecruitmentResponse>('/employers/recruitment/draft', body),
 
-  // 사업자 -  채용 공고생성
+  // 채용공고 삭제
   removeRecruitment: (body: { ids: string[] }) =>
     requests.post<{ ids: string[] }, API.RemoveRecruitmentResponse>('/employers/recruitment/remove', body),
 
+  // *************************************** EMPLOYER APPLICATIONS ***************************************
+  // 합격자 발표
+  createApplicationsAnnouncement: (body: API.CreateApplicationsAnnouncementRequest) =>
+    requests.post<API.CreateApplicationsAnnouncementRequest, any>('/applications/announcements', body),
+
   // *************************************** FILE UPLOAD ***************************************
   // 프로필 이미지 업로드
-  // uploadProfileImage: (body: FormData) => requests.post<FormData, API.UploadProfileImageResponse>('/upload/resume/profile', body),
   uploadProfileImage: (body: FormData) => requests.post<FormData, API.UploadProfileImageResponse>('/upload/resume/profile', body),
 
   // *************************************** PUSH  ***************************************
   // FCM 토큰 저장
   saveFcmToken: (body: API.SaveFcmTokenRequest) => requests.post<API.SaveFcmTokenRequest, API.SaveFcmTokenResponse>('/push/token', body),
 
-  // *************************************** PAYMENT  ***************************************
+  // *************************************** EMPLOYER PAYMENT  ***************************************
   // TODO - type 정의
   // 채용공고 결제 초기요청
   paymentRecruitmentInitiate: (body: any) =>
@@ -394,6 +399,10 @@ export const Patch = {
   // 사업자 - 이력서 열람처리
   updateApplicationResumeView: (body: { applicationId: number }) =>
     requests.patch<{ applicationId: number }, API.UpdateApplicationResumeView>('/applications/view', body),
+
+  // 채용공고 마감
+  closedRecruitment: (body: { recruitmentId: string }) =>
+    requests.patch<{ recruitmentId: string }, API.RemoveRecruitmentResponse>('/employers/recruitment/close', body),
 };
 
 export const Delete = {
