@@ -285,18 +285,18 @@ export const CITY = {
   서울: 'seoul.all',
   경기: 'gyeonggi.all',
   부산: 'busan.all',
-  강원: 'gangwon.all',
+  강원: 'gangwon.all', //강원 -> 강원특별자치도
   경남: 'gyeongnam.all',
-  경북: 'gyeongbuk.all',
-  광주: 'gwangju.all',
+  경북: 'gyeongbuk.all', //ok
+  광주: 'gwangju.all', //
   대구: 'daegu.all',
   대전: 'daejeon.all',
-  세종: 'sejong.all',
+  세종: 'sejong.all', //세종 -> 세종특별자치시
   울산: 'ulsan.all',
   인천: 'incheon.all',
   전남: 'jeonnam.all',
-  전북: 'jeonbuk.all',
+  전북: 'jeonbuk.all', //전북 -> 전북특별자치도
   충남: 'chungnam.all',
   충북: 'chungbuk.all',
-  제주: 'jeju.all',
+  제주: 'jeju.all', //제주 -> 제주특별자치도
 } as const;
