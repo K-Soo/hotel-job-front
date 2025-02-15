@@ -15,6 +15,27 @@ export default function RecruitFilterPanel({ handleClickFilterButton }: RecruitF
   const dragScrollRef = React.useRef<HTMLElement>(null);
   const filterButtonRefs = React.useRef<HTMLLIElement[] | null[]>([]);
 
+  const handleClickTagButton = (event: React.MouseEvent<HTMLButtonElement>) => {
+    const { value } = event.currentTarget;
+    console.log('value: ', value);
+    const { pathname, query } = router;
+    const { tag } = query;
+    // const tags = tag ? tag.split(',') : [];
+
+    // if (tags.includes(value)) {
+    //   const newTags = tags.filter((item) => item !== value);
+    //   router.push({
+    //     pathname,
+    //     query: { ...query, tag: newTags.join(',') },
+    //   });
+    // } else {
+    //   router.push({
+    //     pathname,
+    //     query: { ...query, tag: [...tags, value].join(',') },
+    //   });
+    // }
+  };
+
   return (
     <S.RecruitFilterPanel>
       <div>
@@ -30,11 +51,10 @@ export default function RecruitFilterPanel({ handleClickFilterButton }: RecruitF
         <div className="line" />
 
         <div className="tags">
-          <RecruitTagButton margin="0 15px 0 0" label="파출" />
-          <RecruitTagButton margin="0 15px 0 0" label="부부팀 구인" />
-          <RecruitTagButton margin="0 15px 0 0" label="숙식제공" />
-          <RecruitTagButton margin="0 15px 0 0" label="식대제공" />
-          <RecruitTagButton label="수당" />
+          <RecruitTagButton margin="0 15px 0 0" label="파출" value="AL" onClick={handleClickTagButton} />
+          <RecruitTagButton margin="0 15px 0 0" label="부부팀 구인" value="" onClick={handleClickTagButton} />
+          <RecruitTagButton margin="0 15px 0 0" label="숙식제공" value="" onClick={handleClickTagButton} />
+          <RecruitTagButton margin="0 15px 0 0" label="식대제공" value="" onClick={handleClickTagButton} />
         </div>
       </DragScroll>
     </S.RecruitFilterPanel>
