@@ -13,6 +13,7 @@ import dynamic from 'next/dynamic';
 import Button from '@/components/common/style/Button';
 import NicknameForm from '@/components/employerAccount/NicknameForm';
 import useAuth from '@/hooks/useAuth';
+import ChangeNicknameForm from '@/components/common/ChangeNicknameForm';
 
 const DynamicNoSSRModal = dynamic(() => import('@/components/common/modal'), { ssr: false });
 
@@ -54,12 +55,8 @@ export default function EmployerAccountContainer() {
           <DynamicNoSSRModal handleCloseModal={handleCloseModal}>
             <Modal.Header title="닉네임 변경" handleCloseModal={handleCloseModal} />
             <Modal.Content>
-              <NicknameForm nickname={data.result.nickname} />
+              <ChangeNicknameForm handleCloseModal={() => handleCloseModal()} />
             </Modal.Content>
-            <Modal.Footer>
-              <Button label="취소" variant="tertiary" margin="0 15px 0 0" onClick={handleCloseModal} />
-              <Button label="변경" variant="primary" />
-            </Modal.Footer>
           </DynamicNoSSRModal>
         )}
 
