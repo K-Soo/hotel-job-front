@@ -25,19 +25,19 @@ export default function EmployerAccount({ data, setIsOpenNicknameModal, children
               <p className="title">닉네임</p>
               <div className="wrapper">
                 <p className="wrapper__text">{data.nickname}</p>
-                {/* <Button
+                <Button
                   label="변경"
-                  variant="tertiary"
+                  variant="secondary100"
                   width="80px"
-                  height="35px"
-                  margin="0 0 0 30px"
+                  height="30px"
+                  margin="0 0 0 15px"
                   fontSize="14px"
                   onClick={() => {
                     if (setIsOpenNicknameModal) {
                       setIsOpenNicknameModal(true);
                     }
                   }}
-                /> */}
+                />
               </div>
             </S.Content>
 
