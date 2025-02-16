@@ -6,8 +6,15 @@ import queryKeys from '@/constants/queryKeys';
 import { keepPreviousData } from '@tanstack/react-query';
 import useAuth from '@/hooks/useAuth';
 import useAlertWithConfirm from '@/hooks/useAlertWithConfirm';
+import dynamic from 'next/dynamic';
+import Modal from '@/components/common/modal';
+import ChangeNicknameForm from '@/components/common/ChangeNicknameForm';
+
+const DynamicNoSSRModal = dynamic(() => import('@/components/common/modal'), { ssr: false });
 
 export default function UserProfileContainer() {
+  const [isOpenModal, setIsOpenModal] = React.useState(false);
+
   const { authAtomState } = useAuth();
   const { setAlertWithConfirmAtom } = useAlertWithConfirm();
 
@@ -53,6 +60,27 @@ export default function UserProfileContainer() {
       onClickConfirm: () => fetchDeactivate(),
     }));
   };
+  const handleCloseModal = () => {
+    setIsOpenModal(false);
+  };
+  return (
+    <>
+      {isOpenModal && (
+        <DynamicNoSSRModal handleCloseModal={() => handleCloseModal()}>
+          <Modal.Header title="닉네임 변경" handleCloseModal={() => handleCloseModal()} />
+          <Modal.Content>
+            <ChangeNicknameForm handleCloseModal={() => handleCloseModal()} />
+          </Modal.Content>
+        </DynamicNoSSRModal>
+      )}
 
-  return <UserProfile isLoading={isLoading} isSuccess={isSuccess} data={data?.result} handleClickWithdrawal={handleClickWithdrawal} />;
+      <UserProfile
+        isLoading={isLoading}
+        isSuccess={isSuccess}
+        data={data?.result}
+        handleClickWithdrawal={handleClickWithdrawal}
+        setIsOpenModal={setIsOpenModal}
+      />
+    </>
+  );
 }
