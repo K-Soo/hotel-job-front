@@ -11,7 +11,7 @@ import { AvailableCouponList } from '@/types';
 import Radio from '@/components/common/style/Radio';
 import Dimmed from '@/components/common/Dimmed';
 import useToast from '@/hooks/useToast';
-import { errorMessages, errorCode } from '@/error';
+import { errorMessages } from '@/error';
 import { QueryObserverResult, RefetchOptions } from '@tanstack/react-query';
 import { GetPaymentRecruitmentDetailResponse } from '@/types/API';
 import { AxiosError } from 'axios';
