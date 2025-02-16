@@ -3,7 +3,7 @@ import { CAREER_LEVEL, position, LICENSE_STAGE } from '@/constants/resume';
 import { PREFERENCES } from '@/constants/preferences';
 import { EXPERIENCE_CONDITION, RECRUITMENT_STATUS, WORKING_DAY_LIST } from '@/constants/recruitment';
 import { EDUCATION_LEVEL, SALARY_TYPE } from '@/constants';
-import { ALL_JOBS, allJobsKeyValues, AllJobsKeyValuesKeys, allJobsKeyValuesKeys } from '@/constants/job';
+import { ALL_JOBS, AllJobsKeyValuesKeys, allJobsKeyValuesKeys } from '@/constants/job';
 import { BENEFITS } from '@/constants/benefits';
 import { validation } from '@/utils/validation';
 import {
@@ -287,6 +287,10 @@ const resumeRegister = yup.object({
   isOptionalAgreement: yup.boolean().default(false).oneOf([true]),
 });
 
+const nicknameSchema = yup.object({
+  newNickname: validation.NICKNAME,
+});
+
 export const schema = {
   signInSchema,
   resumeRegister,
@@ -296,4 +300,5 @@ export const schema = {
   oauthSignInSchema,
   recruitmentSchema,
   recruitmentDetailSchema,
+  nicknameSchema,
 };
