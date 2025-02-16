@@ -113,6 +113,7 @@ const StyledMotionInput = styled(motion.input)<{ readOnly?: boolean; disabled?: 
   &:focus {
     transition: 0.3s;
     border: 1px solid ${(props) => props.theme.colors.blue500};
+    box-shadow: inset 0 0 0 1px ${(props) => props.theme.colors.blue500};
   }
 
   &::placeholder {
