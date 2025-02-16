@@ -97,6 +97,10 @@ export const Auth = {
 
   // 로그아웃
   signOut: (body: void) => requests.post('/auth/sign-out', body),
+
+  // 닉네임 변경
+  patchChangeNickname: (body: { newNickname: string }) =>
+    requests.patch<{ newNickname: string }, API.PatchChangeNicknameResponse>('/auth/nickname', body),
 };
 
 export const OAuth = {
