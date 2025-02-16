@@ -153,6 +153,12 @@ export interface GetUserInfoResponse extends BaseResponse {
   };
 }
 
+export interface PatchChangeNicknameResponse extends BaseResponse {
+  result: {
+    status: ResponseStatus;
+  };
+}
+
 export interface GetApplicantProfileResponse extends BaseResponse {
   result: types.ApplicantProfile;
 }
