@@ -163,11 +163,13 @@ const S = {
   UserInfo: styled.div`
     display: flex;
     align-items: center;
+    justify-content: space-between;
     margin-left: 15px;
     font-size: 14px;
     padding: 0 15px;
     cursor: pointer;
     border-radius: 5px;
+    min-width: 180px;
     .nickname {
       padding-right: 8px;
       user-select: none;
