@@ -15,10 +15,13 @@ export default function StepBodyRow({
   handleClickNotifyOneApplicant,
   announcementRecipients,
 }: StepBodyRowProps) {
+  const isCancelApplicant = item.cancelAt !== null;
+
   if (announcementRecipients.length > 0) {
     // 불합격 포함될경우
     const isIncludesRejected = announcementRecipients.some((item) => item.announcement.announcementType === 'REJECT');
 
+    // 합격 발표가 최종 합격일 경우
     const isIncludesAcceptWithFinalAccept = announcementRecipients.some(
       (item) => item.announcement.announcementType === 'ACCEPT' && item.announcement.reviewStage === 'ACCEPT',
     );
@@ -26,7 +29,15 @@ export default function StepBodyRow({
     if (isIncludesRejected) {
       return (
         <S.StepBodyRow>
-          <Button label="불합격 발표 확인" variant="tertiary" width="120px" fontSize="14px" height="35px" style={{ color: '#333333' }} />
+          <Button
+            label="불합격 발표 확인"
+            variant="tertiary"
+            width="120px"
+            fontSize="14px"
+            height="35px"
+            style={{ color: '#333333' }}
+            disabled={isCancelApplicant}
+          />
         </S.StepBodyRow>
       );
     }
@@ -34,7 +45,15 @@ export default function StepBodyRow({
     if (isIncludesAcceptWithFinalAccept) {
       return (
         <S.StepBodyRow>
-          <Button label="합격 발표 확인" variant="tertiary" width="120px" fontSize="14px" height="35px" style={{ color: '#333333' }} />
+          <Button
+            label="합격 발표 확인"
+            variant="tertiary"
+            width="120px"
+            fontSize="14px"
+            height="35px"
+            style={{ color: '#333333' }}
+            disabled={isCancelApplicant}
+          />
         </S.StepBodyRow>
       );
     }
@@ -50,6 +69,7 @@ export default function StepBodyRow({
           fontSize="14px"
           height="35px"
           onClick={() => fetchUpdateEmployerReviewStageStatus(item.id, 'INTERVIEW')}
+          disabled={isCancelApplicant}
         />
       )}
 
@@ -63,6 +83,7 @@ export default function StepBodyRow({
             height="35px"
             margin="0 0 10px 0"
             onClick={() => fetchUpdateEmployerReviewStageStatus(item.id, 'ACCEPT')}
+            disabled={isCancelApplicant}
           />
         </>
       )}
@@ -75,6 +96,7 @@ export default function StepBodyRow({
           fontSize="14px"
           height="35px"
           onClick={() => handleClickNotifyOneApplicant(item)}
+          disabled={isCancelApplicant}
         />
       )}
 
@@ -86,6 +108,7 @@ export default function StepBodyRow({
           fontSize="14px"
           height="35px"
           onClick={() => handleClickNotifyOneApplicant(item)}
+          disabled={isCancelApplicant}
         />
       )}
     </S.StepBodyRow>
