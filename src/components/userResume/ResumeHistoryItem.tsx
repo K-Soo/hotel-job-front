@@ -12,32 +12,31 @@ export default function ResumeHistoryItem({ item }: ResumeHistoryItemProps) {
 
   return (
     <S.ResumeHistoryItem>
-      <div className="info-box">
-        <div className="info-box__hotel">{item.recruitment?.hotelName}</div>
+      <S.InfoBox>
+        <div className="hotel">{item.recruitment?.hotelName}</div>
         <div
-          className="info-box__title"
+          className="title"
           onClick={() => {
             router.push(`/recruit/${item.recruitment.id}`);
           }}
         >
           {item.recruitment?.recruitmentTitle}
         </div>
-      </div>
-      <div className="date-box">
-        {item.applyAt && (
-          <div className="date-box__apply">
-            <span>지원일</span>
-            <p>{dateFormat.date(item.applyAt, 'YY.MM.DD HH:mm')}</p>
-          </div>
-        )}
+      </S.InfoBox>
+
+      <S.DateBox>
+        <div className="apply">
+          <p className="apply__value">{dateFormat.date(item.applyAt, 'YY.MM.DD')}</p>
+          <span>접수</span>
+        </div>
 
         {item.cancelAt && (
-          <div className="date-box__cancel">
+          <div className="cancel">
+            <p className="cancel__value">{dateFormat.date(item.cancelAt, 'YY.MM.DD')}</p>
             <p>지원취소</p>
-            <p>{dateFormat.date(item.cancelAt, 'YY.MM.DD HH:mm')}</p>
           </div>
         )}
-      </div>
+      </S.DateBox>
     </S.ResumeHistoryItem>
   );
 }
@@ -45,45 +44,55 @@ export default function ResumeHistoryItem({ item }: ResumeHistoryItemProps) {
 const S = {
   ResumeHistoryItem: styled.div`
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: 60px;
+    flex-direction: column;
     border-bottom: 1px solid ${(props) => props.theme.colors.gray200};
+    padding: 15px 0;
     &:last-child {
       border-bottom: none;
     }
-    .info-box {
-      &__hotel {
-        font-size: 13px;
-        padding-bottom: 3px;
-        color: ${(props) => props.theme.colors.gray700};
-      }
-      &__title {
-        font-size: 15px;
-        color: ${(props) => props.theme.colors.black500};
-        &:hover {
-          cursor: pointer;
-          text-decoration: underline;
-        }
+  `,
+  InfoBox: styled.div`
+    .hotel {
+      font-size: 15px;
+      padding-bottom: 3px;
+      font-weight: 500;
+      color: ${(props) => props.theme.colors.black300};
+    }
+    .title {
+      font-size: 14px;
+      color: ${(props) => props.theme.colors.black500};
+      &:hover {
+        cursor: pointer;
+        text-decoration: underline;
+        color: ${(props) => props.theme.colors.black300};
       }
     }
-    .date-box {
-      font-size: 13px;
+  `,
+  DateBox: styled.div`
+    display: flex;
+    font-size: 12px;
+    margin-top: 20px;
+    color: ${(props) => props.theme.colors.gray600};
+    .apply {
+      display: flex;
+      &__value {
+        padding-right: 4px;
+      }
+    }
+    .cancel {
+      display: flex;
+      align-items: center;
       color: ${(props) => props.theme.colors.gray600};
-      font-weight: 300;
-      white-space: nowrap;
-      padding-left: 10px;
-      span {
-        padding-right: 3px;
+      &::before {
+        content: '';
+        display: inline-block;
+        width: 1px;
+        height: 10px;
+        background-color: ${(props) => props.theme.colors.gray200};
+        margin: 0 10px;
       }
-      &__apply {
-        display: flex;
-        align-items: center;
-      }
-      &___cancel {
-        display: flex;
-        align-items: center;
-        padding-top: 3px;
+      &__value {
+        padding-right: 4px;
       }
     }
   `,
