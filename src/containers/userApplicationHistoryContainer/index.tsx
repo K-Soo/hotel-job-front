@@ -2,7 +2,7 @@ import React from 'react';
 import useFetchQuery from '@/hooks/useFetchQuery';
 import queryKeys from '@/constants/queryKeys';
 import useAuth from '@/hooks/useAuth';
-import { Get } from '@/apis';
+import { Get, Patch } from '@/apis';
 import UserApplicationHistory from '@/components/userApplicationHistory';
 import HistoryStatus from '@/components/userApplicationHistory/HistoryStatus';
 import ApplicationHistoryTable from '@/components/userApplicationHistory/applicationHistoryTable';
@@ -15,12 +15,24 @@ import dynamic from 'next/dynamic';
 import Modal from '@/components/common/modal';
 import { ApplicationHistory } from '@/types';
 import Button from '@/components/common/style/Button';
+import useResponsive from '@/hooks/useResponsive';
+import useAlertWithConfirm from '@/hooks/useAlertWithConfirm';
+import useLoading from '@/hooks/useLoading';
+import useToast from '@/hooks/useToast';
+import { useQueryClient } from '@tanstack/react-query';
+import EmptyComponent from '@/components/common/EmptyComponent';
 
 const DynamicNoSSRModal = dynamic(() => import('@/components/common/modal'), { ssr: false });
 
 export default function UserApplicationHistoryContainer() {
   const { isAuthenticated, authAtomState } = useAuth();
   const [selectedApplicant, setSelectedApplicant] = React.useState<ApplicationHistory | null>(null);
+
+  const { isTablet } = useResponsive();
+  const { setAlertWithConfirmAtom } = useAlertWithConfirm();
+  const { setLoadingAtomStatue } = useLoading();
+  const { addToast } = useToast();
+  const queryClient = useQueryClient();
 
   const { data, isLoading, isSuccess, isError } = useFetchQuery({
     queryKey: [queryKeys.USER_APPLICATION_HISTORY, { nickname: authAtomState.nickname }],
@@ -34,9 +46,41 @@ export default function UserApplicationHistoryContainer() {
 
   console.log('지원내역 리스트 API : ', data?.result);
 
-  const handleCloseModal = () => setSelectedApplicant(null);
+  const handleCloseModal = React.useCallback(() => setSelectedApplicant(null), []);
 
-  const handleClickApplicant = (applicant: ApplicationHistory) => setSelectedApplicant(applicant);
+  const handleClickApplicant = React.useCallback((applicant: ApplicationHistory) => setSelectedApplicant(applicant), []);
+
+  const fetchApplicationCancel = async (selectedApplicantId: number) => {
+    setLoadingAtomStatue({ isLoading: true });
+    try {
+      const response = await Patch.cancelApplication({ applicationId: selectedApplicantId });
+      console.log('지원취소 API: ', response);
+      if (response.result.status !== 'success') {
+        throw new Error();
+      }
+      await queryClient.invalidateQueries({ queryKey: [queryKeys.USER_APPLICATION_HISTORY], refetchType: 'all' });
+      await queryClient.invalidateQueries({ queryKey: [queryKeys.APPLICATION_APPLY_CHECK], refetchType: 'all' });
+      addToast({ type: 'success', message: '지원이 취소되었습니다.' });
+    } catch (error) {
+      console.log('error: ', error);
+      addToast({ type: 'error', message: '지원취소를 할 수 없습니다.' });
+    } finally {
+      setLoadingAtomStatue({ isLoading: false });
+      handleCloseModal();
+    }
+  };
+
+  const handleClickCancelApplication = (selectedApplicantId: number) => {
+    setAlertWithConfirmAtom((prev) => ({
+      ...prev,
+      type: 'CONFIRM',
+      confirmLabel: '지원취소',
+      cancelLabel: '취소',
+      confirmVariant: 'delete',
+      title: 'TITLE_12',
+      onClickConfirm: () => fetchApplicationCancel(selectedApplicantId),
+    }));
+  };
 
   if (isError) {
     return (
@@ -58,7 +102,14 @@ export default function UserApplicationHistoryContainer() {
             <ApplicationDetailForm selectedApplicant={selectedApplicant} />
           </Modal.Content>
           <Modal.Footer>
-            <Button label="지원취소" variant="primary" fontSize="16px" />
+            <Button
+              label={selectedApplicant.cancelAt === null ? '지원취소' : '지원취소 완료'}
+              variant="primary"
+              fontSize="18px"
+              onClick={() => handleClickCancelApplication(selectedApplicant.id)}
+              borderRadius="30px"
+              disabled={selectedApplicant.cancelAt !== null}
+            />
           </Modal.Footer>
         </DynamicNoSSRModal>
       )}
@@ -70,7 +121,7 @@ export default function UserApplicationHistoryContainer() {
           <HistoryStatus />
 
           <ApplicationHistoryTable>
-            <ApplicationHistoryTable.Header />
+            {!isTablet && <ApplicationHistoryTable.Header />}
             {isLoading && (
               <>
                 <SkeletonUI.Line style={{ height: '40px', margin: '5px 0' }} />
@@ -78,7 +129,16 @@ export default function UserApplicationHistoryContainer() {
                 <SkeletonUI.Line style={{ height: '40px', margin: '5px 0' }} />
               </>
             )}
-            {isSuccess && data && <ApplicationHistoryTable.Body data={data.result} handleClickApplicant={handleClickApplicant} />}
+            {isSuccess && data && (
+              <>
+                {data.result.length === 0 && (
+                  <EmptyComponent message="아직 지원한 채용 공고가 없어요.\n마음에 드는 공고를 찾아 지원해보세요!" isVisibleImage={false} />
+                )}
+                {data.result.length !== 0 && (
+                  <ApplicationHistoryTable.Body data={data.result} handleClickApplicant={handleClickApplicant} />
+                )}
+              </>
+            )}
           </ApplicationHistoryTable>
         </UserTemplate>
       </UserApplicationHistory>
