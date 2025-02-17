@@ -1,3 +1,4 @@
+import React from 'react';
 import styled from 'styled-components';
 import Image from 'next/image';
 
@@ -12,7 +13,16 @@ export default function EmptyComponent({ message, height, isVisibleImage = true 
     <S.EmptyComponent $height={height}>
       <div className="empty-container">
         {isVisibleImage && <Image className="box-image" src="/images/box.png" width={60} height={60} alt="box" />}
-        <span className="text">{message || '등록된 정보가 없습니다.'}</span>
+        <span className="text">
+          {message
+            ? message.split('\\n').map((line, index) => (
+                <React.Fragment key={index}>
+                  {line}
+                  <br />
+                </React.Fragment>
+              ))
+            : '등록된 정보가 없습니다.'}
+        </span>
       </div>
     </S.EmptyComponent>
   );
@@ -34,6 +44,9 @@ const S = {
         color: ${(props) => props.theme.colors.black600};
         font-size: 16px;
         font-weight: 400;
+        white-space: pre-line;
+        text-align: center;
+        line-height: 1.3;
       }
     }
   `,
