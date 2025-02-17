@@ -4,7 +4,7 @@ import ApplicantTab from '@/components/EmployerRecruitmentDetailApplicant/Applic
 import ApplicantController from '@/components/EmployerRecruitmentDetailApplicant/ApplicantController';
 import { ParsedUrlQuery } from 'querystring';
 import { RecruitmentApplicantQueryStep } from '@/types/API';
-import { ResumeDetail } from '@/types';
+import { RecruitmentDetailApplicantListItem, ResumeDetail } from '@/types';
 import ResumePreview from '@/components/common/resume/resumePreview';
 import ApplicantNoticeForm from '@/components/EmployerRecruitmentDetailApplicant/ApplicantNoticeForm';
 import ApplicantListContainer from '@/containers/employerRecruitmentDetailApplicantContainer/ApplicantListContainer';
@@ -13,22 +13,25 @@ import { ErrorBoundary, ErrorComponent } from '@/error';
 import { Patch } from '@/apis';
 import queryKeys from '@/constants/queryKeys';
 import { useQueryClient } from '@tanstack/react-query';
+import useToast from '@/hooks/useToast';
 
-interface Query extends ParsedUrlQuery {
-  step?: RecruitmentApplicantQueryStep;
-}
-
-// TODO
 export default function EmployerRecruitmentDetailApplicantContainer() {
   const [resumePreviewData, setResumePreviewData] = React.useState<ResumeDetail | null>(null);
 
   const queryClient = useQueryClient();
+  const { addToast } = useToast();
 
-  const handleClickResumePreview = (applicationId: number, isView: boolean, data: ResumeDetail) => {
-    setResumePreviewData((prev) => (prev ? null : data));
+  const handleClickResumePreview = (item: RecruitmentDetailApplicantListItem) => {
+    if (item.cancelAt) {
+      return addToast({ message: '지원이 취소된 지원자입니다.', type: 'info' });
+    }
 
-    if (isView) return;
-    fetchApplicationResumeView(applicationId);
+    setResumePreviewData((prev) => (prev ? null : item.resumeSnapshot));
+
+    // 열람된 경우 API 미 호출
+    if (item.isView) return;
+
+    fetchApplicationResumeView(item.id);
   };
 
   //API - 지원자 이력서 열람처리
