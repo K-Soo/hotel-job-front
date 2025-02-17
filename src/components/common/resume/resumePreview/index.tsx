@@ -3,8 +3,6 @@ import Portal from '@/components/common/Portal';
 import Background from '@/components/common/Background';
 import { ResumeDetail, ResumeDetailForm } from '@/types';
 import Icon from '@/icons/Icon';
-import { CAREER_LEVEL } from '@/constants/resume';
-import { EDUCATION_LEVEL } from '@/constants';
 import Line from '@/components/common/Line';
 import { parseBirthDateAndCalculateAge, dateFormat } from '@/utils';
 import { useReactToPrint } from 'react-to-print';
@@ -12,9 +10,9 @@ import { useRef } from 'react';
 import Profile from '@/components/common/resume/resumePreview/Profile';
 import Summary from '@/components/common/resume/resumePreview/Summary';
 import Experience from '@/components/common/resume/resumePreview/Experience';
+import Education from '@/components/common/resume/resumePreview/Education';
 import License from '@/components/common/resume/resumePreview/License';
 import Languages from '@/components/common/resume/resumePreview/Languages';
-import IconDimmed from '@/components/common/IconDimmed';
 interface ResumePreviewProps {
   resumePreviewData: ResumeDetail & ResumeDetailForm;
   closeResume: () => void;
@@ -22,8 +20,9 @@ interface ResumePreviewProps {
 
 // TODO - 인쇄 스타일 설정
 export default function ResumePreview({ resumePreviewData, closeResume }: ResumePreviewProps) {
+  console.log('resumePreviewData: ', resumePreviewData);
   const contentRef = useRef<HTMLDivElement>(null);
-  const reactToPrintFn = useReactToPrint({ contentRef });
+  // const reactToPrintFn = useReactToPrint({ contentRef });
 
   return (
     <Portal>
@@ -34,6 +33,11 @@ export default function ResumePreview({ resumePreviewData, closeResume }: Resume
             <Profile resumePreviewData={resumePreviewData} />
             {resumePreviewData.summary && <Summary resumePreviewData={resumePreviewData} />}
 
+            <S.previewSectionTitle>
+              <h6>최종학력</h6>
+            </S.previewSectionTitle>
+            <Education education={resumePreviewData.education} />
+
             {resumePreviewData.experience.length !== 0 && (
               <>
                 <S.previewSectionTitle>
@@ -43,21 +47,29 @@ export default function ResumePreview({ resumePreviewData, closeResume }: Resume
               </>
             )}
 
-            <S.previewSectionTitle>
-              <h6>자격증</h6>
-            </S.previewSectionTitle>
-            <License resumePreviewData={resumePreviewData} />
+            {resumePreviewData.licenses.length !== 0 && (
+              <>
+                <S.previewSectionTitle>
+                  <h6>자격증</h6>
+                </S.previewSectionTitle>
+                <License resumePreviewData={resumePreviewData} />
+              </>
+            )}
 
-            <S.previewSectionTitle>
-              <h6>외국어</h6>
-            </S.previewSectionTitle>
-            <Languages resumePreviewData={resumePreviewData} />
+            {resumePreviewData.languages.length !== 0 && (
+              <>
+                <S.previewSectionTitle>
+                  <h6>외국어</h6>
+                </S.previewSectionTitle>
+                <Languages resumePreviewData={resumePreviewData} />
+              </>
+            )}
 
-            <S.PreviewFooter>
+            {/* <S.PreviewFooter>
               <div className="wrapper">
                 <button onClick={() => reactToPrintFn()}>프린트</button>
               </div>
-            </S.PreviewFooter>
+            </S.PreviewFooter> */}
           </div>
         </S.ResumePreview>
       </Background>
