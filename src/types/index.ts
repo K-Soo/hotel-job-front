@@ -11,7 +11,12 @@ import { RESUME_STATUS, SANCTION_REASON } from '@/constants/resume';
 import { APPLICATION_STATUS, EMPLOYER_REVIEW_STAGE_STATUS, REVIEW_STAGE_STATUS } from '@/constants/application';
 import { RECRUITMENT_PRODUCT_NAME, RECRUITMENT_PRODUCT_OPTION_NAME, RECRUITMENT_PRODUCT_TYPE } from '@/constants/product';
 import { PAYMENT_STATUS, PAYMENT_TYPE } from '@/constants/payment';
-import { ANNOUNCEMENT_TYPE } from '@/constants/announcement';
+import {
+  ANNOUNCEMENT_TYPE,
+  FAIL_RESULT_NOTIFICATION_STATUS,
+  PASS_RESULT_NOTIFICATION_STATUS,
+  RESULT_NOTIFICATION_STATUS,
+} from '@/constants/announcement';
 
 export type Provider = 'LOCAL' | 'KAKAO' | 'GOOGLE';
 export type RoleType = 'ADMIN' | 'EMPLOYER' | 'JOB_SEEKER';
@@ -59,6 +64,9 @@ export type RecruitmentProductTypeKey = keyof typeof RECRUITMENT_PRODUCT_TYPE;
 export type PaymentStatusKey = keyof typeof PAYMENT_STATUS;
 export type PaymentTypeKey = keyof typeof PAYMENT_TYPE;
 export type AnnouncementTypeKey = keyof typeof ANNOUNCEMENT_TYPE;
+export type PassResultNotificationKey = keyof typeof PASS_RESULT_NOTIFICATION_STATUS;
+export type FailResultNotificationKey = keyof typeof FAIL_RESULT_NOTIFICATION_STATUS;
+export type ResultNotificationStatusKey = PassResultNotificationKey | FailResultNotificationKey;
 
 export type TalentListItem = {};
 
@@ -431,15 +439,17 @@ export interface ApplicationHistory {
   id: number;
   reviewStageStatus: ReviewStageStatusKey;
   applicationStatus: ApplicationStatusKey;
-  recruitment: {
+  recruitmentSnapshot: {
     id: string;
     title: string;
     hotelName: string;
     recruitmentStatus: RecruitmentStatusKeys;
   };
-  resume: {
+  resumeSnapshot: {
     title: string;
     isDefault: string;
+    name: string;
+    phone: string;
   };
   isView: boolean;
   viewAt: Date | null;
@@ -677,5 +687,5 @@ export interface CreateApplicationsAnnouncementForm {
   announcementType: AnnouncementTypeKey;
   recruitmentId: string;
   recipientApplicationIds: number[];
-  reviewStage: ReviewStageStatusKey;
+  resultNotificationStatus: ResultNotificationStatusKey;
 }
