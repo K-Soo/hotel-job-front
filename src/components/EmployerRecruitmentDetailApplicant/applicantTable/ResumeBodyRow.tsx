@@ -6,6 +6,7 @@ interface ResumeBodyRowProps {
   employerReviewStageStatus: 'DOCUMENT' | 'INTERVIEW' | 'ACCEPT' | 'REJECT';
   fetchUpdateEmployerReviewStageStatus: (id: number, stage: EmployerReviewStageStatusKey) => Promise<void>;
   announcementRecipients: { id: number; announcement: AnnouncementType }[];
+  cancelAt: Date | null;
 }
 
 export default function ResumeBodyRow({
@@ -13,14 +14,32 @@ export default function ResumeBodyRow({
   employerReviewStageStatus,
   announcementRecipients,
   fetchUpdateEmployerReviewStageStatus,
+  cancelAt,
 }: ResumeBodyRowProps) {
+  // 지원자 취소일 경우
+  if (cancelAt) {
+    return (
+      <S.ResumeBodyRow>
+        <span>-</span>
+      </S.ResumeBodyRow>
+    );
+  }
+
+  // 발표가 있을 경우
   if (announcementRecipients.length > 0) {
-    // 불합격 포함될경우
     const isIncludesRejected = announcementRecipients.some((item) => item.announcement.announcementType === 'REJECT');
 
     const isIncludesAcceptWithFinalAccept = announcementRecipients.some(
       (item) => item.announcement.announcementType === 'ACCEPT' && item.announcement.reviewStage === 'ACCEPT',
     );
+
+    if (isIncludesRejected) {
+      return (
+        <S.ResumeBodyRow>
+          <span>-</span>
+        </S.ResumeBodyRow>
+      );
+    }
 
     if (isIncludesRejected) {
       return (
