@@ -311,6 +311,7 @@ export default function EmployerRecruitmentDetailContainer() {
         {isOpenPreferencesModal && (
           <DynamicPreferencesModal name="recruitmentInfo.preferences" setIsOpenPreferencesModal={setIsOpenPreferencesModal} />
         )}
+
         {daumPostAtomValue.isOpen && <DynamicDaumPost addressName="locationInfo.address" addressDetailName="locationInfo.addressDetail" />}
 
         <EmployerRecruitmentDetail
