@@ -279,6 +279,12 @@ export interface RemoveRecruitmentResponse extends BaseResponse {
   };
 }
 
+export interface CancelApplicationResponse extends BaseResponse {
+  result: {
+    status: ResponseStatus;
+  };
+}
+
 export interface GetRecruitSpecialListResponse extends BaseResponse {
   result: {
     items: types.RecruitListItem[];
