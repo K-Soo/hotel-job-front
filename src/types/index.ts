@@ -8,7 +8,12 @@ import { BENEFITS } from '@/constants/benefits';
 import { PREFERENCES } from '@/constants/preferences';
 import { LANGUAGE_LEVEL, LANGUAGE } from '@/constants/language';
 import { RESUME_STATUS, SANCTION_REASON } from '@/constants/resume';
-import { APPLICATION_STATUS, EMPLOYER_REVIEW_STAGE_STATUS, REVIEW_STAGE_STATUS } from '@/constants/application';
+import {
+  APPLICANT_REVIEW_STAGE_STATUS,
+  APPLICATION_STATUS,
+  EMPLOYER_REVIEW_STAGE_STATUS,
+  REVIEW_STAGE_STATUS,
+} from '@/constants/application';
 import { RECRUITMENT_PRODUCT_NAME, RECRUITMENT_PRODUCT_OPTION_NAME, RECRUITMENT_PRODUCT_TYPE } from '@/constants/product';
 import { PAYMENT_STATUS, PAYMENT_TYPE } from '@/constants/payment';
 import {
@@ -57,6 +62,7 @@ export type ResumeStatusKey = keyof typeof RESUME_STATUS;
 export type SanctionReasonKey = keyof typeof SANCTION_REASON;
 export type ApplicationStatusKey = keyof typeof APPLICATION_STATUS;
 export type ReviewStageStatusKey = keyof typeof REVIEW_STAGE_STATUS;
+export type ApplicantReviewStageStatusKey = keyof typeof APPLICANT_REVIEW_STAGE_STATUS;
 export type EmployerReviewStageStatusKey = keyof typeof EMPLOYER_REVIEW_STAGE_STATUS;
 export type RecruitmentProductNameKey = keyof typeof RECRUITMENT_PRODUCT_NAME;
 export type RecruitmentProductOptionNameKey = keyof typeof RECRUITMENT_PRODUCT_OPTION_NAME;
@@ -437,7 +443,7 @@ export interface ResumeDetailForm extends Omit<ResumeDetail, 'id' | 'createdAt' 
 
 export interface ApplicationHistory {
   id: number;
-  reviewStageStatus: ReviewStageStatusKey;
+  reviewStageStatus: ApplicantReviewStageStatusKey;
   applicationStatus: ApplicationStatusKey;
   recruitmentSnapshot: {
     id: string;
