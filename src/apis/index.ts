@@ -425,9 +425,13 @@ export const Patch = {
   updateApplicationResumeView: (body: { applicationId: number }) =>
     requests.patch<{ applicationId: number }, API.UpdateApplicationResumeView>('/applications/view', body),
 
-  // 채용공고 마감
+  // 사업자 - 채용공고 마감
   closedRecruitment: (body: { recruitmentId: string }) =>
     requests.patch<{ recruitmentId: string }, API.RemoveRecruitmentResponse>('/employers/recruitment/close', body),
+
+  // 유저 - 공고 지원취소
+  cancelApplication: (body: { applicationId: number }) =>
+    requests.patch<{ applicationId: number }, API.CancelApplicationResponse>('/applications/cancel', body),
 };
 
 export const Delete = {
