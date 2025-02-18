@@ -4,16 +4,16 @@ import queryKeys from '@/constants/queryKeys';
 import useAuth from '@/hooks/useAuth';
 import { Get, Patch } from '@/apis';
 import UserApplicationHistory from '@/components/userApplicationHistory';
-import HistoryStatus from '@/components/userApplicationHistory/HistoryStatus';
 import ApplicationHistoryTable from '@/components/userApplicationHistory/applicationHistoryTable';
 import ApplicationDetailForm from '@/components/userApplicationHistory/ApplicationDetailForm';
+import AnnouncementForm from '@/components/userApplicationHistory/AnnouncementForm';
 import UserTemplate from '@/components/common/user/UserTemplate';
 import UserTitle from '@/components/common/user/UserTitle';
 import { ErrorComponent } from '@/error';
 import SkeletonUI from '@/components/common/SkeletonUI';
 import dynamic from 'next/dynamic';
 import Modal from '@/components/common/modal';
-import { ApplicationHistory } from '@/types';
+import { ApplicantReviewStageStatusKey, ApplicationHistory } from '@/types';
 import Button from '@/components/common/style/Button';
 import useResponsive from '@/hooks/useResponsive';
 import useAlertWithConfirm from '@/hooks/useAlertWithConfirm';
@@ -21,12 +21,26 @@ import useLoading from '@/hooks/useLoading';
 import useToast from '@/hooks/useToast';
 import { useQueryClient } from '@tanstack/react-query';
 import EmptyComponent from '@/components/common/EmptyComponent';
+import HistoryStatusContainer from '@/containers/userApplicationHistoryContainer/HistoryStatusContainer';
+import { useRouter } from 'next/router';
+import { ParsedUrlQuery } from 'querystring';
+import { ErrorBoundary } from '@/error';
+import path from '@/constants/path';
+import { keepPreviousData } from '@tanstack/react-query';
 
 const DynamicNoSSRModal = dynamic(() => import('@/components/common/modal'), { ssr: false });
 
+interface Query extends ParsedUrlQuery {
+  status?: Lowercase<ApplicantReviewStageStatusKey>;
+}
+
 export default function UserApplicationHistoryContainer() {
   const { isAuthenticated, authAtomState } = useAuth();
-  const [selectedApplicant, setSelectedApplicant] = React.useState<ApplicationHistory | null>(null);
+  const [selectedApplication, setSelectedApplication] = React.useState<ApplicationHistory | null>(null);
+  const [stepIndex, setStepIndex] = React.useState(0);
+
+  const router = useRouter();
+  const { status } = router.query as Query;
 
   const { isTablet } = useResponsive();
   const { setAlertWithConfirmAtom } = useAlertWithConfirm();
@@ -35,21 +49,29 @@ export default function UserApplicationHistoryContainer() {
   const queryClient = useQueryClient();
 
   const { data, isLoading, isSuccess, isError } = useFetchQuery({
-    queryKey: [queryKeys.USER_APPLICATION_HISTORY, { nickname: authAtomState.nickname }],
+    queryKey: [queryKeys.USER_APPLICATION_HISTORY, { nickname: authAtomState.nickname, status: status }].filter(Boolean),
     queryFn: Get.getApplicationHistory,
     options: {
       enabled: isAuthenticated,
       staleTime: 1000 * 60 * 3,
       gcTime: 1000 * 60 * 5,
+      placeholderData: keepPreviousData,
+    },
+    requestQuery: {
+      status: status ? (status.toUpperCase() as ApplicantReviewStageStatusKey) : undefined,
     },
   });
 
   console.log('지원내역 리스트 API : ', data?.result);
 
-  const handleCloseModal = React.useCallback(() => setSelectedApplicant(null), []);
+  const handleCloseModal = React.useCallback(() => {
+    setSelectedApplication(null);
+    setStepIndex(0);
+  }, []);
 
-  const handleClickApplicant = React.useCallback((applicant: ApplicationHistory) => setSelectedApplicant(applicant), []);
+  const handleClickApplicant = React.useCallback((applicant: ApplicationHistory) => setSelectedApplication(applicant), []);
 
+  // API - 지원취소
   const fetchApplicationCancel = async (selectedApplicantId: number) => {
     setLoadingAtomStatue({ isLoading: true });
     try {
@@ -95,21 +117,39 @@ export default function UserApplicationHistoryContainer() {
 
   return (
     <>
-      {selectedApplicant && (
+      {selectedApplication && (
         <DynamicNoSSRModal handleCloseModal={() => handleCloseModal()}>
-          <Modal.Header title="지원내역" handleCloseModal={() => handleCloseModal()} />
+          <Modal.Header
+            title={stepIndex === 0 ? '지원내역' : '상세정보'}
+            handleCloseModal={() => handleCloseModal()}
+            setInitialStepIndex={() => setStepIndex(0)}
+            stepIndex={stepIndex}
+            isStepForm={true}
+          />
           <Modal.Content>
-            <ApplicationDetailForm selectedApplicant={selectedApplicant} />
+            {stepIndex === 0 && <ApplicationDetailForm selectedApplication={selectedApplication} />}
+            {stepIndex === 1 && <AnnouncementForm selectedApplication={selectedApplication} />}
           </Modal.Content>
           <Modal.Footer>
             <Button
-              label={selectedApplicant.cancelAt === null ? '지원취소' : '지원취소 완료'}
-              variant="primary"
-              fontSize="18px"
-              onClick={() => handleClickCancelApplication(selectedApplicant.id)}
+              label={selectedApplication.cancelAt === null ? '지원취소' : '지원취소 완료'}
+              variant="secondary"
+              fontSize="16px"
+              onClick={() => handleClickCancelApplication(selectedApplication.id)}
               borderRadius="30px"
-              disabled={selectedApplicant.cancelAt !== null}
+              disabled={selectedApplication.cancelAt !== null}
             />
+            {selectedApplication.announcementRecipients.length !== 0 && (
+              <Button
+                margin="0 0 0 15px"
+                label="상세정보"
+                variant="primary"
+                fontSize="16px"
+                onClick={() => setStepIndex(1)}
+                borderRadius="30px"
+                // disabled={selectedApplication.cancelAt !== null}
+              />
+            )}
           </Modal.Footer>
         </DynamicNoSSRModal>
       )}
@@ -118,7 +158,9 @@ export default function UserApplicationHistoryContainer() {
         <UserTemplate>
           <UserTitle title="지원현황" />
 
-          <HistoryStatus />
+          <ErrorBoundary fallback={null}>
+            <HistoryStatusContainer />
+          </ErrorBoundary>
 
           <ApplicationHistoryTable>
             {!isTablet && <ApplicationHistoryTable.Header />}
@@ -132,7 +174,12 @@ export default function UserApplicationHistoryContainer() {
             {isSuccess && data && (
               <>
                 {data.result.length === 0 && (
-                  <EmptyComponent message="아직 지원한 채용 공고가 없어요.\n마음에 드는 공고를 찾아 지원해보세요!" isVisibleImage={false} />
+                  <EmptyComponent
+                    message={
+                      status ? '해당 조건의 결과가 없습니다.' : '아직 지원한 채용 공고가 없어요.\n마음에 드는 공고를 찾아 지원해보세요!'
+                    }
+                    isVisibleImage={false}
+                  />
                 )}
                 {data.result.length !== 0 && (
                   <ApplicationHistoryTable.Body data={data.result} handleClickApplicant={handleClickApplicant} />
