@@ -349,6 +349,9 @@ export interface DeleteResumeResponse extends BaseResponse {
 export interface GetApplicationHistoryResponse extends BaseResponse {
   result: types.ApplicationHistory[];
 }
+export interface GetApplicationHistoryStatusResponse extends BaseResponse {
+  result: types.ApplicationHistoryStatus;
+}
 
 export interface DeactivateApplicantUserResponse extends BaseResponse {
   result: {
