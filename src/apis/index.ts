@@ -2,6 +2,7 @@ import axios, { AxiosResponse, AxiosRequestConfig } from 'axios';
 import { interceptorHelper } from './interceptorHelper';
 import environment from '@/environment';
 import * as API from '@/types/API';
+import { ApplicantReviewStageStatusKey } from '@/types';
 
 const URL_API = '/api';
 const VERSION = '/v1';
@@ -226,9 +227,21 @@ export const Get = {
   // 유저 - 지원가능한 이력서 리스트
   getAvailableResumeList: () => requests.get<API.GetAvailableResumeList>(`/resumes/available`),
 
+  // 유저 - 채용공고 지원내역
+  getApplicationHistory: ({ status }: { status?: ApplicantReviewStageStatusKey }) => {
+    const params = new URLSearchParams();
+    if (status) params.set('status', status);
+
+    const queryString = params.toString();
+
+    const url = `/applications/history${queryString && `?${queryString}`}`;
+
+    return requests.get<API.GetApplicationHistoryResponse>(url);
+  },
+
   // TODO - 타입정의
-  // 유저 - 채용공고 재원내역
-  getApplicationHistory: () => requests.get<API.GetApplicationHistoryResponse>(`/applications/history`),
+  // 유저 - 채용공고 지원내역 상태 계수
+  getApplicationHistoryStatus: () => requests.get<API.GetApplicationHistoryStatusResponse>(`/applications/history/status`),
 
   // 유저 - 지원가능 여부 체크
   applicationApplyCheck: ({ id }: { id: string }) => requests.get<API.ApplicationApplyCheckResponse>(`/applications/${id}/apply/check`),
