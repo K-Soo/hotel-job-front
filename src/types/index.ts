@@ -445,6 +445,16 @@ export interface ApplicationHistory {
   id: number;
   reviewStageStatus: ApplicantReviewStageStatusKey;
   applicationStatus: ApplicationStatusKey;
+  announcementRecipients: {
+    announcedAt: string;
+    announcementType: 'ACCEPT';
+    id: number;
+    isSent: boolean;
+    message: string;
+    resultNotificationStatus: 'DOCUMENT_PASS';
+    sentAt: Date | null;
+    title: string;
+  }[];
   recruitmentSnapshot: {
     id: string;
     title: string;
@@ -464,6 +474,15 @@ export interface ApplicationHistory {
   applyAt: Date | null;
   cancelAt: Date | null;
   createdAt: Date | null;
+}
+
+export interface ApplicationHistoryStatus {
+  ACCEPT: number;
+  DOCUMENT: number;
+  INTERVIEW: number;
+  INTERVIEW_PASS: number;
+  REJECT: number;
+  TOTAL: number;
 }
 
 export type AnnouncementType = {
