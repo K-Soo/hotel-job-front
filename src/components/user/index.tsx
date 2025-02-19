@@ -1,4 +1,6 @@
 import styled from 'styled-components';
+import UserAsideMenu from '@/components/common/user/UserAsideMenu';
+
 interface UserProps {
   children: React.ReactNode;
 }
@@ -6,8 +8,8 @@ interface UserProps {
 export default function User({ children }: UserProps) {
   return (
     <S.User>
+      <UserAsideMenu />
       {children}
-      <div className="container"></div>
     </S.User>
   );
 }
