@@ -10,7 +10,7 @@ export function ModalFooter({ children }: ModalFooterProps) {
 
 const S = {
   ModalFooter: styled.article`
-    height: 60px;
+    height: 65px;
     display: flex;
     align-items: center;
     padding: 0 15px;
