@@ -14,7 +14,6 @@ import { Auth } from '@/apis';
 import useAuth from '@/hooks/useAuth';
 import { ParsedUrlQuery } from 'querystring';
 import { useRouter } from 'next/router';
-import path from '@/constants/path';
 import environment from '@/environment';
 
 type SignInTab = 'general' | 'company';
@@ -37,17 +36,15 @@ export default function SignInContainer() {
     mode: 'onSubmit',
     reValidateMode: 'onChange',
     defaultValues: {
-      userId: environment.isProd ? '' : 'kanabun102',
-      password: environment.isProd ? '' : '@@EErr1234',
+      userId: '',
+      password: '',
     },
   });
 
   React.useEffect(() => {
     if (methods.formState.submitCount > 5) {
-      methods.clearErrors();
-      methods.reset();
-      setIsSubmitError(false);
       alert('5회 이상 로그인 시도를 하셨습니다.');
+      window.location.reload();
     }
   }, [methods.formState.submitCount]);
 

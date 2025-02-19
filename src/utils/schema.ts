@@ -52,6 +52,7 @@ const signUpSchema = yup.object({
   ageAgree: yup.boolean().default(false).oneOf([true], '필수 동의'),
   personalInfoAgree: yup.boolean().default(false).oneOf([true], '필수 동의'),
   serviceTermsAgree: yup.boolean().default(false).oneOf([true], '필수 동의'),
+
   smsMarketingAgree: yup.boolean().default(false),
   emailMarketingAgree: yup.boolean().default(false),
 

@@ -11,6 +11,7 @@ interface FormCheckboxProps<T> {
   required?: boolean;
   optional?: boolean;
   disabled?: boolean;
+  handleClickIcon?: (value: string) => void;
 }
 
 export default function FormCheckbox<T extends FieldValues>({
@@ -21,6 +22,7 @@ export default function FormCheckbox<T extends FieldValues>({
   required,
   optional,
   disabled,
+  handleClickIcon,
 }: FormCheckboxProps<T>) {
   const {
     register,
@@ -63,7 +65,17 @@ export default function FormCheckbox<T extends FieldValues>({
             </p>
           </label>
         </div>
-        {visibleIcon && <S.ViewIcon>보기</S.ViewIcon>}
+        {visibleIcon && (
+          <S.ViewIcon
+            onClick={() => {
+              if (handleClickIcon) {
+                handleClickIcon(name);
+              }
+            }}
+          >
+            보기
+          </S.ViewIcon>
+        )}
       </S.CheckBoxContainer>
 
       <FormError errors={errors} name={name} style={{ position: 'absolute' }} />

@@ -11,9 +11,17 @@ import { Post, Auth } from '@/apis';
 import { useRouter } from 'next/router';
 import path from '@/constants/path';
 import useAuth from '@/hooks/useAuth';
+import dynamic from 'next/dynamic';
+import Modal from '@/components/common/modal';
+import PolicyTerms from '@/components/policyTerms';
+import PolicyPrivacy from '@/components/policyPrivacy';
 
+const DynamicNoSSRModal = dynamic(() => import('@/components/common/modal'), { ssr: false });
+
+// TODO - 회원가입 완료 UI 구현
 export default function SignUpContainer() {
-  const [step, setStep] = React.useState('STEP_1');
+  // const [step, setStep] = React.useState('STEP_1');
+  const [selectedPolicy, setSelectedPolicy] = React.useState<'PERSONAL' | 'SERVICE' | null>(null);
 
   const router = useRouter();
   const { setAuthAtomState } = useAuth();
@@ -75,8 +83,6 @@ export default function SignUpContainer() {
     }
   };
 
-  console.log('methods:@@@@@@@@@', methods.watch('userIdAvailableState'));
-
   // 아이디 중복 체크 API
   const fetchEmployerUserIdCheck = React.useCallback(async () => {
     try {
@@ -125,19 +131,42 @@ export default function SignUpContainer() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const handleOpenPolicy = React.useCallback((value: string) => {
+    console.log('value: ', value);
+    if (value === 'serviceTermsAgree') {
+      setSelectedPolicy('SERVICE');
+    }
+    if (value === 'personalInfoAgree') {
+      setSelectedPolicy('PERSONAL');
+    }
+  }, []);
+
   return (
-    <FormProvider {...methods}>
-      <SignUp onSubmit={onSubmit}>
-        {step === 'STEP_1' && (
+    <>
+      {selectedPolicy !== null && (
+        <DynamicNoSSRModal handleCloseModal={() => setSelectedPolicy(null)}>
+          <Modal.Header
+            title={selectedPolicy === 'SERVICE' ? '서비스 이용약관' : '개인정보 처리방침'}
+            handleCloseModal={() => setSelectedPolicy(null)}
+          />
+          <Modal.Content>
+            {selectedPolicy === 'SERVICE' && <PolicyTerms />}
+            {selectedPolicy === 'PERSONAL' && <PolicyPrivacy />}
+          </Modal.Content>
+        </DynamicNoSSRModal>
+      )}
+
+      <FormProvider {...methods}>
+        <SignUp onSubmit={onSubmit}>
           <SignUpGeneralForm
-            setStep={setStep}
             handleChangeAllAgree={handleChangeAllAgree}
             fetchEmployerUserIdCheck={fetchEmployerUserIdCheck}
+            handleOpenPolicy={handleOpenPolicy}
           />
-        )}
-        {step === 'STEP_2' && <SignUpCompleteForm />}
-      </SignUp>
-      <FormDevTools control={methods.control} />
-    </FormProvider>
+          {/* {step === 'STEP_2' && <SignUpCompleteForm />} */}
+        </SignUp>
+        <FormDevTools control={methods.control} />
+      </FormProvider>
+    </>
   );
 }
