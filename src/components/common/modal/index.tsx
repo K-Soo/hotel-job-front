@@ -54,6 +54,7 @@ Modal.Footer = ModalFooter;
 
 const S = {
   Modal: styled.div<{ $width?: string }>`
+    z-index: 15;
     position: fixed;
     top: 45%;
     left: 50%;
