@@ -67,7 +67,7 @@ const S = {
     border-top: 1px solid ${(props) => props.theme.colors.gray200};
     position: fixed;
     background-color: white;
-    z-index: 15;
+    z-index: 10;
     bottom: 0;
     width: 100%;
     height: 65px;
