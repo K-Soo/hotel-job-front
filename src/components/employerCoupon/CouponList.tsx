@@ -11,7 +11,7 @@ export default function CouponList({ items }: CouponListProps) {
   return (
     <S.CouponList>
       {items.map((item) => (
-        <S.CouponItem key={item.id}>
+        <S.CouponItem key={item.id} $isUsed={item.isUsed}>
           <div className="price-box">{item.discountType === 'FIXED' && <span>{priceComma(item.discountAmount)}</span>}원</div>
 
           <Line margin="15px 0" />
@@ -43,7 +43,7 @@ const S = {
     flex-wrap: wrap;
     gap: 20px;
   `,
-  CouponItem: styled.div`
+  CouponItem: styled.div<{ $isUsed: boolean }>`
     user-select: text;
     height: 150px;
     width: calc(50% - 10px);
@@ -51,6 +51,7 @@ const S = {
     padding: 20px;
     display: flex;
     flex-direction: column;
+    background-color: ${(props) => (props.$isUsed ? '#f9fafb' : 'white')};
     .price-box {
       font-size: 18px;
       font-weight: 500;

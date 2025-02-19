@@ -1,6 +1,11 @@
 import React from 'react';
 import ApplicantNoticeForm from '@/components/EmployerRecruitmentDetailApplicant/ApplicantNoticeForm';
-import { CreateApplicationsAnnouncementForm, RecruitmentDetailApplicantListItem } from '@/types';
+import {
+  CreateApplicationsAnnouncementForm,
+  FailResultNotificationKey,
+  PassResultNotificationKey,
+  RecruitmentDetailApplicantListItem,
+} from '@/types';
 import { Post } from '@/apis';
 import useLoading from '@/hooks/useLoading';
 import useToast from '@/hooks/useToast';
@@ -27,7 +32,7 @@ export default function ApplicantNoticeFormContainer({
     message: '',
     recipientApplicationIds: [],
     recruitmentId: '',
-    reviewStage: 'DOCUMENT',
+    resultNotificationStatus: 'DOCUMENT_PASS',
     title: '',
   });
 
@@ -38,13 +43,26 @@ export default function ApplicantNoticeFormContainer({
 
   React.useEffect(() => {
     setAnnouncementForm((prev) => {
-      const newMessage = ANNOUNCEMENT_MESSAGE[prev.announcementType][prev.reviewStage];
+      const newMessage =
+        ANNOUNCEMENT_MESSAGE[prev.announcementType][prev.resultNotificationStatus as PassResultNotificationKey & FailResultNotificationKey];
+
       return {
         ...prev,
         message: newMessage,
       };
     });
-  }, [announcementForm.announcementType, announcementForm.reviewStage]);
+  }, [announcementForm.announcementType, announcementForm.resultNotificationStatus]);
+
+  React.useEffect(() => {
+    setAnnouncementForm((prev) => {
+      const prevAnnouncementType = prev.announcementType;
+
+      return {
+        ...prev,
+        resultNotificationStatus: prevAnnouncementType === 'ACCEPT' ? 'DOCUMENT_PASS' : 'DOCUMENT_FAIL',
+      };
+    });
+  }, [announcementForm.announcementType]);
 
   React.useEffect(() => {
     if (checkedApplicants) {
@@ -68,7 +86,7 @@ export default function ApplicantNoticeFormContainer({
         ...announcementForm,
         recruitmentId: recruitmentId as string,
       });
-      console.log('response: ', response);
+      console.log('발표 API : ', response);
       await queryClient.invalidateQueries({ queryKey: [queryKeys.RECRUITMENT_LIST], refetchType: 'all' });
       await queryClient.invalidateQueries({ queryKey: [queryKeys.APPLICATION_RECRUITMENT_STATUS_COUNT], refetchType: 'all' });
       await queryClient.invalidateQueries({ queryKey: [queryKeys.RECRUITMENT_APPLICANT_LIST], refetchType: 'all' });
@@ -116,7 +134,6 @@ export default function ApplicantNoticeFormContainer({
       handleCloseNoticeForm={handleCloseNoticeForm}
       handleChangeAnnouncementForm={handleChangeAnnouncementForm}
       handleClickAnnouncementType={handleClickAnnouncementType}
-      fetchApplicationsAnnouncement={fetchApplicationsAnnouncement}
       handleClickApplicationAnnouncement={handleClickApplicationAnnouncement}
     />
   );

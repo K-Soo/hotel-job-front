@@ -95,7 +95,7 @@ export default function UserResumeListContainer() {
   }
 
   if (isEmptyResume) {
-    return <EmptyComponent message="첫번째 이력서를 작성해보세요! 😀" />;
+    return <EmptyComponent message="첫번째 이력서를 작성해보세요! 😀" isVisibleImage={false} height="150px" />;
   }
 
   if (isSuccess && data) {
@@ -104,6 +104,7 @@ export default function UserResumeListContainer() {
         {isOpenModal && (
           <Modal handleCloseModal={handleCloseModal}>
             <Modal.Header title="입사 지원내역" handleCloseModal={handleCloseModal} />
+
             <Modal.Content>
               {selectedResume.length === 0 && <EmptyComponent message="지원내역이 없습니다." />}
               {selectedResume.map((item) => {

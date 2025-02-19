@@ -4,6 +4,8 @@ import styled from 'styled-components';
 import dynamic from 'next/dynamic';
 import Modal from '@/components/common/modal';
 import MembershipModalForm from '@/components/employer/MembershipModalForm';
+import { useRouter } from 'next/router';
+import path from '@/constants/path';
 
 const DynamicNoSSRModal = dynamic(() => import('@/components/common/modal'), { ssr: false });
 
@@ -13,6 +15,8 @@ interface SupportInfoProps {
 
 export default function SupportInfo({ data }: SupportInfoProps) {
   const [isOpenModal, setIsOpenModal] = React.useState(false);
+
+  const router = useRouter();
 
   return (
     <>
@@ -28,7 +32,7 @@ export default function SupportInfo({ data }: SupportInfoProps) {
       <S.SupportInfo>
         <div className="item">
           <span className="item__title">멤버십</span>
-          <span className="item__content" onClick={() => setIsOpenModal(true)}>
+          <span className="item__content membership" onClick={() => setIsOpenModal(true)}>
             {data.membership.membershipLevel}
           </span>
         </div>
@@ -40,7 +44,9 @@ export default function SupportInfo({ data }: SupportInfoProps) {
 
         <div className="item">
           <span className="item__title">보유쿠폰</span>
-          <span className="item__content">{3}</span>
+          <span className="item__content coupon" onClick={() => router.push(path.EMPLOYER_COUPON)}>
+            {data.availableCouponCount ?? 0}
+          </span>
         </div>
       </S.SupportInfo>
     </>
@@ -70,9 +76,13 @@ const S = {
         font-size: 24px;
         font-weight: 500;
         color: ${({ theme }) => theme.colors.black500};
-        cursor: pointer;
         width: 100%;
         text-align: center;
+      }
+
+      .membership,
+      .coupon {
+        cursor: pointer;
         &:hover {
           color: ${({ theme }) => theme.colors.black100};
           text-decoration: underline;

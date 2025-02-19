@@ -15,6 +15,7 @@ import { Footer } from '@/components/layout';
 import { useRouter } from 'next/router';
 import path from '@/constants/path';
 import { SpeedInsights } from '@vercel/speed-insights/next';
+import Head from 'next/head';
 import '@/recoil';
 
 const commonLayout = (page: React.ReactElement) => <Layout>{page}</Layout>;
@@ -38,23 +39,29 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
   const [queryClient] = React.useState(() => new QueryClient(queryClientDefaultOption));
 
   return (
-    <AppThemeProvider>
-      <SpeedInsights />
-      <RecoilRoot>
-        <QueryClientProvider client={queryClient}>
-          <AuthenticationComponent />
-          <AppComponent />
-          {!Component.authentication && getLayout(<Component {...pageProps} />)}
+    <>
+      <Head>
+        <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport" />
+        <meta name="format-detection" content="telephone=no" />
+      </Head>
+      <AppThemeProvider>
+        <SpeedInsights />
+        <RecoilRoot>
+          <QueryClientProvider client={queryClient}>
+            <AuthenticationComponent />
+            <AppComponent />
+            {!Component.authentication && getLayout(<Component {...pageProps} />)}
 
-          {Component.authentication &&
-            getLayout(
-              <GuardComponent allowedRoles={Component.allowedRoles}>
-                <Component {...pageProps} />
-              </GuardComponent>,
-            )}
-          {/* <ReactQueryDevtools initialIsOpen={false} /> */}
-        </QueryClientProvider>
-      </RecoilRoot>
-    </AppThemeProvider>
+            {Component.authentication &&
+              getLayout(
+                <GuardComponent allowedRoles={Component.allowedRoles}>
+                  <Component {...pageProps} />
+                </GuardComponent>,
+              )}
+            {/* <ReactQueryDevtools initialIsOpen={false} /> */}
+          </QueryClientProvider>
+        </RecoilRoot>
+      </AppThemeProvider>
+    </>
   );
 }

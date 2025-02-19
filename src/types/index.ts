@@ -8,10 +8,20 @@ import { BENEFITS } from '@/constants/benefits';
 import { PREFERENCES } from '@/constants/preferences';
 import { LANGUAGE_LEVEL, LANGUAGE } from '@/constants/language';
 import { RESUME_STATUS, SANCTION_REASON } from '@/constants/resume';
-import { APPLICATION_STATUS, EMPLOYER_REVIEW_STAGE_STATUS, REVIEW_STAGE_STATUS } from '@/constants/application';
+import {
+  APPLICANT_REVIEW_STAGE_STATUS,
+  APPLICATION_STATUS,
+  EMPLOYER_REVIEW_STAGE_STATUS,
+  REVIEW_STAGE_STATUS,
+} from '@/constants/application';
 import { RECRUITMENT_PRODUCT_NAME, RECRUITMENT_PRODUCT_OPTION_NAME, RECRUITMENT_PRODUCT_TYPE } from '@/constants/product';
 import { PAYMENT_STATUS, PAYMENT_TYPE } from '@/constants/payment';
-import { ANNOUNCEMENT_TYPE } from '@/constants/announcement';
+import {
+  ANNOUNCEMENT_TYPE,
+  FAIL_RESULT_NOTIFICATION_STATUS,
+  PASS_RESULT_NOTIFICATION_STATUS,
+  RESULT_NOTIFICATION_STATUS,
+} from '@/constants/announcement';
 
 export type Provider = 'LOCAL' | 'KAKAO' | 'GOOGLE';
 export type RoleType = 'ADMIN' | 'EMPLOYER' | 'JOB_SEEKER';
@@ -52,6 +62,7 @@ export type ResumeStatusKey = keyof typeof RESUME_STATUS;
 export type SanctionReasonKey = keyof typeof SANCTION_REASON;
 export type ApplicationStatusKey = keyof typeof APPLICATION_STATUS;
 export type ReviewStageStatusKey = keyof typeof REVIEW_STAGE_STATUS;
+export type ApplicantReviewStageStatusKey = keyof typeof APPLICANT_REVIEW_STAGE_STATUS;
 export type EmployerReviewStageStatusKey = keyof typeof EMPLOYER_REVIEW_STAGE_STATUS;
 export type RecruitmentProductNameKey = keyof typeof RECRUITMENT_PRODUCT_NAME;
 export type RecruitmentProductOptionNameKey = keyof typeof RECRUITMENT_PRODUCT_OPTION_NAME;
@@ -59,6 +70,9 @@ export type RecruitmentProductTypeKey = keyof typeof RECRUITMENT_PRODUCT_TYPE;
 export type PaymentStatusKey = keyof typeof PAYMENT_STATUS;
 export type PaymentTypeKey = keyof typeof PAYMENT_TYPE;
 export type AnnouncementTypeKey = keyof typeof ANNOUNCEMENT_TYPE;
+export type PassResultNotificationKey = keyof typeof PASS_RESULT_NOTIFICATION_STATUS;
+export type FailResultNotificationKey = keyof typeof FAIL_RESULT_NOTIFICATION_STATUS;
+export type ResultNotificationStatusKey = PassResultNotificationKey | FailResultNotificationKey;
 
 export type TalentListItem = {};
 
@@ -174,6 +188,7 @@ export interface EmployerAccountInfo {
   totalPoint: number;
   totalScore: number;
   passwordChangedAt: Date | null;
+  availableCouponCount: number;
   membership: {
     discountRate: number;
     maxScore: string;
@@ -328,7 +343,7 @@ export interface IRecruitDetail {
   position: PositionKeys | null;
   preferences: PreferencesKeys[];
   recruitmentCapacity: number; //모집인원
-  recruitmentStatus: 'PUBLISHED';
+  recruitmentStatus: RecruitmentStatusKeys;
   recruitmentTitle: string;
   roomCount: number;
   salaryAmount: number;
@@ -428,17 +443,29 @@ export interface ResumeDetailForm extends Omit<ResumeDetail, 'id' | 'createdAt' 
 
 export interface ApplicationHistory {
   id: number;
-  reviewStageStatus: ReviewStageStatusKey;
+  reviewStageStatus: ApplicantReviewStageStatusKey;
   applicationStatus: ApplicationStatusKey;
-  recruitment: {
+  announcementRecipients: {
+    announcedAt: string;
+    announcementType: 'ACCEPT';
+    id: number;
+    isSent: boolean;
+    message: string;
+    resultNotificationStatus: 'DOCUMENT_PASS';
+    sentAt: Date | null;
+    title: string;
+  }[];
+  recruitmentSnapshot: {
     id: string;
     title: string;
     hotelName: string;
     recruitmentStatus: RecruitmentStatusKeys;
   };
-  resume: {
+  resumeSnapshot: {
     title: string;
     isDefault: string;
+    name: string;
+    phone: string;
   };
   isView: boolean;
   viewAt: Date | null;
@@ -447,6 +474,15 @@ export interface ApplicationHistory {
   applyAt: Date | null;
   cancelAt: Date | null;
   createdAt: Date | null;
+}
+
+export interface ApplicationHistoryStatus {
+  ACCEPT: number;
+  DOCUMENT: number;
+  INTERVIEW: number;
+  INTERVIEW_PASS: number;
+  REJECT: number;
+  TOTAL: number;
 }
 
 export type AnnouncementType = {
@@ -676,5 +712,5 @@ export interface CreateApplicationsAnnouncementForm {
   announcementType: AnnouncementTypeKey;
   recruitmentId: string;
   recipientApplicationIds: number[];
-  reviewStage: ReviewStageStatusKey;
+  resultNotificationStatus: ResultNotificationStatusKey;
 }

@@ -1,16 +1,14 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 import CheckBox from '@/components/common/style/CheckBox';
-import Button from '@/components/common/style/Button';
-import DefaultProfileImage from '@/components/common/DefaultProfileImage';
 import { EmployerReviewStageStatusKey, RecruitmentDetailApplicantListItem, ResumeDetail } from '@/types';
-import { dateFormat, parseBirthDateAndCalculateAge } from '@/utils';
 import { EMPLOYER_REVIEW_STAGE_STATUS } from '@/constants/application';
 import ResumeBodyRow from '@/components/EmployerRecruitmentDetailApplicant/applicantTable/ResumeBodyRow';
 import StepBodyRow from '@/components/EmployerRecruitmentDetailApplicant/applicantTable/StepBodyRow';
-import { EDUCATION_LEVEL, SEX_CODE } from '@/constants';
+import DateBodyRow from '@/components/EmployerRecruitmentDetailApplicant/applicantTable/DateBodyRow';
+import ProfileBodyRow from '@/components/EmployerRecruitmentDetailApplicant/applicantTable/ProfileBodyRow';
+import { EDUCATION_LEVEL } from '@/constants';
 import { CAREER_LEVEL } from '@/constants/resume';
-import Icon from '@/icons/Icon';
 
 interface ApplicantTableProps {
   children: React.ReactNode;
@@ -18,10 +16,9 @@ interface ApplicantTableProps {
 interface ApplicantTableBody {
   data: RecruitmentDetailApplicantListItem[];
   checkedApplicants: RecruitmentDetailApplicantListItem[];
-  handleOpenNoticeForm: () => void;
   handleChangeCheckApplicant: (resumeSnapshot: RecruitmentDetailApplicantListItem) => void;
   fetchUpdateEmployerReviewStageStatus: (id: number, stage: EmployerReviewStageStatusKey) => Promise<void>;
-  handleClickResumePreview: (applicationId: number, isView: boolean, data: ResumeDetail) => void;
+  handleClickResumePreview: (item: RecruitmentDetailApplicantListItem) => void;
   handleClickNotifyOneApplicant: (resumeSnapshot: RecruitmentDetailApplicantListItem) => void;
 }
 
@@ -50,7 +47,6 @@ function ApplicantTableHeader() {
       <span className="header-row name">이름/나이</span>
       <span className="header-row career">경력/신입</span>
       <span className="header-row education">최종 학력</span>
-      {/* <span className="header-row salary">희망/최근급여</span> */}
       <span className="header-row date">지원일</span>
       <span className="header-row step">전형/발표</span>
       <span className="header-row resume">분류</span>
@@ -59,12 +55,10 @@ function ApplicantTableHeader() {
 }
 
 const StyledTableHeader = styled.div`
-  /* box-sizing: border-box; */
   height: 60px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  /* border-bottom: 1px solid ${(props) => props.theme.colors.gray300}; */
   background-color: ${(props) => props.theme.colors.gray};
   border-bottom: 1px solid ${(props) => props.theme.colors.gray300};
   .header-row {
@@ -103,7 +97,6 @@ const StyledTableHeader = styled.div`
     ${CommonFlex}
     flex-basis: 8%;
     height: 100%;
-    /* border: 1px solid red; */
   }
   .education {
     ${CommonFlex}
@@ -111,13 +104,6 @@ const StyledTableHeader = styled.div`
     height: 100%;
     /* border: 1px solid red; */
   }
-  .salary {
-    ${CommonFlex}
-    flex-basis: 140px;
-    height: 100%;
-    /* border: 1px solid red; */
-  }
-
   .step {
     ${CommonFlex}
     flex-basis: 15%;
@@ -140,7 +126,6 @@ function ApplicantTableBody({
   data,
   fetchUpdateEmployerReviewStageStatus,
   handleClickResumePreview,
-  handleOpenNoticeForm,
   handleChangeCheckApplicant,
   checkedApplicants,
   handleClickNotifyOneApplicant,
@@ -148,7 +133,6 @@ function ApplicantTableBody({
   return (
     <StyledTableBody>
       {data.map((item) => {
-        const { age, birthYear } = parseBirthDateAndCalculateAge(item.resumeSnapshot.birthday);
         return (
           <div key={item.id} className="body-row">
             <div className="check">
@@ -159,44 +143,19 @@ function ApplicantTableBody({
                 onChange={() => handleChangeCheckApplicant(item)}
               />
             </div>
+
             <div className="status">
               <span>{EMPLOYER_REVIEW_STAGE_STATUS[item.employerReviewStageStatus]}</span>
             </div>
 
-            <div className="name" onClick={() => handleClickResumePreview(item.id, item.isView, item.resumeSnapshot)}>
-              <div className="wrapper">
-                <DefaultProfileImage imageUrl={item.resumeSnapshot.profileImage} margin="0 10px 0 0" />
-                <div className="name__text">
-                  <span className="name__text--top">
-                    {item.resumeSnapshot.name} {'/'} {SEX_CODE[item.resumeSnapshot.sexCode]}
-                  </span>
-                  <span className="name__text--bottom">
-                    {birthYear} {`${age}세`}
-                  </span>
-                </div>
-              </div>
-              {item.employerReviewStageStatus === 'ACCEPT' && item.announcementRecipients.length === 0 && (
-                <StyledNotifyGuide>
-                  <strong className="complete">
-                    <Icon name="NoticeA24x24" width="26px" height="26px" />
-                    최종 합격 전형 이동 완료!
-                  </strong>
-                  <span>합격/불합격 발표로 소식을 전해주세요.</span>
-                </StyledNotifyGuide>
-              )}
-            </div>
+            <ProfileBodyRow item={item} handleClickResumePreview={handleClickResumePreview} />
 
             <div className="career">{CAREER_LEVEL[item.resumeSnapshot.careerLevel]}</div>
 
             <div className="education">{EDUCATION_LEVEL[item.resumeSnapshot.education]}</div>
 
-            {/* <div className="salary">3000 ~ 3800</div> */}
-
-            <div className="date">
-              <div className="date__text">{item.applyAt ? dateFormat.date(item.applyAt, 'YY.MM.DD') : '-'}</div>
-              {item.isView && <span>열람</span>}
-              {!item.isView && <span style={{ color: '#4593fc' }}>미열람</span>}
-            </div>
+            {/* 지원일 */}
+            <DateBodyRow item={item} />
 
             {/* 전형 */}
             <StepBodyRow
@@ -209,6 +168,7 @@ function ApplicantTableBody({
             {/* 분류 */}
             <ResumeBodyRow
               id={item.id}
+              cancelAt={item.cancelAt}
               employerReviewStageStatus={item.employerReviewStageStatus}
               fetchUpdateEmployerReviewStageStatus={fetchUpdateEmployerReviewStageStatus}
               announcementRecipients={item.announcementRecipients}
@@ -262,34 +222,6 @@ const StyledTableBody = styled.div`
       flex-basis: 10%;
       height: 100%;
     }
-    .name {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding-left: 15px;
-      flex-grow: 1;
-      height: 100%;
-      font-size: 13px;
-      cursor: pointer;
-      .wrapper {
-        display: flex;
-        align-items: center;
-      }
-      &__text {
-        display: flex;
-        flex-direction: column;
-        &:hover {
-          text-decoration: underline;
-        }
-        &--top {
-          padding-bottom: 3px;
-        }
-        &--bottom {
-          color: ${(props) => props.theme.colors.gray800};
-          font-weight: 300;
-        }
-      }
-    }
     .career {
       ${CommonFlex}
       flex-basis: 8%;
@@ -299,33 +231,6 @@ const StyledTableBody = styled.div`
       ${CommonFlex}
       flex-basis: 10%;
       height: 100%;
-    }
-    .salary {
-      ${CommonFlex}
-      flex-basis: 140px;
-      height: 100%;
-    }
-    .step {
-      ${CommonFlex}
-      flex-basis: 15%;
-      height: 100%;
-    }
-    .resume {
-      ${CommonFlex}
-      flex: 0 1 100px;
-      height: 100%;
-    }
-    .date {
-      ${CommonFlex}
-      flex-basis: 10%;
-      height: 100%;
-      font-size: 12px;
-      color: ${(props) => props.theme.colors.gray900};
-      font-weight: 300;
-      &__text {
-        color: ${(props) => props.theme.colors.black300};
-        padding-bottom: 5px;
-      }
     }
   }
 `;

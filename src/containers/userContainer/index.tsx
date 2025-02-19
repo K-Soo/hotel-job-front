@@ -3,19 +3,22 @@ import User from '@/components/user';
 import UserAsideMenu from '@/components/common/user/UserAsideMenu';
 import { useRouter } from 'next/router';
 import path from '@/constants/path';
+import UserTemplate from '@/components/common/user/UserTemplate';
+import { ErrorBoundary } from '@/error';
+import HistoryStatusContainer from '@/containers/userApplicationHistoryContainer/HistoryStatusContainer';
+import UserTitle from '@/components/common/user/UserTitle';
+import UserApplicationHistoryContainer from '@/containers/userContainer/UserApplicationHistoryContainer';
 
 export default function UserContainer() {
   const router = useRouter();
 
   return (
     <User>
-      <UserAsideMenu />
-      <div>
-        <button onClick={() => router.push(path.USER_RESUME)}>이력서 페이지 </button>
-        <div>
-          <button onClick={() => router.push(path.USER_PROFILE)}>프로필 페이지</button>
-        </div>
-      </div>
+      <UserTemplate>
+        <ErrorBoundary fallback={null}>
+          <UserApplicationHistoryContainer />
+        </ErrorBoundary>
+      </UserTemplate>
     </User>
   );
 }

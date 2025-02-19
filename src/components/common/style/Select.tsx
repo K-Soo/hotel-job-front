@@ -7,12 +7,13 @@ interface SelectProps {
   options: Record<string, string>;
   name: string;
   onChange: (event: React.ChangeEvent<any>) => void;
+  value: string;
 }
 
-export default function Select({ margin, options, name, onChange }: SelectProps) {
+export default function Select({ margin, options, name, onChange, value }: SelectProps) {
   return (
     <S.Select $margin={margin}>
-      <StyledSelect name={name} onChange={onChange}>
+      <StyledSelect name={name} onChange={onChange} value={value}>
         {Object.entries(options).map(([key, value]) => (
           <option key={key} value={key}>
             {value}

@@ -9,17 +9,17 @@ import Input from '@/components/common/style/Input';
 import { CreateApplicationsAnnouncementForm, RecruitmentDetailApplicantListItem, ResumeDetail } from '@/types';
 import { SEX_CODE } from '@/constants';
 import Icon from '@/icons/Icon';
-import { REVIEW_STAGE_STATUS, ANNOUNCE_ACCEPT_REVIEW_STAGE_STATUS, ANNOUNCE_REJECT_REVIEW_STAGE_STATUS } from '@/constants/application';
+import { REVIEW_STAGE_STATUS } from '@/constants/application';
 import DropdownTemplate from '@/components/common/DropdownTemplate';
 import DefaultProfileImage from '@/components/common/DefaultProfileImage';
 import { parseBirthDateAndCalculateAge } from '@/utils';
+import { FAIL_RESULT_NOTIFICATION_STATUS, PASS_RESULT_NOTIFICATION_STATUS } from '@/constants/announcement';
 
 interface ApplicantNoticeFormProps {
   handleCloseNoticeForm: () => void;
   checkedApplicants: RecruitmentDetailApplicantListItem[];
   handleChangeAnnouncementForm: (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
   announcementForm: CreateApplicationsAnnouncementForm;
-  fetchApplicationsAnnouncement: () => Promise<void>;
   handleClickAnnouncementType: (event: React.MouseEvent<HTMLButtonElement>) => void;
   handleClickApplicationAnnouncement: () => void;
 }
@@ -29,7 +29,6 @@ export default function ApplicantNoticeForm({
   checkedApplicants,
   handleChangeAnnouncementForm,
   announcementForm,
-  fetchApplicationsAnnouncement,
   handleClickAnnouncementType,
   handleClickApplicationAnnouncement,
 }: ApplicantNoticeFormProps) {
@@ -125,13 +124,12 @@ export default function ApplicantNoticeForm({
               <h6 className="title">전형</h6>
               <div className="wrapper">
                 <Select
-                  name="reviewStage"
+                  name="resultNotificationStatus"
                   options={
-                    announcementForm.announcementType === 'ACCEPT'
-                      ? ANNOUNCE_ACCEPT_REVIEW_STAGE_STATUS
-                      : ANNOUNCE_REJECT_REVIEW_STAGE_STATUS
+                    announcementForm.announcementType === 'ACCEPT' ? PASS_RESULT_NOTIFICATION_STATUS : FAIL_RESULT_NOTIFICATION_STATUS
                   }
                   onChange={handleChangeAnnouncementForm}
+                  value={announcementForm.resultNotificationStatus}
                 />
               </div>
             </S.ContentHorizontalRow>

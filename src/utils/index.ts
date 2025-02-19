@@ -10,3 +10,4 @@ export { parseBirthDateAndCalculateAge } from './parseBirthDateAndCalculateAge';
 export { getImageUrl } from './getImageUrl';
 export { queryKeyChecker } from './queryKeyChecker';
 export { formatToManWon } from './formatToManWon';
+export { phoneNumberFormat } from './phoneNumberFormat';

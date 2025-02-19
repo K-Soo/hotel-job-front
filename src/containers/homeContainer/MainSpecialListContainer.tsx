@@ -47,7 +47,7 @@ export default function MainSpecialListContainer() {
       <>
         <RecruitSectionTitle title="🌟 스페셜 채용" />
 
-        {isEmptyFirstPage && isFirstPage && <EmptyComponent height="200px" message="등록된 공고가 없어요." />}
+        {isEmptyFirstPage && isFirstPage && <EmptyComponent height="200px" message="등록된 공고가 없어요." isVisibleImage={false} />}
 
         <InfiniteScroll
           loadMore={() => {

@@ -4,24 +4,40 @@ import useModal from '@/hooks/useModal';
 import useAuth from '@/hooks/useAuth';
 import { useRouter } from 'next/router';
 import path from '@/constants/path';
+import { RecruitmentStatusKeys } from '@/types';
 interface RecruitDetailBottomNavigationProps {
   applyStatus: 'available' | 'duplicate' | 'idle';
+  recruitmentStatus: RecruitmentStatusKeys;
 }
 
-export default function RecruitDetailBottomNavigation({ applyStatus }: RecruitDetailBottomNavigationProps) {
+export default function RecruitDetailBottomNavigation({ applyStatus, recruitmentStatus }: RecruitDetailBottomNavigationProps) {
   const { setModalAtomState } = useModal();
   const { isAuthenticated, role } = useAuth();
   const router = useRouter();
 
+  // 비 로그인
+  if (!isAuthenticated) {
+    return (
+      <S.RecruitDetailBottomNavigation>
+        {recruitmentStatus === 'CLOSED' && <Button label="모집 마감" variant="secondary" height="45px" borderRadius="5px" disabled />}
+        {recruitmentStatus === 'PROGRESS' && (
+          <Button label="로그인 후 지원하기" variant="primary" height="45px" borderRadius="5px" onClick={() => router.push(path.SIGN_IN)} />
+        )}
+      </S.RecruitDetailBottomNavigation>
+    );
+  }
+
   return (
     <S.RecruitDetailBottomNavigation>
-      {/* TODO - bookmark */}
-      {/* <S.BookMarkIcon>
-        <Icon name="Bookmark24x24" height="32px" width="32px" />
-      </S.BookMarkIcon> */}
+      {recruitmentStatus === 'CLOSED' && <Button label="모집 마감" variant="secondary" height="45px" borderRadius="5px" disabled />}
 
-      {isAuthenticated && (
+      {recruitmentStatus === 'PROGRESS' && (
         <>
+          {/* TODO - bookmark */}
+          {/* <S.BookMarkIcon>
+            <Icon name="Bookmark24x24" height="32px" width="32px" />
+          </S.BookMarkIcon> */}
+
           {role === 'JOB_SEEKER' && (
             <Button
               label={applyStatus === 'available' ? '지원하기' : '지원완료'}
@@ -35,10 +51,6 @@ export default function RecruitDetailBottomNavigation({ applyStatus }: RecruitDe
 
           {role !== 'JOB_SEEKER' && <Button label="지원자 전용" variant="secondary" height="45px" borderRadius="5px" disabled />}
         </>
-      )}
-
-      {!isAuthenticated && (
-        <Button label="로그인 후 지원하기" variant="primary" height="45px" borderRadius="5px" onClick={() => router.push(path.SIGN_IN)} />
       )}
     </S.RecruitDetailBottomNavigation>
   );

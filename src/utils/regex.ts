@@ -10,4 +10,5 @@ export const regex = {
   consonant: /^[^ㄱ-ㅎ]*$/, //자음 체크
   korean: /^[가-힣]+$/, //한글
   phone: /^01([0])([0-9]{8})$/,
+  NICKNAME: /^[a-zA-Z0-9가-힣]{2,10}$/, // 닉네임
 };

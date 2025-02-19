@@ -20,7 +20,7 @@ interface Query extends ParsedUrlQuery {
 }
 
 interface ApplicantListContainerProps {
-  handleClickResumePreview: (applicationId: number, isView: boolean, data: ResumeDetail) => void;
+  handleClickResumePreview: (item: RecruitmentDetailApplicantListItem) => void;
 }
 
 export default function ApplicantListContainer({ handleClickResumePreview }: ApplicantListContainerProps) {
@@ -102,8 +102,6 @@ export default function ApplicantListContainer({ handleClickResumePreview }: App
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const handleOpenNoticeForm = React.useCallback(() => setIsOpenNoticeForm(true), []);
-
   const handleCloseNoticeForm = React.useCallback(() => setIsOpenNoticeForm(false), []);
 
   if (isLoading) {
@@ -135,6 +133,7 @@ export default function ApplicantListContainer({ handleClickResumePreview }: App
             recruitmentId={slug as string | undefined}
           />
         )}
+
         <ApplicantTable>
           <ApplicantTable.Header />
           {data.result.length === 0 && <EmptyComponent message="해당 전형에 데이터가 없어요." />}
@@ -142,7 +141,6 @@ export default function ApplicantListContainer({ handleClickResumePreview }: App
             data={data.result}
             fetchUpdateEmployerReviewStageStatus={fetchUpdateEmployerReviewStageStatus}
             handleClickResumePreview={handleClickResumePreview}
-            handleOpenNoticeForm={handleOpenNoticeForm}
             handleChangeCheckApplicant={handleChangeCheckApplicant}
             checkedApplicants={checkedApplicants}
             handleClickNotifyOneApplicant={handleClickNotifyOneApplicant}

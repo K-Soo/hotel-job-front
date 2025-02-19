@@ -5,33 +5,106 @@ import Dimmed from '@/components/common/Dimmed';
 import useAuth from '@/hooks/useAuth';
 import path from '@/constants/path';
 import { useRouter } from 'next/router';
+import RecruitDetailApplyResumeForm from '@/components/recruitDetail/RecruitDetailApplyResumeForm';
+import { RecruitmentStatusKeys } from '@/types';
 
 interface RecruitDetailSideMenuProps {
   managerName: string;
   managerNumber: string;
-  children: React.ReactNode;
+  handleClickApply: () => void;
+  isOpenApplyForm: boolean;
+  isApplyCheckError: boolean;
+  isApplyCheckLoading: boolean;
+  applyStatus: 'available' | 'duplicate' | 'idle';
+  selectedResume: string | null;
+  setSelectedResume: React.Dispatch<React.SetStateAction<string | null>>;
+  setIsOpenApplyForm: React.Dispatch<React.SetStateAction<boolean>>;
+  recruitmentStatus: RecruitmentStatusKeys;
+  fetchSubmitApply: () => Promise<void>;
 }
 
-export default function RecruitDetailSideMenu({ managerName, managerNumber, children }: RecruitDetailSideMenuProps) {
-  const { isAuthenticated, isAuthIdle } = useAuth();
+export default function RecruitDetailSideMenu({
+  managerName,
+  managerNumber,
+  handleClickApply,
+  isOpenApplyForm,
+  isApplyCheckError,
+  applyStatus,
+  isApplyCheckLoading,
+  fetchSubmitApply,
+  selectedResume,
+  setIsOpenApplyForm,
+  recruitmentStatus,
+  setSelectedResume,
+}: RecruitDetailSideMenuProps) {
+  const { isAuthenticated, isAuthIdle, role } = useAuth();
   const router = useRouter();
+
+  if (!isAuthenticated) {
+    return (
+      <S.RecruitDetailSideMenu>
+        <Button label="로그인 후 지원하기" variant="primary" height="50px" onClick={() => router.push(path.SIGN_IN)} fontSize="16px" />
+      </S.RecruitDetailSideMenu>
+    );
+  }
+
+  if (recruitmentStatus === 'CLOSED') {
+    return (
+      <S.RecruitDetailSideMenu>
+        <Button label="모집 마감" variant="secondary" height="50px" borderRadius="10px" fontSize="18px" disabled />
+      </S.RecruitDetailSideMenu>
+    );
+  }
+
+  if (role === 'JOB_SEEKER') {
+    return (
+      <S.RecruitDetailSideMenu>
+        {!isOpenApplyForm && !isApplyCheckError && (
+          <Button
+            label={applyStatus === 'available' ? '지원하기' : '지원완료'}
+            variant="primary"
+            height="50px"
+            borderRadius="10px"
+            onClick={handleClickApply}
+            fontSize="18px"
+            disabled={applyStatus === 'duplicate'}
+            isLoading={isApplyCheckLoading}
+          />
+        )}
+
+        {isApplyCheckError && <Button label="지원불가" variant="secondary" height="50px" borderRadius="10px" fontSize="18px" disabled />}
+
+        {isOpenApplyForm && (
+          <RecruitDetailApplyResumeForm
+            selectedResume={selectedResume}
+            setSelectedResume={setSelectedResume}
+            setIsOpenApplyForm={setIsOpenApplyForm}
+            fetchSubmitApply={fetchSubmitApply}
+          />
+        )}
+
+        <div className="info-box">
+          <div className="info-box__item">
+            <span>담당자</span>
+            <em>{managerName}</em>
+          </div>
+          <div className="info-box__item">
+            <span>연락처</span>
+            <em>{managerNumber}</em>
+          </div>
+        </div>
+
+        {/* TODO - 마감일 */}
+        {/* <div className="period-box"></div> */}
+      </S.RecruitDetailSideMenu>
+    );
+  }
 
   return (
     <S.RecruitDetailSideMenu>
-      {children}
+      <Button label="지원자 전용" variant="secondary" height="50px" borderRadius="10px" fontSize="18px" disabled />
+
       <div className="info-box">
-        {!isAuthIdle && !isAuthenticated && (
-          <Dimmed>
-            <Button
-              label="로그인/회원가입"
-              variant="secondary200"
-              height="40px"
-              width="140px"
-              onClick={() => router.push(path.SIGN_IN)}
-              fontSize="14px"
-            />
-          </Dimmed>
-        )}
         <div className="info-box__item">
           <span>담당자</span>
           <em>{managerName}</em>
@@ -41,6 +114,8 @@ export default function RecruitDetailSideMenu({ managerName, managerNumber, chil
           <em>{managerNumber}</em>
         </div>
       </div>
+
+      {/* TODO - 마감일 */}
       {/* <div className="period-box"></div> */}
     </S.RecruitDetailSideMenu>
   );

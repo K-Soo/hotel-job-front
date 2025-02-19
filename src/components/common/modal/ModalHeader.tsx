@@ -7,16 +7,34 @@ import IconHover from '@/components/common/IconHover';
 interface ModalHeaderProps {
   title?: string;
   handleCloseModal: () => void;
+  isStepForm?: boolean;
+  setInitialStepIndex?: () => void;
+  stepIndex?: number;
 }
 
-export function ModalHeader({ title, handleCloseModal }: ModalHeaderProps) {
-  const { setModalAtomState } = useModal();
+export function ModalHeader({ title, isStepForm, setInitialStepIndex, handleCloseModal, stepIndex = 0 }: ModalHeaderProps) {
   const { isTablet, isMobile } = useResponsive();
 
   return (
     <S.ModalHeader $isTablet={isTablet}>
-      <i className="back" onClick={() => handleCloseModal()}>
-        {isMobile && <Icon name="ArrowLeft24x24" width="24px" height="24px" />}
+      <i className="back">
+        {!isStepForm && isMobile && <Icon name="ArrowLeft24x24" width="24px" height="24px" onClick={() => handleCloseModal()} />}
+        {isStepForm && isMobile && stepIndex === 0 && (
+          <Icon name="ArrowLeft24x24" width="24px" height="24px" onClick={() => handleCloseModal()} />
+        )}
+
+        {isStepForm && stepIndex !== 0 && (
+          <Icon
+            name="ArrowLeft24x24"
+            width="24px"
+            height="24px"
+            onClick={() => {
+              if (setInitialStepIndex) {
+                setInitialStepIndex();
+              }
+            }}
+          />
+        )}
       </i>
 
       <h2 className="title">{title}</h2>

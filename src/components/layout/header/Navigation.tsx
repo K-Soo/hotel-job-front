@@ -105,11 +105,12 @@ const S = {
     height: 100%;
     .item {
       margin-right: 15px;
-      font-size: 15px;
+      font-size: 18px;
       color: ${(props) => props.theme.colors.gray700};
       height: 40px;
       padding: 0 12px;
       border-radius: 5px;
+      letter-spacing: 0.5px;
       display: flex;
       align-items: center;
       justify-content: center;

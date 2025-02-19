@@ -153,6 +153,12 @@ export interface GetUserInfoResponse extends BaseResponse {
   };
 }
 
+export interface PatchChangeNicknameResponse extends BaseResponse {
+  result: {
+    status: ResponseStatus;
+  };
+}
+
 export interface GetApplicantProfileResponse extends BaseResponse {
   result: types.ApplicantProfile;
 }
@@ -273,6 +279,12 @@ export interface RemoveRecruitmentResponse extends BaseResponse {
   };
 }
 
+export interface CancelApplicationResponse extends BaseResponse {
+  result: {
+    status: ResponseStatus;
+  };
+}
+
 export interface GetRecruitSpecialListResponse extends BaseResponse {
   result: {
     items: types.RecruitListItem[];
@@ -336,6 +348,9 @@ export interface DeleteResumeResponse extends BaseResponse {
 
 export interface GetApplicationHistoryResponse extends BaseResponse {
   result: types.ApplicationHistory[];
+}
+export interface GetApplicationHistoryStatusResponse extends BaseResponse {
+  result: types.ApplicationHistoryStatus;
 }
 
 export interface DeactivateApplicantUserResponse extends BaseResponse {

@@ -27,10 +27,10 @@ export default function EmployerAccount({ data, setIsOpenNicknameModal, children
                 <p className="wrapper__text">{data.nickname}</p>
                 <Button
                   label="변경"
-                  variant="tertiary"
+                  variant="secondary100"
                   width="80px"
-                  height="35px"
-                  margin="0 0 0 30px"
+                  height="30px"
+                  margin="0 0 0 15px"
                   fontSize="14px"
                   onClick={() => {
                     if (setIsOpenNicknameModal) {
@@ -81,29 +81,30 @@ export default function EmployerAccount({ data, setIsOpenNicknameModal, children
             </S.Content>
           </S.ContentForm>
 
-          <S.ContentTitle>멤버십 정보</S.ContentTitle>
+          <S.ContentTitle>혜택 정보</S.ContentTitle>
           <S.ContentForm>
             <S.Content>
-              <p className="title">멤버십</p>
+              <p className="title">멤버십 등급</p>
               <div className="wrapper">
                 <p className="wrapper__text">
                   <span>{data.membership.membershipLevel}</span>
-                  <span style={{ color: '#3182f6' }}>&nbsp;&nbsp;&nbsp;{data.membership.discountRate * 100}%</span>
                 </p>
               </div>
             </S.Content>
 
             <S.Content>
-              <p className="title">현재 점수</p>
+              <p className="title">멤버십 점수</p>
               <div className="wrapper">
                 <p className="wrapper__text">{priceComma(data.totalScore)}점</p>
               </div>
             </S.Content>
 
             <S.Content>
-              <p className="title">멤버십 할인율</p>
+              <p className="title">보유 쿠폰</p>
               <div className="wrapper">
-                <p className="wrapper__text">{data.membership.discountRate}</p>
+                <p className="wrapper__text">
+                  <span>{data.availableCouponCount ?? 0}개</span>
+                </p>
               </div>
             </S.Content>
           </S.ContentForm>

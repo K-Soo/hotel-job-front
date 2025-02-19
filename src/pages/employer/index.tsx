@@ -1,6 +1,6 @@
 import Layout, { EmployerMain, EmployerHeader, EmployerFooter } from '@/components/layout';
 import EmployerContainer from '@/containers/employerContainer';
-import { GetServerSideProps, InferGetServerSidePropsType, GetServerSidePropsContext } from 'next';
+import { GetServerSideProps, GetServerSidePropsContext } from 'next';
 import { Auth } from '@/apis';
 import path from '@/constants/path';
 
