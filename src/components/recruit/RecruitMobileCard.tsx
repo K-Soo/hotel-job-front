@@ -5,16 +5,18 @@ import { RecruitListItem } from '@/types';
 import { addressFormat, employmentTypeFormat } from '@/utils';
 import { EXPERIENCE_CONDITION } from '@/constants/recruitment';
 import { ALL_JOBS } from '@/constants/job';
+import { useRouter } from 'next/router';
 
 interface RecruitMobileCardProps {
   item: RecruitListItem;
 }
 
 export default function RecruitMobileCard({ item }: RecruitMobileCardProps) {
+  const router = useRouter();
   const { sido, sigungu } = addressFormat(item.address);
 
   return (
-    <S.RecruitMobileCard>
+    <S.RecruitMobileCard onClick={() => router.push(`/recruit/${item.id}`)}>
       <S.HeaderBox>
         <div className="tags">
           {/* <RecruitTag>숙식제공</RecruitTag> */}

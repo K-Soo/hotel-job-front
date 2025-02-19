@@ -10,7 +10,7 @@ import { EXPERIENCE_CONDITION } from '@/constants/recruitment';
 import { ALL_JOBS } from '@/constants/job';
 import { useRouter } from 'next/router';
 import IconDimmed from '@/components/common/IconDimmed';
-import { priceComma, dateFormat } from '@/utils';
+import { dateFormat } from '@/utils';
 import { CITY_KOREAN_MAP } from '@/constants/location';
 
 interface RecruitDesktopCardProps {
