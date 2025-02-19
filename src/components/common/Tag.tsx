@@ -1,6 +1,6 @@
 import styled, { css, keyframes } from 'styled-components';
 
-type TagType = 'BEST' | 'URGENT' | 'VERIFIED' | 'UNVERIFIED';
+type TagType = 'BEST' | 'URGENT' | 'VERIFIED' | 'UNVERIFIED' | 'DEFAULT_RESUME' | 'DRAFT';
 
 interface TagProps {
   label: string;
@@ -146,6 +146,21 @@ const S = {
         border-radius: 10px;
         font-weight: 400;
         font-size: 12px;
+      `};
+
+    ${(props) =>
+      props.$type === 'DEFAULT_RESUME' &&
+      css`
+        color: ${(props) => props.theme.colors.blue800};
+        background-color: ${(props) => props.theme.colors.blue50};
+        border: none;
+      `};
+
+    ${(props) =>
+      props.$type === 'DRAFT' &&
+      css`
+        color: ${(props) => props.theme.colors.red300};
+        border: none;
       `};
   `,
 };
