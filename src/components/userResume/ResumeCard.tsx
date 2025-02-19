@@ -7,6 +7,8 @@ import { ResumeListItem, ResumeLstItemApplications } from '@/types';
 import { useRouter } from 'next/router';
 import path from '@/constants/path';
 import useModal from '@/hooks/useModal';
+import Tag from '@/components/common/Tag';
+
 interface ResumeCardProps {
   item: ResumeListItem;
   handleClickRemoveResume: (resume: ResumeListItem) => void;
@@ -19,12 +21,10 @@ export default function ResumeCard({ item, handleClickRemoveResume, handleClickS
 
   return (
     <S.ResumeCard>
-      <div className="top">
-        <div className="top__tags">
-          {item.isDefault && <span className="top__default">기본이력서</span>}
-          {item.status === 'DRAFT' && <span className="top__draft">미완성</span>}
-        </div>
-
+      <S.TopContent>
+        <h4 className="title" onClick={() => router.push(`${path.USER_RESUME}/${item.id}`)}>
+          {item.title}
+        </h4>
         <IconHover
           onClick={(event) => {
             event.stopPropagation();
@@ -33,95 +33,75 @@ export default function ResumeCard({ item, handleClickRemoveResume, handleClickS
         >
           <Icon name="Dots24x24" width="18px" height="18px" style={{ transform: 'rotate(90deg)', color: '#555' }} />
         </IconHover>
-      </div>
+      </S.TopContent>
 
-      <h4 className="title" onClick={() => router.push(`${path.USER_RESUME}/${item.id}`)}>
-        {item.title}
-      </h4>
-      <div className="summary">
-        {/* <p className="summary__text">경력 총 3년</p> */}
-        {/* <p className="summary__text">희망지역 서울 강남구</p> */}
-      </div>
-      <div className="bottom">
-        <button className="bottom__history" onClick={() => handleClickSelectedApplications(item.applications)}>
-          입사지원내역 {item.applicationsCount}건
-        </button>
-        {/* TODO - 복사 기능 */}
-        {/* <Button label="복사" variant="tertiary" width="70px" height="30px" fontSize="14px" onClick={() => alert('복사')} /> */}
-      </div>
+      <S.BottomContent className="bottom">
+        <div className="tags">
+          {item.isDefault && <Tag label="기본 이력서" type="DEFAULT_RESUME" fontSize="13px" />}
+          {item.status === 'DRAFT' && <Tag label="미완성" type="DRAFT" fontSize="13px" />}
+        </div>
+
+        {item.applicationsCount !== 0 && (
+          <button className="history" onClick={() => handleClickSelectedApplications(item.applications)}>
+            입사 지원내역 {item.applicationsCount}건
+          </button>
+        )}
+      </S.BottomContent>
     </S.ResumeCard>
   );
 }
 
 const S = {
   ResumeCard: styled(motion.div)`
-    height: auto;
     border: 1px solid ${({ theme }) => theme.colors.gray200};
     color: ${({ theme }) => theme.colors.gray500};
     border-radius: 15px;
-    margin: 10px 0;
-    padding: 10px 15px 15px 15px;
-    user-select: none;
-    min-height: 100px;
+    padding: 15px;
+    min-height: 120px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    &:last-child {
+      margin-bottom: 0;
+    }
     &:hover {
       border: 1px solid ${({ theme }) => theme.colors.gray300};
     }
-    .top {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      font-size: 13px;
-      &__tags {
-        display: flex;
-        align-items: center;
-      }
-      &__default {
-        display: inline-block;
-        padding: 0 5px;
-        color: ${(props) => props.theme.colors.blue800};
-        background-color: ${(props) => props.theme.colors.blue50};
-        height: 18px;
-        display: flex;
-        align-items: center;
-        border-radius: 3px;
-        margin-right: 3px;
-      }
-      &__draft {
-        color: ${(props) => props.theme.colors.red300};
-      }
-    }
+  `,
+  TopContent: styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     .title {
       cursor: pointer;
       font-size: 18px;
-      font-weight: 400;
+      font-weight: 500;
       color: ${(props) => props.theme.colors.black400};
-      margin-bottom: 15px;
+      font-size: 16px;
+      ${(props) => props.theme.media.mobile`
+        text-overflow: ellipsis;
+        word-break: break-all;
+        white-space: nowrap;
+        overflow: hidden;
+        max-width: 230px;
+      `};
       &:hover {
         text-decoration: underline;
         color: ${(props) => props.theme.colors.black100};
       }
     }
-    .summary {
+  `,
+  BottomContent: styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .history {
+      cursor: pointer;
       font-size: 13px;
-      &__text {
-        padding-bottom: 3px;
-      }
-      :last-child {
-        padding-bottom: 0;
-      }
-    }
-    .bottom {
-      margin-top: 15px;
-      justify-content: space-between;
-      display: flex;
-      align-items: center;
-      &__history {
-        font-size: 14px;
-        cursor: pointer;
-        &:hover {
-          text-decoration: underline;
-          color: ${({ theme }) => theme.colors.black400};
-        }
+      &:hover {
+        text-decoration: underline;
+        color: ${(props) => props.theme.colors.black100};
       }
     }
   `,
