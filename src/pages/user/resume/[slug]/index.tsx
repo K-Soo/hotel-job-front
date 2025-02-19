@@ -15,6 +15,7 @@ export default function UserResumeDetailPage() {
     if (authAtomState.certificationStatus !== 'VERIFIED') {
       alert('이력서 등록을 위해서는 본인인증이 필요합니다.');
       window.location.href = '/user/resume';
+      return;
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
