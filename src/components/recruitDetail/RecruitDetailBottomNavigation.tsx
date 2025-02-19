@@ -8,9 +8,14 @@ import { RecruitmentStatusKeys } from '@/types';
 interface RecruitDetailBottomNavigationProps {
   applyStatus: 'available' | 'duplicate' | 'idle';
   recruitmentStatus: RecruitmentStatusKeys;
+  setIsOpenModal: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export default function RecruitDetailBottomNavigation({ applyStatus, recruitmentStatus }: RecruitDetailBottomNavigationProps) {
+export default function RecruitDetailBottomNavigation({
+  applyStatus,
+  recruitmentStatus,
+  setIsOpenModal,
+}: RecruitDetailBottomNavigationProps) {
   const { setModalAtomState } = useModal();
   const { isAuthenticated, role } = useAuth();
   const router = useRouter();
@@ -44,7 +49,7 @@ export default function RecruitDetailBottomNavigation({ applyStatus, recruitment
               variant="primary"
               height="45px"
               borderRadius="5px"
-              onClick={() => setModalAtomState({ isOpen: true })}
+              onClick={() => setIsOpenModal(true)}
               disabled={applyStatus === 'duplicate'}
             />
           )}
