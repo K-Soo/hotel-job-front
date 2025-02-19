@@ -44,7 +44,7 @@ export default function MainUrgentListContainer() {
     return (
       <>
         <RecruitSectionTitle title="급구채용" />
-        {isEmptyFirstPage && isFirstPage && <EmptyComponent height="200px" message="등록된 공고가 없어요." />}
+        {isEmptyFirstPage && isFirstPage && <EmptyComponent height="200px" message="등록된 공고가 없어요." isVisibleImage={false} />}
 
         <InfiniteScroll
           loadMore={() => {
