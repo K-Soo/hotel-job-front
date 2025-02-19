@@ -1,6 +1,37 @@
 # 변경 로그
 
 프로젝트의 모든 주요 변경 사항
+## [1.7.0](https://github.com/K-Soo/hotel-job-front/compare/v1.6.0...v1.7.0) (2025-02-19)
+
+
+### Features
+
+* **components:** 모달 컴포넌트에 z-index 추가 ([99a3ece](https://github.com/K-Soo/hotel-job-front/commit/99a3ece4558adda59f1eebb48992d045699c0d0c))
+* **components:** RecruitDesktopCard 및 RecruitMobileCard에서 불필요한 import 제거 및 라우터 기능 추가 ([583234e](https://github.com/K-Soo/hotel-job-front/commit/583234e21407474ef195388d40f1c686b809596b))
+* **components:** RecruitDetailBottomNavigation에서 모달 상태 설정 함수 추가 ([2f10878](https://github.com/K-Soo/hotel-job-front/commit/2f10878df26f6ae58d521b8306aeed30064fef38))
+* **components:** RecruitDetailContainer에서 모달 상태 관리 및 의존성 추가 ([373c892](https://github.com/K-Soo/hotel-job-front/commit/373c892757cb2437859094a014f4f2500d14711e))
+* **components:** ResumeCard 컴포넌트에 태그 추가 및 레이아웃 개선 ([2b01ddb](https://github.com/K-Soo/hotel-job-front/commit/2b01ddb723e2a4fcbe6fc46a5c81e19dae743b60))
+* **components:** Tag 컴포넌트에 DEFAULT_RESUME 및 DRAFT 타입 추가 ([b7c4acd](https://github.com/K-Soo/hotel-job-front/commit/b7c4acd32ed3c462503756f02d2fd75d2de344f3))
+* **config:** 프로덕션 환경에서 콘솔 로그 제거 및 이미지 캐시 헤더 추가 ([31faf24](https://github.com/K-Soo/hotel-job-front/commit/31faf24441ba56efcf49e14e15eaf40a0a3656a9))
+* **utils:** 회원가입 스키마에 SMS 및 이메일 마케팅 동의 항목 추가 ([38e1c45](https://github.com/K-Soo/hotel-job-front/commit/38e1c4555fb6db0f10ddc16de6111f91be6e7bf6))
+
+
+### Bug Fixes
+
+* **CompanyForm:** 비밀번호 입력 필드 및 로그인 버튼의 여백 수정 ([93c68ce](https://github.com/K-Soo/hotel-job-front/commit/93c68ce7ac9e99303862bf4e5eaba07110207af0))
+* **CompanyForm:** 비밀번호 입력 필드의 여백 수정 ([a0c044d](https://github.com/K-Soo/hotel-job-front/commit/a0c044dd63522f2db1a96ba344e120619e885d70))
+* **components:** CreateResumeButton의 margin 수정 ([af1d13e](https://github.com/K-Soo/hotel-job-front/commit/af1d13ee0894fbb0aecb61a01658be6cef4d2832))
+* **components:** ModalFooter의 높이를 60px에서 65px로 수정 ([183bbb0](https://github.com/K-Soo/hotel-job-front/commit/183bbb091426a7e489f0723b312001b8367b320c))
+* **components:** RecruitDetailBottomNavigation의 z-index 수정 ([f0e4e88](https://github.com/K-Soo/hotel-job-front/commit/f0e4e881fa6cba60eb32c1d8f52780482ee5ffaa))
+* **components:** RecruitDetailContainer의 버튼 fontSize 수정 ([06f5004](https://github.com/K-Soo/hotel-job-front/commit/06f500405fc3b67e853ca899dbd5e49298554c98))
+* **FormCheckbox:** 아이콘 클릭 시 핸들러 추가 ([46388cc](https://github.com/K-Soo/hotel-job-front/commit/46388cce16f15e0921f0311537e027beb4c43050))
+* **signInContainer:** 로그인 시도 횟수 초과 시 페이지 새로 고침 추가 및 기본값 수정 ([15c03a6](https://github.com/K-Soo/hotel-job-front/commit/15c03a6c40a97585d366d5400cf288424f7d23d1))
+* **SignUpContainer:** 정책 동의 모달 추가 및 상태 관리 개선 ([4040c33](https://github.com/K-Soo/hotel-job-front/commit/4040c33414385394b89aad700444d7ce104f3245))
+* **signUpContainer:** 콘솔 로그 제거 ([d290e34](https://github.com/K-Soo/hotel-job-front/commit/d290e34d1e8b8a5205a7ae5514f9d7436cd88097))
+* **SignUpForm:** SMS 및 이메일 마케팅 동의 필드 추가 ([9b05346](https://github.com/K-Soo/hotel-job-front/commit/9b0534640c0e267dafb306483a6267489a71e65d))
+* **signUpGeneralForm:** 사용자 동의 체크박스에 아이콘 표시 추가 ([0c2f988](https://github.com/K-Soo/hotel-job-front/commit/0c2f988713991589f9a0194a87a6beb6afa37c35))
+* **SignUpGeneralForm:** 정책 동의 핸들러 추가 및 필드 레이블 수정 ([098db37](https://github.com/K-Soo/hotel-job-front/commit/098db378955d6cdb817e2e32bcaa4d55d50cee8e))
+
 ## [1.6.0](https://github.com/K-Soo/hotel-job-front/compare/v1.5.0...v1.6.0) (2025-02-19)
 
 
