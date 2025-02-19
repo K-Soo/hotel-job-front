@@ -77,6 +77,7 @@ export default function RecruitDetailContainer() {
         resumeId: selectedResume as string,
       });
       console.log('이력서 제출 API : ', response);
+
       await queryClient.invalidateQueries({ queryKey: [queryKeys.APPLICATION_APPLY_CHECK], refetchType: 'all' });
       await queryClient.invalidateQueries({ queryKey: [queryKeys.RESUME_LIST], refetchType: 'all' });
       await queryClient.invalidateQueries({ queryKey: [queryKeys.USER_APPLICATION_HISTORY], refetchType: 'all' });
@@ -88,8 +89,7 @@ export default function RecruitDetailContainer() {
       setIsOpenApplyForm(false);
       setSelectedResume(null);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedResume]);
+  }, [addToast, selectedResume, slug]);
 
   console.log('채용공고 상세 API : ', data);
 
@@ -101,7 +101,7 @@ export default function RecruitDetailContainer() {
   if (isSuccess && data) {
     return (
       <>
-        {isTablet && modalAtomState.isOpen && (
+        {isTablet && isOpenModal && (
           <DynamicNoSSRModal handleCloseModal={() => setIsOpenModal(false)}>
             <Modal.Header title="지원하기" handleCloseModal={() => setIsOpenModal(false)} />
             <Modal.Content>
@@ -145,7 +145,11 @@ export default function RecruitDetailContainer() {
         </RecruitDetail>
 
         {/* MOBILE BOTTOM */}
-        <RecruitDetailBottomNavigation applyStatus={applyStatus} recruitmentStatus={data.result.recruitmentStatus} />
+        <RecruitDetailBottomNavigation
+          applyStatus={applyStatus}
+          recruitmentStatus={data.result.recruitmentStatus}
+          setIsOpenModal={setIsOpenModal}
+        />
       </>
     );
   }
