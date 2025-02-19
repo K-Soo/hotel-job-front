@@ -23,8 +23,6 @@ export default function SignUpGeneralForm({ setStep, handleChangeAllAgree, fetch
     formState: { isSubmitting },
   } = useFormContext<SignUpForm>();
 
-  const userIdAvailableStateWatchValue = watch('userIdAvailableState');
-
   const agreeList = watch(['ageAgree', 'personalInfoAgree', 'serviceTermsAgree', 'smsMarketingAgree', 'emailMarketingAgree']);
   const allAgreeChecked = agreeList.every((agree) => agree);
 
@@ -77,8 +75,9 @@ export default function SignUpGeneralForm({ setStep, handleChangeAllAgree, fetch
       <FormCheckbox name="ageAgree" required label="만 19세 이상" margin="0 0 15px 0" visibleIcon={false} />
       <FormCheckbox name="personalInfoAgree" required label="서비스이용 동의" margin="0 0 15px 0" />
       <FormCheckbox name="serviceTermsAgree" required label="개인정보 수집동의" margin="0 0 15px 0" />
-      <FormCheckbox name="smsMarketingAgree" optional label="SMS 수신 동의" margin="0 0 15px 0" />
-      <FormCheckbox name="emailMarketingAgree" optional label="E-Mail 수신 동의" margin="0 0 15px 0" />
+      <FormCheckbox name="smsMarketingAgree" optional label="SMS 수신 동의" margin="0 0 15px 0" visibleIcon={false} />
+      <FormCheckbox name="emailMarketingAgree" optional label="E-Mail 수신 동의" margin="0 0 15px 0" visibleIcon={false} />
+
       <div className="button-group">
         <Button label="이전" variant="secondary" margin="0 15px 0 0" onClick={() => router.push(path.SIGN_IN)} />
         <Button label="가입완료" variant="primary" type="submit" />
