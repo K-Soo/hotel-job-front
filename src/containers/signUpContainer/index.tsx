@@ -75,8 +75,6 @@ export default function SignUpContainer() {
     }
   };
 
-  console.log('methods:@@@@@@@@@', methods.watch('userIdAvailableState'));
-
   // 아이디 중복 체크 API
   const fetchEmployerUserIdCheck = React.useCallback(async () => {
     try {
