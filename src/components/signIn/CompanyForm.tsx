@@ -24,16 +24,16 @@ export default function CompanyForm({ onSubmit, isSubmitError }: CompanyFormProp
     <S.CompanyForm>
       <form onSubmit={handleSubmit(onSubmit)}>
         <FormInput<SignInForm> label="아이디" name="userId" placeholder="아이디" isFocusing margin="0 0 15px 0" />
-        <FormInput<SignInForm> label="비밀번호" name="password" type="password" placeholder="비밀번호" />
+        <FormInput<SignInForm> label="비밀번호" name="password" type="password" placeholder="비밀번호" isFocusing margin="0 0 30px 0" />
 
         <S.ResponseErrorText $isVisible={isSubmitError}>로그인 정보를 확인해주세요.</S.ResponseErrorText>
 
-        <Button label="로그인" type="submit" variant="primary" margin="30px 0 0 0" isLoading={isSubmitting} />
+        <Button label="로그인" type="submit" variant="primary" margin="15px 0 0 0" isLoading={isSubmitting} />
       </form>
       <div className="line" />
       <div className="button-group">
         <div className="button-group__find-box">
-          <Button
+          {/* <Button
             label="아이디 찾기"
             fontSize="11px"
             width="73px"
@@ -51,7 +51,7 @@ export default function CompanyForm({ onSubmit, isSubmitError }: CompanyFormProp
             variant="secondary200"
             width="73px"
             onClick={() => push(path.SIGN_UP)}
-          />
+          /> */}
         </div>
         <Button
           label="회원가입"
@@ -87,7 +87,6 @@ const S = {
     }
   `,
   ResponseErrorText: styled.p<{ $isVisible: boolean }>`
-    margin-top: 15px;
     text-align: center;
     color: ${(props) => props.theme.colors.red500};
     font-weight: 400;
