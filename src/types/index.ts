@@ -134,6 +134,7 @@ export interface SignUpForm {
   ageAgree: boolean;
   personalInfoAgree: boolean;
   serviceTermsAgree: boolean;
+
   smsMarketingAgree: boolean;
   emailMarketingAgree: boolean;
 
