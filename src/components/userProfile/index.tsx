@@ -48,17 +48,16 @@ export default function UserProfile({ isLoading, isSuccess, data, handleClickWit
             {data.certificationStatus !== 'VERIFIED' && (
               <S.Item>
                 <StyledCertTag>미인증</StyledCertTag>
-                <Button label="인증하기" variant="tertiary" height="30px" width="80px" fontSize="14px" />
+                <Button label="인증하기" variant="primary" height="30px" width="80px" fontSize="14px" />
               </S.Item>
             )}
           </S.Panel>
 
-          <ProfileTitle title="광고성 정보 수신" />
-
+          {/* <ProfileTitle title="광고성 정보 수신" />
           <S.Panel>
             <S.Item>이메일 {data.consent.emailMarketingAgree}</S.Item>
             <S.Item>SMS {data.consent.smsMarketingAgree}</S.Item>
-          </S.Panel>
+          </S.Panel> */}
 
           <S.WithdrawalButton onClick={handleClickWithdrawal}>회원탈퇴</S.WithdrawalButton>
         </div>
@@ -68,10 +67,9 @@ export default function UserProfile({ isLoading, isSuccess, data, handleClickWit
 }
 
 const StyledCertTag = styled.span`
-  border: 1px solid red;
-  padding: 2px 10px;
   font-size: 14px;
   border-radius: 15px;
+  color: ${(props) => props.theme.colors.red400};
 `;
 
 const S = {
