@@ -17,6 +17,7 @@ const nextConfig = {
   reactStrictMode: false,
   compiler: {
     styledComponents: true,
+    removeConsole: process.env.NODE_ENV === 'production',
   },
   experimental: {
     scrollRestoration: true,
@@ -37,7 +38,19 @@ const nextConfig = {
       },
     ],
   },
-
+  async headers() {
+    return [
+      {
+        source: '/images/(.*)',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+        ],
+      },
+    ];
+  },
   webpack: (config) => {
     config.module.rules.push({
       test: /\.svg$/i,
