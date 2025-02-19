@@ -117,8 +117,8 @@ export default function RecruitDetailContainer() {
                 <Button
                   label={applyStatus === 'available' ? '제출하기' : '지원완료'}
                   variant="primary"
-                  height="40px"
                   borderRadius="5px"
+                  fontSize="16px"
                   onClick={fetchSubmitApply}
                   disabled={!selectedResume}
                 />
