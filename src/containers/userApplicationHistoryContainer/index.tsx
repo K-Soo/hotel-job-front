@@ -25,7 +25,6 @@ import HistoryStatusContainer from '@/containers/userApplicationHistoryContainer
 import { useRouter } from 'next/router';
 import { ParsedUrlQuery } from 'querystring';
 import { ErrorBoundary } from '@/error';
-import path from '@/constants/path';
 import { keepPreviousData } from '@tanstack/react-query';
 
 const DynamicNoSSRModal = dynamic(() => import('@/components/common/modal'), { ssr: false });
