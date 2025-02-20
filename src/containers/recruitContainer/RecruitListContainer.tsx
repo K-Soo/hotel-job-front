@@ -66,7 +66,7 @@ export default function RecruitListContainer() {
       return (
         <>
           <RecruitSectionTitle title="급구채용" />
-          <EmptyComponent height="200px" message="등록된 공고가 없어요." />
+          <EmptyComponent height="200px" message="해당하는 공고가 없어요." />
         </>
       );
     }
@@ -91,7 +91,7 @@ export default function RecruitListContainer() {
 
           return <RecruitDesktopCard key={index} item={item} />;
         })}
-        {!isEmpty && <PaginationComponent pagination={data.result.pagination} />}
+        {!isEmpty && <PaginationComponent pagination={data.result.pagination} margin="50px 0 0 0" />}
       </>
     );
   }

@@ -40,12 +40,12 @@ export default function BottomNavigation() {
           </S.ButtonLink>
         </div>
 
-        <div className="item">
+        {/* <div className="item">
           <S.ButtonLink name={path.TALENT} onClick={handleLink}>
             <Icon name="StickerSmileSquare24x24" width="24px" height="24px" />
             <S.IconText $active={router.pathname === path.TALENT}>인재</S.IconText>
           </S.ButtonLink>
-        </div>
+        </div> */}
 
         {isAuthenticated && (
           <div className="item">
@@ -82,11 +82,9 @@ const S = {
     height: 75px;
     box-sizing: border-box;
     background-color: ${(props) => props.theme.colors.white};
-    padding-bottom: 5px;
-    /* border-top-left-radius: 10px; */
-    /* border-top-right-radius: 10px; */
     /* box-shadow: 0 -1px 15px rgba(0, 0, 0, 0.1); */
     border-top: 1px solid ${(props) => props.theme.colors.gray100};
+    padding-bottom: 10px;
     .item {
       flex: 1;
       display: flex;
@@ -99,8 +97,8 @@ const S = {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 55px;
-    height: 55px;
+    width: 50px;
+    height: 50px;
     border-radius: 10px;
   `,
   IconText: styled.span<{ $active: boolean }>`

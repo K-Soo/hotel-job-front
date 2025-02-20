@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import Icon from '@/icons/Icon';
 import RecruitPrice from '@/components/recruit/RecruitPrice';
 import { RecruitListItem } from '@/types';
-import { addressFormat, employmentTypeFormat } from '@/utils';
+import { addressFormat, dateFormat, employmentTypeFormat } from '@/utils';
 import { EXPERIENCE_CONDITION } from '@/constants/recruitment';
 import { ALL_JOBS } from '@/constants/job';
 import { useRouter } from 'next/router';
@@ -23,7 +23,11 @@ export default function RecruitMobileCard({ item }: RecruitMobileCardProps) {
           {/* <RecruitTag>수당</RecruitTag> */}
           {/* <RecruitTag>수당</RecruitTag> */}
         </div>
-        <time>TODAY</time>
+        {dateFormat.dateOrToday(item.priorityDate) === 'TODAY' ? (
+          <time className="today">TODAY</time>
+        ) : (
+          <time>{dateFormat.dateOrToday(item.priorityDate)}</time>
+        )}
       </S.HeaderBox>
       <S.ContentBox>
         <div className="info-box">
@@ -34,9 +38,6 @@ export default function RecruitMobileCard({ item }: RecruitMobileCardProps) {
               {sido} {sigungu}
             </address>
           </div>
-        </div>
-        <div className="icon-box">
-          <Icon name="Star24x24" width="24px" height="24px" margin="0" />
         </div>
       </S.ContentBox>
       <S.infoBox>
@@ -140,14 +141,7 @@ const S = {
         }
       }
     }
-    .icon-box {
-      margin-left: 35px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
   `,
-
   infoBox: styled.div`
     display: flex;
     justify-content: space-between;
