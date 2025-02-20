@@ -5,6 +5,9 @@ import ProfileTitle from '@/components/userProfile/ProfileTitle';
 import { ApplicantProfile } from '@/types';
 import Button from '@/components/common/style/Button';
 import { dateFormat } from '@/utils';
+import { certificationModalAtom } from '@/recoil/certification';
+import { useSetRecoilState } from 'recoil';
+
 interface UserProfileProps {
   isLoading: boolean;
   isSuccess: boolean;
@@ -14,6 +17,8 @@ interface UserProfileProps {
 }
 
 export default function UserProfile({ isLoading, isSuccess, data, handleClickWithdrawal, setIsOpenModal }: UserProfileProps) {
+  const setCertificationModalAtom = useSetRecoilState(certificationModalAtom);
+
   return (
     <S.UserProfile>
       <UserAsideMenu />
@@ -48,7 +53,14 @@ export default function UserProfile({ isLoading, isSuccess, data, handleClickWit
             {data.certificationStatus !== 'VERIFIED' && (
               <S.Item>
                 <StyledCertTag>미인증</StyledCertTag>
-                <Button label="인증하기" variant="primary" height="30px" width="80px" fontSize="14px" />
+                <Button
+                  label="인증하기"
+                  variant="primary"
+                  height="30px"
+                  width="80px"
+                  fontSize="14px"
+                  onClick={() => setCertificationModalAtom({ isOpen: true })}
+                />
               </S.Item>
             )}
           </S.Panel>

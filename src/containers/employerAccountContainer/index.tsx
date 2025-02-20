@@ -49,7 +49,7 @@ export default function EmployerAccountContainer() {
   if (isSuccess && data) {
     return (
       <>
-        {certificationModalAtomState.isOpen && <CertificationModal />}
+        {/* {certificationModalAtomState.isOpen && <CertificationModal />} */}
 
         {isOpenNicknameModal && (
           <DynamicNoSSRModal handleCloseModal={handleCloseModal}>
