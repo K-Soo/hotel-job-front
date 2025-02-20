@@ -12,7 +12,7 @@ export default function HomeContainer() {
     <Home>
       <RecruitSearch>
         <JobSearch />
-        <LocationSearch />
+        {/* <LocationSearch /> */}
       </RecruitSearch>
 
       <ErrorBoundary fallback={null}>
