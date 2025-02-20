@@ -18,7 +18,7 @@ import { ErrorBoundary, ErrorComponent } from '@/error';
 import { errorCode } from '@/error';
 import { GetResumeListResponse } from '@/types/API';
 
-const DynamicNoSSRCertificationModal = dynamic(() => import('@/components/common/CertificationModal'), { ssr: false });
+// const DynamicNoSSRCertificationModal = dynamic(() => import('@/components/common/CertificationModal'), { ssr: false });
 
 export default function UserResumeContainer() {
   const [certificationModalAtomState, setCertificationModalAtomState] = useRecoilState(certificationModalAtom);
@@ -72,7 +72,7 @@ export default function UserResumeContainer() {
 
   return (
     <>
-      {certificationModalAtomState.isOpen && <DynamicNoSSRCertificationModal />}
+      {/* {certificationModalAtomState.isOpen && <DynamicNoSSRCertificationModal />} */}
       <UserResume>
         <UserTemplate>
           <UserTitle title="내 이력서" />

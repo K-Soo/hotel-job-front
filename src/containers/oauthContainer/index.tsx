@@ -71,7 +71,6 @@ export default function OauthContainer({ oauth }: OauthContainerProps) {
       }
 
       const restoredState = JSON.parse(decoded);
-      console.log('restoredState: ', restoredState);
 
       methods.setValue('code', query.code ?? '');
       methods.setValue('requestType', restoredState.requestType ?? 'signIn');

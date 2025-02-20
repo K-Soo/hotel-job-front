@@ -6,6 +6,7 @@ import { daumPostAtom } from '@/recoil/daumPost';
 import { bottomSheetAtom } from '@/recoil/bottomSheet';
 import { hamburgerNavigationAtom } from '@/recoil/hamburgerNavigation';
 import { alertWithConfirmSelector, alertWithConfirmAtom } from '@/recoil/alertWithConfirm';
+import { certificationModalAtom } from '@/recoil/certification';
 import { toastAtom } from '@/recoil/toast';
 import dynamic from 'next/dynamic';
 import { AnimatePresence } from 'framer-motion';
@@ -27,6 +28,7 @@ const DynamicNoSSRConfirm = dynamic(() => import('@/components/common/Confirm'),
 const DynamicNoSSRToast = dynamic(() => import('@/components/common/Toast'), { ssr: false });
 const DynamicNoSSRHamburgerNavigation = dynamic(() => import('@/components/layout/HamburgerNavigation'), { ssr: false });
 const DynamicNoSSRDaumPost = dynamic(() => import('@/components/common/DaumPost'), { ssr: false });
+const DynamicNoSSRCertificationModal = dynamic(() => import('@/components/common/CertificationModal'), { ssr: false });
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -39,6 +41,7 @@ export default function Layout({ children }: LayoutProps) {
   const toastAtomValue = useRecoilValue(toastAtom);
   const alertWithConfirmSelectorValue = useRecoilValue(alertWithConfirmSelector);
   const hamburgerNavigationAtomValue = useRecoilValue(hamburgerNavigationAtom);
+  const certificationModalAtomValue = useRecoilValue(certificationModalAtom);
   const setAlertWithConfirmSelector = useSetRecoilState(alertWithConfirmAtom);
 
   // React.useEffect(() => {
@@ -56,6 +59,8 @@ export default function Layout({ children }: LayoutProps) {
     <S.Layout>
       {loadingAtomValue.isLoading && <DynamicNoSSRLoadingOverlay />}
       {bottomSheetAtomValue.isOpen && <DynamicNoSSRAccountBottomSheet />}
+      {certificationModalAtomValue.isOpen && <DynamicNoSSRCertificationModal />}
+
       <AnimatePresence>{hamburgerNavigationAtomValue.isOpen && <DynamicNoSSRHamburgerNavigation />}</AnimatePresence>
 
       {alertWithConfirmSelectorValue.type === 'ALERT' && <DynamicNoSSRAlert />}
