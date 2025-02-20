@@ -1,5 +1,6 @@
 import * as yup from 'yup';
 import { regex } from './regex';
+import { BLACKLISTED_NAMES } from '@/constants/blacklist';
 
 yup.setLocale({
   mixed: {
@@ -15,8 +16,8 @@ yup.setLocale({
 
 const MORE_TEXT = (more: number) => `${more}자 이상`;
 const LESS_TEXT = (less: number) => `${less}자 이하`;
-const MORE_File = (more: number) => `${more}개 이상 등록해주세요.`;
-const LESS_File = (less: number) => `${less}개까지 등록 가능합니다.`;
+// const MORE_File = (more: number) => `${more}개 이상 등록해주세요.`;
+// const LESS_File = (less: number) => `${less}개까지 등록 가능합니다.`;
 
 const EMAIL_VALID_TEXT = '이메일 형식을 확인해주세요';
 const KO_VALID_TEXT = '한글만 입력가능합니다.';
@@ -24,20 +25,25 @@ const KO_VALID_TEXT_1 = '모음 입력제한';
 const KO_VALID_TEXT_2 = '자음 입력제한';
 const FIRST_SPACES_VALID_TEXT = '앞 공백 있음';
 const LAST_SPACES_VALID_TEXT = '뒤 공백 있음';
-const SPECIAL_VALID_TEXT_1 = '특수문자는 허용되지않습니다';
-const NUMBER_VALID_TEXT = '숫자만 입력 가능합니다.';
+// const SPECIAL_VALID_TEXT_1 = '특수문자는 허용되지않습니다';
+// const NUMBER_VALID_TEXT = '숫자만 입력 가능합니다.';
 
 const SPACES_VALID_TEXT_1 = '공백';
 
 export const validation = {
   USER_ID: yup
     .string()
-    .required()
-    .min(8, MORE_TEXT(8))
-    .max(16, LESS_TEXT(16))
-    .matches(regex.FIRST_SPACE, FIRST_SPACES_VALID_TEXT)
-    .matches(regex.LAST_SPACE, LAST_SPACES_VALID_TEXT)
-    .matches(regex.userId, '소문자 + 숫자만 입력가능합니다.'),
+    .test('no-repeated-chars', '연속된 동일 문자를 사용할 수 없습니다.', (value) => {
+      if (!value) return false;
+      return !/(.)\1{2,}/.test(value);
+    })
+    .test('no-forbidden-words', '사용할 수 없는 아이디입니다.', (value) => {
+      if (!value) return false;
+      return !BLACKLISTED_NAMES.some((word) => value.toLowerCase().includes(word));
+    })
+    .matches(regex.userId, '8~16자의 영문 소문자 및 숫자 조합')
+    .required(),
+
   PASSWORD: yup.string().required().matches(regex.password, '비밀번호 형식을 확인해주세요.'),
   PASSWORD_CONFIRM: yup
     .string()

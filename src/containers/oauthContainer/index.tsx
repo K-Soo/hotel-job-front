@@ -23,6 +23,7 @@ import { errorMessages, getErrorCode, errorCode } from '@/error';
 export interface UrlQuery extends ParsedUrlQuery {
   code: string;
   state: string;
+  error?: string;
 }
 
 interface OauthContainerProps {
@@ -59,6 +60,9 @@ export default function OauthContainer({ oauth }: OauthContainerProps) {
   // 초기 진입시 작동
   React.useEffect(() => {
     if (router.isReady) {
+      if (query.error) {
+        window.location.href = path.HOME;
+      }
       const decoded = decodeURIComponent(query.state);
       if (decoded === 'undefined') {
         alert('잘못된 접근입니다.');
