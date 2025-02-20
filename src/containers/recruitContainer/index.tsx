@@ -23,7 +23,7 @@ export default function RecruitContainer() {
       <Recruit>
         <RecruitSearch>
           <JobSearch />
-          <LocationSearch />
+          {/* <LocationSearch /> */}
         </RecruitSearch>
 
         <RecruitFilterPanel handleClickFilterButton={handleClickFilterButton} />
