@@ -38,7 +38,9 @@ const S = {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-color: rgba(0, 0, 0, 0.1);
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(5px);
+
     min-height: ${({ height }) => height || '100%'};
     z-index: 15;
     .message {
