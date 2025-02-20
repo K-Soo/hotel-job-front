@@ -8,11 +8,11 @@ export function Footer() {
     <S.Footer>
       <div className="container">
         <S.Category>
-          <li className="item">
+          {/* <li className="item">
             <Link href={path.SUPPORT_NOTICE} prefetch={false}>
               고객센터
             </Link>
-          </li>
+          </li> */}
           <li className="item">
             <Link href={path.POLICY_TERMS} prefetch={false}>
               서비스 이용약관

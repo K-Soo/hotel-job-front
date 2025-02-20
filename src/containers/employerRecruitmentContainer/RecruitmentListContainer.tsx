@@ -24,10 +24,15 @@ interface Query extends ParsedUrlQuery {
 
 interface RecruitmentListContainerProps {
   checkedItems: string[];
+  resetCheckedItems: () => void;
   handleClickCheckBoxItem: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-export default function RecruitmentListContainer({ checkedItems, handleClickCheckBoxItem }: RecruitmentListContainerProps) {
+export default function RecruitmentListContainer({
+  checkedItems,
+  handleClickCheckBoxItem,
+  resetCheckedItems,
+}: RecruitmentListContainerProps) {
   const router = useRouter();
   const { page = '1', status = 'all' } = router.query as Query;
 
@@ -64,6 +69,7 @@ export default function RecruitmentListContainer({ checkedItems, handleClickChec
 
   console.log('채용공고 리스트 API : ', data);
 
+  // API - 채용공고 마감
   const fetchCloseRecruitment = async (recruitmentId: string) => {
     setLoadingAtomStatue({ isLoading: true });
     try {
@@ -82,6 +88,7 @@ export default function RecruitmentListContainer({ checkedItems, handleClickChec
   };
 
   const handleCloseRecruitment = async (recruitmentId: string) => {
+    resetCheckedItems();
     setAlertWithConfirmAtom((prev) => ({
       ...prev,
       type: 'CONFIRM',

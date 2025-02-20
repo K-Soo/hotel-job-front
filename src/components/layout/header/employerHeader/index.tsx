@@ -62,7 +62,8 @@ export function EmployerHeader() {
       <nav className="nav-bar">
         <Logo size="small" isEmployer margin="0 90px 0 0" />
         {/* <Link href={path.EMPLOYER}>로그</Link> */}
-        <Link href={path.SUPPORT_NOTICE}>인재풀</Link>
+        {/* TODO - 인재풀 */}
+        {/* <Link href={path.SUPPORT_NOTICE}>인재풀</Link> */}
       </nav>
 
       {!isAuthIdle && !isAuthenticated && (
