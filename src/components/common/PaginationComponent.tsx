@@ -64,15 +64,19 @@ export default function PaginationComponent({ margin, pagination }: PaginationCo
     );
   };
 
+  if (totalPages === 1) return null;
+
   return (
     <S.PaginationComponent $margin={margin}>
       <button className="arrow" disabled={!prevPage} onClick={handleClickPrevArrow}>
-        <Icon
-          name="ArrowRight16x16"
-          width="16px"
-          height="16px"
-          style={{ transform: 'rotate(180deg)', color: prevPage ? '#000' : '#999', cursor: prevPage ? 'pointer' : 'default' }}
-        />
+        {prevPage && (
+          <Icon
+            name="ArrowRight16x16"
+            width="16px"
+            height="16px"
+            style={{ transform: 'rotate(180deg)', color: prevPage ? '#000' : '#999', cursor: prevPage ? 'pointer' : 'default' }}
+          />
+        )}
       </button>
 
       <S.PageNumbers>
@@ -95,12 +99,14 @@ export default function PaginationComponent({ margin, pagination }: PaginationCo
       </S.PageNumbers>
 
       <button className="arrow" disabled={currentPage === totalPages} onClick={handleClickNextArrow}>
-        <Icon
-          name="ArrowRight16x16"
-          width="16px"
-          height="16px"
-          style={{ color: currentPage === totalPages ? '#999' : '#000', cursor: currentPage === totalPages ? 'default' : 'pointer' }}
-        />
+        {currentPage !== totalPages && (
+          <Icon
+            name="ArrowRight16x16"
+            width="16px"
+            height="16px"
+            style={{ color: currentPage === totalPages ? '#999' : '#000', cursor: currentPage === totalPages ? 'default' : 'pointer' }}
+          />
+        )}
       </button>
     </S.PaginationComponent>
   );
@@ -115,6 +121,8 @@ const S = {
     justify-content: center;
     .arrow {
       font-size: 0;
+      width: 16px;
+      height: 16px;
     }
   `,
   PageNumbers: styled.div`
