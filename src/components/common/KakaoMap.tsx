@@ -9,16 +9,17 @@ interface KakaoMapProps {
 }
 
 function KakaoMap({ address, addressDetail }: KakaoMapProps) {
-  const [position, setPosition] = React.useState({ lat: 33.55635, lng: 126.795841 });
+  const [position, setPosition] = React.useState<{ lat: number; lng: number } | null>(null);
   const [isErrorCoordinates, setIsErrorCoordinates] = React.useState(false);
 
   const [loading, error] = useKakaoLoader({
     appkey: environment.kakaoJavascriptKKey,
     libraries: ['services', 'clusterer'],
   });
+  console.log('loading: ', loading);
 
   React.useEffect(() => {
-    if (!window.kakao || !address) return;
+    if (loading || !window.kakao || !address) return;
 
     const geocoder = new kakao.maps.services.Geocoder();
     const fullAddress = `${address}`;
@@ -32,9 +33,9 @@ function KakaoMap({ address, addressDetail }: KakaoMapProps) {
         console.error('주소 변환 실패:', status);
       }
     });
-  }, [address, addressDetail]);
+  }, [address, loading]);
 
-  if (loading) return <></>;
+  if (loading || position === null) return <></>;
 
   if (error || isErrorCoordinates) {
     return null;
