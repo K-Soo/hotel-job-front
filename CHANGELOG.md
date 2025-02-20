@@ -1,6 +1,42 @@
 # 변경 로그
 
 프로젝트의 모든 주요 변경 사항
+## [1.8.0](https://github.com/K-Soo/hotel-job-front/compare/v1.7.0...v1.8.0) (2025-02-20)
+
+
+### Features
+
+* **blacklist:** 블랙리스트 이름 목록 추가 ([d069115](https://github.com/K-Soo/hotel-job-front/commit/d069115c8dbba6003fb44138f88c4031fbefe558))
+* **certification:** 인증 모달 상태 관리 및 사용자 프로필에서 인증하기 버튼 추가 ([899ec74](https://github.com/K-Soo/hotel-job-front/commit/899ec740e24cda460c8bd666dad25ac7222baa2b))
+* **OauthSignUpForm:** 정책 동의 모달 추가 및 전체 동의 체크박스 기능 개선 ([4401b2f](https://github.com/K-Soo/hotel-job-front/commit/4401b2f8dd20c5fd197176abbf594fabf005add6))
+
+
+### Bug Fixes
+
+* **BottomNavigation:** 주석 처리된 인재 버튼 및 스타일 수정 ([cf903b2](https://github.com/K-Soo/hotel-job-front/commit/cf903b2a64a1e78c32efae697422f568b903987f))
+* **EmployerHeader:** 인재풀 링크 주석 처리 및 TODO 추가 ([17d8aee](https://github.com/K-Soo/hotel-job-front/commit/17d8aee2ea75cc55e5db7bf38b4c08e67e33be77))
+* **EmployerRecruitmentContainer:** 체크된 항목 초기화 로직 개선 및 버튼 레이블 수정 ([c350296](https://github.com/K-Soo/hotel-job-front/commit/c3502963f5e73e943d05982a510665d28016f42d))
+* **Footer:** 고객센터 링크 주석 처리 ([68ed4a0](https://github.com/K-Soo/hotel-job-front/commit/68ed4a06a96fa137397fcce30ddbdaef743e9762))
+* **HomeContainer:** 위치 검색 컴포넌트 주석 처리 ([e0ffe4b](https://github.com/K-Soo/hotel-job-front/commit/e0ffe4b19fd05fe43cf5dda627c1032a1ccb65ba))
+* **JobSearch:** 스타일 수정 및 불필요한 주석 제거 ([cb25161](https://github.com/K-Soo/hotel-job-front/commit/cb2516131d6a799c5db1640c52a21ccfa5abef63))
+* **KakaoMap:** 초기 위치 상태를 null로 설정하고 로딩 상태에 따른 조건 추가 ([22e7c84](https://github.com/K-Soo/hotel-job-front/commit/22e7c8464fab57cb9ef016f81e2fba033f66a9ea))
+* **OauthContainer:** 오류 쿼리 파라미터 처리 및 홈으로 리디렉션 추가 ([77f99b9](https://github.com/K-Soo/hotel-job-front/commit/77f99b9e89405fd6c1b45e9f4b0d01e28c30228d))
+* **PaginationComponent:** 페이지가 하나일 경우 Pagination 컴포넌트 숨김 및 화살표 버튼 조건부 렌더링 추가 ([1ffbd9f](https://github.com/K-Soo/hotel-job-front/commit/1ffbd9fc477da52d60f534366e86317a5f83f032))
+* **RecruitContainer:** 위치 검색 컴포넌트 주석 처리 ([7df6e99](https://github.com/K-Soo/hotel-job-front/commit/7df6e992cfb585303cae6b94524cee07881f211b))
+* **RecruitDetailContainer:** 사용자 지원 내역 카운트 쿼리 무효화 추가 ([8959c62](https://github.com/K-Soo/hotel-job-front/commit/8959c621e060220b2892eaf9733c3dfdd59939e9))
+* **RecruitListContainer:** 수정된 메시지 및 Pagination 컴포넌트 여백 추가 ([0fbeb7a](https://github.com/K-Soo/hotel-job-front/commit/0fbeb7a4c7595d5da3a74bbdd419d5ed4aa9f962))
+* **RecruitmentListContainer:** resetCheckedItems 함수 추가 및 체크박스 항목 초기화 로직 개선 ([f69f9b4](https://github.com/K-Soo/hotel-job-front/commit/f69f9b4b1b6aef8fbbbd697a2fcf2cfd60ad5b88))
+* **RecruitMobileCard:** 날짜 형식 처리 및 불필요한 아이콘 박스 제거 ([e2c8896](https://github.com/K-Soo/hotel-job-front/commit/e2c88960c986ef383e7d468275f9d1b03ecac675))
+* **RecruitPage:** MobileNavigation에 제목 추가 ([658244c](https://github.com/K-Soo/hotel-job-front/commit/658244c9c549cc29834f292d9d4e31480e7380b5))
+* **regex:** 사용자 ID 정규 표현식에 소문자 포함 조건 추가 ([8cd38f9](https://github.com/K-Soo/hotel-job-front/commit/8cd38f90ef0507f8472ce3d44af6cc63fea251ee))
+* **UtilityMenu:** 고객센터 링크 주석 처리 ([33a05d7](https://github.com/K-Soo/hotel-job-front/commit/33a05d73d8c590092a346dc6278311e403c8be5b))
+* **validation:** 사용자 ID 검증에 금지된 단어 체크 및 연속된 동일 문자 사용 제한 추가 ([2b7b564](https://github.com/K-Soo/hotel-job-front/commit/2b7b564a7fda76cfd940490a237ccfbd02988434))
+
+
+### Styles
+
+* **LoadingOverlay:** 배경 색상 변경 및 블러 효과 추가 ([f4b050b](https://github.com/K-Soo/hotel-job-front/commit/f4b050b551bf158d3619ace9594f8a33de2230b0))
+
 ## [1.7.0](https://github.com/K-Soo/hotel-job-front/compare/v1.6.0...v1.7.0) (2025-02-19)
 
 
