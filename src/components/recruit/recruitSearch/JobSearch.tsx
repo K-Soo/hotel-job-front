@@ -209,7 +209,21 @@ export default function JobSearch() {
 const S = {
   JobSearch: styled.div`
     position: relative;
+
     ${(props) => props.theme.media.mobile`
+      // border-top-left-radius: 8px;
+      // border-top-right-radius: 8px;
+      border-radius: 8px;
+      padding-left: 15px;
+      height: 50px;
+      // border-top: 1px solid ${props.theme.colors.gray500};
+      // border-left: 1px solid ${props.theme.colors.gray500};
+      // border-right: 1px solid ${props.theme.colors.gray500};
+      border: 1px solid ${props.theme.colors.gray500};
+    `};
+
+    /* TODO - 지역검색 이후 */
+    /* ${(props) => props.theme.media.mobile`
       border-top-left-radius: 8px;
       border-top-right-radius: 8px;
       padding-left: 15px;
@@ -217,7 +231,7 @@ const S = {
       border-top: 1px solid ${props.theme.colors.gray500};
       border-left: 1px solid ${props.theme.colors.gray500};
       border-right: 1px solid ${props.theme.colors.gray500};
-    `};
+    `}; */
   `,
   JobSearchButton: styled(motion.div)`
     height: 100%;
