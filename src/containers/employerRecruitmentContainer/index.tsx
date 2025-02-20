@@ -13,7 +13,6 @@ import { Post } from '@/apis';
 import queryKeys from '@/constants/queryKeys';
 import { useQueryClient } from '@tanstack/react-query';
 import path from '@/constants/path';
-import axios from 'axios';
 interface Query extends ParsedUrlQuery {
   page?: string;
 }
@@ -28,8 +27,10 @@ export default function EmployerRecruitmentContainer() {
 
   const { addToast } = useToast();
 
+  const resetCheckedItems = React.useCallback(() => setCheckedItems([]), []);
+
   React.useEffect(() => {
-    setCheckedItems([]);
+    resetCheckedItems();
   }, [page]);
 
   const handleClickCheckBoxItem = React.useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
@@ -53,7 +54,7 @@ export default function EmployerRecruitmentContainer() {
       subTitle: 'DESC_4',
       cancelLabel: '취소',
       confirmLabel: '삭제',
-      onClickCancel: () => setCheckedItems([]),
+      onClickCancel: () => resetCheckedItems(),
       onClickConfirm: () => fetchRemoveRecruitment(),
     }));
   };
@@ -77,7 +78,7 @@ export default function EmployerRecruitmentContainer() {
       }
       alert('삭제 중 문제가 발생했습니다. 문제가 지속되면 관리자에게 문의하세요.');
     } finally {
-      setCheckedItems([]);
+      resetCheckedItems();
     }
   };
 
@@ -86,13 +87,17 @@ export default function EmployerRecruitmentContainer() {
       <div>
         <SectionTitle title="공고 목록" />
         <RecruitmentStatusBar />
-        <div style={{ display: 'flex', margin: '20px 0' }}>
-          <Button label="공고 삭제" variant="tertiary" width="90px" height="35px" fontSize="14px" onClick={fetchDeleteRecruitment} />
+        <div style={{ display: 'flex', margin: '20px 0', justifyContent: 'flex-end' }}>
+          <Button label="공고 일괄삭제" variant="tertiary" width="100px" height="35px" fontSize="14px" onClick={fetchDeleteRecruitment} />
         </div>
       </div>
 
       <ErrorBoundary fallback={<ErrorComponent height="100%" />}>
-        <RecruitmentListContainer handleClickCheckBoxItem={handleClickCheckBoxItem} checkedItems={checkedItems} />
+        <RecruitmentListContainer
+          handleClickCheckBoxItem={handleClickCheckBoxItem}
+          checkedItems={checkedItems}
+          resetCheckedItems={resetCheckedItems}
+        />
       </ErrorBoundary>
     </EmployerRecruitment>
   );
