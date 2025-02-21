@@ -107,35 +107,25 @@ export default function FormDate<T extends FieldValues>({
   );
 }
 
-const StyledInput = styled.input`
-  width: 100%;
-  height: 40px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  padding: 0 10px;
-  font-size: 14px;
-  &:focus {
-    outline: none;
-    border-color: #5e9ed6;
-  }
-`;
-
 const S = {
   FormDate: styled.div<{ $margin?: string; $width?: string; $maxWidth?: string }>`
     margin: ${(props) => (props.$margin ? props.$margin : '0')};
     width: ${(props) => (props.$width ? props.$width : '100%')};
     max-width: ${(props) => (props.$maxWidth ? props.$maxWidth : '100%')};
+
     .react-datepicker-wrapper {
       border-radius: 5px;
       border: 1px solid ${({ theme }) => theme.colors.gray300};
       width: 100%;
       height: 40px;
       cursor: pointer;
+
       .react-datepicker__input-container {
         width: 100%;
         height: 100%;
         margin: 0;
         overflow: hidden;
+
         input {
           all: unset;
           border: none;
@@ -143,6 +133,7 @@ const S = {
           padding-left: 10px;
           margin: 0;
           height: 100%;
+
           &::placeholder {
             color: ${(props) => props.theme.colors.gray400};
             font-size: 14px;
@@ -171,21 +162,4 @@ const StyledLabel = styled.label<{ required?: boolean }>`
         color: crimson;
       }
     `};
-`;
-
-const StyledDatePicker = styled(DatePicker)`
-  border: 1px solid ${({ theme }) => theme.colors.gray300};
-  height: 40px;
-  width: 100%;
-  max-width: 100%;
-  border-radius: 5px;
-  cursor: pointer;
-  padding-left: 15px;
-  &::placeholder {
-    color: ${(props) => props.theme.colors.gray400};
-    font-size: 14px;
-  }
-  &:disabled {
-    background-color: ${(props) => props.theme.colors.gray100};
-  }
 `;
