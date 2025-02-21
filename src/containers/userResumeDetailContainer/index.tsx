@@ -17,6 +17,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import ResumeProgress from '@/components/common/resume/ResumeProgress';
 import { useResumeContext } from '@/context/ResumeProvider';
 import ResumePreview from '@/components/common/resume/resumePreview';
+import LoadingSpinner from '@/components/common/LoadingSpinner';
 
 export default function UserResumeDetailContainer() {
   const [resumePreviewData, setResumePreviewData] = React.useState<ResumeDetail | null>(null);
@@ -148,7 +149,7 @@ export default function UserResumeDetailContainer() {
   }, [data?.result]);
 
   if (isLoading || isContextLoading) {
-    return <div>loading</div>;
+    return <LoadingSpinner />;
   }
 
   if (isSuccess && data) {
