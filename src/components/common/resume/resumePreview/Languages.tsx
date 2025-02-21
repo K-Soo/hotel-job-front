@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { LANGUAGE_LEVEL, LANGUAGE } from '@/constants/language';
 
 interface LanguagesProps {
-  resumePreviewData: ResumeDetail & ResumeDetailForm;
+  resumePreviewData: ResumeDetail | ResumeDetailForm;
 }
 
 export default function Languages({ resumePreviewData }: LanguagesProps) {
