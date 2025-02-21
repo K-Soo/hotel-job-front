@@ -1,16 +1,17 @@
 import styled from 'styled-components';
 import { useFormContext, useFieldArray } from 'react-hook-form';
-import { LanguageKey, ResumeDetailForm, ResumeRegisterForm, ResumeStatusKey } from '@/types';
+import { ResumeDetailForm } from '@/types';
 import ResumeSection from '@/components/common/resume/ResumeSection';
 import ResumePolicy from '@/components/common/resume/ResumePolicy';
 import ResumeProfileSection from '@/components/common/resume/ResumeProfileSection';
 import ResumeProfileSectionPreview from '@/components/userResumeDetail/ResumeProfileSectionPreview';
 import ResumeExperienceForm from '@/components/common/resume/ResumeExperienceForm';
 import ResumeLicenseForm from '@/components/common/resume/ResumeLicenseForm';
+import ResumeLanguageForm from '@/components/common/resume/ResumeLanguageForm';
 import FormSelect from '@/components/common/form/FormSelect';
 import FormMapSelect from '@/components/common/form/FormMapSelect';
 import FormToggle from '@/components/common/form/FormToggle';
-import { educationConditionLevelOptions, languageOptions, resumeEducationLevelOptions } from '@/constants/options';
+import { resumeEducationLevelOptions } from '@/constants/options';
 import FormArea from '@/components/common/form/FormArea';
 import { LANGUAGE, LANGUAGE_LEVEL } from '@/constants/language';
 import useToast from '@/hooks/useToast';
@@ -29,8 +30,9 @@ interface UserResumeDetailProps {
 
 export default function UserResumeDetail({ children }: UserResumeDetailProps) {
   const { resumeStatus, isEditing } = useResumeContext();
-  const { register, watch, setValue, getValues } = useFormContext<ResumeDetailForm>();
-  const { fields, remove, append } = useFieldArray<ResumeDetailForm>({ name: 'languages' });
+  const { watch, setValue, getValues } = useFormContext<ResumeDetailForm>();
+  const { fields, append } = useFieldArray<ResumeDetailForm>({ name: 'languages' });
+
   const { addToast } = useToast();
 
   const careerLevelValue = watch('careerLevel');
@@ -39,15 +41,18 @@ export default function UserResumeDetail({ children }: UserResumeDetailProps) {
   const languagesValue = watch('languages');
 
   const handleClickAddLanguage = () => {
-    if (fields.length >= 4) {
+    if (languagesValue.length >= 4) {
       return addToast({ message: '최대 4개까지 선택 가능합니다.', type: 'warning' });
     }
-    append({ name: null as any, level: null as any });
+
+    setValue('languages', [...languagesValue, { name: null as any, level: null as any }]);
   };
 
   const handleClickAddLicense = () => {
-    const values = getValues('licenses');
-    setValue('licenses', [...values, { licenseName: '', licenseStage: 'FINAL' }]);
+    if (licensesValue.length >= 10) {
+      return addToast({ message: '최대 10개까지 선택 가능합니다.', type: 'warning' });
+    }
+    setValue('licenses', [...licensesValue, { licenseName: '', licenseStage: 'FINAL' }]);
   };
 
   const handleClickExperiences = () => {
@@ -140,28 +145,11 @@ export default function UserResumeDetail({ children }: UserResumeDetailProps) {
         {/* 외국어 */}
         {isEditing && (
           <ResumeSection title="외국어" handleClickAdd={handleClickAddLanguage} visibleAddButton={isEditing ? true : false}>
-            {fields.map((field, index) => (
-              <div key={field.id} style={{ display: 'flex' }} className="language-item">
-                <FormMapSelect<ResumeDetailForm>
-                  name={`languages.${index}.name`}
-                  options={{ '': '선택', ...LANGUAGE }}
-                  required
-                  maxWidth="180px"
-                  margin="0 15px 15px 0"
-                />
-                <FormMapSelect<ResumeDetailForm>
-                  name={`languages.${index}.level`}
-                  options={{ '': '선택', ...LANGUAGE_LEVEL }}
-                  required
-                  maxWidth="120px"
-                  margin="0 15px 15px 0"
-                />
-              </div>
-            ))}
+            <ResumeLanguageForm />
           </ResumeSection>
         )}
         {!isEditing && languagesValue.length !== 0 && (
-          <ResumeSection title="외국어" handleClickAdd={handleClickAddLanguage} visibleAddButton={isEditing ? true : false}>
+          <ResumeSection title="외국어" visibleAddButton={isEditing ? true : false}>
             <ResumeLanguagesSectionPreview />
           </ResumeSection>
         )}
