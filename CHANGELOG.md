@@ -1,6 +1,47 @@
 # 변경 로그
 
 프로젝트의 모든 주요 변경 사항
+## [1.9.0](https://github.com/K-Soo/hotel-job-front/compare/v1.8.0...v1.9.0) (2025-02-21)
+
+
+### Features
+
+* **ResumeLanguageForm:** 언어 선택 및 수준 선택 기능 추가 ([d1d7cb6](https://github.com/K-Soo/hotel-job-front/commit/d1d7cb6057354154a373977108d1856609edaaef))
+
+
+### Bug Fixes
+
+* **Experience:** resumePreviewData 타입을 ResumeDetail 또는 ResumeDetailForm으로 수정 ([a4a3287](https://github.com/K-Soo/hotel-job-front/commit/a4a32878bc393be00b8e25e4d2d33d8042858b98))
+* **Languages:** resumePreviewData 타입을 ResumeDetail 또는 ResumeDetailForm으로 수정 ([de9fb0e](https://github.com/K-Soo/hotel-job-front/commit/de9fb0e937a82be4fa83c137edadd2b445dabd5c))
+* **License:** resumePreviewData 타입을 ResumeDetail 또는 ResumeDetailForm으로 수정 ([7e03c44](https://github.com/K-Soo/hotel-job-front/commit/7e03c44cebd9d1509691ded679a91f36ed5e35dd))
+* **Profile:** resumePreviewData 타입을 ResumeDetail 또는 ResumeDetailForm으로 수정 ([7b6158e](https://github.com/K-Soo/hotel-job-front/commit/7b6158ef7c2a1a8939f2c75e682dfcd2a6c2d7d1))
+* **ResumeCard:** 수정된 상태에 따라 태그 표시 로직 개선 ([2818bc8](https://github.com/K-Soo/hotel-job-front/commit/2818bc8e669ccfb3bbe6fd1f702c90ea78560a2d))
+* **ResumePreview:** resumePreviewData 타입을 ResumeDetail 또는 ResumeDetailForm으로 수정 ([cdd6b9f](https://github.com/K-Soo/hotel-job-front/commit/cdd6b9f9ccc0d3edad263d0dd779810fb569a5b2))
+* **Summary:** resumePreviewData 타입을 ResumeDetail 또는 ResumeDetailForm으로 수정 ([95dd71c](https://github.com/K-Soo/hotel-job-front/commit/95dd71c72c457ef3349f4e5230f2cc6a61e91c4d))
+* **UserResumeDetailContainer:** resumePreviewData 타입을 ResumeDetailForm으로 수정 및 불필요한 코드 정리 ([5cc76f0](https://github.com/K-Soo/hotel-job-front/commit/5cc76f0410125830e2a1bb1520da9351ee3a5105))
+
+
+### Refactors
+
+* **modal:** useModal 훅 제거 및 관련 코드 정리 ([76538af](https://github.com/K-Soo/hotel-job-front/commit/76538af95888dfada71b2f35840c254e3e306b8f))
+
+
+### Styles
+
+* **colors:** blue30 색상 추가 ([11e9385](https://github.com/K-Soo/hotel-job-front/commit/11e9385e1d0db938c2f29d0dff30e56a9cb76e56))
+* **FormDate:** 스타일 컴포넌트 정리 및 불필요한 코드 제거 ([7b61bac](https://github.com/K-Soo/hotel-job-front/commit/7b61bac702bf339fa35f63ae3faca343047d554c))
+* **FormMapSelect:** 포커스 시 스타일 개선 및 전환 효과 추가 ([0227ee7](https://github.com/K-Soo/hotel-job-front/commit/0227ee7b4ce5e0b1f740344dfc65a7da35d53f01))
+* **FormSelect:** 포커스 시 전환 효과 및 그림자 추가 ([324444c](https://github.com/K-Soo/hotel-job-front/commit/324444c5930000304d6fa625e2e3caeb8ae536bf))
+* **RemoveButton:** 아이콘 추가 및 버튼 스타일 개선 ([96523ae](https://github.com/K-Soo/hotel-job-front/commit/96523aebbbb6fee886d062341722c9a620fcd73d))
+* **ResumeCard:** 기본 이력서 스타일 개선 및 클릭 이벤트 수정 ([3d2e958](https://github.com/K-Soo/hotel-job-front/commit/3d2e95863bb7abe0bc035ae689c35c9e8d49e9b6))
+* **ResumeLicenseForm:** 자격증 입력 폼 스타일 개선 및 레이아웃 수정 ([282ce0d](https://github.com/K-Soo/hotel-job-front/commit/282ce0dcd82d75bef51ba8659a2a62562d571ea2))
+* **ResumeProgress:** 미리보기 버튼의 진행 상태 표시 제거 ([a6ff7e1](https://github.com/K-Soo/hotel-job-front/commit/a6ff7e1bf7e6b3127aec37e417fa7b2f94971511))
+* **ResumeTitleForm:** 반응형 디자인 개선을 위한 폰트 크기 조정 ([583529a](https://github.com/K-Soo/hotel-job-front/commit/583529a857ffe2797b988b539662a61c382eb28b))
+* **Tag:** 태그 컴포넌트 배경 스타일 수정 ([2ff2d75](https://github.com/K-Soo/hotel-job-front/commit/2ff2d75c183eadb2a44918e5cdc3bcb2c96585df))
+* **UserResumeDetail:** 외국어 섹션에 ResumeLanguageForm 추가 및 언어 선택 로직 개선 ([c4c30b3](https://github.com/K-Soo/hotel-job-front/commit/c4c30b397916cc5bfb82731cb9ae2e3d56c4c086))
+* **UserResumeDetailContainer:** 로딩 상태에 따른 스피너 컴포넌트 추가 ([a6e39d2](https://github.com/K-Soo/hotel-job-front/commit/a6e39d290edbef7ed49fac6bdd95bab9e5ba1769))
+* **UserResumeDetailPage:** 로딩 상태에 따른 스피너 추가 및 인증 상태에 따른 조건부 렌더링 개선 ([310d773](https://github.com/K-Soo/hotel-job-front/commit/310d7733ae57385e1c0c939373c7ed249e764657))
+
 ## [1.8.0](https://github.com/K-Soo/hotel-job-front/compare/v1.7.0...v1.8.0) (2025-02-20)
 
 
