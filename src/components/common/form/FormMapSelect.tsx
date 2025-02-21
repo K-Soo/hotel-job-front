@@ -146,7 +146,9 @@ const StyledMotionSelect = styled(motion.select)`
     border: 1px solid ${({ theme }) => theme.colors.blue100};
   }
   &:focus {
+    transition: 0.3s;
     border: 1px solid ${(props) => props.theme.colors.blue500};
+    box-shadow: inset 0 0 0 1px ${(props) => props.theme.colors.blue500};
   }
   &:disabled {
     background-color: ${(props) => props.theme.colors.gray};
