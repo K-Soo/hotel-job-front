@@ -12,25 +12,26 @@ export default function ResumeLicenseForm() {
   return (
     <S.ResumeLicenseForm>
       {fields.map((field, index) => (
-        <div key={field.id} className="license-item">
-          <FormMapSelect<ResumeDetailForm>
-            name={`licenses.${index}.licenseStage`}
-            options={LICENSE_STAGE}
-            required
-            maxWidth="250px"
-            margin="0 0 15px 0"
-          />
-          <div className="license-item__stage">
+        <div key={field.id} className="item">
+          <div className="item__wrapper">
             <FormInput<ResumeDetailForm>
               name={`licenses.${index}.licenseName`}
               placeholder="자격증 명"
               required
-              maxWidth="250px"
-              margin="0 15px 0 0"
-              maxLength={15}
+              maxWidth="200px"
+              maxLength={12}
+              errorPosition="static"
+              margin="0 0 2px 0"
             />
-            <RemoveButton onClick={() => remove(index)} />
+            <FormMapSelect<ResumeDetailForm>
+              name={`licenses.${index}.licenseStage`}
+              options={LICENSE_STAGE}
+              required
+              maxWidth="200px"
+              margin="0"
+            />
           </div>
+          <RemoveButton onClick={() => remove(index)} />
         </div>
       ))}
     </S.ResumeLicenseForm>
@@ -39,19 +40,17 @@ export default function ResumeLicenseForm() {
 
 const S = {
   ResumeLicenseForm: styled.div`
-    .license-item {
+    .item {
       display: flex;
-      flex-direction: column;
+      justify-content: space-between;
       margin-bottom: 15px;
-      &__stage {
+      background-color: ${(props) => props.theme.colors.gray};
+      padding: 10px;
+      border-radius: 5px;
+      &__wrapper {
         width: 100%;
-        display: flex;
-        align-items: center;
-        /* justify-content: space-between; */
+        height: 100%;
       }
-      ${(props) => props.theme.media.mobile`
-        flex-direction: column-reverse;
-      `};
     }
   `,
 };
