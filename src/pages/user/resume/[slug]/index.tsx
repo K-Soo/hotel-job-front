@@ -7,6 +7,7 @@ import useAuth from '@/hooks/useAuth';
 import axios from 'axios';
 import path from '@/constants/path';
 import { ResumeProvider } from '@/context/ResumeProvider';
+import LoadingSpinner from '@/components/common/LoadingSpinner';
 export default function UserResumeDetailPage() {
   const router = useRouter();
   const { authAtomState } = useAuth();
@@ -17,32 +18,29 @@ export default function UserResumeDetailPage() {
       window.location.href = '/user/resume';
       return;
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [authAtomState.certificationStatus]);
 
   // XXX - loading 처리?
-  // if (authAtomState.certificationStatus !== 'VERIFIED') {
-  //   return <div></div>;
-  // }
-
-  if (authAtomState.certificationStatus === 'VERIFIED') {
-    return (
-      <ErrorBoundary
-        onError={(error) => {
-          if (axios.isAxiosError(error)) {
-            if (error.response?.status === 404) {
-              router.replace('/404');
-            }
-          }
-        }}
-        fallback={<ErrorComponent />}
-      >
-        <ResumeProvider>
-          <UserResumeDetailContainer />
-        </ResumeProvider>
-      </ErrorBoundary>
-    );
+  if (authAtomState.certificationStatus !== 'VERIFIED') {
+    return <LoadingSpinner />;
   }
+
+  return (
+    <ErrorBoundary
+      onError={(error) => {
+        if (axios.isAxiosError(error)) {
+          if (error.response?.status === 404) {
+            router.replace('/404');
+          }
+        }
+      }}
+      fallback={<ErrorComponent />}
+    >
+      <ResumeProvider>
+        <UserResumeDetailContainer />
+      </ResumeProvider>
+    </ErrorBoundary>
+  );
 }
 
 UserResumeDetailPage.getLayout = (page: React.ReactElement) => {
