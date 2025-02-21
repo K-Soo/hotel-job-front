@@ -44,9 +44,15 @@ const S = {
       word-break: break-all;
       width: 100%;
       color: ${(props) => props.theme.colors.black300};
-      ${(props) => props.theme.media.mobile`
-        font-size: 20px;
+      ${(props) => props.theme.media.tablet`
+        font-size: 24px;
       `};
+      ${(props) => props.theme.media.mobile`
+        font-size: 18px;
+      `};
+      @media (max-width: 400px) {
+        font-size: 16px;
+      }
     }
   `,
 };
