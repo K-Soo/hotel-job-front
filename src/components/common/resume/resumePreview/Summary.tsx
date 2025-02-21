@@ -2,7 +2,7 @@ import { ResumeDetail, ResumeDetailForm } from '@/types';
 import styled from 'styled-components';
 
 interface SummaryProps {
-  resumePreviewData: ResumeDetail & ResumeDetailForm;
+  resumePreviewData: ResumeDetail | ResumeDetailForm;
 }
 
 export default function Summary({ resumePreviewData }: SummaryProps) {

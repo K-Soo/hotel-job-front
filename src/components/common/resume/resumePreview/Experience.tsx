@@ -5,7 +5,7 @@ import { ALL_JOBS } from '@/constants/job';
 import { POSITION } from '@/constants';
 
 interface ExperienceProps {
-  resumePreviewData: ResumeDetail & ResumeDetailForm;
+  resumePreviewData: ResumeDetail | ResumeDetailForm;
 }
 
 export default function Experience({ resumePreviewData }: ExperienceProps) {

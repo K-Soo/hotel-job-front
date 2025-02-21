@@ -10,12 +10,12 @@ import { parseBirthDateAndCalculateAge } from '@/utils';
 import Image from 'next/image';
 
 interface ProfileProps {
-  resumePreviewData: ResumeDetail & ResumeDetailForm;
+  resumePreviewData: ResumeDetail | ResumeDetailForm;
 }
 
 export default function Profile({ resumePreviewData }: ProfileProps) {
-  const { address, addressDetail, birthday, careerLevel, createdAt, email, languages, name, phone, localCode, sexCode, profileImage } =
-    resumePreviewData;
+  const { address, addressDetail, birthday, careerLevel, email, name, phone, localCode, sexCode, profileImage } = resumePreviewData;
+
   const { age, birthYear } = parseBirthDateAndCalculateAge(birthday);
 
   const { isTablet } = useResponsive();

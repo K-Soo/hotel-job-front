@@ -3,7 +3,7 @@ import { ResumeDetail, ResumeDetailForm } from '@/types';
 import styled from 'styled-components';
 
 interface LicenseProps {
-  resumePreviewData: ResumeDetail & ResumeDetailForm;
+  resumePreviewData: ResumeDetail | ResumeDetailForm;
 }
 
 export default function License({ resumePreviewData }: LicenseProps) {

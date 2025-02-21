@@ -9,11 +9,8 @@ import ResumeExperienceForm from '@/components/common/resume/ResumeExperienceFor
 import ResumeLicenseForm from '@/components/common/resume/ResumeLicenseForm';
 import ResumeLanguageForm from '@/components/common/resume/ResumeLanguageForm';
 import FormSelect from '@/components/common/form/FormSelect';
-import FormMapSelect from '@/components/common/form/FormMapSelect';
-import FormToggle from '@/components/common/form/FormToggle';
 import { resumeEducationLevelOptions } from '@/constants/options';
 import FormArea from '@/components/common/form/FormArea';
-import { LANGUAGE, LANGUAGE_LEVEL } from '@/constants/language';
 import useToast from '@/hooks/useToast';
 import ResumeTitleForm from '@/components/userResumeDetail/ResumeTitleForm';
 import ResumePrevuesNavigation from '@/components/userResumeDetail/ResumePrevuesNavigation';

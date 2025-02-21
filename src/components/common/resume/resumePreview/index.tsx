@@ -14,13 +14,12 @@ import Education from '@/components/common/resume/resumePreview/Education';
 import License from '@/components/common/resume/resumePreview/License';
 import Languages from '@/components/common/resume/resumePreview/Languages';
 interface ResumePreviewProps {
-  resumePreviewData: ResumeDetail & ResumeDetailForm;
+  resumePreviewData: ResumeDetail | ResumeDetailForm;
   closeResume: () => void;
 }
 
 // TODO - 인쇄 스타일 설정
 export default function ResumePreview({ resumePreviewData, closeResume }: ResumePreviewProps) {
-  console.log('resumePreviewData: ', resumePreviewData);
   const contentRef = useRef<HTMLDivElement>(null);
   // const reactToPrintFn = useReactToPrint({ contentRef });
 
@@ -31,6 +30,7 @@ export default function ResumePreview({ resumePreviewData, closeResume }: Resume
           <Icon className="close-icon" name="CloseA24x24" onClick={closeResume} width="45px" height="45px" />
           <div className="preview-container" ref={contentRef}>
             <Profile resumePreviewData={resumePreviewData} />
+
             {resumePreviewData.summary && <Summary resumePreviewData={resumePreviewData} />}
 
             <S.previewSectionTitle>
