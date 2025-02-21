@@ -6,7 +6,6 @@ import { motion } from 'framer-motion';
 import { ResumeListItem, ResumeLstItemApplications } from '@/types';
 import { useRouter } from 'next/router';
 import path from '@/constants/path';
-import useModal from '@/hooks/useModal';
 import Tag from '@/components/common/Tag';
 
 interface ResumeCardProps {
@@ -35,10 +34,10 @@ export default function ResumeCard({ item, handleClickRemoveResume, handleClickS
         </IconHover>
       </S.TopContent>
 
-      <S.BottomContent className="bottom">
+      <S.BottomContent>
         <div className="tags">
+          {item.status !== 'DRAFT' && <Tag label="미완성" type="DRAFT" fontSize="13px" margin="0 5px 0 0" />}
           {item.isDefault && <Tag label="기본 이력서" type="DEFAULT_RESUME" fontSize="13px" />}
-          {item.status === 'DRAFT' && <Tag label="미완성" type="DRAFT" fontSize="13px" />}
         </div>
 
         {item.applicationsCount !== 0 && (
@@ -96,6 +95,10 @@ const S = {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    .tags {
+      display: flex;
+      align-items: center;
+    }
     .history {
       cursor: pointer;
       font-size: 13px;
