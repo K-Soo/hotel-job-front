@@ -10,7 +10,7 @@ export default function ResumeProgress({ handleClickPreview }: ResumeProgressPro
 
   return (
     <S.ResumeProgress>
-      {isEditing && <div className="progress-container"></div>}
+      {/* {isEditing && <div className="progress-container"></div>} */}
       <Button
         height="45px"
         label="이력서 미리보기"
