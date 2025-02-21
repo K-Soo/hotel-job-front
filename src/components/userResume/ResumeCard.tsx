@@ -6,7 +6,6 @@ import { motion } from 'framer-motion';
 import { ResumeListItem, ResumeLstItemApplications } from '@/types';
 import { useRouter } from 'next/router';
 import path from '@/constants/path';
-import useModal from '@/hooks/useModal';
 import Tag from '@/components/common/Tag';
 
 interface ResumeCardProps {
@@ -20,29 +19,33 @@ export default function ResumeCard({ item, handleClickRemoveResume, handleClickS
   const router = useRouter();
 
   return (
-    <S.ResumeCard>
+    <S.ResumeCard $isDefault={item.isDefault} onClick={() => router.push(`${path.USER_RESUME}/${item.id}`)}>
       <S.TopContent>
-        <h4 className="title" onClick={() => router.push(`${path.USER_RESUME}/${item.id}`)}>
-          {item.title}
-        </h4>
+        <h4 className="title">{item.title}</h4>
         <IconHover
           onClick={(event) => {
             event.stopPropagation();
             handleClickRemoveResume(item);
           }}
         >
-          <Icon name="Dots24x24" width="18px" height="18px" style={{ transform: 'rotate(90deg)', color: '#555' }} />
+          <Icon name="Dots24x24" width="18px" height="18px" style={{ transform: 'rotate(90deg)', color: '#b0b8c1' }} />
         </IconHover>
       </S.TopContent>
 
-      <S.BottomContent className="bottom">
+      <S.BottomContent>
         <div className="tags">
+          {item.status === 'DRAFT' && <Tag label="미완성" type="DRAFT" fontSize="13px" margin="0 5px 0 0" />}
           {item.isDefault && <Tag label="기본 이력서" type="DEFAULT_RESUME" fontSize="13px" />}
-          {item.status === 'DRAFT' && <Tag label="미완성" type="DRAFT" fontSize="13px" />}
         </div>
 
         {item.applicationsCount !== 0 && (
-          <button className="history" onClick={() => handleClickSelectedApplications(item.applications)}>
+          <button
+            className="history"
+            onClick={(event) => {
+              event.stopPropagation();
+              handleClickSelectedApplications(item.applications);
+            }}
+          >
             입사 지원내역 {item.applicationsCount}건
           </button>
         )}
@@ -52,9 +55,10 @@ export default function ResumeCard({ item, handleClickRemoveResume, handleClickS
 }
 
 const S = {
-  ResumeCard: styled(motion.div)`
+  ResumeCard: styled(motion.div)<{ $isDefault: boolean }>`
     border: 1px solid ${({ theme }) => theme.colors.gray200};
     color: ${({ theme }) => theme.colors.gray500};
+    background-color: ${(props) => (props.$isDefault ? props.theme.colors.blue : props.theme.colors.white)};
     border-radius: 15px;
     padding: 15px;
     min-height: 120px;
@@ -62,11 +66,12 @@ const S = {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    cursor: pointer;
     &:last-child {
       margin-bottom: 0;
     }
     &:hover {
-      border: 1px solid ${({ theme }) => theme.colors.gray300};
+      border: 1px solid ${({ theme }) => theme.colors.blue200};
     }
   `,
   TopContent: styled.div`
@@ -96,6 +101,10 @@ const S = {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    .tags {
+      display: flex;
+      align-items: center;
+    }
     .history {
       cursor: pointer;
       font-size: 13px;

@@ -161,6 +161,7 @@ const S = {
       css`
         color: ${(props) => props.theme.colors.red300};
         border: none;
+        background: none;
       `};
   `,
 };

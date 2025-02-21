@@ -1,45 +1,42 @@
-import styled from 'styled-components';
 import { ResumeDetailForm } from '@/types';
-import FormInput from '@/components/common/form/FormInput';
-import { useFieldArray } from 'react-hook-form';
+import styled from 'styled-components';
 import FormMapSelect from '@/components/common/form/FormMapSelect';
-import { LICENSE_STAGE } from '@/constants/resume';
+import { useFieldArray } from 'react-hook-form';
+import { LANGUAGE, LANGUAGE_LEVEL } from '@/constants/language';
 import RemoveButton from '@/components/common/style/RemoveButton';
 
-export default function ResumeLicenseForm() {
-  const { fields, remove } = useFieldArray<ResumeDetailForm>({ name: 'licenses' });
+export default function ResumeLanguageForm() {
+  const { fields, remove } = useFieldArray<ResumeDetailForm>({ name: 'languages' });
+  console.log('@@: ', fields);
 
   return (
-    <S.ResumeLicenseForm>
+    <S.ResumeLanguageForm>
       {fields.map((field, index) => (
-        <div key={field.id} className="item">
+        <div key={field.id} style={{ display: 'flex' }} className="item">
           <div className="item__wrapper">
-            <FormInput<ResumeDetailForm>
-              name={`licenses.${index}.licenseName`}
-              placeholder="자격증 명"
+            <FormMapSelect<ResumeDetailForm>
+              name={`languages.${index}.name`}
+              options={{ '': '선택', ...LANGUAGE }}
               required
               maxWidth="200px"
-              maxLength={12}
-              errorPosition="static"
-              margin="0 0 2px 0"
+              margin="0 0 15px 0"
             />
             <FormMapSelect<ResumeDetailForm>
-              name={`licenses.${index}.licenseStage`}
-              options={LICENSE_STAGE}
+              name={`languages.${index}.level`}
+              options={{ '': '선택', ...LANGUAGE_LEVEL }}
               required
               maxWidth="200px"
-              margin="0"
             />
           </div>
           <RemoveButton onClick={() => remove(index)} />
         </div>
       ))}
-    </S.ResumeLicenseForm>
+    </S.ResumeLanguageForm>
   );
 }
 
 const S = {
-  ResumeLicenseForm: styled.div`
+  ResumeLanguageForm: styled.div`
     .item {
       display: flex;
       justify-content: space-between;

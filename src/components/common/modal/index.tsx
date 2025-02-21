@@ -3,7 +3,6 @@ import { ModalHeader } from '@/components/common/modal/ModalHeader';
 import { ModalFooter } from '@/components/common/modal/ModalFooter';
 import Portal from '@/components/common/Portal';
 import Background from '@/components/common/Background';
-import useModal from '@/hooks/useModal';
 
 interface ModalProps {
   width?: string;

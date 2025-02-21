@@ -14,7 +14,6 @@ import Modal from '@/components/common/modal';
 import dynamic from 'next/dynamic';
 import useResponsive from '@/hooks/useResponsive';
 import RecruitDetailBottomNavigation from '@/components/recruitDetail/RecruitDetailBottomNavigation';
-import useModal from '@/hooks/useModal';
 
 interface useFetchApplyCheckProps {
   recruitmentId: string | undefined;

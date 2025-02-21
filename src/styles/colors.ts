@@ -16,6 +16,7 @@ const colors = {
   icon100: '#1C274D', //active
 
   blue: '#fbfdff',
+  blue30: 'rgba(0, 102, 255, .02)',
   blue50: '#e8f3ff',
   blue100: '#c9e2ff',
   blue200: '#90c2ff',

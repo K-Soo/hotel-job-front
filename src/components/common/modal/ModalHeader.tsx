@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import Icon from '@/icons/Icon';
-import useModal from '@/hooks/useModal';
 import useResponsive from '@/hooks/useResponsive';
 import IconHover from '@/components/common/IconHover';
 

@@ -8,8 +8,7 @@ import useAuth from '@/hooks/useAuth';
 import { useRouter } from 'next/router';
 import useAlertWithConfirm from '@/hooks/useAlertWithConfirm';
 import { certificationModalAtom } from '@/recoil/certification';
-import { useRecoilState } from 'recoil';
-import dynamic from 'next/dynamic';
+import { useSetRecoilState } from 'recoil';
 import { Post } from '@/apis';
 import queryKeys from '@/constants/queryKeys';
 import { useQueryClient } from '@tanstack/react-query';
@@ -18,10 +17,8 @@ import { ErrorBoundary, ErrorComponent } from '@/error';
 import { errorCode } from '@/error';
 import { GetResumeListResponse } from '@/types/API';
 
-// const DynamicNoSSRCertificationModal = dynamic(() => import('@/components/common/CertificationModal'), { ssr: false });
-
 export default function UserResumeContainer() {
-  const [certificationModalAtomState, setCertificationModalAtomState] = useRecoilState(certificationModalAtom);
+  const setCertificationModalAtom = useSetRecoilState(certificationModalAtom);
   const router = useRouter();
   const { setAlertWithConfirmAtom } = useAlertWithConfirm();
   const { addToast } = useToast();
@@ -35,7 +32,7 @@ export default function UserResumeContainer() {
         type: 'CONFIRM',
         title: 'TITLE_1',
         subTitle: 'DESC_6',
-        onClickConfirm: () => setCertificationModalAtomState({ isOpen: true }),
+        onClickConfirm: () => setCertificationModalAtom({ isOpen: true }),
         confirmLabel: '인증하기',
         cancelLabel: '취소',
       }));
@@ -72,7 +69,6 @@ export default function UserResumeContainer() {
 
   return (
     <>
-      {/* {certificationModalAtomState.isOpen && <DynamicNoSSRCertificationModal />} */}
       <UserResume>
         <UserTemplate>
           <UserTitle title="내 이력서" />
