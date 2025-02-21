@@ -6,7 +6,6 @@ import { useRouter } from 'next/router';
 import dynamic from 'next/dynamic';
 import useResponsive from '@/hooks/useResponsive';
 import Modal from '@/components/common/modal';
-import useModal from '@/hooks/useModal';
 import Button from '@/components/common/style/Button';
 import { LOCATION, CITY } from '@/constants/location';
 import path from '@/constants/path';

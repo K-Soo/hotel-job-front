@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import Button from '@/components/common/style/Button';
-import useModal from '@/hooks/useModal';
 import useAuth from '@/hooks/useAuth';
 import { useRouter } from 'next/router';
 import path from '@/constants/path';
@@ -16,7 +15,6 @@ export default function RecruitDetailBottomNavigation({
   recruitmentStatus,
   setIsOpenModal,
 }: RecruitDetailBottomNavigationProps) {
-  const { setModalAtomState } = useModal();
   const { isAuthenticated, role } = useAuth();
   const router = useRouter();
 

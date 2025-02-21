@@ -14,7 +14,6 @@ import Modal from '@/components/common/modal';
 import dynamic from 'next/dynamic';
 import useResponsive from '@/hooks/useResponsive';
 import RecruitDetailBottomNavigation from '@/components/recruitDetail/RecruitDetailBottomNavigation';
-import useModal from '@/hooks/useModal';
 import useFetchApplyCheck from '@/hooks/useFetchApplyCheck';
 
 const DynamicNoSSRModal = dynamic(() => import('@/components/common/modal'), { ssr: false });
@@ -25,7 +24,6 @@ export default function RecruitDetailContainer() {
   const [applyStatus, setApplyStatus] = React.useState<'available' | 'duplicate' | 'idle'>('idle');
   const [isOpenModal, setIsOpenModal] = React.useState(false);
 
-  const { modalAtomState } = useModal();
   const { isTablet } = useResponsive();
   const { isAuthenticated, role } = useAuth();
   const { addToast } = useToast();

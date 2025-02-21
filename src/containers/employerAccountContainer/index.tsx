@@ -3,7 +3,6 @@ import EmployerAccount from '@/components/employerAccount';
 import queryKeys from '@/constants/queryKeys';
 import { Get } from '@/apis';
 import useFetchQuery from '@/hooks/useFetchQuery';
-import CertificationModal from '@/components/common/CertificationModal';
 import { useRecoilState } from 'recoil';
 import { certificationModalAtom } from '@/recoil/certification';
 import SectionTitle from '@/components/common/employer/SectionTitle';
@@ -19,7 +18,6 @@ const DynamicNoSSRModal = dynamic(() => import('@/components/common/modal'), { s
 
 export default function EmployerAccountContainer() {
   const [isOpenNicknameModal, setIsOpenNicknameModal] = React.useState(false);
-  const [certificationModalAtomState, setCertificationModalAtomState] = useRecoilState(certificationModalAtom);
 
   const { authAtomState } = useAuth();
 
@@ -49,8 +47,6 @@ export default function EmployerAccountContainer() {
   if (isSuccess && data) {
     return (
       <>
-        {/* {certificationModalAtomState.isOpen && <CertificationModal />} */}
-
         {isOpenNicknameModal && (
           <DynamicNoSSRModal handleCloseModal={handleCloseModal}>
             <Modal.Header title="닉네임 변경" handleCloseModal={handleCloseModal} />

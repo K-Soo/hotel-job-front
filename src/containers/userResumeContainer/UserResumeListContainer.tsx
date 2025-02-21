@@ -11,7 +11,6 @@ import { useQueryClient } from '@tanstack/react-query';
 import { ResumeListItem, ResumeLstItemApplications } from '@/types';
 import useLoading from '@/hooks/useLoading';
 import Modal from '@/components/common/modal';
-import useModal from '@/hooks/useModal';
 import EmptyComponent from '@/components/common/EmptyComponent';
 import SkeletonUI from '@/components/common/SkeletonUI';
 
@@ -23,7 +22,6 @@ export default function UserResumeListContainer() {
   const { setLoadingAtomStatue } = useLoading();
   const { addToast } = useToast();
   const { authAtomState } = useAuth();
-  const { modalAtomState, setModalAtomState } = useModal();
   const queryClient = useQueryClient();
 
   const { data, isLoading, isSuccess } = useFetchQuery({
@@ -39,10 +37,10 @@ export default function UserResumeListContainer() {
   console.log('이력서 리스트 API : ', data);
 
   React.useEffect(() => {
-    if (!modalAtomState.isOpen) {
+    if (!isOpenModal) {
       setSelectedSelectedResume([]);
     }
-  }, [modalAtomState.isOpen]);
+  }, [isOpenModal]);
 
   const handleCloseModal = () => setIsOpenModal(false);
 

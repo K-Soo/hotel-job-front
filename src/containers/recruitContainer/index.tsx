@@ -9,14 +9,9 @@ import RecruitUrgentListContainer from '@/containers/recruitContainer/RecruitUrg
 import RecruitSpecialListContainer from '@/containers/recruitContainer/RecruitSpecialListContainer';
 import Line from '@/components/common/Line';
 import { ErrorBoundary, ErrorComponent } from '@/error';
-import useModal from '@/hooks/useModal';
 
 export default function RecruitContainer() {
-  const { modalAtomState, setModalAtomState } = useModal();
-
-  const handleClickFilterButton = (event: React.MouseEvent<HTMLButtonElement>) => {
-    setModalAtomState({ isOpen: true });
-  };
+  const handleClickFilterButton = (event: React.MouseEvent<HTMLButtonElement>) => {};
 
   return (
     <>
