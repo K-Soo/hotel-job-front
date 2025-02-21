@@ -20,13 +20,17 @@ import ResumePreview from '@/components/common/resume/resumePreview';
 import LoadingSpinner from '@/components/common/LoadingSpinner';
 
 export default function UserResumeDetailContainer() {
-  const [resumePreviewData, setResumePreviewData] = React.useState<ResumeDetail | null>(null);
+  const [resumePreviewData, setResumePreviewData] = React.useState<ResumeDetailForm | null>(null);
+  const [isDisabled, setIsDisabled] = React.useState(false);
+
+  const queryClient = useQueryClient();
+
   const router = useRouter();
   const { slug } = router.query;
+
   const { authAtomState } = useAuth();
   const { addToast } = useToast();
-  const queryClient = useQueryClient();
-  const [isDisabled, setIsDisabled] = React.useState(false);
+
   const { setResumeStatus, isContextLoading, setIsContextLoading, setIsEditing } = useResumeContext();
 
   const methods = useForm<ResumeDetailForm>({
@@ -85,39 +89,37 @@ export default function UserResumeDetailContainer() {
   }, [data]);
 
   React.useEffect(() => {
-    if (isSuccess && data) {
-      // if (isSuccess && data) {
-      //   methods.reset(data.result); // 한 번에 설정
-      // }
+    if (!(isSuccess && data)) {
+      return;
+    }
 
-      methods.setValue('title', data.result.title);
-      methods.setValue('careerLevel', data.result.careerLevel);
+    methods.setValue('title', data.result.title);
+    methods.setValue('careerLevel', data.result.careerLevel);
 
-      methods.setValue('profileImage', data.result.profileImage);
+    methods.setValue('profileImage', data.result.profileImage);
 
-      methods.setValue('name', data.result.name);
-      methods.setValue('localCode', data.result.localCode);
-      methods.setValue('birthday', data.result.birthday);
-      methods.setValue('education', data.result.education);
-      methods.setValue('email', data.result.email);
-      methods.setValue('sexCode', data.result.sexCode);
-      methods.setValue('phone', data.result.phone);
-      methods.setValue('summary', data.result.summary);
-      methods.setValue('address', data.result.address);
-      methods.setValue('addressDetail', data.result.addressDetail);
+    methods.setValue('name', data.result.name);
+    methods.setValue('localCode', data.result.localCode);
+    methods.setValue('birthday', data.result.birthday);
+    methods.setValue('education', data.result.education);
+    methods.setValue('email', data.result.email);
+    methods.setValue('sexCode', data.result.sexCode);
+    methods.setValue('phone', data.result.phone);
+    methods.setValue('summary', data.result.summary);
+    methods.setValue('address', data.result.address);
+    methods.setValue('addressDetail', data.result.addressDetail);
 
-      methods.setValue('isRequiredAgreement', data.result.isRequiredAgreement);
-      methods.setValue('isOptionalAgreement', data.result.isOptionalAgreement);
+    methods.setValue('isRequiredAgreement', data.result.isRequiredAgreement);
+    methods.setValue('isOptionalAgreement', data.result.isOptionalAgreement);
 
-      if (data.result.experience && Array.isArray(data.result.experience)) {
-        methods.setValue('experience', data.result.experience);
-      }
-      if (data.result.licenses && Array.isArray(data.result.licenses)) {
-        methods.setValue('licenses', data.result.licenses);
-      }
-      if (data.result.languages && Array.isArray(data.result.languages)) {
-        methods.setValue('languages', data.result.languages);
-      }
+    if (data.result.experience && Array.isArray(data.result.experience)) {
+      methods.setValue('experience', data.result.experience);
+    }
+    if (data.result.licenses && Array.isArray(data.result.licenses)) {
+      methods.setValue('licenses', data.result.licenses);
+    }
+    if (data.result.languages && Array.isArray(data.result.languages)) {
+      methods.setValue('languages', data.result.languages);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isSuccess, data]);
@@ -125,11 +127,9 @@ export default function UserResumeDetailContainer() {
   const onSubmit: SubmitHandler<ResumeDetailForm> = async (data) => {
     setIsDisabled(true);
     try {
-      const response = await Post.publishResume({
-        ...data,
-        id: slug as string,
-      });
+      const response = await Post.publishResume({ ...data, id: slug as string });
       console.log('이력서 작성완료 API : ', response);
+
       addToast({ type: 'success', message: '이력서가 등록되었습니다.' });
       await queryClient.invalidateQueries({ queryKey: [queryKeys.RESUME_DETAIL], refetchType: 'all' });
       await queryClient.invalidateQueries({ queryKey: [queryKeys.RESUME_LIST], refetchType: 'all' });
@@ -141,12 +141,10 @@ export default function UserResumeDetailContainer() {
   };
 
   const handleClickPreview = React.useCallback(() => {
-    if (data?.result) {
-      const values = methods.watch();
-
-      setResumePreviewData(data.result);
-    }
-  }, [data?.result]);
+    const values = methods.watch();
+    setResumePreviewData(values);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   if (isLoading || isContextLoading) {
     return <LoadingSpinner />;
