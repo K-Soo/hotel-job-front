@@ -389,7 +389,8 @@ export const Post = {
 
   // *************************************** PUSH  ***************************************
   // FCM 토큰 저장
-  saveFcmToken: (body: API.SaveFcmTokenRequest) => requests.post<API.SaveFcmTokenRequest, API.SaveFcmTokenResponse>('/push/token', body),
+  saveFcmToken: (body: API.SaveFcmTokenRequest) =>
+    requests.post<API.SaveFcmTokenRequest, API.SaveFcmTokenResponse>('/notifications/push/token', body),
 
   // *************************************** EMPLOYER PAYMENT  ***************************************
   // TODO - type 정의
