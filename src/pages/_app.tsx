@@ -8,15 +8,14 @@ import React from 'react';
 import GuardComponent from '@/auth/GuardComponent';
 import EmployerGuardComponent from '@/auth/EmployerGuardComponent';
 import AuthenticationComponent from '@/auth/AuthenticationComponent';
-import AppComponent from '@/auth/AppComponent';
 import environment from '@/environment';
-import Maintenance from '@/components/common/Maintenance';
-import { Footer } from '@/components/layout';
-import { useRouter } from 'next/router';
-import path from '@/constants/path';
+// import Maintenance from '@/components/common/Maintenance';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import Head from 'next/head';
+import dynamic from 'next/dynamic';
 import '@/recoil';
+
+const DynamicNoSSRAppComponent = dynamic(() => import('@/auth/AppComponent'), { ssr: false });
 
 const commonLayout = (page: React.ReactElement) => <Layout>{page}</Layout>;
 
@@ -34,7 +33,6 @@ const queryClientDefaultOption = {
 
 export default function App({ Component, pageProps }: AppPropsWithLayout) {
   const getLayout = Component.getLayout ?? commonLayout;
-  const router = useRouter();
 
   const [queryClient] = React.useState(() => new QueryClient(queryClientDefaultOption));
 
@@ -44,12 +42,12 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport" />
         <meta name="format-detection" content="telephone=no" />
       </Head>
+      <SpeedInsights />
       <AppThemeProvider>
-        <SpeedInsights />
         <RecoilRoot>
           <QueryClientProvider client={queryClient}>
             <AuthenticationComponent />
-            <AppComponent />
+            <DynamicNoSSRAppComponent />
             {!Component.authentication && getLayout(<Component {...pageProps} />)}
 
             {Component.authentication &&
