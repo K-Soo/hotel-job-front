@@ -19,9 +19,9 @@ messaging.onBackgroundMessage((payload) => {
 
   const notificationOptions = {
     body: payload.notification.body,
-    icon: '/icons/icon-192x192.png',
+    icon: '/icons/icon-72x72.png',
     data: {
-      url: link,
+      data: { url: link },
     },
   };
 
@@ -29,9 +29,24 @@ messaging.onBackgroundMessage((payload) => {
 });
 
 self.addEventListener('notificationclick', (event) => {
-  console.log('notificationclick 이벤트 발생: ', event);
   event.notification.close();
 
-  const url = event.notification.data.url;
-  event.waitUntil(clients.openWindow(url));
+  event.waitUntil(
+    clients.matchAll({ type: 'window', includeUncontrolled: true }).then(function (clientList) {
+      const url = event.notification.data.url;
+
+      if (!url) return;
+
+      for (const client of clientList) {
+        if (client.url === url && 'focus' in client) {
+          return client.focus();
+        }
+      }
+
+      if (clients.openWindow) {
+        console.log('OPENWINDOW ON CLIENT');
+        return clients.openWindow(url);
+      }
+    }),
+  );
 });
