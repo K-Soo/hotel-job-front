@@ -13,10 +13,10 @@ export default function HomePage() {
     <>
       {isMobile && <A2HS />}
       <HomeContainer />
-      <div>
+      {/* <div>
         <p>{JSON.stringify(notificationPermissionStatus)}</p>
         <p>{JSON.stringify(token)}</p>
-      </div>
+      </div> */}
     </>
   );
 }
