@@ -1,10 +1,11 @@
 import React from 'react';
 import { fetchToken, messaging } from '@/lib/firebase-client';
-import { onMessage } from 'firebase/messaging';
+import { onMessage, getMessaging } from 'firebase/messaging';
 import environment from '@/environment';
 import { Post } from '@/apis';
 import { appAtom } from '@/recoil/app';
 import { useRecoilValue } from 'recoil';
+import { useRouter } from 'next/router';
 
 async function requestNotificationPermissionAndToken() {
   if (!('Notification' in window)) {
@@ -36,6 +37,7 @@ export default function useRequestFCMPermission({ isAuthenticated }: useRequestF
   const appAtomValue = useRecoilValue(appAtom);
   const isLoading = React.useRef(false);
   const retryLoadToken = React.useRef(0);
+  const router = useRouter();
 
   React.useEffect(() => {
     async function initialize() {
@@ -96,19 +98,39 @@ export default function useRequestFCMPermission({ isAuthenticated }: useRequestF
     if (isAuthenticated) {
       initialize();
     }
-  }, [isAuthenticated]);
+  }, [appAtomValue.isPWA, isAuthenticated]);
 
   React.useEffect(() => {
     const setupListener = async () => {
       if (!token) return;
+
       const getMessaging = await messaging();
       if (!getMessaging) return;
 
-      console.log(`onMessage 리스너 등록됨 ${token}`);
-
       const unsubscribe = onMessage(getMessaging, (payload) => {
-        console.log('@@@@@@@@@@@@@@@@: ', payload);
-        if (Notification.permission !== 'granted') return;
+        console.log('Foreground 푸시 알림 수신:', payload);
+
+        if (Notification.permission !== 'granted') {
+          console.info('알림 표시 권한 없음.');
+          return;
+        }
+
+        const link = payload.fcmOptions?.link || payload.data?.link;
+        console.log('link: ', link);
+
+        const notification = new Notification(payload.notification?.title || '새로운 메세지', {
+          body: payload.notification?.body || '',
+          data: link ? { url: link } : undefined,
+          icon: '/icons/icon-192x192.png',
+        });
+
+        notification.onclick = (event) => {
+          event.preventDefault();
+          const link = (event.target as any)?.data?.url;
+          if (link) {
+            router.push(link);
+          }
+        };
       });
 
       return unsubscribe;
@@ -123,5 +145,7 @@ export default function useRequestFCMPermission({ isAuthenticated }: useRequestF
     });
 
     return () => unsubscribe?.();
-  }, [token]);
+  }, [router, token]);
+
+  console.log('notificationPermissionStatus: ', notificationPermissionStatus);
 }

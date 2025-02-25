@@ -2,15 +2,16 @@ importScripts('https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js'
 importScripts('https://www.gstatic.com/firebasejs/10.7.1/firebase-messaging-compat.js');
 
 firebase.initializeApp({
-  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
-  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
-  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
-  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
-  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
+  apiKey: 'AIzaSyBUK1DafcLVaE9O0pLOyF28oTrqTGwGisI',
+  authDomain: 'hotel-job-41787.firebaseapp.com"',
+  projectId: 'hotel-job-41787',
+  storageBucket: 'hotel-job-41787.firebasestorage.app',
+  messagingSenderId: '1096073443624',
+  appId: '1:1096073443624:web:ca7d1c90030b2ba7e4381d',
 });
 
 const messaging = firebase.messaging();
+console.log('!!: ', messaging);
 
 messaging.onBackgroundMessage((payload) => {
   console.log('백그라운드 푸시 알림 수신: ', payload);
