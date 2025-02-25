@@ -40,13 +40,15 @@ export default function useRequestFCMPermission({ isAuthenticated }: useRequestF
   const router = useRouter();
 
   React.useEffect(() => {
+    console.log('@@@@@@@@: ', Notification.permission);
+
     if (!('serviceWorker' in navigator)) {
       alert('서비스 워커 미지원');
       console.info('서비스 워커를 지원하지 않음');
     }
 
     if ('serviceWorker' in navigator) {
-      alert('서비스 워커! 지원');
+      // alert('서비스 워커! 지원');
       console.info('서비스 워커를 지원하지 않음');
     }
 
@@ -62,18 +64,20 @@ export default function useRequestFCMPermission({ isAuthenticated }: useRequestF
 
   React.useEffect(() => {
     async function initialize() {
+      // IOS PWA(safari, chrome) 지원
       if (!('Notification' in window)) {
         console.info('알림 지원 브라우저가 아님');
         return;
       }
 
-      if (typeof window === 'undefined' || typeof navigator === 'undefined') {
-        console.info('클라이언트 환경이 아님');
+      // PROD ios(safari, chrome)지원
+      if (!('serviceWorker' in navigator)) {
+        console.info('서비스 워커를 지원하지 않음');
         return;
       }
 
-      if (!('serviceWorker' in navigator)) {
-        console.info('서비스 워커를 지원하지 않음');
+      if (typeof window === 'undefined' || typeof navigator === 'undefined') {
+        console.info('클라이언트 환경이 아님');
         return;
       }
 
@@ -137,7 +141,6 @@ export default function useRequestFCMPermission({ isAuthenticated }: useRequestF
         }
 
         const link = payload.fcmOptions?.link || payload.data?.link;
-        console.log('link: ', link);
 
         const notification = new Notification(payload.notification?.title || '새로운 메세지', {
           body: payload.notification?.body || '',
@@ -168,5 +171,5 @@ export default function useRequestFCMPermission({ isAuthenticated }: useRequestF
     return () => unsubscribe?.();
   }, [router, token]);
 
-  console.log('notificationPermissionStatus: ', notificationPermissionStatus);
+  return { notificationPermissionStatus, token };
 }

@@ -10,7 +10,9 @@ import Icon from '@/icons/Icon';
 
 const TWENTY_FOUR_HOURS_IN_MILLISECONDS = 24 * 60 * 60 * 1000; // 24시간
 
-// mobile only
+/**
+ * @description mobile only - beforeinstallprompt ios 미지원
+ */
 export default function A2HS() {
   const [visiblePopUp, setVisiblePopUp] = React.useState<'IDLE' | 'ON' | 'OFF'>('IDLE');
 

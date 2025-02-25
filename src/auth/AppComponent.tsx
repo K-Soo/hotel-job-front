@@ -27,7 +27,12 @@ export default function AppComponent() {
 
   console.log('appAtomState: ', appAtomState);
 
-  useRequestFCMPermission({ isAuthenticated });
+  const { notificationPermissionStatus, token } = useRequestFCMPermission({ isAuthenticated });
 
-  return <></>;
+  return (
+    <div>
+      <p>{JSON.stringify(notificationPermissionStatus)}</p>
+      <p>{JSON.stringify(token)}</p>
+    </div>
+  );
 }
