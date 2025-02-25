@@ -8,6 +8,7 @@
     "dev": "env-cmd -e development next dev",
     "build": "next build",
     "build:local": "env-cmd -e local next build",
+    "build:prod": "env-cmd -e production next build",
     "start": "next start",
     "lint": "next lint",
     "release": "standard-version"
