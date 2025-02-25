@@ -1,15 +1,17 @@
 import Layout, { Header, Footer, Main, DesktopNavigation, MobileNavigation } from '@/components/layout';
 import HomeContainer from '@/containers/homeContainer';
 import BottomNavigation from '@/components/layout/BottomNavigation';
-import environment from '@/environment';
-import Maintenance from '@/components/common/Maintenance';
-
+import A2HS from '@/components/common/A2HS';
+import useResponsive from '@/hooks/useResponsive';
 export default function HomePage() {
-  // if (environment.isProd) {
-  //   return <Maintenance />;
-  // }
+  const { isMobile } = useResponsive();
 
-  return <HomeContainer />;
+  return (
+    <>
+      {isMobile && <A2HS />}
+      <HomeContainer />
+    </>
+  );
 }
 
 HomePage.getLayout = (page: React.ReactElement) => {
