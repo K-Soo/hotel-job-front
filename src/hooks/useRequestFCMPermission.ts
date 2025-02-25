@@ -41,9 +41,16 @@ export default function useRequestFCMPermission({ isAuthenticated }: useRequestF
 
   React.useEffect(() => {
     if (!('serviceWorker' in navigator)) {
+      alert('서비스 워커 미지원');
       console.info('서비스 워커를 지원하지 않음');
     }
 
+    if ('serviceWorker' in navigator) {
+      alert('서비스 워커! 지원');
+      console.info('서비스 워커를 지원하지 않음');
+    }
+
+    // IOS PWA(safari, chrome) 지원
     if (!('Notification' in window)) {
       console.info('알림 지원 브라우저가 아님');
     }
