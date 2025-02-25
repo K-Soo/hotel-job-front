@@ -3,13 +3,20 @@ import HomeContainer from '@/containers/homeContainer';
 import BottomNavigation from '@/components/layout/BottomNavigation';
 import A2HS from '@/components/common/A2HS';
 import useResponsive from '@/hooks/useResponsive';
+import useRequestFCMPermission from '@/hooks/useRequestFCMPermission';
+
 export default function HomePage() {
   const { isMobile } = useResponsive();
+  const { notificationPermissionStatus, token } = useRequestFCMPermission();
 
   return (
     <>
       {isMobile && <A2HS />}
       <HomeContainer />
+      <div>
+        <p>{JSON.stringify(notificationPermissionStatus)}</p>
+        <p>{JSON.stringify(token)}</p>
+      </div>
     </>
   );
 }

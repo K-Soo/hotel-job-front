@@ -6,6 +6,7 @@ import { Post } from '@/apis';
 import { appAtom } from '@/recoil/app';
 import { useRecoilValue } from 'recoil';
 import { useRouter } from 'next/router';
+import useAuth from '@/hooks/useAuth';
 
 async function requestNotificationPermissionAndToken() {
   if (!('Notification' in window)) {
@@ -27,16 +28,17 @@ async function requestNotificationPermissionAndToken() {
   }
 }
 
-interface useRequestFCMPermissionProps {
-  isAuthenticated: boolean;
-}
-
-export default function useRequestFCMPermission({ isAuthenticated }: useRequestFCMPermissionProps) {
+export default function useRequestFCMPermission() {
   const [notificationPermissionStatus, setNotificationPermissionStatus] = React.useState<NotificationPermission | null>(null);
   const [token, setToken] = React.useState<string | null>(null);
+
+  const { isAuthenticated } = useAuth();
+
   const appAtomValue = useRecoilValue(appAtom);
+
   const isLoading = React.useRef(false);
   const retryLoadToken = React.useRef(0);
+
   const router = useRouter();
 
   React.useEffect(() => {
