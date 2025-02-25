@@ -11,7 +11,6 @@ firebase.initializeApp({
 });
 
 const messaging = firebase.messaging();
-console.log('!!: ', messaging);
 
 messaging.onBackgroundMessage((payload) => {
   console.log('백그라운드 푸시 알림 수신: ', payload);
