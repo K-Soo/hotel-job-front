@@ -40,6 +40,20 @@ export default function useRequestFCMPermission({ isAuthenticated }: useRequestF
   const router = useRouter();
 
   React.useEffect(() => {
+    if (!('serviceWorker' in navigator)) {
+      console.info('서비스 워커를 지원하지 않음');
+    }
+
+    if (!('Notification' in window)) {
+      console.info('알림 지원 브라우저가 아님');
+    }
+
+    if (typeof window === 'undefined' || typeof navigator === 'undefined') {
+      console.info('클라이언트 환경이 아님');
+    }
+  }, []);
+
+  React.useEffect(() => {
     async function initialize() {
       if (!('Notification' in window)) {
         console.info('알림 지원 브라우저가 아님');
