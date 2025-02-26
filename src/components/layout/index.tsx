@@ -10,6 +10,7 @@ import { certificationModalAtom } from '@/recoil/certification';
 import { toastAtom } from '@/recoil/toast';
 import dynamic from 'next/dynamic';
 import { AnimatePresence } from 'framer-motion';
+import { Toaster, toast } from 'sonner';
 
 export { Footer } from '@/components/layout/footer';
 export { Main } from '@/components/layout/main';
@@ -21,6 +22,7 @@ export { EmployerHeader } from '@/components/layout/header/employerHeader';
 export { EmployerAside } from '@/components/layout/aside/EmployerAside';
 export { EmployerFooter } from '@/components/layout/footer/EmployerFooter';
 
+const DynamicNoSSRStyledToaster = dynamic(() => import('@/components/common/StyledToaster'), { ssr: false });
 const DynamicNoSSRLoadingOverlay = dynamic(() => import('@/components/common/LoadingOverlay'), { ssr: false });
 const DynamicNoSSRAccountBottomSheet = dynamic(() => import('@/components/common/AccountBottomSheet'), { ssr: false });
 const DynamicNoSSRAlert = dynamic(() => import('@/components/common/Alert'), { ssr: false });
@@ -57,6 +59,8 @@ export default function Layout({ children }: LayoutProps) {
 
   return (
     <S.Layout>
+      <DynamicNoSSRStyledToaster />
+
       {loadingAtomValue.isLoading && <DynamicNoSSRLoadingOverlay />}
       {bottomSheetAtomValue.isOpen && <DynamicNoSSRAccountBottomSheet />}
       {certificationModalAtomValue.isOpen && <DynamicNoSSRCertificationModal />}
