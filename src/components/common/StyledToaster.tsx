@@ -1,4 +1,3 @@
-import styled from 'styled-components';
 import { Toaster } from 'sonner';
 
 function BellIcon() {
@@ -21,7 +20,7 @@ export default function StyledToaster() {
         info: <BellIcon />,
       }}
       mobileOffset={30}
-      richColors={true}
+      richColors={false}
       expand={false}
       // invert={true}
       closeButton={true}

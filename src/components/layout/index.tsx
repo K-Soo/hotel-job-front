@@ -10,7 +10,6 @@ import { certificationModalAtom } from '@/recoil/certification';
 import { toastAtom } from '@/recoil/toast';
 import dynamic from 'next/dynamic';
 import { AnimatePresence } from 'framer-motion';
-import { Toaster, toast } from 'sonner';
 
 export { Footer } from '@/components/layout/footer';
 export { Main } from '@/components/layout/main';
@@ -57,19 +56,9 @@ export default function Layout({ children }: LayoutProps) {
   //   }));
   // }, []);
 
-  const handleCLick = () => {
-    toast.info(`바빠: 바빠요`, {
-      action: {
-        label: 'Visit',
-        onClick: () => {},
-      },
-    });
-  };
   return (
     <S.Layout>
       <DynamicNoSSRStyledToaster />
-
-      <button onClick={handleCLick}>토소</button>
 
       {loadingAtomValue.isLoading && <DynamicNoSSRLoadingOverlay />}
       {bottomSheetAtomValue.isOpen && <DynamicNoSSRAccountBottomSheet />}
