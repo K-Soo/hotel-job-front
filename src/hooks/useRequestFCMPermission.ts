@@ -146,6 +146,7 @@ export default function useRequestFCMPermission() {
 
         const link = payload.fcmOptions?.link || payload.data?.link;
 
+        // iOS Safari PWA에서는 Notification API를 사용할 수 없음(백그라운드 상태일 때만 표시됨)
         const notification = new Notification(payload.notification?.title || '새로운 메세지', {
           body: payload.notification?.body || '',
           data: link ? { url: link } : undefined,
