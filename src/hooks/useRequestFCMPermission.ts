@@ -1,12 +1,12 @@
 import React from 'react';
 import { fetchToken, messaging } from '@/lib/firebase-client';
-import { onMessage, getMessaging } from 'firebase/messaging';
-import environment from '@/environment';
+import { onMessage } from 'firebase/messaging';
 import { Post } from '@/apis';
 import { appAtom } from '@/recoil/app';
 import { useRecoilValue } from 'recoil';
 import { useRouter } from 'next/router';
 import useAuth from '@/hooks/useAuth';
+import { toast } from 'sonner';
 
 async function requestNotificationPermissionAndToken() {
   if (!('Notification' in window)) {
@@ -14,7 +14,7 @@ async function requestNotificationPermissionAndToken() {
     return null;
   }
 
-  // 권한이 이미 부여된경우
+  // 권한이 이미 부여 된 경우
   if (Notification.permission === 'granted') {
     return await fetchToken();
   }
@@ -137,7 +137,7 @@ export default function useRequestFCMPermission() {
       const unsubscribe = onMessage(getMessaging, (payload) => {
         console.log('Foreground 푸시 알림 수신:', payload);
 
-        alert(JSON.stringify(payload));
+        // alert(JSON.stringify(payload));
 
         if (Notification.permission !== 'granted') {
           console.info('알림 표시 권한 없음.');
@@ -146,20 +146,38 @@ export default function useRequestFCMPermission() {
 
         const link = payload.fcmOptions?.link || payload.data?.link;
 
-        // iOS Safari PWA에서는 Notification API를 사용할 수 없음(백그라운드 상태일 때만 표시됨)
-        const notification = new Notification(payload.notification?.title || '새로운 메세지', {
-          body: payload.notification?.body || '',
-          data: link ? { url: link } : undefined,
-          icon: '/icons/icon-192x192.png',
-        });
+        if (link) {
+          toast.info(`${payload.notification?.title}: ${payload.notification?.body}`, {
+            action: {
+              label: '확인',
+              onClick: () => {
+                const link = payload.fcmOptions?.link || payload.data?.link;
+                if (link) {
+                  router.push(link);
+                }
+              },
+            },
+          });
+        } else {
+          toast.info(`${payload.notification?.title}: ${payload.notification?.body}`);
+        }
 
-        notification.onclick = (event) => {
-          event.preventDefault();
-          const link = (event.target as any)?.data?.url;
-          if (link) {
-            router.push(link);
-          }
-        };
+        // --------------------------------------------
+        // iOS Safari PWA에서는 Notification API를 사용할 수 없음(백그라운드 상태일 때만 표시됨)
+        // const notification = new Notification(payload.notification?.title || '새로운 메세지', {
+        //   body: payload.notification?.body || '',
+        //   data: link ? { url: link } : undefined,
+        //   icon: '/icons/icon-192x192.png',
+        // });
+
+        // notification.onclick = (event) => {
+        //   event.preventDefault();
+        //   const link = (event.target as any)?.data?.url;
+        //   if (link) {
+        //     router.push(link);
+        //   }
+        // };
+        // --------------------------------------------
       });
 
       return unsubscribe;
