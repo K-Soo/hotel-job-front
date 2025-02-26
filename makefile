@@ -12,3 +12,7 @@ increase-major-version :
 increase-minor-version :
 	npm run release -- --release-as minor
 	git push --follow-tags origin 
+
+increase-patch-version :
+	npm run release -- --release-as patch
+	git push --follow-tags origin 
