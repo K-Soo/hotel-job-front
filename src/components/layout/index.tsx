@@ -57,9 +57,19 @@ export default function Layout({ children }: LayoutProps) {
   //   }));
   // }, []);
 
+  const handleCLick = () => {
+    toast.info(`바빠: 바빠요`, {
+      action: {
+        label: 'Visit',
+        onClick: () => {},
+      },
+    });
+  };
   return (
     <S.Layout>
       <DynamicNoSSRStyledToaster />
+
+      <button onClick={handleCLick}>토소</button>
 
       {loadingAtomValue.isLoading && <DynamicNoSSRLoadingOverlay />}
       {bottomSheetAtomValue.isOpen && <DynamicNoSSRAccountBottomSheet />}
