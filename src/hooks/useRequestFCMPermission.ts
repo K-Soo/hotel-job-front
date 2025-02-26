@@ -137,6 +137,8 @@ export default function useRequestFCMPermission() {
       const unsubscribe = onMessage(getMessaging, (payload) => {
         console.log('Foreground 푸시 알림 수신:', payload);
 
+        alert(JSON.stringify(payload));
+
         if (Notification.permission !== 'granted') {
           console.info('알림 표시 권한 없음.');
           return;
