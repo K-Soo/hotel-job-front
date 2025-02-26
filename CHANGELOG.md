@@ -1,6 +1,39 @@
 # 변경 로그
 
 프로젝트의 모든 주요 변경 사항
+### [1.9.1](https://github.com/K-Soo/hotel-job-front/compare/v1.9.0...v1.9.1) (2025-02-26)
+
+
+### Features
+
+* 서비스 워커 및 알림 지원 여부 확인 로직 추가 ([59ce63d](https://github.com/K-Soo/hotel-job-front/commit/59ce63d6b972a47dc7d564481c6bd818de2dbb63))
+* 서비스 워커 지원 여부 알림 추가 및 콘솔 로그 개선 ([50ace5e](https://github.com/K-Soo/hotel-job-front/commit/50ace5e7f59e7c3dcb5473acdb9e82c0ada2e6b4))
+* 알림 클릭 이벤트 처리 개선 및 아이콘 변경 ([56b9985](https://github.com/K-Soo/hotel-job-front/commit/56b9985302a843890af7a0a04a1559f00a2a5828))
+* 알림 토스트 추가 ([5b05992](https://github.com/K-Soo/hotel-job-front/commit/5b059921e65cd4266f818b03b4f2ac6ed1af8a0e))
+* 프로덕션 빌드 스크립트 추가 ([b77fcc2](https://github.com/K-Soo/hotel-job-front/commit/b77fcc25a437159ca0bfebe80aae0f024cc6644f))
+* A2HS 컴포넌트 추가 및 설치 프롬프트 기능 구현 ([12da672](https://github.com/K-Soo/hotel-job-front/commit/12da672623e5136df5860ae2c124c846096bc243))
+* A2HS 컴포넌트를 모바일에서 조건부로 렌더링하도록 수정 ([7442bea](https://github.com/K-Soo/hotel-job-front/commit/7442beac7bb94877bd0c0dffb8ce5a6e6be1c94b))
+* A2HS 훅 추가 및 설치 프롬프트 처리 기능 구현 ([7b7dfd3](https://github.com/K-Soo/hotel-job-front/commit/7b7dfd3f0b9b511c1d63ae5155026b834b3e962e))
+* FCM 푸시 알림 수신 시 토스트 알림 추가 및 불필요한 코드 주석 처리 ([dcdd05c](https://github.com/K-Soo/hotel-job-front/commit/dcdd05c2c91dab0c4f19f5cb0dcbdaed8bf40243))
+* **Firebase:** 알림 권한 요청 및 FCM 토큰 가져오기 로직 개선 ([b2fba2a](https://github.com/K-Soo/hotel-job-front/commit/b2fba2af51fa01d39726481621e77ec48e7cfc96))
+* **Firebase:** Firebase 메시징 기능 추가 및 토큰 가져오기 함수 구현 ([62b1f1a](https://github.com/K-Soo/hotel-job-front/commit/62b1f1ae12bae8648234bb67f40fff2570a777a4))
+* PWA 설정 업데이트 및 Firebase 메시징 서비스 워커 추가 ([81091be](https://github.com/K-Soo/hotel-job-front/commit/81091be5f89abae0048fa928f21d9495573d581f))
+* StyledToaster 컴포넌트 동적 로딩 추가 ([d60d2c5](https://github.com/K-Soo/hotel-job-front/commit/d60d2c516d05a153d29d2dd11800fdfcc0fb78c7))
+
+
+### Bug Fixes
+
+* 콘솔 로그 제거 및 테마 색상 흰색으로 변경 ([03c035f](https://github.com/K-Soo/hotel-job-front/commit/03c035f047c013b29b0d1e7e363e520ff8c5f096))
+* **api:** FCM 토큰 저장 경로를 '/notifications/push/token'으로 수정 ([b06f9b1](https://github.com/K-Soo/hotel-job-front/commit/b06f9b173bd0a4cfe15c76ddd69f98e057076256))
+* **App:** AppComponent를 동적 로딩으로 변경하여 SSR 비활성화 ([1c0efa8](https://github.com/K-Soo/hotel-job-front/commit/1c0efa8de65695b58df016901a02394b22807c8b))
+* FCM 토큰 저장 API 경로 수정 및 Recoil 상태 관리 개선 ([b0fa417](https://github.com/K-Soo/hotel-job-front/commit/b0fa4179f96ae45dc5b71c74fc5ab2da3cb2847d))
+
+
+### Updates
+
+* console ([e62ed30](https://github.com/K-Soo/hotel-job-front/commit/e62ed30f55d297effe7b1aa88bf5f361b9d8f04d))
+* fcm hook ([cb5381a](https://github.com/K-Soo/hotel-job-front/commit/cb5381a1bad9846d9f376b9b7bba0ac39529f3fb))
+
 ## [1.9.0](https://github.com/K-Soo/hotel-job-front/compare/v1.8.0...v1.9.0) (2025-02-21)
 
 
