@@ -17,10 +17,16 @@ function BellIcon() {
 export default function StyledToaster() {
   return (
     <Toaster
-      containerAriaLabel="asdas"
       icons={{
         info: <BellIcon />,
       }}
+      mobileOffset={30}
+      richColors={true}
+      expand={false}
+      // invert={true}
+      closeButton={true}
+      //정렬기준
+      dir="auto"
       toastOptions={{
         actionButtonStyle: { background: 'none', color: '#3182f6', textDecoration: 'underline' },
       }}
