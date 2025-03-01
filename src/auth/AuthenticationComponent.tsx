@@ -36,18 +36,12 @@ export default function AuthenticationComponent() {
     },
   });
 
-  // console.log('ME API : ', userInfoData);
+  console.log('ME API : ', userInfoData);
 
   React.useEffect(() => {
     if (isLoading) {
+      setAuthAtomState({ status: 'AUTHENTICATED_LOADING' });
       return;
-    }
-
-    if (!userInfoData) {
-      return setAuthAtomState((prev) => ({
-        ...prev,
-        status: 'AUTHENTICATION_FAILURE',
-      }));
     }
 
     if (userInfoData) {
@@ -55,7 +49,10 @@ export default function AuthenticationComponent() {
         ...userInfoData.result,
         status: 'AUTHENTICATED',
       });
+      return;
     }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userInfoData, isLoading]);
 
   return null;
