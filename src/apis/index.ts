@@ -332,6 +332,18 @@ export const Get = {
 
     return requests.get<API.GetEmployerCouponList>(url);
   },
+
+  // ***************************************  NOTIFICATION  ***************************************
+  getNotificationList: ({ page, limit }: API.GetNotificationListRequest) => {
+    const params = new URLSearchParams();
+    if (page) params.set('page', page);
+    if (limit) params.set('limit', limit);
+
+    const queryString = params.toString();
+    const url = `/notification${queryString && `?${queryString}`}`;
+
+    return requests.get<API.GetNotificationListResponse>(url);
+  },
 };
 
 export const Post = {
@@ -390,7 +402,7 @@ export const Post = {
   // *************************************** PUSH  ***************************************
   // FCM 토큰 저장
   saveFcmToken: (body: API.SaveFcmTokenRequest) =>
-    requests.post<API.SaveFcmTokenRequest, API.SaveFcmTokenResponse>('/notifications/push/token', body),
+    requests.post<API.SaveFcmTokenRequest, API.SaveFcmTokenResponse>('/notification/push/token', body),
 
   // *************************************** EMPLOYER PAYMENT  ***************************************
   // TODO - type 정의
