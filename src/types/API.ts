@@ -1,7 +1,7 @@
 import { AllJobsKeyValuesKeys } from '@/constants/job';
 import * as types from '@/types';
 
-type ResponseStatus = 'success' | 'duplicate' | 'available' | 'failure' | 'available';
+type ResponseStatus = 'success' | 'duplicate' | 'failure' | 'available' | 'unavailable';
 
 // query
 export type RecruitmentQueryStatus = 'ALL' | 'PROGRESS' | 'PUBLISHED' | 'CLOSED' | 'REVIEWING' | 'DRAFT';
@@ -105,6 +105,11 @@ export interface PaymentRecruitmentConfirmRequest {
   orderId: string;
   paymentKey: string;
   amount: number; // XXX
+}
+
+export interface GetNotificationListRequest {
+  page: string;
+  limit: string;
 }
 
 export interface PaymentRecruitmentFreeConfirmRequest extends Pick<PaymentRecruitmentConfirmRequest, 'orderId' | 'amount'> {}
@@ -420,5 +425,12 @@ export interface AvailableCouponListResponse extends BaseResponse {
 export interface ApplyCouponResponse extends BaseResponse {
   result: {
     status: ResponseStatus;
+  };
+}
+
+export interface GetNotificationListResponse extends BaseResponse {
+  result: {
+    items: types.NotificationListItem[];
+    pagination: PaginationInfo;
   };
 }
