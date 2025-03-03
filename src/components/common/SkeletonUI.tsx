@@ -302,12 +302,24 @@ const StyledRecruitBasicList = styled.div`
   }
 `;
 
+const Icon = ({ style }: { style?: React.CSSProperties }) => {
+  return <StyledIcon style={style}></StyledIcon>;
+};
+
+const StyledIcon = styled.div`
+  ${SkeletonAnimation}
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+`;
+
 const SkeletonUI = {
   ResumeListItems,
   Document,
   Line,
   Table,
   Tabs,
+  Icon,
   Recruitment,
   RecruitMentProductPreview,
   RecruitMentProductList,
