@@ -37,8 +37,16 @@ export default function RecruitDetailSideMenu({
   recruitmentStatus,
   setSelectedResume,
 }: RecruitDetailSideMenuProps) {
-  const { isAuthenticated, isAuthIdle, role } = useAuth();
+  const { isAuthenticated, role } = useAuth();
   const router = useRouter();
+
+  if (applyStatus === 'idle') {
+    return (
+      <S.RecruitDetailSideMenu>
+        <Button label="" variant="primary" height="50px" fontSize="16px" isLoading={true} />
+      </S.RecruitDetailSideMenu>
+    );
+  }
 
   if (!isAuthenticated) {
     return (
