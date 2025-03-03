@@ -197,6 +197,8 @@ const StyledNotifyGuide = styled.div`
 
 const StyledTableBody = styled.div`
   min-height: 400px;
+  max-height: 800px;
+  overflow-y: auto;
   .body-row {
     box-sizing: border-box;
     display: flex;
