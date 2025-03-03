@@ -334,6 +334,7 @@ export const Get = {
   },
 
   // ***************************************  NOTIFICATION  ***************************************
+  // 알림 리스트
   getNotificationList: ({ page, limit }: API.GetNotificationListRequest) => {
     const params = new URLSearchParams();
     if (page) params.set('page', page);
