@@ -23,14 +23,14 @@ export default function StepBodyRow({
 
     // 합격 발표가 최종 합격일 경우
     const isIncludesAcceptWithFinalAccept = announcementRecipients.some(
-      (item) => item.announcement.announcementType === 'ACCEPT' && item.announcement.reviewStage === 'ACCEPT',
+      (item) => item.announcement.announcementType === 'ACCEPT' && item.announcement.resultNotificationStatus === 'FINAL_PASS',
     );
 
     if (isIncludesRejected) {
       return (
         <S.StepBodyRow>
           <Button
-            label="불합격 발표 확인"
+            label="불합격 발표"
             variant="tertiary"
             width="120px"
             fontSize="14px"
@@ -46,7 +46,7 @@ export default function StepBodyRow({
       return (
         <S.StepBodyRow>
           <Button
-            label="합격 발표 확인"
+            label="최종 합격 발표"
             variant="tertiary"
             width="120px"
             fontSize="14px"
