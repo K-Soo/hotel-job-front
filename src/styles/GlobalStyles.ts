@@ -38,6 +38,11 @@ const GlobalStyle = createGlobalStyle`
     /* overflow-x: hidden; sticky: x */
   }
 
+  textarea {  
+    font-family: var(--font-family);
+    line-height: 1.5;
+  }
+
   button {
     all: unset;
     box-sizing: border-box;
