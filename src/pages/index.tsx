@@ -3,11 +3,9 @@ import HomeContainer from '@/containers/homeContainer';
 import BottomNavigation from '@/components/layout/BottomNavigation';
 import A2HS from '@/components/common/A2HS';
 import useResponsive from '@/hooks/useResponsive';
-import useRequestFCMPermission from '@/hooks/useRequestFCMPermission';
 
 export default function HomePage() {
   const { isMobile } = useResponsive();
-  const { notificationPermissionStatus, token } = useRequestFCMPermission();
 
   return (
     <>
@@ -26,7 +24,7 @@ HomePage.getLayout = (page: React.ReactElement) => {
     <Layout>
       <Header>
         <DesktopNavigation />
-        <MobileNavigation logoIcon />
+        <MobileNavigation logoIcon notificationIcon />
       </Header>
       <Main>{page}</Main>
       <Footer />
