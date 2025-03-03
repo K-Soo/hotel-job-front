@@ -22,6 +22,7 @@ import {
   PASS_RESULT_NOTIFICATION_STATUS,
   RESULT_NOTIFICATION_STATUS,
 } from '@/constants/announcement';
+import { CATEGORY_TYPE } from '@/constants/notification';
 
 export type Provider = 'LOCAL' | 'KAKAO' | 'GOOGLE';
 export type RoleType = 'ADMIN' | 'EMPLOYER' | 'JOB_SEEKER';
@@ -73,6 +74,7 @@ export type AnnouncementTypeKey = keyof typeof ANNOUNCEMENT_TYPE;
 export type PassResultNotificationKey = keyof typeof PASS_RESULT_NOTIFICATION_STATUS;
 export type FailResultNotificationKey = keyof typeof FAIL_RESULT_NOTIFICATION_STATUS;
 export type ResultNotificationStatusKey = PassResultNotificationKey | FailResultNotificationKey;
+export type CategoryTypeKey = keyof typeof CATEGORY_TYPE;
 
 export type TalentListItem = {};
 
@@ -492,7 +494,7 @@ export type AnnouncementType = {
   id: number;
   isSent: boolean;
   message: string;
-  reviewStage: ReviewStageStatusKey;
+  resultNotificationStatus: ResultNotificationStatusKey;
   sentAt: null;
   title: string;
 };
@@ -714,4 +716,16 @@ export interface CreateApplicationsAnnouncementForm {
   recruitmentId: string;
   recipientApplicationIds: number[];
   resultNotificationStatus: ResultNotificationStatusKey;
+}
+
+export interface NotificationListItem {
+  createdAt: string;
+  link: string;
+  message: string;
+  notificationType: ['PUSH', 'IN_APP'];
+  readByUserIds: string[];
+  userIds: string[];
+  category: CategoryTypeKey;
+  id: string;
+  title: string;
 }
