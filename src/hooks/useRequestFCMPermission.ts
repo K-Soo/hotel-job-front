@@ -41,28 +41,7 @@ export default function useRequestFCMPermission() {
 
   const router = useRouter();
 
-  // React.useEffect(() => {
-  //   console.log('@@@@@@@@: ', Notification.permission);
-
-  //   if (!('serviceWorker' in navigator)) {
-  //     alert('서비스 워커 미지원');
-  //     console.info('서비스 워커를 지원하지 않음');
-  //   }
-
-  //   if ('serviceWorker' in navigator) {
-  //     // alert('서비스 워커! 지원');
-  //     console.info('서비스 워커를 지원하지 않음');
-  //   }
-
-  //   // IOS PWA(safari, chrome) 지원
-  //   if (!('Notification' in window)) {
-  //     console.info('알림 지원 브라우저가 아님');
-  //   }
-
-  //   if (typeof window === 'undefined' || typeof navigator === 'undefined') {
-  //     console.info('클라이언트 환경이 아님');
-  //   }
-  // }, []);
+  const isEligiblePath = router.pathname === '/' || router.pathname === '/employer';
 
   React.useEffect(() => {
     async function initialize() {
@@ -83,6 +62,7 @@ export default function useRequestFCMPermission() {
         return;
       }
 
+      console.log('isLoading.current: ', isLoading.current);
       if (isLoading.current) return;
 
       isLoading.current = true;
@@ -117,8 +97,8 @@ export default function useRequestFCMPermission() {
         // FCM 전송
         const response = await Post.saveFcmToken({ token, isPWA: appAtomValue.isPWA });
         console.log('FCM API : ', response);
-      } catch (error) {
-        console.log('error: ', error);
+      } catch (error: any) {
+        console.error('FCM 토큰저장 error: ', error?.message);
       }
     }
 
@@ -128,12 +108,15 @@ export default function useRequestFCMPermission() {
   }, [appAtomValue.isPWA, isAuthenticated]);
 
   React.useEffect(() => {
-    const setupListener = async () => {
-      if (!token) return;
+    if (typeof window === 'undefined') return;
 
+    if (!token) return;
+
+    const setupListener = async () => {
       const getMessaging = await messaging();
       if (!getMessaging) return;
 
+      console.log('✅ Foreground 푸시 알림 리스너 등록됨');
       const unsubscribe = onMessage(getMessaging, (payload) => {
         console.log('Foreground 푸시 알림 수신:', payload);
 
@@ -146,8 +129,10 @@ export default function useRequestFCMPermission() {
 
         const link = payload.fcmOptions?.link || payload.data?.link;
 
+        const toastMessage = `${payload.notification?.title || ''}${payload.notification?.body}`;
+
         if (link) {
-          toast.info(`${payload.notification?.title}: ${payload.notification?.body}`, {
+          toast.info(toastMessage, {
             action: {
               label: '확인',
               onClick: () => {
@@ -159,7 +144,7 @@ export default function useRequestFCMPermission() {
             },
           });
         } else {
-          toast.info(`${payload.notification?.title}: ${payload.notification?.body}`);
+          toast.info(toastMessage);
         }
 
         // --------------------------------------------
@@ -192,7 +177,7 @@ export default function useRequestFCMPermission() {
     });
 
     return () => unsubscribe?.();
-  }, [router, token]);
+  }, [token]);
 
   return { notificationPermissionStatus, token };
 }
