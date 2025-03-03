@@ -108,10 +108,11 @@ const S = {
     }
     .content {
       padding: 15px 15px 0 15px;
-      max-height: 300px;
+      max-height: 430px;
       overflow-y: auto;
       ${(props) => props.theme.media.tablet`
         padding: 0;
+        max-height: auto;
       `};
     }
     .bottom {
