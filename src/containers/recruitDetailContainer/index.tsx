@@ -49,13 +49,19 @@ export default function RecruitDetailContainer() {
   const { applyCheckData, isApplyCheckLoading, isApplyCheckError } = useFetchApplyCheck({ recruitmentId: data?.result?.id });
 
   React.useEffect(() => {
-    if (applyCheckData) {
-      if (applyCheckData.result.status === 'available') {
-        setApplyStatus('available');
-      }
-      if (applyCheckData.result.status === 'duplicate') {
-        setApplyStatus('duplicate');
-      }
+    if (!applyCheckData) {
+      return setApplyStatus('idle');
+    }
+
+    if (applyCheckData.result.status === 'available') {
+      setApplyStatus('available');
+    }
+    if (applyCheckData.result.status === 'duplicate') {
+      setApplyStatus('duplicate');
+    }
+    // TODO - unavailable 상태 추가
+    if (applyCheckData.result.status === 'unavailable') {
+      setApplyStatus('duplicate');
     }
   }, [applyCheckData]);
 
