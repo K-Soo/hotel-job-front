@@ -7,11 +7,13 @@ export default function useAuth() {
   const isAuthenticated = authAtomState.status === 'AUTHENTICATED';
   const isAuthIdle = authAtomState.status === 'IDLE';
   const isAuthFailure = authAtomState.status === 'AUTHENTICATION_FAILURE';
+  const isAuthLoading = authAtomState.status === 'AUTHENTICATED_LOADING';
 
   return {
     isAuthenticated,
     isAuthIdle,
     isAuthFailure,
+    isAuthLoading,
 
     role: authAtomState.role,
     authAtomState,
