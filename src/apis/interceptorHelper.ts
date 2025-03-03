@@ -3,6 +3,7 @@ import { instance, Auth } from '@/apis';
 
 const ALLOW_AUTHENTICATION_PATH = ['/auth/sign-in', '/oauth/kakao', '/auth/refresh'];
 
+// 로그인 시 응답값 중 accessToken을 받아와서 axios header에 추가
 const handleSuccessResponse = (config: AxiosResponse) => {
   if (!config.config?.url) {
     return;
@@ -16,6 +17,7 @@ const handleSuccessResponse = (config: AxiosResponse) => {
   }
 };
 
+// accessToken 만료 시 refreshToken을 통해 새로운 accessToken을 받아옴
 const handleRequestAccessToken = async (originalRequest: any) => {
   try {
     const response = await Auth.requestAccessToken({});
