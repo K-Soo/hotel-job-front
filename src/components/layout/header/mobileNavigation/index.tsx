@@ -5,7 +5,7 @@ import path from '@/constants/path';
 import Icon from '@/icons/Icon';
 import { useSetRecoilState } from 'recoil';
 import { hamburgerNavigationAtom } from '@/recoil/hamburgerNavigation';
-
+import Notification from '@/components/common/notification';
 interface MobileNavigationProps {
   backIcon?: boolean;
   profileIcon?: boolean;
@@ -14,9 +14,19 @@ interface MobileNavigationProps {
   homeIcon?: boolean;
   backUrl?: string;
   title?: string;
+  notificationIcon?: boolean;
 }
 
-export function MobileNavigation({ title, backUrl, backIcon, profileIcon, logoIcon, homeIcon, hamburgerIcon }: MobileNavigationProps) {
+export function MobileNavigation({
+  title,
+  backUrl,
+  backIcon,
+  profileIcon,
+  logoIcon,
+  homeIcon,
+  hamburgerIcon,
+  notificationIcon,
+}: MobileNavigationProps) {
   const router = useRouter();
 
   const setHamburgerNavigationAtomState = useSetRecoilState(hamburgerNavigationAtom);
@@ -38,6 +48,7 @@ export function MobileNavigation({ title, backUrl, backIcon, profileIcon, logoIc
 
       <div className="right">
         {profileIcon && <i>profile</i>}
+        {notificationIcon && <Notification />}
         {hamburgerIcon && (
           <Icon name="ListA24x24" width="24px" height="24px" onClick={() => setHamburgerNavigationAtomState({ isOpen: true })} />
         )}

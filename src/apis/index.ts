@@ -332,15 +332,33 @@ export const Get = {
 
     return requests.get<API.GetEmployerCouponList>(url);
   },
+
+  // ***************************************  NOTIFICATION  ***************************************
+  // 알림 리스트
+  getNotificationList: ({ page, limit }: API.GetNotificationListRequest) => {
+    const params = new URLSearchParams();
+    if (page) params.set('page', page);
+    if (limit) params.set('limit', limit);
+
+    const queryString = params.toString();
+    const url = `/notification${queryString && `?${queryString}`}`;
+
+    return requests.get<API.GetNotificationListResponse>(url);
+  },
 };
 
 export const Post = {
-  // 본인인증 요청
+  // 본인인증 요청 시작
   certificationStart: (body: void) => requests.post<void, API.CertificationStartResponse>('/certification/start', body),
 
   //TODO - 타입정의
-  // 본인인증 검증
-  certificationVerify: (body: any) => requests.post<any, any>('/certification/verify', body),
+  // 본인인증 검증 및 저장(사업자 무료 쿠폰발급)
+  accountCertificationVerify: (body: any) =>
+    requests.post<any, API.AccountCertificationVerifyResponse>('/certification/account/verify', body),
+
+  //TODO - 타입정의
+  // 비밀번호 찾기 - 본인인증 검증
+  resetCertificationVerify: (body: any) => requests.post<any, API.ResetCertificationVerifyResponse>('/certification/reset/verify', body),
 
   //유저 - 이력서 생성
   createResume: (body: void) => requests.post<void, API.CreateResumeResponse>('/resumes', body),
@@ -390,7 +408,7 @@ export const Post = {
   // *************************************** PUSH  ***************************************
   // FCM 토큰 저장
   saveFcmToken: (body: API.SaveFcmTokenRequest) =>
-    requests.post<API.SaveFcmTokenRequest, API.SaveFcmTokenResponse>('/notifications/push/token', body),
+    requests.post<API.SaveFcmTokenRequest, API.SaveFcmTokenResponse>('/notification/push/token', body),
 
   // *************************************** EMPLOYER PAYMENT  ***************************************
   // TODO - type 정의
@@ -446,6 +464,10 @@ export const Patch = {
   // 유저 - 공고 지원취소
   cancelApplication: (body: { applicationId: number }) =>
     requests.patch<{ applicationId: number }, API.CancelApplicationResponse>('/applications/cancel', body),
+
+  // 비밀번호 변경
+  employerAccountReset: (body: API.EmployerAccountResetRequest) =>
+    requests.patch<API.EmployerAccountResetRequest, API.EmployerAccountResetResponse>('/employers/account/reset', body),
 };
 
 export const Delete = {

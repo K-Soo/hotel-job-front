@@ -11,7 +11,7 @@ interface ResumeContextProps {
   setIsContextLoading: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const ResumeContext = createContext<ResumeContextProps | undefined>(undefined);
+const ResumeContext = createContext<ResumeContextProps | null>(null);
 
 export const useResumeContext = () => {
   const context = useContext(ResumeContext);

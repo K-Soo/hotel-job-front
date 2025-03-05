@@ -4,7 +4,6 @@ import RecruitSpecialCard from '@/components/recruit/RecruitSpecialCard';
 import RecruitSectionTitle from '@/components/recruit/RecruitSectionTitle';
 import InfiniteScroll from 'react-infinite-scroller';
 import queryKeys from '@/constants/queryKeys';
-import Button from '@/components/common/style/Button';
 import useInfiniteScroll from '@/hooks/useInfiniteScroll';
 import { Get } from '@/apis';
 import EmptyComponent from '@/components/common/EmptyComponent';

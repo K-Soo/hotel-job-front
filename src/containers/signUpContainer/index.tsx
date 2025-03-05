@@ -77,7 +77,7 @@ export default function SignUpContainer() {
         ...response.result,
         status: 'AUTHENTICATED',
       });
-      router.replace(path.EMPLOYER);
+      router.replace(path.EMPLOYER_SETUP_COMPANY);
     } catch (error) {
       alert('회원가입 중 오류가 발생했습니다.');
     }

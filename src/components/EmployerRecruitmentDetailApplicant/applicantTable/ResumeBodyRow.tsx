@@ -30,7 +30,7 @@ export default function ResumeBodyRow({
     const isIncludesRejected = announcementRecipients.some((item) => item.announcement.announcementType === 'REJECT');
 
     const isIncludesAcceptWithFinalAccept = announcementRecipients.some(
-      (item) => item.announcement.announcementType === 'ACCEPT' && item.announcement.reviewStage === 'ACCEPT',
+      (item) => item.announcement.announcementType === 'ACCEPT' && item.announcement.resultNotificationStatus === 'FINAL_PASS',
     );
 
     if (isIncludesRejected) {

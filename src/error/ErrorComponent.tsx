@@ -17,7 +17,14 @@ export function ErrorComponent({ height, margin, padding, width, message, visibl
   return (
     <S.ErrorComponent $height={height} $margin={margin} $padding={padding} $width={width}>
       <div className="error-container">
-        <p>{message || '오류가 발생했습니다.'}</p>
+        {message && <p>{message}</p>}
+        {!message && (
+          <p>
+            <span>서버에서 응답을 받을 수 없습니다.</span>
+            <br />
+            <span>잠시 후 다시 시도해주세요.</span>
+          </p>
+        )}
         {visibleBackButton && <Button label="이전" variant="secondary" margin="30px 0 0 0" onClick={() => router.back()} />}
       </div>
     </S.ErrorComponent>
@@ -33,6 +40,9 @@ const S = {
     display: flex;
     align-items: center;
     justify-content: center;
+    color: ${(props) => props.theme.colors.gray700};
+    line-height: 1.2;
+    font-size: 14px;
     .error-container {
       text-align: center;
     }

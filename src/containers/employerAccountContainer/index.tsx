@@ -3,14 +3,10 @@ import EmployerAccount from '@/components/employerAccount';
 import queryKeys from '@/constants/queryKeys';
 import { Get } from '@/apis';
 import useFetchQuery from '@/hooks/useFetchQuery';
-import { useRecoilState } from 'recoil';
-import { certificationModalAtom } from '@/recoil/certification';
 import SectionTitle from '@/components/common/employer/SectionTitle';
 import SkeletonUI from '@/components/common/SkeletonUI';
 import Modal from '@/components/common/modal';
 import dynamic from 'next/dynamic';
-import Button from '@/components/common/style/Button';
-import NicknameForm from '@/components/employerAccount/NicknameForm';
 import useAuth from '@/hooks/useAuth';
 import ChangeNicknameForm from '@/components/common/ChangeNicknameForm';
 

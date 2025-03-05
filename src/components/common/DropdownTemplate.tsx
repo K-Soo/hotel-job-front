@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import { motion } from 'framer-motion';
 
 interface DropdownTemplateProps {
-  width?: string;
   outStyle?: React.CSSProperties;
   innerStyle?: React.CSSProperties;
   tabIndex?: number;
@@ -11,7 +10,7 @@ interface DropdownTemplateProps {
 }
 
 const DropdownTemplate = forwardRef<HTMLDivElement, DropdownTemplateProps>(
-  ({ width, outStyle, tabIndex, innerStyle, children }: DropdownTemplateProps, ref) => {
+  ({ outStyle, tabIndex, innerStyle, children }: DropdownTemplateProps, ref) => {
     return (
       <S.DropdownTemplate ref={ref} style={outStyle} tabIndex={tabIndex}>
         <S.Content style={innerStyle}>{children}</S.Content>
@@ -32,10 +31,10 @@ const S = {
   `,
   Content: styled(motion.div)`
     background-color: ${({ theme }) => theme.colors.white};
-    height: 100%;
-    border-radius: 5px;
-    width: 100%;
     border: 1px solid ${(props) => props.theme.colors.gray300};
+    height: 100%;
+    border-radius: 4px;
+    width: 100%;
     padding: 10px;
     overflow-y: auto;
     z-index: 6;

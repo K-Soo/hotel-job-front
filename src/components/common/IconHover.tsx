@@ -41,6 +41,7 @@ const S = {
     width: ${(props) => props.$width || 'auto'};
     height: ${(props) => props.$height || 'auto'};
     margin: ${(props) => props.$margin || '0'};
+    cursor: pointer;
     &:hover {
       background-color: rgba(242, 244, 246, 1);
       transition: background-color 0.2s;

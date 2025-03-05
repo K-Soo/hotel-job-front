@@ -11,6 +11,7 @@ import { Auth } from '@/apis';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { QueryClient } from '@tanstack/react-query';
+import Notification from '@/components/common/notification';
 
 export function EmployerHeader() {
   const [isDropdownOpen, setIsDropdownOpen] = React.useState(false);
@@ -80,8 +81,7 @@ export function EmployerHeader() {
       {isAuthenticated && (
         <div className="user-control-bar">
           <S.UtilMenu>
-            <Icon name="SolarBell24x24" width="22px" height="22px" />
-            <span>알림</span>
+            <Notification margin="0 5px 0 0" />
           </S.UtilMenu>
 
           <S.UserInfo ref={inputRef} tabIndex={0} onBlur={handleBlur} onFocus={handleFocus} onClick={handleClickToggle}>

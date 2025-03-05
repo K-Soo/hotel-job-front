@@ -73,8 +73,8 @@ export const EMPLOYER_ASIDE_MENU = [
     icon: 'Settings24x24',
     items: [
       { label: '계정정보', value: path.EMPLOYER_ACCOUNT },
+      { label: '비밀번호 변경', value: path.EMPLOYER_ACCOUNT_RESET },
       // { label: '알림설정', value: path.EMPLOYER_ACCOUNT_NOTIFICATION },
-      // { label: '비밀번호 변경', value: path.EMPLOYER_ACCOUNT_AUTHENTICATION },
     ],
   },
 ];

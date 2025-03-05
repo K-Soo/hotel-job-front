@@ -105,6 +105,7 @@ const StyledUnderLine = styled.div`
 
 const S = {
   ApplicantTab: styled.div`
+    z-index: 5;
     position: sticky;
     top: 60px;
     height: 60px;

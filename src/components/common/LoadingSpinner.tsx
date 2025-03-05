@@ -8,7 +8,7 @@ interface LoadingSpinnerProps {
 export default function LoadingSpinner({ height }: LoadingSpinnerProps) {
   return (
     <S.LoadingSpinner $height={height}>
-      <Image src="/images/spinner200px.gif" width={30} height={30} alt="loading" priority />
+      <Image src="/images/spinner200px.gif" width={26} height={26} alt="loading" priority />
     </S.LoadingSpinner>
   );
 }
@@ -19,5 +19,6 @@ const S = {
     display: flex;
     align-items: center;
     justify-content: center;
+    opacity: 0.6;
   `,
 };

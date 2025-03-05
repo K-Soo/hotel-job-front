@@ -2,7 +2,8 @@ import React from 'react';
 import { UAParser } from 'ua-parser-js';
 import { isStandalonePWA } from 'ua-parser-js/helpers';
 import { appAtom } from '@/recoil/app';
-import { useSetRecoilState, useRecoilState } from 'recoil';
+import { useRecoilState } from 'recoil';
+import useRequestFCMPermission from '@/hooks/useRequestFCMPermission';
 
 export default function AppComponent() {
   const [appAtomState, setAppAtomState] = useRecoilState(appAtom);
@@ -21,6 +22,8 @@ export default function AppComponent() {
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  const { notificationPermissionStatus, token } = useRequestFCMPermission();
 
   return null;
 }

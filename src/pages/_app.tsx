@@ -9,11 +9,13 @@ import GuardComponent from '@/auth/GuardComponent';
 import EmployerGuardComponent from '@/auth/EmployerGuardComponent';
 import AuthenticationComponent from '@/auth/AuthenticationComponent';
 import environment from '@/environment';
+import NotificationProvider from '@/context/NotificationProvider';
 // import Maintenance from '@/components/common/Maintenance';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import Head from 'next/head';
 import dynamic from 'next/dynamic';
 import '@/recoil';
+import useNotification from '@/hooks/useNotification';
 
 const DynamicNoSSRAppComponent = dynamic(() => import('@/auth/AppComponent'), { ssr: false });
 
@@ -33,7 +35,6 @@ const queryClientDefaultOption = {
 
 export default function App({ Component, pageProps }: AppPropsWithLayout) {
   const getLayout = Component.getLayout ?? commonLayout;
-
   const [queryClient] = React.useState(() => new QueryClient(queryClientDefaultOption));
 
   return (
@@ -48,18 +49,26 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
           <QueryClientProvider client={queryClient}>
             <AuthenticationComponent />
             <DynamicNoSSRAppComponent />
-            {!Component.authentication && getLayout(<Component {...pageProps} />)}
+            {/* <NotificationInitializer /> */}
+            <NotificationProvider>
+              {!Component.authentication && getLayout(<Component {...pageProps} />)}
 
-            {Component.authentication &&
-              getLayout(
-                <GuardComponent allowedRoles={Component.allowedRoles}>
-                  <Component {...pageProps} />
-                </GuardComponent>,
-              )}
+              {Component.authentication &&
+                getLayout(
+                  <GuardComponent allowedRoles={Component.allowedRoles}>
+                    <Component {...pageProps} />
+                  </GuardComponent>,
+                )}
+            </NotificationProvider>
             {/* <ReactQueryDevtools initialIsOpen={false} /> */}
           </QueryClientProvider>
         </RecoilRoot>
       </AppThemeProvider>
     </>
   );
+}
+
+function NotificationInitializer() {
+  // useNotification();
+  return null;
 }

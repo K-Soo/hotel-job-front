@@ -1,7 +1,7 @@
 import { AllJobsKeyValuesKeys } from '@/constants/job';
 import * as types from '@/types';
 
-type ResponseStatus = 'success' | 'duplicate' | 'available' | 'failure' | 'available';
+type ResponseStatus = 'success' | 'duplicate' | 'failure' | 'available' | 'unavailable';
 
 // query
 export type RecruitmentQueryStatus = 'ALL' | 'PROGRESS' | 'PUBLISHED' | 'CLOSED' | 'REVIEWING' | 'DRAFT';
@@ -107,9 +107,16 @@ export interface PaymentRecruitmentConfirmRequest {
   amount: number; // XXX
 }
 
+export interface GetNotificationListRequest {
+  page: string;
+  limit: string;
+}
+
 export interface PaymentRecruitmentFreeConfirmRequest extends Pick<PaymentRecruitmentConfirmRequest, 'orderId' | 'amount'> {}
 
 export interface CreateApplicationsAnnouncementRequest extends types.CreateApplicationsAnnouncementForm {}
+
+export interface EmployerAccountResetRequest extends Pick<types.EmployerAccountResetForm, 'currentPassword' | 'newPassword'> {}
 
 /************************************* RESPONSE **************************************/
 
@@ -198,6 +205,17 @@ export interface CertificationStartResponse extends BaseResponse {
   result: {
     status: ResponseStatus;
     params: Record<string, string>;
+  };
+}
+
+export interface AccountCertificationVerifyResponse extends BaseResponse {
+  result: {
+    status: ResponseStatus;
+  };
+}
+export interface ResetCertificationVerifyResponse extends BaseResponse {
+  result: {
+    status: ResponseStatus;
   };
 }
 
@@ -418,6 +436,19 @@ export interface AvailableCouponListResponse extends BaseResponse {
 }
 
 export interface ApplyCouponResponse extends BaseResponse {
+  result: {
+    status: ResponseStatus;
+  };
+}
+
+export interface GetNotificationListResponse extends BaseResponse {
+  result: {
+    items: types.NotificationListItem[];
+    pagination: PaginationInfo;
+  };
+}
+
+export interface EmployerAccountResetResponse extends BaseResponse {
   result: {
     status: ResponseStatus;
   };

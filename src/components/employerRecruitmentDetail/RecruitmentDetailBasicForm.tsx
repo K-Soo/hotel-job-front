@@ -1,8 +1,7 @@
 import styled from 'styled-components';
 import HorizontalFormWrapper from '@/components/common/form/HorizontalFormWrapper';
 import FormInputB from '@/components/common/form/FormInputB';
-import FormCheckbox from '@/components/common/form/FormCheckbox';
-import { CreateRecruitmentForm, RecruitmentDetailForm } from '@/types';
+import { RecruitmentDetailForm } from '@/types';
 
 interface RecruitmentDetailBasicFormProps {}
 
