@@ -292,6 +292,12 @@ const nicknameSchema = yup.object({
   newNickname: validation.NICKNAME,
 });
 
+const accountResetSchema = yup.object({
+  currentPassword: validation.PASSWORD,
+  newPassword: validation.PASSWORD,
+  newPasswordConfirm: validation.NEW_PASSWORD_CONFIRM,
+});
+
 export const schema = {
   signInSchema,
   resumeRegister,
@@ -302,4 +308,5 @@ export const schema = {
   recruitmentSchema,
   recruitmentDetailSchema,
   nicknameSchema,
+  accountResetSchema,
 };
