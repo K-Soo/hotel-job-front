@@ -49,6 +49,10 @@ export const validation = {
     .string()
     .required()
     .oneOf([yup.ref('password')], '비밀번호가 일치하지않습니다.'),
+  NEW_PASSWORD_CONFIRM: yup
+    .string()
+    .required()
+    .oneOf([yup.ref('newPassword')], '비밀번호가 일치하지않습니다.'),
   PHONE: yup.string().required().matches(regex.phone, '010으로 시작하는 "-"를 제외한 숫자'),
   NICKNAME: yup
     .string()
