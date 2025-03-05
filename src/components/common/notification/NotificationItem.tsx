@@ -29,6 +29,9 @@ const S = {
     border-bottom: 1px solid ${(props) => props.theme.colors.gray100};
     cursor: pointer;
     overflow: hidden;
+    &:last-child {
+      border-bottom: none;
+    }
     .item-container {
       display: flex;
       flex-direction: column;
