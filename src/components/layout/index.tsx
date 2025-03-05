@@ -29,7 +29,9 @@ const DynamicNoSSRConfirm = dynamic(() => import('@/components/common/Confirm'),
 const DynamicNoSSRToast = dynamic(() => import('@/components/common/Toast'), { ssr: false });
 const DynamicNoSSRHamburgerNavigation = dynamic(() => import('@/components/layout/HamburgerNavigation'), { ssr: false });
 const DynamicNoSSRDaumPost = dynamic(() => import('@/components/common/DaumPost'), { ssr: false });
-const DynamicNoSSRCertificationModal = dynamic(() => import('@/components/common/CertificationModal'), { ssr: false });
+const DynamicNoSSRCertificationAccountModal = dynamic(() => import('@/components/common/certification/CertificationAccountModal'), {
+  ssr: false,
+});
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -62,7 +64,7 @@ export default function Layout({ children }: LayoutProps) {
 
       {loadingAtomValue.isLoading && <DynamicNoSSRLoadingOverlay />}
       {bottomSheetAtomValue.isOpen && <DynamicNoSSRAccountBottomSheet />}
-      {certificationModalAtomValue.isOpen && <DynamicNoSSRCertificationModal />}
+      {certificationModalAtomValue.isOpen && <DynamicNoSSRCertificationAccountModal />}
 
       <AnimatePresence>{hamburgerNavigationAtomValue.isOpen && <DynamicNoSSRHamburgerNavigation />}</AnimatePresence>
 
