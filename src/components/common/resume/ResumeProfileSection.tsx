@@ -86,7 +86,7 @@ export default function ResumeProfileSection() {
 
       <S.AddressBox>
         <div className="address">
-          <FormInput<ResumeDetailForm> name="address" maxWidth="350px" errorPosition="absolute" placeholder="주소" />
+          <FormInput<ResumeDetailForm> label="주소" name="address" maxWidth="350px" errorPosition="static" placeholder="주소" disabled />
           <Button
             variant="primary"
             label="검색"
@@ -123,7 +123,6 @@ const S = {
     .address {
       display: flex;
       align-items: center;
-      margin-bottom: 15px;
     }
   `,
   CertBox: styled.div`

@@ -73,7 +73,7 @@ export default function ResumeProfileSectionPreview() {
 
         {previewImage && (
           <div className="image-info">
-            <Image src={previewImage} className="image" alt="프로필 이미지" fill />
+            <Image src={previewImage} className="image" alt="프로필 이미지" fill priority />
           </div>
         )}
       </article>
@@ -113,6 +113,9 @@ const S = {
         height: 130px;
         position: relative;
         overflow: hidden;
+        img {
+          object-fit: cover;
+        }
         ${(props) => props.theme.media.mobile`
           margin-right: 15px;
       `};
