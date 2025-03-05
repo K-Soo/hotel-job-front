@@ -116,6 +116,8 @@ export interface PaymentRecruitmentFreeConfirmRequest extends Pick<PaymentRecrui
 
 export interface CreateApplicationsAnnouncementRequest extends types.CreateApplicationsAnnouncementForm {}
 
+export interface EmployerAccountResetRequest extends Pick<types.EmployerAccountResetForm, 'currentPassword' | 'newPassword'> {}
+
 /************************************* RESPONSE **************************************/
 
 export interface SignInResponse extends BaseResponse {
@@ -203,6 +205,12 @@ export interface CertificationStartResponse extends BaseResponse {
   result: {
     status: ResponseStatus;
     params: Record<string, string>;
+  };
+}
+
+export interface ResetCertificationVerifyResponse extends BaseResponse {
+  result: {
+    status: ResponseStatus;
   };
 }
 
@@ -432,5 +440,11 @@ export interface GetNotificationListResponse extends BaseResponse {
   result: {
     items: types.NotificationListItem[];
     pagination: PaginationInfo;
+  };
+}
+
+export interface EmployerAccountResetResponse extends BaseResponse {
+  result: {
+    status: ResponseStatus;
   };
 }
