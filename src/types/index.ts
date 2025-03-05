@@ -729,3 +729,9 @@ export interface NotificationListItem {
   id: string;
   title: string;
 }
+
+export interface EmployerAccountResetForm {
+  currentPassword: string;
+  newPassword: string;
+  newPasswordConfirm: string;
+}
