@@ -353,7 +353,8 @@ export const Post = {
 
   //TODO - 타입정의
   // 본인인증 검증 및 저장(사업자 무료 쿠폰발급)
-  AccountCertificationVerify: (body: any) => requests.post<any, any>('/certification/account/verify', body),
+  accountCertificationVerify: (body: any) =>
+    requests.post<any, API.AccountCertificationVerifyResponse>('/certification/account/verify', body),
 
   //TODO - 타입정의
   // 비밀번호 찾기 - 본인인증 검증
