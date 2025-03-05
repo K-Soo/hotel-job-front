@@ -64,18 +64,10 @@ export default function NotificationProvider({ children }: { children: React.Rea
     socketInstance.on('newNotification', (data) => {
       console.info('인앱 알림 수신!!:', data);
       setNotificationStatus((prev) => (prev.status === 'all_read' ? { status: 'unread_exist' } : prev));
-
-      // toast.info(`새로운 알림`, {
-      //   action: {
-      //     label: '확인',
-      //     onClick: () => {
-      //       setIsOpen(true);
-      //     },
-      //   },
-      // });
     });
 
     return () => {
+      console.info('웹소켓 연결 종료');
       socketInstance.disconnect();
     };
   }, [isAuthenticated]);
