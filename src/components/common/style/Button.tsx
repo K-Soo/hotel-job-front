@@ -85,9 +85,9 @@ export default function Button({
       $padding={padding}
       $isLoading={isLoading}
     >
-      {!isLoading && icon}
       {isLoading && <Image src="/images/rolling.gif" alt="image" width={30} height={30} />}
       {!isLoading && label}
+      {!isLoading && icon}
     </S.Button>
   );
 }
