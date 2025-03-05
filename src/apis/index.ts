@@ -348,12 +348,16 @@ export const Get = {
 };
 
 export const Post = {
-  // 본인인증 요청
+  // 본인인증 요청 시작
   certificationStart: (body: void) => requests.post<void, API.CertificationStartResponse>('/certification/start', body),
 
   //TODO - 타입정의
-  // 본인인증 검증
-  certificationVerify: (body: any) => requests.post<any, any>('/certification/verify', body),
+  // 본인인증 검증 및 저장(사업자 무료 쿠폰발급)
+  AccountCertificationVerify: (body: any) => requests.post<any, any>('/certification/account/verify', body),
+
+  //TODO - 타입정의
+  // 비밀번호 찾기 - 본인인증 검증
+  resetCertificationVerify: (body: any) => requests.post<any, API.ResetCertificationVerifyResponse>('/certification/reset/verify', body),
 
   //유저 - 이력서 생성
   createResume: (body: void) => requests.post<void, API.CreateResumeResponse>('/resumes', body),
@@ -459,6 +463,10 @@ export const Patch = {
   // 유저 - 공고 지원취소
   cancelApplication: (body: { applicationId: number }) =>
     requests.patch<{ applicationId: number }, API.CancelApplicationResponse>('/applications/cancel', body),
+
+  // 비밀번호 변경
+  employerAccountReset: (body: API.EmployerAccountResetRequest) =>
+    requests.patch<API.EmployerAccountResetRequest, API.EmployerAccountResetResponse>('/employers/account/reset', body),
 };
 
 export const Delete = {
