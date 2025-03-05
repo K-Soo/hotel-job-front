@@ -15,6 +15,7 @@ import { SpeedInsights } from '@vercel/speed-insights/next';
 import Head from 'next/head';
 import dynamic from 'next/dynamic';
 import '@/recoil';
+import useNotification from '@/hooks/useNotification';
 
 const DynamicNoSSRAppComponent = dynamic(() => import('@/auth/AppComponent'), { ssr: false });
 
@@ -48,6 +49,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
           <QueryClientProvider client={queryClient}>
             <AuthenticationComponent />
             <DynamicNoSSRAppComponent />
+            {/* <NotificationInitializer /> */}
             <NotificationProvider>
               {!Component.authentication && getLayout(<Component {...pageProps} />)}
 
@@ -64,4 +66,9 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
       </AppThemeProvider>
     </>
   );
+}
+
+function NotificationInitializer() {
+  // useNotification();
+  return null;
 }
