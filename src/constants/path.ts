@@ -55,7 +55,7 @@ const path = {
 
   EMPLOYER_ACCOUNT: '/employer/account', // 계정 · 업체정보
   EMPLOYER_ACCOUNT_NOTIFICATION: '/employer/account/notification', // 알림설정
-  EMPLOYER_ACCOUNT_AUTHENTICATION: '/employer/account/authentication', // 비밀번호 변경
+  EMPLOYER_ACCOUNT_RESET: '/employer/account/reset', // 비밀번호 변경
 
   // ACCOUNT_RECOVER_RESET_SUCCESS: '/account/recover/reset/success', //비밀번호 찾기 결과
   // ACCOUNT_RECOVER_USER: '/account/recover/user', //이메일 찾기
