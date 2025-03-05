@@ -12,6 +12,8 @@ import NotificationItem from '@/components/common/notification/NotificationItem'
 import InfiniteScroll from 'react-infinite-scroller';
 import { useRouter } from 'next/router';
 import { useNotificationContext } from '@/context/NotificationProvider';
+import Button from '@/components/common/style/Button';
+import Icon from '@/icons/Icon';
 
 interface NotificationContentProps {
   isOpen: boolean;
@@ -57,6 +59,7 @@ export default function NotificationContent({ isOpen, setIsOpen }: NotificationC
   }, []);
 
   const isFirstPage = data?.pages[data.pages.length - 1].result.pagination.currentPage === 1;
+  console.log('isFirstPage: ', isFirstPage);
 
   const isEmptyFirstPage = isFirstPage && data?.pages[0]?.result.items.length === 0;
 
@@ -78,11 +81,15 @@ export default function NotificationContent({ isOpen, setIsOpen }: NotificationC
   }
 
   if (isSuccess && data) {
+    const hasLoadedSecondPage = data?.pages.length > 1;
+
     return (
       <>
         <InfiniteScroll
           loadMore={() => {
-            fetchNextPage();
+            if (!isFirstPage) {
+              fetchNextPage();
+            }
           }}
           hasMore={hasNextPage && !isFetching}
           threshold={450}
@@ -95,6 +102,21 @@ export default function NotificationContent({ isOpen, setIsOpen }: NotificationC
               ));
             })}
           </S.NotificationContent>
+          {isFirstPage && hasNextPage && (
+            <div style={{ display: 'flex', justifyContent: 'center', margin: '20px 0 50px 0' }}>
+              <Button
+                label="알림 더보기"
+                variant="tertiary"
+                width="120px"
+                height="40px"
+                icon={<Icon name="ArrowRight16x16" width="16px" height="16px" margin="0 0 0 2px" />}
+                borderRadius="8px"
+                fontSize="14px"
+                onClick={() => fetchNextPage()}
+              />
+            </div>
+          )}
+
           {isFetchingNextPage && <LoadingSpinner height="100px" />}
         </InfiniteScroll>
       </>
