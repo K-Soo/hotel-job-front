@@ -208,6 +208,11 @@ export interface CertificationStartResponse extends BaseResponse {
   };
 }
 
+export interface AccountCertificationVerifyResponse extends BaseResponse {
+  result: {
+    status: ResponseStatus;
+  };
+}
 export interface ResetCertificationVerifyResponse extends BaseResponse {
   result: {
     status: ResponseStatus;
