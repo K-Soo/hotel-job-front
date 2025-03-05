@@ -34,12 +34,16 @@ export default function CertificationAccountModal() {
       }
 
       if (parsedData.type === 'CERTIFICATION_SUCCESS') {
-        const response = await Post.AccountCertificationVerify(parsedData.payload);
+        const response = await Post.accountCertificationVerify(parsedData.payload);
         console.log('본인인증 검증 API : ', response);
 
-        if (response.result.status !== 'success') {
-          throw new Error();
+        if (response.result.status === 'duplicate') {
+          throw new Error('이미 본인인증이 완료된 계정입니다.');
         }
+        // TODO - 휴대폰번호 중복 인증 방지
+        // if (response.result.status === 'unavailable') {
+        //   throw new Error('중복된 휴대폰 번호');
+        // }
 
         await queryClient.invalidateQueries({ queryKey: [queryKeys.AUTH_ME], refetchType: 'all' });
         await queryClient.invalidateQueries({ queryKey: [queryKeys.EMPLOYER_ACCOUNT], refetchType: 'all' });
