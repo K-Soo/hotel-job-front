@@ -13,6 +13,7 @@ const TITLE_TEXT = {
   TITLE_10: '입력하신 내용으로 즉시 발표를 진행하시겠습니까?',
   TITLE_11: '진행중인 공고입니다. 정말 마감하시겠습니까?',
   TITLE_12: '지원을 취소하시겠습니까?',
+  TITLE_13: '비밀번호 변경이 완료되었습니다.',
 } as const;
 
 const DESCRIPTION_TEXT = {
