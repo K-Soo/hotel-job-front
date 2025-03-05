@@ -33,7 +33,7 @@ const S = {
     background-color: ${({ theme }) => theme.colors.white};
     border: 1px solid ${(props) => props.theme.colors.gray300};
     height: 100%;
-    border-radius: 5px;
+    border-radius: 4px;
     width: 100%;
     padding: 10px;
     overflow-y: auto;
