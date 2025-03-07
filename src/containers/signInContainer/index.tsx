@@ -6,7 +6,6 @@ import { useForm, FormProvider, SubmitHandler } from 'react-hook-form';
 import { SignInForm } from '@/types';
 import { schema } from '@/utils';
 import { yupResolver } from '@hookform/resolvers/yup';
-import FormDevTools from '@/components/common/FormDevTools';
 import Tabs from '@/components/common/Tabs';
 import CompanyForm from '@/components/signIn/CompanyForm';
 import GeneralForm from '@/components/signIn/GeneralForm';
@@ -24,6 +23,7 @@ export interface UrlQuery extends ParsedUrlQuery {
 
 export default function SignInContainer() {
   const [isSubmitError, setIsSubmitError] = React.useState(false);
+  const [isLoading, setIsLoading] = React.useState(false);
 
   const router = useRouter();
   const { type = 'general' } = router.query as UrlQuery;
@@ -83,11 +83,10 @@ export default function SignInContainer() {
   return (
     <SignIn>
       <FormProvider {...methods}>
-        <Logo size="middle" margin="0 0 30px 0" />
+        <Logo size="middle" margin="0 0 50px 0" />
         <Tabs margin="0 0 30px 0" tabsOptions={signInTabOptions} />
         {type === 'general' && <GeneralForm />}
         {type === 'company' && <CompanyForm onSubmit={onSubmit} isSubmitError={isSubmitError} />}
-        {/* <FormDevTools control={methods.control} /> */}
       </FormProvider>
     </SignIn>
   );
