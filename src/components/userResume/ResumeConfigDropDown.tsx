@@ -55,6 +55,7 @@ const S = {
     align-items: center;
     justify-content: space-between;
     padding: 0 15px;
+    cursor: pointer;
     border-bottom: 1px solid ${(props) => props.theme.colors.gray200};
     &:hover {
       background-color: ${(props) => props.theme.colors.gray};
