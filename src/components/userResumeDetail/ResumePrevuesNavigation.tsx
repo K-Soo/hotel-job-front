@@ -14,7 +14,7 @@ export default function ResumePrevuesNavigation() {
         color: '#2272eb',
       }}
     >
-      <Icon name="ArrowLeft24x24" width="16px" height="16px" />
+      <Icon name="ArrowLeft24x24" width="20px" height="20px" />
       <div className="back-title">이력서 목록</div>
     </S.ResumePrevuesNavigation>
   );
@@ -22,15 +22,14 @@ export default function ResumePrevuesNavigation() {
 
 const S = {
   ResumePrevuesNavigation: styled(motion.div)`
-    height: 35px;
     display: flex;
     align-items: center;
-    font-size: 16px;
-    color: ${(props) => props.theme.colors.black500};
-    margin-bottom: 5px;
-    font-weight: 300;
+    font-size: 20px;
+    color: ${(props) => props.theme.colors.black700};
+    margin-bottom: 50px;
     width: fit-content;
     cursor: pointer;
+    font-weight: 500;
     .back-title {
       padding-left: 5px;
     }

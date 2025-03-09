@@ -43,6 +43,7 @@ export default function ResumeProfileSectionPreview() {
           </S.NameWithCareerBox>
 
           <S.CertInfoBox>
+            {/* 외국인 */}
             {localCode === '02' && (
               <>
                 <span>{LOCAL_CODE[localCode]}</span>&nbsp;•&nbsp;
@@ -77,6 +78,7 @@ export default function ResumeProfileSectionPreview() {
           </div>
         )}
       </article>
+
       {isTablet && (
         <>
           <S.PhoneBox>

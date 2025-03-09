@@ -6,7 +6,7 @@ import { useRouter } from 'next/router';
 import UserResumeDetail from '@/components/userResumeDetail';
 import ResumeBottomController from '@/components/common/resume/ResumeBottomController';
 import { useForm, FormProvider, SubmitHandler } from 'react-hook-form';
-import { ResumeDetail, ResumeDetailForm } from '@/types';
+import { ResumeDetailForm } from '@/types';
 import { schema } from '@/utils';
 import { yupResolver } from '@hookform/resolvers/yup';
 import FormDevTools from '@/components/common/FormDevTools';
@@ -153,7 +153,9 @@ export default function UserResumeDetailContainer() {
   if (isSuccess && data) {
     return (
       <FormProvider {...methods}>
+        {/* 이력서 미리보기 */}
         {resumePreviewData && <ResumePreview resumePreviewData={resumePreviewData} closeResume={() => setResumePreviewData(null)} />}
+
         <UserResumeDetail>
           <ResumeProgress handleClickPreview={handleClickPreview} />
           <ResumeBottomController onSubmit={onSubmit} refetch={refetch} updatedAt={data.result.updatedAt} />
