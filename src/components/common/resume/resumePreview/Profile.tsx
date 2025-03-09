@@ -1,13 +1,11 @@
 import React from 'react';
 import { ResumeDetail } from '@/types';
 import styled from 'styled-components';
-import { useFormContext } from 'react-hook-form';
 import { ResumeDetailForm } from '@/types';
 import { LOCAL_CODE, SEX_CODE } from '@/constants';
 import { CAREER_LEVEL } from '@/constants/resume';
 import useResponsive from '@/hooks/useResponsive';
 import { parseBirthDateAndCalculateAge } from '@/utils';
-import Image from 'next/image';
 import ResumeProfileImage from '@/components/common/resume/ResumeProfileImage';
 interface ProfileProps {
   resumePreviewData: ResumeDetail | ResumeDetailForm;

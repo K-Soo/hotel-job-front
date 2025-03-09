@@ -48,7 +48,7 @@ const S = {
     width: 100px;
     height: 120px;
     font-size: 0;
-    border-radius: 5px;
+    border-radius: 8px;
     overflow: hidden;
     display: flex;
     align-items: center;
