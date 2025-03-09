@@ -46,8 +46,10 @@ import CornerLeftUp24x24 from './cornerLeftUp24x24.svg';
 import Profile from './profile.svg';
 import NoticeA24x24 from './notice_a_24x24.svg';
 import Delete from './delete.svg';
+import Pen24x24 from './pen24x24.svg';
 
 export {
+  Pen24x24,
   Delete,
   NoticeA24x24,
   Profile,
