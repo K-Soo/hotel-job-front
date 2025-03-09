@@ -85,7 +85,7 @@ export default function SignInContainer() {
     <SignIn>
       <FormProvider {...methods}>
         <Logo size="middle" margin="0 0 50px 0" />
-        <SignInTab margin="0 0 30px 0" tabsOptions={signInTabOptions} />
+        <SignInTab tabsOptions={signInTabOptions} />
         {type === 'general' && <GeneralForm />}
         {type === 'company' && <CompanyForm onSubmit={onSubmit} isSubmitError={isSubmitError} />}
       </FormProvider>

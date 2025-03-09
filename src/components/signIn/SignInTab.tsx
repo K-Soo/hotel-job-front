@@ -1,24 +1,18 @@
 import React from 'react';
 import styled from 'styled-components';
-import { motion, useAnimationControls } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { useRouter } from 'next/router';
 import { ParsedUrlQuery } from 'querystring';
 
 interface SignInTabProps {
   tabsOptions: Readonly<{ label: string; value: string }[]>;
-  margin?: string;
-  width?: string;
-  height?: string;
-  backgroundColor?: string;
-  fontSize?: string;
-  fontColor?: string;
 }
 
 export interface UrlQuery extends ParsedUrlQuery {
   type?: string;
 }
 
-export default function SignInTab({ margin, width, tabsOptions, height, backgroundColor, fontSize, fontColor }: SignInTabProps) {
+export default function SignInTab({ tabsOptions }: SignInTabProps) {
   const router = useRouter();
   const { type } = router.query as UrlQuery;
 
@@ -27,7 +21,7 @@ export default function SignInTab({ margin, width, tabsOptions, height, backgrou
   const containerRef = React.useRef<HTMLDivElement>(null);
 
   const currentTab = React.useMemo(() => {
-    return tabsOptions.find((tab) => tab.value === type);
+    return tabsOptions.find((tab) => tab.value === type) || tabsOptions[0];
   }, [type, tabsOptions]);
 
   const handleClickTab = (value: string) => {
@@ -39,20 +33,14 @@ export default function SignInTab({ margin, width, tabsOptions, height, backgrou
   };
 
   return (
-    <S.SignInTab $margin={margin} $width={width} $height={height} $fontSize={fontSize}>
+    <S.SignInTab>
       <motion.div className="container" ref={containerRef}>
         {tabsOptions.map((item) => (
           <motion.button key={item.value} className="item" value={item.value} onClick={() => handleClickTab(item.value)}>
             <span>{item.label}</span>
 
             {currentTab && currentTab.value === item.value && (
-              <S.ToggleButton
-                initial={{ opacity: 0 }}
-                $backgroundColor={backgroundColor}
-                $fontColor={fontColor}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.2 }}
-              >
+              <S.ToggleButton initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.2 }}>
                 {currentTab.label}
               </S.ToggleButton>
             )}
@@ -64,11 +52,11 @@ export default function SignInTab({ margin, width, tabsOptions, height, backgrou
 }
 
 const S = {
-  SignInTab: styled.div<{ $margin?: string; $width?: string; $height?: string; $fontSize?: string }>`
-    height: ${(props) => props.$height || '45px'};
-    width: ${(props) => props.$width || '100%'};
-    margin: ${(props) => props.$margin || '0'};
-    font-size: ${(props) => props.$fontSize || '16px'};
+  SignInTab: styled.div`
+    height: 45px;
+    width: 100%;
+    margin-bottom: 30px;
+    font-size: 16px;
     .container {
       height: 100%;
       display: flex;
@@ -85,10 +73,10 @@ const S = {
       }
     }
   `,
-  ToggleButton: styled(motion.span)<{ $backgroundColor?: string; $fontColor?: string }>`
+  ToggleButton: styled(motion.span)`
     position: absolute;
-    background-color: ${(props) => props.$backgroundColor || props.theme.colors.blue500};
-    color: ${(props) => props.$fontColor || props.theme.colors.white};
+    background-color: ${(props) => props.theme.colors.blue500};
+    color: ${(props) => props.theme.colors.white};
     height: 100%;
     width: 100%;
     display: flex;
