@@ -164,8 +164,8 @@ const StyleRecruitment = styled.section`
 const ResumeListItems = () => {
   return (
     <StyleResumeListItems>
-      <StyledLine style={{ height: '100px', borderRadius: '15px', margin: '10px 0' }} />
-      <StyledLine style={{ height: '100px', borderRadius: '15px', margin: '10px 0' }} />
+      <StyledLine style={{ height: '120px', borderRadius: '15px', margin: '10px 0' }} />
+      <StyledLine style={{ height: '120px', borderRadius: '15px', margin: '10px 0' }} />
     </StyleResumeListItems>
   );
 };

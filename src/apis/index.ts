@@ -66,14 +66,12 @@ instance.interceptors.response.use(
   },
 );
 
-const responseBody = <T>(response: AxiosResponse<T>) => response?.data;
+const responseBody = <T>(response: AxiosResponse<T>) => response.data;
 
 const requests = {
   get: <Response>(url: string, config?: AxiosRequestConfig) => instance.get<Response>(url, config).then(responseBody),
-  post: <Request, Response>(url: string, body: Request, config?: AxiosRequestConfig) =>
-    instance.post<Response>(url, body, config).then(responseBody),
-  patch: <Request, Response>(url: string, body: Request, config?: AxiosRequestConfig) =>
-    instance.patch<Response>(url, body, config).then(responseBody),
+  post: <Request, Response>(url: string, body: Request, config?: AxiosRequestConfig) => instance.post<Response>(url, body, config).then(responseBody),
+  patch: <Request, Response>(url: string, body: Request, config?: AxiosRequestConfig) => instance.patch<Response>(url, body, config).then(responseBody),
   delete: <Response>(url: string) => instance.delete<Response>(url, config).then(responseBody),
 };
 
@@ -84,24 +82,16 @@ export const Internal = {
 export const Auth = {
   // 사업자 로그인
   signIn: (body: API.SignInRequest) => requests.post<API.SignInRequest, API.SignInResponse>('/auth/sign-in', body),
-
   // 사업자 회원가입
-  signUpEmployer: (body: API.SignUpEmployerRequest) =>
-    requests.post<API.SignUpEmployerRequest, API.SignUpEmployerResponse>('/auth/sign-up', body),
-
+  signUpEmployer: (body: API.SignUpEmployerRequest) => requests.post<API.SignUpEmployerRequest, API.SignUpEmployerResponse>('/auth/sign-up', body),
   // 유저정보
   me: (body: {}, config?: AxiosRequestConfig) => requests.post<{}, API.GetUserInfoResponse>('/auth/me', body, config),
-
   // 엑세스토큰 재요청
-  requestAccessToken: (body: {}, config?: AxiosRequestConfig) =>
-    requests.post<{}, API.RequestAccessTokenResponse>('/auth/refresh', body, config),
-
+  requestAccessToken: (body: {}, config?: AxiosRequestConfig) => requests.post<{}, API.RequestAccessTokenResponse>('/auth/refresh', body, config),
   // 로그아웃
   signOut: (body: void) => requests.post('/auth/sign-out', body),
-
   // 닉네임 변경
-  patchChangeNickname: (body: { newNickname: string }) =>
-    requests.patch<{ newNickname: string }, API.PatchChangeNicknameResponse>('/auth/nickname', body),
+  patchChangeNickname: (body: { newNickname: string }) => requests.patch<{ newNickname: string }, API.PatchChangeNicknameResponse>('/auth/nickname', body),
 };
 
 export const OAuth = {
@@ -260,8 +250,7 @@ export const Get = {
 
   // TODO - 타입정의
   // 사업자 - 지원자관리 목록 상태별 수량 집계
-  recruitmentApplicationStatusCount: ({ id }: { id: string }) =>
-    requests.get<API.RecruitmentApplicationStatusCountResponse>(`/applications/recruitment/${id}/status`),
+  recruitmentApplicationStatusCount: ({ id }: { id: string }) => requests.get<API.RecruitmentApplicationStatusCountResponse>(`/applications/recruitment/${id}/status`),
 
   // 사업자 - 채용공고 별 지원자 리스트
   getRecruitmentDetailApplicantList: ({ recruitmentId, step }: API.GetRecruitmentDetailApplicantListRequest) => {
@@ -275,16 +264,12 @@ export const Get = {
     return requests.get<API.GetRecruitmentDetailApplicantListResponse>(url);
   },
 
-  // TODO - 타입정의
   // 사업자 - 채용공고 총지원자, 열람, 미열람 상세정보 카운트
-  getRecruitmentDetailApplicationCount: ({ recruitmentId }: { recruitmentId: string }) =>
-    requests.get<API.GetRecruitmentDetailApplicationCountResponse>(`/employers/recruitment/${recruitmentId}/applications/count`),
+  getRecruitmentDetailApplicationCount: ({ recruitmentId }: { recruitmentId: string }) => requests.get<API.GetRecruitmentDetailApplicationCountResponse>(`/employers/recruitment/${recruitmentId}/applications/count`),
 
-  // TODO - 타입정의
   // 사업자 - 채용공고 상품 리스트
   getPublishedRecruitmentList: () => requests.get<API.GetPublishedRecruitmentListResponse>(`/employers/recruitment/published`),
 
-  // TODO - 타입정의
   // 사업자 - 채용공고 리스트
   recruitmentList: ({ page, limit, status }: API.RecruitmentListRequest) => {
     const params = new URLSearchParams();
@@ -351,12 +336,9 @@ export const Post = {
   // 본인인증 요청 시작
   certificationStart: (body: void) => requests.post<void, API.CertificationStartResponse>('/certification/start', body),
 
-  //TODO - 타입정의
   // 본인인증 검증 및 저장(사업자 무료 쿠폰발급)
-  accountCertificationVerify: (body: any) =>
-    requests.post<any, API.AccountCertificationVerifyResponse>('/certification/account/verify', body),
+  accountCertificationVerify: (body: any) => requests.post<any, API.AccountCertificationVerifyResponse>('/certification/account/verify', body),
 
-  //TODO - 타입정의
   // 비밀번호 찾기 - 본인인증 검증
   resetCertificationVerify: (body: any) => requests.post<any, API.ResetCertificationVerifyResponse>('/certification/reset/verify', body),
 
@@ -372,8 +354,7 @@ export const Post = {
   applyResume: (body: API.ApplyResumeRequest) => requests.post<API.ApplyResumeRequest, any>('/applications/apply', body),
 
   //아이디 중복확인
-  verificationsEmployerUserId: (body: { userId: string }) =>
-    requests.post<{ userId: string }, API.verificationsEmployerUserIdResponse>('/verifications/employer/user-id', body),
+  verificationsEmployerUserId: (body: { userId: string }) => requests.post<{ userId: string }, API.verificationsEmployerUserIdResponse>('/verifications/employer/user-id', body),
 
   // *************************************** EMPLOYER ***************************************
   //사업자번호 검증
@@ -381,25 +362,20 @@ export const Post = {
     requests.post<{ b_no: string }, API.verificationsBusinessNumberCheckResponse>('/verifications/business-number', body),
 
   //초기 회사정보 등록
-  setupCompany: (body: API.SetupCompanyRequest) =>
-    requests.post<API.SetupCompanyRequest, API.SetupCompanyResponse>('/employers/company', body),
+  setupCompany: (body: API.SetupCompanyRequest) => requests.post<API.SetupCompanyRequest, API.SetupCompanyResponse>('/employers/company', body),
 
   //채용 공고생성
-  createRecruitment: (body: API.CreateRecruitmentRequest) =>
-    requests.post<API.CreateRecruitmentRequest, API.CreateRecruitmentResponse>('/employers/recruitment', body),
+  createRecruitment: (body: API.CreateRecruitmentRequest) => requests.post<API.CreateRecruitmentRequest, API.CreateRecruitmentResponse>('/employers/recruitment', body),
 
   // 공고 임시저장
-  draftRecruitment: (body: API.DraftRecruitmentRequest) =>
-    requests.post<API.DraftRecruitmentRequest, API.DraftRecruitmentResponse>('/employers/recruitment/draft', body),
+  draftRecruitment: (body: API.DraftRecruitmentRequest) => requests.post<API.DraftRecruitmentRequest, API.DraftRecruitmentResponse>('/employers/recruitment/draft', body),
 
   // 채용공고 삭제
-  removeRecruitment: (body: { ids: string[] }) =>
-    requests.post<{ ids: string[] }, API.RemoveRecruitmentResponse>('/employers/recruitment/remove', body),
+  removeRecruitment: (body: { ids: string[] }) => requests.post<{ ids: string[] }, API.RemoveRecruitmentResponse>('/employers/recruitment/remove', body),
 
   // *************************************** EMPLOYER APPLICATIONS ***************************************
   // 합격자 발표
-  createApplicationsAnnouncement: (body: API.CreateApplicationsAnnouncementRequest) =>
-    requests.post<API.CreateApplicationsAnnouncementRequest, any>('/applications/announcements', body),
+  createApplicationsAnnouncement: (body: API.CreateApplicationsAnnouncementRequest) => requests.post<API.CreateApplicationsAnnouncementRequest, any>('/applications/announcements', body),
 
   // *************************************** FILE UPLOAD ***************************************
   // 프로필 이미지 업로드
@@ -407,67 +383,47 @@ export const Post = {
 
   // *************************************** PUSH  ***************************************
   // FCM 토큰 저장
-  saveFcmToken: (body: API.SaveFcmTokenRequest) =>
-    requests.post<API.SaveFcmTokenRequest, API.SaveFcmTokenResponse>('/notification/push/token', body),
+  saveFcmToken: (body: API.SaveFcmTokenRequest) => requests.post<API.SaveFcmTokenRequest, API.SaveFcmTokenResponse>('/notification/push/token', body),
 
   // *************************************** EMPLOYER PAYMENT  ***************************************
   // TODO - type 정의
   // 채용공고 결제 초기요청
-  paymentRecruitmentInitiate: (body: any) =>
-    requests.post<any, API.PaymentRecruitmentInitiateResponse>('/payment/recruitment/initiate', body),
+  paymentRecruitmentInitiate: (body: any) => requests.post<any, API.PaymentRecruitmentInitiateResponse>('/payment/recruitment/initiate', body),
 
   // 채용공고 결제 승인요청
-  paymentRecruitmentConfirm: (body: API.PaymentRecruitmentConfirmRequest) =>
-    requests.post<API.PaymentRecruitmentConfirmRequest, API.PaymentRecruitmentConfirmResponse>('/payment/recruitment/confirm', body),
+  paymentRecruitmentConfirm: (body: API.PaymentRecruitmentConfirmRequest) => requests.post<API.PaymentRecruitmentConfirmRequest, API.PaymentRecruitmentConfirmResponse>('/payment/recruitment/confirm', body),
 
   // 채용공고 무료 승인요청
-  paymentFreeRecruitmentConfirm: (body: API.PaymentRecruitmentFreeConfirmRequest) =>
-    requests.post<API.PaymentRecruitmentFreeConfirmRequest, API.PaymentRecruitmentConfirmResponse>(
-      '/payment/recruitment/confirm/free',
-      body,
-    ),
+  paymentFreeRecruitmentConfirm: (body: API.PaymentRecruitmentFreeConfirmRequest) => requests.post<API.PaymentRecruitmentFreeConfirmRequest, API.PaymentRecruitmentConfirmResponse>('/payment/recruitment/confirm/free', body),
 
   // 채용공고 사용가능한 쿠폰리스트
-  availableCouponList: (body: { orderId: string }) =>
-    requests.post<{ orderId: string }, API.AvailableCouponListResponse>('/payment/recruitment/coupon', body),
+  availableCouponList: (body: { orderId: string }) => requests.post<{ orderId: string }, API.AvailableCouponListResponse>('/payment/recruitment/coupon', body),
 
   // 채용공고 쿠폰 적용
-  applyCoupon: (body: { orderId: string; couponId: string }) =>
-    requests.post<{ orderId: string; couponId: string }, API.ApplyCouponResponse>('/payment/recruitment/coupon/apply', body),
+  applyCoupon: (body: { orderId: string; couponId: string }) => requests.post<{ orderId: string; couponId: string }, API.ApplyCouponResponse>('/payment/recruitment/coupon/apply', body),
 
-  // TODO - type 정의
   // 채용공고 쿠폰 적용 취소
-  cancelCoupon: (body: { orderId: string; couponId: string }) =>
-    requests.post<{ orderId: string; couponId: string }, any>('/payment/recruitment/coupon/cancel', body),
+  cancelCoupon: (body: { orderId: string; couponId: string }) => requests.post<{ orderId: string; couponId: string }, any>('/payment/recruitment/coupon/cancel', body),
 };
 
 export const Patch = {
   // 사업자 -  등록된 공고 수정
-  updateRecruitment: (body: API.UpdateRecruitmentRequest) =>
-    requests.patch<API.UpdateRecruitmentRequest, API.UpdateRecruitmentResponse>('/employers/recruitment', body),
+  updateRecruitment: (body: API.UpdateRecruitmentRequest) => requests.patch<API.UpdateRecruitmentRequest, API.UpdateRecruitmentResponse>('/employers/recruitment', body),
 
   // 사업자 - 지원자의 전형상태 변경
-  updateEmployerReviewStageStatus: (body: API.UpdateEmployerReviewStageStatusRequest) =>
-    requests.patch<API.UpdateEmployerReviewStageStatusRequest, API.UpdateEmployerReviewStageStatusResponse>(
-      '/applications/recruitment/status/review-stage',
-      body,
-    ),
+  updateEmployerReviewStageStatus: (body: API.UpdateEmployerReviewStageStatusRequest) => requests.patch<API.UpdateEmployerReviewStageStatusRequest, API.UpdateEmployerReviewStageStatusResponse>('/applications/recruitment/status/review-stage', body),
 
   // 사업자 - 이력서 열람처리
-  updateApplicationResumeView: (body: { applicationId: number }) =>
-    requests.patch<{ applicationId: number }, API.UpdateApplicationResumeView>('/applications/view', body),
+  updateApplicationResumeView: (body: { applicationId: number }) => requests.patch<{ applicationId: number }, API.UpdateApplicationResumeView>('/applications/view', body),
 
   // 사업자 - 채용공고 마감
-  closedRecruitment: (body: { recruitmentId: string }) =>
-    requests.patch<{ recruitmentId: string }, API.RemoveRecruitmentResponse>('/employers/recruitment/close', body),
-
+  closedRecruitment: (body: { recruitmentId: string }) => requests.patch<{ recruitmentId: string }, API.RemoveRecruitmentResponse>('/employers/recruitment/close', body),
+  
+  // 사업자 - 비밀번호 변경
+  employerAccountReset: (body: API.EmployerAccountResetRequest) => requests.patch<API.EmployerAccountResetRequest, API.EmployerAccountResetResponse>('/employers/account/reset', body),
+  
   // 유저 - 공고 지원취소
-  cancelApplication: (body: { applicationId: number }) =>
-    requests.patch<{ applicationId: number }, API.CancelApplicationResponse>('/applications/cancel', body),
-
-  // 비밀번호 변경
-  employerAccountReset: (body: API.EmployerAccountResetRequest) =>
-    requests.patch<API.EmployerAccountResetRequest, API.EmployerAccountResetResponse>('/employers/account/reset', body),
+  cancelApplication: (body: { applicationId: number }) => requests.patch<{ applicationId: number }, API.CancelApplicationResponse>('/applications/cancel', body),
 };
 
 export const Delete = {
