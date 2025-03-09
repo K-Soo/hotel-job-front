@@ -1,6 +1,35 @@
 # 변경 로그
 
 프로젝트의 모든 주요 변경 사항
+### [1.9.3](https://github.com/K-Soo/hotel-job-front/compare/v1.9.2...v1.9.3) (2025-03-09)
+
+
+### Features
+
+* 로그인 시도 횟수에 따른 경고 메시지 및 페이지 새로고침 로직 추가 ([044e2be](https://github.com/K-Soo/hotel-job-front/commit/044e2bea6e1daaca5e9e294b2e53ac551402008f))
+* 로그인 컨테이너에 로딩 상태 추가 및 로고 마진 조정 ([cba779b](https://github.com/K-Soo/hotel-job-front/commit/cba779b523cf382c078de489edcdb0c390847379))
+* 사용자 ID 유효성 검사에 필수 입력 조건 추가 ([8e9ce10](https://github.com/K-Soo/hotel-job-front/commit/8e9ce101b6b7af3f22c8c08280e306493de2d112))
+* 이력서 프로필 이미지 업로드 기능 추가 및 관련 컴포넌트 수정 ([42ce184](https://github.com/K-Soo/hotel-job-front/commit/42ce184f86a6ce0891a9d0a23d3c9b4b240b2481))
+* 주소 입력 필드에 레이블 추가 및 비활성화 처리 ([1111f6d](https://github.com/K-Soo/hotel-job-front/commit/1111f6df070a5952235aaae531d5e90c42c82446))
+* 프로필 이미지의 우선 순위 설정 및 이미지 스타일 개선 ([a86bc97](https://github.com/K-Soo/hotel-job-front/commit/a86bc97e9913ce44ec562dda5fe68a3e7c4bdd44))
+* AnnouncementForm 및 CreateResumeButton 스타일 수정, UserResumeDetail에 제목 섹션 추가 ([1c05fde](https://github.com/K-Soo/hotel-job-front/commit/1c05fde29da53d89f8cb83ed25963a6209cdc876))
+* DaumPost 컴포넌트에서 불필요한 console.log 제거 및 addressDetailName 초기화 로직 추가 ([0908280](https://github.com/K-Soo/hotel-job-front/commit/0908280ffc947d87b2489617b84694e6b99d0896))
+* FormArea 컴포넌트에 placeholder 추가하여 사용자 안내 개선 ([7320a0f](https://github.com/K-Soo/hotel-job-front/commit/7320a0fbbbde1dfcc4924e494c61f1e6974338ab))
+* format-detection 메타 태그에 주소 및 이메일 비활성화 추가 ([6d53807](https://github.com/K-Soo/hotel-job-front/commit/6d53807a87b9b9b10887f1843c22ff87eaa512d0))
+* RecruitListContainer에서 Tabs 컴포넌트 제거 ([8e05994](https://github.com/K-Soo/hotel-job-front/commit/8e05994ea4839c467b21244b17f10ecd9c3dc4c6))
+* ResumeProfileSectionPreview에서 Image 컴포넌트를 ResumeProfileImage로 변경하여 코드 정리 ([e1bb3d5](https://github.com/K-Soo/hotel-job-front/commit/e1bb3d54abd3a25dd6a661604624fa696e10420b))
+* ResumeTitleForm에서 placeholder 텍스트 변경 및 margin-bottom 값 조정 ([229f50d](https://github.com/K-Soo/hotel-job-front/commit/229f50d532b3ef1dbaf9df8087f53046e5ee1fe1))
+* SignInContainer에서 Tabs 컴포넌트를 SignInTab으로 교체 ([2480dc8](https://github.com/K-Soo/hotel-job-front/commit/2480dc80551c328b054ab7c97225dab29fc12fa8))
+* SignInTab 컴포넌트 추가 및 탭 기능 구현 ([0e47dea](https://github.com/K-Soo/hotel-job-front/commit/0e47dea376da1827e982d36f8f354b8c3f8771ac))
+* SignInTab에서 불필요한 props 제거 및 기본 스타일 적용 ([b067910](https://github.com/K-Soo/hotel-job-front/commit/b067910e303ae7b49d7723ff95a7d072a06ce405))
+* Tabs 컴포넌트 삭제 ([0d26dca](https://github.com/K-Soo/hotel-job-front/commit/0d26dca8a68c138b1c7d515e4d4795330fd4f096))
+* UserResumeDetailContainer에 다이나믹 DaumPost 컴포넌트 추가 ([309b2c6](https://github.com/K-Soo/hotel-job-front/commit/309b2c6805e8ccc78e49f184c0deedf02502cb5a))
+
+
+### Styles
+
+* ResumeProfileImage 컴포넌트의 border-radius 값을 5px에서 8px로 변경 ([5cd25ef](https://github.com/K-Soo/hotel-job-front/commit/5cd25ef3201bb6edfd33e9647a38990661c770c0))
+
 ### [1.9.2](https://github.com/K-Soo/hotel-job-front/compare/v1.9.1...v1.9.2) (2025-03-05)
 
 
