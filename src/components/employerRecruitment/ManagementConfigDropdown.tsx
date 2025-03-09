@@ -22,11 +22,11 @@ const ManagementConfigDropdown = React.forwardRef<HTMLDivElement, ManagementConf
         }}
       >
         <S.MenuItem onClick={() => router.push(`/employer/recruitment/${id}`)}>
-          <span className="text">공고 수정</span>
+          <span className="text">채용공고 수정</span>
           <Icon name="Pen24x24" width="16px" height="16px" />
         </S.MenuItem>
 
-        {status === 'PROGRESS' && (
+        {(status === 'PUBLISHED' || status === 'DRAFT') && (
           <S.MenuItem onClick={() => handleCloseRecruitment(id)}>
             <span className="delete-text">이력서 삭제</span>
             <Icon name="Delete" width="16px" height="16px" />
@@ -47,7 +47,7 @@ const S = {
     top: 35px;
     right: 0;
     z-index: 10;
-    width: 200px;
+    width: 160px;
     height: auto;
     border-radius: 10px;
     background-color: white;
@@ -70,12 +70,12 @@ const S = {
       border-bottom: none;
     }
     .delete-text {
-      font-size: 12px;
+      font-size: 13px;
       font-weight: 300;
       color: ${(props) => props.theme.colors.red400};
     }
     .text {
-      font-size: 12px;
+      font-size: 13px;
       font-weight: 300;
       color: ${(props) => props.theme.colors.black400};
     }
