@@ -47,7 +47,13 @@ export default function FormArea<T extends FieldValues>({
           {label}
         </StyledLabel>
       )}
-      <StyledTextArea id={name + '-form-area'} maxLength={maxLength} {...register(name)} disabled={disabled} />
+      <StyledTextArea
+        id={name + '-form-area'}
+        maxLength={maxLength}
+        {...register(name)}
+        disabled={disabled}
+        placeholder="자신을 표현할 수 있는 간단한 자기소개를 해주세요!"
+      />
       {error && <FormError errors={errors} name={name} />}
     </S.FormArea>
   );
