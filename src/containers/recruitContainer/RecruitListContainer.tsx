@@ -10,7 +10,6 @@ import { ParsedUrlQuery } from 'querystring';
 import { useRouter } from 'next/router';
 import { keepPreviousData } from '@tanstack/react-query';
 import RecruitSectionTitle from '@/components/recruit/RecruitSectionTitle';
-import Tabs from '@/components/common/Tabs';
 import { recruitOrderFilterTabOptions } from '@/constants/tabs';
 import SkeletonUI from '@/components/common/SkeletonUI';
 import EmptyComponent from '@/components/common/EmptyComponent';
