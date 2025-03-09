@@ -6,7 +6,8 @@ import { useForm, FormProvider, SubmitHandler } from 'react-hook-form';
 import { SignInForm } from '@/types';
 import { schema } from '@/utils';
 import { yupResolver } from '@hookform/resolvers/yup';
-import Tabs from '@/components/common/Tabs';
+
+import SignInTab from '@/components/signIn/SignInTab';
 import CompanyForm from '@/components/signIn/CompanyForm';
 import GeneralForm from '@/components/signIn/GeneralForm';
 import { Auth } from '@/apis';
@@ -84,7 +85,7 @@ export default function SignInContainer() {
     <SignIn>
       <FormProvider {...methods}>
         <Logo size="middle" margin="0 0 50px 0" />
-        <Tabs margin="0 0 30px 0" tabsOptions={signInTabOptions} />
+        <SignInTab margin="0 0 30px 0" tabsOptions={signInTabOptions} />
         {type === 'general' && <GeneralForm />}
         {type === 'company' && <CompanyForm onSubmit={onSubmit} isSubmitError={isSubmitError} />}
       </FormProvider>
