@@ -43,19 +43,18 @@ export default function SignInContainer() {
   });
 
   React.useEffect(() => {
-    if (methods.formState.submitCount > 5) {
-      alert('5회 이상 로그인 시도를 하셨습니다.');
-      window.location.reload();
-    }
-  }, [methods.formState.submitCount]);
-
-  React.useEffect(() => {
     if (methods.formState) {
       setIsSubmitError(false);
     }
   }, [methods]);
 
   const onSubmit: SubmitHandler<SignInForm> = async (data) => {
+    if (methods.formState.submitCount >= 5) {
+      alert('5회 이상 로그인 시도를 하셨습니다.');
+      window.location.reload();
+      return;
+    }
+
     try {
       const response = await Auth.signIn({ userId: data.userId, password: data.password });
       console.log('로그인 API : ', response);
