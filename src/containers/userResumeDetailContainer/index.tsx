@@ -6,7 +6,7 @@ import { useRouter } from 'next/router';
 import UserResumeDetail from '@/components/userResumeDetail';
 import ResumeBottomController from '@/components/common/resume/ResumeBottomController';
 import { useForm, FormProvider, SubmitHandler } from 'react-hook-form';
-import { ResumeDetail, ResumeDetailForm } from '@/types';
+import { ResumeDetailForm } from '@/types';
 import { schema } from '@/utils';
 import { yupResolver } from '@hookform/resolvers/yup';
 import FormDevTools from '@/components/common/FormDevTools';
@@ -18,12 +18,18 @@ import ResumeProgress from '@/components/common/resume/ResumeProgress';
 import { useResumeContext } from '@/context/ResumeProvider';
 import ResumePreview from '@/components/common/resume/resumePreview';
 import LoadingSpinner from '@/components/common/LoadingSpinner';
+import { daumPostAtom } from '@/recoil/daumPost';
+import dynamic from 'next/dynamic';
+import { useRecoilValue } from 'recoil';
+
+const DynamicDaumPost = dynamic(() => import('@/components/common/DaumPost'), { ssr: false });
 
 export default function UserResumeDetailContainer() {
   const [resumePreviewData, setResumePreviewData] = React.useState<ResumeDetailForm | null>(null);
   const [isDisabled, setIsDisabled] = React.useState(false);
 
   const queryClient = useQueryClient();
+  const daumPostAtomValue = useRecoilValue(daumPostAtom);
 
   const router = useRouter();
   const { slug } = router.query;
@@ -153,7 +159,10 @@ export default function UserResumeDetailContainer() {
   if (isSuccess && data) {
     return (
       <FormProvider {...methods}>
+        {/* 이력서 미리보기 */}
         {resumePreviewData && <ResumePreview resumePreviewData={resumePreviewData} closeResume={() => setResumePreviewData(null)} />}
+        {daumPostAtomValue.isOpen && <DynamicDaumPost />}
+
         <UserResumeDetail>
           <ResumeProgress handleClickPreview={handleClickPreview} />
           <ResumeBottomController onSubmit={onSubmit} refetch={refetch} updatedAt={data.result.updatedAt} />

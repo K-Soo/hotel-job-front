@@ -1,14 +1,12 @@
 import React from 'react';
 import { ResumeDetail } from '@/types';
 import styled from 'styled-components';
-import { useFormContext } from 'react-hook-form';
 import { ResumeDetailForm } from '@/types';
 import { LOCAL_CODE, SEX_CODE } from '@/constants';
 import { CAREER_LEVEL } from '@/constants/resume';
 import useResponsive from '@/hooks/useResponsive';
 import { parseBirthDateAndCalculateAge } from '@/utils';
-import Image from 'next/image';
-
+import ResumeProfileImage from '@/components/common/resume/ResumeProfileImage';
 interface ProfileProps {
   resumePreviewData: ResumeDetail | ResumeDetailForm;
 }
@@ -58,12 +56,9 @@ export default function Profile({ resumePreviewData }: ProfileProps) {
           )}
         </div>
 
-        {profileImage && (
-          <div className="image-info">
-            <Image src={profileImage} className="image" alt="프로필 이미지" fill />
-          </div>
-        )}
+        {profileImage && <ResumeProfileImage imageUrl={profileImage} />}
       </article>
+
       {isTablet && (
         <>
           <S.PhoneBox>
@@ -90,20 +85,6 @@ const S = {
     .profile-preview-container {
       display: flex;
       justify-content: space-between;
-      .profile-info {
-      }
-      .image-info {
-        flex-shrink: 0;
-        border: 1px solid ${({ theme }) => theme.colors.gray200};
-        border-radius: 10px;
-        width: 110px;
-        height: 130px;
-        position: relative;
-        overflow: hidden;
-        ${(props) => props.theme.media.mobile`
-          margin-right: 15px;
-      `};
-      }
 
       ${(props) => props.theme.media.mobile`
         flex-direction: row-reverse;

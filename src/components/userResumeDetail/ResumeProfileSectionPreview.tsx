@@ -6,7 +6,7 @@ import { LOCAL_CODE, SEX_CODE } from '@/constants';
 import { CAREER_LEVEL } from '@/constants/resume';
 import useResponsive from '@/hooks/useResponsive';
 import { parseBirthDateAndCalculateAge } from '@/utils';
-import Image from 'next/image';
+import ResumeProfileImage from '@/components/common/resume/ResumeProfileImage';
 
 export default function ResumeProfileSectionPreview() {
   const [previewImage, setPreviewImage] = React.useState('');
@@ -43,6 +43,7 @@ export default function ResumeProfileSectionPreview() {
           </S.NameWithCareerBox>
 
           <S.CertInfoBox>
+            {/* 외국인 */}
             {localCode === '02' && (
               <>
                 <span>{LOCAL_CODE[localCode]}</span>&nbsp;•&nbsp;
@@ -71,12 +72,9 @@ export default function ResumeProfileSectionPreview() {
           )}
         </div>
 
-        {previewImage && (
-          <div className="image-info">
-            <Image src={previewImage} className="image" alt="프로필 이미지" fill priority />
-          </div>
-        )}
+        {previewImage && <ResumeProfileImage imageUrl={previewImage} />}
       </article>
+
       {isTablet && (
         <>
           <S.PhoneBox>
@@ -104,26 +102,15 @@ const S = {
       display: flex;
       justify-content: space-between;
       .profile-info {
-      }
-      .image-info {
-        flex-shrink: 0;
-        border: 1px solid ${({ theme }) => theme.colors.gray200};
-        border-radius: 10px;
-        width: 110px;
-        height: 130px;
-        position: relative;
-        overflow: hidden;
-        img {
-          object-fit: cover;
-        }
         ${(props) => props.theme.media.mobile`
-          margin-right: 15px;
+          margin-left: 15px;
       `};
       }
 
       ${(props) => props.theme.media.mobile`
         flex-direction: row-reverse;
         justify-content: flex-end;
+        margin-bottom: 30px;
       `};
     }
   `,

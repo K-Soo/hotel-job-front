@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import ResumeProfileImage from '@/components/common/resume/ResumeProfileImage';
+import ResumeUploadProfileImageForm from '@/components/common/resume/ResumeUploadProfileImageForm';
 import FormInput from '@/components/common/form/FormInput';
 import FormMapSelect from '@/components/common/form/FormMapSelect';
 import Button from '@/components/common/style/Button';
@@ -81,7 +81,7 @@ export default function ResumeProfileSection() {
           <FormInput<ResumeDetailForm> name="email" label="이메일" maxWidth="295px" maxLength={30} />
         </div>
 
-        <ResumeProfileImage<ResumeDetailForm> name="profileImage" />
+        <ResumeUploadProfileImageForm<ResumeDetailForm> name="profileImage" />
       </article>
 
       <S.AddressBox>

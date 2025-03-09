@@ -29,7 +29,14 @@ export default function ResumeTitleForm({ name }: ResumeTitleFormProps) {
 
   return (
     <S.ResumeTitleForm>
-      <input type="text" className="title-input" placeholder="이력서 제목" maxLength={25} {...register(name)} disabled={!isEditing} />
+      <input
+        type="text"
+        className="title-input"
+        placeholder="이력서 제목을 작성해주세요."
+        maxLength={25}
+        {...register(name)}
+        disabled={!isEditing}
+      />
       <FormError errors={errors} name={name} />
     </S.ResumeTitleForm>
   );
@@ -37,7 +44,10 @@ export default function ResumeTitleForm({ name }: ResumeTitleFormProps) {
 
 const S = {
   ResumeTitleForm: styled.div`
-    margin-bottom: 5px;
+    margin-bottom: 30px;
+    ${(props) => props.theme.media.mobile`
+      margin-bottom: 15px;
+    `};
     .title-input {
       all: unset;
       font-size: 28px;

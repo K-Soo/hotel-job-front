@@ -33,6 +33,7 @@ const SPACES_VALID_TEXT_1 = '공백';
 export const validation = {
   USER_ID: yup
     .string()
+    .required()
     .test('no-repeated-chars', '연속된 동일 문자를 사용할 수 없습니다.', (value) => {
       if (!value) return false;
       return !/(.)\1{2,}/.test(value);
@@ -41,8 +42,7 @@ export const validation = {
       if (!value) return false;
       return !BLACKLISTED_NAMES.some((word) => value.toLowerCase().includes(word));
     })
-    .matches(regex.userId, '8~16자의 영문 소문자 및 숫자 조합')
-    .required(),
+    .matches(regex.userId, '8~16자의 영문 소문자 및 숫자 조합'),
 
   PASSWORD: yup.string().required().matches(regex.password, '비밀번호 형식을 확인해주세요.'),
   PASSWORD_CONFIRM: yup

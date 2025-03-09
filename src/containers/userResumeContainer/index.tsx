@@ -73,7 +73,7 @@ export default function UserResumeContainer() {
         <UserTemplate>
           <UserTitle title="내 이력서" />
           <div style={{ width: '100%', display: 'flex', justifyContent: 'space-between', margin: '0 0 15px 0' }}>
-            <CreateResumeButton margin="0 0 0 0" type="new" handleClickCreateResumeButton={handleClickCreateResumeButton} />
+            <CreateResumeButton margin="0" type="new" handleClickCreateResumeButton={handleClickCreateResumeButton} />
             {/* <CreateResumeButton type="file" handleClickCreateResumeButton={handleClickCreateResumeButton} /> */}
           </div>
 

@@ -20,7 +20,6 @@ export default function DaumPost({ addressName = 'address', addressDetailName = 
 
   const handleComplete = (data: Address) => {
     const { address, addressType, buildingName, zonecode, jibunAddress, sido, sigungu } = data;
-    console.log('@@@@@@@@@@@@@@: ', data);
 
     let fullAddress = address;
     let extraAddress = '';
@@ -40,7 +39,7 @@ export default function DaumPost({ addressName = 'address', addressDetailName = 
     }
 
     setValue(addressName, fullAddress);
-
+    setValue(addressDetailName, '');
     setFocus(addressDetailName);
     resetDaumPostAtom();
   };

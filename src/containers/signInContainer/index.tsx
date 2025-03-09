@@ -6,8 +6,8 @@ import { useForm, FormProvider, SubmitHandler } from 'react-hook-form';
 import { SignInForm } from '@/types';
 import { schema } from '@/utils';
 import { yupResolver } from '@hookform/resolvers/yup';
-import FormDevTools from '@/components/common/FormDevTools';
-import Tabs from '@/components/common/Tabs';
+
+import SignInTab from '@/components/signIn/SignInTab';
 import CompanyForm from '@/components/signIn/CompanyForm';
 import GeneralForm from '@/components/signIn/GeneralForm';
 import { Auth } from '@/apis';
@@ -24,6 +24,7 @@ export interface UrlQuery extends ParsedUrlQuery {
 
 export default function SignInContainer() {
   const [isSubmitError, setIsSubmitError] = React.useState(false);
+  const [isLoading, setIsLoading] = React.useState(false);
 
   const router = useRouter();
   const { type = 'general' } = router.query as UrlQuery;
@@ -42,19 +43,18 @@ export default function SignInContainer() {
   });
 
   React.useEffect(() => {
-    if (methods.formState.submitCount > 5) {
-      alert('5회 이상 로그인 시도를 하셨습니다.');
-      window.location.reload();
-    }
-  }, [methods.formState.submitCount]);
-
-  React.useEffect(() => {
     if (methods.formState) {
       setIsSubmitError(false);
     }
   }, [methods]);
 
   const onSubmit: SubmitHandler<SignInForm> = async (data) => {
+    if (methods.formState.submitCount >= 5) {
+      alert('5회 이상 로그인 시도를 하셨습니다.');
+      window.location.reload();
+      return;
+    }
+
     try {
       const response = await Auth.signIn({ userId: data.userId, password: data.password });
       console.log('로그인 API : ', response);
@@ -83,11 +83,10 @@ export default function SignInContainer() {
   return (
     <SignIn>
       <FormProvider {...methods}>
-        <Logo size="middle" margin="0 0 30px 0" />
-        <Tabs margin="0 0 30px 0" tabsOptions={signInTabOptions} />
+        <Logo size="middle" margin="0 0 50px 0" />
+        <SignInTab tabsOptions={signInTabOptions} />
         {type === 'general' && <GeneralForm />}
         {type === 'company' && <CompanyForm onSubmit={onSubmit} isSubmitError={isSubmitError} />}
-        {/* <FormDevTools control={methods.control} /> */}
       </FormProvider>
     </SignIn>
   );
