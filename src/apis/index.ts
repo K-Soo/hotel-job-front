@@ -37,11 +37,8 @@ instance.interceptors.response.use(
 
     // access token 위조
     // refresh token 만료 or 누락 or 위조
-    const shouldLogoutUser =
-      responseData?.error?.code === 'ERR-1020' ||
-      responseData?.error?.code === 'ERR-1021' ||
-      responseData?.error?.code === 'ERR-1022' ||
-      responseData?.error?.code === 'ERR-1002';
+    // TODO - 리펙토링
+    const shouldLogoutUser = responseData?.error?.code === 'ERR-1020' || responseData?.error?.code === 'ERR-1021' || responseData?.error?.code === 'ERR-1022' || responseData?.error?.code === 'ERR-1002';
 
     //소셜로그인 초기 로그인 요청을 했는데 서버에서 userId로 사용자를 찾을수없을때
     const notFoundUser = responseData?.error?.code === 'ERR-1030';
@@ -421,7 +418,7 @@ export const Patch = {
   
   // 사업자 - 비밀번호 변경
   employerAccountReset: (body: API.EmployerAccountResetRequest) => requests.patch<API.EmployerAccountResetRequest, API.EmployerAccountResetResponse>('/employers/account/reset', body),
-  
+
   // 유저 - 공고 지원취소
   cancelApplication: (body: { applicationId: number }) => requests.patch<{ applicationId: number }, API.CancelApplicationResponse>('/applications/cancel', body),
 };
