@@ -4,15 +4,14 @@ import Link from 'next/link';
 import Icon from '@/icons/Icon';
 import React from 'react';
 import { SubmitHandler, useFormContext } from 'react-hook-form';
-import { CreateRecruitmentForm, RecruitmentDetailForm, RecruitmentStatusKeys } from '@/types';
-import { dateFormat } from '@/utils';
+import { CreateRecruitmentForm, RecruitmentDetailForm } from '@/types';
 
 interface RecruitmentDetailProgressMenuProps {
   fetchDraftRecruitment: () => Promise<void>;
   children: React.ReactNode;
 }
 
-function RecruitmentDetailProgressMenu({ fetchDraftRecruitment, children }: RecruitmentDetailProgressMenuProps) {
+function RecruitmentDetailProgressMenu({ children }: RecruitmentDetailProgressMenuProps) {
   const { watch, handleSubmit } = useFormContext<CreateRecruitmentForm | RecruitmentDetailForm>();
 
   // const updatedAtWatchValue = watch('updatedAt');
