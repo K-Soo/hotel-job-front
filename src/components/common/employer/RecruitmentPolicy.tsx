@@ -7,8 +7,6 @@ function RecruitmentPolicy() {
       <h5 className="policy-title">공고 등록 확인</h5>
       <p className="policy-text">최저임금을 준수하지 않는 경우, 공고 강제 마감 및 행정처분을 받을 수 있습니다.</p>
       <p className="policy-text">채용절차 공정화 법상 금지되는 개인 정보를 요구하는 경우, 공고 강제 마감 및 행정처분을 받을 수 있습니다.</p>
-      <p className="policy-text">최저임금을 준수하지 않는 경우, 공고 강제 마감 및 행정처분을 받을 수 있습니다.</p>
-      <p className="policy-text">최저임금을 준수하지 않는 경우, 공고 강제 마감 및 행정처분을 받을 수 있습니다.</p>
     </RecruitmentPolicyContainer>
   );
 }
