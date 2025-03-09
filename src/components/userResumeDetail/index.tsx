@@ -75,6 +75,7 @@ export default function UserResumeDetail({ children }: UserResumeDetailProps) {
       <article className="resume-container">
         <ResumePrevuesNavigation />
 
+        {isEditing && <S.TitleSectionName>이력서 제목</S.TitleSectionName>}
         <ResumeTitleForm name="title" />
 
         {/* 기본정보 */}
@@ -169,5 +170,10 @@ const S = {
     .resume-container {
       flex: 1;
     }
+  `,
+  TitleSectionName: styled.div`
+    font-size: 18px;
+    /* font-weight: 500; */
+    margin-bottom: 5px;
   `,
 };

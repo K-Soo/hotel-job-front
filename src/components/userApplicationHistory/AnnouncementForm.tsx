@@ -24,19 +24,12 @@ export default function AnnouncementForm({ selectedApplication }: AnnouncementFo
 }
 
 const S = {
-  AnnouncementForm: styled.div`
-    margin: 0 10px;
-  `,
+  AnnouncementForm: styled.div``,
   AnnouncementFormContent: styled.div`
-    padding-top: 30px;
-    padding-bottom: 30px;
-    border-bottom: 1px solid ${({ theme }) => theme.colors.gray300};
-    &:first-child {
-      padding-top: 0;
-    }
-    &:last-child {
-      border-bottom: none;
-    }
+    background-color: ${({ theme }) => theme.colors.gray};
+    padding: 15px;
+    border-radius: 15px;
+    margin-bottom: 50px;
     .announced-at {
       display: flex;
       justify-content: flex-end;
@@ -55,10 +48,9 @@ const S = {
     .message {
       width: 100%;
       resize: none;
-      border: 1px solid ${({ theme }) => theme.colors.gray200};
-      padding: 10px 8px;
-      border-radius: 5px;
       outline: none;
+      border: none;
+      background-color: inherit;
     }
   `,
 };

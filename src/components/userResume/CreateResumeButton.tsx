@@ -32,12 +32,13 @@ const S = {
     color: ${({ theme }) => theme.colors.gray500};
     margin: ${({ $margin }) => $margin || '0'};
     width: 100%;
-    height: 80px;
+    height: 100px;
     border-radius: 15px;
     display: flex;
     align-items: center;
     justify-content: center;
     font-weight: 400;
+    font-size: 18px;
     /* background-color: ${({ theme }) => theme.colors.gray}; */
     cursor: pointer;
     ${(props) => props.theme.media.tablet`
