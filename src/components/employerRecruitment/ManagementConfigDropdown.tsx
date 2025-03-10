@@ -22,7 +22,7 @@ const ManagementConfigDropdown = React.forwardRef<HTMLDivElement, ManagementConf
         }}
       >
         <S.MenuItem onClick={() => router.push(`/employer/recruitment/${id}`)}>
-          <span className="text">채용공고 수정</span>
+          <span className="text">공고 수정</span>
           <Icon name="Pen24x24" width="16px" height="16px" />
         </S.MenuItem>
 
