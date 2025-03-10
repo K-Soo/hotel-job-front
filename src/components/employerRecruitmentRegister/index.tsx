@@ -27,18 +27,18 @@ export default function EmployerRecruitmentRegister({
       <div className="register-container">
         <form className="register-container__form">
           <EmployerTemplateForm height="100%">
-            <EmployerTemplateForm.SubTitle title="공고 기본 설정" size="large" id="basic" />
+            <EmployerTemplateForm.SubTitle title="공고 기본 설정" size="large" id="default" />
 
             <EmployerTemplateForm.Content marginBottom="80px">
               <RecruitmentRegisterBasicForm />
             </EmployerTemplateForm.Content>
 
-            <EmployerTemplateForm.SubTitle title="모집내용" size="large" id="detail" />
+            <EmployerTemplateForm.SubTitle title="모집내용" size="large" id="recruitment" />
             <EmployerTemplateForm.Content marginBottom="80px">
               <RegisterInfoForm setIsOpenJobModal={setIsOpenJobModal} setIsOpenPreferencesModal={setIsOpenPreferencesModal} />
             </EmployerTemplateForm.Content>
 
-            <EmployerTemplateForm.SubTitle title="상세 모집내용" size="large" id="detail" />
+            <EmployerTemplateForm.SubTitle title="상세 모집내용" size="large" id="recruitment-detail" />
             <EmployerTemplateForm.Content marginBottom="80px">
               <FormEditor<CreateRecruitmentForm> name="content" />
             </EmployerTemplateForm.Content>
