@@ -49,3 +49,12 @@ export const WORKING_DAY_LIST = {
   ALTERNATE_NIGHT_SHIFT: '격일제 (24시간 야간 맞교대)',
   ALTERNATE_2DAY_OFF: '격일제 (24시간 근무 2일 휴무)',
 };
+
+export const PROGRESS_MENU = [
+  { id: 'default', title: '공고 제목' },
+  { id: 'recruitment', title: '모집내용' },
+  { id: 'recruitment-detail', title: '상세 모집내용' },
+  { id: 'condition', title: '근무 조건' },
+  { id: 'place', title: '근무지 정보' },
+  { id: 'manager', title: '담당자 정보' },
+] as const;
