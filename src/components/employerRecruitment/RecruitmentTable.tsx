@@ -16,6 +16,7 @@ interface RecruitmentTableBodyProps {
   handleClickRecruitmentItem: (id: string, status: RecruitmentStatusKeys) => void;
   handleClickCheckBoxItem: (event: React.ChangeEvent<HTMLInputElement>) => void;
   handleCloseRecruitment: (recruitmentId: string) => Promise<void>;
+  handleClickDeleteRecruitment: (ids: string[]) => Promise<void>;
 }
 
 export default function RecruitmentTable({ children }: RecruitmentTableProps) {
@@ -41,6 +42,7 @@ function RecruitmentTableBody({
   checkedItems,
   handleClickCheckBoxItem,
   handleCloseRecruitment,
+  handleClickDeleteRecruitment,
 }: RecruitmentTableBodyProps) {
   return (
     <S.RecruitmentTableBody>
@@ -74,7 +76,12 @@ function RecruitmentTableBody({
           </div>
 
           <div className="item__management">
-            <ManagementOverview status={item.recruitmentStatus} id={item.id} handleCloseRecruitment={handleCloseRecruitment} />
+            <ManagementOverview
+              status={item.recruitmentStatus}
+              id={item.id}
+              handleCloseRecruitment={handleCloseRecruitment}
+              handleClickDeleteRecruitment={handleClickDeleteRecruitment}
+            />
           </div>
         </div>
       ))}
@@ -86,7 +93,6 @@ const S = {
   RecruitmentTable: styled.div`
     width: 100%;
     border-top: 1px solid ${(props) => props.theme.colors.gray700};
-    border-bottom: 1px solid ${(props) => props.theme.colors.gray700};
   `,
   RecruitmentTableHeader: styled.div`
     height: 50px;
@@ -124,7 +130,7 @@ const S = {
     }
   `,
   RecruitmentTableBody: styled.div`
-    background-color: ${(props) => props.theme.colors.blue};
+    min-height: 360px;
     .item {
       height: 60px;
       display: flex;
@@ -133,6 +139,7 @@ const S = {
       border-bottom: 1px solid ${(props) => props.theme.colors.gray300};
       background-color: ${(props) => props.theme.colors.white};
       font-size: 14px;
+
       &:hover {
         background-color: ${(props) => props.theme.colors.blue};
       }
