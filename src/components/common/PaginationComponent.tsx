@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { PaginationInfo } from '@/types/API';
 import { motion } from 'framer-motion';
 import { useRouter } from 'next/router';
@@ -64,20 +64,13 @@ export default function PaginationComponent({ margin, pagination }: PaginationCo
     );
   };
 
-  if (totalPages === 1) return null;
+  // if (totalPages === 1) return null;
 
   return (
     <S.PaginationComponent $margin={margin}>
-      <button className="arrow" disabled={!prevPage} onClick={handleClickPrevArrow}>
-        {prevPage && (
-          <Icon
-            name="ArrowRight16x16"
-            width="16px"
-            height="16px"
-            style={{ transform: 'rotate(180deg)', color: prevPage ? '#000' : '#999', cursor: prevPage ? 'pointer' : 'default' }}
-          />
-        )}
-      </button>
+      <StyledPrevArrow disabled={!prevPage} onClick={handleClickPrevArrow} $active={prevPage === null ? false : true}>
+        <Icon className="arrow-icon" name="ArrowRight16x16" width="16px" height="16px" />
+      </StyledPrevArrow>
 
       <S.PageNumbers>
         {pageGroup.map((element) => (
@@ -91,26 +84,77 @@ export default function PaginationComponent({ margin, pagination }: PaginationCo
               color: element === currentPage ? '#FFFFFF' : '#8b95a1',
               backgroundColor: element === currentPage ? '#3182f6' : '#FFFFFF',
             }}
-            transition={{ duration: 0.1 }}
+            transition={{ duration: 0 }}
           >
             {element}
           </S.Page>
         ))}
       </S.PageNumbers>
 
-      <button className="arrow" disabled={currentPage === totalPages} onClick={handleClickNextArrow}>
-        {currentPage !== totalPages && (
-          <Icon
-            name="ArrowRight16x16"
-            width="16px"
-            height="16px"
-            style={{ color: currentPage === totalPages ? '#999' : '#000', cursor: currentPage === totalPages ? 'default' : 'pointer' }}
-          />
-        )}
-      </button>
+      <StyledNextArrow
+        disabled={currentPage === totalPages}
+        onClick={handleClickNextArrow}
+        $active={currentPage === totalPages ? false : true}
+      >
+        <Icon className="arrow-icon" name="ArrowRight16x16" width="16px" height="16px" />
+      </StyledNextArrow>
     </S.PaginationComponent>
   );
 }
+
+const StyledArrowCommon = css`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  cursor: not-allowed;
+`;
+
+const StyledPrevArrow = styled.button<{ $active: boolean }>`
+  ${StyledArrowCommon}
+  ${(props) =>
+    props.$active &&
+    css`
+      cursor: pointer;
+      &:hover {
+        background-color: ${(props) => props.theme.colors.gray100};
+      }
+    `};
+  .arrow-icon {
+    color: #999;
+    transform: rotate(180deg);
+    pointer-events: none;
+    ${(props) =>
+      props.$active &&
+      css`
+        color: #000000;
+      `};
+  }
+`;
+
+const StyledNextArrow = styled.button<{ $active: boolean }>`
+  ${StyledArrowCommon}
+  ${(props) =>
+    props.$active &&
+    css`
+      cursor: pointer;
+      &:hover {
+        background-color: ${(props) => props.theme.colors.gray100};
+      }
+    `};
+  .arrow-icon {
+    color: #999;
+    pointer-events: none;
+    ${(props) =>
+      props.$active &&
+      css`
+        color: #000000;
+      `};
+  }
+`;
 
 const S = {
   PaginationComponent: styled.div<{ $margin?: string }>`
@@ -129,20 +173,20 @@ const S = {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 0 10px;
+    margin: 0 2px;
   `,
   Page: styled(motion.button)`
     box-sizing: border-box;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 28px;
-    height: 28px;
+    width: 26px;
+    height: 26px;
     font-size: 14px;
     font-weight: 400;
     line-height: 24px;
     border-radius: 50%;
-    margin: 0 8px;
+    margin: 0 6px;
     cursor: pointer;
   `,
 };

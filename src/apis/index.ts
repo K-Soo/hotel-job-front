@@ -297,8 +297,7 @@ export const Get = {
 
   // *************************************** PAYMENT  ***************************************
   // 사업자 채용공고 결제 초기요청
-  getPaymentRecruitmentDetail: ({ orderId }: { orderId: string }) =>
-    requests.get<API.GetPaymentRecruitmentDetailResponse>(`/payment/recruitment/${orderId}`),
+  getPaymentRecruitmentDetail: ({ orderId }: { orderId: string }) => requests.get<API.GetPaymentRecruitmentDetailResponse>(`/payment/recruitment/${orderId}`),
   // 사업자 - 상품 결제 내역
   getEmployerPaymentList: () => requests.get<API.GetEmployerPaymentListResponse>(`/payment`),
 
@@ -415,6 +414,8 @@ export const Patch = {
 
   // 사업자 - 채용공고 마감
   closedRecruitment: (body: { recruitmentId: string }) => requests.patch<{ recruitmentId: string }, API.RemoveRecruitmentResponse>('/employers/recruitment/close', body),
+
+
   
   // 사업자 - 비밀번호 변경
   employerAccountReset: (body: API.EmployerAccountResetRequest) => requests.patch<API.EmployerAccountResetRequest, API.EmployerAccountResetResponse>('/employers/account/reset', body),
@@ -429,4 +430,7 @@ export const Delete = {
 
   //유저 - 계정삭제 요청
   deactivateApplicantUser: () => requests.delete<API.DeactivateApplicantUserResponse>(`/applicants/deactivate`),
+
+  // 사업자 - 채용공고 삭제
+  removeRecruitment: ({ recruitmentId }: { recruitmentId:string }) => requests.delete<any>(`/employers/recruitment/remove/${recruitmentId}`),
 };
