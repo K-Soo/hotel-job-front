@@ -10,9 +10,10 @@ interface ManagementOverviewProps {
   id: string;
   status: RecruitmentStatusKeys;
   handleCloseRecruitment: (recruitmentId: string) => void;
+  handleClickDeleteRecruitment: (ids: string[]) => Promise<void>;
 }
 
-export default function ManagementOverview({ id, status, handleCloseRecruitment }: ManagementOverviewProps) {
+export default function ManagementOverview({ id, status, handleCloseRecruitment, handleClickDeleteRecruitment }: ManagementOverviewProps) {
   const [isDropdownOpen, setIsDropdownOpen] = React.useState(false);
 
   const dropdownRef = React.useRef<HTMLDivElement>(null);
@@ -33,8 +34,8 @@ export default function ManagementOverview({ id, status, handleCloseRecruitment 
     };
   }, [isDropdownOpen]);
 
-  if (status === 'DRAFT' || status === 'CLOSED') {
-    return <span>{'-'}</span>;
+  if (status === 'CLOSED') {
+    return null;
   }
 
   return (
@@ -44,7 +45,13 @@ export default function ManagementOverview({ id, status, handleCloseRecruitment 
       </IconHover>
 
       {isDropdownOpen && (
-        <ManagementConfigDropdown status={status} ref={dropdownRef} handleCloseRecruitment={handleCloseRecruitment} id={id} />
+        <ManagementConfigDropdown
+          ref={dropdownRef}
+          id={id}
+          status={status}
+          handleCloseRecruitment={handleCloseRecruitment}
+          handleClickDeleteRecruitment={handleClickDeleteRecruitment}
+        />
       )}
     </S.ManagementOverview>
   );
