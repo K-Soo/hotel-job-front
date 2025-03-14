@@ -10,16 +10,17 @@ import { ParsedUrlQuery } from 'querystring';
 import { useRouter } from 'next/router';
 import { keepPreviousData } from '@tanstack/react-query';
 import RecruitSectionTitle from '@/components/recruit/RecruitSectionTitle';
-import { recruitOrderFilterTabOptions } from '@/constants/tabs';
 import SkeletonUI from '@/components/common/SkeletonUI';
 import EmptyComponent from '@/components/common/EmptyComponent';
-import { AllJobsKeyValuesKeys } from '@/constants/job';
 
 interface Query extends ParsedUrlQuery {
   page?: string;
   job?: any;
 }
 
+const BASIC_LIST_LIMIT = '20';
+
+// TODO - 필터 적용
 export default function RecruitListContainer() {
   const { isTablet } = useResponsive();
 
@@ -28,7 +29,7 @@ export default function RecruitListContainer() {
 
   const { data, isLoading, isSuccess } = useFetchQuery({
     queryFn: Get.getRecruitBasicList,
-    queryKey: [queryKeys.RECRUIT_BASIC_LIST, { limit: '20', type: 'BASIC', page, job }],
+    queryKey: [queryKeys.RECRUIT_BASIC_LIST, { limit: BASIC_LIST_LIMIT, type: 'RECRUIT', page, job }],
     options: {
       enabled: true,
       staleTime: 60 * 1000 * 5,
@@ -38,7 +39,7 @@ export default function RecruitListContainer() {
     },
     requestQuery: {
       page,
-      limit: '20',
+      limit: BASIC_LIST_LIMIT,
       type: 'RECRUIT',
       job,
     },
@@ -49,9 +50,6 @@ export default function RecruitListContainer() {
   if (isLoading) {
     return (
       <>
-        {/* <div style={{ display: 'flex', justifyContent: 'flex-end', margin: '0' }}>
-          <SkeletonUI.Line style={{ height: '35px', width: '180px' }} />
-        </div> */}
         <SkeletonUI.Line style={{ height: '24px', width: '147px', marginBottom: '10px' }} />
         <SkeletonUI.RecruitBasicList count={2} />
       </>
@@ -72,16 +70,6 @@ export default function RecruitListContainer() {
 
     return (
       <>
-        {/* <div style={{ display: 'flex', justifyContent: 'flex-end', margin: '0' }}>
-          <Tabs
-            tabsOptions={recruitOrderFilterTabOptions}
-            width="180px"
-            height="35px"
-            fontSize="13px"
-            fontColor="gray"
-            backgroundColor="#FFFFFF"
-          />
-        </div> */}
         <RecruitSectionTitle title="일반채용" count={data.result.pagination.totalItems} />
         {data.result.items.map((item, index) => {
           if (isTablet) {
