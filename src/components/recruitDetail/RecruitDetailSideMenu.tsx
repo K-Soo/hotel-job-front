@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import Button from '@/components/common/style/Button';
-import Dimmed from '@/components/common/Dimmed';
 import useAuth from '@/hooks/useAuth';
 import path from '@/constants/path';
 import { useRouter } from 'next/router';
@@ -39,6 +38,14 @@ export default function RecruitDetailSideMenu({
 }: RecruitDetailSideMenuProps) {
   const { isAuthenticated, role } = useAuth();
   const router = useRouter();
+
+  if (role !== 'JOB_SEEKER') {
+    return (
+      <S.RecruitDetailSideMenu>
+        <Button label="지원자 전용" variant="secondary" height="50px" borderRadius="10px" fontSize="18px" disabled />
+      </S.RecruitDetailSideMenu>
+    );
+  }
 
   if (applyStatus === 'idle') {
     return (
