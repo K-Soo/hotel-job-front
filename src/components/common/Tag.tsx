@@ -1,6 +1,6 @@
 import styled, { css, keyframes } from 'styled-components';
 
-type TagType = 'BEST' | 'URGENT' | 'VERIFIED' | 'UNVERIFIED' | 'DEFAULT_RESUME' | 'DRAFT';
+type TagType = 'BEST' | 'URGENT' | 'VERIFIED' | 'UNVERIFIED' | 'DEFAULT_RESUME' | 'DRAFT' | 'ATTENTION';
 
 interface TagProps {
   label: string;
@@ -61,7 +61,7 @@ export default function Tag({
       $height={height}
       $type={type}
     >
-      {/* {type === 'URGENT' && '🔥 '} */}
+      {type === 'ATTENTION' && '✨ '}
       {label}
     </S.Tag>
   );
@@ -89,11 +89,12 @@ const S = {
     padding: ${(props) => props.$padding || '3px 8px'};
     width: ${(props) => props.$width || 'auto'};
     height: ${(props) => props.$height || 'auto'};
-    display: flex;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
     pointer-events: none;
     user-select: none;
+    white-space: nowrap;
     ${(props) =>
       props.$type === 'BEST' &&
       css`
@@ -112,6 +113,47 @@ const S = {
         border: none;
         overflow: hidden;
         padding: 3px 6px;
+        position: relative;
+        &::before {
+          position: absolute;
+          content: '';
+          display: inline-block;
+          top: -180px;
+          left: 0;
+          width: 30px;
+          height: 100%;
+          background-color: #fff;
+          animation: ${twinkle} 6s ease-in-out infinite;
+        }
+      `};
+
+    ${(props) =>
+      props.$type === 'URGENT' &&
+      css`
+        color: ${props.theme.colors.white};
+        background-color: ${props.theme.colors.red500};
+        border: none;
+        overflow: hidden;
+        padding: 3px 6px;
+        position: relative;
+        &::before {
+          position: absolute;
+          content: '';
+          display: inline-block;
+          top: -180px;
+          left: 0;
+          width: 30px;
+          height: 100%;
+          background-color: #fff;
+          animation: ${twinkle} 6s ease-in-out infinite;
+        }
+      `};
+    ${(props) =>
+      props.$type === 'ATTENTION' &&
+      css`
+        color: ${props.theme.colors.black400};
+        border: none;
+        overflow: hidden;
         position: relative;
         &::before {
           position: absolute;
