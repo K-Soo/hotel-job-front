@@ -50,7 +50,7 @@ export default function RecruitDetailContainer() {
 
   React.useEffect(() => {
     if (!applyCheckData) {
-      return setApplyStatus('idle');
+      return;
     }
 
     if (applyCheckData.result.status === 'available') {

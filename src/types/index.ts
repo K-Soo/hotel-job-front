@@ -676,7 +676,7 @@ export interface RecruitListItem {
   salaryType: SalaryTypeKeys;
   address: string;
   addressDetail: string;
-  paymentRecruitment: PaymentRecruitment[];
+  paymentRecruitment: PaymentRecruitment;
   priorityDate: Date;
   recruitmentStatus: RecruitmentStatusKeys;
   employmentType: {

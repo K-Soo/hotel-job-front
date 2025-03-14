@@ -1,6 +1,6 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
-import { motion, useAnimationControls } from 'framer-motion';
+import { useAnimationControls } from 'framer-motion';
 import Icon from '@/icons/Icon';
 import Tag from '@/components/common/Tag';
 import RecruitPrice from '@/components/recruit/RecruitPrice';
@@ -35,11 +35,11 @@ export default function RecruitDesktopCard({ item }: RecruitDesktopCardProps) {
     let hasHighlightEffect = false;
     let hasTagEffect = false;
 
-    item.paymentRecruitment?.[0]?.options?.forEach((option) => {
+    item.paymentRecruitment.options?.forEach((option) => {
       const postingEndDate = option.postingEndDate ? new Date(option.postingEndDate) : null;
 
       if (postingEndDate && currentDate <= postingEndDate) {
-        if (option.name === 'LIST_UP') hasBoldEffect = true;
+        if (option.name === 'BOLD') hasBoldEffect = true;
         if (option.name === 'HIGHLIGHT') hasHighlightEffect = true;
         if (option.name === 'TAG') hasTagEffect = true;
       }
@@ -68,12 +68,7 @@ export default function RecruitDesktopCard({ item }: RecruitDesktopCardProps) {
   };
 
   return (
-    <S.RecruitDesktopCard
-      onClick={(event) => {
-        event.stopPropagation();
-      }}
-      $isClosed={item.recruitmentStatus === 'CLOSED'}
-    >
+    <S.RecruitDesktopCard onClick={() => router.push(`/recruit/${item.id}`)} $isClosed={item.recruitmentStatus === 'CLOSED'}>
       <S.Body>
         <S.LocationRow>
           <div className="location-box">
@@ -82,7 +77,7 @@ export default function RecruitDesktopCard({ item }: RecruitDesktopCardProps) {
           </div>
         </S.LocationRow>
 
-        <S.Summary onClick={() => router.push(`/recruit/${item.id}`)}>
+        <S.Summary>
           <StyledTitle $isBold={isBold} $isHighlight={isHighlight}>
             {isTag && <Tag label="급구" type="URGENT" width="32px" margin="0 5px 0 0" fontSize="11px" height="17px" />}
             <h5 className="text">{item.recruitmentTitle}</h5>
@@ -95,7 +90,8 @@ export default function RecruitDesktopCard({ item }: RecruitDesktopCardProps) {
             <Icon className="icon" name="ExternalLinkB50x50" onClick={handleClickBlank} width="22px" height="22px" />
           </IconDimmed>
 
-          {/* <Icon
+          {/*  TODO : 드롭다운
+          <Icon
             className="icon"
             name="SearchPlusA24x24"
             width="18px"
@@ -107,17 +103,15 @@ export default function RecruitDesktopCard({ item }: RecruitDesktopCardProps) {
           /> */}
         </S.Utils>
 
-        {item.jobs.length > 1 ? (
-          <S.JobRow>
+        <S.JobRow>
+          {item.jobs.length > 1 ? (
             <span>
               {ALL_JOBS[item.jobs[0]]} 외 {item.jobs.length - 1}
             </span>
-          </S.JobRow>
-        ) : (
-          <S.JobRow>
+          ) : (
             <span>{ALL_JOBS[item.jobs[0]]}</span>
-          </S.JobRow>
-        )}
+          )}
+        </S.JobRow>
 
         <S.InfoRow>
           <span className="text">{EXPERIENCE_CONDITION[item.experienceCondition]}</span>
@@ -143,6 +137,7 @@ export default function RecruitDesktopCard({ item }: RecruitDesktopCardProps) {
     </S.RecruitDesktopCard>
   );
 }
+
 const StyledTitle = styled.div<{ $isBold: boolean; $isHighlight: boolean }>`
   width: fit-content;
   margin-bottom: 4px;
@@ -155,9 +150,7 @@ const StyledTitle = styled.div<{ $isBold: boolean; $isHighlight: boolean }>`
     ${(props) =>
       props.$isHighlight &&
       css`
-        background: linear-gradient(135deg, #c9e2ff 30%, transparent 70%), linear-gradient(-45deg, #e8f3ff 30%, transparent 70%);
-        background-blend-mode: multiply;
-        border-radius: 2px;
+        background-color: #ffee07;
       `};
     &:hover {
       color: ${(props) => props.theme.colors.black};
@@ -175,6 +168,7 @@ const S = {
     color: ${(props) => props.theme.colors.black100};
     border-bottom: 1px solid ${(props) => props.theme.colors.gray300};
     height: auto;
+    cursor: pointer;
     &:hover {
       /* background-color: ${(props) => props.theme.colors.gray}; */
       background-color: ${(props) => (props.$isClosed ? 'none' : props.theme.colors.gray)};
@@ -188,7 +182,7 @@ const S = {
   Body: styled.div`
     display: flex;
     align-items: center;
-    height: 100px;
+    height: 80px;
   `,
   LocationRow: styled.div`
     flex: 1 1 8%;
@@ -219,7 +213,6 @@ const S = {
     justify-content: center;
     height: 100%;
     position: relative;
-    cursor: pointer;
     padding-left: 10px;
     .icon {
       position: absolute;
@@ -272,10 +265,12 @@ const S = {
   PayRow: styled.div`
     flex: 1 0 15%;
     display: flex;
+    flex-shrink: 0;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-end;
     flex-wrap: wrap;
     height: 100%;
+    padding-right: 15px;
   `,
   DateRow: styled.div`
     flex: 1 1 8%;
@@ -291,6 +286,7 @@ const S = {
     font-weight: 400;
     .today {
       color: ${(props) => props.theme.colors.blue500};
+      font-weight: 500;
     }
   `,
 };

@@ -1,3 +1,4 @@
+import React from 'react';
 import styled from 'styled-components';
 import Button from '@/components/common/style/Button';
 import Icon from '@/icons/Icon';
@@ -7,6 +8,7 @@ import { ResumeListItem, ResumeLstItemApplications } from '@/types';
 import { useRouter } from 'next/router';
 import path from '@/constants/path';
 import Tag from '@/components/common/Tag';
+import ResumeConfigDropDown from '@/components/userResume/ResumeConfigDropDown';
 
 interface ResumeCardProps {
   item: ResumeListItem;
@@ -16,20 +18,42 @@ interface ResumeCardProps {
 
 // TODO - 지원내역 모달 추가
 export default function ResumeCard({ item, handleClickRemoveResume, handleClickSelectedApplications }: ResumeCardProps) {
+  const [isOpenConfig, setIsOpenConfig] = React.useState(false);
   const router = useRouter();
+
+  const dropdownRef = React.useRef<HTMLDivElement>(null);
+
+  React.useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsOpenConfig(false);
+      }
+    }
+
+    if (isOpenConfig) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isOpenConfig]);
 
   return (
     <S.ResumeCard $isDefault={item.isDefault} onClick={() => router.push(`${path.USER_RESUME}/${item.id}`)}>
       <S.TopContent>
         <h4 className="title">{item.title}</h4>
-        <IconHover
-          onClick={(event) => {
-            event.stopPropagation();
-            handleClickRemoveResume(item);
-          }}
-        >
-          <Icon name="Dots24x24" width="18px" height="18px" style={{ transform: 'rotate(90deg)', color: '#b0b8c1' }} />
-        </IconHover>
+        {!item.isDefault && (
+          <IconHover
+            onClick={(event) => {
+              event.stopPropagation();
+              setIsOpenConfig((prev) => !prev);
+            }}
+          >
+            <Icon name="Dots24x24" width="18px" height="18px" style={{ transform: 'rotate(90deg)', color: '#b0b8c1' }} />
+          </IconHover>
+        )}
+        {isOpenConfig && <ResumeConfigDropDown handleClickRemoveResume={handleClickRemoveResume} item={item} ref={dropdownRef} />}
       </S.TopContent>
 
       <S.BottomContent>
@@ -78,6 +102,7 @@ const S = {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: relative;
     .title {
       cursor: pointer;
       font-size: 18px;

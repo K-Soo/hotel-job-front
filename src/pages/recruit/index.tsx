@@ -11,7 +11,7 @@ RecruitPage.getLayout = (page: React.ReactElement) => {
     <Layout>
       <Header>
         <DesktopNavigation />
-        <MobileNavigation title="채용" />
+        <MobileNavigation title="채용" notificationIcon />
       </Header>
       <Main>{page}</Main>
       <Footer />

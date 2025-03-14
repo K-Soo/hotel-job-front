@@ -56,7 +56,6 @@ export default function UserResumeContainer() {
       queryClient.invalidateQueries({ queryKey: [queryKeys.RESUME_LIST], refetchType: 'all' });
     } catch (error: any) {
       const responseErrorCode = error.response?.data?.error?.code;
-      console.log('responseErrorCode: ', responseErrorCode);
       if (responseErrorCode === errorCode.CREATION_LIMIT_EXCEEDED) {
         return addToast({ message: '이력서 생성은 최대 5개까지 가능합니다.', type: 'warning' });
       }

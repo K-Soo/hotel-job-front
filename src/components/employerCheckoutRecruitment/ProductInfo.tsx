@@ -17,7 +17,7 @@ export default function ProductInfo({ productInfo, isLoading }: ProductInfoProps
 
   return (
     <S.ProductInfo>
-      <h2 className="title">주문상품</h2>
+      <h2 className="title">주문 상품</h2>
       {isLoading && <SkeletonUI.Line style={{ height: '80px' }} />}
       {!isLoading && productInfo && (
         <S.ProductContainer>
@@ -29,56 +29,64 @@ export default function ProductInfo({ productInfo, isLoading }: ProductInfoProps
           </S.ProductHeader>
 
           <S.ProductContent>
+            {/* 메인 상품 */}
             <div className="product-item">
               <div className="product-item__text type">
-                {productInfo?.type && (
-                  <>
-                    <Tag label="PC+M" margin="0 5px 0 0" height="18px" width="40px" fontSize="11px" />
-                    <span>{RECRUITMENT_PRODUCT_TYPE[productInfo.type]}&nbsp;페이지</span>
-                  </>
-                )}
+                <Tag label="PC+M" margin="0 5px 0 0" height="18px" width="40px" fontSize="11px" />
+                <span>{RECRUITMENT_PRODUCT_TYPE[productInfo.type]}&nbsp;페이지</span>
               </div>
+
+              {/* 상품명 */}
               <div className="product-item__text">
                 {productInfo?.name && <span>{RECRUITMENT_PRODUCT_NAME[productInfo.name]}</span>}&nbsp;공고
               </div>
+
+              {/* 상품 게재기간 */}
               <div className="product-item__text duration">
-                {productInfo?.duration && (
-                  <>
-                    <div style={{ width: '60px' }}>
-                      <span>{productInfo?.duration}일</span>
-                      {productInfo?.bonusDays !== 0 && <span>&nbsp;{`(+${productInfo.bonusDays}일)`}</span>}
-                    </div>
-                    <span className="product-item__text--date">
-                      {dateFormat.dateRange(new Date(), productInfo.duration + (productInfo?.bonusDays ?? 0))}
-                    </span>
-                  </>
-                )}
+                <div style={{ width: '60px', fontSize: '12px' }}>
+                  <span>{productInfo.duration}일</span>
+                  {productInfo.bonusDays !== 0 && <span>&nbsp;{`(+${productInfo.bonusDays}일)`}</span>}
+                </div>
+                <span className="product-item__text--date">
+                  {dateFormat.dateRange(new Date(), productInfo.duration + (productInfo.bonusDays ?? 0))}
+                </span>
               </div>
+
+              {/* 상품 금액 */}
               <div className="product-item__text">
                 <span>{priceComma(price)}원</span>
               </div>
             </div>
-            {productInfo?.options.map((option) => (
-              <div className="option-item" key={option.id}>
-                <div className="option-item__text type">
-                  <StyledCorner />
-                  <span>옵션</span>
-                </div>
-                <p className="option-item__text">
-                  <span>{RECRUITMENT_PRODUCT_OPTION_NAME[option.name]}</span>
-                </p>
-                <div className="option-item__text duration">
-                  <div style={{ width: '60px', textAlign: 'right' }}>
-                    <span>{option?.duration}일</span>
-                    {option?.bonusDays && <span>&nbsp;{`(+${option.bonusDays}일)`}</span>}
+
+            {/* 옵션 */}
+            {productInfo.options.length !== 0 &&
+              productInfo.options.map((option) => (
+                <div className="option-item" key={option.id}>
+                  <div className="option-item__text type">
+                    <StyledCorner />
+                    <span>옵션</span>
                   </div>
-                  <span className="option-item__text--date"> {dateFormat.dateRange(new Date(), option.duration + option.bonusDays)}</span>
+
+                  {/* 옵션명 */}
+                  <p className="option-item__text">
+                    <span>{RECRUITMENT_PRODUCT_OPTION_NAME[option.name]}</span>
+                  </p>
+
+                  {/* 옵션 게재기간 */}
+                  <div className="option-item__text duration">
+                    <div style={{ width: '60px', fontSize: '12px' }}>
+                      <span>{option.duration}일</span>
+                      {option.bonusDays !== 0 && <span>&nbsp;{`(+${option.bonusDays}일)`}</span>}
+                    </div>
+                    <span className="option-item__text--date">
+                      {dateFormat.dateRange(new Date(), option.duration + (option.bonusDays ?? 0))}
+                    </span>
+                  </div>
+
+                  {/* 옵션 금액 */}
+                  <div className="option-item__text">{priceComma(option.price)}원</div>
                 </div>
-                <div className="option-item__text">
-                  {priceComma(option.price)}원 {option.bonusDays}
-                </div>
-              </div>
-            ))}
+              ))}
           </S.ProductContent>
         </S.ProductContainer>
       )}
@@ -96,7 +104,7 @@ const StyledCorner = styled.span`
 
 const S = {
   ProductInfo: styled.div`
-    padding: 0 30px 30px 30px;
+    padding: 30px;
     .title {
       font-size: 20px;
       font-weight: 600;
@@ -138,13 +146,12 @@ const S = {
         display: flex;
         align-items: center;
         justify-content: center;
+        height: 100%;
+
         &--date {
           color: ${({ theme }) => theme.colors.gray600};
           padding-left: 5px;
         }
-      }
-      .duration {
-        white-space: nowrap;
       }
       .type {
         width: 120px;
@@ -153,6 +160,11 @@ const S = {
         display: flex;
         align-items: center;
         justify-content: flex-start;
+      }
+
+      .duration {
+        white-space: nowrap;
+        min-width: 250px;
       }
     }
     .option-item {
@@ -169,13 +181,15 @@ const S = {
         align-items: center;
         justify-content: center;
         height: 100%;
+
         &--date {
           color: ${({ theme }) => theme.colors.gray600};
-          padding-left: 12px;
+          padding-left: 5px;
         }
       }
       .duration {
         white-space: nowrap;
+        min-width: 250px;
       }
       .type {
         width: 120px;

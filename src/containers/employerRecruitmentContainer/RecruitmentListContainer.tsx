@@ -26,12 +26,14 @@ interface RecruitmentListContainerProps {
   checkedItems: string[];
   resetCheckedItems: () => void;
   handleClickCheckBoxItem: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  handleClickDeleteRecruitment: (ids: string[]) => Promise<void>;
 }
 
 export default function RecruitmentListContainer({
   checkedItems,
   handleClickCheckBoxItem,
   resetCheckedItems,
+  handleClickDeleteRecruitment,
 }: RecruitmentListContainerProps) {
   const router = useRouter();
   const { page = '1', status = 'all' } = router.query as Query;
@@ -62,7 +64,7 @@ export default function RecruitmentListContainer({
     },
     requestQuery: {
       page: page,
-      limit: '8',
+      limit: '6',
       status: status.toLocaleUpperCase() as RecruitmentQueryStatus,
     },
   });
@@ -119,6 +121,7 @@ export default function RecruitmentListContainer({
             items={data.result.items}
             handleClickCheckBoxItem={handleClickCheckBoxItem}
             handleCloseRecruitment={handleCloseRecruitment}
+            handleClickDeleteRecruitment={handleClickDeleteRecruitment}
           />
         </RecruitmentTable>
         <PaginationComponent pagination={data.result.pagination} />

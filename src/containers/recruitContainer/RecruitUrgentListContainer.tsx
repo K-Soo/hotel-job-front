@@ -18,13 +18,15 @@ interface Query extends ParsedUrlQuery {
   job?: any;
 }
 
+const URGENT_RECRUIT_LIMIT = '8';
+
 export default function RecruitUrgentListContainer() {
   const router = useRouter();
-  const { page = '1', location, job } = router.query as Query;
+  const { location, job } = router.query as Query;
 
   const { data, isLoading, isSuccess, fetchNextPage, hasNextPage, isFetching } = useInfiniteScroll({
     queryFn: Get.getRecruitUrgentList,
-    queryKey: [queryKeys.RECRUIT_URGENT_LIST, { limit: '12', type: 'RECRUIT', job }],
+    queryKey: [queryKeys.RECRUIT_URGENT_LIST, { limit: URGENT_RECRUIT_LIMIT, type: 'RECRUIT', job }],
     options: {
       throwOnError: true,
       staleTime: 60 * 1000 * 5,
@@ -32,7 +34,7 @@ export default function RecruitUrgentListContainer() {
       placeholderData: keepPreviousData,
     },
     requestQuery: {
-      limit: '12',
+      limit: URGENT_RECRUIT_LIMIT,
       type: 'RECRUIT',
       job,
     },
@@ -50,10 +52,8 @@ export default function RecruitUrgentListContainer() {
   }
 
   if (isSuccess && data) {
-    // 페이지 1에서 데이터가 없는지 확인
-
-    const isFirstPage = data?.pages[data.pages.length - 1].result.pagination.currentPage === 1;
-    const nextPage = data?.pages[data.pages.length - 1].result.pagination.nextPage;
+    const isFirstPage = data?.pages.at(-1)?.result.pagination.currentPage === 1;
+    const nextPage = data?.pages.at(-1)?.result.pagination.nextPage;
     const isEmptyFirstPage = isFirstPage && data?.pages[0]?.result.items.length === 0;
 
     return (

@@ -1,17 +1,17 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import dynamic from "next/dynamic";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import dynamic from 'next/dynamic';
 
 interface IPortal {
   children: React.ReactNode;
 }
 
 const Portal = ({ children }: IPortal) => {
-  if (window && typeof window !== "object") {
+  if (window && typeof window !== 'object') {
     return <></>;
   }
 
-  const element = document.getElementById("portal");
+  const element = document.getElementById('portal');
 
   if (!element) {
     return <></>;

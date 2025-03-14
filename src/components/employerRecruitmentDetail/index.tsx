@@ -29,18 +29,18 @@ export default function EmployerRecruitmentDetail({
       <div className="detail-container">
         <form className="detail-container__form">
           <EmployerTemplateForm height="100%">
-            <EmployerTemplateForm.SubTitle title="공고 기본 설정" size="large" id="basic" />
+            <EmployerTemplateForm.SubTitle title="공고 기본 설정" size="large" id="default" />
 
             <EmployerTemplateForm.Content marginBottom="80px">
               <RecruitmentDetailBasicForm />
             </EmployerTemplateForm.Content>
 
-            <EmployerTemplateForm.SubTitle title="모집내용" size="large" id="detail" />
+            <EmployerTemplateForm.SubTitle title="모집내용" size="large" id="recruitment" />
             <EmployerTemplateForm.Content marginBottom="80px">
               <DetailInfoForm setIsOpenJobModal={setIsOpenJobModal} setIsOpenPreferencesModal={setIsOpenPreferencesModal} />
             </EmployerTemplateForm.Content>
 
-            <EmployerTemplateForm.SubTitle title="상세 모집내용" size="large" id="detail" />
+            <EmployerTemplateForm.SubTitle title="상세 모집내용" size="large" id="recruitment-detail" />
             <EmployerTemplateForm.Content marginBottom="80px">
               <FormEditor<RecruitmentDetailForm> name="content" />
             </EmployerTemplateForm.Content>

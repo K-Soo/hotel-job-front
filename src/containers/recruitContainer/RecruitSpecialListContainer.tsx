@@ -42,12 +42,6 @@ export default function RecruitSpecialListContainer() {
 
   console.log('스페셜 채용 리스트 API : ', data);
 
-  const isFirstPage = data?.pages[data.pages.length - 1].result.pagination.currentPage === 1;
-  const nextPage = data?.pages[data.pages.length - 1].result.pagination.nextPage;
-
-  // 페이지 1에서 데이터가 없는지 확인
-  const isEmptyFirstPage = isFirstPage && data?.pages[0]?.result.items.length === 0;
-
   if (isLoading) {
     return (
       <>
@@ -58,6 +52,10 @@ export default function RecruitSpecialListContainer() {
   }
 
   if (isSuccess && data) {
+    const isFirstPage = data?.pages.at(-1)?.result.pagination.currentPage === 1;
+    const nextPage = data?.pages.at(-1)?.result.pagination.nextPage;
+    const isEmptyFirstPage = isFirstPage && data?.pages[0]?.result.items.length === 0;
+
     return (
       <>
         <RecruitSectionTitle title="🌟 스페셜 채용" />

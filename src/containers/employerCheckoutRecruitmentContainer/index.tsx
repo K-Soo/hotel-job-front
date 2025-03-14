@@ -194,8 +194,8 @@ export default function EmployerCheckoutRecruitmentContainer() {
 
   return (
     <EmployerCheckoutRecruitment>
-      <ProductInfo productInfo={data?.result.productInfo} isLoading={isLoading} />
       <RecruitmentInfo recruitmentInfo={data?.result.recruitmentInfo} isLoading={isLoading} />
+      <ProductInfo productInfo={data?.result.productInfo} isLoading={isLoading} />
       <DiscountInfo
         TotalAmount={data?.result.amountInfo.TotalAmount}
         orderId={data?.result.orderId}

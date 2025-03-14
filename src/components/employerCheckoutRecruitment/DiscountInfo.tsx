@@ -217,7 +217,7 @@ export default function DiscountInfo({ TotalAmount, orderId, appliedCouponId, re
       )}
 
       <S.DiscountInfo>
-        <h2 className="title">할인선택</h2>
+        <h2 className="title">할인 선택</h2>
         {isLoading && <SkeletonUI.Line style={{ height: '80px' }} />}
         {!isLoading && (
           <S.DiscountContainer>

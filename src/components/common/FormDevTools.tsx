@@ -11,6 +11,8 @@ interface IFormDevTool {
 }
 
 export default function FormDevTools({ control }: IFormDevTool) {
+  if (!control) return null;
+
   return (
     <Portal>
       <Devtool control={control} />

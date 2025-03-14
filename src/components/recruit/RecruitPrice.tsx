@@ -24,6 +24,7 @@ const S = {
     border-radius: 4px;
     width: fit-content;
     font-size: ${(props) => props.$fonSize || '14px'};
+    white-space: nowrap;
     .pay-type {
       letter-spacing: 1px;
       padding-right: 5px;

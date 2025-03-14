@@ -12,14 +12,18 @@ interface ProductOverviewProps {
 export default function ProductOverview({ item }: ProductOverviewProps) {
   const router = useRouter();
 
+  if (item.recruitmentStatus === 'DRAFT') {
+    return null;
+  }
+
   return (
     <S.ProductOverview>
       {item.paymentRecruitment && (item.recruitmentStatus === 'PROGRESS' || item.recruitmentStatus === 'CLOSED') && (
         <S.Progress $isClosed={item.recruitmentStatus === 'CLOSED'}>
           <div className="content">
             <div className="content__product">
-              <span>{`${RECRUITMENT_PRODUCT_TYPE[item.paymentRecruitment.type]} `}</span>
-              <span>{RECRUITMENT_PRODUCT_NAME[item.paymentRecruitment.name]}상품</span>
+              <span>{RECRUITMENT_PRODUCT_NAME[item.paymentRecruitment.name]} 채용</span>
+              <span>{`(${RECRUITMENT_PRODUCT_TYPE[item.paymentRecruitment.type]})`}</span>
             </div>
 
             <div className="content__options">
@@ -55,8 +59,6 @@ export default function ProductOverview({ item }: ProductOverviewProps) {
       )}
 
       {item.recruitmentStatus === 'REVIEWING' && <S.Reviewing>확인중</S.Reviewing>}
-
-      {item.recruitmentStatus === 'DRAFT' && <S.Draft>-</S.Draft>}
     </S.ProductOverview>
   );
 }
@@ -104,8 +106,5 @@ const S = {
     }
   `,
   Closed: styled.div``,
-  Draft: styled.div`
-    color: ${(props) => props.theme.colors.gray700};
-  `,
   Reviewing: styled.div``,
 };

@@ -87,8 +87,8 @@ export default function ProductOption({ option }: ProductOptionProps) {
           <span className="option-header__title--text">{RECRUITMENT_PRODUCT_OPTION_NAME[option.name]}</span>
         </div>
         <div className="option-header__tags">
-          <Tag label="PC+M" margin="0 0 0 7px" />
-          {option.name === 'LIST_UP' && <Tag label="BEST" margin="0 0 0 7px" type="BEST" />}
+          <Tag label="PC+M" margin="0 0 0 5px" />
+          {(option.name === 'LIST_UP' || option.name === 'TAG') && <Tag label="BEST" margin="0 0 0 7px" type="BEST" />}
         </div>
       </div>
 

@@ -58,7 +58,8 @@ export default function NotificationContent({ isOpen, setIsOpen }: NotificationC
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const isFirstPage = data?.pages[data.pages.length - 1].result.pagination.currentPage === 1;
+  const isFirstPage = data?.pages.at(-1)?.result.pagination.currentPage === 1;
+
   console.log('isFirstPage: ', isFirstPage);
 
   const isEmptyFirstPage = isFirstPage && data?.pages[0]?.result.items.length === 0;

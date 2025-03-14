@@ -13,8 +13,10 @@ import { Post } from '@/apis';
 import queryKeys from '@/constants/queryKeys';
 import { useQueryClient } from '@tanstack/react-query';
 import path from '@/constants/path';
+import { RecruitmentQueryStatus } from '@/types/API';
 interface Query extends ParsedUrlQuery {
   page?: string;
+  status?: RecruitmentQueryStatus;
 }
 
 export default function EmployerRecruitmentContainer() {
@@ -23,7 +25,7 @@ export default function EmployerRecruitmentContainer() {
   const { setAlertWithConfirmAtom } = useAlertWithConfirm();
   const queryClient = useQueryClient();
   const router = useRouter();
-  const { page } = router.query as Query;
+  const { page, status } = router.query as Query;
 
   const { addToast } = useToast();
 
@@ -31,7 +33,7 @@ export default function EmployerRecruitmentContainer() {
 
   React.useEffect(() => {
     resetCheckedItems();
-  }, [page]);
+  }, [page, status]);
 
   const handleClickCheckBoxItem = React.useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, checked } = event.target;
@@ -43,10 +45,7 @@ export default function EmployerRecruitmentContainer() {
     }
   }, []);
 
-  const fetchDeleteRecruitment = async () => {
-    if (checkedItems.length === 0) {
-      return addToast({ type: 'error', message: '삭제할 공고를 선택해주세요.' });
-    }
+  const handleClickDeleteRecruitment = async (ids: string[]) => {
     setAlertWithConfirmAtom((prev) => ({
       ...prev,
       type: 'CONFIRM',
@@ -55,13 +54,17 @@ export default function EmployerRecruitmentContainer() {
       cancelLabel: '취소',
       confirmLabel: '삭제',
       onClickCancel: () => resetCheckedItems(),
-      onClickConfirm: () => fetchRemoveRecruitment(),
+      onClickConfirm: () => fetchRemoveRecruitment(ids),
     }));
   };
 
-  const fetchRemoveRecruitment = async () => {
+  const fetchRemoveRecruitment = async (ids: string[]) => {
+    if (ids.length === 0) {
+      return addToast({ type: 'error', message: '삭제할 공고를 선택해주세요.' });
+    }
+
     try {
-      const response = await Post.removeRecruitment({ ids: checkedItems });
+      const response = await Post.removeRecruitment({ ids });
       console.log('공고 삭제 API : ', response);
       if (response.result.status !== 'success') {
         throw new Error();
@@ -88,7 +91,14 @@ export default function EmployerRecruitmentContainer() {
         <SectionTitle title="공고 목록" />
         <RecruitmentStatusBar />
         <div style={{ display: 'flex', margin: '20px 0', justifyContent: 'flex-end' }}>
-          <Button label="공고 일괄삭제" variant="tertiary" width="100px" height="35px" fontSize="14px" onClick={fetchDeleteRecruitment} />
+          <Button
+            label="공고 일괄삭제"
+            variant="tertiary"
+            width="100px"
+            height="35px"
+            fontSize="14px"
+            onClick={() => handleClickDeleteRecruitment(checkedItems)}
+          />
         </div>
       </div>
 
@@ -97,6 +107,7 @@ export default function EmployerRecruitmentContainer() {
           handleClickCheckBoxItem={handleClickCheckBoxItem}
           checkedItems={checkedItems}
           resetCheckedItems={resetCheckedItems}
+          handleClickDeleteRecruitment={handleClickDeleteRecruitment}
         />
       </ErrorBoundary>
     </EmployerRecruitment>

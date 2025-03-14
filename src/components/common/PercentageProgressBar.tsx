@@ -21,6 +21,7 @@ export default function MembershipProgressBar({ membershipInfo }: MembershipProg
   const inView = useInView(ref, { once: true });
 
   const { previousScore, addedScore, currentScore, currentLevel, previousLevel, previousMinScore, previousMaxScore } = membershipInfo;
+  console.log('membershipInfo: ', membershipInfo);
 
   const totalRange = previousMaxScore - previousMinScore;
   const startPercentage = ((previousScore - previousMinScore) / totalRange) * 100;

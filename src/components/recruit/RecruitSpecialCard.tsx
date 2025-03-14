@@ -10,6 +10,7 @@ import { EXPERIENCE_CONDITION } from '@/constants/recruitment';
 import { addressFormat, employmentTypeFormat } from '@/utils';
 import IconDimmed from '@/components/common/IconDimmed';
 import Tag from '@/components/common/Tag';
+import useResponsive from '@/hooks/useResponsive';
 
 interface RecruitSpecialCardProps {
   item: RecruitListItem;
@@ -23,6 +24,7 @@ export default function RecruitSpecialCard({ item }: RecruitSpecialCardProps) {
   const router = useRouter();
 
   const { sido, sigungu } = addressFormat(item.address);
+  const { isTablet } = useResponsive();
 
   const { hasBoldEffect, hasHighlightEffect, hasTagEffect } = React.useMemo(() => {
     const currentDate = new Date();
@@ -30,13 +32,13 @@ export default function RecruitSpecialCard({ item }: RecruitSpecialCardProps) {
     let hasHighlightEffect = false;
     let hasTagEffect = false;
 
-    item.paymentRecruitment?.[0]?.options?.forEach((option) => {
+    item.paymentRecruitment.options?.forEach((option) => {
       const postingEndDate = option.postingEndDate ? new Date(option.postingEndDate) : null;
 
       if (postingEndDate && currentDate <= postingEndDate) {
-        if (option.name === 'LIST_UP') hasBoldEffect = true;
+        if (option.name === 'BOLD') hasBoldEffect = true;
         if (option.name === 'HIGHLIGHT') hasHighlightEffect = true;
-        if (option.name === 'TAG') hasHighlightEffect = true;
+        if (option.name === 'TAG') hasTagEffect = true;
       }
     });
 
@@ -57,29 +59,26 @@ export default function RecruitSpecialCard({ item }: RecruitSpecialCardProps) {
   return (
     <S.RecruitSpecialCard
       whileHover={{
-        border: '1px solid #4593fc',
+        boxShadow: 'inset 0 0 0 1px #3182f6',
       }}
       whileTap={{ scale: 0.98 }}
       onClick={() => router.push(`/recruit/${item.id}`)}
     >
       <S.HeaderBox>
-        <div className="tags">
-          {true && <Tag label="급구" type="URGENT" width="32px" margin="0 5px 0 0" fontSize="11px" height="17px" />}
-        </div>
+        {isTag && <Tag label="급구" type="URGENT" width="32px" margin="0 5px 0 0" fontSize="11px" height="17px" />}
+        <Tag label="주목" type="ATTENTION" width="44px" margin="0 5px 0 0" fontSize="11px" height="17px" />
       </S.HeaderBox>
 
       <S.ContentBox>
-        <div className="info-box">
-          <StyledTitle $isBold={isBold} $isHighlight={isHighlight}>
-            <h5 className="text">{item.recruitmentTitle}</h5>
-          </StyledTitle>
+        <StyledTitle $isBold={isBold} $isHighlight={isHighlight}>
+          <h5 className="text">{item.recruitmentTitle}</h5>
+        </StyledTitle>
 
-          <div className="info-box__detail">
-            <div className="info-box__detail--company">호텔 더 아무무</div>
-            <address className="info-box__detail--address">
-              {sido} {sigungu}
-            </address>
-          </div>
+        <div className="company">
+          <div className="company__hotel">호텔 더 아무무</div>
+          <address className="company__address">
+            {sido} {sigungu}
+          </address>
         </div>
       </S.ContentBox>
 
@@ -97,11 +96,14 @@ export default function RecruitSpecialCard({ item }: RecruitSpecialCardProps) {
             <span>{employmentTypeFormat(item.employmentType)}</span>
           </div>
         </div>
+
         <div className="price-wrapper">
           <RecruitPrice fonSize="13px" salaryAmount={item.salaryAmount} salary={item.salaryType} />
-          <IconDimmed onClick={handleClickBlank} padding="1px">
-            <Icon name="ExternalLinkB50x50" width="22px" height="22px" />
-          </IconDimmed>
+          {!isTablet && (
+            <IconDimmed onClick={handleClickBlank} padding="1px">
+              <Icon name="ExternalLinkB50x50" width="22px" height="22px" />
+            </IconDimmed>
+          )}
         </div>
       </S.infoBox>
     </S.RecruitSpecialCard>
@@ -109,10 +111,10 @@ export default function RecruitSpecialCard({ item }: RecruitSpecialCardProps) {
 }
 
 const StyledTitle = styled.div<{ $isBold: boolean; $isHighlight: boolean }>`
-  margin-bottom: 5px;
+  margin-bottom: 10px;
   width: fit-content;
   .text {
-    padding: 1px 3px 1px 0;
+    padding: 1px 0;
     color: ${(props) => props.theme.colors.gray800};
     font-weight: ${(props) => (props.$isBold ? 600 : 400)};
     width: fit-content;
@@ -121,9 +123,7 @@ const StyledTitle = styled.div<{ $isBold: boolean; $isHighlight: boolean }>`
     ${(props) =>
       props.$isHighlight &&
       css`
-        background: linear-gradient(135deg, #c9e2ff 30%, transparent 70%), linear-gradient(-45deg, #e8f3ff 30%, transparent 70%);
-        background-blend-mode: multiply;
-        border-radius: 2px;
+        background-color: #ffee07;
       `};
     &:hover {
       color: ${(props) => props.theme.colors.black};
@@ -155,11 +155,12 @@ const S = {
     aspect-ratio: 5/3;
     border-radius: 10px;
     padding: 15px;
-    border: 1px solid ${(props) => props.theme.colors.blue100};
+    border: 1px solid ${(props) => props.theme.colors.blue400};
     cursor: pointer;
     display: flex;
     user-select: none;
     flex-direction: column;
+    max-height: 180px;
     ${(props) => props.theme.media.tablet`
       aspect-ratio: 5 / 3;
       width: calc(50% - 5px);
@@ -172,54 +173,24 @@ const S = {
   `,
   HeaderBox: styled.div`
     display: flex;
-    justify-content: space-between;
     align-items: center;
     margin-bottom: 4px;
-    .tags {
-      display: flex;
-      flex-wrap: wrap;
-    }
   `,
   ContentBox: styled.div`
     flex: 1;
-    display: flex;
-    .info-box {
-      flex: 1;
-      &__title {
-        display: flex;
-        align-items: center;
-        margin-bottom: 10px;
-        &--text {
-          color: ${(props) => props.theme.colors.gray800};
-          font-size: 16px;
-          font-weight: 500;
-          overflow: hidden;
-          white-space: nowrap;
-          white-space: break-spaces;
-          display: -webkit-box;
-          word-break: break-all;
-          text-overflow: ellipsis;
-          -webkit-box-orient: vertical;
-          -webkit-line-clamp: 2;
-          ${(props) => props.theme.media.laptop`
-            font-size: 15px;
-          `};
-        }
-      }
-      &__detail {
-        display: flex;
-        flex-direction: column;
-        &--company {
-          font-size: 14px;
-          font-weight: 400;
-          color: ${(props) => props.theme.colors.black100};
-          margin-bottom: 5px;
-        }
-        &--address {
-          font-size: 13px;
-          font-weight: 300;
+    .company {
+      display: flex;
+      font-size: 14px;
+      &__hotel {
+        color: ${(props) => props.theme.colors.black100};
+        &::after {
+          content: '|';
+          margin: 0 6px;
           color: ${(props) => props.theme.colors.gray700};
         }
+      }
+      &__address {
+        color: ${(props) => props.theme.colors.gray700};
       }
     }
   `,

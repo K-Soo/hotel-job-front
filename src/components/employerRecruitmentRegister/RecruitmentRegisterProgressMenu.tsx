@@ -1,10 +1,11 @@
 import styled from 'styled-components';
 import Button from '@/components/common/style/Button';
-import Link from 'next/link';
+import { Link } from 'react-scroll';
 import Icon from '@/icons/Icon';
 import React from 'react';
 import { useFormContext } from 'react-hook-form';
 import { RecruitmentDetailForm } from '@/types';
+import { PROGRESS_MENU } from '@/constants/recruitment';
 
 interface RecruitmentRegisterProgressMenuProps {
   children: React.ReactNode;
@@ -19,30 +20,12 @@ function RecruitmentRegisterProgressMenu({ children }: RecruitmentRegisterProgre
     <S.RecruitmentRegisterProgressMenu>
       <S.MenuForm>
         <div className="list-container">
-          <Link className="list-container__item" href="#default">
-            <Icon name="CheckOn16x17" width="16px" height="17px" margin="0 5px 0 0" />
-            <span>공고 제목</span>
-          </Link>
-
-          <Link className="list-container__item" href="#basic">
-            <Icon name="CheckOn16x17" width="16px" height="17px" margin="0 5px 0 0" />
-            <span>모집 내용</span>
-          </Link>
-
-          <Link className="list-container__item" href="#condition" scroll={true}>
-            <Icon name="CheckOn16x17" width="16px" height="17px" margin="0 5px 0 0" />
-            <span>근무조건</span>
-          </Link>
-
-          <Link className="list-container__item" href="#place" scroll={true}>
-            <Icon name="CheckOn16x17" width="16px" height="17px" margin="0 5px 0 0" />
-            <span>근무지 정보</span>
-          </Link>
-
-          <Link className="list-container__item" href="#manager" scroll={true}>
-            <Icon name="CheckOn16x17" width="16px" height="17px" margin="0 5px 0 0" />
-            <span>담당자 정보</span>
-          </Link>
+          {PROGRESS_MENU.map((menu) => (
+            <Link key={menu.id} id={menu.id} className="list-container__item" to={menu.id} smooth={true} offset={-100} duration={500}>
+              {/* <i>ico</i> */}
+              <span>{menu.title}</span>
+            </Link>
+          ))}
         </div>
       </S.MenuForm>
       {children}
@@ -65,23 +48,24 @@ const S = {
     `};
   `,
   MenuForm: styled.div`
-    border: 1px solid ${(props) => props.theme.colors.gray200};
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
     border-radius: 5px;
     padding: 0 15px;
     margin-bottom: 15px;
-    svg {
-      /* fill: ${(props) => props.theme.colors.blue400}; */
-    }
     .list-container {
       display: flex;
       flex-direction: column;
       &__item {
         font-size: 15px;
-        height: 40px;
+        height: 45px;
         display: flex;
         align-items: center;
-        /* justify-content: space-between; */
         color: ${(props) => props.theme.colors.gray600};
+        font-weight: 500;
+        cursor: pointer;
+        &:hover {
+          color: ${(props) => props.theme.colors.blue400};
+        }
       }
     }
   `,

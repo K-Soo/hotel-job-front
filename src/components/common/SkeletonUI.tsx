@@ -164,8 +164,8 @@ const StyleRecruitment = styled.section`
 const ResumeListItems = () => {
   return (
     <StyleResumeListItems>
-      <StyledLine style={{ height: '100px', borderRadius: '15px', margin: '10px 0' }} />
-      <StyledLine style={{ height: '100px', borderRadius: '15px', margin: '10px 0' }} />
+      <StyledLine style={{ height: '120px', borderRadius: '15px', margin: '10px 0' }} />
+      <StyledLine style={{ height: '120px', borderRadius: '15px', margin: '10px 0' }} />
     </StyleResumeListItems>
   );
 };
@@ -282,7 +282,7 @@ const RecruitBasicList = ({ count }: { count: number }) => {
   return (
     <StyledRecruitBasicList>
       {Array.from({ length: count }, (_, index) => (
-        <div key={index} className="item"></div>
+        <div key={index} className="item" />
       ))}
     </StyledRecruitBasicList>
   );
@@ -295,7 +295,7 @@ const StyledRecruitBasicList = styled.div`
   margin-bottom: 50px;
   .item {
     ${SkeletonAnimation}
-    height: 100px;
+    height: 80px;
     ${(props) => props.theme.media.tablet`
       height: 160px;
     `};

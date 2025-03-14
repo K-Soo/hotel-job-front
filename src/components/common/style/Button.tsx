@@ -224,7 +224,7 @@ const S = {
       css`
         color: ${(props) => props.theme.colors.gray600};
         background-color: ${(props) => props.theme.colors.white};
-        font-weight: 600;
+        font-weight: 500;
         &:hover {
           transition: 0.3s;
           color: ${(props) => props.theme.colors.black};
@@ -310,7 +310,7 @@ const S = {
       props.$variant === 'delete' &&
       css`
         color: ${(props) => props.theme.colors.red400};
-        font-weight: 600;
+        font-weight: 500;
         &:hover {
           transition: 0.3s;
           color: ${(props) => props.theme.colors.red500};

@@ -38,11 +38,11 @@ export default function Alert() {
             <p className="description">{alertWithConfirmSelectorValue.subTitle}</p>
           </S.Content>
 
-          <div style={{ width: '100%', display: 'flex', justifyContent: 'flex-end' }}>
+          <S.ButtonBox>
             <Button
               name="positive"
               label={alertWithConfirmSelectorValue.confirmLabel}
-              variant="primary"
+              variant="primary100"
               maxWidth="100px"
               type="button"
               height="45px"
@@ -51,7 +51,7 @@ export default function Alert() {
                 resetAlertWithConfirmAtom();
               }}
             />
-          </div>
+          </S.ButtonBox>
         </S.Alert>
       </Background>
     </Portal>
@@ -106,5 +106,10 @@ const S = {
         font-size: 15px;
       `};
     }
+  `,
+  ButtonBox: styled.div`
+    width: 100%;
+    display: flex;
+    justify-content: center;
   `,
 };
