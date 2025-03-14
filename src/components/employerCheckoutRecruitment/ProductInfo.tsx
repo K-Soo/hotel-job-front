@@ -17,7 +17,7 @@ export default function ProductInfo({ productInfo, isLoading }: ProductInfoProps
 
   return (
     <S.ProductInfo>
-      <h2 className="title">주문상품</h2>
+      <h2 className="title">주문 상품</h2>
       {isLoading && <SkeletonUI.Line style={{ height: '80px' }} />}
       {!isLoading && productInfo && (
         <S.ProductContainer>
@@ -76,7 +76,7 @@ export default function ProductInfo({ productInfo, isLoading }: ProductInfoProps
                   <div className="option-item__text duration">
                     <div style={{ width: '60px', fontSize: '12px' }}>
                       <span>{option.duration}일</span>
-                      {option.bonusDays && <span>&nbsp;{`(+${option.bonusDays}일)`}</span>}
+                      {option.bonusDays !== 0 && <span>&nbsp;{`(+${option.bonusDays}일)`}</span>}
                     </div>
                     <span className="option-item__text--date">
                       {dateFormat.dateRange(new Date(), option.duration + (option.bonusDays ?? 0))}
@@ -104,7 +104,7 @@ const StyledCorner = styled.span`
 
 const S = {
   ProductInfo: styled.div`
-    padding: 0 30px 30px 30px;
+    padding: 30px;
     .title {
       font-size: 20px;
       font-weight: 600;
