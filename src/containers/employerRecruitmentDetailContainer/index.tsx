@@ -4,7 +4,7 @@ import { useForm, FormProvider, SubmitHandler } from 'react-hook-form';
 import FormDevTools from '@/components/common/FormDevTools';
 import dynamic from 'next/dynamic';
 import RecruitmentDetailProgressMenu from '@/components/employerRecruitmentDetail/RecruitmentDetailProgressMenu';
-import { RecruitmentDetailForm } from '@/types';
+import { RecruitmentDetailForm, RecruitmentStatusKeys } from '@/types';
 import { Post, Patch } from '@/apis';
 import { schema } from '@/utils';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -250,6 +250,7 @@ export default function EmployerRecruitmentDetailContainer() {
     }
   };
 
+  // API - 채용공고 수정
   const fetchUpdateRecruitment: SubmitHandler<RecruitmentDetailForm> = async (event) => {
     setIsDisabled(true);
     const watchData = methods.watch();
@@ -275,11 +276,13 @@ export default function EmployerRecruitmentDetailContainer() {
       await queryClient.invalidateQueries({ queryKey: [queryKeys.RECRUITMENT_LIST], refetchType: 'all' });
       await queryClient.invalidateQueries({ queryKey: [queryKeys.RECRUITMENT_DETAIL], refetchType: 'all' });
 
-      router.replace(path.EMPLOYER_RECRUITMENT);
-
-      setTimeout(() => {
-        addToast({ message: '채용공고 수정완료', type: 'success' });
-      }, 800);
+      setAlertWithConfirmAtom((prev) => ({
+        ...prev,
+        type: 'ALERT',
+        title: 'TITLE_15',
+        confirmLabel: '확인',
+        onClickConfirm: () => router.push(path.EMPLOYER_RECRUITMENT),
+      }));
     } catch (error) {
       alert('공고 수정 중 문제가 발생했습니다. 문제가 지속되면 관리자에게 문의하세요.');
     } finally {
@@ -287,16 +290,29 @@ export default function EmployerRecruitmentDetailContainer() {
     }
   };
 
-  const handleClickUpdateProgressRecruitment = () => {
-    setAlertWithConfirmAtom((prev) => ({
-      ...prev,
-      type: 'CONFIRM',
-      title: 'TITLE_8',
-      subTitle: 'DESC_9',
-      confirmLabel: '확인',
-      cancelLabel: '취소',
-      onClickConfirm: methods.handleSubmit(fetchUpdateRecruitment),
-    }));
+  const handleClickUpdateRecruitment = (recruitmentStatus: RecruitmentStatusKeys) => {
+    if (recruitmentStatus === 'PUBLISHED') {
+      setAlertWithConfirmAtom((prev) => ({
+        ...prev,
+        type: 'CONFIRM',
+        title: 'TITLE_14',
+        confirmLabel: '저장',
+        cancelLabel: '취소',
+        onClickConfirm: methods.handleSubmit(fetchUpdateRecruitment),
+      }));
+    }
+
+    if (recruitmentStatus === 'PROGRESS') {
+      setAlertWithConfirmAtom((prev) => ({
+        ...prev,
+        type: 'CONFIRM',
+        title: 'TITLE_8',
+        subTitle: 'DESC_9',
+        confirmLabel: '확인',
+        cancelLabel: '취소',
+        onClickConfirm: methods.handleSubmit(fetchUpdateRecruitment),
+      }));
+    }
   };
 
   if (isLoading) {
@@ -333,24 +349,13 @@ export default function EmployerRecruitmentDetailContainer() {
               />
             )}
 
-            {data.result.recruitmentStatus === 'PUBLISHED' && (
+            {/* 게제중 or 대기중 */}
+            {(data.result.recruitmentStatus === 'PUBLISHED' || data.result.recruitmentStatus === 'PROGRESS') && (
               <Button
                 label="공고 수정"
                 variant="primary"
                 margin="0 0 10px 0"
-                onClick={methods.handleSubmit(fetchUpdateRecruitment)}
-                type="button"
-                isLoading={methods.formState.isSubmitting}
-                disabled={isDisabled}
-              />
-            )}
-
-            {data.result.recruitmentStatus === 'PROGRESS' && (
-              <Button
-                label="공고 수정"
-                variant="primary"
-                margin="0 0 10px 0"
-                onClick={() => handleClickUpdateProgressRecruitment()}
+                onClick={() => handleClickUpdateRecruitment(data.result.recruitmentStatus)}
                 type="button"
                 isLoading={methods.formState.isSubmitting}
                 disabled={isDisabled}
