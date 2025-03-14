@@ -14,6 +14,8 @@ const TITLE_TEXT = {
   TITLE_11: '진행중인 공고입니다. 정말 마감하시겠습니까?',
   TITLE_12: '지원을 취소하시겠습니까?',
   TITLE_13: '비밀번호 변경이 완료되었습니다.',
+  TITLE_14: '수정하신 내용으로 저장하시겠습니까?',
+  TITLE_15: '수정이 완료되었습니다.',
 } as const;
 
 const DESCRIPTION_TEXT = {
