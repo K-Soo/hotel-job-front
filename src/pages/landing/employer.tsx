@@ -1,4 +1,4 @@
-import Layout, { EmployerMain, EmployerHeader } from '@/components/layout';
+import Layout, { EmployerMain, EmployerHeader, Footer } from '@/components/layout';
 import LandingEmployerContainer from '@/containers/landingEmployerContainer';
 
 export default function LandingEmployerPage() {

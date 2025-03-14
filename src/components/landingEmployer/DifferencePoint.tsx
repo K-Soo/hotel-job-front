@@ -4,7 +4,7 @@ import styled from 'styled-components';
 export default function DifferencePoint() {
   return (
     <S.DifferencePoint>
-      <h2 className="title">호텔잡 차별점</h2>
+      <h2 className="title">타사 호텔업계 사이트와 뭐가 다를까?</h2>
       <S.DifferencePointContent>
         {DIFFERENCE_POINTS.map((item, index) => (
           <div className="item" key={index}>
@@ -32,6 +32,9 @@ const S = {
       font-size: 36px;
       font-weight: 500;
       margin-bottom: 50px;
+      ${(props) => props.theme.media.tablet`
+        font-size: 20px;
+      `};
     }
   `,
   DifferencePointContent: styled.div`
@@ -48,9 +51,12 @@ const S = {
       border-radius: 20px;
       display: flex;
       padding: 30px;
+      ${(props) => props.theme.media.tablet`
+        min-height: 220px;
+      `};
       ${(props) => props.theme.media.mobile`
         padding: 15px;
-        min-height: 170px;
+        min-height: 210px;
       `};
       .description {
         &__title {

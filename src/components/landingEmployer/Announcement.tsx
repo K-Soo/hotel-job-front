@@ -21,7 +21,7 @@ export default function Announcement() {
           variant="primary"
           width="180px"
           margin="30px 0 0 0"
-          onClick={() => router.push(path.SIGN_UP)}
+          onClick={() => router.push(`${path.SIGN_IN}?type=company`)}
         />
       </div>
     </S.Announcement>
