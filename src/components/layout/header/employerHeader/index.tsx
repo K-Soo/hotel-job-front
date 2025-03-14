@@ -13,7 +13,11 @@ import { motion } from 'framer-motion';
 import { QueryClient } from '@tanstack/react-query';
 import Notification from '@/components/common/notification';
 
-export function EmployerHeader() {
+interface EmployerHeaderProps {
+  borderBottom?: boolean;
+}
+
+export function EmployerHeader({ borderBottom = true }: EmployerHeaderProps) {
   const [isDropdownOpen, setIsDropdownOpen] = React.useState(false);
 
   const dropdownRef = React.useRef<HTMLDivElement>(null);
@@ -58,7 +62,7 @@ export function EmployerHeader() {
   };
 
   return (
-    <S.EmployerHeader>
+    <S.EmployerHeader $borderBottom={borderBottom}>
       {/* TODO: 분기 처리 */}
       <nav className="nav-bar">
         <Logo size="small" isEmployer margin="0 90px 0 0" />
@@ -129,7 +133,7 @@ const StyledDropDownItem = styled(motion.div)`
 `;
 
 const S = {
-  EmployerHeader: styled.div`
+  EmployerHeader: styled.div<{ $borderBottom?: boolean }>`
     position: sticky;
     top: -0;
     height: 60px;
@@ -139,8 +143,8 @@ const S = {
     align-items: center;
     justify-content: space-between;
     padding: 0 15px 0 20px;
-    border-bottom: 1px solid ${(props) => props.theme.colors.gray200};
     background-color: ${(props) => props.theme.colors.white};
+    border-bottom: ${(props) => (props.$borderBottom ? '1px solid #e5e8eb' : 'none')};
     .nav-bar {
       display: flex;
       align-items: center;
