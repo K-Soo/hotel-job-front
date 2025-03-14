@@ -5,7 +5,6 @@ import useInfiniteScroll from '@/hooks/useInfiniteScroll';
 import { Get } from '@/apis';
 import InfiniteScroll from 'react-infinite-scroller';
 import queryKeys from '@/constants/queryKeys';
-import Button from '@/components/common/style/Button';
 import RecruitSectionTitle from '@/components/recruit/RecruitSectionTitle';
 import EmptyComponent from '@/components/common/EmptyComponent';
 import SkeletonUI from '@/components/common/SkeletonUI';
@@ -37,8 +36,7 @@ export default function MainUrgentListContainer() {
   }
 
   if (isSuccess && data) {
-    // 페이지 1에서 데이터가 없는지 확인
-    const isFirstPage = data?.pages[data.pages.length - 1].result.pagination.currentPage === 1;
+    const isFirstPage = data?.pages.at(-1)?.result.pagination.currentPage === 1;
     const isEmptyFirstPage = isFirstPage && data?.pages[0]?.result.items.length === 0;
 
     return (
