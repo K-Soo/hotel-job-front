@@ -28,7 +28,7 @@ export default function SignUpGeneralForm({ handleChangeAllAgree, fetchEmployerU
 
   return (
     <S.SignUpGeneralForm>
-      <h2 className="sign-up-title">회원가입</h2>
+      <h2 className="sign-up-title">업체 회원가입</h2>
 
       <S.Horizontal>
         <div className="wrapper">
