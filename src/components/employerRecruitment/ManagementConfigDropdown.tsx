@@ -22,10 +22,12 @@ const ManagementConfigDropdown = React.forwardRef<HTMLDivElement, ManagementConf
           event.stopPropagation();
         }}
       >
-        <S.MenuItem onClick={() => router.push(`/employer/recruitment/${id}`)}>
-          <span className="text">공고 수정</span>
-          <Icon name="Pen24x24" width="16px" height="16px" />
-        </S.MenuItem>
+        {(status === 'PUBLISHED' || status === 'PROGRESS') && (
+          <S.MenuItem onClick={() => router.push(`/employer/recruitment/${id}`)}>
+            <span className="text">공고 수정</span>
+            <Icon name="Pen24x24" width="16px" height="16px" />
+          </S.MenuItem>
+        )}
 
         {status === 'PROGRESS' && (
           <S.MenuItem onClick={() => handleCloseRecruitment(id)}>
