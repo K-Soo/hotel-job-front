@@ -12,7 +12,7 @@ interface RecruitmentInfoProps {
 const RecruitmentInfo = ({ recruitmentInfo, isLoading }: RecruitmentInfoProps) => {
   return (
     <S.RecruitmentInfo>
-      <h2 className="title">공고정보</h2>
+      <h2 className="title">적용하는 채용공고</h2>
       {isLoading && <SkeletonUI.Line style={{ height: '80px' }} />}
       {!isLoading && recruitmentInfo && (
         <S.RecruitmentContainer>
@@ -47,7 +47,7 @@ export default React.memo(RecruitmentInfo);
 
 const S = {
   RecruitmentInfo: styled.div`
-    padding: 30px;
+    padding: 0 30px 30px 30px;
     .title {
       font-size: 20px;
       font-weight: 600;
