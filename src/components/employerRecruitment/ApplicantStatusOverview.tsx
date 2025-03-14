@@ -8,7 +8,7 @@ interface ApplicantStatusOverviewProps {
 
 export default function ApplicantStatusOverview({ status, applicationCount }: ApplicantStatusOverviewProps) {
   if (status === 'DRAFT') {
-    return <span>-</span>;
+    return null;
   }
 
   return (
