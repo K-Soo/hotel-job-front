@@ -8,7 +8,7 @@ export default function LandingEmployerPage() {
 LandingEmployerPage.getLayout = (page: React.ReactElement) => {
   return (
     <Layout>
-      <EmployerHeader />
+      <EmployerHeader borderBottom={false} />
       <EmployerMain>{page}</EmployerMain>
     </Layout>
   );
