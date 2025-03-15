@@ -1,8 +1,8 @@
+import React from 'react';
 import { SubmitHandler, useFormContext } from 'react-hook-form';
 import styled from 'styled-components';
 import { SetupCompanyForm } from '@/types';
-import FormInput from '@/components/common/form/FormInput';
-import Button from '@/components/common/style/Button';
+import useAlertWithConfirm from '@/hooks/useAlertWithConfirm';
 
 interface EmployerSetupCompanyProps {
   children: React.ReactNode;
@@ -12,10 +12,16 @@ interface EmployerSetupCompanyProps {
 
 export default function EmployerSetupCompany({ onSubmit, handleKeyDown, children }: EmployerSetupCompanyProps) {
   const { handleSubmit } = useFormContext<SetupCompanyForm>();
+  const { setAlertWithConfirmAtom } = useAlertWithConfirm();
+
+  React.useEffect(() => {
+    setAlertWithConfirmAtom((prev) => ({ ...prev, confirmLabel: '확인', type: 'ALERT', title: 'TITLE_16', subTitle: 'DESC_13' }));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <S.EmployerSetupCompany>
-      <form onSubmit={handleSubmit(onSubmit)} onKeyDown={handleKeyDown}>
+      <form className="company-form" onSubmit={handleSubmit(onSubmit)} onKeyDown={handleKeyDown}>
         {children}
       </form>
     </S.EmployerSetupCompany>
@@ -23,5 +29,10 @@ export default function EmployerSetupCompany({ onSubmit, handleKeyDown, children
 }
 
 const S = {
-  EmployerSetupCompany: styled.section``,
+  EmployerSetupCompany: styled.section`
+    .company-form {
+      margin: 0 auto;
+      max-width: 400px;
+    }
+  `,
 };
