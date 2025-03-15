@@ -144,21 +144,19 @@ export default function EmployerSetupCompanyContainer() {
 
       await queryClient.invalidateQueries({ queryKey: [queryKeys.AUTH_ME] });
 
-      await queryClient.invalidateQueries({ queryKey: [queryKeys.REFRESH_COOKIE] });
-
       setAlertWithConfirmAtom((prev) => ({
         ...prev,
         type: 'ALERT',
         title: 'TITLE_2',
         subTitle: 'DESC_2',
         confirmLabel: '확인',
-        onClickConfirm: () => window.location.replace(path.EMPLOYER),
+        onClickConfirm: () => {
+          window.location.replace(path.EMPLOYER);
+        },
       }));
     } catch (error) {
       alert('회사정보 등록에 실패했습니다.');
       window.location.reload();
-    } finally {
-      setLoadingAtomStatue({ isLoading: false });
     }
   };
 

@@ -94,10 +94,11 @@ const S = {
     .description {
       color: ${(props) => props.theme.colors.black500};
       font-weight: 400;
-      margin-top: 30px;
+      margin-top: 20px;
       font-size: 16px;
       text-align: center;
-      line-height: 1.3;
+      line-height: 1.4;
+      white-space: pre-line;
       ${(props) => props.theme.media.mobile`
         margin-top: 15px;
         font-size: 15px;

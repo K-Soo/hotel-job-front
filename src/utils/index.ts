@@ -11,3 +11,4 @@ export { getImageUrl } from './getImageUrl';
 export { queryKeyChecker } from './queryKeyChecker';
 export { formatToManWon } from './formatToManWon';
 export { phoneNumberFormat } from './phoneNumberFormat';
+export { businessNumberFormat } from './businessNumberFormat';

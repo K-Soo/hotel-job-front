@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Portal from '@/components/common/Portal';
 import Background from '@/components/common/Background';
-import { useRecoilValue, useResetRecoilState } from 'recoil';
+import { useRecoilValue, useResetRecoilState, useSetRecoilState } from 'recoil';
 import Icon from '@/icons/Icon';
 import Line from '@/components/common/Line';
 import { selectProductAtom, durationCalcOptionsSelector, selectRecruitmentIdAtom, productFocusAtom } from '@/recoil/product';
@@ -19,6 +19,9 @@ import { Post } from '@/apis';
 import Button from '@/components/common/style/Button';
 import SkeletonUI from '@/components/common/SkeletonUI';
 import useToast from '@/hooks/useToast';
+import useAuth from '@/hooks/useAuth';
+import useAlertWithConfirm from '@/hooks/useAlertWithConfirm';
+import { certificationModalAtom } from '@/recoil/certification';
 
 interface ProductRecruitmentSideMenuProps {
   handleCloseSideMenu: () => void;
@@ -32,6 +35,9 @@ export default function ProductRecruitmentSideMenu({ handleCloseSideMenu }: Prod
   const selectProductAtomValue = useRecoilValue(selectProductAtom);
   const { recruitmentId } = useRecoilValue(selectRecruitmentIdAtom);
   const { addToast } = useToast();
+  const { authAtomState } = useAuth();
+  const { setAlertWithConfirmAtom } = useAlertWithConfirm();
+  const setCertificationModalAtomState = useSetRecoilState(certificationModalAtom);
 
   const restProductFocusAtom = useResetRecoilState(productFocusAtom);
   const resetSelectProductAtom = useResetRecoilState(selectProductAtom);
@@ -52,6 +58,19 @@ export default function ProductRecruitmentSideMenu({ handleCloseSideMenu }: Prod
   const isEmptyRecruitmentList = isSuccess && data && data.result.length === 0;
 
   const handleClickCheckout = async () => {
+    if (authAtomState.certificationStatus === 'UNVERIFIED') {
+      setAlertWithConfirmAtom((prev) => ({
+        ...prev,
+        type: 'CONFIRM',
+        title: 'TITLE_17',
+        subTitle: 'DESC_1',
+        cancelLabel: '취소',
+        confirmLabel: '인증하기',
+        onClickConfirm: () => setCertificationModalAtomState({ isOpen: true }),
+      }));
+      return;
+    }
+
     if (!recruitmentId) {
       if (isEmptyRecruitmentList) {
         return addToast({ message: '채용공고를 먼저 등록해주세요.', type: 'info' });
@@ -86,7 +105,7 @@ export default function ProductRecruitmentSideMenu({ handleCloseSideMenu }: Prod
 
     try {
       const response = await Post.paymentRecruitmentInitiate(requestData);
-      console.log('초기화 API : ', response);
+      console.log('주문서 생성 API : ', response);
 
       if (response.result.status !== 'success') {
         throw new Error('초기화 API 실패');
