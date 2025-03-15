@@ -1,9 +1,14 @@
 import Layout, { Header, Footer, Main, DesktopNavigation, MobileNavigation } from '@/components/layout';
 import RecruitContainer from '@/containers/recruitContainer';
 import BottomNavigation from '@/components/layout/BottomNavigation';
-
+import { NextSeo } from 'next-seo';
 export default function RecruitPage() {
-  return <RecruitContainer />;
+  return (
+    <>
+      <NextSeo title="채용정보" />
+      <RecruitContainer />
+    </>
+  );
 }
 
 RecruitPage.getLayout = (page: React.ReactElement) => {

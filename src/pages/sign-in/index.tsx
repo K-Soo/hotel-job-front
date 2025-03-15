@@ -1,8 +1,14 @@
 import Layout, { Main, Header, MobileNavigation } from '@/components/layout';
 import SignInContainer from '@/containers/signInContainer';
+import { NextSeo } from 'next-seo';
 
 export default function SignInPage() {
-  return <SignInContainer />;
+  return (
+    <>
+      <NextSeo title="로그인" />
+      <SignInContainer />;
+    </>
+  );
 }
 
 SignInPage.getLayout = (page: React.ReactElement) => {
