@@ -1,11 +1,11 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
-import { useDropzone } from 'react-dropzone';
+import { FileRejection, useDropzone } from 'react-dropzone';
 import { FieldValues, Path, PathValue, useFormContext } from 'react-hook-form';
 import Image from 'next/image';
 import { Post } from '@/apis';
 import ResumeProfileImage from '@/components/common/resume/ResumeProfileImage';
-
+import axios from 'axios';
 interface ResumeUploadProfileImageFormProps<T> {
   name: Path<T>;
 }
@@ -21,11 +21,27 @@ export default function ResumeUploadProfileImageForm<T extends FieldValues>({ na
     }
   }, [profileImageValue]);
 
-  const onDrop = async (acceptedFiles: File[]) => {
+  const onDrop = async (acceptedFiles: File[], fileRejections: FileRejection[]) => {
+    // if (fileRejections.length > 0) {
+    //   fileRejections.forEach((rejection) => {
+    //     const { errors } = rejection;
+    //     const errorCode = errors[0]?.code;
+    //     if (errorCode === 'file-too-large') {
+    //       alert(`파일 크기가 너무 큽니다(제한: 10MB)`);
+    //     }
+    //     if (errorCode === 'file-invalid-type') {
+    //       alert(`지원되지 않는 파일 형식입니다.`);
+    //     }
+    //   });
+    //   return;
+    // }
+
     const file = acceptedFiles[0];
+
     if (!file) {
       alert('이미지 파일만 업로드 가능합니다.');
     }
+
     const formData = new FormData();
     formData.append('file', file);
 
@@ -34,12 +50,17 @@ export default function ResumeUploadProfileImageForm<T extends FieldValues>({ na
       console.log('이미지 응답 API : ', response.result);
       setValue(name, response.result.key as PathValue<T, Path<T>>);
       setPreviewImage(response.result.key);
-    } catch (error) {
-      console.log('error: ', error);
+    } catch (error: any) {
+      const errorMessage = error.response?.data?.error?.message;
+      if (errorMessage) {
+        alert(errorMessage);
+        return;
+      }
+      alert('이미지 업로드에 실패했습니다.');
     }
   };
 
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({
+  const { getRootProps, getInputProps } = useDropzone({
     onDrop,
     multiple: false,
     accept: {
@@ -47,7 +68,7 @@ export default function ResumeUploadProfileImageForm<T extends FieldValues>({ na
       'image/jpeg': [],
       'image/jpg': [],
     },
-    maxSize: 10 * 1024 * 1024, // 10MB 제한
+    maxSize: 5 * 1024 * 1024, // 5MB 제한
   });
 
   return (
