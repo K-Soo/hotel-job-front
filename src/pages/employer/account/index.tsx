@@ -1,12 +1,16 @@
 import Layout, { EmployerMain, EmployerHeader, EmployerFooter } from '@/components/layout';
 import EmployerAccountContainer from '@/containers/employerAccountContainer';
 import { ErrorBoundary, ErrorComponent } from '@/error';
+import { NextSeo } from 'next-seo';
 
 export default function EmployerAccountPage() {
   return (
-    <ErrorBoundary fallback={<ErrorComponent />}>
-      <EmployerAccountContainer />
-    </ErrorBoundary>
+    <>
+      <NextSeo title="계정정보" nofollow={true} noindex={true} />
+      <ErrorBoundary fallback={<ErrorComponent />}>
+        <EmployerAccountContainer />
+      </ErrorBoundary>
+    </>
   );
 }
 

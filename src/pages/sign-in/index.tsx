@@ -5,7 +5,7 @@ import { NextSeo } from 'next-seo';
 export default function SignInPage() {
   return (
     <>
-      <NextSeo title="로그인" />
+      <NextSeo title="로그인" canonical="https://www.hotel-job-connect.com/sign-in" />
       <SignInContainer />;
     </>
   );
