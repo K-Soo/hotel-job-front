@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { loadingAtom } from '@/recoil/loading';
-import { daumPostAtom } from '@/recoil/daumPost';
 import { bottomSheetAtom } from '@/recoil/bottomSheet';
 import { hamburgerNavigationAtom } from '@/recoil/hamburgerNavigation';
 import { alertWithConfirmSelector, alertWithConfirmAtom } from '@/recoil/alertWithConfirm';
@@ -28,7 +27,6 @@ const DynamicNoSSRAlert = dynamic(() => import('@/components/common/Alert'), { s
 const DynamicNoSSRConfirm = dynamic(() => import('@/components/common/Confirm'), { ssr: false });
 const DynamicNoSSRToast = dynamic(() => import('@/components/common/Toast'), { ssr: false });
 const DynamicNoSSRHamburgerNavigation = dynamic(() => import('@/components/layout/HamburgerNavigation'), { ssr: false });
-const DynamicNoSSRDaumPost = dynamic(() => import('@/components/common/DaumPost'), { ssr: false });
 const DynamicNoSSRCertificationAccountModal = dynamic(() => import('@/components/common/certification/CertificationAccountModal'), {
   ssr: false,
 });
@@ -39,7 +37,6 @@ interface LayoutProps {
 
 export default function Layout({ children }: LayoutProps) {
   const loadingAtomValue = useRecoilValue(loadingAtom);
-  const daumPostAtomValue = useRecoilValue(daumPostAtom);
   const bottomSheetAtomValue = useRecoilValue(bottomSheetAtom);
   const toastAtomValue = useRecoilValue(toastAtom);
   const alertWithConfirmSelectorValue = useRecoilValue(alertWithConfirmSelector);
