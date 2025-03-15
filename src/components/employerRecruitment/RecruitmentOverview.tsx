@@ -1,4 +1,4 @@
-import { ALL_JOBS, AllJobsKeyValuesKeys } from '@/constants/job';
+import { ALL_JOBS } from '@/constants/job';
 import { RecruitmentItem } from '@/types';
 import styled from 'styled-components';
 import { dateFormat } from '@/utils';
@@ -19,9 +19,9 @@ export default function RecruitmentOverview({ item }: RecruitmentOverviewProps) 
             </span>
           ))}
         </div>
-        {item.recruitmentStatus === 'PROGRESS' && (
+        {/* {item.recruitmentStatus === 'PROGRESS' && (
           <time className="summary__date--update">{dateFormat.date(item.updatedAt, 'YY.MM.DD HH:mm')} 수정</time>
-        )}
+        )} */}
       </div>
     </S.RecruitmentOverview>
   );
