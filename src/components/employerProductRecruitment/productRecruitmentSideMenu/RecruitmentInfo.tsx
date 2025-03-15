@@ -6,6 +6,8 @@ import { motion } from 'framer-motion';
 import { ALL_JOBS } from '@/constants/job';
 import { selectRecruitmentIdAtom } from '@/recoil/product';
 import { useSetRecoilState } from 'recoil';
+import { useRouter } from 'next/router';
+import path from '@/constants/path';
 
 interface RecruitmentInfoProps {
   items: GetPublishedRecruitmentListItem[];
@@ -16,6 +18,7 @@ export default function RecruitmentInfo({ items }: RecruitmentInfoProps) {
   const [isOpenDropDown, setIsOpenDropDown] = React.useState(false);
   const [isFocus, setIsFocus] = React.useState(false);
   const setSelectRecruitmentIdAtom = useSetRecoilState(selectRecruitmentIdAtom);
+  const router = useRouter();
 
   const selectRef = React.useRef<HTMLDivElement | null>(null); // ✅ 셀렉트 박스 참조
   const dropDownRef = React.useRef<HTMLDivElement | null>(null); // ✅ 드롭다운 참조
@@ -62,6 +65,19 @@ export default function RecruitmentInfo({ items }: RecruitmentInfoProps) {
     };
   }, [isOpenDropDown]);
 
+  if (isEmptyRecruitment) {
+    return (
+      <S.RecruitmentInfo>
+        <StyledEmptyForm>
+          <span className="text">광고를 적용할 수 있는 공고가 없습니다.</span>
+          <button className="now" onClick={() => router.push(path.EMPLOYER_RECRUITMENT)}>
+            공고 등록하러 가기
+          </button>
+        </StyledEmptyForm>
+      </S.RecruitmentInfo>
+    );
+  }
+
   return (
     <S.RecruitmentInfo>
       <S.RecruitmentSelect
@@ -73,13 +89,12 @@ export default function RecruitmentInfo({ items }: RecruitmentInfoProps) {
       >
         {selectedRecruitment && <span>{selectedRecruitment.recruitmentTitle}</span>}
         {!selectedRecruitment && !isEmptyRecruitment && <span>선택</span>}
-        {isEmptyRecruitment && <span>선택 가능한 채용공고가 없습니다.</span>}
         <i className="arrow-icon">
           <Icon name="ArrowLeft24x24" width="20px" height="20px" />
         </i>
       </S.RecruitmentSelect>
 
-      {isOpenDropDown && !isEmptyRecruitment && (
+      {isOpenDropDown && (
         <S.DropDownMenu ref={dropDownRef}>
           {items.map((item) => (
             <S.DropDownMenuItem
@@ -105,6 +120,30 @@ export default function RecruitmentInfo({ items }: RecruitmentInfoProps) {
     </S.RecruitmentInfo>
   );
 }
+
+const StyledEmptyForm = styled.div`
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
+  .text {
+    color: ${(props) => props.theme.colors.red500};
+  }
+  .now {
+    margin-top: 15px;
+    color: ${(props) => props.theme.colors.blue400};
+    font-weight: 500;
+    cursor: pointer;
+    text-decoration: underline;
+    font-size: 13px;
+    &:hover {
+      color: ${(props) => props.theme.colors.blue600};
+    }
+  }
+`;
 
 const S = {
   RecruitmentInfo: styled.div`
