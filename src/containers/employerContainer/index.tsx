@@ -1,6 +1,5 @@
 import React from 'react';
 import Employer from '@/components/employer';
-import RecentlyRecruitment from '@/components/employer/RecentlyRecruitment';
 import { Get } from '@/apis';
 import useFetchQuery from '@/hooks/useFetchQuery';
 import queryKeys from '@/constants/queryKeys';
@@ -23,10 +22,5 @@ export default function EmployerContainer() {
     return <ErrorComponent visibleBackButton={false} />;
   }
 
-  return (
-    <Employer isLoading={isLoading} data={data?.result}>
-      <></>
-      {/* <RecentlyRecruitment /> */}
-    </Employer>
-  );
+  return <Employer isLoading={isLoading} data={data?.result} />;
 }
