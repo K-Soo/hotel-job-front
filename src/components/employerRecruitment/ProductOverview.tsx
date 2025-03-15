@@ -50,8 +50,8 @@ export default function ProductOverview({ item }: ProductOverviewProps) {
           <Button
             label="상품 신청"
             variant="secondary100"
-            width="60px"
-            height="25px"
+            width="70px"
+            height="30px"
             fontSize="12px"
             onClick={() => router.push(path.EMPLOYER_PRODUCT_RECRUITMENT)}
           />
