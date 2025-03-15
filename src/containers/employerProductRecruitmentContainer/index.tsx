@@ -1,6 +1,5 @@
 import React from 'react';
 import EmployerProductRecruitment from '@/components/employerProductRecruitment';
-import { useRecoilValue } from 'recoil';
 import queryKeys from '@/constants/queryKeys';
 import { Get } from '@/apis';
 import useFetchQuery from '@/hooks/useFetchQuery';
@@ -10,11 +9,14 @@ import { useRouter } from 'next/router';
 import ProductCard from '@/components/employerProductRecruitment/ProductCard';
 import { keepPreviousData } from '@tanstack/react-query';
 import ProductRecruitmentSideMenuContainer from '@/containers/employerProductRecruitmentContainer/ProductRecruitmentSideMenuContainer';
+import SkeletonUI from '@/components/common/SkeletonUI';
+import ProductRecruitmentTab from '@/components/employerProductRecruitment/ProductRecruitmentTab';
 
 interface Query extends ParsedUrlQuery {
   type?: ProductRecruitmentQuery;
 }
 
+// TODO - 메인 프리미엄 상품
 export default function EmployerProductRecruitmentContainer() {
   const [isOpenSideMenu, setIsOpenSideMenu] = React.useState(false);
 
@@ -35,16 +37,29 @@ export default function EmployerProductRecruitmentContainer() {
     },
   });
 
-  console.log('상품 리스트 API : ', data);
+  if (isLoading) {
+    return (
+      <section>
+        <ProductRecruitmentTab />
+        <div style={{ display: 'flex' }}>
+          <SkeletonUI.RecruitMentProductPreview />
+          <SkeletonUI.RecruitMentProductList />
+        </div>
+      </section>
+    );
+  }
 
-  return (
-    <>
-      {isOpenSideMenu && <ProductRecruitmentSideMenuContainer setIsOpenSideMenu={setIsOpenSideMenu} />}
-      <EmployerProductRecruitment isLoading={isLoading}>
-        {isSuccess &&
-          data &&
-          data.result.map((product) => <ProductCard key={product.id} product={product} setIsOpenSideMenu={setIsOpenSideMenu} />)}
-      </EmployerProductRecruitment>
-    </>
-  );
+  if (isSuccess && data) {
+    return (
+      <>
+        {isOpenSideMenu && <ProductRecruitmentSideMenuContainer setIsOpenSideMenu={setIsOpenSideMenu} />}
+        <EmployerProductRecruitment>
+          {data.result.map((product) => {
+            if (product.name === 'PREMIUM') return;
+            return <ProductCard key={product.id} product={product} setIsOpenSideMenu={setIsOpenSideMenu} />;
+          })}
+        </EmployerProductRecruitment>
+      </>
+    );
+  }
 }
