@@ -8,22 +8,19 @@ import FormDevTools from '@/components/common/FormDevTools';
 import SignUpGeneralForm from '@/components/signUp/SignUpGeneralForm';
 import SignUpCompleteForm from '@/components/signUp/SignUpCompleteForm';
 import { Post, Auth } from '@/apis';
-import { useRouter } from 'next/router';
-import path from '@/constants/path';
 import useAuth from '@/hooks/useAuth';
 import dynamic from 'next/dynamic';
 import Modal from '@/components/common/modal';
 import PolicyTerms from '@/components/policyTerms';
 import PolicyPrivacy from '@/components/policyPrivacy';
+import { errorCode } from '@/error/errorCode';
 
 const DynamicNoSSRModal = dynamic(() => import('@/components/common/modal'), { ssr: false });
 
-// TODO - 회원가입 완료 UI 구현
 export default function SignUpContainer() {
-  // const [step, setStep] = React.useState('STEP_1');
+  const [step, setStep] = React.useState('STEP_1');
   const [selectedPolicy, setSelectedPolicy] = React.useState<'PERSONAL' | 'SERVICE' | null>(null);
 
-  const router = useRouter();
   const { setAuthAtomState } = useAuth();
 
   const methods = useForm<SignUpForm>({
@@ -60,6 +57,7 @@ export default function SignUpContainer() {
       methods.setError('userId', { type: 'custom', message: '아이디 중복체크를 해주세요.' });
       return;
     }
+
     const requestData = {
       userId: data.userId,
       password: data.password,
@@ -72,13 +70,17 @@ export default function SignUpContainer() {
     };
     try {
       const response = await Auth.signUpEmployer(requestData);
-      console.log('회원가입 API : ', response);
       setAuthAtomState({
         ...response.result,
         status: 'AUTHENTICATED',
       });
-      router.replace(path.EMPLOYER_SETUP_COMPANY);
-    } catch (error) {
+      setStep('STEP_2');
+    } catch (error: any) {
+      const responseErrorCode = error.response?.data?.error?.code;
+      if (responseErrorCode === errorCode.ALREADY_EXISTS) {
+        alert('이미 존재하는 아이디입니다.');
+        return;
+      }
       alert('회원가입 중 오류가 발생했습니다.');
     }
   };
@@ -132,7 +134,6 @@ export default function SignUpContainer() {
   }, []);
 
   const handleOpenPolicy = React.useCallback((value: string) => {
-    console.log('value: ', value);
     if (value === 'serviceTermsAgree') {
       setSelectedPolicy('SERVICE');
     }
@@ -158,12 +159,14 @@ export default function SignUpContainer() {
 
       <FormProvider {...methods}>
         <SignUp onSubmit={onSubmit}>
-          <SignUpGeneralForm
-            handleChangeAllAgree={handleChangeAllAgree}
-            fetchEmployerUserIdCheck={fetchEmployerUserIdCheck}
-            handleOpenPolicy={handleOpenPolicy}
-          />
-          {/* {step === 'STEP_2' && <SignUpCompleteForm />} */}
+          {step === 'STEP_1' && (
+            <SignUpGeneralForm
+              handleChangeAllAgree={handleChangeAllAgree}
+              fetchEmployerUserIdCheck={fetchEmployerUserIdCheck}
+              handleOpenPolicy={handleOpenPolicy}
+            />
+          )}
+          {step === 'STEP_2' && <SignUpCompleteForm />}
         </SignUp>
         <FormDevTools control={methods.control} />
       </FormProvider>
