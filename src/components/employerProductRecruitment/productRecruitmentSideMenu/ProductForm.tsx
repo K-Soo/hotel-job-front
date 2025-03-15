@@ -6,6 +6,8 @@ import { useRecoilState } from 'recoil';
 import { selectProductAtom } from '@/recoil/product';
 import { priceComma } from '@/utils';
 import Icon from '@/icons/Icon';
+import Tag from '@/components/common/Tag';
+import Button from '@/components/common/style/Button';
 
 export default function ProductForm() {
   const [isVisibleOption, setIsVisibleOption] = React.useState(false);
@@ -36,6 +38,7 @@ export default function ProductForm() {
     <S.ProductForm>
       <S.ProductInfo>
         <h6 className="title">{RECRUITMENT_PRODUCT_NAME[selectProductAtomState.name as keyof typeof RECRUITMENT_PRODUCT_NAME]}공고</h6>
+        <Tag label="PC+M" height="18px" margin="0 0 0 8px" />
       </S.ProductInfo>
 
       <S.PriceInfo>
@@ -46,7 +49,15 @@ export default function ProductForm() {
             <span>+{selectProductAtomState.selectedDuration.bonusDays}일</span>
           </div>
 
-          <StyledChangeButton onClick={() => setIsVisibleOption((prev) => !prev)}>기간변경</StyledChangeButton>
+          <Button
+            label="옵션 변경"
+            variant="secondary100"
+            width="70px"
+            fontSize="13px"
+            height="20px"
+            borderRadius="15px"
+            onClick={() => setIsVisibleOption((prev) => !prev)}
+          />
         </div>
 
         <div className="price-box">
@@ -89,16 +100,6 @@ export default function ProductForm() {
   );
 }
 
-const StyledChangeButton = styled.button`
-  background-color: ${(props) => props.theme.colors.gray600};
-  color: white;
-  padding: 3px 8px;
-  border-radius: 15px;
-  font-weight: 300;
-  font-size: 14px;
-  cursor: pointer;
-`;
-
 const StyledDropDown = styled.div`
   padding-top: 15px;
   padding-bottom: 15px;
@@ -114,9 +115,11 @@ const S = {
   `,
   ProductInfo: styled.div`
     display: flex;
+    align-items: center;
+    margin-bottom: 5px;
     .title {
-      font-size: 16px;
-      font-weight: 500;
+      font-size: 15px;
+      font-weight: 400;
     }
   `,
   PriceInfo: styled.div`
@@ -128,8 +131,8 @@ const S = {
       display: flex;
       align-items: center;
       &__text {
-        font-size: 16px;
-        margin-right: 10px;
+        font-size: 14px;
+        margin-right: 30px;
         &--label {
           color: ${(props) => props.theme.colors.gray600};
           padding-right: 5px;
