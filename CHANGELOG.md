@@ -1,6 +1,60 @@
 # 변경 로그
 
 프로젝트의 모든 주요 변경 사항
+### [1.9.5](https://github.com/K-Soo/hotel-job-front/compare/v1.9.4...v1.9.5) (2025-03-15)
+
+
+### Features
+
+* **API:** 채용공고 프리미엄 리스트 조회 기능 추가 ([be4000d](https://github.com/K-Soo/hotel-job-front/commit/be4000df4be73e31b2478190f9f2d89004b64d27))
+* **API:** GetRecruitPremiumListResponse 인터페이스 추가 ([4d1f039](https://github.com/K-Soo/hotel-job-front/commit/4d1f039b5e3bbf7a10175b66372e2f2952de97d2))
+* **DifferencePoint:** 제목 변경 및 반응형 디자인 개선 ([08c4e6d](https://github.com/K-Soo/hotel-job-front/commit/08c4e6d914383927e06cc8f22a92bd5dd76b9ab6))
+* **EmployerProductRecruitment:** 로딩 상태에 대한 스켈레톤 UI 추가 및 프리미엄 상품 필터링 ([2624b6f](https://github.com/K-Soo/hotel-job-front/commit/2624b6f791e79a357e4a4a2c2e8bfc27d831b339))
+* **EmployerProductRecruitmentPage:** ErrorBoundary 추가하여 오류 처리 개선 ([4307c1d](https://github.com/K-Soo/hotel-job-front/commit/4307c1d7718a1fd4efff7d2f946ef6b6a676c881))
+* **ErrorComponent:** fontSize prop 추가 및 스타일 개선 ([382139d](https://github.com/K-Soo/hotel-job-front/commit/382139d56490c84b09517d9fa81dd7c239e5ea09))
+* **LandingEmployer:** Footer 컴포넌트 추가 ([31cd3dd](https://github.com/K-Soo/hotel-job-front/commit/31cd3dd01bcd59de5b254e4b4ede924c142b2670))
+* **PremiumListContainer:** 프리미엄 채용 리스트를 위한 무한 스크롤 컴포넌트 추가 ([e527a7f](https://github.com/K-Soo/hotel-job-front/commit/e527a7f360dc55343e65bac3a0fbfd95176cdfae))
+* **ProductCard:** 상품 이름에 '상품' 추가 및 스타일 개선 ([e489199](https://github.com/K-Soo/hotel-job-front/commit/e4891991a220b9007db67fad640af3c7c6d24207))
+* **ProductForm:** 옵션 변경 버튼 추가 및 UI 개선 ([229e24b](https://github.com/K-Soo/hotel-job-front/commit/229e24b24722daf1160c684bbe2d8898d6d2588c))
+* **ProductPreview:** 제품 상태에 따른 애니메이션 효과 추가 및 이미지 스타일 개선 ([1d1d86c](https://github.com/K-Soo/hotel-job-front/commit/1d1d86cafb1492131391b3fe4afc58c2768db8e1))
+* **queryKeys:** MAIN_PREMIUM_LIST 및 MAIN_SPECIAL_LIST 추가 ([2faab29](https://github.com/K-Soo/hotel-job-front/commit/2faab29dcb4d807dbc5d615b8ef305434f14d497))
+* **RecruitFlow:** 반응형 디자인 적용 및 단계 표시 추가 ([ccded46](https://github.com/K-Soo/hotel-job-front/commit/ccded4668937d3a234fece380aa7d87c4b679e3c))
+* **RecruitmentInfo:** 빈 공고 상태에 대한 안내 및 등록 버튼 추가 ([f898c69](https://github.com/K-Soo/hotel-job-front/commit/f898c69a541645cce40817cce964b203b1ff839f))
+* **RecruitPremiumCard:** 프리미엄 카드 컴포넌트 추가 ([f1dbdb5](https://github.com/K-Soo/hotel-job-front/commit/f1dbdb505a7481e21d4d70f6ba474d6d22936e6c))
+* **RecruitPremiumList:** 프리미엄 리스트 컴포넌트 추가 ([2d50b44](https://github.com/K-Soo/hotel-job-front/commit/2d50b448450c6f1b45907b3b3850ffccf69b13fe))
+* **ResumeUploadProfileImageForm:** 파일 업로드 시 오류 처리 개선 및 최대 파일 크기 5MB로 변경 ([0164467](https://github.com/K-Soo/hotel-job-front/commit/01644678cb956ec9698bd094e5fb0176e8b7a973))
+
+
+### Bug Fixes
+
+* **Announcement:** SIGN_UP 경로를 SIGN_IN 경로로 변경하여 회사 타입 추가 ([ac5a8d8](https://github.com/K-Soo/hotel-job-front/commit/ac5a8d8df4b82109d1685c436d9f8e7d2dea05c0))
+* **product:** TAG 설명을 '급구 태그로 공고를 빠르게 노출!'로 수정 ([957b2ce](https://github.com/K-Soo/hotel-job-front/commit/957b2ce5d62e9e4b246b6e1f2829aa1efa7c7820))
+* **useDidMountEffect:** eslint 규칙을 무시하여 의존성 배열 경고 제거 ([6026712](https://github.com/K-Soo/hotel-job-front/commit/6026712182279cb20ca1680cd0392e9368505366))
+
+
+### Styles
+
+* **Advantage:** 배경 그라데이션 투명도 조정 ([0af69fd](https://github.com/K-Soo/hotel-job-front/commit/0af69fd17ea4961688358a538b86e9e532533a45))
+* **ProductOverview:** 버튼 크기 조정 및 UI 개선 ([03a3112](https://github.com/K-Soo/hotel-job-front/commit/03a3112456938b15170d7d87747a9ae6b7ece4b2))
+* **RecruitmentStatusTag:** 태그 배경색 추가 및 스타일 조정 ([4b12ddf](https://github.com/K-Soo/hotel-job-front/commit/4b12ddf8d63bfe7a38994bd56ae1f5886e15650c))
+
+
+### Refactors
+
+* **App:** 주석 처리된 Maintenance 컴포넌트 제거 및 ReactQueryDevtools 주석 해제 ([db87a17](https://github.com/K-Soo/hotel-job-front/commit/db87a171737838723447d315a8bb39fa8af94bda))
+* **EmployerGuardComponent:** styled-components 임포트 제거 ([2ec0478](https://github.com/K-Soo/hotel-job-front/commit/2ec04789c281a1d080529517f4b020dc667672b0))
+* **EmployerProductRecruitment:** isLoading prop 제거 및 로딩 UI 개선 ([8a1e5d9](https://github.com/K-Soo/hotel-job-front/commit/8a1e5d925ace1ff3cc5cada5989ad4126e88d6b9))
+* **HomeContainer:** 주석 처리된 컴포넌트 정리 및 프리미엄 상품 관련 TODO 추가 ([4588d0d](https://github.com/K-Soo/hotel-job-front/commit/4588d0d85c3172fab65f6b97548b61bad1bd3dd9))
+* **LandingEmployer:** Advantage 컴포넌트 및 관련 스타일 제거 ([c3dd554](https://github.com/K-Soo/hotel-job-front/commit/c3dd554b2316cdee2cf57fbc54398d2948bffa2b))
+* **LandingEmployerPage:** 불필요한 Footer 컴포넌트 임포트 제거 ([fd34d3c](https://github.com/K-Soo/hotel-job-front/commit/fd34d3cc26bacf6510699b64523a0ea5a5641121))
+* **MainSpecialListContainer:** 상수 사용하여 모집 한도 관리 개선 ([ab4abc2](https://github.com/K-Soo/hotel-job-front/commit/ab4abc206f856dddacd91e9db55060f01b24c614))
+* **MainUrgentListContainer:** 이미지 파일 정리 및 불필요한 컴포넌트 제거 ([f74a3ac](https://github.com/K-Soo/hotel-job-front/commit/f74a3acdfa8ae00248c1f4788e051ff6c3372fb0))
+* **ProductOption:** 불필요한 margin 제거 및 태그 표시 개선 ([c254caa](https://github.com/K-Soo/hotel-job-front/commit/c254caae84e22032968d8e30dcaeeecf9e7dce2d))
+* **RecruitmentOverview:** 주석 처리된 코드 제거 ([dd4e5c4](https://github.com/K-Soo/hotel-job-front/commit/dd4e5c4b15ecf36cd8afc15ef04f3b9f0f91dc04))
+* **RecruitSpecialCard:** RecruitTag 컴포넌트 제거 ([4405acd](https://github.com/K-Soo/hotel-job-front/commit/4405acdbb391c5cba87d3ab6a74723369089fba9))
+* **RecruitSpecialListContainer:** 모집 한도 상수를 사용하여 코드 개선 ([8b99b29](https://github.com/K-Soo/hotel-job-front/commit/8b99b2930fc4c1a4cdceb3e8a5f005bc00a47805))
+* **useRequestFCMPermission:** 불필요한 경로 확인 주석 처리 ([4ce41a9](https://github.com/K-Soo/hotel-job-front/commit/4ce41a95848fc127694c03034871651135e61e73))
+
 ### [1.9.4](https://github.com/K-Soo/hotel-job-front/compare/v1.9.3...v1.9.4) (2025-03-14)
 
 
