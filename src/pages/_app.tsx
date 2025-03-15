@@ -10,7 +10,6 @@ import EmployerGuardComponent from '@/auth/EmployerGuardComponent';
 import AuthenticationComponent from '@/auth/AuthenticationComponent';
 import environment from '@/environment';
 import NotificationProvider from '@/context/NotificationProvider';
-// import Maintenance from '@/components/common/Maintenance';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import Head from 'next/head';
 import dynamic from 'next/dynamic';
@@ -60,7 +59,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
                   </GuardComponent>,
                 )}
             </NotificationProvider>
-            {/* <ReactQueryDevtools initialIsOpen={false} /> */}
+            <ReactQueryDevtools initialIsOpen={false} />
           </QueryClientProvider>
         </RecoilRoot>
       </AppThemeProvider>
