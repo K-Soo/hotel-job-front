@@ -1,6 +1,19 @@
 # 변경 로그
 
 프로젝트의 모든 주요 변경 사항
+## [1.10.0](https://github.com/K-Soo/hotel-job-front/compare/v1.9.7...v1.10.0) (2025-03-15)
+
+
+### Features
+
+* **dependencies:** next-seo 패키지 추가 ([e0c8f25](https://github.com/K-Soo/hotel-job-front/commit/e0c8f25f7dafb82a62ed0bf7e9a5863fe0932f84))
+* **seo:** 기본 SEO 설정 추가 및 페이지별 메타 태그 적용 ([68b2ffd](https://github.com/K-Soo/hotel-job-front/commit/68b2ffd8e00673e7a8e7f2233adbf8ba0d515ae4))
+
+
+### Bug Fixes
+
+* **certification:** 중복된 휴대폰 번호 오류 처리 추가 ([d301474](https://github.com/K-Soo/hotel-job-front/commit/d301474d8d41b6ab0b528cf602057b6a7e7a07b3))
+
 ### [1.9.7](https://github.com/K-Soo/hotel-job-front/compare/v1.9.6...v1.9.7) (2025-03-15)
 
 
