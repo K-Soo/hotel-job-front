@@ -1,9 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import axios from 'axios';
 import { SubmitHandler, useFormContext } from 'react-hook-form';
 import { SignUpForm } from '@/types';
-import FormInput from '@/components/common/form/FormInput';
 
 interface SignUpProps {
   children: React.ReactNode;
@@ -27,6 +25,6 @@ const S = {
     margin: 0 auto;
     display: flex;
     flex-direction: column;
-    padding-bottom: 60px;
+    padding-top: 30px;
   `,
 };
