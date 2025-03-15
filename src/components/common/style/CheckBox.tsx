@@ -142,8 +142,14 @@ const S = {
     }
 
     input[type='checkbox']:disabled + label:before {
-      background-color: #ccc;
-      border: 2px solid #ccc;
+      background-color: ${(props) => props.theme.colors.gray100};
+      border: 2px solid ${(props) => props.theme.colors.gray300};
+    }
+
+    input[type='checkbox']:disabled:checked + label:before {
+      background-color: ${(props) => props.theme.colors.blue700};
+      border: 2px solid ${(props) => props.theme.colors.blue700};
+      opacity: 0.7;
     }
 
     .label-text {
