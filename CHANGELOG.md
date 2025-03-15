@@ -1,6 +1,52 @@
 # 변경 로그
 
 프로젝트의 모든 주요 변경 사항
+### [1.9.6](https://github.com/K-Soo/hotel-job-front/compare/v1.9.5...v1.9.6) (2025-03-15)
+
+
+### Features
+
+* **alertWithConfirm:** 새로운 안내 메시지 추가 및 설명 텍스트 개행 수정 ([4d85708](https://github.com/K-Soo/hotel-job-front/commit/4d85708d46a00e978dc5506eae2c01d51fba83cf))
+* **BusinessNumberForm:** StepHeader 컴포넌트 추가 및 헤더 스타일 제거 ([11d6ebd](https://github.com/K-Soo/hotel-job-front/commit/11d6ebda500b3b45df836acf69ad92f1212a8826))
+* **CheckBox:** 비활성화된 체크박스 스타일 개선 및 체크 상태 색상 추가 ([0501798](https://github.com/K-Soo/hotel-job-front/commit/0501798e0a6dae560a1dd5167f74ebb66e8603c0))
+* **EmployerSetupCompanyContainer:** 로딩 상태 관리 추가 및 버튼 스타일 수정 ([4fd3dcd](https://github.com/K-Soo/hotel-job-front/commit/4fd3dcd00d830ae92ffb189ea7b79bb94ea42030))
+* **EmployerSetupCompany:** useAlertWithConfirm 훅 추가 및 스타일 수정 ([1d4e3ae](https://github.com/K-Soo/hotel-job-front/commit/1d4e3ae803dc9cfa9b4e9c234eabb8e9bea3959a))
+* **errorCode:** 'ALREADY_EXISTS' 오류 코드 추가 ([d56442b](https://github.com/K-Soo/hotel-job-front/commit/d56442b696d7dd7e32fc9141f20af1afca62f0a8))
+* **FormCheckbox:** 체크박스 비활성화 기능 추가 및 스타일 수정 ([7071a13](https://github.com/K-Soo/hotel-job-front/commit/7071a13a307f91000a97d88313fe7d330d2cfe5c))
+* **icon:** 새로운 체크 아이콘 SVG 추가 ([33f45ef](https://github.com/K-Soo/hotel-job-front/commit/33f45efa3b0c283d678d7f773e42bce285d190b9))
+* **icon:** 체크 아이콘 추가 ([7d09bb8](https://github.com/K-Soo/hotel-job-front/commit/7d09bb8d9888c5727dd8b2a5fb94cb018362d36e))
+* **SignUpCompleteForm:** 회원가입 완료 화면 추가 및 스타일 정의 ([f012ed4](https://github.com/K-Soo/hotel-job-front/commit/f012ed467f724e062ac5b262192459b9ed6d2f94))
+* **SignUpContainer:** 회원가입 프로세스 단계 추가 및 오류 처리 개선 ([1dee43b](https://github.com/K-Soo/hotel-job-front/commit/1dee43b39c82b4542306aacbf6e50884eae8979f))
+* **SignUpEmployerResponse:** 계정 상태 및 인증 상태 필드 추가 ([9caeabc](https://github.com/K-Soo/hotel-job-front/commit/9caeabcde8d8deeb4ac76c04e29b02659ca8285e))
+* **SignUpGeneralForm:** 입력 필드 비활성화 및 버튼 로딩 상태 추가 ([6a42812](https://github.com/K-Soo/hotel-job-front/commit/6a428127a7ee0a48674026b03e1861822353042b))
+* **StepHeader:** 새로운 StepHeader 컴포넌트 추가 및 스타일 정의 ([476021d](https://github.com/K-Soo/hotel-job-front/commit/476021d76f6541e5c83a329806dd4dd8a172183d))
+
+
+### Bug Fixes
+
+* **CompanyInfo:** '미 인증' 텍스트 수정 ([ad5d9aa](https://github.com/K-Soo/hotel-job-front/commit/ad5d9aae645e5b051ad879b83f9b09872c8a3d00))
+* **EmployerAccount:** '미 인증' 텍스트 수정 ([27ee3fa](https://github.com/K-Soo/hotel-job-front/commit/27ee3fa3f9ad40b3c2660d86523932e915d9eccc))
+
+
+### Styles
+
+* **Alert:** description 스타일 수정 및 여백, 줄 높이 조정 ([22709e1](https://github.com/K-Soo/hotel-job-front/commit/22709e156dd681801188a29db9536be5a12592c0))
+
+
+### Refactors
+
+* **BusinessInfoForm:** StepHeader 컴포넌트로 헤더 변경 및 스타일 수정 ([a4e9c08](https://github.com/K-Soo/hotel-job-front/commit/a4e9c08f8e7941b94b747d9120bc7b7483485fc2))
+* **EmployerAside:** 불필요한 주석 제거 ([777612d](https://github.com/K-Soo/hotel-job-front/commit/777612daca162e1acf5be3cd0d26f29b79bf74e6))
+* **Employer:** children prop 제거 ([3a48188](https://github.com/K-Soo/hotel-job-front/commit/3a481888725e8923d0e6456a841758cd1ddfb0d3))
+* **EmployerContainer:** 불필요한 RecentlyRecruitment 컴포넌트 제거 및 코드 간소화 ([0d24a08](https://github.com/K-Soo/hotel-job-front/commit/0d24a083966fd8cbe6d26addbd785c1c5533bb86))
+* **EmployerSetupCompanyContainer:** 코드 가독성을 위한 오류 처리 구문 수정 ([7a4011a](https://github.com/K-Soo/hotel-job-front/commit/7a4011aa55724493e0b658bf3914da5a6cd0c5b8))
+* **Layout:** daumPost 관련 코드 제거 ([ddf2be5](https://github.com/K-Soo/hotel-job-front/commit/ddf2be5c703b0c7a24f12871631a5bfcb702d114))
+* **ManagerInfoForm:** StepHeader 컴포넌트로 헤더 변경 및 불필요한 코드 제거 ([9bc3cb2](https://github.com/K-Soo/hotel-job-front/commit/9bc3cb20ca8cb36f329719ae5da8b028c50d6501))
+* **ProductPreview:** 코드 간소화 및 스타일 개선, 탭 컴포넌트 구조 변경 ([daefc02](https://github.com/K-Soo/hotel-job-front/commit/daefc02a3cefc2cffb8844e5357857151d3e37fc))
+* **ProductRecruitmentSideMenu:** 로그 메시지 수정 및 불필요한 상태 변수 제거 ([50a34df](https://github.com/K-Soo/hotel-job-front/commit/50a34df6097f0aac3a0fabbabacf74400730e578))
+* **SignInContainer:** 불필요한 상태 변수 제거 ([053d05b](https://github.com/K-Soo/hotel-job-front/commit/053d05b95a2a838ecda81e538e4bfce2f8bcf526))
+* **SignUp:** 상단 패딩 수정 및 불필요한 코드 제거 ([b5be536](https://github.com/K-Soo/hotel-job-front/commit/b5be536b8170085354deb4d9a7bff5e75b33a3d4))
+
 ### [1.9.5](https://github.com/K-Soo/hotel-job-front/compare/v1.9.4...v1.9.5) (2025-03-15)
 
 
