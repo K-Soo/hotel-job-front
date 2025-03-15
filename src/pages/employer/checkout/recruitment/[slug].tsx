@@ -1,5 +1,6 @@
 import Layout, { EmployerMain, EmployerHeader, EmployerFooter } from '@/components/layout';
 import EmployerCheckoutRecruitmentContainer from '@/containers/employerCheckoutRecruitmentContainer';
+import { NextSeo } from 'next-seo';
 import dynamic from 'next/dynamic';
 
 const DynamicNoSSREmployerCheckoutRecruitmentContainer = dynamic(() => import('@/containers/employerCheckoutRecruitmentContainer'), {
@@ -7,7 +8,12 @@ const DynamicNoSSREmployerCheckoutRecruitmentContainer = dynamic(() => import('@
 });
 
 export default function EmployerCheckoutRecruitmentPage() {
-  return <DynamicNoSSREmployerCheckoutRecruitmentContainer />;
+  return (
+    <>
+      <NextSeo title="주문" nofollow={true} noindex={true} />
+      <DynamicNoSSREmployerCheckoutRecruitmentContainer />;
+    </>
+  );
 }
 
 EmployerCheckoutRecruitmentPage.getLayout = (page: React.ReactElement) => {

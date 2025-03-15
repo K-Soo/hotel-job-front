@@ -5,7 +5,7 @@ import { NextSeo } from 'next-seo';
 export default function RecruitPage() {
   return (
     <>
-      <NextSeo title="채용정보" />
+      <NextSeo title="채용정보" canonical="https://www.hotel-job-connect.com/recruit" />
       <RecruitContainer />
     </>
   );

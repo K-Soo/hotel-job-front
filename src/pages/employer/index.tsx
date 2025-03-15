@@ -3,9 +3,15 @@ import EmployerContainer from '@/containers/employerContainer';
 import { GetServerSideProps, GetServerSidePropsContext } from 'next';
 import { Auth } from '@/apis';
 import path from '@/constants/path';
+import { NextSeo } from 'next-seo';
 
 export default function EmployerPage() {
-  return <EmployerContainer />;
+  return (
+    <>
+      <NextSeo title="대시보드" nofollow={true} noindex={true} />
+      <EmployerContainer />
+    </>
+  );
 }
 
 EmployerPage.getLayout = (page: React.ReactElement) => {

@@ -6,13 +6,21 @@ import { QueryClient } from '@tanstack/react-query';
 import { GetStaticPaths, GetStaticPropsContext } from 'next';
 import path from '@/constants/path';
 import { ErrorBoundary, ErrorComponent } from '@/error';
+import { NextSeo } from 'next-seo';
 
 // TODO  - SEO 작업
 export default function RecruitDetailPage() {
   return (
-    <ErrorBoundary fallback={<ErrorComponent />}>
-      <RecruitDetailContainer />
-    </ErrorBoundary>
+    <>
+      <NextSeo
+        title="상세정보"
+        // description
+        // canonical="https://www.hotel-job-connect.com/recruit/id"
+      />
+      <ErrorBoundary fallback={<ErrorComponent />}>
+        <RecruitDetailContainer />
+      </ErrorBoundary>
+    </>
   );
 }
 

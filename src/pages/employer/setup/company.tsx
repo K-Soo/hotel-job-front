@@ -4,9 +4,15 @@ import EmployerSetupCompanyContainer from '@/containers/employerSetupCompanyCont
 import path from '@/constants/path';
 import { GetServerSideProps, GetServerSidePropsContext } from 'next';
 import { Auth } from '@/apis';
+import { NextSeo } from 'next-seo';
 
 export default function EmployerSetupCompanyPage() {
-  return <EmployerSetupCompanyContainer />;
+  return (
+    <>
+      <NextSeo title="사업자 정보" nofollow={true} noindex={true} />
+      <EmployerSetupCompanyContainer />;
+    </>
+  );
 }
 
 export const getServerSideProps: GetServerSideProps = async (context: GetServerSidePropsContext) => {

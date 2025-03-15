@@ -1,12 +1,16 @@
 import Layout, { EmployerMain, EmployerHeader, EmployerFooter } from '@/components/layout';
 import EmployerProductRecruitmentContainer from '@/containers/employerProductRecruitmentContainer';
 import { ErrorBoundary, ErrorComponent } from '@/error';
+import { NextSeo } from 'next-seo';
 
 export default function EmployerProductRecruitmentPage() {
   return (
-    <ErrorBoundary fallback={<ErrorComponent visibleBackButton={false} fontSize="16px" />}>
-      <EmployerProductRecruitmentContainer />
-    </ErrorBoundary>
+    <>
+      <NextSeo title="채용상품" nofollow={true} noindex={true} />
+      <ErrorBoundary fallback={<ErrorComponent visibleBackButton={false} fontSize="16px" />}>
+        <EmployerProductRecruitmentContainer />
+      </ErrorBoundary>
+    </>
   );
 }
 
