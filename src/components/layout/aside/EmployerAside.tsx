@@ -69,7 +69,6 @@ export function EmployerAside() {
 
 const S = {
   EmployerAside: styled(motion.aside)`
-    /* border-right: 1px solid ${(props) => props.theme.colors.gray200}; */
     background-color: ${(props) => props.theme.colors.white};
     padding: 15px 4px 15px 10px;
     font-size: 15px;
