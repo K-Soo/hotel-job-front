@@ -9,10 +9,12 @@ import { Get } from '@/apis';
 import EmptyComponent from '@/components/common/EmptyComponent';
 import SkeletonUI from '@/components/common/SkeletonUI';
 
+const SPECIAL_RECRUIT_LIMIT = '9';
+
 export default function MainSpecialListContainer() {
   const { data, isLoading, isSuccess, fetchNextPage, hasNextPage, isFetching } = useInfiniteScroll({
     queryFn: Get.getRecruitSpecialList,
-    queryKey: [queryKeys.RECRUIT_SPECIAL_LIST, { limit: '9', type: 'MAIN' }],
+    queryKey: [queryKeys.MAIN_SPECIAL_LIST, { type: 'MAIN' }],
     options: {
       enabled: true,
       throwOnError: true,
@@ -20,7 +22,7 @@ export default function MainSpecialListContainer() {
       gcTime: 60 * 1000 * 10,
     },
     requestQuery: {
-      limit: '9',
+      limit: SPECIAL_RECRUIT_LIMIT,
       type: 'MAIN',
     },
   });

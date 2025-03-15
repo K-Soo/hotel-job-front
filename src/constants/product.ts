@@ -27,6 +27,6 @@ export const RECRUITMENT_PRODUCT_DESCRIPTION = {
 export const RECRUITMENT_PRODUCT_OPTIONS_DESCRIPTION = {
   LIST_UP: '',
   HIGHLIGHT: '형광펜 효과로 공고를 강조!',
-  TAG: '인기 태그로 공고를 돋보이게!',
+  TAG: '급구 태그로 공고를 빠르게 노출!',
   BOLD: '볼드효과로 공고를 돋보이게!',
 };

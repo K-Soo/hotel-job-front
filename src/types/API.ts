@@ -302,7 +302,12 @@ export interface CancelApplicationResponse extends BaseResponse {
     status: ResponseStatus;
   };
 }
-
+export interface GetRecruitPremiumListResponse extends BaseResponse {
+  result: {
+    items: types.RecruitListItem[];
+    pagination: PaginationInfo;
+  };
+}
 export interface GetRecruitSpecialListResponse extends BaseResponse {
   result: {
     items: types.RecruitListItem[];

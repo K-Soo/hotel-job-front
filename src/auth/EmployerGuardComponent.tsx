@@ -1,4 +1,3 @@
-import styled from 'styled-components';
 import React from 'react';
 import { useRouter } from 'next/router';
 import path from '@/constants/path';
@@ -6,7 +5,7 @@ import useAuth from '@/hooks/useAuth';
 import { RoleType } from '@/types';
 import LoadingOverlay from '@/components/common/LoadingOverlay';
 import { alertWithConfirmAtom } from '@/recoil/alertWithConfirm';
-import { useRecoilState, useSetRecoilState } from 'recoil';
+import { useSetRecoilState } from 'recoil';
 
 interface EmployerGuardComponentProps {
   allowedRoles: RoleType[] | undefined;

@@ -21,7 +21,7 @@ const StyledDimmed = styled.div`
   height: 100%;
   position: absolute;
   z-index: 1;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.06), rgba(0, 0, 0, 0));
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.02), rgba(0, 0, 0, 0));
   border-radius: inherit;
   top: 0;
   left: 0;

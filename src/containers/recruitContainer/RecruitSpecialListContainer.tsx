@@ -18,6 +18,7 @@ interface Query extends ParsedUrlQuery {
   page?: string;
   job?: any;
 }
+const SPECIAL_LIMIT = '2';
 
 export default function RecruitSpecialListContainer() {
   const router = useRouter();
@@ -25,7 +26,7 @@ export default function RecruitSpecialListContainer() {
 
   const { data, isLoading, isSuccess, fetchNextPage, hasNextPage, isFetching } = useInfiniteScroll({
     queryFn: Get.getRecruitSpecialList,
-    queryKey: [queryKeys.RECRUIT_SPECIAL_LIST, { limit: '9', type: 'RECRUIT', job }],
+    queryKey: [queryKeys.RECRUIT_SPECIAL_LIST, { limit: SPECIAL_LIMIT, type: 'RECRUIT', job }],
     options: {
       enabled: true,
       throwOnError: true,
@@ -34,7 +35,7 @@ export default function RecruitSpecialListContainer() {
       placeholderData: keepPreviousData,
     },
     requestQuery: {
-      limit: '9',
+      limit: SPECIAL_LIMIT,
       type: 'RECRUIT',
       job,
     },

@@ -131,24 +131,6 @@ const StyledTitle = styled.div<{ $isBold: boolean; $isHighlight: boolean }>`
   }
 `;
 
-const RecruitTag = styled.span`
-  height: 18px;
-  width: fit-content;
-  display: flex;
-  align-items: center;
-  padding: 0px 5px;
-  border-radius: 3px;
-  margin-right: 8px;
-  background-color: ${(props) => props.theme.colors.blue50};
-  font-size: 13px;
-  font-weight: 300;
-  color: ${(props) => props.theme.colors.blue800};
-  letter-spacing: 0.8px;
-  &:hover {
-    background-color: ${(props) => props.theme.colors.blue100};
-  }
-`;
-
 const S = {
   RecruitSpecialCard: styled(motion.div)`
     width: calc(33.333% - 6.7px);

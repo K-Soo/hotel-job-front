@@ -9,5 +9,6 @@ export default function useDidMountEffect(effect: () => any, deps: Array<any>) {
     } else {
       didMount.current = true;
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, deps);
 }

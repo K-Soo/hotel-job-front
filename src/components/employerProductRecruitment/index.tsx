@@ -21,12 +21,11 @@ const SUB_TITLE = {
 } as const;
 
 interface EmployerProductRecruitmentProps {
-  isLoading: boolean;
   children: React.ReactNode;
 }
 
 // TODO  - loading
-export default function EmployerProductRecruitment({ isLoading, children }: EmployerProductRecruitmentProps) {
+export default function EmployerProductRecruitment({ children }: EmployerProductRecruitmentProps) {
   const router = useRouter();
   const { type = 'MAIN' } = router.query as Query;
 
@@ -40,10 +39,8 @@ export default function EmployerProductRecruitment({ isLoading, children }: Empl
       </S.Header>
 
       <div className="product-container">
-        {isLoading ? <SkeletonUI.RecruitMentProductPreview /> : <ProductPreview />}
-
-        {isLoading && <SkeletonUI.RecruitMentProductList />}
-        {!isLoading && <div className="product-container__list">{children}</div>}
+        <ProductPreview />
+        <div className="product-container__list">{children}</div>
       </div>
     </S.EmployerProductRecruitment>
   );
