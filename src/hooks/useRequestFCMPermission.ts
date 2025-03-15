@@ -41,7 +41,7 @@ export default function useRequestFCMPermission() {
 
   const router = useRouter();
 
-  const isEligiblePath = router.pathname === '/' || router.pathname === '/employer';
+  // const isEligiblePath = router.pathname === '/' || router.pathname === '/employer';
 
   React.useEffect(() => {
     async function initialize() {
