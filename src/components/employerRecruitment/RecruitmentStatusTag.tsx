@@ -16,26 +16,29 @@ const S = {
     cursor: default;
     display: inline-block;
     font-size: 13px;
-    width: 100%;
+    width: 65px;
     max-width: 90px;
     color: #343a40;
     border-radius: 30px;
     padding: 5px 5px;
-    font-weight: 500;
+    font-weight: 400;
     ${(props) =>
       props.type === 'PROGRESS' &&
       css`
         color: #4caf50;
+        background-color: rgba(76, 175, 80, 0.15);
       `};
     ${(props) =>
       props.type === 'PUBLISHED' &&
       css`
         color: ${props.theme.colors.blue500};
+        background-color: ${props.theme.colors.blue50};
       `};
     ${(props) =>
       props.type === 'CLOSED' &&
       css`
         color: ${props.theme.colors.gray600};
+        background-color: ${props.theme.colors.gray100};
       `};
     ${(props) =>
       props.type === 'REVIEWING' &&
@@ -46,6 +49,7 @@ const S = {
       props.type === 'DRAFT' &&
       css`
         color: ${props.theme.colors.red300};
+        background-color: ${props.theme.colors.red100};
       `};
   `,
 };
