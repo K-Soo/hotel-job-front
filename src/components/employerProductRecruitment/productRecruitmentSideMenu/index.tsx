@@ -44,11 +44,10 @@ export default function ProductRecruitmentSideMenu({ handleCloseSideMenu }: Prod
       enabled: true,
       throwOnError: true,
       staleTime: 0,
-      gcTime: 60 * 1000 * 10,
     },
   });
 
-  console.log('채용공고 API : ', data);
+  console.log('채용공고 목록 API : ', data);
 
   const isEmptyRecruitmentList = isSuccess && data && data.result.length === 0;
 
@@ -59,6 +58,8 @@ export default function ProductRecruitmentSideMenu({ handleCloseSideMenu }: Prod
       }
       return addToast({ message: '채용공고가 선택되지 않았습니다.', type: 'info' });
     }
+
+    setIsLoadingPayment(true);
 
     const options = selectProductAtomValue.selectedOptions.map((selectedOption) => {
       return {
@@ -84,9 +85,9 @@ export default function ProductRecruitmentSideMenu({ handleCloseSideMenu }: Prod
     };
 
     try {
-      setIsLoadingPayment(true);
       const response = await Post.paymentRecruitmentInitiate(requestData);
       console.log('초기화 API : ', response);
+
       if (response.result.status !== 'success') {
         throw new Error('초기화 API 실패');
       }
