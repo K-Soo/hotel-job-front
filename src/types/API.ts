@@ -197,7 +197,12 @@ export interface verificationsBusinessNumberCheckResponse extends BaseResponse {
 
 export interface SignUpEmployerResponse extends BaseResponse {
   result: {
-    status: ResponseStatus;
+    accountStatus: types.AccountStatus;
+    certificationStatus: types.CertificationStatus;
+    companyVerificationStatus: types.CompanyVerificationStatus;
+    nickname: string;
+    provider: types.Provider;
+    role: types.RoleType;
   };
 }
 

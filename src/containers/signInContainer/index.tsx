@@ -6,7 +6,6 @@ import { useForm, FormProvider, SubmitHandler } from 'react-hook-form';
 import { SignInForm } from '@/types';
 import { schema } from '@/utils';
 import { yupResolver } from '@hookform/resolvers/yup';
-
 import SignInTab from '@/components/signIn/SignInTab';
 import CompanyForm from '@/components/signIn/CompanyForm';
 import GeneralForm from '@/components/signIn/GeneralForm';
@@ -14,7 +13,6 @@ import { Auth } from '@/apis';
 import useAuth from '@/hooks/useAuth';
 import { ParsedUrlQuery } from 'querystring';
 import { useRouter } from 'next/router';
-import environment from '@/environment';
 
 type SignInTab = 'general' | 'company';
 
@@ -24,7 +22,6 @@ export interface UrlQuery extends ParsedUrlQuery {
 
 export default function SignInContainer() {
   const [isSubmitError, setIsSubmitError] = React.useState(false);
-  const [isLoading, setIsLoading] = React.useState(false);
 
   const router = useRouter();
   const { type = 'general' } = router.query as UrlQuery;

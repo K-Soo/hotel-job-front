@@ -1,8 +1,7 @@
 import styled from 'styled-components';
 import FormInput from '@/components/common/form/FormInput';
 import { SetupCompanyForm } from '@/types';
-import Button from '@/components/common/style/Button';
-import Line from '@/components/common/Line';
+import StepHeader from '@/components/employerSetupCompany/StepHeader';
 
 interface ManagerInfoFormProps {
   children: React.ReactNode;
@@ -11,11 +10,10 @@ interface ManagerInfoFormProps {
 export default function ManagerInfoForm({ children }: ManagerInfoFormProps) {
   return (
     <S.ManagerInfoForm>
-      <S.Header>
-        <h2 className="title">담당자 기본 정보</h2>
-      </S.Header>
+      <StepHeader text="담당자 기본 정보" />
 
       <FormInput<SetupCompanyForm> required label="담당자명" name="managerName" placeholder="담당자명" isFocusing errorPosition="static" />
+
       <FormInput<SetupCompanyForm>
         required
         label="담당자 연락처"
@@ -33,8 +31,6 @@ export default function ManagerInfoForm({ children }: ManagerInfoFormProps) {
 
 const S = {
   ManagerInfoForm: styled.div`
-    max-width: 450px;
-    margin: 0 auto;
     padding: 15px;
     .address-wrapper {
       display: flex;

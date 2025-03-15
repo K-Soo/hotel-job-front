@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import FormInput from '@/components/common/form/FormInput';
 import { SetupCompanyForm } from '@/types';
-
+import StepHeader from '@/components/employerSetupCompany/StepHeader';
 interface BusinessNumberFormProps {
   children: React.ReactNode;
 }
@@ -9,9 +9,7 @@ interface BusinessNumberFormProps {
 export default function BusinessNumberForm({ children }: BusinessNumberFormProps) {
   return (
     <S.BusinessNumberForm>
-      <S.Header>
-        <h2 className="title">사업자 기본 정보</h2>
-      </S.Header>
+      <StepHeader text="사업자 기본정보 입력" />
 
       <FormInput<SetupCompanyForm>
         required
@@ -31,27 +29,10 @@ export default function BusinessNumberForm({ children }: BusinessNumberFormProps
 
 const S = {
   BusinessNumberForm: styled.div`
-    max-width: 450px;
-    margin: 0 auto;
     padding: 15px;
   `,
-  Header: styled.div`
-    margin-bottom: 30px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: 100px;
-    padding: 0 15px;
-    border-radius: 8px;
-    background-color: ${(props) => props.theme.colors.gray100};
-    .title {
-      font-size: 18px;
-      font-weight: 500;
-      color: ${(props) => props.theme.colors.gray800};
-    }
-  `,
   ButtonBox: styled.div`
-    margin-top: 20px;
+    margin-top: 90px;
     display: flex;
     justify-content: flex-end;
   `,

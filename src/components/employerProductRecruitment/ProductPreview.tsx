@@ -18,10 +18,7 @@ export default function ProductPreview() {
   const router = useRouter();
   const { type = 'MAIN' } = router.query as Query;
 
-  const productFocusAtomValue = useRecoilValue(productFocusAtom);
-
-  const [productFocusAtomState, setProductFocusAtomState] = useRecoilState(productFocusAtom);
-  console.log('productFocusAtomState: ', productFocusAtomState.product);
+  const productFocusAtomState = useRecoilValue(productFocusAtom);
 
   React.useEffect(() => {
     setTab('pc');
@@ -33,12 +30,6 @@ export default function ProductPreview() {
 
   const handleClickTab = (value: string) => {
     setTab(value as 'pc' | 'mobile');
-    // setProductFocusAtomState({ product: 'DEFAULT' });
-
-    // if (tab === 'mobile') {
-    //   return controls.start({ y: -200, transition: { duration: 0.2 } });
-    // }
-    // return controls.start({ y: -300, transition: { duration: 0.2 } });
   };
 
   React.useEffect(() => {
@@ -58,34 +49,31 @@ export default function ProductPreview() {
     if (productFocusAtomState.product === 'BASIC') {
       controls.start({ y: isMobile ? -900 : -150, x: isMobile ? 0 : 200, scale: isMobile ? 1 : 2, transition: { duration: 0.2 } });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [productFocusAtomState, tab]);
 
   return (
     <S.ProductPreview>
-      <div className="preview-tab">
+      <S.PreviewTab>
         <motion.button
-          className="preview-tab__item"
+          className="item"
           onClick={() => handleClickTab('pc')}
           initial={{ backgroundColor: '#FFFFFF' }}
-          animate={tab === 'pc' ? { backgroundColor: '#f2f4f6', color: '#2272eb' } : { backgroundColor: '#FFFFFF', color: '#8b95a1' }}
-          whileHover={{
-            color: '#2272eb',
-          }}
+          animate={tab === 'pc' ? { backgroundColor: '#3182f6', color: '#ffffff' } : { backgroundColor: '#f2f4f6', color: '#8b95a1' }}
+          transition={{ duration: 0 }}
         >
           PC 광고
         </motion.button>
         <motion.button
-          className="preview-tab__item"
+          className="item"
           onClick={() => handleClickTab('mobile')}
           initial={{ backgroundColor: '#FFFFFF' }}
-          animate={tab === 'mobile' ? { backgroundColor: '#f2f4f6', color: '#2272eb' } : { backgroundColor: '#FFFFFF', color: '#8b95a1' }}
-          whileHover={{
-            color: '#2272eb',
-          }}
+          animate={tab === 'mobile' ? { backgroundColor: '#3182f6', color: '#ffffff' } : { backgroundColor: '#f2f4f6', color: '#8b95a1' }}
+          transition={{ duration: 0 }}
         >
           모바일 광고
         </motion.button>
-      </div>
+      </S.PreviewTab>
 
       <S.ImageContent>
         <motion.div className="image-box" ref={imageRef} animate={controls} initial={undefined}>
@@ -96,53 +84,19 @@ export default function ProductPreview() {
   );
 }
 
-const StyledZoomImage = styled.div`
-  z-index: 20;
-  border: 1px solid red;
-  height: 300px;
-  width: 100%;
-  img {
-    width: 100%;
-    height: 300px;
-    position: absolute;
-    transform: translateX(30%);
-    object-fit: cover;
-    z-index: 20;
-  }
-`;
-
 const S = {
   ProductPreview: styled.div`
     flex: 0 0 370px;
-    .preview-tab {
-      height: 50px;
-      border: 1px solid ${(props) => props.theme.colors.gray500};
-      margin-bottom: 15px;
-      border-radius: 5px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      overflow: hidden;
-      padding: 3px 0;
-      &__item {
-        flex: 1;
-        text-align: center;
-        cursor: pointer;
-        height: 100%;
-        margin: 3px;
-        border-radius: 5px;
-        color: ${(props) => props.theme.colors.gray700};
-      }
-    }
   `,
   ImageContent: styled.div`
     position: relative;
-    height: 680px;
-    border: 1px solid ${(props) => props.theme.colors.gray500};
+    height: 665px;
     background-color: ${(props) => props.theme.colors.white};
     border-radius: 5px;
     overflow: hidden;
     font-size: 0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border: 1px solid ${(props) => props.theme.colors.gray};
     .image-box {
       width: 100%;
       img {
@@ -150,6 +104,27 @@ const S = {
         height: 100%;
         object-fit: cover;
       }
+    }
+  `,
+  PreviewTab: styled.div`
+    height: 50px;
+    margin-bottom: 30px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    overflow: hidden;
+    padding: 3px 0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background-color: ${(props) => props.theme.colors.gray100};
+    .item {
+      flex: 1;
+      text-align: center;
+      cursor: pointer;
+      height: 100%;
+      margin: 3px;
+      border-radius: 5px;
+      color: ${(props) => props.theme.colors.gray700};
     }
   `,
 };

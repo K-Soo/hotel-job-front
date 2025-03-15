@@ -10,7 +10,6 @@ import CompanyInfoContainer from '@/containers/employerContainer/CompanyInfoCont
 interface EmployerProps {
   isLoading: boolean;
   data: EmployerAccountInfo | undefined;
-  children: React.ReactNode;
 }
 
 export default function Employer({ isLoading, data }: EmployerProps) {

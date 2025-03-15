@@ -22,7 +22,10 @@ export const getServerSideProps: GetServerSideProps = async (context: GetServerS
     if (!responseAccessToken) throw new Error();
 
     const responseUserInfo = await Auth.me({}, requestHeader);
-    if (!responseUserInfo) throw new Error();
+
+    if (!responseUserInfo) {
+      throw new Error();
+    }
 
     if (responseUserInfo.result.role !== 'EMPLOYER') {
       return {

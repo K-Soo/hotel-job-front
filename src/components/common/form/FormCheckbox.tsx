@@ -55,7 +55,7 @@ export default function FormCheckbox<T extends FieldValues>({
     <S.FormCheckbox $margin={margin}>
       <S.CheckBoxContainer $active={!!watchValue}>
         <div>
-          <input id={`form-checkbox-${name}`} type="checkbox" {...register(name)} />
+          <input id={`form-checkbox-${name}`} type="checkbox" {...register(name)} disabled={disabled} />
 
           <label className="form-label" htmlFor={`form-checkbox-${name}`} tabIndex={0}>
             <p className="form-label__wrapper">
@@ -119,7 +119,7 @@ const S = {
     }
 
     input[type='checkbox']:disabled + label:before {
-      background-color: ${(props) => props.theme.colors.gray};
+      background-color: ${(props) => props.theme.colors.gray100};
       border: 2px solid ${(props) => props.theme.colors.gray300};
     }
 

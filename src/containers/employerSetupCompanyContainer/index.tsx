@@ -17,6 +17,7 @@ import useAlertWithConfirm from '@/hooks/useAlertWithConfirm';
 import path from '@/constants/path';
 import { useQueryClient } from '@tanstack/react-query';
 import queryKeys from '@/constants/queryKeys';
+import useLoading from '@/hooks/useLoading';
 
 const DynamicDaumPost = dynamic(() => import('@/components/common/DaumPost'), { ssr: false });
 
@@ -29,6 +30,7 @@ export default function EmployerSetupCompanyContainer() {
   const queryClient = useQueryClient();
   const daumPostAtomValue = useRecoilValue(daumPostAtom);
   const { setAlertWithConfirmAtom } = useAlertWithConfirm();
+  const { setLoadingAtomStatue } = useLoading();
 
   const methods = useForm<SetupCompanyForm>({
     resolver: yupResolver(schema.setupCompanyForm),
@@ -70,7 +72,6 @@ export default function EmployerSetupCompanyContainer() {
     }
 
     // 요청 횟수 증가 및 제한 검사
-
     if (submitCount >= 3) {
       alert('사업자 번호 인증 요청 횟수 많습니다. 새로고침 후 다시 시도해주세요.');
       return;
@@ -83,10 +84,9 @@ export default function EmployerSetupCompanyContainer() {
       methods.setFocus(firstErrorField as keyof SetupCompanyForm);
       return;
     }
+    setLoading(true);
 
     try {
-      setLoading(true);
-
       const requestData = {
         b_no: methods.getValues('businessRegistrationNumber'),
       };
@@ -126,7 +126,10 @@ export default function EmployerSetupCompanyContainer() {
     }
   };
 
+  // API - 회사정보 등록
   const onSubmit: SubmitHandler<SetupCompanyForm> = async (data) => {
+    setLoadingAtomStatue({ isLoading: true });
+
     try {
       const response = await Post.setupCompany(data);
       console.log('회사정보 등록 API : ', response);
@@ -138,12 +141,10 @@ export default function EmployerSetupCompanyContainer() {
         window.location.reload();
         return;
       }
+
       await queryClient.invalidateQueries({ queryKey: [queryKeys.AUTH_ME] });
 
       await queryClient.invalidateQueries({ queryKey: [queryKeys.REFRESH_COOKIE] });
-
-      // 데이터 강제 요청 및 대기
-      // await queryClient.ensureQueryData({ queryKey: [queryKeys.AUTH_ME] });
 
       setAlertWithConfirmAtom((prev) => ({
         ...prev,
@@ -156,36 +157,53 @@ export default function EmployerSetupCompanyContainer() {
     } catch (error) {
       alert('회사정보 등록에 실패했습니다.');
       window.location.reload();
+    } finally {
+      setLoadingAtomStatue({ isLoading: false });
     }
   };
 
   return (
     <FormProvider {...methods}>
       {daumPostAtomValue.isOpen && <DynamicDaumPost />}
+
       <EmployerSetupCompany onSubmit={onSubmit} handleKeyDown={handleKeyDown}>
         {step === 'step1' && (
           <BusinessNumberForm>
             <Button
               label="다음"
               variant="primary"
-              width="100px"
-              height="40px"
+              height="45px"
               onClick={handleClickBusinessNumberForm}
               isLoading={loading}
+              borderRadius="30px"
             />
           </BusinessNumberForm>
         )}
 
         {step === 'step2' && (
           <BusinessInfoForm>
-            <Button label="다음" variant="primary" width="100px" height="40px" onClick={handleClickBusinessInfoForm} />
+            <Button label="다음" variant="primary" height="45px" onClick={handleClickBusinessInfoForm} borderRadius="30px" />
           </BusinessInfoForm>
         )}
 
         {step === 'step3' && (
           <ManagerInfoForm>
-            <Button label="이전" variant="secondary" width="100px" height="40px" onClick={() => setStep('step2')} margin="0 15px 0 0" />
-            <Button label="등록" variant="primary" width="100px" height="40px" type="submit" isLoading={methods.formState.isSubmitting} />
+            <Button
+              label="이전"
+              variant="secondary"
+              height="45px"
+              onClick={() => setStep('step2')}
+              margin="0 15px 0 0"
+              borderRadius="30px"
+            />
+            <Button
+              label="등록"
+              variant="primary"
+              height="45px"
+              type="submit"
+              isLoading={methods.formState.isSubmitting}
+              borderRadius="30px"
+            />
           </ManagerInfoForm>
         )}
       </EmployerSetupCompany>
