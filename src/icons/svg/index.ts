@@ -47,8 +47,10 @@ import Profile from './profile.svg';
 import NoticeA24x24 from './notice_a_24x24.svg';
 import Delete from './delete.svg';
 import Pen24x24 from './pen24x24.svg';
+import Check24x24 from './check24x24.svg';
 
 export {
+  Check24x24,
   Pen24x24,
   Delete,
   NoticeA24x24,
