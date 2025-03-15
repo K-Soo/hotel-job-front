@@ -14,7 +14,9 @@ import { SpeedInsights } from '@vercel/speed-insights/next';
 import Head from 'next/head';
 import dynamic from 'next/dynamic';
 import '@/recoil';
+import DEFAULT_SEO from '@/next-seo.config';
 import useNotification from '@/hooks/useNotification';
+import { DefaultSeo } from 'next-seo';
 
 const DynamicNoSSRAppComponent = dynamic(() => import('@/auth/AppComponent'), { ssr: false });
 
@@ -38,10 +40,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
 
   return (
     <>
-      <Head>
-        <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport" />
-        <meta name="format-detection" content="telephone=no, address=no, email=no" />
-      </Head>
+      <DefaultSeo {...DEFAULT_SEO} />
       <SpeedInsights />
       <AppThemeProvider>
         <RecoilRoot>
