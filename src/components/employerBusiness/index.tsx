@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { EmployerBusinessForm } from '@/types';
-import Button from '@/components/common/style/Button';
+import { businessNumberFormat, phoneNumberFormat } from '@/utils';
 interface EmployerBusinessProps {
   data?: EmployerBusinessForm;
   children: React.ReactNode;
@@ -29,14 +29,14 @@ export default function EmployerBusiness({ data, children }: EmployerBusinessPro
             <S.Content>
               <p className="title">사업자 등록번호</p>
               <div className="wrapper">
-                <p className="wrapper__text">{data.businessRegistrationNumber}</p>
+                <p className="wrapper__text">{businessNumberFormat(data.businessRegistrationNumber)}</p>
               </div>
             </S.Content>
             <S.Content>
               <p className="title">사업장 주소</p>
               <div className="wrapper">
                 <p className="wrapper__text">
-                  {data.address} {data.address}
+                  {data.address} {data.addressDetail}
                 </p>
               </div>
             </S.Content>
@@ -56,7 +56,7 @@ export default function EmployerBusiness({ data, children }: EmployerBusinessPro
             <S.Content>
               <p className="title">담당자 연락처</p>
               <div className="wrapper">
-                <p className="wrapper__text">{data.managerNumber}</p>
+                <p className="wrapper__text">{phoneNumberFormat(data.managerNumber)}</p>
               </div>
             </S.Content>
             <S.Content>
