@@ -58,7 +58,7 @@ export default function EmployerAccount({ data, setIsOpenNicknameModal, children
             <S.Content>
               <p className="title">본인인증</p>
               <div className="wrapper">
-                <p className="wrapper__text">{data.certificationStatus === 'VERIFIED' ? '인증완료' : '미 인증'}</p>
+                <p className="wrapper__text">{data.certificationStatus === 'VERIFIED' ? '인증완료' : '미인증'}</p>
                 {data.certificationStatus !== 'VERIFIED' && (
                   <Button
                     label="인증하기"
