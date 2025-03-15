@@ -49,7 +49,8 @@ export default function ProductCard({ product, margin, setIsOpenSideMenu }: Prod
     >
       <S.Header>
         <div className="title-box">
-          <h3 className="title-box__title">{RECRUITMENT_PRODUCT_NAME[product.name]}</h3>
+          <h3 className="title-box__title">{RECRUITMENT_PRODUCT_NAME[product.name]} 상품</h3>
+
           <div className="title-box__tags">
             <Tag label="PC+M" margin="0 0 0" height="28px" width="70px" fontSize="14px" />
           </div>
@@ -58,7 +59,8 @@ export default function ProductCard({ product, margin, setIsOpenSideMenu }: Prod
 
       <S.Description>{RECRUITMENT_PRODUCT_DESCRIPTION[product.name]}</S.Description>
 
-      <S.DurationSelectTitle className="select-title">기간설정</S.DurationSelectTitle>
+      <S.DurationSelectTitle>기간설정</S.DurationSelectTitle>
+
       <S.DurationSelect>
         <select onChange={onChangeDuration} defaultValue={product.durations[2].id}>
           {product.durations.map((duration) => (
@@ -103,12 +105,14 @@ const S = {
   Header: styled.div`
     .title-box {
       display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
+      /* justify-content: space-between; */
+      align-items: center;
+      /* border: 1px solid red; */
       &__title {
         font-size: 22px;
         font-weight: 600;
         color: ${(props) => props.theme.colors.gray800};
+        margin-right: 10px;
       }
       &__tags {
         display: flex;
@@ -139,13 +143,13 @@ const S = {
     justify-content: flex-end;
   `,
   DurationSelectTitle: styled.p`
-    padding-bottom: 2px;
+    margin: 5px 0;
     font-size: 15px;
   `,
   DurationSelect: styled.div`
     height: 40px;
     border-radius: 5px;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
     max-width: 200px;
     width: 100%;
     background-color: white;
