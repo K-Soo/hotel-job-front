@@ -39,6 +39,7 @@ export default function SignUpGeneralForm({ handleChangeAllAgree, fetchEmployerU
             placeholder="소문자+숫자, 8~16자"
             maxLength={16}
             errorPosition="static"
+            disabled={isSubmitting}
           />
           <Button
             label="확인"
@@ -60,6 +61,7 @@ export default function SignUpGeneralForm({ handleChangeAllAgree, fetchEmployerU
         type="password"
         maxLength={16}
         errorPosition="static"
+        disabled={isSubmitting}
       />
       <FormInput<SignUpForm>
         required
@@ -68,19 +70,49 @@ export default function SignUpGeneralForm({ handleChangeAllAgree, fetchEmployerU
         placeholder="비밀번호 확인"
         type="password"
         maxLength={16}
+        disabled={isSubmitting}
       />
+
       <S.Subtitle>이용 약관</S.Subtitle>
       <CheckBox name="all" label="전체 동의" checked={allAgreeChecked} onChange={handleChangeAllAgree} disabled={isSubmitting} />
       <Line margin="10px 0" />
-      <FormCheckbox name="ageAgree" required label="만 19세 이상" margin="0 0 15px 0" visibleIcon={false} />
-      <FormCheckbox name="serviceTermsAgree" required label="서비스 이용 동의" margin="0 0 15px 0" handleClickIcon={handleOpenPolicy} />
-      <FormCheckbox name="personalInfoAgree" required label="개인정보 수집동의" margin="0 0 15px 0" handleClickIcon={handleOpenPolicy} />
-      <FormCheckbox name="smsMarketingAgree" optional label="SMS 수신 동의" margin="0 0 15px 0" visibleIcon={false} />
-      <FormCheckbox name="emailMarketingAgree" optional label="E-Mail 수신 동의" margin="0 0 15px 0" visibleIcon={false} />
+      <FormCheckbox name="ageAgree" required label="만 19세 이상" margin="0 0 15px 0" visibleIcon={false} disabled={isSubmitting} />
+      <FormCheckbox
+        name="serviceTermsAgree"
+        required
+        label="서비스 이용 동의"
+        margin="0 0 15px 0"
+        handleClickIcon={handleOpenPolicy}
+        disabled={isSubmitting}
+      />
+      <FormCheckbox
+        name="personalInfoAgree"
+        required
+        label="개인정보 수집동의"
+        margin="0 0 15px 0"
+        handleClickIcon={handleOpenPolicy}
+        disabled={isSubmitting}
+      />
+      <FormCheckbox
+        name="smsMarketingAgree"
+        optional
+        label="SMS 수신 동의"
+        margin="0 0 15px 0"
+        visibleIcon={false}
+        disabled={isSubmitting}
+      />
+      <FormCheckbox
+        name="emailMarketingAgree"
+        optional
+        label="E-Mail 수신 동의"
+        margin="0 0 15px 0"
+        visibleIcon={false}
+        disabled={isSubmitting}
+      />
 
       <div className="button-group">
-        <Button label="이전" variant="secondary" margin="0 15px 0 0" onClick={() => router.push(path.SIGN_IN)} />
-        <Button label="가입완료" variant="primary" type="submit" />
+        <Button label="이전" variant="secondary" margin="0 15px 0 0" onClick={() => router.push(path.SIGN_IN)} isLoading={isSubmitting} />
+        <Button label="가입완료" variant="primary" type="submit" isLoading={isSubmitting} />
       </div>
     </S.SignUpGeneralForm>
   );
@@ -92,7 +124,7 @@ const S = {
       font-size: 32px;
       color: ${(props) => props.theme.colors.gray800};
       font-weight: 600;
-      margin-bottom: 30px;
+      margin-bottom: 50px;
     }
     .button-group {
       display: flex;
