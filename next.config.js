@@ -23,7 +23,7 @@ const nextConfig = {
     scrollRestoration: true,
   },
   images: {
-    domains: ['hotel-job-connect.s3.amazonaws.com', 'pds.saramin.co.kr', 'cdn.hotel-job-connect.com'],
+    domains: ['hotel-job-connect.s3.amazonaws.com', 'cdn.hotel-job-connect.com'],
     // loader: 'custom',
     // unoptimized: true,
     remotePatterns: [
