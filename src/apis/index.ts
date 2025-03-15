@@ -108,6 +108,31 @@ export const Get = {
   // 채용공고 상세
   recruitDetail: ({ id }: { id: string }) => requests.get<API.RecruitDetailResponse>(`/recruit/${id}`),
 
+  // 채용공고 프리미엄
+  getRecruitPremiumList: ({ page, limit, benefits, employment, experience, job, type }: API.GetRecruitSpecialListRequest) => {
+    const params = new URLSearchParams();
+    params.set('page', page);
+    params.set('limit', limit);
+    params.set('type', type);
+
+    if (type) params.set('type', type);
+    if (experience) params.set('experience', experience);
+    if (employment) employment.forEach((item) => params.append('employment', item));
+    if (benefits) benefits.forEach((item) => params.append('benefits', item));
+    if (job) {
+      if (Array.isArray(job)) {
+        job.forEach((item) => params.append('job', item.toLocaleUpperCase()));
+      } else {
+        params.set('job', job.toLocaleUpperCase());
+      }
+    }
+
+    const queryString = params.toString();
+    const url = `/recruit/premium${queryString && `?${queryString}`}`;
+
+    return requests.get<API.GetRecruitPremiumListResponse>(url);
+  },
+
   // 채용공고 스페셜
   getRecruitSpecialList: ({ page, limit, benefits, employment, experience, job, type }: API.GetRecruitSpecialListRequest) => {
     const params = new URLSearchParams();
