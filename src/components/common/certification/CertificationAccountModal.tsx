@@ -40,16 +40,17 @@ export default function CertificationAccountModal() {
         if (response.result.status === 'duplicate') {
           throw new Error('이미 본인인증이 완료된 계정입니다.');
         }
+
         // TODO - 휴대폰번호 중복 인증 방지
-        // if (response.result.status === 'unavailable') {
-        //   throw new Error('중복된 휴대폰 번호');
-        // }
+        if (response.result.status === 'unavailable') {
+          throw new Error('중복된 휴대폰 번호');
+        }
+
+        alert('본인 인증 완료');
+        window.location.reload();
 
         await queryClient.invalidateQueries({ queryKey: [queryKeys.AUTH_ME], refetchType: 'all' });
         await queryClient.invalidateQueries({ queryKey: [queryKeys.EMPLOYER_ACCOUNT], refetchType: 'all' });
-        setCertificationModalAtom({ isOpen: false });
-        alert('본인 인증 완료');
-        window.location.reload();
       }
     } catch (error: any) {
       console.error('Error handling certification message:', error?.message);
