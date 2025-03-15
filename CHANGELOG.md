@@ -1,6 +1,27 @@
 # 변경 로그
 
 프로젝트의 모든 주요 변경 사항
+### [1.9.7](https://github.com/K-Soo/hotel-job-front/compare/v1.9.6...v1.9.7) (2025-03-15)
+
+
+### Features
+
+* **alertWithConfirm:** 본인 인증 및 할인 쿠폰 관련 텍스트 수정 ([be34aff](https://github.com/K-Soo/hotel-job-front/commit/be34aff09fb2d2a92953671d6c3d87258b656da6))
+* **EmployerBusiness:** 사업자 등록번호 및 연락처 포맷팅 기능 추가, 주소 상세 정보 표시 ([886c35b](https://github.com/K-Soo/hotel-job-front/commit/886c35b802fbc991d04fc65e83faa40a387656e5))
+* **ProductRecruitmentSideMenu:** 인증 상태에 따른 확인 알림 추가 및 주문서 생성 로그 수정 ([453c7ba](https://github.com/K-Soo/hotel-job-front/commit/453c7baf080e341c2a852f573bcaa4e59383208a))
+* **utils:** 사업자 등록번호 포맷팅 기능 추가 ([b35eb54](https://github.com/K-Soo/hotel-job-front/commit/b35eb548fcf42570ed2d1d340b8108fd455745da))
+* **utils:** 사업자 등록번호 포맷팅 함수 추가 ([f2e4c96](https://github.com/K-Soo/hotel-job-front/commit/f2e4c96d0ee2b07488896e018eafdb5bc5864d0a))
+
+
+### Styles
+
+* **Confirm:** 마진 및 줄 높이 조정, 공백 처리 추가 ([8e603e1](https://github.com/K-Soo/hotel-job-front/commit/8e603e17ecc51f1996dcd89aa87dcebdc366de70))
+
+
+### Refactors
+
+* **EmployerSetupCompanyContainer:** 코드 정리 및 confirm 클릭 핸들러 개선 ([454f6bd](https://github.com/K-Soo/hotel-job-front/commit/454f6bdcbf1fa1e666f2f7903b337800a8a53ad7))
+
 ### [1.9.6](https://github.com/K-Soo/hotel-job-front/compare/v1.9.5...v1.9.6) (2025-03-15)
 
 
