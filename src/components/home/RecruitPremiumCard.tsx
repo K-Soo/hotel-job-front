@@ -72,7 +72,8 @@ const StyledTitle = styled.div<{ $isBold: boolean; $isHighlight: boolean }>`
     ${(props) =>
       props.$isHighlight &&
       css`
-        background-color: #ffee07;
+        background-color: #6877ed;
+        color: #ffffff;
       `};
     &:hover {
       color: ${(props) => props.theme.colors.black};
