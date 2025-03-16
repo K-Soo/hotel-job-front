@@ -12,12 +12,14 @@ const S = {
   Header: styled.header`
     position: sticky;
     top: -25px;
-    box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid ${(props) => props.theme.colors.gray200};
     z-index: 5;
-    background-color: ${(props) => props.theme.colors.white};
+    background-color: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
     ${(props) => props.theme.media.tablet`
       top: 0;
-      padding: 0 15px;
+      border-bottom: none;
+      background-color: initial;
     `};
   `,
 };

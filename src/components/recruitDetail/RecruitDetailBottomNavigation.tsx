@@ -22,9 +22,15 @@ export default function RecruitDetailBottomNavigation({
   if (!isAuthenticated) {
     return (
       <S.RecruitDetailBottomNavigation>
-        {recruitmentStatus === 'CLOSED' && <Button label="모집 마감" variant="secondary" height="45px" borderRadius="5px" disabled />}
+        {recruitmentStatus === 'CLOSED' && <Button label="모집 마감" variant="secondary" height="45px" borderRadius="10px" disabled />}
         {recruitmentStatus === 'PROGRESS' && (
-          <Button label="로그인 후 지원하기" variant="primary" height="45px" borderRadius="5px" onClick={() => router.push(path.SIGN_IN)} />
+          <Button
+            label="로그인 후 지원하기"
+            variant="primary"
+            height="45px"
+            borderRadius="10px"
+            onClick={() => router.push(path.SIGN_IN)}
+          />
         )}
       </S.RecruitDetailBottomNavigation>
     );
@@ -32,29 +38,31 @@ export default function RecruitDetailBottomNavigation({
 
   return (
     <S.RecruitDetailBottomNavigation>
-      {recruitmentStatus === 'CLOSED' && <Button label="모집 마감" variant="secondary" height="45px" borderRadius="5px" disabled />}
+      <div className="wrapper">
+        {recruitmentStatus === 'CLOSED' && <Button label="모집 마감" variant="secondary" height="45px" borderRadius="10px" disabled />}
 
-      {recruitmentStatus === 'PROGRESS' && (
-        <>
-          {/* TODO - bookmark */}
-          {/* <S.BookMarkIcon>
+        {recruitmentStatus === 'PROGRESS' && (
+          <>
+            {/* TODO - bookmark */}
+            {/* <S.BookMarkIcon>
             <Icon name="Bookmark24x24" height="32px" width="32px" />
           </S.BookMarkIcon> */}
 
-          {role === 'JOB_SEEKER' && (
-            <Button
-              label={applyStatus === 'available' ? '지원하기' : '지원완료'}
-              variant="primary"
-              height="45px"
-              borderRadius="5px"
-              onClick={() => setIsOpenModal(true)}
-              disabled={applyStatus === 'duplicate'}
-            />
-          )}
+            {role === 'JOB_SEEKER' && (
+              <Button
+                label={applyStatus === 'available' ? '지원하기' : '지원완료'}
+                variant="primary"
+                height="45px"
+                borderRadius="10px"
+                onClick={() => setIsOpenModal(true)}
+                disabled={applyStatus === 'duplicate'}
+              />
+            )}
 
-          {role !== 'JOB_SEEKER' && <Button label="지원자 전용" variant="secondary" height="45px" borderRadius="5px" disabled />}
-        </>
-      )}
+            {role !== 'JOB_SEEKER' && <Button label="지원자 전용" variant="secondary" height="45px" borderRadius="5px" disabled />}
+          </>
+        )}
+      </div>
     </S.RecruitDetailBottomNavigation>
   );
 }
@@ -62,18 +70,32 @@ export default function RecruitDetailBottomNavigation({
 const S = {
   RecruitDetailBottomNavigation: styled.div`
     display: none;
-    border-top: 1px solid ${(props) => props.theme.colors.gray200};
     position: fixed;
     background-color: white;
     z-index: 10;
     bottom: 0;
     width: 100%;
-    height: 65px;
+    height: 78px;
     left: 0;
     right: 0;
-    padding: 0 15px;
     align-items: center;
     justify-content: center;
+    .wrapper {
+      width: 100%;
+      position: relative;
+      padding: 0 15px 20px 15px;
+      &::after {
+        content: '';
+        position: absolute;
+        top: -20px;
+        left: 0;
+        right: 0;
+        height: 20px;
+        background: linear-gradient(rgba(255, 255, 255, 0), #fff);
+        z-index: 1;
+      }
+    }
+
     ${(props) => props.theme.media.tablet`
       display: flex;
     `};

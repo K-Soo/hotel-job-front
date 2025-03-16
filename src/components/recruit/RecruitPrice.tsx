@@ -19,15 +19,16 @@ export default function RecruitPrice({ fonSize, salaryAmount, salary }: RecruitP
 
 const S = {
   RecruitPrice: styled.div<{ $fonSize?: string; $salary: SalaryTypeKeys }>`
-    background-color: ${(props) => props.theme.colors.gray100};
-    padding: 4px 5px;
     border-radius: 4px;
     width: fit-content;
     font-size: ${(props) => props.$fonSize || '14px'};
+    display: flex;
+    /* flex-direction: row-reverse; */
+    align-items: center;
     white-space: nowrap;
     .pay-type {
       letter-spacing: 1px;
-      padding-right: 5px;
+      padding: 0 2px;
       ${(props) =>
         props.$salary === 'ANNUAL' &&
         css`
@@ -50,8 +51,8 @@ const S = {
         `};
     }
     .pay-price {
-      letter-spacing: 0.3px;
-      font-weight: 400;
+      letter-spacing: 0.1px;
+      font-weight: 500;
     }
   `,
 };

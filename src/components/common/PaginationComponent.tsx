@@ -4,7 +4,6 @@ import { motion } from 'framer-motion';
 import { useRouter } from 'next/router';
 import usePagination from '@/hooks/usePagination';
 import Icon from '@/icons/Icon';
-import IconDimmed from '@/components/common/IconDimmed';
 interface PaginationComponentProps {
   margin?: string;
   pagination: PaginationInfo;
@@ -64,13 +63,13 @@ export default function PaginationComponent({ margin, pagination }: PaginationCo
     );
   };
 
-  // if (totalPages === 1) return null;
-
   return (
     <S.PaginationComponent $margin={margin}>
-      <StyledPrevArrow disabled={!prevPage} onClick={handleClickPrevArrow} $active={prevPage === null ? false : true}>
-        <Icon className="arrow-icon" name="ArrowRight16x16" width="16px" height="16px" />
-      </StyledPrevArrow>
+      {totalPages > 1 && (
+        <StyledPrevArrow disabled={!prevPage} onClick={handleClickPrevArrow} $active={prevPage === null ? false : true}>
+          <Icon className="arrow-icon" name="ArrowRight16x16" width="16px" height="16px" />
+        </StyledPrevArrow>
+      )}
 
       <S.PageNumbers>
         {pageGroup.map((element) => (
@@ -91,13 +90,15 @@ export default function PaginationComponent({ margin, pagination }: PaginationCo
         ))}
       </S.PageNumbers>
 
-      <StyledNextArrow
-        disabled={currentPage === totalPages}
-        onClick={handleClickNextArrow}
-        $active={currentPage === totalPages ? false : true}
-      >
-        <Icon className="arrow-icon" name="ArrowRight16x16" width="16px" height="16px" />
-      </StyledNextArrow>
+      {totalPages > 1 && (
+        <StyledNextArrow
+          disabled={currentPage === totalPages}
+          onClick={handleClickNextArrow}
+          $active={currentPage === totalPages ? false : true}
+        >
+          <Icon className="arrow-icon" name="ArrowRight16x16" width="16px" height="16px" />
+        </StyledNextArrow>
+      )}
     </S.PaginationComponent>
   );
 }

@@ -100,7 +100,7 @@ export function EmployerHeader({ borderBottom = true }: EmployerHeaderProps) {
                 whileHover={{ backgroundColor: '#f2f4f6', color: '#4593fc' }}
                 onClick={() => router.push(path.RECRUIT)}
               >
-                채용페이지 바로가기
+                채용 페이지 바로가기
               </StyledDropDownItem>
 
               <StyledDropDownItem

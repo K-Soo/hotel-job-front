@@ -1,3 +1,4 @@
+import React from 'react';
 import styled from 'styled-components';
 import { useRouter } from 'next/router';
 import Logo from '@/components/common/Logo';
@@ -6,6 +7,8 @@ import Icon from '@/icons/Icon';
 import { useSetRecoilState } from 'recoil';
 import { hamburgerNavigationAtom } from '@/recoil/hamburgerNavigation';
 import Notification from '@/components/common/notification';
+import { useScroll, motion, useMotionValueEvent } from 'framer-motion';
+
 interface MobileNavigationProps {
   backIcon?: boolean;
   profileIcon?: boolean;
@@ -27,9 +30,21 @@ export function MobileNavigation({
   hamburgerIcon,
   notificationIcon,
 }: MobileNavigationProps) {
+  const [hasBorder, setHasBorder] = React.useState(false);
+
   const router = useRouter();
+  const { scrollY } = useScroll();
 
   const setHamburgerNavigationAtomState = useSetRecoilState(hamburgerNavigationAtom);
+
+  useMotionValueEvent(scrollY, 'change', (latest) => {
+    if (latest >= 50 && !hasBorder) {
+      setHasBorder(true);
+    }
+    if (latest < 50 && hasBorder) {
+      setHasBorder(false);
+    }
+  });
 
   const handleClickBack = () => {
     if (!backUrl) return;
@@ -37,14 +52,14 @@ export function MobileNavigation({
   };
 
   return (
-    <S.MobileNavigation>
+    <S.MobileNavigation $hasBorder={hasBorder}>
       <div className="left">
         {backIcon && <Icon name="ArrowLeft24x24" width="24px" height="24px" onClick={handleClickBack} />}
         {homeIcon && <Icon name="Home24x24" width="24px" height="24px" onClick={() => router.push(path.HOME)} />}
         {logoIcon && <Logo size="small" margin="0" />}
       </div>
 
-      <div className="title">{title && <h3>{title}</h3>}</div>
+      <div className="title">{title && <h1>{title}</h1>}</div>
 
       <div className="right">
         {profileIcon && <i>profile</i>}
@@ -58,9 +73,12 @@ export function MobileNavigation({
 }
 
 const S = {
-  MobileNavigation: styled.div`
+  MobileNavigation: styled(motion.div)<{ $hasBorder: boolean }>`
     display: none;
     height: 50px;
+    padding: 0 15px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-bottom: ${(props) => (props.$hasBorder ? '1px solid #e5e8eb' : 'none')};
     ${(props) => props.theme.media.tablet`
       display: flex;
       align-items: center;

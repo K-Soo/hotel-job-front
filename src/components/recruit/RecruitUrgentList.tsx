@@ -13,6 +13,6 @@ const S = {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
-    margin-bottom: 50px;
+    margin-bottom: 100px;
   `,
 };

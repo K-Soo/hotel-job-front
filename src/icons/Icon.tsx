@@ -22,6 +22,7 @@ function Icon({ name, className, style, onClick, color }: IconProps) {
   return React.createElement(svg[name], {
     className,
     style,
+    color,
     onClick,
   });
 }
@@ -31,6 +32,7 @@ export default styled(Icon)`
   height: ${(props) => (props.height ? props.height : '28px')};
   margin: ${(props) => (props.margin ? props.margin : '0')};
   cursor: ${(props) => (props.cursor ? props.cursor : 'pointer')};
-  /* color: currentColor; */
-  /* fill: currentColor; */
+  svg {
+    color: ${(props) => (props.color ? props.color : 'inherit')};
+  }
 `;

@@ -20,7 +20,7 @@ export default function RecruitmentJobConditionAdditional({
         onClick={handleClickToggleButton}
         animate={additionalTabs.workingDay ? { backgroundColor: '#3182f6', color: '#FFFFFF' } : undefined}
       >
-        근무요일
+        근무시간
       </motion.button>
 
       <motion.button

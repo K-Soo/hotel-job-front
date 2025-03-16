@@ -18,7 +18,7 @@ interface Query extends ParsedUrlQuery {
   job?: any;
 }
 
-const URGENT_RECRUIT_LIMIT = '8';
+const URGENT_RECRUIT_LIMIT = '12';
 
 export default function RecruitUrgentListContainer() {
   const router = useRouter();
@@ -77,7 +77,14 @@ export default function RecruitUrgentListContainer() {
           </RecruitUrgentList>
           {!isEmptyFirstPage && isFirstPage && nextPage && (
             <div style={{ display: 'flex', justifyContent: 'center' }}>
-              <Button label="더보기" variant="tertiary" width="200px" onClick={() => fetchNextPage()} margin="0 0 30px 0" />
+              <Button
+                label="더보기"
+                variant="tertiary"
+                width="200px"
+                onClick={() => fetchNextPage()}
+                margin="0 0 30px 0"
+                borderRadius="30px"
+              />
             </div>
           )}
         </InfiniteScroll>
