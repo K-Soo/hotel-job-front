@@ -23,7 +23,7 @@ export default function RecruitContainer() {
 
         <RecruitFilterPanel handleClickFilterButton={handleClickFilterButton} />
 
-        <Line margin="20px 0" />
+        <Line margin="20px 0" color="#e5e8eb" />
 
         {/* TODO - ERROR 높이값 */}
         <ErrorBoundary fallback={null}>
