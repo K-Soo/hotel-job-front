@@ -18,7 +18,7 @@ interface Query extends ParsedUrlQuery {
   page?: string;
   job?: any;
 }
-const SPECIAL_LIMIT = '2';
+const SPECIAL_LIMIT = '9';
 
 export default function RecruitSpecialListContainer() {
   const router = useRouter();
@@ -78,10 +78,16 @@ export default function RecruitSpecialListContainer() {
             })}
           </RecruitSpecialList>
         </InfiniteScroll>
-
         {!isEmptyFirstPage && isFirstPage && nextPage && (
           <div style={{ display: 'flex', justifyContent: 'center' }}>
-            <Button label="더보기" variant="tertiary" width="200px" onClick={() => fetchNextPage()} margin="0 0 30px 0" />
+            <Button
+              label="더보기"
+              variant="tertiary"
+              width="200px"
+              onClick={() => fetchNextPage()}
+              margin="0 0 30px 0"
+              borderRadius="30px"
+            />
           </div>
         )}
       </>
