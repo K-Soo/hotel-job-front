@@ -139,7 +139,7 @@ export default function RecruitmentDetailJobConditionForm({ isSuccess, setIsOpen
 
       {additionalTabs.workingDay && (
         <S.AdditionalContainer>
-          <S.AdditionalTitle>근무요일</S.AdditionalTitle>
+          <S.AdditionalTitle>근무시간</S.AdditionalTitle>
           <div className="day-form">
             <div>
               <FormRadio<CreateRecruitmentForm>
