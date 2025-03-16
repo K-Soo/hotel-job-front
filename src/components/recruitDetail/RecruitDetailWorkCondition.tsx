@@ -32,7 +32,7 @@ export default function RecruitDetailWorkCondition({
             <S.RowValue>{selectedTypes.length > 0 ? selectedTypes.join(', ') : '-'}</S.RowValue>
           </S.Row>
           <S.Row>
-            <S.RowLabel>근무요일</S.RowLabel>
+            <S.RowLabel>근무시간</S.RowLabel>
             <S.RowValue>{workingDay ? WORKING_DAY_LIST[workingDay] : '-'}</S.RowValue>
           </S.Row>
         </div>
