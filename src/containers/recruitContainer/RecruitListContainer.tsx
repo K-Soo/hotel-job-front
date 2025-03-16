@@ -78,7 +78,7 @@ export default function RecruitListContainer() {
 
           return <RecruitDesktopCard key={index} item={item} />;
         })}
-        {!isEmpty && <PaginationComponent pagination={data.result.pagination} margin="50px 0 0 0" />}
+        {!isEmpty && <PaginationComponent pagination={data.result.pagination} margin="20px 0 50px 0" />}
       </>
     );
   }
