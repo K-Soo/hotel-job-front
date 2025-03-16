@@ -4,6 +4,7 @@ import React from 'react';
 import { EMPLOYER_ASIDE_MENU } from '@/constants/menu';
 import Icon, { IconType } from '@/icons/Icon';
 import { useRouter } from 'next/router';
+import path from '@/constants/path';
 
 export function EmployerAside() {
   const [isOpen, setIsOpen] = React.useState<string | null>(null);
@@ -40,32 +41,45 @@ export function EmployerAside() {
         <Icon name={isExpanded ? 'MinimizeSquare24x24' : 'MaximizeSquare24x24'} width="24px" height="24px" />
       </S.ResizeButton>
 
-      {EMPLOYER_ASIDE_MENU.map((element) => {
-        return (
-          <S.Menu key={element.label} onClick={() => handleClickMenu(element.label, element.value)}>
-            <S.MenuItem>
-              <motion.div className="item-wrapper" whileTap={{ scale: 0.98 }}>
-                <Icon name={element.icon as IconType} width="24px" height="24px" />
-                <h6 className="title">{element.label}</h6>
-              </motion.div>
-              {element.items.length !== 0 && <Icon className="arrow-icon" name="ArrowRight16x16" width="16px" height="16px" />}
-            </S.MenuItem>
+      <div className="menu-container">
+        {EMPLOYER_ASIDE_MENU.map((element) => {
+          return (
+            <S.Menu key={element.label} onClick={() => handleClickMenu(element.label, element.value)}>
+              <S.MenuItem>
+                <motion.div className="item-wrapper" whileTap={{ scale: 0.98 }}>
+                  <Icon name={element.icon as IconType} width="22px" height="22px" />
+                  <h6 className="title">{element.label}</h6>
+                </motion.div>
+                {element.items.length !== 0 && <Icon className="arrow-icon" name="ArrowRight16x16" width="16px" height="16px" />}
+              </S.MenuItem>
 
-            {isOpen === element.label && (
-              <React.Fragment>
-                {element.items.map((item) => (
-                  <S.MenuItemChild key={item.label} onClick={() => router.push(item.value)}>
-                    <div className="content">{item.label}</div>
-                  </S.MenuItemChild>
-                ))}
-              </React.Fragment>
-            )}
-          </S.Menu>
-        );
-      })}
+              {isOpen === element.label && (
+                <React.Fragment>
+                  {element.items.map((item) => (
+                    <S.MenuItemChild key={item.label} onClick={() => router.push(item.value)}>
+                      <div className="content">{item.label}</div>
+                    </S.MenuItemChild>
+                  ))}
+                </React.Fragment>
+              )}
+            </S.Menu>
+          );
+        })}
+      </div>
+      <StyledRecruitLink onClick={() => window.open(path.RECRUIT, '_blank')}>채용 페이지 바로가기</StyledRecruitLink>
     </S.EmployerAside>
   );
 }
+
+const StyledRecruitLink = styled.button`
+  cursor: pointer;
+  color: ${(props) => props.theme.colors.blue500};
+  padding-left: 10px;
+  font-size: 14px;
+  &:hover {
+    text-decoration: underline;
+  }
+`;
 
 const S = {
   EmployerAside: styled(motion.aside)`
@@ -80,8 +94,13 @@ const S = {
     user-select: none;
     scrollbar-width: thin;
     scrollbar-color: #eaeaea #fafafa;
+    display: flex;
+    flex-direction: column;
     svg {
       flex-shrink: 0;
+    }
+    .menu-container {
+      flex: 1;
     }
   `,
   ResizeButton: styled.button`
