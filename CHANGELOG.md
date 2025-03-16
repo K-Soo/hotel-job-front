@@ -1,6 +1,54 @@
 # 변경 로그
 
 프로젝트의 모든 주요 변경 사항
+## [1.11.0](https://github.com/K-Soo/hotel-job-front/compare/v1.10.0...v1.11.0) (2025-03-16)
+
+
+### Features
+
+* **employer-aside:** 메뉴 컨테이너 추가 및 채용 페이지 링크 버튼 스타일링 ([db27029](https://github.com/K-Soo/hotel-job-front/commit/db27029597d581cd38cf2e11c20eed3dce7a4951))
+* **icon:** CalendarMini24x24 및 HomeSecond24x24 아이콘 추가 ([8ebb6fa](https://github.com/K-Soo/hotel-job-front/commit/8ebb6fa340998a26b65375ae21ebaa58e65552cf))
+* **icon:** calendarMini24x24 아이콘 추가 ([5c4ad5c](https://github.com/K-Soo/hotel-job-front/commit/5c4ad5ca0bcd7467bee025c5e73a463cf1a0131e))
+* **icon:** homeSecond24x24 아이콘 추가 ([5655ea1](https://github.com/K-Soo/hotel-job-front/commit/5655ea1f196762845060271ab813a878e3401180))
+* **icon:** rocket24x24 아이콘의 fill 속성을 currentColor로 변경 ([d68f413](https://github.com/K-Soo/hotel-job-front/commit/d68f4135fc980efbd949e389b3d5d1349332d65e))
+* **icon:** stickerSmileSquare24x24 아이콘의 fill 속성을 currentColor로 변경 ([e918453](https://github.com/K-Soo/hotel-job-front/commit/e918453ccda01073c8fbf037fe28de6ea4fced27))
+* **icon:** userRounded24x24 아이콘의 fill 속성을 currentColor로 변경 ([da1470e](https://github.com/K-Soo/hotel-job-front/commit/da1470e568ff1328b6773847d66b10651b544df0))
+* **menu:** 대시보드 아이콘을 Widget 아이콘으로 변경 및 새로운 Widget 아이콘 추가 ([2983faf](https://github.com/K-Soo/hotel-job-front/commit/2983faf15459aae6f84ba50941cbaf6604a03dc1))
+* **mobile-navigation:** 스크롤에 따라 하단 테두리 추가 및 제목 태그 변경 ([c3b1aaf](https://github.com/K-Soo/hotel-job-front/commit/c3b1aaf00b7dda3337f607fe716f254ed3d4ab6e))
+* **recruit:** MobileNavigation에 notificationIcon 추가 ([b89d878](https://github.com/K-Soo/hotel-job-front/commit/b89d87836e353d204b88a2101e8739b657b1fc3a))
+* **recruit:** RecruitMobileCard에 애니메이션 추가 및 스타일 수정 ([ec65ac5](https://github.com/K-Soo/hotel-job-front/commit/ec65ac56fc77bf9fcb3ecfe9672262716ebc0663))
+* **recruit:** RecruitPage에서 Footer 컴포넌트 제거 ([6edd72a](https://github.com/K-Soo/hotel-job-front/commit/6edd72ad93133b762c21fb001270f89631e19bfd))
+* **recruit:** RecruitUrgentCard 스타일 수정 및 조건 표시 개선 ([07505e0](https://github.com/K-Soo/hotel-job-front/commit/07505e054ee6e3cca7d3a2bab1c127ed4947de6a))
+* **seo:** 각 페이지에 SEO 메타 태그 추가 및 불필요한 컴포넌트 삭제 ([75c5c50](https://github.com/K-Soo/hotel-job-front/commit/75c5c501dc6ff8f998d29eb45576b8510d5653e0))
+* **toggle:** ToggleButton에서 배경색 관련 주석 제거 ([9a437d3](https://github.com/K-Soo/hotel-job-front/commit/9a437d3ce51c98e8b0431064549d8289e3a93736))
+
+
+### Bug Fixes
+
+* **employer-header:** '채용페이지 바로가기' 텍스트를 '채용 페이지 바로가기'로 수정 ([c06103f](https://github.com/K-Soo/hotel-job-front/commit/c06103f7e3299984ffa5fb43dd2b02df895904cf))
+* **header:** 헤더 스타일 수정 - 배경색 및 그림자 변경 ([347d6f1](https://github.com/K-Soo/hotel-job-front/commit/347d6f164ffcd9e074b4bddc033c534e5df7052d))
+* **home:** 'RecruitPremiumCard' 배경색 및 텍스트 색상 수정 ([040367d](https://github.com/K-Soo/hotel-job-front/commit/040367dfc51784c6e269159b122b714bb572a211))
+* **icon:** 아이콘 컴포넌트에 color 속성 추가 및 스타일 수정 ([10fb77b](https://github.com/K-Soo/hotel-job-front/commit/10fb77b4a0406cd21baaf63c8f4dad2e8432f83b))
+* **icon:** calendar-minimalistic 아이콘 파일 삭제 ([514132c](https://github.com/K-Soo/hotel-job-front/commit/514132c1bb55c890aef0c09f833c68866a2b1e08))
+* **menu:** '홈' 라벨을 '대시보드'로 수정 ([2faa2f5](https://github.com/K-Soo/hotel-job-front/commit/2faa2f5301026ef65021cc8820b629accbf7751d))
+* **navigation:** 하단 내비게이션 아이콘 색상 및 스타일 수정 ([9d2199b](https://github.com/K-Soo/hotel-job-front/commit/9d2199b888033cff68dfab7d823c2cb3a8a09075))
+* **pagination:** 페이지가 1개일 때 화살표 버튼 숨기기 ([91a32ad](https://github.com/K-Soo/hotel-job-front/commit/91a32ad8df7272ea6b6ac0a4aff49adfb0c94d28))
+* **recruit-container:** Line 컴포넌트의 색상 속성 추가 ([274f189](https://github.com/K-Soo/hotel-job-front/commit/274f18982e4b3893fbfe64617fb7522650d18619))
+* **recruit-desktop-card:** 스타일 수정 및 드롭다운 기능 추가를 위한 레이아웃 조정 ([422d4e0](https://github.com/K-Soo/hotel-job-front/commit/422d4e090ab5f96b40f9aac7bd7a319d5380e953))
+* **recruit-detail-navigation:** 버튼 스타일 수정 및 레이아웃 조정으로 가독성 향상 ([eff9a08](https://github.com/K-Soo/hotel-job-front/commit/eff9a086c8a00434782e0a864f91f426a03c37e8))
+* **recruit-detail-work-condition:** '근무요일' 라벨을 '근무시간'으로 수정 ([c1041b4](https://github.com/K-Soo/hotel-job-front/commit/c1041b4e146fbb7c804dbdf31317a3a8ff7975a9))
+* **recruit-list:** PaginationComponent의 여백 조정 ([c070a9f](https://github.com/K-Soo/hotel-job-front/commit/c070a9fc397e805716c62c761e208d357530767e))
+* **recruit-price:** 스타일 수정 및 레이아웃 조정으로 가독성 향상 ([72a9f65](https://github.com/K-Soo/hotel-job-front/commit/72a9f651ad41250afb66f6422c169cd1c5921c55))
+* **recruit-search:** 모바일 레이아웃에서 상단 여백 제거 ([c86a18b](https://github.com/K-Soo/hotel-job-front/commit/c86a18be370ffd9528426ba187663c26b536e14c))
+* **recruit-special-card:** 스타일 수정 및 레이아웃 조정으로 가독성 향상 ([8435b41](https://github.com/K-Soo/hotel-job-front/commit/8435b41fd689535024a5ca72264690b1125f40cb))
+* **recruit-special-list:** 스타일 수정으로 여백 및 간격 조정 ([0689060](https://github.com/K-Soo/hotel-job-front/commit/06890606ff54cc259789d21b6e8b29caf4a72362))
+* **recruit-special-list:** SPECIAL_LIMIT을 2에서 9로 변경하고 '더보기' 버튼 스타일 수정 ([7384d14](https://github.com/K-Soo/hotel-job-front/commit/7384d14980de98d1ab7ae0aeb97c3e76bb14f03c))
+* **recruit-urgent-list:** 여백 조정으로 하단 여백 증가 ([0ced998](https://github.com/K-Soo/hotel-job-front/commit/0ced9986c84b3367a991dbcacf21b9f627578ecd))
+* **recruit-urgent-list:** URGENT_RECRUIT_LIMIT을 8에서 12로 변경하고 '더보기' 버튼의 borderRadius 추가 ([14fdb1b](https://github.com/K-Soo/hotel-job-front/commit/14fdb1b8aa202b3c88dc6e51e936d8ea5feef01f))
+* **recruitment:** '근무요일' 텍스트를 '근무시간'으로 수정 ([a19d28b](https://github.com/K-Soo/hotel-job-front/commit/a19d28b38a3e49d413d32d2497d26b9f1ee38d25))
+* **recruitment:** '근무요일' 텍스트를 '근무시간'으로 수정 ([2581412](https://github.com/K-Soo/hotel-job-front/commit/2581412b11423809c72c686ea9e130851516a2ed))
+* **recruitment:** '근무요일' 텍스트를 '근무시간'으로 수정 ([0ff6b6f](https://github.com/K-Soo/hotel-job-front/commit/0ff6b6f1e7a8100705e77034a4ad76e74ba57c12))
+
 ## [1.10.0](https://github.com/K-Soo/hotel-job-front/compare/v1.9.7...v1.10.0) (2025-03-15)
 
 
