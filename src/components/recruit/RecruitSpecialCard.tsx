@@ -92,7 +92,7 @@ export default function RecruitSpecialCard({ item }: RecruitSpecialCardProps) {
             <span className="jobs__text">{ALL_JOBS[item.jobs[0]]}</span>
           )}
           <div className="jobs__conditions">
-            <span>{EXPERIENCE_CONDITION[item.experienceCondition]}</span>
+            <span className="jobs__conditions--condition">{EXPERIENCE_CONDITION[item.experienceCondition]}</span>
             <span>{employmentTypeFormat(item.employmentType)}</span>
           </div>
         </div>
@@ -120,32 +120,33 @@ const StyledTitle = styled.div<{ $isBold: boolean; $isHighlight: boolean }>`
     width: fit-content;
     display: inline;
     line-height: 1.35;
+    ${(props) => props.theme.media.tablet`
+      font-size: 14px;
+    `};
     ${(props) =>
       props.$isHighlight &&
       css`
-        background-color: #ffee07;
+        background-color: #6877ed;
+        color: #ffffff;
       `};
-    &:hover {
-      color: ${(props) => props.theme.colors.black};
-    }
   }
 `;
 
 const S = {
   RecruitSpecialCard: styled(motion.div)`
-    width: calc(33.333% - 6.7px);
+    width: calc(33.333% - 14px);
     aspect-ratio: 5/3;
     border-radius: 10px;
     padding: 15px;
-    border: 1px solid ${(props) => props.theme.colors.blue400};
     cursor: pointer;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1), inset 0 3px 0 #64a8ff;
     display: flex;
     user-select: none;
     flex-direction: column;
-    max-height: 180px;
+    max-height: 220px;
     ${(props) => props.theme.media.tablet`
       aspect-ratio: 5 / 3;
-      width: calc(50% - 5px);
+      width: calc(50% - 10px);
     `};
 
     ${(props) => props.theme.media.mobile`
@@ -165,10 +166,13 @@ const S = {
       font-size: 14px;
       &__hotel {
         color: ${(props) => props.theme.colors.black100};
+        display: flex;
+        align-items: center;
         &::after {
-          content: '|';
-          margin: 0 6px;
-          color: ${(props) => props.theme.colors.gray700};
+          content: '·';
+          display: inline-block;
+          color: ${(props) => props.theme.colors.black100};
+          margin: 0 5px;
         }
       }
       &__address {
@@ -191,12 +195,24 @@ const S = {
         align-items: center;
         font-size: 13px;
         color: ${(props) => props.theme.colors.gray600};
-        margin-top: 5px;
+        margin-top: 8px;
         ${(props) => props.theme.media.laptop`
           font-size: 12px;
         `};
-        & > span {
+        /* & > span {
           margin-right: 5px;
+        } */
+        &--condition {
+          display: flex;
+          align-items: center;
+          &::after {
+            content: '';
+            display: inline-block;
+            width: 1px;
+            height: 10px;
+            background-color: ${(props) => props.theme.colors.gray500};
+            margin: 0 6px;
+          }
         }
       }
     }
