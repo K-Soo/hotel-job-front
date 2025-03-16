@@ -23,7 +23,7 @@ export const GENERAL_ASIDE_MENU = [
 ];
 
 export const EMPLOYER_ASIDE_MENU = [
-  { label: '홈', value: path.EMPLOYER, items: [], icon: 'Home24x24' },
+  { label: '대시보드', value: path.EMPLOYER, items: [], icon: 'Home24x24' },
 
   {
     label: '업체정보 관리',
