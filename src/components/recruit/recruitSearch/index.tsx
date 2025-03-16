@@ -17,6 +17,7 @@ const S = {
     color: ${({ theme }) => theme.colors.black300};
     ${(props) => props.theme.media.mobile`
       flex-direction: column;
+      margin-top: 0;
       margin-bottom: 15px;
     `};
   `,
