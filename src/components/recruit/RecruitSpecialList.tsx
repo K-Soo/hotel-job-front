@@ -12,7 +12,7 @@ const S = {
   RecruitSpecialList: styled.div`
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
-    margin-bottom: 50px;
+    gap: 20px;
+    margin-bottom: 100px;
   `,
 };
