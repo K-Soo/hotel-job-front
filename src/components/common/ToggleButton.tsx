@@ -15,7 +15,6 @@ export default function ToggleButton({}: ToggleButtonProps) {
 
     controls.start({
       x: isOn ? 0 : 28,
-      // backgroundColor: isOn ? 'blue' : 'red',
       transition: { type: 'spring', stiffness: 300, damping: 30 },
     });
   };
