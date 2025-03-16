@@ -85,7 +85,7 @@ export default function RecruitUrgentCard({ item }: RecruitUrgentCardProps) {
             <span className="jobs__text">{ALL_JOBS[item.jobs[0]]}</span>
           )}
           <div className="jobs__conditions">
-            <span>{EXPERIENCE_CONDITION[item.experienceCondition]}</span>
+            <span className="jobs__conditions--condition">{EXPERIENCE_CONDITION[item.experienceCondition]}</span>
             <span>{employmentTypeFormat(item.employmentType)}</span>
           </div>
         </div>
@@ -111,16 +111,14 @@ const StyledTitle = styled.div<{ $isBold: boolean; $isHighlight: boolean }>`
     vertical-align: bottom;
     color: ${(props) => props.theme.colors.gray800};
     font-weight: ${(props) => (props.$isBold ? 600 : 400)};
-    font-size: 14px;
+    font-size: 15px;
     width: fit-content;
     ${(props) =>
       props.$isHighlight &&
       css`
-        background-color: #ffee07;
+        background-color: #6877ed;
+        color: #ffffff;
       `};
-    &:hover {
-      color: ${(props) => props.theme.colors.black};
-    }
   }
   ${(props) => props.theme.media.mobile`
     display: flex;
@@ -139,9 +137,9 @@ const S = {
     display: flex;
     flex-direction: column;
     padding: 10px;
-    border: 1px solid ${(props) => props.theme.colors.gray300};
+    border: 1px solid ${(props) => props.theme.colors.gray200};
     cursor: pointer;
-    border-radius: 4px;
+    border-radius: 8px;
     user-select: none;
     ${(props) => props.theme.media.tablet`
       aspect-ratio: 5 / 3;
@@ -166,12 +164,19 @@ const S = {
     flex-direction: column;
     justify-content: space-between;
     .info-box {
-      /* margin-bottom: 15px; */
+      display: flex;
+      align-items: center;
+      margin-bottom: 15px;
       &__company {
         font-size: 13px;
         font-weight: 400;
         color: ${(props) => props.theme.colors.black100};
-        margin-bottom: 5px;
+        &::after {
+          content: '·';
+          display: inline-block;
+          color: ${(props) => props.theme.colors.black100};
+          margin: 0 5px;
+        }
       }
       &__address {
         font-size: 13px;
@@ -185,7 +190,6 @@ const S = {
     flex-direction: column;
     justify-content: space-between;
     margin-top: 10px;
-    /* border: 1px solid red; */
     .jobs {
       &__text {
         font-size: 14px;
@@ -196,8 +200,17 @@ const S = {
         font-size: 12px;
         color: ${(props) => props.theme.colors.gray600};
         margin-top: 5px;
-        & > span {
-          margin-right: 5px;
+        &--condition {
+          display: flex;
+          align-items: center;
+          &::after {
+            content: '';
+            display: inline-block;
+            width: 1px;
+            height: 10px;
+            background-color: ${(props) => props.theme.colors.gray500};
+            margin: 0 6px;
+          }
         }
       }
     }
