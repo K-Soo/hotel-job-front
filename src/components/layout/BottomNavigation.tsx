@@ -9,7 +9,7 @@ import Icon from '@/icons/Icon';
 
 export default function BottomNavigation() {
   const router = useRouter();
-  const setBottomSheetAtom = useSetRecoilState(bottomSheetAtom);
+  // const setBottomSheetAtom = useSetRecoilState(bottomSheetAtom);
 
   const { isAuthenticated, role } = useAuth();
 
@@ -19,23 +19,23 @@ export default function BottomNavigation() {
     router.push(name);
   };
 
-  const handleClickPopUpSheet = () => {
-    setBottomSheetAtom((prev) => ({ ...prev, isOpen: !prev.isOpen }));
-  };
+  // const handleClickPopUpSheet = () => {
+  //   setBottomSheetAtom((prev) => ({ ...prev, isOpen: !prev.isOpen }));
+  // };
 
   return (
     <Portal>
       <S.BottomNavigation>
         <div className="item">
           <S.ButtonLink name={path.HOME} onClick={handleLink}>
-            <Icon name="Home24x24" width="24px" height="24px" />
+            <Icon name="HomeSecond24x24" width="24px" height="24px" color={router.pathname === path.HOME ? '#1b64da' : '#8b95a1'} />
             <S.IconText $active={router.pathname === path.HOME}>홈</S.IconText>
           </S.ButtonLink>
         </div>
 
         <div className="item">
           <S.ButtonLink name={path.RECRUIT} onClick={handleLink}>
-            <Icon name="Rocket24x24" width="24px" height="24px" />
+            <Icon name="CalendarMini24x24" width="24px" height="24px" color={router.pathname === path.RECRUIT ? '#1b64da' : '#8b95a1'} />
             <S.IconText $active={router.pathname === path.RECRUIT}>채용</S.IconText>
           </S.ButtonLink>
         </div>
@@ -50,7 +50,12 @@ export default function BottomNavigation() {
         {isAuthenticated && (
           <div className="item">
             <S.ButtonLink name={role === 'JOB_SEEKER' ? path.USER : path.EMPLOYER} onClick={handleLink}>
-              <Icon name="StickerSmileSquare24x24" width="24px" height="24px" />
+              <Icon
+                name="StickerSmileSquare24x24"
+                width="24px"
+                height="24px"
+                color={router.pathname === path.USER ? '#1b64da' : '#8b95a1'}
+              />
               <S.IconText $active={router.pathname === path.USER}>MY</S.IconText>
             </S.ButtonLink>
           </div>
@@ -59,7 +64,7 @@ export default function BottomNavigation() {
         {!isAuthenticated && (
           <div className="item">
             <S.ButtonLink name={path.SIGN_IN} onClick={handleLink}>
-              <Icon name="UserRounded24x24" width="24px" height="24px" />
+              <Icon name="UserRounded24x24" width="24px" height="24px" color={router.pathname === path.SIGN_IN ? '#1b64da' : '#8b95a1'} />
               <S.IconText $active={router.pathname === path.SIGN_IN}>로그인</S.IconText>
             </S.ButtonLink>
           </div>
@@ -81,10 +86,10 @@ const S = {
     width: 100%;
     height: 75px;
     box-sizing: border-box;
-    background-color: ${(props) => props.theme.colors.white};
-    /* box-shadow: 0 -1px 15px rgba(0, 0, 0, 0.1); */
-    border-top: 1px solid ${(props) => props.theme.colors.gray100};
     padding-bottom: 10px;
+    border-top: 1px solid rgba(0, 0, 0, 0.07);
+    background-color: rgba(255, 255, 255, 0.7);
+    backdrop-filter: saturate(150%) blur(32px);
     .item {
       flex: 1;
       display: flex;
@@ -102,13 +107,13 @@ const S = {
     border-radius: 10px;
   `,
   IconText: styled.span<{ $active: boolean }>`
-    font-size: 13px;
+    font-size: 11px;
     padding-top: 5px;
     color: ${(props) => props.theme.colors.gray500};
     ${(props) =>
       props.$active &&
       css`
-        color: ${props.theme.colors.black200};
+        color: ${props.theme.colors.blue500};
         font-weight: 500;
       `};
   `,
