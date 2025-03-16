@@ -1,6 +1,5 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
-import Icon from '@/icons/Icon';
 import RecruitPrice from '@/components/recruit/RecruitPrice';
 import { RecruitListItem } from '@/types';
 import { addressFormat, dateFormat, employmentTypeFormat } from '@/utils';
@@ -8,6 +7,7 @@ import { EXPERIENCE_CONDITION } from '@/constants/recruitment';
 import { ALL_JOBS } from '@/constants/job';
 import { useRouter } from 'next/router';
 import Tag from '@/components/common/Tag';
+import { motion, useAnimationControls } from 'framer-motion';
 
 interface RecruitMobileCardProps {
   item: RecruitListItem;
@@ -17,6 +17,8 @@ export default function RecruitMobileCard({ item }: RecruitMobileCardProps) {
   const [isBold, setIsBold] = React.useState(false);
   const [isHighlight, setIsHighlight] = React.useState(false);
   const [isTag, setIsTag] = React.useState(false);
+
+  const controls = useAnimationControls();
 
   const router = useRouter();
   const { sido, sigungu } = addressFormat(item.address);
@@ -46,8 +48,13 @@ export default function RecruitMobileCard({ item }: RecruitMobileCardProps) {
     setIsTag(hasTagEffect);
   }, [hasBoldEffect, hasHighlightEffect, hasTagEffect]);
 
+  const handleClickRecruit = async () => {
+    await controls.start({ scale: [0.98, 1] });
+    router.push(`/recruit/${item.id}`);
+  };
+
   return (
-    <S.RecruitMobileCard onClick={() => router.push(`/recruit/${item.id}`)}>
+    <S.RecruitMobileCard onClick={handleClickRecruit} animate={controls} initial={{ scale: 1 }}>
       <S.HeaderBox>
         <div className="left">
           <div className="left__company">{item.hotelName}</div>
@@ -72,11 +79,11 @@ export default function RecruitMobileCard({ item }: RecruitMobileCardProps) {
       <S.infoBox>
         <div className="jobs">
           {item.jobs.length > 1 ? (
-            <span className="jobs__text">
+            <span className="jobs__job">
               {ALL_JOBS[item.jobs[0]]} 외 {item.jobs.length - 1}
             </span>
           ) : (
-            <span className="jobs__text">{ALL_JOBS[item.jobs[0]]} </span>
+            <span className="jobs__job">{ALL_JOBS[item.jobs[0]]} </span>
           )}
 
           <div className="jobs__conditions">
@@ -95,14 +102,14 @@ export default function RecruitMobileCard({ item }: RecruitMobileCardProps) {
 
 const StyledTitle = styled.div<{ $isBold: boolean; $isHighlight: boolean }>`
   flex: 1;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
   display: flex;
   align-items: center;
   width: 100%;
   .text {
     width: fit-content;
     color: ${(props) => props.theme.colors.gray800};
-    font-weight: ${(props) => (props.$isBold ? 600 : 400)};
+    font-weight: ${(props) => (props.$isBold ? 500 : 400)};
     font-size: 14px;
     overflow: hidden;
     white-space: nowrap;
@@ -110,13 +117,14 @@ const StyledTitle = styled.div<{ $isBold: boolean; $isHighlight: boolean }>`
     ${(props) =>
       props.$isHighlight &&
       css`
-        background-color: #ffee07;
+        background-color: #6877ed;
+        color: #ffffff;
       `};
   }
 `;
 
 const S = {
-  RecruitMobileCard: styled.div`
+  RecruitMobileCard: styled(motion.div)`
     width: 100%;
     height: 100px;
     display: flex;
@@ -129,22 +137,20 @@ const S = {
     justify-content: space-between;
     align-items: center;
     font-size: 13px;
-    margin-bottom: 10px;
     font-weight: 500;
     color: ${(props) => props.theme.colors.gray700};
     .left {
       display: flex;
       align-items: center;
-
       &__company {
         font-size: 14px;
         font-weight: 400;
         color: ${(props) => props.theme.colors.black100};
-
         &::after {
-          content: '|';
-          margin: 0 8px;
-          color: ${(props) => props.theme.colors.gray400};
+          content: '·';
+          display: inline-block;
+          color: ${(props) => props.theme.colors.black100};
+          margin: 0 6px;
         }
       }
       &__address {
@@ -161,19 +167,28 @@ const S = {
       display: flex;
       align-items: center;
       white-space: nowrap;
-
-      &__text {
-        font-size: 14px;
+      font-size: 13px;
+      &__job {
         &::after {
-          content: '|';
-          margin: 0 4px;
-          color: ${(props) => props.theme.colors.gray400};
+          content: '';
+          display: inline-block;
+          width: 1px;
+          height: 10px;
+          background-color: ${(props) => props.theme.colors.gray500};
+          margin: 0 6px;
         }
+        ${(props) => props.theme.media.mobile`
+        text-overflow: ellipsis;
+        word-break: break-all;
+        white-space: nowrap;
+        overflow: hidden;
+        max-width: 100px;
+        
+        `};
       }
       &__conditions {
         display: flex;
         align-items: center;
-        font-size: 13px;
         color: ${(props) => props.theme.colors.gray600};
         & > span {
           margin-right: 5px;
