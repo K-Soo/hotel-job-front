@@ -50,8 +50,10 @@ import Pen24x24 from './pen24x24.svg';
 import Check24x24 from './check24x24.svg';
 import CalendarMini24x24 from './calendarMini24x24.svg';
 import HomeSecond24x24 from './homeSecond24x24.svg';
+import Widget24x24 from './widget24x24.svg';
 
 export {
+  Widget24x24,
   HomeSecond24x24,
   CalendarMini24x24,
   Check24x24,
