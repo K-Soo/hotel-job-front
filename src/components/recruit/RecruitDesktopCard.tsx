@@ -130,6 +130,7 @@ export default function RecruitDesktopCard({ item }: RecruitDesktopCardProps) {
           )}
         </S.DateRow>
       </S.Body>
+
       {/* TODO - 드롭다운 */}
       {/* <ExpansionContent initial={{ height: 0, opacity: 0 }} animate={controls} ref={expansionContentRef}>
         asd
@@ -147,14 +148,13 @@ const StyledTitle = styled.div<{ $isBold: boolean; $isHighlight: boolean }>`
     padding: 1px 3px 1px 2px;
     color: ${(props) => props.theme.colors.gray800};
     font-weight: ${(props) => (props.$isBold ? 600 : 400)};
+    font-size: 15px;
     ${(props) =>
       props.$isHighlight &&
       css`
-        background-color: #ffee07;
+        background-color: #6877ed;
+        color: #ffffff;
       `};
-    &:hover {
-      color: ${(props) => props.theme.colors.black};
-    }
   }
 `;
 
@@ -165,13 +165,11 @@ const S = {
     display: flex;
     flex-direction: column;
     user-select: none;
-    color: ${(props) => props.theme.colors.black100};
-    border-bottom: 1px solid ${(props) => props.theme.colors.gray300};
+    border-bottom: 1px solid ${(props) => props.theme.colors.gray200};
     height: auto;
     cursor: pointer;
     &:hover {
-      /* background-color: ${(props) => props.theme.colors.gray}; */
-      background-color: ${(props) => (props.$isClosed ? 'none' : props.theme.colors.gray)};
+      background-color: ${(props) => (props.$isClosed ? 'none' : props.theme.colors.blue)};
     }
     ${(props) =>
       props.$isClosed &&
@@ -239,12 +237,15 @@ const S = {
     }
   `,
   JobRow: styled.div`
-    flex: 1 1 10%;
+    flex: 1 1 15%;
     display: flex;
     align-items: center;
     justify-content: center;
     height: 100%;
     font-size: 13px;
+    font-weight: 500;
+    padding: 0 5px;
+    color: ${(props) => props.theme.colors.black400};
     span {
       text-align: center;
     }
@@ -256,10 +257,10 @@ const S = {
     align-items: center;
     justify-content: center;
     font-size: 13px;
-    color: #475067;
+    color: ${(props) => props.theme.colors.gray800};
     height: 100%;
     .text {
-      padding: 1px 0;
+      padding: 2px 0;
     }
   `,
   PayRow: styled.div`
