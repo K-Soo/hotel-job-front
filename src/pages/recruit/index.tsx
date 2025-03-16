@@ -19,7 +19,6 @@ RecruitPage.getLayout = (page: React.ReactElement) => {
         <MobileNavigation title="채용" notificationIcon />
       </Header>
       <Main>{page}</Main>
-      <Footer />
       <BottomNavigation />
     </Layout>
   );
