@@ -29,7 +29,7 @@ RecruitDetailPage.getLayout = (page: React.ReactElement) => {
     <Layout>
       <Header>
         <DesktopNavigation />
-        <MobileNavigation backIcon backUrl={path.RECRUIT} />
+        <MobileNavigation backIcon backUrl={path.RECRUIT} notificationIcon />
       </Header>
       <Main>{page}</Main>
       <Footer />
