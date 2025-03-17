@@ -116,7 +116,7 @@ export default function useRequestFCMPermission() {
       const getMessaging = await messaging();
       if (!getMessaging) return;
 
-      console.log('✅ Foreground 푸시 알림 리스너 등록됨');
+      console.info('--- Foreground 푸시 알림 리스너 등록됨 ---');
       const unsubscribe = onMessage(getMessaging, (payload) => {
         console.log('Foreground 푸시 알림 수신:', payload);
 

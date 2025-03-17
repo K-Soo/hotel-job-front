@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { PaginationInfo } from '@/types/API';
 
-const MAX_PAGE_BUTTON = 5; //최대 버튼개수
+const MAX_PAGE_BUTTON = 5;
 
 export default function usePagination(props: PaginationInfo) {
   const { currentPage, totalPages } = props;
