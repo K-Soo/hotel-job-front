@@ -15,23 +15,35 @@ export default function RecruitDetailBottomNavigation({
   recruitmentStatus,
   setIsOpenModal,
 }: RecruitDetailBottomNavigationProps) {
-  const { isAuthenticated, role } = useAuth();
+  const { isAuthenticated, role, isAuthLoading } = useAuth();
   const router = useRouter();
+
+  if (isAuthLoading) {
+    return (
+      <S.RecruitDetailBottomNavigation>
+        <div className="wrapper">
+          <Button label="" variant="secondary" height="45px" borderRadius="10px" disabled isLoading={true} />
+        </div>
+      </S.RecruitDetailBottomNavigation>
+    );
+  }
 
   // 비 로그인
   if (!isAuthenticated) {
     return (
       <S.RecruitDetailBottomNavigation>
-        {recruitmentStatus === 'CLOSED' && <Button label="모집 마감" variant="secondary" height="45px" borderRadius="10px" disabled />}
-        {recruitmentStatus === 'PROGRESS' && (
-          <Button
-            label="로그인 후 지원하기"
-            variant="primary"
-            height="45px"
-            borderRadius="10px"
-            onClick={() => router.push(path.SIGN_IN)}
-          />
-        )}
+        <div className="wrapper">
+          {recruitmentStatus === 'CLOSED' && <Button label="모집 마감" variant="secondary" height="45px" borderRadius="10px" disabled />}
+          {recruitmentStatus === 'PROGRESS' && (
+            <Button
+              label="로그인 후 지원하기"
+              variant="primary"
+              height="45px"
+              borderRadius="10px"
+              onClick={() => router.push(path.SIGN_IN)}
+            />
+          )}
+        </div>
       </S.RecruitDetailBottomNavigation>
     );
   }
@@ -59,7 +71,7 @@ export default function RecruitDetailBottomNavigation({
               />
             )}
 
-            {role !== 'JOB_SEEKER' && <Button label="지원자 전용" variant="secondary" height="45px" borderRadius="5px" disabled />}
+            {role !== 'JOB_SEEKER' && <Button label="지원자 전용" variant="secondary" height="45px" borderRadius="10px" disabled />}
           </>
         )}
       </div>
