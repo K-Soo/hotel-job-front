@@ -31,10 +31,13 @@ export default function RecruitDetailWorkCondition({
             <S.RowLabel>고용형태</S.RowLabel>
             <S.RowValue>{selectedTypes.length > 0 ? selectedTypes.join(', ') : '-'}</S.RowValue>
           </S.Row>
-          <S.Row>
-            <S.RowLabel>근무시간</S.RowLabel>
-            <S.RowValue>{workingDay ? WORKING_DAY_LIST[workingDay] : '-'}</S.RowValue>
-          </S.Row>
+
+          {workingDay && (
+            <S.Row>
+              <S.RowLabel>근무시간</S.RowLabel>
+              <S.RowValue>{WORKING_DAY_LIST[workingDay]}</S.RowValue>
+            </S.Row>
+          )}
         </div>
 
         <div className="right">
@@ -44,13 +47,13 @@ export default function RecruitDetailWorkCondition({
               {SALARY_TYPE[salaryType]} {priceComma(salaryAmount)}원
             </S.RowValue>
           </S.Row>
-          <S.Row>
-            <S.RowLabel>출퇴근 시간</S.RowLabel>
-            <S.RowValue>
-              {!(workingTime.start && workingTime.end) && '-'}
-              {workingTime.start && workingTime.end && <span>{dateFormat.timeRange(workingTime.start, workingTime.end)}</span>}
-            </S.RowValue>
-          </S.Row>
+
+          {workingTime.start && workingTime.end && (
+            <S.Row>
+              <S.RowLabel>출퇴근 시간</S.RowLabel>
+              <S.RowValue>{<span>{dateFormat.timeRange(workingTime.start, workingTime.end)}</span>}</S.RowValue>
+            </S.Row>
+          )}
         </div>
       </div>
     </S.RecruitDetailWorkCondition>
