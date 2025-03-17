@@ -232,11 +232,11 @@ const RecruitSpecialList = ({ count }: { count: number }) => {
 const StyledRecruitSpecialList = styled.div`
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 20px;
   margin-bottom: 50px;
   .item {
     ${SkeletonAnimation}
-    width: calc(33.333% - 6.7px);
+    width: calc(33.333% - 14px);
     border-radius: 10px;
     aspect-ratio: 5/3;
     height: 100%;
@@ -313,6 +313,65 @@ const StyledIcon = styled.div`
   border-radius: 50%;
 `;
 
+const RecruitmentDetail = () => {
+  return (
+    <StyledRecruitmentDetail>
+      <div className="content">
+        <div className="header">
+          <Line style={{ height: '20px', width: '200px', marginBottom: '5px' }} />
+          <div className="header__icons">
+            <Icon style={{ marginRight: '10px' }} />
+            <Icon />
+          </div>
+        </div>
+        <Line style={{ height: '27px', width: '300px', marginBottom: '50px' }} />
+
+        {/* 근무조건 */}
+        <Line style={{ height: '22px', width: '100px', marginBottom: '15px' }} />
+        <Line style={{ height: '100px', width: '100%', marginBottom: '50px' }} />
+
+        {/* 모집내용 */}
+        <Line style={{ height: '22px', width: '100px', marginBottom: '15px' }} />
+        <Line style={{ height: '100px', width: '100%', marginBottom: '50px' }} />
+
+        {/* 상세내용 */}
+        <Line style={{ height: '22px', width: '100px', marginBottom: '15px' }} />
+        <Line style={{ height: '100px', width: '100%', marginBottom: '20px' }} />
+        <Line style={{ height: '100px', width: '100%', marginBottom: '20px' }} />
+      </div>
+      <div className="side">
+        <Line style={{ height: '50px' }} />
+      </div>
+    </StyledRecruitmentDetail>
+  );
+};
+
+const StyledRecruitmentDetail = styled.section`
+  display: flex;
+  height: 100%;
+  .content {
+    flex: 1;
+    .header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 8px;
+      &__icons {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+      }
+    }
+  }
+  .side {
+    flex: 0 1 330px;
+    margin-left: 30px;
+    ${(props) => props.theme.media.tablet`
+      display: none;
+    `};
+  }
+`;
+
 const SkeletonUI = {
   ResumeListItems,
   Document,
@@ -326,6 +385,7 @@ const SkeletonUI = {
   RecruitSpecialList,
   RecruitUrgentList,
   RecruitBasicList,
+  RecruitmentDetail,
 };
 
 export default SkeletonUI;
