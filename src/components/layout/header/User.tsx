@@ -9,9 +9,7 @@ import SkeletonUI from '@/components/common/SkeletonUI';
 import IconHover from '@/components/common/IconHover';
 import { motion } from 'framer-motion';
 
-interface UserProps {}
-
-export default function User({}: UserProps) {
+export default function User() {
   const [isVisible, setIsVisible] = React.useState(false);
 
   const router = useRouter();
@@ -40,7 +38,7 @@ export default function User({}: UserProps) {
 
   if (isAuthenticated) {
     return (
-      <S.User initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
+      <S.User initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.2 }}>
         <IconHover onClick={handleClickUserIcon} width="40px" height="40px">
           <Icon name="User" />
         </IconHover>
