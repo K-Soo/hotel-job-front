@@ -1,6 +1,41 @@
 # 변경 로그
 
 프로젝트의 모든 주요 변경 사항
+## [1.12.0](https://github.com/K-Soo/hotel-job-front/compare/v1.11.0...v1.12.0) (2025-03-17)
+
+
+### Features
+
+* **api:** 채용공고 progress ids를 가져오는 API 추가 ([0b0f51c](https://github.com/K-Soo/hotel-job-front/commit/0b0f51c472b39297b343ce08f9ef3f2fb74991cf))
+* **recruit:** RecruitMobileCard에 상태에 따른 배경색 변경 기능 추가 ([46af1a5](https://github.com/K-Soo/hotel-job-front/commit/46af1a5e99751017653f72cbaa1c3006f7b7e9e9))
+* **recruit:** RecruitMobileCard에 상태에 따른 스타일 추가 및 기타 컴포넌트 수정 ([99f78f5](https://github.com/K-Soo/hotel-job-front/commit/99f78f5e4a2a5486586a4f2bed3026a8beb117e4))
+* **recruit:** SEO 최적화 및 getStaticPaths, getStaticProps 수정 ([aab8ddd](https://github.com/K-Soo/hotel-job-front/commit/aab8dddb2b786c69e0dff853f8e2dd09bc52c6ed))
+* **types:** GetProgressRecruitIdsResponse 인터페이스 추가 ([03ff2fc](https://github.com/K-Soo/hotel-job-front/commit/03ff2fcd04e4b408f929cf05d27758ba12d82979))
+
+
+### Bug Fixes
+
+* **fonts:** 경로 수정하여 Pretendard 폰트 로드 ([a3d800f](https://github.com/K-Soo/hotel-job-front/commit/a3d800f414137db5d978592ebdd9e2c4f2679317))
+* **navigation:** Notification 컴포넌트의 마진 값을 5px에서 8px로 수정 ([cd8fd7a](https://github.com/K-Soo/hotel-job-front/commit/cd8fd7ab9b428c889e5dfe828bf6001e43403ea0))
+* **recruit:** 근무 부서, 비자조건, 직급 정보의 조건부 렌더링 추가 ([cae5f68](https://github.com/K-Soo/hotel-job-front/commit/cae5f680d2633aee12f40f16887c6621dbb91a39))
+* **recruit:** 근무시간 및 출퇴근 시간의 조건부 렌더링 추가 ([1a6c9ef](https://github.com/K-Soo/hotel-job-front/commit/1a6c9ef822fd27fcf4254be094ff1962fd77ce3a))
+* **recruit:** 로그인 상태 로딩 중 버튼 비활성화 및 로딩 표시 추가 ([a755065](https://github.com/K-Soo/hotel-job-front/commit/a755065917b0aef2b26bc7ca59cbaed0c9db6e1b))
+* **recruit:** 로딩 상태에서 스켈레톤 UI로 대체 ([225bb7c](https://github.com/K-Soo/hotel-job-front/commit/225bb7c22bdb25acb9652303d3cf6bf5e607928a))
+* **recruit:** 로딩 상태의 스켈레톤 UI 높이 조정 및 채용 섹션 제목 변경 ([4518dfd](https://github.com/K-Soo/hotel-job-front/commit/4518dfde70f517ed988e226a13e920f12b86a5ee))
+* **recruit:** 스켈레톤 UI의 마진 조정 ([a7eed31](https://github.com/K-Soo/hotel-job-front/commit/a7eed31c35d23eeb6a7c80a3afd00d3a461a0621))
+* **recruit:** 스켈레톤 UI의 마진 조정 ([0850f7f](https://github.com/K-Soo/hotel-job-front/commit/0850f7ff4ea971c221492c9bb67df9ac891730cf))
+* **recruit:** 인증 로딩 상태에 따른 버튼 텍스트 및 활성화 상태 수정 ([6df61b7](https://github.com/K-Soo/hotel-job-front/commit/6df61b7cd71baee0332db4d577db32070b999ad2))
+* **recruit:** RecruitSectionTitle의 마진 값을 10px에서 20px로 수정 ([73a4ebb](https://github.com/K-Soo/hotel-job-front/commit/73a4ebb14f2672fd4f151da9d0e1115ce263c384))
+* **recruit:** RecruitSpecialCard의 박스 그림자 색상 변경 ([d7a5889](https://github.com/K-Soo/hotel-job-front/commit/d7a588902421f29a876322d90db488b8c6d5386f))
+
+
+### Refactors
+
+* **certification:** 불필요한 import 제거 ([51fc9da](https://github.com/K-Soo/hotel-job-front/commit/51fc9dac45b5b8e76f7aec18f23a656e33a4c8a3))
+* **header:** User 컴포넌트에서 불필요한 props 제거 및 애니메이션 지속 시간 수정 ([486d72c](https://github.com/K-Soo/hotel-job-front/commit/486d72c20ad4560842bb5e641a17a42fbd6b9fd7))
+* **hooks:** 불필요한 import 제거 및 로그 메시지 수정 ([3096b6f](https://github.com/K-Soo/hotel-job-front/commit/3096b6f12ab0f41ac2260219a50d40957d42ba67))
+* **hooks:** 에러 타입 정의 주석 추가 ([c4f051c](https://github.com/K-Soo/hotel-job-front/commit/c4f051c047ffb34ef66d468d805e3c20799a75f9))
+
 ## [1.11.0](https://github.com/K-Soo/hotel-job-front/compare/v1.10.0...v1.11.0) (2025-03-16)
 
 
