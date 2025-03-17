@@ -15,6 +15,7 @@ import dynamic from 'next/dynamic';
 import useResponsive from '@/hooks/useResponsive';
 import RecruitDetailBottomNavigation from '@/components/recruitDetail/RecruitDetailBottomNavigation';
 import useFetchApplyCheck from '@/hooks/useFetchApplyCheck';
+import SkeletonUI from '@/components/common/SkeletonUI';
 
 const DynamicNoSSRModal = dynamic(() => import('@/components/common/modal'), { ssr: false });
 
@@ -94,13 +95,13 @@ export default function RecruitDetailContainer() {
       setIsOpenApplyForm(false);
       setSelectedResume(null);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [addToast, selectedResume, slug]);
 
   console.log('채용공고 상세 API : ', data);
 
-  // TODO - Loading
   if (isLoading) {
-    return <div>isLoading</div>;
+    return <SkeletonUI.RecruitmentDetail />;
   }
 
   if (isSuccess && data) {
@@ -146,7 +147,7 @@ export default function RecruitDetailContainer() {
             setSelectedResume={setSelectedResume}
             setIsOpenApplyForm={setIsOpenApplyForm}
             fetchSubmitApply={fetchSubmitApply}
-          ></RecruitDetailSideMenu>
+          />
         </RecruitDetail>
 
         {/* MOBILE BOTTOM */}
