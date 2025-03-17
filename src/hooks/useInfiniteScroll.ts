@@ -1,5 +1,5 @@
 import { PaginationInfo } from '@/types/API';
-import { InfiniteData, QueryKey, useInfiniteQuery, UseInfiniteQueryOptions, UseQueryOptions } from '@tanstack/react-query';
+import { InfiniteData, QueryKey, useInfiniteQuery, UseInfiniteQueryOptions } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
 
 interface UseInfiniteScroll<T, Q> {
