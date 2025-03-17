@@ -139,7 +139,7 @@ const S = {
     border-radius: 10px;
     padding: 15px;
     cursor: pointer;
-    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1), inset 0 3px 0 #64a8ff;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1), inset 0 3px 0 #4593fc;
     display: flex;
     user-select: none;
     flex-direction: column;
