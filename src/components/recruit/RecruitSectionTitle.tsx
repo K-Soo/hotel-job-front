@@ -24,7 +24,7 @@ const S = {
   RecruitSectionTitle: styled.div<{ $margin?: string }>`
     display: flex;
     align-items: end;
-    margin: ${(props) => props.$margin ?? '0 0 10px 0'};
+    margin: ${(props) => props.$margin ?? '0 0 20px 0'};
     color: ${(props) => props.theme.colors.black400};
     font-weight: 500;
     .title {
