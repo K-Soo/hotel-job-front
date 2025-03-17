@@ -59,10 +59,12 @@ export default function RecruitDetailInfo({
             <S.RowValue>{recruitmentCapacity}명</S.RowValue>
           </S.Row>
 
-          <S.Row>
-            <S.RowLabel>근무 부서</S.RowLabel>
-            <S.RowValue>{department ? department : '-'}</S.RowValue>
-          </S.Row>
+          {department && (
+            <S.Row>
+              <S.RowLabel>근무 부서</S.RowLabel>
+              <S.RowValue>{department ? department : '-'}</S.RowValue>
+            </S.Row>
+          )}
         </div>
 
         <div className="right">
@@ -71,21 +73,28 @@ export default function RecruitDetailInfo({
             <S.RowValue>{EXPERIENCE_CONDITION[experienceCondition]}</S.RowValue>
           </S.Row>
 
-          {/* 외국인 or 국적무관 일때 비자조건 렌더링 */}
-          <S.Row>
-            <S.RowLabel>비자조건</S.RowLabel>
-            <S.RowValue>{nationality.marriageVisa ? nationality.marriageVisa : '-'}</S.RowValue>
-          </S.Row>
+          {/* 외국인 or 국적무관 일때 비자조건 */}
+          {nationality.marriageVisa && (
+            <S.Row>
+              <S.RowLabel>비자조건</S.RowLabel>
+              <S.RowValue>{nationality.marriageVisa ? nationality.marriageVisa : '-'}</S.RowValue>
+            </S.Row>
+          )}
 
           <S.Row>
             <S.RowLabel>학력조건</S.RowLabel>
-            <S.RowValue>{EDUCATION_LEVEL[educationCondition]}</S.RowValue>
+            <S.RowValue>
+              <span>{EDUCATION_LEVEL[educationCondition]}</span>
+              {educationCondition !== 'NOT_REQUIRED' && <span> 졸업</span>}
+            </S.RowValue>
           </S.Row>
 
-          <S.Row>
-            <S.RowLabel>직급</S.RowLabel>
-            <S.RowValue>{position ? POSITION[position] : '-'}</S.RowValue>
-          </S.Row>
+          {position && (
+            <S.Row>
+              <S.RowLabel>직급</S.RowLabel>
+              <S.RowValue>{POSITION[position]}</S.RowValue>
+            </S.Row>
+          )}
         </div>
       </div>
     </S.RecruitDetailInfo>

@@ -30,7 +30,7 @@ export default function Navigation() {
       </S.Menu>
 
       <S.Utility>
-        <Notification margin="0 5px 0 0" />
+        <Notification margin="0 8px 0 0" />
         <User />
       </S.Utility>
     </S.Navigation>

@@ -105,6 +105,9 @@ export const Get = {
 
   getBusinessUser: () => requests.get('/business-user'),
 
+  // 채용공고 progress ids
+  getProgressRecruitIds: () => requests.get<API.GetProgressRecruitIdsResponse>('/recruit/progress'),
+  
   // 채용공고 상세
   recruitDetail: ({ id }: { id: string }) => requests.get<API.RecruitDetailResponse>(`/recruit/${id}`),
 
@@ -277,8 +280,8 @@ export const Get = {
   // 사업자 - 채용공고 별 지원자 리스트
   getRecruitmentDetailApplicantList: ({ recruitmentId, step }: API.GetRecruitmentDetailApplicantListRequest) => {
     const params = new URLSearchParams();
-    if (step) params.set('step', step);
 
+    if (step) params.set('step', step);
     const queryString = params.toString();
 
     const url = `/applications/recruitment/${recruitmentId}${queryString && `?${queryString}`}`;

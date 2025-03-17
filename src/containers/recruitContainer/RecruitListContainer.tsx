@@ -50,7 +50,7 @@ export default function RecruitListContainer() {
   if (isLoading) {
     return (
       <>
-        <SkeletonUI.Line style={{ height: '24px', width: '147px', marginBottom: '10px' }} />
+        <SkeletonUI.Line style={{ height: '24px', width: '147px', marginBottom: '20px' }} />
         <SkeletonUI.RecruitBasicList count={2} />
       </>
     );
@@ -62,7 +62,7 @@ export default function RecruitListContainer() {
     if (isEmpty) {
       return (
         <>
-          <RecruitSectionTitle title="급구채용" />
+          <RecruitSectionTitle title="일반채용" />
           <EmptyComponent height="200px" message="해당하는 공고가 없어요." />
         </>
       );

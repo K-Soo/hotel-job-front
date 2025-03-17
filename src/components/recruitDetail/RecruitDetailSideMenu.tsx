@@ -36,21 +36,13 @@ export default function RecruitDetailSideMenu({
   recruitmentStatus,
   setSelectedResume,
 }: RecruitDetailSideMenuProps) {
-  const { isAuthenticated, role } = useAuth();
+  const { isAuthenticated, role, isAuthLoading } = useAuth();
   const router = useRouter();
 
-  if (role !== 'JOB_SEEKER') {
+  if (isAuthLoading) {
     return (
       <S.RecruitDetailSideMenu>
-        <Button label="지원자 전용" variant="secondary" height="50px" borderRadius="10px" fontSize="18px" disabled />
-      </S.RecruitDetailSideMenu>
-    );
-  }
-
-  if (applyStatus === 'idle') {
-    return (
-      <S.RecruitDetailSideMenu>
-        <Button label="" variant="primary" height="50px" fontSize="16px" isLoading={true} />
+        <Button label="" variant="secondary" height="50px" onClick={() => router.push(path.SIGN_IN)} fontSize="16px" isLoading={true} />
       </S.RecruitDetailSideMenu>
     );
   }
@@ -67,6 +59,14 @@ export default function RecruitDetailSideMenu({
     return (
       <S.RecruitDetailSideMenu>
         <Button label="모집 마감" variant="secondary" height="50px" borderRadius="10px" fontSize="18px" disabled />
+      </S.RecruitDetailSideMenu>
+    );
+  }
+
+  if (role !== 'JOB_SEEKER') {
+    return (
+      <S.RecruitDetailSideMenu>
+        <Button label="지원자 전용" variant="secondary" height="50px" borderRadius="10px" fontSize="18px" disabled />
       </S.RecruitDetailSideMenu>
     );
   }

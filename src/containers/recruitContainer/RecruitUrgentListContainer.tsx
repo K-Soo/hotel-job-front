@@ -45,7 +45,7 @@ export default function RecruitUrgentListContainer() {
   if (isLoading) {
     return (
       <>
-        <SkeletonUI.Line style={{ height: '24px', width: '147px', marginBottom: '15px' }} />
+        <SkeletonUI.Line style={{ height: '24px', width: '147px', marginBottom: '20px' }} />
         <SkeletonUI.RecruitUrgentList count={4} />
       </>
     );

@@ -334,6 +334,10 @@ export interface GetRecruitBasicListResponse extends BaseResponse {
   };
 }
 
+export interface GetProgressRecruitIdsResponse extends BaseResponse {
+  result: string[];
+}
+
 export interface RecruitDetailResponse extends BaseResponse {
   result: types.IRecruitDetail;
 }

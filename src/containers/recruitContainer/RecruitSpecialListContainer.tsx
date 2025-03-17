@@ -9,7 +9,6 @@ import useInfiniteScroll from '@/hooks/useInfiniteScroll';
 import { Get } from '@/apis';
 import EmptyComponent from '@/components/common/EmptyComponent';
 import SkeletonUI from '@/components/common/SkeletonUI';
-import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { ParsedUrlQuery } from 'querystring';
 import { keepPreviousData } from '@tanstack/react-query';
@@ -46,7 +45,7 @@ export default function RecruitSpecialListContainer() {
   if (isLoading) {
     return (
       <>
-        <SkeletonUI.Line style={{ height: '24px', width: '147px', marginBottom: '10px' }} />
+        <SkeletonUI.Line style={{ height: '24px', width: '147px', marginBottom: '20px' }} />
         <SkeletonUI.RecruitSpecialList count={3} />
       </>
     );

@@ -1,4 +1,4 @@
-import { useSetRecoilState, useRecoilState } from 'recoil';
+import { useRecoilState } from 'recoil';
 import { toastAtom, ToastItem } from '@/recoil/toast';
 import { v4 as uuidv4 } from 'uuid';
 

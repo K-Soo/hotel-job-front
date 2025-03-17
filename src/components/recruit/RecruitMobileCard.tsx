@@ -54,7 +54,12 @@ export default function RecruitMobileCard({ item }: RecruitMobileCardProps) {
   };
 
   return (
-    <S.RecruitMobileCard onClick={handleClickRecruit} animate={controls} initial={{ scale: 1 }}>
+    <S.RecruitMobileCard
+      onClick={handleClickRecruit}
+      animate={controls}
+      initial={{ scale: 1 }}
+      $isClosed={item.recruitmentStatus === 'CLOSED'}
+    >
       <S.HeaderBox>
         <div className="left">
           <div className="left__company">{item.hotelName}</div>
@@ -124,13 +129,18 @@ const StyledTitle = styled.div<{ $isBold: boolean; $isHighlight: boolean }>`
 `;
 
 const S = {
-  RecruitMobileCard: styled(motion.div)`
+  RecruitMobileCard: styled(motion.div)<{ $isClosed: boolean }>`
     width: 100%;
     height: 100px;
     display: flex;
     flex-direction: column;
     border-bottom: 1px solid ${(props) => props.theme.colors.gray300};
     padding: 15px 10px;
+    ${(props) =>
+      props.$isClosed &&
+      css`
+        background-color: ${props.theme.colors.gray};
+      `};
   `,
   HeaderBox: styled.div`
     display: flex;
