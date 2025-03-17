@@ -2,10 +2,7 @@ import React from 'react';
 import { Post } from '@/apis';
 import { useSetRecoilState } from 'recoil';
 import { certificationModalAtom } from '@/recoil/certification';
-import { useQueryClient } from '@tanstack/react-query';
-import queryKeys from '@/constants/queryKeys';
 import { appendQueryParams } from '@/utils';
-import environment from '@/environment';
 
 export default function useCertification() {
   const [iframeUrl, setIframeUrl] = React.useState<string | null>(null);
