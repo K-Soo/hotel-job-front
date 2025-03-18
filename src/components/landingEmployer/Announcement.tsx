@@ -2,9 +2,11 @@ import styled from 'styled-components';
 import Button from '@/components/common/style/Button';
 import { useRouter } from 'next/router';
 import path from '@/constants/path';
+import useAuth from '@/hooks/useAuth';
 
 export default function Announcement() {
   const router = useRouter();
+  const { isUnAuthenticated } = useAuth();
 
   return (
     <S.Announcement>
@@ -16,13 +18,15 @@ export default function Announcement() {
         </h1>
 
         <p className="text">지금 바로 회원가입하고 필요한 인재를 찾아보세요.</p>
-        <Button
-          label="지금 무료로 시작하기"
-          variant="primary"
-          width="180px"
-          margin="30px 0 0 0"
-          onClick={() => router.push(`${path.SIGN_IN}?type=company`)}
-        />
+        {isUnAuthenticated && (
+          <Button
+            label="지금 무료로 시작하기"
+            variant="primary"
+            width="180px"
+            margin="30px 0 0 0"
+            onClick={() => router.push(`${path.SIGN_IN}?type=company`)}
+          />
+        )}
       </div>
     </S.Announcement>
   );
