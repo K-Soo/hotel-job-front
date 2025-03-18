@@ -25,7 +25,7 @@ export default function NotificationItem({ item, handleClickNotification }: Noti
 
 const S = {
   NotificationItem: styled.div`
-    min-height: 140px;
+    min-height: 130px;
     border-bottom: 1px solid ${(props) => props.theme.colors.gray100};
     cursor: pointer;
     overflow: hidden;
