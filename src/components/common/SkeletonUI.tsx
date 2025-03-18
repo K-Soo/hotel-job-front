@@ -302,13 +302,13 @@ const StyledRecruitBasicList = styled.div`
   }
 `;
 
-const Icon = ({ style }: { style?: React.CSSProperties }) => {
-  return <StyledIcon style={style}></StyledIcon>;
+const Icon = ({ style, margin }: { style?: React.CSSProperties; margin?: string }) => {
+  return <StyledIcon style={style} $margin={margin}></StyledIcon>;
 };
 
-const StyledIcon = styled.div`
-  ${SkeletonAnimation}
-  width: 40px;
+const StyledIcon = styled.div<{ $margin?: string }>`
+  ${SkeletonAnimation} width: 40px;
+  margin: ${(props) => props.$margin};
   height: 40px;
   border-radius: 50%;
 `;
