@@ -62,7 +62,7 @@ export default function NotificationProvider({ children }: { children: React.Rea
     });
 
     socketInstance.on('newNotification', (data) => {
-      console.info('인앱 알림 수신!!:', data);
+      console.info('인앱 알림 수신!:', data);
       setNotificationStatus((prev) => (prev.status === 'all_read' ? { status: 'unread_exist' } : prev));
     });
 
