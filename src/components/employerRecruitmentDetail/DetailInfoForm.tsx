@@ -80,11 +80,17 @@ export default function DetailInfoForm({ setIsOpenJobModal, setIsOpenPreferences
   };
 
   const isCheckedForeigner = watch('recruitmentInfo.nationality.foreigner');
+  console.log('isCheckedForeigner: ', isCheckedForeigner);
 
   React.useEffect(() => {
     if (isCheckedForeigner) {
       clearErrors('recruitmentInfo.nationality.korean');
+      return;
     }
+
+    setValue('recruitmentInfo.nationality.marriageVisa', '');
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isCheckedForeigner, clearErrors]);
 
   return (
