@@ -128,7 +128,6 @@ const S = {
     height: 40px;
     display: flex;
     align-items: center;
-    justify-content: flex-end;
     color: ${({ theme }) => theme.colors.gray600};
     font-weight: 300;
     text-decoration: underline;
