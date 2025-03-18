@@ -1,6 +1,32 @@
 # 변경 로그
 
 프로젝트의 모든 주요 변경 사항
+## [1.13.0](https://github.com/K-Soo/hotel-job-front/compare/v1.12.1...v1.13.0) (2025-03-18)
+
+
+### Features
+
+* **api:** 채용공고 복사 기능 추가 ([f792fa3](https://github.com/K-Soo/hotel-job-front/commit/f792fa3be60bae7867a817bb558c8851e4a9e936))
+* **employer:** 고용주 페이지에 인증 상태 기반 로딩 오버레이 추가 및 불필요한 서버 사이드 코드 주석 처리 ([4be10a2](https://github.com/K-Soo/hotel-job-front/commit/4be10a259f0f7fbd496a2303d8dab17dc240e192))
+* **icons:** 복사 아이콘 추가 및 인덱스 파일에 임포트 ([403b013](https://github.com/K-Soo/hotel-job-front/commit/403b013d8932ddf2a66b8985804d8d91f6d8cd3d))
+* **recruitment:** 공고 복사 기능 추가 ([92d4de3](https://github.com/K-Soo/hotel-job-front/commit/92d4de30581b12a060e83a55675b79b2ec7cc4be))
+* **recruitment:** 채용공고 복사 기능 추가 및 관련 API 호출 구현 ([10baf49](https://github.com/K-Soo/hotel-job-front/commit/10baf499c456d67233bc23b1a227c6b2250a5e58))
+
+
+### Bug Fixes
+
+* **employer:** 고용주 사이드바 표시 조건에 회사 인증 상태 추가 ([b1b233c](https://github.com/K-Soo/hotel-job-front/commit/b1b233c4e5ad16c89c4d8620ddb1570c3e8d92ec))
+* **notification:** 알림 아이템 최소 높이 수정 ([1f0a424](https://github.com/K-Soo/hotel-job-front/commit/1f0a42499b831fed67e04b58e13735f1497d441a))
+* **policyPrivacy:** 개인정보 처리 방침 내용 간소화 및 수정 ([488611f](https://github.com/K-Soo/hotel-job-front/commit/488611f2597f10111398eee32d4c58d68d4e1110))
+* **quill:** 초기 텍스트에서 불필요한 내용 제거 ([494e105](https://github.com/K-Soo/hotel-job-front/commit/494e105d4620d8e130367a611f8a947a4faaffe9))
+* **recruitment:** 외국인 체크 시 한국인 필드 오류 수정 및 결혼 비자 필드 초기화 ([2c193cc](https://github.com/K-Soo/hotel-job-front/commit/2c193cce2499a23b2e467c6bd7241ff92cad10d4))
+* **recruitSpecialCard:** 호텔 이름을 동적으로 표시하도록 수정 ([aca5acf](https://github.com/K-Soo/hotel-job-front/commit/aca5acf8ee7c03cf146d2e79211bb88bcb0a1080))
+
+
+### Refactors
+
+* **middleware:** 주석 개선 ([d01d245](https://github.com/K-Soo/hotel-job-front/commit/d01d245117a791a444f17427e27f839544d6d980))
+
 ### [1.12.1](https://github.com/K-Soo/hotel-job-front/compare/v1.12.0...v1.12.1) (2025-03-18)
 
 
