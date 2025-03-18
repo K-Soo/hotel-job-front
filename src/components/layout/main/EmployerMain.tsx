@@ -11,13 +11,13 @@ const EXCLUDED_ASIDE_PATH = ['landing', 'setup', 'success', 'fail'] as const;
 
 export function EmployerMain({ children }: EmployerMainProps) {
   const router = useRouter();
-  const { role } = useAuth();
+  const { role, authAtomState } = useAuth();
 
   const isExcludedAsidePath = EXCLUDED_ASIDE_PATH.some((path) => router.pathname.includes(path));
 
   return (
     <S.EmployerMain>
-      {!isExcludedAsidePath && role === Role.EMPLOYER && <EmployerAside />}
+      {!isExcludedAsidePath && role === Role.EMPLOYER && authAtomState.companyVerificationStatus === 'VERIFIED' && <EmployerAside />}
       <div className="main-container">{children}</div>
     </S.EmployerMain>
   );
