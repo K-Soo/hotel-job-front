@@ -75,7 +75,7 @@ export default function RecruitSpecialCard({ item }: RecruitSpecialCardProps) {
         </StyledTitle>
 
         <div className="company">
-          <div className="company__hotel">호텔 더 아무무</div>
+          <div className="company__hotel">{item.hotelName}</div>
           <address className="company__address">
             {sido} {sigungu}
           </address>
