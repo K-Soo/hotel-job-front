@@ -9,7 +9,40 @@ import { ErrorBoundary, ErrorComponent } from '@/error';
 import { NextSeo } from 'next-seo';
 import { useRouter } from 'next/router';
 
-const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+export default function RecruitDetailPage(props: InferGetStaticPropsType<typeof getStaticProps>) {
+  const { hotel, title, recruitId } = props.seoData;
+
+  return (
+    <>
+      <NextSeo
+        title={`[${hotel}] ${title}`}
+        canonical={`https://www.hotel-job-connect.com/recruit/${recruitId}`}
+        openGraph={{
+          title: `[${hotel}] ${title}`,
+          url: `https://www.hotel-job-connect.com/recruit/${recruitId}`,
+        }}
+      />
+      <HydrationBoundary state={props.dehydratedState}>
+        <ErrorBoundary fallback={<ErrorComponent />}>
+          <RecruitDetailContainer />
+        </ErrorBoundary>
+      </HydrationBoundary>
+    </>
+  );
+}
+
+RecruitDetailPage.getLayout = (page: React.ReactElement) => {
+  return (
+    <Layout>
+      <Header>
+        <DesktopNavigation />
+        <MobileNavigation backIcon backUrl={path.RECRUIT} notificationIcon />
+      </Header>
+      <Main>{page}</Main>
+      <Footer />
+    </Layout>
+  );
+};
 
 export const getStaticPaths: GetStaticPaths = async () => {
   try {
@@ -23,12 +56,12 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
     return {
       paths: paths,
-      fallback: true,
+      fallback: 'blocking',
     };
   } catch (error) {
     return {
       paths: [],
-      fallback: true,
+      fallback: 'blocking',
     };
   }
 };
@@ -71,39 +104,4 @@ export const getStaticProps = async (context: GetStaticPropsContext) => {
       notFound: true,
     };
   }
-};
-
-export default function RecruitDetailPage(props: InferGetStaticPropsType<typeof getStaticProps>) {
-  const { hotel, title, recruitId } = props.seoData;
-
-  return (
-    <>
-      <NextSeo
-        title={`[${hotel}] ${title}`}
-        canonical={`https://www.hotel-job-connect.com/recruit/${recruitId}`}
-        openGraph={{
-          title: `[${hotel}] ${title}`,
-          url: `https://www.hotel-job-connect.com/recruit/${recruitId}`,
-        }}
-      />
-      <HydrationBoundary state={props.dehydratedState}>
-        <ErrorBoundary fallback={<ErrorComponent />}>
-          <RecruitDetailContainer />
-        </ErrorBoundary>
-      </HydrationBoundary>
-    </>
-  );
-}
-
-RecruitDetailPage.getLayout = (page: React.ReactElement) => {
-  return (
-    <Layout>
-      <Header>
-        <DesktopNavigation />
-        <MobileNavigation backIcon backUrl={path.RECRUIT} notificationIcon />
-      </Header>
-      <Main>{page}</Main>
-      <Footer />
-    </Layout>
-  );
 };
