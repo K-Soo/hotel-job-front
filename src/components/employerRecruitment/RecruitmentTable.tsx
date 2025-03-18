@@ -17,6 +17,7 @@ interface RecruitmentTableBodyProps {
   handleClickCheckBoxItem: (event: React.ChangeEvent<HTMLInputElement>) => void;
   handleCloseRecruitment: (recruitmentId: string) => Promise<void>;
   handleClickDeleteRecruitment: (ids: string[]) => Promise<void>;
+  handleClickCopyRecruitment: (recruitmentId: string) => void;
 }
 
 export default function RecruitmentTable({ children }: RecruitmentTableProps) {
@@ -43,6 +44,7 @@ function RecruitmentTableBody({
   handleClickCheckBoxItem,
   handleCloseRecruitment,
   handleClickDeleteRecruitment,
+  handleClickCopyRecruitment,
 }: RecruitmentTableBodyProps) {
   return (
     <S.RecruitmentTableBody>
@@ -81,6 +83,7 @@ function RecruitmentTableBody({
               id={item.id}
               handleCloseRecruitment={handleCloseRecruitment}
               handleClickDeleteRecruitment={handleClickDeleteRecruitment}
+              handleClickCopyRecruitment={handleClickCopyRecruitment}
             />
           </div>
         </div>
