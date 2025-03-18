@@ -18,6 +18,7 @@ const TITLE_TEXT = {
   TITLE_15: '수정이 완료되었습니다.',
   TITLE_16: '최소한의 정보 입력으로 바로 시작!',
   TITLE_17: '본인인증 후 서비스 등록이 가능합니다.',
+  TITLE_18: '해당 공고를 복사하시겠습니까?',
 } as const;
 
 const DESCRIPTION_TEXT = {
