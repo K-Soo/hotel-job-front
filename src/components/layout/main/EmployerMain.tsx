@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 import { EmployerAside } from '@/components/layout';
 import { useRouter } from 'next/router';
-
+import useAuth from '@/hooks/useAuth';
+import { Role } from '@/constants/auth';
 interface EmployerMainProps {
   children: React.ReactNode;
 }
@@ -10,12 +11,13 @@ const EXCLUDED_ASIDE_PATH = ['landing', 'setup', 'success', 'fail'] as const;
 
 export function EmployerMain({ children }: EmployerMainProps) {
   const router = useRouter();
+  const { role } = useAuth();
 
   const isExcludedAsidePath = EXCLUDED_ASIDE_PATH.some((path) => router.pathname.includes(path));
 
   return (
     <S.EmployerMain>
-      {!isExcludedAsidePath && <EmployerAside />}
+      {!isExcludedAsidePath && role === Role.EMPLOYER && <EmployerAside />}
       <div className="main-container">{children}</div>
     </S.EmployerMain>
   );
