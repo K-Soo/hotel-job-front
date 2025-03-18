@@ -6,7 +6,7 @@ export default function SignInPage() {
   return (
     <>
       <NextSeo title="로그인" canonical="https://www.hotel-job-connect.com/sign-in" />
-      <SignInContainer />;
+      <SignInContainer />
     </>
   );
 }
@@ -14,9 +14,6 @@ export default function SignInPage() {
 SignInPage.getLayout = (page: React.ReactElement) => {
   return (
     <Layout>
-      <Header>
-        <MobileNavigation homeIcon />
-      </Header>
       <Main>{page}</Main>
     </Layout>
   );
