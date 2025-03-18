@@ -87,15 +87,16 @@ const S = {
     z-index: 10;
     bottom: 0;
     width: 100%;
-    height: 78px;
+    height: 80px;
     left: 0;
     right: 0;
     align-items: center;
     justify-content: center;
     .wrapper {
       width: 100%;
+      height: 100%;
       position: relative;
-      padding: 0 15px 20px 15px;
+      padding: 0 15px;
       &::after {
         content: '';
         position: absolute;
