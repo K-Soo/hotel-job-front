@@ -1,16 +1,13 @@
 import styled from 'styled-components';
 import React from 'react';
-import useAppRouter from '@/hooks/useAppRouter';
 import { GENERAL_ASIDE_MENU } from '@/constants/menu';
 import Line from '@/components/common/Line';
-import { motion, AnimatePresence } from 'framer-motion';
-import Icon from '@/icons/Icon';
+import { motion } from 'framer-motion';
 import { useRouter } from 'next/router';
 import { Auth } from '@/apis';
 import useToast from '@/hooks/useToast';
 
 export default function UserAsideMenu() {
-  const appRouter = useAppRouter();
   const router = useRouter();
   const { addToast } = useToast();
 
