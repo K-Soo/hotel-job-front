@@ -66,10 +66,11 @@ export default function NotificationContent({ isOpen, setIsOpen }: NotificationC
 
   if (isLoading) {
     return (
-      <>
-        <SkeletonUI.Line style={{ height: '140px' }} />
-        <SkeletonUI.Line style={{ height: '140px' }} />
-      </>
+      <div style={{ padding: '5px' }}>
+        <SkeletonUI.Line style={{ height: '120px', marginBottom: '15px' }} />
+        <SkeletonUI.Line style={{ height: '120px', marginBottom: '15px' }} />
+        <SkeletonUI.Line style={{ height: '120px' }} />
+      </div>
     );
   }
 
@@ -82,8 +83,6 @@ export default function NotificationContent({ isOpen, setIsOpen }: NotificationC
   }
 
   if (isSuccess && data) {
-    const hasLoadedSecondPage = data?.pages.length > 1;
-
     return (
       <>
         <InfiniteScroll
@@ -103,6 +102,7 @@ export default function NotificationContent({ isOpen, setIsOpen }: NotificationC
               ));
             })}
           </S.NotificationContent>
+
           {isFirstPage && hasNextPage && (
             <div style={{ display: 'flex', justifyContent: 'center', margin: '20px 0 50px 0' }}>
               <Button
