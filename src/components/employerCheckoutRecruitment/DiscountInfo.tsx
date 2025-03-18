@@ -2,20 +2,19 @@ import React from 'react';
 import styled from 'styled-components';
 import Button from '@/components/common/style/Button';
 import Line from '@/components/common/Line';
-import { dateFormat, priceComma } from '@/utils';
+import { priceComma } from '@/utils';
 import SkeletonUI from '@/components/common/SkeletonUI';
 import dynamic from 'next/dynamic';
 import Modal from '@/components/common/modal';
 import { Post } from '@/apis';
 import { AvailableCouponList } from '@/types';
-import Radio from '@/components/common/style/Radio';
-import Dimmed from '@/components/common/Dimmed';
 import useToast from '@/hooks/useToast';
 import { errorMessages } from '@/error';
 import { QueryObserverResult, RefetchOptions } from '@tanstack/react-query';
 import { GetPaymentRecruitmentDetailResponse } from '@/types/API';
 import { AxiosError } from 'axios';
 import EmptyComponent from '@/components/common/EmptyComponent';
+import CouponCard from '@/components/common/CouponCard';
 
 const DynamicNoSSRModal = dynamic(() => import('@/components/common/modal'), { ssr: false });
 
@@ -158,55 +157,23 @@ export default function DiscountInfo({ TotalAmount, orderId, appliedCouponId, re
             )}
 
             {couponList.availableCoupons.map((item) => (
-              <StyledModalCouponListItem key={item.id} onClick={() => handleChangedCoupon(item.id)}>
-                <div className="price-box">
-                  <span>{item.discountType === 'FIXED' && <span>{priceComma(item.discountAmount)}</span>}원 할인</span>
-                  <Radio checked={selectedCoupon === item.id} name="coupon" onChange={() => handleChangedCoupon(item.id)} value={item.id} />
-                </div>
-                <Line margin="15px 0" />
-                <div className="content-box">
-                  <div>
-                    <p className="content-box__description">{item.description}</p>
-                  </div>
-
-                  <div>
-                    {item.minOrderAmount !== 0 && (
-                      <p className="content-box__minOrderAmount">
-                        <span>최소 상품 금액</span>
-                        <span> {priceComma(item.minOrderAmount)}원</span>
-                      </p>
-                    )}
-                    {item.expiresAt && <p className="content-box__date">{dateFormat.date(item.expiresAt, 'YYYY.MM.DD')}까지</p>}
-                    {!item.expiresAt && <p className="content-box__date">만료 기간없음</p>}
-                  </div>
-                </div>
-              </StyledModalCouponListItem>
+              <CouponCard
+                key={item.id}
+                item={item}
+                selectedCoupon={selectedCoupon}
+                handleChangedCoupon={handleChangedCoupon}
+                isUsed={false}
+              />
             ))}
 
             {couponList.unavailableCoupons.map((item) => (
-              <StyledModalCouponListItem key={item.id}>
-                <Dimmed text={item.reason} />
-                <div className="price-box">
-                  <span>{item.discountType === 'FIXED' && <span>{priceComma(item.discountAmount)}</span>}원 할인</span>
-                </div>
-                <Line margin="15px 0" />
-                <div className="content-box">
-                  <div>
-                    <p className="content-box__description">{item.description}</p>
-                  </div>
-
-                  <div>
-                    {item.minOrderAmount !== 0 && (
-                      <p className="content-box__minOrderAmount">
-                        <span>최소 상품 금액</span>
-                        <span> {priceComma(item.minOrderAmount)}원</span>
-                      </p>
-                    )}
-                    {item.expiresAt && <p className="content-box__date">{dateFormat.date(item.expiresAt, 'YYYY.MM.DD')}까지</p>}
-                    {!item.expiresAt && <p className="content-box__date">만료 기간없음</p>}
-                  </div>
-                </div>
-              </StyledModalCouponListItem>
+              <CouponCard
+                key={item.id}
+                item={item}
+                selectedCoupon={selectedCoupon}
+                handleChangedCoupon={handleChangedCoupon}
+                isUsed={true}
+              />
             ))}
           </Modal.Content>
           <Modal.Footer>
@@ -296,47 +263,6 @@ const StyledCouponCount = styled.p<{ $isAvailable?: boolean }>`
   }
   .own {
     font-weight: 500;
-  }
-`;
-
-const StyledModalCouponListItem = styled.div`
-  position: relative;
-  user-select: text;
-  height: 150px;
-  border: 1px solid ${({ theme }) => theme.colors.gray300};
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 15px;
-  border-radius: 10px;
-  cursor: pointer;
-  &:hover {
-    background-color: ${({ theme }) => theme.colors.gray};
-  }
-  .price-box {
-    font-size: 18px;
-    font-weight: 500;
-    color: ${({ theme }) => theme.colors.red400};
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    min-height: 24px;
-  }
-  .content-box {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    &__description {
-      font-weight: 500;
-    }
-    &__minOrderAmount {
-      font-size: 14px;
-    }
-    &__date {
-      margin-top: 2px;
-      font-size: 14px;
-    }
   }
 `;
 

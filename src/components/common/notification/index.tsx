@@ -8,6 +8,7 @@ import Modal from '@/components/common/modal';
 import dynamic from 'next/dynamic';
 import useResponsive from '@/hooks/useResponsive';
 import DropdownTemplate from '@/components/common/DropdownTemplate';
+import SkeletonUI from '@/components/common/SkeletonUI';
 
 const DynamicNoSSRModal = dynamic(() => import('@/components/common/modal'), { ssr: false });
 const DynamicNoSSRNotificationContent = dynamic(() => import('@/components/common/notification/NotificationContent'), { ssr: false });
@@ -53,7 +54,7 @@ export default function Notification({ margin }: NotificationProps) {
   }, []);
 
   if (isAuthLoading) {
-    return null;
+    return <SkeletonUI.Icon margin={margin} />;
   }
 
   if (isAuthenticated) {

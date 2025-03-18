@@ -29,6 +29,9 @@ const S = {
     border-bottom: 1px solid ${(props) => props.theme.colors.gray100};
     cursor: pointer;
     overflow: hidden;
+    &:hover {
+      background-color: ${(props) => props.theme.colors.gray};
+    }
     &:last-child {
       border-bottom: none;
     }
@@ -37,29 +40,25 @@ const S = {
       flex-direction: column;
       padding: 20px 24px;
       border-radius: 10px;
-      &:hover {
-        background-color: ${(props) => props.theme.colors.gray};
+      .category {
+        display: inline-block;
+        font-size: 12px;
+        color: ${(props) => props.theme.colors.blue500};
+        margin-bottom: 12px;
+        font-weight: 500;
+      }
+      .title {
+        font-size: 14px;
+        color: ${(props) => props.theme.colors.black};
+        margin-bottom: 2px;
+      }
+      .message {
+        font-size: 14px;
+        line-height: 1.4;
+        color: ${(props) => props.theme.colors.black};
+        word-break: break-all;
       }
     }
-    .category {
-      display: inline-block;
-      font-size: 12px;
-      color: ${(props) => props.theme.colors.blue500};
-      margin-bottom: 12px;
-      font-weight: 500;
-    }
-    .title {
-      font-size: 14px;
-      color: ${(props) => props.theme.colors.black};
-      margin-bottom: 2px;
-    }
-    .message {
-      font-size: 14px;
-      line-height: 1.4;
-      color: ${(props) => props.theme.colors.black};
-      word-break: break-all;
-    }
-
     .date {
       margin-top: 12px;
       font-size: 11px;

@@ -8,6 +8,7 @@ import { useRouter } from 'next/router';
 import User from '@/components/layout/header/User';
 import Notification from '@/components/common/notification';
 
+// TODO - 인재정보, 고객센터 추가 예정
 export default function Navigation() {
   const router = useRouter();
 

@@ -95,6 +95,11 @@ const S = {
       display: none;
     }
 
+    input[type='radio'] + label:before {
+      background-color: #fff;
+      border: 2px solid ${(props) => props.theme.colors.blue700};
+    }
+
     input[type='radio']:checked + label:before {
       background-color: ${(props) => props.theme.colors.blue700};
       border: 2px solid ${(props) => props.theme.colors.blue700};

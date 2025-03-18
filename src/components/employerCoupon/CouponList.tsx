@@ -12,30 +12,40 @@ export default function CouponList({ items }: CouponListProps) {
     <S.CouponList>
       {items.map((item) => (
         <S.CouponItem key={item.id} $isUsed={item.isUsed}>
-          <div className="price-box">{item.discountType === 'FIXED' && <span>{priceComma(item.discountAmount)}</span>}원</div>
+          <div className="form">
+            <div className="form__left">
+              <h6 className="form__left--title">{item.description}</h6>
 
-          <Line margin="15px 0" />
+              {item.discountType === 'FIXED' && <p className="form__left--price">₩ {priceComma(item.discountAmount)}</p>}
 
-          <div className="content-box">
-            <div>
-              <p className="content-box__description">{item.description}</p>
+              <div className="form__left--date">
+                {item.minOrderAmount > 0 && <span>최소 주문 금액 {priceComma(item.minOrderAmount)}원</span>}
+                {item.expiresAt && <p className="content-box__date">{dateFormat.date(item.expiresAt, 'YYYY.MM.DD')}까지</p>}
+                {!item.expiresAt && <p className="content-box__date">유효기간 없음</p>}
+              </div>
             </div>
 
-            <div>
-              {item.minOrderAmount !== 0 && (
-                <p className="content-box__minOrderAmount">
-                  <span>최소 상품 금액</span>
-                  <span> {priceComma(item.minOrderAmount)}원</span>
-                </p>
-              )}
-              <p className="content-box__date">{dateFormat.date(item.expiresAt, 'YYYY.MM.DD')}까지</p>
+            <div className="form__right">
+              <p className="form__right--text">COUPON</p>
             </div>
           </div>
+
+          <StyledCircle />
         </S.CouponItem>
       ))}
     </S.CouponList>
   );
 }
+
+const StyledCircle = styled.div`
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  position: absolute;
+  right: -15px;
+  z-index: 2;
+  background-color: #fff;
+`;
 
 const S = {
   CouponList: styled.div`
@@ -44,33 +54,71 @@ const S = {
     gap: 20px;
   `,
   CouponItem: styled.div<{ $isUsed: boolean }>`
-    user-select: text;
-    height: 150px;
-    width: calc(50% - 10px);
-    border: 1px solid ${({ theme }) => theme.colors.gray300};
-    padding: 20px;
+    width: calc(33.3% - 13px);
     display: flex;
-    flex-direction: column;
-    background-color: ${(props) => (props.$isUsed ? '#f9fafb' : 'white')};
-    .price-box {
-      font-size: 18px;
-      font-weight: 500;
-      color: ${({ theme }) => theme.colors.red400};
-    }
-    .content-box {
-      flex: 1;
+    align-items: center;
+    justify-content: center;
+    height: 150px;
+    border-radius: 5px;
+    user-select: text;
+    position: relative;
+    overflow: hidden;
+    background: ${({ $isUsed }) =>
+      $isUsed ? 'linear-gradient(to right, #bcbcbc, #bcbcbc)' : 'linear-gradient(to right, #3182f6, #4593fc)'};
+    .form {
+      /* height: 100%; */
+      width: 100%;
       display: flex;
-      flex-direction: column;
       justify-content: space-between;
-      &__description {
-        font-weight: 500;
+      color: #fff;
+      &__left {
+        width: 100%;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 15px 0;
+        &--title {
+          font-weight: 500;
+          font-size: 16px;
+        }
+        &--price {
+          padding-top: 10px;
+          font-size: 30px;
+          font-weight: 700;
+          display: flex;
+          align-items: center;
+        }
+        &--date {
+          padding-top: 10px;
+          display: flex;
+          flex-direction: column;
+          font-size: 13px;
+          p {
+            padding-top: 2px;
+          }
+        }
       }
-      &__minOrderAmount {
-        font-size: 14px;
-      }
-      &__date {
-        margin-top: 2px;
-        font-size: 14px;
+
+      &__right {
+        width: 80px;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        /* 대시 간격 조절 */
+        background: linear-gradient(to bottom, transparent 50%, #ffffff 50%);
+        background-size: 2px 10px;
+        background-repeat: repeat-y;
+        &--text {
+          font-size: 15px;
+          transform: rotate(0deg);
+          padding-left: 5px;
+          writing-mode: vertical-lr;
+          letter-spacing: 2px;
+          color: #fff;
+        }
       }
     }
   `,

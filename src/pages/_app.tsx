@@ -6,33 +6,20 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { RecoilRoot } from 'recoil';
 import React from 'react';
 import GuardComponent from '@/auth/GuardComponent';
-import EmployerGuardComponent from '@/auth/EmployerGuardComponent';
 import AuthenticationComponent from '@/auth/AuthenticationComponent';
-import environment from '@/environment';
 import NotificationProvider from '@/context/NotificationProvider';
 import { SpeedInsights } from '@vercel/speed-insights/next';
-import Head from 'next/head';
 import dynamic from 'next/dynamic';
-import '@/recoil';
 import DEFAULT_SEO from '@/next-seo.config';
 import useNotification from '@/hooks/useNotification';
 import { DefaultSeo } from 'next-seo';
+import { queryClientDefaultOption } from '@/constants/queryClientDefaultOption';
+import AppComponent from '@/auth/AppComponent';
+import '@/recoil';
 
 const DynamicNoSSRAppComponent = dynamic(() => import('@/auth/AppComponent'), { ssr: false });
 
-const commonLayout = (page: React.ReactElement) => <Layout>{page}</Layout>;
-
-const queryClientDefaultOption = {
-  defaultOptions: {
-    queries: {
-      staleTime: 60 * 1000,
-      gcTime: 60 * 1000 * 5,
-      throwOnError: false,
-      retry: 0,
-      suspense: false,
-    },
-  },
-};
+const commonLayout = (pageComponent: React.ReactElement) => <Layout>{pageComponent}</Layout>;
 
 export default function App({ Component, pageProps }: AppPropsWithLayout) {
   const getLayout = Component.getLayout ?? commonLayout;
@@ -47,7 +34,6 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
           <QueryClientProvider client={queryClient}>
             <AuthenticationComponent />
             <DynamicNoSSRAppComponent />
-            {/* <NotificationInitializer /> */}
             <NotificationProvider>
               {!Component.authentication && getLayout(<Component {...pageProps} />)}
 
@@ -66,7 +52,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
   );
 }
 
-function NotificationInitializer() {
-  // useNotification();
-  return null;
-}
+// function NotificationInitializer() {
+//   useNotification();
+//   return null;
+// }

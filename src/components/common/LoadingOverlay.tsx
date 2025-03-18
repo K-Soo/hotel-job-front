@@ -9,6 +9,21 @@ interface LoadingProps {
 }
 
 export default function LoadingOverlay({ height, message }: LoadingProps) {
+  const [showLoading, setShowLoading] = React.useState(false);
+
+  React.useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowLoading(true);
+    }, 300);
+
+    document.documentElement.style.overflow = 'hidden';
+
+    return () => {
+      clearTimeout(timer);
+      document.documentElement.style.overflow = '';
+    };
+  }, []);
+
   React.useEffect(() => {
     document.documentElement.style.overflow = 'hidden';
 
@@ -16,6 +31,8 @@ export default function LoadingOverlay({ height, message }: LoadingProps) {
       document.documentElement.style.overflow = '';
     };
   }, []);
+
+  if (!showLoading) return null;
 
   return (
     <Portal>

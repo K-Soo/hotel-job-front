@@ -28,14 +28,14 @@ export default function Logo({ size, margin, style, isEmployer }: LogoProps) {
       $margin={margin}
       style={style}
     >
-      <span className="hotel-word">HOTEL</span>
+      HOTEL
       <span className="job-word">JOB</span>
     </S.Logo>
   );
 }
 
 const S = {
-  Logo: styled(motion.article)<{ size: 'large' | 'middle' | 'small'; $margin?: string }>`
+  Logo: styled(motion.h1)<{ size: 'large' | 'middle' | 'small'; $margin?: string }>`
     margin: ${(props) => (props.$margin ? props.$margin : '0')};
     width: fit-content;
     display: flex;
@@ -43,9 +43,7 @@ const S = {
     height: auto;
     user-select: none;
     cursor: pointer;
-    .hotel-word {
-      color: #68a4ee;
-    }
+    color: #68a4ee;
     .job-word {
       padding-left: 4px;
       color: #1663c0;

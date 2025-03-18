@@ -10,7 +10,7 @@ export function middleware(request: NextRequest) {
 
   // 로그인 페이지로 접근 시 리디렉션 처리
   if (['/sign-in', '/sign-up'].includes(request.nextUrl.pathname) && refreshTokenExists) {
-    const referer = request.headers.get('referer');
+    // const referer = request.headers.get('referer');
 
     const previousPage = new URL('/', request.url).toString();
     return NextResponse.redirect(previousPage);

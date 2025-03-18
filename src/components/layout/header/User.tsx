@@ -10,18 +10,8 @@ import IconHover from '@/components/common/IconHover';
 import { motion } from 'framer-motion';
 
 export default function User() {
-  const [isVisible, setIsVisible] = React.useState(false);
-
   const router = useRouter();
-  const { isAuthenticated, isAuthLoading, role } = useAuth();
-
-  React.useEffect(() => {
-    const timeout = setTimeout(() => {
-      setIsVisible(true);
-    }, 300);
-
-    return () => clearTimeout(timeout);
-  }, []);
+  const { isAuthenticated, isAuthLoading, role, isUnAuthenticated } = useAuth();
 
   const handleClickUserIcon = () => {
     if (role === 'JOB_SEEKER') {
@@ -32,21 +22,7 @@ export default function User() {
     }
   };
 
-  if (isAuthLoading) {
-    return <SkeletonUI.Icon />;
-  }
-
-  if (isAuthenticated) {
-    return (
-      <S.User initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.2 }}>
-        <IconHover onClick={handleClickUserIcon} width="40px" height="40px">
-          <Icon name="User" />
-        </IconHover>
-      </S.User>
-    );
-  }
-
-  if (!isAuthLoading && !isAuthenticated && isVisible) {
+  if (isUnAuthenticated) {
     return (
       <S.User>
         <Button
@@ -62,16 +38,26 @@ export default function User() {
       </S.User>
     );
   }
+
+  if (isAuthLoading) {
+    return <SkeletonUI.Icon />;
+  }
+
+  if (isAuthenticated) {
+    return (
+      <S.User initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0 }}>
+        <IconHover onClick={handleClickUserIcon} width="40px" height="40px">
+          <Icon name="User" />
+        </IconHover>
+      </S.User>
+    );
+  }
 }
 
 const S = {
   User: styled(motion.div)`
-    /* border: 1px solid red; */
     display: flex;
     align-items: center;
     font-size: 0;
-    .user-icon {
-      border: 1px solid red;
-    }
   `,
 };

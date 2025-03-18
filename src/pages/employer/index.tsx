@@ -39,6 +39,7 @@ export const getServerSideProps: GetServerSideProps = async (context: GetServerS
 
   try {
     const responseAccessToken = await Auth.requestAccessToken({}, requestHeader);
+
     if (!responseAccessToken) throw new Error();
 
     const responseUserInfo = await Auth.me({}, requestHeader);
@@ -48,7 +49,7 @@ export const getServerSideProps: GetServerSideProps = async (context: GetServerS
     if (responseUserInfo.result.role !== 'EMPLOYER') {
       return {
         redirect: {
-          destination: path.SIGN_IN,
+          destination: path.HOME,
           permanent: false,
         },
       };
