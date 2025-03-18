@@ -8,6 +8,7 @@ import { useSetRecoilState } from 'recoil';
 import { hamburgerNavigationAtom } from '@/recoil/hamburgerNavigation';
 import Notification from '@/components/common/notification';
 import { useScroll, motion, useMotionValueEvent } from 'framer-motion';
+import useAuth from '@/hooks/useAuth';
 
 interface MobileNavigationProps {
   backIcon?: boolean;
@@ -30,12 +31,21 @@ export function MobileNavigation({
   hamburgerIcon,
   notificationIcon,
 }: MobileNavigationProps) {
+  const [showSignUp, setShowSignUp] = React.useState(false);
   const [hasBorder, setHasBorder] = React.useState(false);
-
+  const { isAuthenticated, isAuthLoading, isAuthIdle } = useAuth();
   const router = useRouter();
   const { scrollY } = useScroll();
 
   const setHamburgerNavigationAtomState = useSetRecoilState(hamburgerNavigationAtom);
+
+  React.useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowSignUp(true);
+    }, 100);
+
+    return () => clearTimeout(timer);
+  }, []);
 
   useMotionValueEvent(scrollY, 'change', (latest) => {
     if (latest >= 50 && !hasBorder) {
@@ -64,6 +74,7 @@ export function MobileNavigation({
       <div className="right">
         {profileIcon && <i>profile</i>}
         {notificationIcon && <Notification />}
+        {!isAuthenticated && !isAuthLoading && isAuthIdle && showSignUp && <SignUpButton>회원가입</SignUpButton>}
         {hamburgerIcon && (
           <Icon name="ListA24x24" width="24px" height="24px" onClick={() => setHamburgerNavigationAtomState({ isOpen: true })} />
         )}
@@ -71,6 +82,17 @@ export function MobileNavigation({
     </S.MobileNavigation>
   );
 }
+
+const SignUpButton = styled.div`
+  font-size: 12px;
+  border: 1px solid ${(props) => props.theme.colors.gray300};
+  border-radius: 8px;
+  padding: 0 12px;
+  color: ${(props) => props.theme.colors.blue500};
+  height: 32px;
+  display: flex;
+  align-items: center;
+`;
 
 const S = {
   MobileNavigation: styled(motion.div)<{ $hasBorder: boolean }>`
@@ -85,23 +107,24 @@ const S = {
       justify-content: space-between;
     `}
     .left {
-      flex-basis: 50px;
+      flex-basis: 120px;
       height: 100%;
       display: flex;
       align-items: center;
     }
     .title {
+      flex: 1 0 auto;
       height: 100%;
       display: flex;
       align-items: center;
       justify-content: center;
       text-align: center;
-      flex-basis: calc(100% - 100px);
       font-size: 16px;
       font-weight: 500;
     }
     .right {
-      flex-basis: 50px;
+      flex-basis: 120px;
+      flex-basis: 1;
       height: 100%;
       display: flex;
       align-items: center;
