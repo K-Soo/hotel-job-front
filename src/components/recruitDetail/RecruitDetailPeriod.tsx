@@ -17,10 +17,6 @@ export default function RecruitDetailPeriod({ managerEmail, managerName, manager
             <em>{managerName}</em>
           </div>
           <div className="info-box__item">
-            <span>담당자 이메일</span>
-            <em>{managerEmail}</em>
-          </div>
-          <div className="info-box__item">
             <span>담당자 연락처</span>
             <em>{managerNumber}</em>
           </div>
