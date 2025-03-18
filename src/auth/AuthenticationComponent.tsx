@@ -26,8 +26,6 @@ export default function AuthenticationComponent() {
     },
   });
 
-  console.log('cookieData: ', cookieData);
-
   React.useEffect(() => {
     if (isSuccessCookie && cookieData?.result === false) {
       setAuthAtomState((prev) => ({

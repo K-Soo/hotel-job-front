@@ -1,11 +1,23 @@
+import React from 'react';
 import Layout, { EmployerMain, EmployerHeader, EmployerFooter } from '@/components/layout';
 import EmployerContainer from '@/containers/employerContainer';
-import { GetServerSideProps, GetServerSidePropsContext } from 'next';
-import { Auth } from '@/apis';
-import path from '@/constants/path';
 import { NextSeo } from 'next-seo';
+import useAuth from '@/hooks/useAuth';
+import LoadingOverlay from '@/components/common/LoadingOverlay';
 
 export default function EmployerPage() {
+  const {
+    authAtomState: { companyVerificationStatus },
+    role,
+  } = useAuth();
+
+  console.log('companyVerificationStatus: ', companyVerificationStatus);
+  React.useEffect(() => {}, []);
+
+  if (role !== 'EMPLOYER') {
+    return <LoadingOverlay />;
+  }
+
   return (
     <>
       <NextSeo title="대시보드" nofollow={true} noindex={true} />
@@ -27,50 +39,50 @@ EmployerPage.getLayout = (page: React.ReactElement) => {
 EmployerPage.authentication = true;
 EmployerPage.allowedRoles = ['EMPLOYER'];
 
-export const getServerSideProps: GetServerSideProps = async (context: GetServerSidePropsContext) => {
-  const cookieString = context.req ? context.req.headers?.cookie : undefined;
+// export const getServerSideProps: GetServerSideProps = async (context: GetServerSidePropsContext) => {
+//   const cookieString = context.req ? context.req.headers?.cookie : undefined;
 
-  const requestHeader = {
-    headers: {
-      Cookie: cookieString,
-    },
-    withCredentials: true,
-  };
+//   const requestHeader = {
+//     headers: {
+//       Cookie: cookieString,
+//     },
+//     withCredentials: true,
+//   };
 
-  try {
-    const responseAccessToken = await Auth.requestAccessToken({}, requestHeader);
+//   try {
+//     const responseAccessToken = await Auth.requestAccessToken({}, requestHeader);
 
-    if (!responseAccessToken) throw new Error();
+//     if (!responseAccessToken) throw new Error();
 
-    const responseUserInfo = await Auth.me({}, requestHeader);
+//     const responseUserInfo = await Auth.me({}, requestHeader);
 
-    if (!responseUserInfo) throw new Error();
+//     if (!responseUserInfo) throw new Error();
 
-    if (responseUserInfo.result.role !== 'EMPLOYER') {
-      return {
-        redirect: {
-          destination: path.HOME,
-          permanent: false,
-        },
-      };
-    }
+//     if (responseUserInfo.result.role !== 'EMPLOYER') {
+//       return {
+//         redirect: {
+//           destination: path.HOME,
+//           permanent: false,
+//         },
+//       };
+//     }
 
-    if (responseUserInfo.result.companyVerificationStatus === 'NOT_REQUESTED') {
-      return {
-        redirect: {
-          destination: path.EMPLOYER_SETUP_COMPANY,
-          permanent: false,
-        },
-      };
-    }
-  } catch (error) {
-    console.log('error: ', error);
-    return {
-      notFound: true,
-    };
-  }
+//     if (responseUserInfo.result.companyVerificationStatus === 'NOT_REQUESTED') {
+//       return {
+//         redirect: {
+//           destination: path.EMPLOYER_SETUP_COMPANY,
+//           permanent: false,
+//         },
+//       };
+//     }
+//   } catch (error) {
+//     console.log('error: ', error);
+//     return {
+//       notFound: true,
+//     };
+//   }
 
-  return {
-    props: {},
-  };
-};
+//   return {
+//     props: {},
+//   };
+// };

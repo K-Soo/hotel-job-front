@@ -9,10 +9,11 @@ interface ManagementConfigDropdownProps {
   status: RecruitmentStatusKeys;
   handleCloseRecruitment: (recruitmentId: string) => void;
   handleClickDeleteRecruitment: (ids: string[]) => Promise<void>;
+  handleClickCopyRecruitment: (recruitmentId: string) => void;
 }
 
 const ManagementConfigDropdown = React.forwardRef<HTMLDivElement, ManagementConfigDropdownProps>(
-  ({ id, handleCloseRecruitment, handleClickDeleteRecruitment, status }, ref) => {
+  ({ id, handleCloseRecruitment, handleClickDeleteRecruitment, handleClickCopyRecruitment, status }, ref) => {
     const router = useRouter();
 
     return (
@@ -26,6 +27,13 @@ const ManagementConfigDropdown = React.forwardRef<HTMLDivElement, ManagementConf
           <S.MenuItem onClick={() => router.push(`/employer/recruitment/${id}`)}>
             <span className="text">공고 수정</span>
             <Icon name="Pen24x24" width="16px" height="16px" />
+          </S.MenuItem>
+        )}
+
+        {(status === 'PUBLISHED' || status === 'PROGRESS' || status === 'CLOSED') && (
+          <S.MenuItem onClick={() => handleClickCopyRecruitment(id)}>
+            <span className="text">공고 복사</span>
+            <Icon name="Copy24x24" width="16px" height="16px" />
           </S.MenuItem>
         )}
 

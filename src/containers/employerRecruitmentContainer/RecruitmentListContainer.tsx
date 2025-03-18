@@ -16,6 +16,7 @@ import useAlertWithConfirm from '@/hooks/useAlertWithConfirm';
 import useLoading from '@/hooks/useLoading';
 import useToast from '@/hooks/useToast';
 import { useQueryClient } from '@tanstack/react-query';
+import path from '@/constants/path';
 
 interface Query extends ParsedUrlQuery {
   page?: string;
@@ -81,9 +82,29 @@ export default function RecruitmentListContainer({
 
       await queryClient.invalidateQueries({ queryKey: [queryKeys.RECRUITMENT_LIST], refetchType: 'all' });
       await queryClient.invalidateQueries({ queryKey: [queryKeys.RECRUITMENT_STATUS], refetchType: 'all' });
+      router.push(`/employer/recruitment`);
     } catch (error) {
       console.log('error: ', error);
       addToast({ type: 'error', message: '채용공고 마감에 실패했습니다.' });
+    } finally {
+      setLoadingAtomStatue({ isLoading: false });
+    }
+  };
+
+  // API - 채용공고 복사
+  const fetchCopyRecruitment = async (recruitmentId: string) => {
+    setLoadingAtomStatue({ isLoading: true });
+    try {
+      const response = await Patch.copyRecruitment({ recruitmentId });
+      console.log('채용공고 복사 API : ', response);
+      addToast({ type: 'success', message: '복사 완료' });
+
+      await queryClient.invalidateQueries({ queryKey: [queryKeys.RECRUITMENT_LIST], refetchType: 'all' });
+      await queryClient.invalidateQueries({ queryKey: [queryKeys.RECRUITMENT_STATUS], refetchType: 'all' });
+      router.replace(path.EMPLOYER_RECRUITMENT);
+    } catch (error) {
+      console.log('error: ', error);
+      addToast({ type: 'error', message: '복사에 실패했습니다.' });
     } finally {
       setLoadingAtomStatue({ isLoading: false });
     }
@@ -103,6 +124,17 @@ export default function RecruitmentListContainer({
     }));
   };
 
+  const handleClickCopyRecruitment = (recruitmentId: string) => {
+    setAlertWithConfirmAtom((prev) => ({
+      ...prev,
+      type: 'CONFIRM',
+      confirmLabel: '복사',
+      cancelLabel: '취소',
+      title: 'TITLE_18',
+      onClickConfirm: () => fetchCopyRecruitment(recruitmentId),
+    }));
+  };
+
   if (isLoading) {
     return <SkeletonUI.Table />;
   }
@@ -115,6 +147,7 @@ export default function RecruitmentListContainer({
         <RecruitmentTable>
           <RecruitmentTable.Header />
           {isEmpty && <EmptyComponent message="조건에 맞는 공고를 찾을 수 없습니다." />}
+
           <RecruitmentTable.Body
             checkedItems={checkedItems}
             handleClickRecruitmentItem={handleClickRecruitmentItem}
@@ -122,6 +155,7 @@ export default function RecruitmentListContainer({
             handleClickCheckBoxItem={handleClickCheckBoxItem}
             handleCloseRecruitment={handleCloseRecruitment}
             handleClickDeleteRecruitment={handleClickDeleteRecruitment}
+            handleClickCopyRecruitment={handleClickCopyRecruitment}
           />
         </RecruitmentTable>
         <PaginationComponent pagination={data.result.pagination} />
