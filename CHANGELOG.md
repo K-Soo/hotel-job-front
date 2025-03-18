@@ -1,6 +1,62 @@
 # 변경 로그
 
 프로젝트의 모든 주요 변경 사항
+### [1.12.1](https://github.com/K-Soo/hotel-job-front/compare/v1.12.0...v1.12.1) (2025-03-18)
+
+
+### Features
+
+* **announcement:** 인증되지 않은 사용자에게만 회원가입 버튼 표시 ([2e31ee9](https://github.com/K-Soo/hotel-job-front/commit/2e31ee97edbc768c25338078fd3eaf9be5625963))
+* **auth:** 사용자 역할 상수 추가 및 인증 상태 업데이트 ([d313555](https://github.com/K-Soo/hotel-job-front/commit/d313555dc2169e86e793ceee9a3bf44e406a1292))
+* **auth:** 역할 상수를 정의하여 인증 관련 로직 개선 ([2e65bbe](https://github.com/K-Soo/hotel-job-front/commit/2e65bbe5e350b5b9ac72f4ae3ddc857109a54200))
+* **auth:** authAtomState 추가 및 쿠키 상태에 따른 인증 상태 업데이트 로직 구현 ([f848311](https://github.com/K-Soo/hotel-job-front/commit/f848311603a03007295ed998b30cd88e2b4b0dd2))
+* **constants:** queryClientDefaultOption 추가 및 기본 쿼리 설정 정의 ([1cdf2e7](https://github.com/K-Soo/hotel-job-front/commit/1cdf2e7136937b511b604bfd65b22813bd5ae404))
+* **coupon:** CouponCard 컴포넌트 추가 및 스타일링 ([245e683](https://github.com/K-Soo/hotel-job-front/commit/245e683e25313af6a579ec84f84dcb7236b121e9))
+* **couponList:** CouponList 컴포넌트 리팩토링 및 스타일 개선 ([964194e](https://github.com/K-Soo/hotel-job-front/commit/964194e9ef51488255a37a4b70159183a6cb919e))
+* **EmployerHeader:** 인증 상태에 따라 로그인 버튼 및 로딩 UI 추가 ([c3f61bd](https://github.com/K-Soo/hotel-job-front/commit/c3f61bdbca1d124ef3935af2f29cc3bd07eeaaca))
+* **EmployerMain:** 고용주 역할에 따라 EmployerAside 컴포넌트 표시 로직 추가 ([65ff495](https://github.com/K-Soo/hotel-job-front/commit/65ff495acf2c6567d0e0c03ccadb51e9f4c4cabc))
+* **loading:** 로딩 오버레이 표시 지연 추가 및 상태 관리 개선 ([aa9346a](https://github.com/K-Soo/hotel-job-front/commit/aa9346af88ec8e36c142a38d73ed646b79fa5358))
+* **MobileNavigation:** 인증되지 않은 사용자에게 회원가입 버튼 추가 ([684a970](https://github.com/K-Soo/hotel-job-front/commit/684a970da8ceb6e2afd02e7f3f2703e1898cac15))
+* **notification:** 로딩 중 SkeletonUI 추가하여 사용자 경험 개선 ([40436bb](https://github.com/K-Soo/hotel-job-front/commit/40436bbe97fa0dd9d51e6161e83cbbe2d0904d55))
+* **notification:** NotificationItem 컴포넌트에 hover 효과 추가 및 스타일 정리 ([2b757ae](https://github.com/K-Soo/hotel-job-front/commit/2b757ae5fe4ecf68a26b835fecc42e289a879478))
+* **notification:** SkeletonUI 스타일 개선 및 불필요한 코드 제거 ([a02f875](https://github.com/K-Soo/hotel-job-front/commit/a02f8759915be351a7e34334852d2869693bb304))
+* **radio:** 라디오 버튼 스타일 개선 및 선택 상태 시 배경색 변경 ([adb2ce0](https://github.com/K-Soo/hotel-job-front/commit/adb2ce0ac729e9f21d7da0023f9f28c94adabaa3))
+* **recruit:** RecruitDetailPage 컴포넌트 리팩토링 및 SEO 최적화 ([762aead](https://github.com/K-Soo/hotel-job-front/commit/762aead96fa9aa95bf82265edfb32cfdea879209))
+* **skeleton:** Icon 컴포넌트에 margin 속성 추가 및 스타일 개선 ([7374071](https://github.com/K-Soo/hotel-job-front/commit/7374071ab892bd8c7875154a7cc6643bdd2d37cd))
+* **User:** 인증 상태에 따라 사용자 아이콘 표시 로직 개선 ([26287e4](https://github.com/K-Soo/hotel-job-front/commit/26287e4f4331d3086f2869600afec3c7fe4df1ee))
+
+
+### Bug Fixes
+
+* **alertWithConfirm:** 채용공고 수정 반영 안내 문구 간소화 ([7cf0a68](https://github.com/K-Soo/hotel-job-front/commit/7cf0a68a0709aee29f017b59951166cef0e7c82b))
+* **auth:** 인증 상태에 'UNAUTHENTICATED' 추가 ([3aca1d1](https://github.com/K-Soo/hotel-job-front/commit/3aca1d1f0f2d053fb737fd39f98bd789d277400b))
+* **employer:** 로그인 후 리다이렉트 경로를 홈으로 변경 ([035f730](https://github.com/K-Soo/hotel-job-front/commit/035f7303042fc617bbb5e6ff8cc39c867024994a))
+* **errorMessages:** 주문 만료 메시지 수정으로 사용자 안내 개선 ([5d421fa](https://github.com/K-Soo/hotel-job-front/commit/5d421fa7ac3b0a273895f5655c5f19a1ccc0d5a9))
+* **NotificationProvider:** 알림 수신 로그 메시지 수정 ([737e44c](https://github.com/K-Soo/hotel-job-front/commit/737e44c35c5d59a8dc0fab12baf62b62e09868d8))
+* **useAuth:** 인증 상태 변수 추가로 인증 로직 개선 ([77b77bf](https://github.com/K-Soo/hotel-job-front/commit/77b77bfd2015232f35d95585fec02d8d52b73fee))
+
+
+### Updates
+
+* **discountInfo:** CouponCard 컴포넌트로 리팩토링 및 불필요한 코드 제거 ([db55aec](https://github.com/K-Soo/hotel-job-front/commit/db55aec6447bde9769386e811c13e68e96aba5ac))
+
+
+### Styles
+
+* **SignIn:** 상단 및 하단 여백 추가로 로그인 컴포넌트 정렬 개선 ([3b4173c](https://github.com/K-Soo/hotel-job-front/commit/3b4173c0889fe6b7e9b7a6480e8dc646890926c8))
+
+
+### Refactors
+
+* **auth:** EmployerGuardComponent 제거 및 GuardComponent에 인증 상태 처리 로직 통합 ([2d00c0a](https://github.com/K-Soo/hotel-job-front/commit/2d00c0a5d1b6dfc95838b04cc42337d859145f26))
+* **auth:** useSetRecoilState로 상태 관리 방식 변경 및 FCM 권한 요청 개선 ([f1468ca](https://github.com/K-Soo/hotel-job-front/commit/f1468ca31f529dd74509143a1ef0125654877af7))
+* **HamburgerNavigation:** justify-content 속성 제거로 스타일 개선 ([faa5cc1](https://github.com/K-Soo/hotel-job-front/commit/faa5cc1f52318bd212740acc1affd721676639bb))
+* **logo:** Logo 컴포넌트 구조 개선 및 스타일 통합 ([e22607a](https://github.com/K-Soo/hotel-job-front/commit/e22607a5f86ab40727060406e7c4c7809cdf9c15))
+* **middleware:** 사용하지 않는 referer 변수 주석 처리 ([84c07df](https://github.com/K-Soo/hotel-job-front/commit/84c07dfbd384fbad016b142643c7c159afdb363f))
+* **userAsideMenu:** useRouter 훅으로 변경 및 불필요한 코드 제거 ([6e261c2](https://github.com/K-Soo/hotel-job-front/commit/6e261c2b9ff3c0083bd3027167a03dc14061c3c0))
+* **UserContainer:** 불필요한 import 제거로 코드 정리 ([7ebbd62](https://github.com/K-Soo/hotel-job-front/commit/7ebbd625a18e3d0d4e9e8db835c1d6be21bb55ca))
+* **useRequestFCMPermission, _app:** 불필요한 로그 제거 및 코드 정리 ([d629728](https://github.com/K-Soo/hotel-job-front/commit/d62972806e5ab08d1c7cc1b2a18b65df446b4b80))
+
 ## [1.12.0](https://github.com/K-Soo/hotel-job-front/compare/v1.11.0...v1.12.0) (2025-03-17)
 
 
