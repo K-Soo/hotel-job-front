@@ -8,10 +8,10 @@ import Icon from '@/icons/Icon';
 import DropdownTemplate from '@/components/common/DropdownTemplate';
 import React from 'react';
 import { Auth } from '@/apis';
-import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { QueryClient } from '@tanstack/react-query';
 import Notification from '@/components/common/notification';
+import SkeletonUI from '@/components/common/SkeletonUI';
 
 interface EmployerHeaderProps {
   borderBottom?: boolean;
@@ -27,7 +27,7 @@ export function EmployerHeader({ borderBottom = true }: EmployerHeaderProps) {
 
   const queryClient = new QueryClient();
 
-  const { isAuthenticated, authAtomState, isAuthIdle } = useAuth();
+  const { isAuthenticated, authAtomState, isUnAuthenticated, isAuthLoading, role } = useAuth();
 
   const handleBlur = (event: React.FocusEvent) => {
     event.stopPropagation();
@@ -40,14 +40,11 @@ export function EmployerHeader({ borderBottom = true }: EmployerHeaderProps) {
 
   const handleFocus = (event: React.FocusEvent<HTMLDivElement>) => {
     event.stopPropagation();
-    // setIsDropdownOpen(true);
   };
 
   const handleClickToggle = () => {
     setIsDropdownOpen((prev) => !prev);
   };
-
-  const handleClickDropdownItem = (value: string) => {};
 
   const handleClickSignOut = async () => {
     try {
@@ -61,17 +58,12 @@ export function EmployerHeader({ borderBottom = true }: EmployerHeaderProps) {
     }
   };
 
-  return (
-    <S.EmployerHeader $borderBottom={borderBottom}>
-      {/* TODO: 분기 처리 */}
-      <nav className="nav-bar">
-        <Logo size="small" isEmployer margin="0 90px 0 0" />
-        {/* <Link href={path.EMPLOYER}>로그</Link> */}
-        {/* TODO - 인재풀 */}
-        {/* <Link href={path.SUPPORT_NOTICE}>인재풀</Link> */}
-      </nav>
-
-      {!isAuthIdle && !isAuthenticated && (
+  if (isUnAuthenticated) {
+    return (
+      <S.EmployerHeader $borderBottom={borderBottom}>
+        <nav className="nav-bar">
+          <Logo size="small" isEmployer margin="0 90px 0 0" />
+        </nav>
         <Button
           label="로그인"
           variant="tertiary"
@@ -80,9 +72,33 @@ export function EmployerHeader({ borderBottom = true }: EmployerHeaderProps) {
           fontSize="15px"
           width="80px"
         />
-      )}
+      </S.EmployerHeader>
+    );
+  }
 
-      {isAuthenticated && (
+  if (isAuthLoading) {
+    return (
+      <S.EmployerHeader $borderBottom={borderBottom}>
+        <nav className="nav-bar">
+          <Logo size="small" isEmployer margin="0 90px 0 0" />
+        </nav>
+        <SkeletonUI.Line style={{ width: '180px', height: '45px' }} />
+      </S.EmployerHeader>
+    );
+  }
+
+  return (
+    <S.EmployerHeader $borderBottom={borderBottom}>
+      {/* TODO: 분기 처리 */}
+      <nav className="nav-bar">
+        <Logo size="small" isEmployer margin="0 90px 0 0" />
+
+        {/* <Link href={path.EMPLOYER}>로그</Link> */}
+        {/* TODO - 인재풀 */}
+        {/* <Link href={path.SUPPORT_NOTICE}>인재풀</Link> */}
+      </nav>
+
+      {role === 'EMPLOYER' && (
         <div className="user-control-bar">
           <S.UtilMenu>
             <Notification margin="0 5px 0 0" />
