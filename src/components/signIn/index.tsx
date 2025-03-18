@@ -18,7 +18,7 @@ const S = {
     min-height: 100%;
     max-width: 380px;
     width: 100%;
-    margin: 0 auto;
+    margin: 50px auto 50px auto;
     .signin-container {
       display: flex;
       flex-direction: column;
