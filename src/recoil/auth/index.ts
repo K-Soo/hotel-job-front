@@ -8,7 +8,7 @@ export interface AuthAtom {
   certificationStatus?: CertificationStatus;
   companyVerificationStatus?: CompanyVerificationStatus; //사업자만 사용
 
-  status: 'IDLE' | 'AUTHENTICATED_LOADING' | 'AUTHENTICATED' | 'AUTHENTICATION_FAILURE';
+  status: 'IDLE' | 'AUTHENTICATED_LOADING' | 'AUTHENTICATED' | 'AUTHENTICATION_FAILURE' | 'UNAUTHENTICATED';
 }
 
 export const authAtom = atom<AuthAtom>({
