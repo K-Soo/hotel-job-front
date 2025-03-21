@@ -1,6 +1,21 @@
 # 변경 로그
 
 프로젝트의 모든 주요 변경 사항
+### [1.14.1](https://github.com/K-Soo/hotel-job-front/compare/v1.14.0...v1.14.1) (2025-03-21)
+
+
+### Features
+
+* **certification:** 본인 인증 검증 로직 수정 및 새로운 API 추가 ([203636d](https://github.com/K-Soo/hotel-job-front/commit/203636df57fdba0117cde60c91c679c3c4351d22))
+* **certification:** 인증 검증 모달 컴포넌트 추가 ([b8d4395](https://github.com/K-Soo/hotel-job-front/commit/b8d43957af29350fb1937fdf6d6a5176b4acee8d))
+* **certification:** 인증 관련 모달 및 이미지 파일 삭제 ([92cb8a9](https://github.com/K-Soo/hotel-job-front/commit/92cb8a9f0b7300986d94c5cabeae634ab1cccc24))
+* **certification:** 인증 확인 모달로 변경 및 성공 시 처리 로직 추가 ([74f6339](https://github.com/K-Soo/hotel-job-front/commit/74f6339dd74e34426625ecdc775440bf4bfb761e))
+
+
+### Updates
+
+* **withdraw:** 회원탈퇴 페이지의 제목 마진 추가 및 카카오, 구글 로그인 텍스트 번역 ([d9591ac](https://github.com/K-Soo/hotel-job-front/commit/d9591ac00c57e0285f3ccbee3212ab400c2d9faf))
+
 ## [1.14.0](https://github.com/K-Soo/hotel-job-front/compare/v1.13.0...v1.14.0) (2025-03-21)
 
 
