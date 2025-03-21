@@ -10,9 +10,10 @@ import useCertification from '@/hooks/useCertification';
 
 interface CertificationResetPasswordModalProps {
   handleCloseModal: () => void;
+  successCertification: () => void;
 }
 
-export default function CertificationResetPasswordModal({ handleCloseModal }: CertificationResetPasswordModalProps) {
+export default function CertificationResetPasswordModal({ handleCloseModal, successCertification }: CertificationResetPasswordModalProps) {
   const [isLoading, setIsLoading] = React.useState(false);
 
   const { iframeUrl, isLoadingCertStart } = useCertification();
@@ -33,17 +34,18 @@ export default function CertificationResetPasswordModal({ handleCloseModal }: Ce
 
       if (parsedData.type === 'CERTIFICATION_SUCCESS') {
         const response = await Post.resetCertificationVerify(parsedData.payload);
-        // console.log('본인인증 검증 API : ', response);
+        console.log('본인인증 검증 API : ', response);
+
         if (response.result.status === 'failure') {
           throw new Error('계정 인증 정보와 일치하지 않습니다.');
         }
-        handleCloseModal();
+
+        successCertification();
       }
     } catch (error: any) {
       console.error('Error handling certification message:', error?.message);
 
-      const errorMessage = error instanceof Error && error.message ? error.message : '인증 요청이 실패했습니다.';
-      alert(errorMessage);
+      alert(error?.message || '인증 요청이 실패했습니다.');
 
       handleCloseModal();
     } finally {
