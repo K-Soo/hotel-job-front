@@ -18,10 +18,26 @@ export default function CertificationVerifyModal({ handleCloseModal, onCertifica
 
   const { iframeUrl, isLoadingCertStart } = useCertification();
 
+  const fetchVerifyIdentityMatch = async (payload: any) => {
+    setIsLoading(true);
+
+    try {
+      const response = await Post.verifyIdentityMatch(payload);
+      console.log('본인인증 검증 API : ', response);
+      if (response.result.status === 'failure') {
+        throw new Error('계정 인증 정보와 일치하지 않습니다.');
+      }
+      onCertificationSuccess();
+      handleCloseModal();
+    } catch (error) {
+      throw error;
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   React.useEffect(() => {
     const processCertificationMessage = async (event: MessageEvent) => {
-      setIsLoading(true);
-
       try {
         if (event.origin !== environment.baseUrl) {
           throw new Error('잘못된 요청 출처입니다. 올바른 경로에서 다시 시도해주세요.');
@@ -34,22 +50,16 @@ export default function CertificationVerifyModal({ handleCloseModal, onCertifica
         }
 
         if (parsedData.type === 'CERTIFICATION_SUCCESS') {
-          const response = await Post.verifyIdentityMatch(parsedData.payload);
-          console.log('본인인증 검증 API : ', response);
-
-          if (response.result.status === 'failure') {
-            throw new Error('계정 인증 정보와 일치하지 않습니다.');
-          }
-          onCertificationSuccess();
+          await fetchVerifyIdentityMatch(parsedData.payload);
         }
       } catch (error: any) {
-        console.error('Error:', error?.message);
+        console.error('processCertificationMessage:', error?.message);
         if (error instanceof Error) {
-          return alert(error.message);
+          alert(error.message);
+          handleCloseModal();
+          return;
         }
         alert('인증 요청이 실패했습니다. 다시 시도해주세요.');
-      } finally {
-        setIsLoading(false);
         handleCloseModal();
       }
     };

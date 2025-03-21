@@ -20,8 +20,36 @@ export default function CertificationAccountModal() {
 
   const { iframeUrl, isLoadingCertStart } = useCertification();
 
-  const processCertificationMessage = async (event: MessageEvent) => {
+  const fetchAccountCertificationVerify = async (payload: any) => {
     setIsLoading(true);
+
+    try {
+      const response = await Post.accountCertificationVerify(payload);
+      console.log('본인인증 검증 API : ', response);
+
+      if (response.result.status === 'duplicate') {
+        throw new Error('이미 본인인증을 완료한 계정입니다.');
+      }
+
+      // TODO - 휴대폰번호 중복 인증 방지
+      if (response.result.status === 'unavailable') {
+        throw new Error('이미 사용중인 휴대폰 번호입니다.');
+      }
+
+      alert('본인 인증 완료');
+
+      await queryClient.invalidateQueries({ queryKey: [queryKeys.AUTH_ME], refetchType: 'all' });
+      await queryClient.invalidateQueries({ queryKey: [queryKeys.EMPLOYER_ACCOUNT], refetchType: 'all' });
+
+      window.location.reload();
+    } catch (error) {
+      throw error;
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const processCertificationMessage = async (event: MessageEvent) => {
     try {
       if (event.origin !== environment.baseUrl) {
         throw new Error('잘못된 요청 출처입니다. 올바른 경로에서 다시 시도해주세요.');
@@ -34,32 +62,19 @@ export default function CertificationAccountModal() {
       }
 
       if (parsedData.type === 'CERTIFICATION_SUCCESS') {
-        const response = await Post.accountCertificationVerify(parsedData.payload);
-        console.log('본인인증 검증 API : ', response);
-
-        if (response.result.status === 'duplicate') {
-          throw new Error('이미 본인인증이 완료된 계정입니다.');
-        }
-
-        // TODO - 휴대폰번호 중복 인증 방지
-        if (response.result.status === 'unavailable') {
-          throw new Error('중복된 휴대폰 번호');
-        }
-
-        alert('본인 인증 완료');
-        window.location.reload();
-
-        await queryClient.invalidateQueries({ queryKey: [queryKeys.AUTH_ME], refetchType: 'all' });
-        await queryClient.invalidateQueries({ queryKey: [queryKeys.EMPLOYER_ACCOUNT], refetchType: 'all' });
+        await fetchAccountCertificationVerify(parsedData.payload);
       }
     } catch (error: any) {
       console.error('Error handling certification message:', error?.message);
 
-      const errorMessage = error instanceof Error && error.message ? error.message : '인증 요청이 실패했습니다.';
-      alert(errorMessage);
+      if (error instanceof Error) {
+        alert(error.message);
+        setCertificationModalAtom({ isOpen: false });
+        return;
+      }
+
+      alert('인증 요청이 실패했습니다. 다시 시도해주세요.');
       setCertificationModalAtom({ isOpen: false });
-    } finally {
-      setIsLoading(false);
     }
   };
 
