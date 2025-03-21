@@ -1,6 +1,46 @@
 # 변경 로그
 
 프로젝트의 모든 주요 변경 사항
+## [1.14.0](https://github.com/K-Soo/hotel-job-front/compare/v1.13.0...v1.14.0) (2025-03-21)
+
+
+### Features
+
+* **alertWithConfirm:** 메시지 텍스트 수정 및 본인 인증 관련 문구 추가 ([147e7ea](https://github.com/K-Soo/hotel-job-front/commit/147e7eaf0be0d779f1e6dfe3ed9caa1c2777c648))
+* **api:** 사업자 계정 삭제 기능 추가 ([5dc59ab](https://github.com/K-Soo/hotel-job-front/commit/5dc59abbb4fd8757817c131836d3bed154388cc5))
+* **certification:** 인증 철회 모달 컴포넌트 추가 ([19b3ae1](https://github.com/K-Soo/hotel-job-front/commit/19b3ae108d4c05406a0040ae50baafb69ebb19e9))
+* **certificationResult:** 인증 결과에 따라 성공 및 실패 메시지 전송 로직 수정 ([946660b](https://github.com/K-Soo/hotel-job-front/commit/946660b38fb0978c949bc282cf7bd56fb483f603))
+* **employerAccount:** 회원탈퇴 버튼 추가 및 스타일 적용 ([4fdcdfc](https://github.com/K-Soo/hotel-job-front/commit/4fdcdfceb144da870e977b975f27a4d6fa7b49be))
+* **employerAccountReset:** 비밀번호 재설정 모달에 성공 인증 핸들러 추가 ([dd792f0](https://github.com/K-Soo/hotel-job-front/commit/dd792f052e5853982913dd87078933a241bb8430))
+* **employerAccountWithdraw:** 사업자 회원 탈퇴 기능 추가 및 인증 모달 구현 ([d9af28f](https://github.com/K-Soo/hotel-job-front/commit/d9af28fa8a01d8195b5590ae1fd52a8039295336))
+* **employerAccountWithdraw:** 사업자 회원 탈퇴 페이지 및 레이아웃 추가 ([b8cb029](https://github.com/K-Soo/hotel-job-front/commit/b8cb029a0035b10c7db4019ddc2316f46c7ec76d))
+* **employerAccountWithdraw:** 회원 탈퇴 안내 및 동의 체크박스 추가 ([2b8763b](https://github.com/K-Soo/hotel-job-front/commit/2b8763b352b472f46cab478c4a3659461c075dc8))
+* **employerAside:** 채용 페이지 링크 표시 조건 추가 및 스타일 개선 ([138a63c](https://github.com/K-Soo/hotel-job-front/commit/138a63cc01655c84582af91add02c9a8b5567dc8))
+* **employerFooter:** 제휴 문의 모달 추가 및 스타일 개선 ([201bbda](https://github.com/K-Soo/hotel-job-front/commit/201bbda92cc60741c604480a7d777bc321b4e231))
+* **icons:** eye 아이콘 추가 및 인덱스에 포함 ([803fde8](https://github.com/K-Soo/hotel-job-front/commit/803fde82336fa420edd574387cceb73477b6d167))
+* **managementConfigDropdown:** 메뉴 항목 텍스트 수정 및 '공고 보러가기' 추가 ([02d9fd8](https://github.com/K-Soo/hotel-job-front/commit/02d9fd837d4036fd88bd32cfec87b882caf362fc))
+* **mobileNavigation:** 회원가입 및 공유 버튼 추가 ([cc64cb0](https://github.com/K-Soo/hotel-job-front/commit/cc64cb0fb56fcef193f89f1d90cb901df26044bb))
+* **modal:** ModalHeader에 borderBottom 속성 추가 ([53a2326](https://github.com/K-Soo/hotel-job-front/commit/53a23265b2014ccecac5237ad98179c073ea61a2))
+* **path:** 사업자 회원탈퇴 경로 추가 ([95a15b4](https://github.com/K-Soo/hotel-job-front/commit/95a15b49253a2f1870cd7b3ccae0eeda0ab27b0a))
+* **recruitDetail:** 이력서 로딩 시 스켈레톤 UI 스타일 개선 및 기본 이력서 수정일 표시 제거 ([90b4d20](https://github.com/K-Soo/hotel-job-front/commit/90b4d209a29dfef85f1f43e262bdef2001797eaf))
+* **recruitDetail:** RecruitDetailFavoriteShareBar에 호텔 이름과 채용 제목 전달 ([a2e1f5a](https://github.com/K-Soo/hotel-job-front/commit/a2e1f5a32fa572400d2c2e5687687afc3535816a))
+* **recruitDetail:** RecruitDetailFavoriteShareBar에 호텔 이름과 채용 제목을 전달하여 공유 제목 개선 ([7f05be1](https://github.com/K-Soo/hotel-job-front/commit/7f05be136dc777325690fd66a579ec735f8c6780))
+* **recruitDetail:** shareIcon 추가 및 불필요한 로그 제거 ([8a4484a](https://github.com/K-Soo/hotel-job-front/commit/8a4484a271fb0cad2b87c124e895b109e21b96a0))
+* **recruitMobileCard:** 오늘 날짜 스타일 추가 ([43759dc](https://github.com/K-Soo/hotel-job-front/commit/43759dc0437a4c63ebc082cc513657b2b3d7ec11))
+* **useShare:** title 속성을 선택적으로 변경하여 기본값 추가 ([116add0](https://github.com/K-Soo/hotel-job-front/commit/116add0b405cd58a8a733e4b4006b6dccdb4a370))
+* **withdraw:** 회원 탈퇴 페이지 추가 및 레이아웃 구성 ([fd1e5d0](https://github.com/K-Soo/hotel-job-front/commit/fd1e5d066f82517a898f598f50b97ce3bcb6591b))
+
+
+### Bug Fixes
+
+* **button:** 버튼 배경색을 blue500에서 blue600으로 변경 ([d549c2e](https://github.com/K-Soo/hotel-job-front/commit/d549c2edf697cf5c606a56d766dd0bfe42c4cbc1))
+* **certification:** 인증 성공 시 모달 닫기 대신 성공 콜백 호출로 변경 ([343b42f](https://github.com/K-Soo/hotel-job-front/commit/343b42f638acdb97d4821867ffa648ed4b66c276))
+* **checkbox:** label-text의 font-weight 및 padding-right 조정 ([7198a8c](https://github.com/K-Soo/hotel-job-front/commit/7198a8c4859accfb257f8bb6db6d36b1e54a37a4))
+* **confirm:** 줄 높이 조정으로 가독성 향상 ([c193aaa](https://github.com/K-Soo/hotel-job-front/commit/c193aaaeb8b3b5d8cfce3d7c46c939b027c65c2c))
+* **next-seo:** 주석 처리된 SEO 설정 및 이미지 정보 제거 ([be0bc29](https://github.com/K-Soo/hotel-job-front/commit/be0bc29d34d77193067723021b70e1fe93ee3106))
+* **recruitDetail:** 담당자 이메일 정보 표시 제거 ([3b419af](https://github.com/K-Soo/hotel-job-front/commit/3b419afa0b738842bb3194dac6d6e9a9de9992b8))
+* **recruitDetail:** 하단 내비게이션 높이 조정 및 패딩 수정 ([29eb5c6](https://github.com/K-Soo/hotel-job-front/commit/29eb5c64dfa15761577136c5cee2435fa9015340))
+
 ## [1.13.0](https://github.com/K-Soo/hotel-job-front/compare/v1.12.1...v1.13.0) (2025-03-18)
 
 
