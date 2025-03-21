@@ -10,10 +10,7 @@ interface ChangePasswordFormProps {
 }
 
 export default function ChangePasswordForm({ onSubmit }: ChangePasswordFormProps) {
-  const {
-    handleSubmit,
-    formState: { isSubmitting },
-  } = useFormContext<any>();
+  const { handleSubmit, formState } = useFormContext<any>();
 
   return (
     <S.ChangePasswordForm>
