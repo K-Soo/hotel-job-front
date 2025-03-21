@@ -66,7 +66,7 @@ export function EmployerAside() {
           );
         })}
       </div>
-      <StyledRecruitLink onClick={() => window.open(path.RECRUIT, '_blank')}>채용 페이지 바로가기</StyledRecruitLink>
+      {isExpanded && <StyledRecruitLink onClick={() => window.open(path.RECRUIT, '_blank')}>채용 페이지 바로가기</StyledRecruitLink>}
     </S.EmployerAside>
   );
 }
@@ -76,6 +76,8 @@ const StyledRecruitLink = styled.button`
   color: ${(props) => props.theme.colors.blue500};
   padding-left: 10px;
   font-size: 14px;
+  white-space: nowrap;
+  overflow: hidden;
   &:hover {
     text-decoration: underline;
   }
@@ -147,7 +149,7 @@ const S = {
       width: 100%;
     }
     .title {
-      padding-left: 11px;
+      padding-left: 15px;
     }
     .arrow-icon {
       flex-shrink: 1;
