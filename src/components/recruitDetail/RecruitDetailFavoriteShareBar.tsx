@@ -7,14 +7,19 @@ import useAuth from '@/hooks/useAuth';
 import useShare from '@/hooks/useShare';
 import useResponsive from '@/hooks/useResponsive';
 
-export default function RecruitDetailFavoriteShareBar() {
+interface RecruitDetailFavoriteShareBarProps {
+  hotelName: string;
+  recruitmentTitle: string;
+}
+
+export default function RecruitDetailFavoriteShareBar({ hotelName, recruitmentTitle }: RecruitDetailFavoriteShareBarProps) {
   const { isAuthenticated } = useAuth();
   const { addToast } = useToast();
   const { isTablet } = useResponsive();
 
   // TODO - 공유하기 로직 추가
   const { handleClickShare } = useShare({
-    title: 'title',
+    title: `[${hotelName}]  ${recruitmentTitle}`,
   });
 
   // TODO - 북마크 로직 추가
@@ -26,13 +31,14 @@ export default function RecruitDetailFavoriteShareBar() {
     }
     // 북마크에 추가되었습니다! 😄
   };
+
   return (
     <S.RecruitDetailFavoriteShareBar>
-      {!isTablet && (
+      {/* {!isTablet && (
         <IconDimmed width="36px" height="36px" margin="0 15px 0 0" onClick={handleClickBookmark}>
           <Icon name="Bookmark24x24" height="24px" width="24px" />
         </IconDimmed>
-      )}
+      )} */}
       <IconDimmed width="36px" height="36px" onClick={handleClickShare}>
         <Icon name="Share24x24" height="24px" width="24px" />
       </IconDimmed>
@@ -45,6 +51,9 @@ const S = {
     display: flex;
     align-items: center;
     justify-content: flex-end;
+    ${(props) => props.theme.media.tablet`
+      display: none;
+    `};
     svg {
       color: #999;
     }
