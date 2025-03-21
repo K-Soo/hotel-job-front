@@ -87,6 +87,7 @@ const S = {
       white-space: pre-line;
       word-wrap: break-word;
       max-width: 100%;
+      line-height: 1.2;
       ${(props) => props.theme.media.mobile`
         font-size: 18px;
       `};
