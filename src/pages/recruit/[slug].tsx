@@ -7,7 +7,6 @@ import { GetStaticPaths, GetStaticPropsContext, InferGetStaticPropsType } from '
 import path from '@/constants/path';
 import { ErrorBoundary, ErrorComponent } from '@/error';
 import { NextSeo } from 'next-seo';
-import { useRouter } from 'next/router';
 
 export default function RecruitDetailPage(props: InferGetStaticPropsType<typeof getStaticProps>) {
   const { hotel, title, recruitId } = props.seoData;
@@ -36,7 +35,7 @@ RecruitDetailPage.getLayout = (page: React.ReactElement) => {
     <Layout>
       <Header>
         <DesktopNavigation />
-        <MobileNavigation backIcon backUrl={path.RECRUIT} notificationIcon />
+        <MobileNavigation backIcon backUrl={path.RECRUIT} notificationIcon shareIcon />
       </Header>
       <Main>{page}</Main>
       <Footer />
@@ -80,8 +79,6 @@ export const getStaticProps = async (context: GetStaticPropsContext) => {
       queryKey: [queryKeys.RECRUIT_DETAIL, { slug: recruitId }],
       queryFn: () => Get.recruitDetail({ id: recruitId as string }),
     });
-
-    console.log('getStaticProps - 채용상세 API : ', response);
 
     if (!response.success) {
       throw new Error();
