@@ -14,7 +14,7 @@ export default function EmployerAccountWithdraw({ consentForm, handleChangeConse
   return (
     <S.EmployerAccountWithdraw>
       <div className="withdraw-container">
-        <SectionTitle title="회원탈퇴" textAlignment="center" />
+        <SectionTitle title="회원탈퇴" textAlignment="center" margin="0 0 60px 0" />
         <div className="withdraw-content">
           <S.GuideContent>
             <p className="important">탈퇴 전, 아래 내용을 반드시 확인해주세요.</p>

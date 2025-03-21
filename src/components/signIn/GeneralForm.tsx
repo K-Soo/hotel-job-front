@@ -26,12 +26,12 @@ export default function GeneralForm() {
     <S.GeneralForm>
       <S.SocialButton name="KAKAO" onClick={handleClickSocialSignInButton}>
         <Image src="/images/social/kakao_icon.svg" width={18} height={18} alt="kakao" className="image-icon" />
-        <span className="text">Sign In with Kakao</span>
+        <span className="text">카카오 로그인</span>
       </S.SocialButton>
 
       <S.SocialButton name="GOOGLE" onClick={handleClickSocialSignInButton}>
         <Image src="/images/social/google_icon.svg" width={18} height={18} alt="google" className="image-icon" />
-        <span className="text">Sign In with Google</span>
+        <span className="text">구글 로그인</span>
       </S.SocialButton>
     </S.GeneralForm>
   );
@@ -47,7 +47,7 @@ const S = {
     justify-content: center;
     align-items: center;
     border: none;
-    border-radius: 5px;
+    border-radius: 30px;
     padding: 0 15px;
     cursor: pointer;
     position: relative;
@@ -64,7 +64,7 @@ const S = {
       props.name === 'KAKAO' &&
       css`
         background-color: #fee500;
-        margin-bottom: 10px;
+        margin-bottom: 15px;
         .text {
           margin-left: 24px;
           color: #000000 85%;

@@ -12,10 +12,9 @@ import { EmployerAccountResetForm } from '@/types';
 import useLoading from '@/hooks/useLoading';
 import useAlertWithConfirm from '@/hooks/useAlertWithConfirm';
 
-const DynamicNoSSRCertificationResetPasswordModal = dynamic(
-  () => import('@/components/common/certification/CertificationResetPasswordModal'),
-  { ssr: false },
-);
+const DynamicNoSSRCertificationVerifyModal = dynamic(() => import('@/components/common/certification/CertificationVerifyModal'), {
+  ssr: false,
+});
 
 export default function EmployerAccountResetContainer() {
   const [step, setStep] = React.useState('START');
@@ -39,7 +38,7 @@ export default function EmployerAccountResetContainer() {
 
   const handleCloseModal = () => setIsOpenResetPasswordModal(false);
 
-  const successCertification = () => {
+  const onCertificationSuccess = () => {
     setStep('CHANGE_PASSWORD');
     handleCloseModal();
   };
@@ -84,7 +83,7 @@ export default function EmployerAccountResetContainer() {
   return (
     <EmployerAccountReset>
       {isOpenResetPasswordModal && (
-        <DynamicNoSSRCertificationResetPasswordModal handleCloseModal={handleCloseModal} successCertification={successCertification} />
+        <DynamicNoSSRCertificationVerifyModal handleCloseModal={handleCloseModal} onCertificationSuccess={onCertificationSuccess} />
       )}
 
       {step === 'START' && <ChoiceCertificationForm handleOpenResetPasswordModal={handleOpenResetPasswordModal} />}

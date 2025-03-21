@@ -8,51 +8,52 @@ import environment from '@/environment';
 import IconDimmed from '@/components/common/IconDimmed';
 import useCertification from '@/hooks/useCertification';
 
-interface CertificationWithdrawModalProps {
+interface CertificationVerifyModalProps {
   handleCloseModal: () => void;
+  onCertificationSuccess: () => void;
 }
 
-export default function CertificationWithdrawModal({ handleCloseModal }: CertificationWithdrawModalProps) {
+export default function CertificationVerifyModal({ handleCloseModal, onCertificationSuccess }: CertificationVerifyModalProps) {
   const [isLoading, setIsLoading] = React.useState(false);
 
   const { iframeUrl, isLoadingCertStart } = useCertification();
 
-  const processCertificationMessage = async (event: MessageEvent) => {
-    setIsLoading(true);
+  React.useEffect(() => {
+    const processCertificationMessage = async (event: MessageEvent) => {
+      setIsLoading(true);
 
-    try {
-      if (event.origin !== environment.baseUrl) {
-        throw new Error('잘못된 요청 출처입니다. 올바른 경로에서 다시 시도해주세요.');
-      }
-
-      const parsedData = typeof event.data === 'string' ? JSON.parse(event.data) : event.data;
-
-      if (parsedData.type === 'CERTIFICATION_FAIL') {
-        throw new Error('인증 요청이 실패했습니다. 다시 시도해주세요.');
-      }
-
-      if (parsedData.type === 'CERTIFICATION_SUCCESS') {
-        const response = await Post.resetCertificationVerify(parsedData.payload);
-        console.log('본인인증 검증 API : ', response);
-
-        if (response.result.status === 'failure') {
-          throw new Error('계정 인증 정보와 일치하지 않습니다.');
+      try {
+        if (event.origin !== environment.baseUrl) {
+          throw new Error('잘못된 요청 출처입니다. 올바른 경로에서 다시 시도해주세요.');
         }
 
+        const parsedData = typeof event.data === 'string' ? JSON.parse(event.data) : event.data;
+
+        if (parsedData.type === 'CERTIFICATION_FAIL') {
+          throw new Error('인증 요청이 실패했습니다. 다시 시도해주세요.');
+        }
+
+        if (parsedData.type === 'CERTIFICATION_SUCCESS') {
+          const response = await Post.verifyIdentityMatch(parsedData.payload);
+          console.log('본인인증 검증 API : ', response);
+
+          if (response.result.status === 'failure') {
+            throw new Error('계정 인증 정보와 일치하지 않습니다.');
+          }
+
+          onCertificationSuccess();
+        }
+      } catch (error: any) {
+        console.error('Error:', error?.message);
+
+        alert(error?.message || '인증 요청이 실패했습니다.');
+
         handleCloseModal();
+      } finally {
+        setIsLoading(false);
       }
-    } catch (error: any) {
-      console.error('Error handling certification message:', error?.message);
+    };
 
-      alert(error?.message || '인증 요청이 실패했습니다.');
-
-      handleCloseModal();
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  React.useEffect(() => {
     window.addEventListener('message', processCertificationMessage);
 
     return () => {
@@ -64,20 +65,20 @@ export default function CertificationWithdrawModal({ handleCloseModal }: Certifi
   if (isLoadingCertStart || isLoading) {
     return (
       <Portal>
-        <S.CertificationWithdrawModal>
+        <S.CertificationVerifyModal>
           <S.Container>
             <div className="loading-box">
               <Image src="/images/spinner200px.gif" width={30} height={30} alt="loading" priority />
             </div>
           </S.Container>
-        </S.CertificationWithdrawModal>
+        </S.CertificationVerifyModal>
       </Portal>
     );
   }
 
   return (
     <Portal>
-      <S.CertificationWithdrawModal>
+      <S.CertificationVerifyModal>
         <S.Container>
           {iframeUrl && (
             <>
@@ -90,13 +91,13 @@ export default function CertificationWithdrawModal({ handleCloseModal }: Certifi
             </>
           )}
         </S.Container>
-      </S.CertificationWithdrawModal>
+      </S.CertificationVerifyModal>
     </Portal>
   );
 }
 
 const S = {
-  CertificationWithdrawModal: styled.div`
+  CertificationVerifyModal: styled.div`
     z-index: 15;
     position: fixed;
     left: 0;

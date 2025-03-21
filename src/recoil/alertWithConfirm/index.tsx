@@ -20,6 +20,7 @@ const TITLE_TEXT = {
   TITLE_17: '본인인증 후 서비스 등록이 가능합니다.',
   TITLE_18: '해당 공고를 복사하시겠습니까?',
   TITLE_19: '회원 탈퇴를 위해 본인 인증이 필요합니다.',
+  TITLE_20: '본인인증이 완료되었습니다. \n 탈퇴하시겠습니까?',
 } as const;
 
 const DESCRIPTION_TEXT = {

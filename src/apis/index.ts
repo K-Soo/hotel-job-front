@@ -363,8 +363,8 @@ export const Post = {
   // 본인인증 검증 및 저장(사업자 무료 쿠폰발급)
   accountCertificationVerify: (body: any) => requests.post<any, API.AccountCertificationVerifyResponse>('/certification/account/verify', body),
 
-  // 비밀번호 찾기 - 본인인증 검증
-  resetCertificationVerify: (body: any) => requests.post<any, API.ResetCertificationVerifyResponse>('/certification/reset/verify', body),
+  // 인증정보가 본인인지 확인
+  verifyIdentityMatch: (body: any) => requests.post<any, API.verifyIdentityMatchResponse>('/certification/verify/identity', body),
 
   //유저 - 이력서 생성
   createResume: (body: void) => requests.post<void, API.CreateResumeResponse>('/resumes', body),

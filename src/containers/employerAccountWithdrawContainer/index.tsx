@@ -3,9 +3,8 @@ import EmployerAccountWithdraw from '@/components/employerAccountWithdraw';
 import Button from '@/components/common/style/Button';
 import useAlertWithConfirm from '@/hooks/useAlertWithConfirm';
 import useLoading from '@/hooks/useLoading';
-import useCertification from '@/hooks/useCertification';
 import { Get } from '@/apis';
-import CertificationWithdrawModal from '@/components/common/certification/CertificationWithdrawModal';
+import CertificationVerifyModal from '@/components/common/certification/CertificationVerifyModal';
 
 export type ConsentFormType = {
   rejoinRestriction: boolean;
@@ -75,13 +74,30 @@ export default function EmployerAccountWithdrawContainer() {
 
   const fetchEmployerWithdraw = async () => {
     try {
+      alert('탈퇴되었습니다.');
     } catch (error) {}
+  };
+
+  const onCertificationSuccess = () => {
+    setIsSuccessAuth(true);
+    setAlertWithConfirmAtom((prev) => ({
+      ...prev,
+      type: 'CONFIRM',
+      confirmVariant: 'delete',
+      title: 'TITLE_20',
+      confirmLabel: '탈퇴',
+      cancelLabel: '취소',
+      onClickConfirm: async () => await fetchEmployerWithdraw(),
+    }));
   };
 
   return (
     <>
       {isOpenCertificationWithdrawModal && (
-        <CertificationWithdrawModal handleCloseModal={() => setIsOpenCertificationWithdrawModal(false)} />
+        <CertificationVerifyModal
+          handleCloseModal={() => setIsOpenCertificationWithdrawModal(false)}
+          onCertificationSuccess={onCertificationSuccess}
+        />
       )}
 
       <EmployerAccountWithdraw consentForm={consentForm} handleChangeConsent={handleChangeConsent}>
