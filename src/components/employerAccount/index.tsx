@@ -5,6 +5,9 @@ import { certificationModalAtom } from '@/recoil/certification';
 import { useSetRecoilState } from 'recoil';
 import { dateFormat, priceComma } from '@/utils';
 import { ACCOUNT_STATUS } from '@/constants/account';
+import path from '@/constants/path';
+import { useRouter } from 'next/router';
+import Icon from '@/icons/Icon';
 interface EmployerAccountProps {
   data?: EmployerAccountInfo | undefined;
   setIsOpenNicknameModal?: React.Dispatch<React.SetStateAction<boolean>>;
@@ -13,6 +16,7 @@ interface EmployerAccountProps {
 
 export default function EmployerAccount({ data, setIsOpenNicknameModal, children }: EmployerAccountProps) {
   const setCertificationModalAtomState = useSetRecoilState(certificationModalAtom);
+  const router = useRouter();
 
   return (
     <S.EmployerAccount>
@@ -108,6 +112,12 @@ export default function EmployerAccount({ data, setIsOpenNicknameModal, children
               </div>
             </S.Content>
           </S.ContentForm>
+          <S.Withdraw>
+            <button onClick={() => router.push(path.EMPLOYER_ACCOUNT_WITHDRAW)} className="withdraw-button">
+              <span>회원탈퇴</span>
+              <Icon name="ArrowRight16x16" width="16px" height="16px" />
+            </button>
+          </S.Withdraw>
         </S.ContentContainer>
       )}
     </S.EmployerAccount>
@@ -158,5 +168,20 @@ const S = {
     font-size: 13px;
     display: flex;
     align-items: center;
+  `,
+  Withdraw: styled.div`
+    display: flex;
+    justify-content: flex-end;
+    .withdraw-button {
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      color: ${({ theme }) => theme.colors.gray600};
+      &:hover {
+        cursor: pointer;
+        text-decoration: underline;
+        color: ${({ theme }) => theme.colors.gray800};
+      }
+    }
   `,
 };
