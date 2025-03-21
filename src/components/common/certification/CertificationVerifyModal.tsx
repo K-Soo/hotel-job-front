@@ -40,17 +40,17 @@ export default function CertificationVerifyModal({ handleCloseModal, onCertifica
           if (response.result.status === 'failure') {
             throw new Error('계정 인증 정보와 일치하지 않습니다.');
           }
-
           onCertificationSuccess();
         }
       } catch (error: any) {
         console.error('Error:', error?.message);
-
-        alert(error?.message || '인증 요청이 실패했습니다.');
-
-        handleCloseModal();
+        if (error instanceof Error) {
+          return alert(error.message);
+        }
+        alert('인증 요청이 실패했습니다. 다시 시도해주세요.');
       } finally {
         setIsLoading(false);
+        handleCloseModal();
       }
     };
 
