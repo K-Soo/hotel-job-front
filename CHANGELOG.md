@@ -1,6 +1,13 @@
 # 변경 로그
 
 프로젝트의 모든 주요 변경 사항
+### [1.14.2](https://github.com/K-Soo/hotel-job-front/compare/v1.14.1...v1.14.2) (2025-03-21)
+
+
+### Updates
+
+* **certification:** 인증 실패 시 경고 메시지 개선 및 모달 닫기 로직 추가 ([04ba681](https://github.com/K-Soo/hotel-job-front/commit/04ba681aa8bb6702478537f8d64d2d55fe0e7ecb))
+
 ### [1.14.1](https://github.com/K-Soo/hotel-job-front/compare/v1.14.0...v1.14.1) (2025-03-21)
 
 
