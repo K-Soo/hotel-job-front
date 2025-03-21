@@ -6,11 +6,12 @@ import environment from '@/environment';
 
 export default function ResultCertificationPage({ result }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   React.useEffect(() => {
-    if (result) {
-      window.parent?.postMessage(JSON.stringify({ type: 'CERTIFICATION_SUCCESS', payload: result }), environment.baseUrl);
-    } else {
+    if (!result) {
       window.parent?.postMessage(JSON.stringify({ type: 'CERTIFICATION_FAIL', payload: result }), environment.baseUrl);
+      return;
     }
+
+    window.parent?.postMessage(JSON.stringify({ type: 'CERTIFICATION_SUCCESS', payload: result }), environment.baseUrl);
   }, [result]);
 
   return (
