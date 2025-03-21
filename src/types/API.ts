@@ -218,7 +218,7 @@ export interface AccountCertificationVerifyResponse extends BaseResponse {
     status: ResponseStatus;
   };
 }
-export interface ResetCertificationVerifyResponse extends BaseResponse {
+export interface verifyIdentityMatchResponse extends BaseResponse {
   result: {
     status: ResponseStatus;
   };
