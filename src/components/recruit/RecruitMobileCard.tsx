@@ -169,6 +169,10 @@ const S = {
         color: ${(props) => props.theme.colors.gray700};
       }
     }
+    .today {
+      color: ${(props) => props.theme.colors.blue500};
+      font-weight: 500;
+    }
   `,
   infoBox: styled.div`
     display: flex;
