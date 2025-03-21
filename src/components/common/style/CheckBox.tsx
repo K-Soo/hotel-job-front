@@ -153,19 +153,18 @@ const S = {
     }
 
     .label-text {
-      font-weight: 300;
+      font-weight: 400;
       ${(props) =>
         props.$active &&
         `
           color: ${props.theme.colors.blue700};
-          font-weight: 400;
         `};
       &__required {
         color: ${(props) => props.theme.colors.blue700};
-        padding-right: 2px;
+        padding-right: 6px;
       }
       &__optional {
-        padding-right: 2px;
+        padding-right: 6px;
       }
     }
   `,
