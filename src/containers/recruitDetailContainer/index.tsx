@@ -93,6 +93,7 @@ export default function RecruitDetailContainer() {
       addToast({ message: '이력서 제출에 실패했습니다.', type: 'error' });
     } finally {
       setIsOpenApplyForm(false);
+      setIsOpenModal(false);
       setSelectedResume(null);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -110,6 +111,7 @@ export default function RecruitDetailContainer() {
         {isTablet && isOpenModal && (
           <DynamicNoSSRModal handleCloseModal={() => setIsOpenModal(false)}>
             <Modal.Header title="지원하기" handleCloseModal={() => setIsOpenModal(false)} />
+
             <Modal.Content>
               <RecruitDetailApplyResumeForm
                 selectedResume={selectedResume}
