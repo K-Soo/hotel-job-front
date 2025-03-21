@@ -32,7 +32,7 @@ export default function RecruitDetail({ data, children }: RecruitDetailProps) {
               <address className="addr sido">{data.address.split(' ')[0]}</address>
               <address className="addr sigungu">{data.address.split(' ')[1]}</address>
             </div>
-            <RecruitDetailFavoriteShareBar />
+            <RecruitDetailFavoriteShareBar hotelName={data.hotelName} recruitmentTitle={data.recruitmentTitle} />
           </S.UtilPanel>
 
           <S.Header>
