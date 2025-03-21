@@ -2,7 +2,7 @@ import useToast from '@/hooks/useToast';
 import { useRouter } from 'next/router';
 
 interface IUseShare {
-  title: string;
+  title?: string;
 }
 
 // TODO - 웹뷰 분기처리 로직 추가
@@ -16,7 +16,7 @@ export default function useShare({ title: receivedTitle }: IUseShare) {
     try {
       if (navigator.share) {
         return await navigator.share({
-          title: receivedTitle,
+          title: receivedTitle || '',
           url: currentUrl,
         });
       }
