@@ -39,6 +39,11 @@ export default function EmployerAccountResetContainer() {
 
   const handleCloseModal = () => setIsOpenResetPasswordModal(false);
 
+  const successCertification = () => {
+    setStep('CHANGE_PASSWORD');
+    handleCloseModal();
+  };
+
   const onSubmit: SubmitHandler<EmployerAccountResetForm> = async (data) => {
     setLoadingAtomStatue({ isLoading: true });
 
@@ -78,7 +83,9 @@ export default function EmployerAccountResetContainer() {
 
   return (
     <EmployerAccountReset>
-      {isOpenResetPasswordModal && <DynamicNoSSRCertificationResetPasswordModal handleCloseModal={handleCloseModal} />}
+      {isOpenResetPasswordModal && (
+        <DynamicNoSSRCertificationResetPasswordModal handleCloseModal={handleCloseModal} successCertification={successCertification} />
+      )}
 
       {step === 'START' && <ChoiceCertificationForm handleOpenResetPasswordModal={handleOpenResetPasswordModal} />}
 
