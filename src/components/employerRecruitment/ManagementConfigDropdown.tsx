@@ -25,15 +25,22 @@ const ManagementConfigDropdown = React.forwardRef<HTMLDivElement, ManagementConf
       >
         {(status === 'PUBLISHED' || status === 'PROGRESS') && (
           <S.MenuItem onClick={() => router.push(`/employer/recruitment/${id}`)}>
-            <span className="text">공고 수정</span>
+            <span className="text">수정하기</span>
             <Icon name="Pen24x24" width="16px" height="16px" />
           </S.MenuItem>
         )}
 
         {(status === 'PUBLISHED' || status === 'PROGRESS' || status === 'CLOSED') && (
           <S.MenuItem onClick={() => handleClickCopyRecruitment(id)}>
-            <span className="text">공고 복사</span>
+            <span className="text">복사하기</span>
             <Icon name="Copy24x24" width="16px" height="16px" />
+          </S.MenuItem>
+        )}
+
+        {status === 'PROGRESS' && (
+          <S.MenuItem onClick={() => router.push(`/recruit/${id}`)}>
+            <span className="text">공고 보러가기</span>
+            <Icon name="Eye24x24" width="16px" height="16px" />
           </S.MenuItem>
         )}
 
@@ -65,7 +72,7 @@ const S = {
     top: 35px;
     right: 0;
     z-index: 10;
-    width: 160px;
+    width: 180px;
     height: auto;
     border-radius: 10px;
     background-color: white;

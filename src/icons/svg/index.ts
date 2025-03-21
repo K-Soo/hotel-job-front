@@ -52,8 +52,10 @@ import CalendarMini24x24 from './calendarMini24x24.svg';
 import HomeSecond24x24 from './homeSecond24x24.svg';
 import Widget24x24 from './widget24x24.svg';
 import Copy24x24 from './copy24x24.svg';
+import Eye24x24 from './eye24x24.svg';
 
 export {
+  Eye24x24,
   Copy24x24,
   Widget24x24,
   HomeSecond24x24,

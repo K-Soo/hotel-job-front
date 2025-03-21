@@ -20,7 +20,7 @@ HomePage.getLayout = (page: React.ReactElement) => {
     <Layout>
       <Header>
         <DesktopNavigation />
-        <MobileNavigation logoIcon notificationIcon />
+        <MobileNavigation logoIcon notificationIcon signUpIcon />
       </Header>
       <Main>{page}</Main>
       <Footer />

@@ -462,4 +462,7 @@ export const Delete = {
 
   // 사업자 - 채용공고 삭제
   removeRecruitment: ({ recruitmentId }: { recruitmentId:string }) => requests.delete<any>(`/employers/recruitment/remove/${recruitmentId}`),
+
+  // 사업자 - 계정삭제
+  withdrawEmployer: () => requests.delete<any>(`/employers/account/withdraw`),
 };

@@ -8,12 +8,11 @@ import environment from '@/environment';
 import IconDimmed from '@/components/common/IconDimmed';
 import useCertification from '@/hooks/useCertification';
 
-interface CertificationResetPasswordModalProps {
+interface CertificationWithdrawModalProps {
   handleCloseModal: () => void;
-  successCertification: () => void;
 }
 
-export default function CertificationResetPasswordModal({ handleCloseModal, successCertification }: CertificationResetPasswordModalProps) {
+export default function CertificationWithdrawModal({ handleCloseModal }: CertificationWithdrawModalProps) {
   const [isLoading, setIsLoading] = React.useState(false);
 
   const { iframeUrl, isLoadingCertStart } = useCertification();
@@ -40,7 +39,7 @@ export default function CertificationResetPasswordModal({ handleCloseModal, succ
           throw new Error('계정 인증 정보와 일치하지 않습니다.');
         }
 
-        successCertification();
+        handleCloseModal();
       }
     } catch (error: any) {
       console.error('Error handling certification message:', error?.message);
@@ -65,20 +64,20 @@ export default function CertificationResetPasswordModal({ handleCloseModal, succ
   if (isLoadingCertStart || isLoading) {
     return (
       <Portal>
-        <S.CertificationResetPasswordModal>
+        <S.CertificationWithdrawModal>
           <S.Container>
             <div className="loading-box">
               <Image src="/images/spinner200px.gif" width={30} height={30} alt="loading" priority />
             </div>
           </S.Container>
-        </S.CertificationResetPasswordModal>
+        </S.CertificationWithdrawModal>
       </Portal>
     );
   }
 
   return (
     <Portal>
-      <S.CertificationResetPasswordModal>
+      <S.CertificationWithdrawModal>
         <S.Container>
           {iframeUrl && (
             <>
@@ -91,13 +90,13 @@ export default function CertificationResetPasswordModal({ handleCloseModal, succ
             </>
           )}
         </S.Container>
-      </S.CertificationResetPasswordModal>
+      </S.CertificationWithdrawModal>
     </Portal>
   );
 }
 
 const S = {
-  CertificationResetPasswordModal: styled.div`
+  CertificationWithdrawModal: styled.div`
     z-index: 15;
     position: fixed;
     left: 0;
@@ -136,9 +135,7 @@ const S = {
     }
 
     .iframe {
-      /* overflow: auto; */
       width: 100%;
-      /* height: calc(100% - 50px); */
       height: 100%;
     }
   `,

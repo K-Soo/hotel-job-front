@@ -1,14 +1,10 @@
 import React from 'react';
 import { Post } from '@/apis';
-import { useSetRecoilState } from 'recoil';
-import { certificationModalAtom } from '@/recoil/certification';
 import { appendQueryParams } from '@/utils';
 
 export default function useCertification() {
   const [iframeUrl, setIframeUrl] = React.useState<string | null>(null);
   const [isLoadingCertStart, setIsLoadingCertStart] = React.useState(false);
-
-  const setCertificationModalAtom = useSetRecoilState(certificationModalAtom);
 
   // API - start certification
   const fetchStartCertification = async () => {
@@ -25,8 +21,7 @@ export default function useCertification() {
 
       setIframeUrl(iframeUrl);
     } catch (error) {
-      alert('인증 요청에 실패했습니다.');
-      setCertificationModalAtom({ isOpen: false });
+      alert('인증 요청에 실패했습니다. \n 다시 시도해주세요.');
       console.error('Error starting certification:', error);
     } finally {
       setIsLoadingCertStart(false);

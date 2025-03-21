@@ -9,13 +9,14 @@ interface ModalHeaderProps {
   isStepForm?: boolean;
   setInitialStepIndex?: () => void;
   stepIndex?: number;
+  borderBottom?: string;
 }
 
-export function ModalHeader({ title, isStepForm, setInitialStepIndex, handleCloseModal, stepIndex = 0 }: ModalHeaderProps) {
+export function ModalHeader({ title, isStepForm, setInitialStepIndex, handleCloseModal, borderBottom, stepIndex = 0 }: ModalHeaderProps) {
   const { isTablet, isMobile } = useResponsive();
 
   return (
-    <S.ModalHeader $isTablet={isTablet}>
+    <S.ModalHeader $isTablet={isTablet} $borderBottom={borderBottom}>
       <i className="back">
         {!isStepForm && isMobile && <Icon name="ArrowLeft24x24" width="24px" height="24px" onClick={() => handleCloseModal()} />}
         {isStepForm && isMobile && stepIndex === 0 && (
@@ -50,13 +51,14 @@ export function ModalHeader({ title, isStepForm, setInitialStepIndex, handleClos
 }
 
 const S = {
-  ModalHeader: styled.div<{ $isTablet: boolean }>`
+  ModalHeader: styled.div<{ $isTablet: boolean; $borderBottom?: string }>`
     height: 55px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 0 15px;
     border-bottom: 1px solid ${(props) => props.theme.colors.gray200};
+    border-bottom: ${(props) => (props.$borderBottom ? props.$borderBottom : '1px solid #e5e8eb')};
     font-size: 0;
     .back {
       flex-basis: 50px;

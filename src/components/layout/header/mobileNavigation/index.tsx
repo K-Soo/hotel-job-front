@@ -9,43 +9,41 @@ import { hamburgerNavigationAtom } from '@/recoil/hamburgerNavigation';
 import Notification from '@/components/common/notification';
 import { useScroll, motion, useMotionValueEvent } from 'framer-motion';
 import useAuth from '@/hooks/useAuth';
+import useShare from '@/hooks/useShare';
 
 interface MobileNavigationProps {
   backIcon?: boolean;
-  profileIcon?: boolean;
   hamburgerIcon?: boolean;
   logoIcon?: boolean;
   homeIcon?: boolean;
   backUrl?: string;
   title?: string;
   notificationIcon?: boolean;
+  signUpIcon?: boolean;
+  shareIcon?: boolean;
 }
 
 export function MobileNavigation({
   title,
   backUrl,
   backIcon,
-  profileIcon,
   logoIcon,
   homeIcon,
   hamburgerIcon,
   notificationIcon,
+  signUpIcon,
+  shareIcon,
 }: MobileNavigationProps) {
-  const [showSignUp, setShowSignUp] = React.useState(false);
   const [hasBorder, setHasBorder] = React.useState(false);
-  const { isAuthenticated, isAuthLoading, isAuthIdle } = useAuth();
+  const { isUnAuthenticated } = useAuth();
   const router = useRouter();
   const { scrollY } = useScroll();
 
   const setHamburgerNavigationAtomState = useSetRecoilState(hamburgerNavigationAtom);
 
-  React.useEffect(() => {
-    const timer = setTimeout(() => {
-      setShowSignUp(true);
-    }, 100);
-
-    return () => clearTimeout(timer);
-  }, []);
+  const { handleClickShare } = useShare({
+    title: ``,
+  });
 
   useMotionValueEvent(scrollY, 'change', (latest) => {
     if (latest >= 50 && !hasBorder) {
@@ -72,16 +70,29 @@ export function MobileNavigation({
       <div className="title">{title && <h1>{title}</h1>}</div>
 
       <div className="right">
-        {profileIcon && <i>profile</i>}
         {notificationIcon && <Notification />}
-        {!isAuthenticated && !isAuthLoading && isAuthIdle && showSignUp && <SignUpButton>회원가입</SignUpButton>}
+        {signUpIcon && isUnAuthenticated && <SignUpButton>회원가입</SignUpButton>}
         {hamburgerIcon && (
           <Icon name="ListA24x24" width="24px" height="24px" onClick={() => setHamburgerNavigationAtomState({ isOpen: true })} />
+        )}
+        {shareIcon && (
+          <StyledShareButton onClick={() => handleClickShare()}>
+            <Icon name="Share24x24" width="24px" height="24px" />
+          </StyledShareButton>
         )}
       </div>
     </S.MobileNavigation>
   );
 }
+
+const StyledShareButton = styled.div`
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 10px;
+`;
 
 const SignUpButton = styled.div`
   font-size: 12px;
@@ -101,6 +112,9 @@ const S = {
     padding: 0 15px;
     background-color: rgba(255, 255, 255, 0.8);
     border-bottom: ${(props) => (props.$hasBorder ? '1px solid #e5e8eb' : 'none')};
+    svg {
+      color: #333333;
+    }
     ${(props) => props.theme.media.tablet`
       display: flex;
       align-items: center;

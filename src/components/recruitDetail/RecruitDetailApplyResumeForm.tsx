@@ -6,7 +6,6 @@ import { Get } from '@/apis';
 import useFetchQuery from '@/hooks/useFetchQuery';
 import queryKeys from '@/constants/queryKeys';
 import useAuth from '@/hooks/useAuth';
-import { dateFormat } from '@/utils';
 import IconDimmed from '@/components/common/IconDimmed';
 import { ResumeStatusKey } from '@/types';
 import SkeletonUI from '@/components/common/SkeletonUI';
@@ -52,7 +51,13 @@ export default function RecruitDetailApplyResumeForm({
       </div>
 
       <div className="content">
-        {isLoading && <SkeletonUI.Line style={{ height: '78px' }} />}
+        {isLoading && (
+          <>
+            <SkeletonUI.Line style={{ height: '100px', marginBottom: '10px' }} />
+            <SkeletonUI.Line style={{ height: '100px' }} />
+          </>
+        )}
+
         {isSuccess && data && (
           <>
             {data.result.map((resume) => (
@@ -66,7 +71,6 @@ export default function RecruitDetailApplyResumeForm({
                 <div className="meta">
                   {resume.isDefault && <span className="meta__default">기본 이력서</span>}
                   {resume.status === 'DRAFT' && <span>작성중</span>}
-                  <span>수정일 {dateFormat.date(resume.updatedAt, 'YY.MM.DD')}</span>
                 </div>
               </S.ResumeItem>
             ))}
@@ -129,6 +133,10 @@ const S = {
     padding: 15px;
     cursor: pointer;
     border: 1px solid ${(props) => props.theme.colors.gray300};
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     .meta {
       height: 20px;
       margin-top: 10px;
