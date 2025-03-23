@@ -1,7 +1,7 @@
 import { AllJobsKeyValuesKeys } from '@/constants/job';
 import * as types from '@/types';
 
-type ResponseStatus = 'success' | 'duplicate' | 'failure' | 'available' | 'unavailable';
+type ResponseStatus = 'success' | 'duplicate' | 'failure' | 'available' | 'unavailable' | 'not_found';
 
 // query
 export type RecruitmentQueryStatus = 'ALL' | 'PROGRESS' | 'PUBLISHED' | 'CLOSED' | 'REVIEWING' | 'DRAFT';
