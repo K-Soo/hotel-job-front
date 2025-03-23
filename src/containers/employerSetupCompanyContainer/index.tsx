@@ -157,6 +157,8 @@ export default function EmployerSetupCompanyContainer() {
     } catch (error) {
       alert('회사정보 등록에 실패했습니다.');
       window.location.reload();
+    } finally {
+      setLoadingAtomStatue({ isLoading: false });
     }
   };
 
