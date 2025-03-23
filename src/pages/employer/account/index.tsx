@@ -14,6 +14,9 @@ export default function EmployerAccountPage() {
   );
 }
 
+EmployerAccountPage.authentication = true;
+EmployerAccountPage.allowedRoles = ['EMPLOYER'];
+
 EmployerAccountPage.getLayout = (page: React.ReactElement) => {
   return (
     <Layout>
@@ -23,6 +26,3 @@ EmployerAccountPage.getLayout = (page: React.ReactElement) => {
     </Layout>
   );
 };
-
-EmployerAccountPage.authentication = true;
-EmployerAccountPage.allowedRoles = ['EMPLOYER'];
