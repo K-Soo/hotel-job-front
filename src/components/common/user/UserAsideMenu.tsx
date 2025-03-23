@@ -4,26 +4,11 @@ import { GENERAL_ASIDE_MENU } from '@/constants/menu';
 import Line from '@/components/common/Line';
 import { motion } from 'framer-motion';
 import { useRouter } from 'next/router';
-import { Auth } from '@/apis';
-import useToast from '@/hooks/useToast';
+import useSignout from '@/hooks/useSignout';
 
 export default function UserAsideMenu() {
   const router = useRouter();
-  const { addToast } = useToast();
-
-  const handleClickSignOut = async () => {
-    try {
-      const response = await Auth.signOut();
-      console.log('로그아웃 API : ', response);
-      addToast({ message: '로그아웃 되었습니다.', type: 'success' });
-    } catch (error) {
-      console.log('error: ', error);
-    } finally {
-      setTimeout(() => {
-        window.location.href = '/sign-in';
-      }, 1200);
-    }
-  };
+  const { handleClickSignout } = useSignout();
 
   return (
     <S.UserAsideMenu>
@@ -37,7 +22,7 @@ export default function UserAsideMenu() {
 
       <Line color="#f2f4f6" margin="10px 0" />
 
-      <S.SignOutButton onClick={() => handleClickSignOut()}>로그아웃</S.SignOutButton>
+      <S.SignOutButton onClick={() => handleClickSignout()}>로그아웃</S.SignOutButton>
     </S.UserAsideMenu>
   );
 }
