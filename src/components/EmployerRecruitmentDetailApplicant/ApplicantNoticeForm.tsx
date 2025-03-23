@@ -6,10 +6,9 @@ import Button from '@/components/common/style/Button';
 import Radio from '@/components/common/style/Radio';
 import Select from '@/components/common/style/Select';
 import Input from '@/components/common/style/Input';
-import { CreateApplicationsAnnouncementForm, RecruitmentDetailApplicantListItem, ResumeDetail } from '@/types';
+import { CreateApplicationsAnnouncementForm, RecruitmentDetailApplicantListItem } from '@/types';
 import { SEX_CODE } from '@/constants';
 import Icon from '@/icons/Icon';
-import { REVIEW_STAGE_STATUS } from '@/constants/application';
 import DropdownTemplate from '@/components/common/DropdownTemplate';
 import DefaultProfileImage from '@/components/common/DefaultProfileImage';
 import { parseBirthDateAndCalculateAge } from '@/utils';
@@ -50,7 +49,7 @@ export default function ApplicantNoticeForm({
       <Background>
         <S.ApplicantNoticeForm>
           <S.Header>
-            <Icon name="Close25x25" />
+            <Icon name="Close25x25" onClick={handleCloseNoticeForm} />
           </S.Header>
           <S.Content>
             <S.ContentHorizontalRow>

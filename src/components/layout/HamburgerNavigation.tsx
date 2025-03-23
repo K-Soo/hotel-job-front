@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { motion, AnimatePresence, useAnimation } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { useRecoilState } from 'recoil';
 import { hamburgerNavigationAtom } from '@/recoil/hamburgerNavigation';
 import Portal from '@/components/common/Portal';
@@ -8,11 +8,13 @@ import Icon from '@/icons/Icon';
 import { debounce } from 'lodash';
 import { GENERAL_ASIDE_MENU } from '@/constants/menu';
 import { useRouter } from 'next/router';
-import { Auth } from '@/apis';
+import useSignout from '@/hooks/useSignout';
 
 export default function HamburgerNavigation() {
   const router = useRouter();
   const [hamburgerNavigationAtomState, setHamburgerNavigationAtomState] = useRecoilState(hamburgerNavigationAtom);
+
+  const { handleClickSignout } = useSignout();
 
   const handleDragDebounced = debounce((offsetX, setHamburgerNavigationAtomState) => {
     if (offsetX > 3) {
@@ -30,17 +32,6 @@ export default function HamburgerNavigation() {
       return;
     }
     setHamburgerNavigationAtomState({ isOpen: false });
-  };
-
-  const handleClickSignOut = async () => {
-    try {
-      const response = await Auth.signOut();
-      console.log('로그아웃 API : ', response);
-    } catch (error) {
-      console.log('error: ', error);
-    } finally {
-      window.location.href = '/sign-in';
-    }
   };
 
   return (
@@ -81,7 +72,7 @@ export default function HamburgerNavigation() {
             })}
           </S.Content>
           <S.Footer>
-            <button onClick={handleClickSignOut}>로그아웃</button>
+            <button onClick={handleClickSignout}>로그아웃</button>
           </S.Footer>
         </S.HamburgerNavigation>
       </StyledOverlay>

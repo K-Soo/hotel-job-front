@@ -7,11 +7,11 @@ import Logo from '@/components/common/Logo';
 import Icon from '@/icons/Icon';
 import DropdownTemplate from '@/components/common/DropdownTemplate';
 import React from 'react';
-import { Auth } from '@/apis';
 import { motion } from 'framer-motion';
 import { QueryClient } from '@tanstack/react-query';
 import Notification from '@/components/common/notification';
 import SkeletonUI from '@/components/common/SkeletonUI';
+import useSignout from '@/hooks/useSignout';
 
 interface EmployerHeaderProps {
   borderBottom?: boolean;
@@ -23,9 +23,9 @@ export function EmployerHeader({ borderBottom = true }: EmployerHeaderProps) {
   const dropdownRef = React.useRef<HTMLDivElement>(null);
   const inputRef = React.useRef(null);
 
-  const router = useRouter();
+  const { handleClickSignout } = useSignout();
 
-  const queryClient = new QueryClient();
+  const router = useRouter();
 
   const { isAuthenticated, authAtomState, isUnAuthenticated, isAuthLoading, role } = useAuth();
 
@@ -44,18 +44,6 @@ export function EmployerHeader({ borderBottom = true }: EmployerHeaderProps) {
 
   const handleClickToggle = () => {
     setIsDropdownOpen((prev) => !prev);
-  };
-
-  const handleClickSignOut = async () => {
-    try {
-      const response = await Auth.signOut();
-      console.log('로그아웃 API : ', response);
-      await queryClient.invalidateQueries();
-    } catch (error) {
-      console.log('error: ', error);
-    } finally {
-      window.location.href = '/sign-in';
-    }
   };
 
   if (isUnAuthenticated) {
@@ -120,7 +108,7 @@ export function EmployerHeader({ borderBottom = true }: EmployerHeaderProps) {
               </StyledDropDownItem>
 
               <StyledDropDownItem
-                onClick={handleClickSignOut}
+                onClick={handleClickSignout}
                 initial={{ backgroundColor: '#FFFFFF' }}
                 whileHover={{ backgroundColor: '#f2f4f6', color: '#4593fc' }}
               >

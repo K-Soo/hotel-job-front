@@ -20,11 +20,10 @@ export default function CertificationVerifyModal({ handleCloseModal, onCertifica
 
   const fetchVerifyIdentityMatch = async (payload: any) => {
     setIsLoading(true);
-
     try {
       const response = await Post.verifyIdentityMatch(payload);
       console.log('본인인증 검증 API : ', response);
-      if (response.result.status === 'failure') {
+      if (response.result.status === 'not_found') {
         throw new Error('계정 인증 정보와 일치하지 않습니다.');
       }
       onCertificationSuccess();

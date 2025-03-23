@@ -15,6 +15,9 @@ export default function EmployerBusinessPage() {
   );
 }
 
+EmployerBusinessPage.authentication = true;
+EmployerBusinessPage.allowedRoles = ['EMPLOYER'];
+
 EmployerBusinessPage.getLayout = (page: React.ReactElement) => {
   return (
     <Layout>

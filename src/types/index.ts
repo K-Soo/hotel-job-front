@@ -202,7 +202,6 @@ export interface EmployerAccountInfo {
 
 export interface ApplicantProfile {
   accountStatus: AccountStatus;
-  certification: null;
   certificationStatus: CertificationStatus;
   consent: {
     ageAgree: boolean;
@@ -679,6 +678,9 @@ export interface RecruitListItem {
   paymentRecruitment: PaymentRecruitment;
   priorityDate: Date;
   recruitmentStatus: RecruitmentStatusKeys;
+  isListUp: boolean;
+  listUpCount: number;
+
   employmentType: {
     CONTRACT: boolean;
     DAILY_WORKER: boolean;

@@ -132,7 +132,7 @@ export default function UserApplicationHistoryContainer() {
           <Modal.Footer>
             <Button
               label={selectedApplication.cancelAt === null ? '지원취소' : '지원취소 완료'}
-              variant="secondary"
+              variant="delete"
               fontSize="16px"
               onClick={() => handleClickCancelApplication(selectedApplication.id)}
               borderRadius="30px"
@@ -141,12 +141,11 @@ export default function UserApplicationHistoryContainer() {
             {selectedApplication.announcementRecipients.length !== 0 && (
               <Button
                 margin="0 0 0 15px"
-                label="상세정보"
+                label={stepIndex === 0 ? '발표 안내' : '이전'}
                 variant="primary"
                 fontSize="16px"
-                onClick={() => setStepIndex(1)}
+                onClick={() => setStepIndex((prev) => (prev === 0 ? 1 : 0))}
                 borderRadius="30px"
-                // disabled={selectedApplication.cancelAt !== null}
               />
             )}
           </Modal.Footer>
