@@ -10,6 +10,7 @@ import dynamic from 'next/dynamic';
 import Modal from '@/components/common/modal';
 import ChangeNicknameForm from '@/components/common/ChangeNicknameForm';
 import useLoading from '@/hooks/useLoading';
+import useSignout from '@/hooks/useSignout';
 
 const DynamicNoSSRModal = dynamic(() => import('@/components/common/modal'), { ssr: false });
 
@@ -19,6 +20,7 @@ export default function UserProfileContainer() {
   const { authAtomState } = useAuth();
   const { setAlertWithConfirmAtom } = useAlertWithConfirm();
   const { setLoadingAtomStatue } = useLoading();
+  const { handleClickSignout } = useSignout();
 
   const { data, isLoading, isSuccess } = useFetchQuery({
     queryKey: [queryKeys.USER_PROFILE, { nickname: authAtomState.nickname }],
@@ -42,9 +44,8 @@ export default function UserProfileContainer() {
       if (response.result.status !== 'success') {
         throw new Error();
       }
-      alert('회원탈퇴가 완료되었습니다.');
-      Auth.signOut();
-      window.location.href = '/sign-in';
+      alert('회원탈퇴가 완료되었습니다. 이용해주셔서 감사합니다.');
+      handleClickSignout();
     } catch (error) {
       console.log('error: ', error);
       alert('회원탈퇴에 실패했습니다. 문제가 지속될 경우 고객센터로 문의해주세요.');
