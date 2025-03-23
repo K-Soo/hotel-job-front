@@ -3,8 +3,9 @@ import EmployerAccountWithdraw from '@/components/employerAccountWithdraw';
 import Button from '@/components/common/style/Button';
 import useAlertWithConfirm from '@/hooks/useAlertWithConfirm';
 import useLoading from '@/hooks/useLoading';
-import { Get } from '@/apis';
+import { Delete, Get } from '@/apis';
 import CertificationVerifyModal from '@/components/common/certification/CertificationVerifyModal';
+import useSignout from '@/hooks/useSignout';
 
 export type ConsentFormType = {
   rejoinRestriction: boolean;
@@ -26,12 +27,11 @@ export default function EmployerAccountWithdrawContainer() {
 
   const { setLoadingAtomStatue } = useLoading();
   const { setAlertWithConfirmAtom } = useAlertWithConfirm();
+  const { handleClickSignout } = useSignout();
 
   const isDisabled = React.useMemo(() => {
     return Object.values(consentForm).some((value) => !value);
   }, [consentForm]);
-
-  const {} = useAlertWithConfirm();
 
   React.useEffect(() => {
     const fetchRecruitmentStatusCount = async () => {
@@ -72,10 +72,23 @@ export default function EmployerAccountWithdrawContainer() {
     }));
   };
 
+  // API - 사업자 회원탈퇴
   const fetchEmployerWithdraw = async () => {
+    setLoadingAtomStatue({ isLoading: true });
     try {
-      alert('탈퇴되었습니다.');
-    } catch (error) {}
+      const response = await Delete.withdrawEmployer();
+      console.log('사업자 탈퇴 API : ', response);
+      if (response.result.status !== 'success') {
+        throw new Error();
+      }
+      alert('회원탈퇴가 완료되었습니다. 이용해주셔서 감사합니다.');
+      handleClickSignout();
+    } catch (error) {
+      console.log('error: ', error);
+      alert('회원탈퇴에 실패하였습니다. 잠시 후 다시 시도해주세요.');
+    } finally {
+      setLoadingAtomStatue({ isLoading: false });
+    }
   };
 
   const onCertificationSuccess = () => {
