@@ -1,6 +1,6 @@
 import Layout, { EmployerMain, EmployerHeader, EmployerFooter } from '@/components/layout';
-import { NextSeo } from 'next-seo';
 import EmployerAccountWithdrawContainer from '@/containers/employerAccountWithdrawContainer';
+import { NextSeo } from 'next-seo';
 
 export default function EmployerAccountWithdrawPage() {
   return (
