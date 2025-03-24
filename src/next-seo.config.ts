@@ -9,7 +9,7 @@ const config: DefaultSeoProps = {
     type: 'website',
     locale: 'ko_KR',
     url: 'https://www.hotel-job-connect.com',
-    siteName: '호텔잡 - - 숙박업, 호텔업, 모텔, 파출 채용정보 매칭 플랫폼',
+    siteName: '호텔잡 - 호텔업, 숙박업, 모텔, 파출 채용정보 매칭 플랫폼',
     // images: [
     //   {
     //     url: ``,
