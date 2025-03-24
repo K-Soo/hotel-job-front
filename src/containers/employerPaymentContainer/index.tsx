@@ -14,6 +14,7 @@ import Modal from '@/components/common/modal';
 import { EmployerPaymentItem } from '@/types';
 import SkeletonUI from '@/components/common/SkeletonUI';
 import EmptyComponent from '@/components/common/EmptyComponent';
+import { ErrorComponent } from '@/error/ErrorComponent';
 
 const DynamicNoSSRModal = dynamic(() => import('@/components/common/modal'), { ssr: false });
 
@@ -28,7 +29,7 @@ export default function EmployerPaymentContainer() {
   const router = useRouter();
   const { slug } = router.query as Query;
 
-  const { data, isLoading, isSuccess } = useFetchQuery({
+  const { data, isLoading, isSuccess, isError } = useFetchQuery({
     queryKey: [queryKeys.PAYMENT_LIST].filter(Boolean),
     queryFn: Get.getEmployerPaymentList,
     options: {
@@ -62,6 +63,18 @@ export default function EmployerPaymentContainer() {
       <EmployerPayment>
         <SectionTitle title="상품 결제내역" />
         {isLoading && <SkeletonUI.Document />}
+      </EmployerPayment>
+    );
+  }
+
+  if (isError) {
+    return (
+      <EmployerPayment>
+        <SectionTitle title="상품 결제내역" />
+        <EmployerPaymentTable>
+          <EmployerPaymentTable.Header />
+          <ErrorComponent visibleBackButton={false} height="500px" />
+        </EmployerPaymentTable>
       </EmployerPayment>
     );
   }
