@@ -1,6 +1,16 @@
 # 변경 로그
 
 프로젝트의 모든 주요 변경 사항
+### [1.14.5](https://github.com/K-Soo/hotel-job-front/compare/v1.14.4...v1.14.5) (2025-03-24)
+
+
+### Updates
+
+* **PreferencesModal:** 제목을 '복리후생 선택'에서 '우대사항 선택'으로 변경 ([3c26b33](https://github.com/K-Soo/hotel-job-front/commit/3c26b33b06bf384ae483105d646ed4f085438384))
+* **quill:** HTML 텍스트 수정 및 불필요한 태그 제거 ([1bd3ad3](https://github.com/K-Soo/hotel-job-front/commit/1bd3ad3758db9f1aa75bb09f5592cd92443222bc))
+* **RecruitDetailContent:** 목록 스타일 수정 및 텍스트 강조 추가 ([569676d](https://github.com/K-Soo/hotel-job-front/commit/569676d030ed6de1c037f1ed500a68f2c843404a))
+* **RecruitDetailSideMenu:** 인증된 사용자만 지원자 전용 버튼 숨김 ([739c9c0](https://github.com/K-Soo/hotel-job-front/commit/739c9c09caf8739563a4a06fa61e06437caa992b))
+
 ### [1.14.4](https://github.com/K-Soo/hotel-job-front/compare/v1.14.3...v1.14.4) (2025-03-24)
 
 
