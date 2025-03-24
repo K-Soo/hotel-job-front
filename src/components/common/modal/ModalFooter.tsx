@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 interface ModalFooterProps {
   children: React.ReactNode;
@@ -14,6 +14,21 @@ const S = {
     display: flex;
     align-items: center;
     padding: 0 15px;
-    border-top: 1px solid ${(props) => props.theme.colors.gray200};
+    position: relative;
+
+    ${(props) => props.theme.media.mobile`
+      height: 85px;
+      align-items: flex-start;
+      &::after {
+        content: '';
+        position: absolute;
+        top: -20px;
+        left: 0;
+        right: 0;
+        height: 20px;
+        background: linear-gradient(rgba(255, 255, 255, 0), #fff);
+        z-index: 1;
+      }
+    `};
   `,
 };

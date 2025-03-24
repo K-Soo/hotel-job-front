@@ -9,6 +9,8 @@ import useAuth from '@/hooks/useAuth';
 import IconDimmed from '@/components/common/IconDimmed';
 import { ResumeStatusKey } from '@/types';
 import SkeletonUI from '@/components/common/SkeletonUI';
+import path from '@/constants/path';
+import { useRouter } from 'next/router';
 interface RecruitDetailApplyResumeFormProps {
   selectedResume: string | null;
   setSelectedResume: React.Dispatch<React.SetStateAction<string | null>>;
@@ -23,6 +25,8 @@ export default function RecruitDetailApplyResumeForm({
   fetchSubmitApply,
 }: RecruitDetailApplyResumeFormProps) {
   const { isAuthenticated, authAtomState } = useAuth();
+
+  const router = useRouter();
 
   const { data, isLoading, isSuccess } = useFetchQuery({
     queryKey: [queryKeys.AVAILABLE_RESUME_LIST, { nickname: authAtomState.nickname }],
@@ -51,15 +55,17 @@ export default function RecruitDetailApplyResumeForm({
       </div>
 
       <div className="content">
-        {isLoading && (
-          <>
-            <SkeletonUI.Line style={{ height: '100px', marginBottom: '10px' }} />
-            <SkeletonUI.Line style={{ height: '100px' }} />
-          </>
-        )}
-
+        {isLoading && <SkeletonUI.Line style={{ height: '100px' }} />}
         {isSuccess && data && (
           <>
+            {data.result.length === 0 && (
+              <EmptyResume>
+                <p className="text">이력서가 없습니다.</p>
+                <button className="write" onClick={() => router.push(path.USER_RESUME)}>
+                  이력서 작성하러 가기
+                </button>
+              </EmptyResume>
+            )}
             {data.result.map((resume) => (
               <S.ResumeItem
                 key={resume.id}
@@ -77,12 +83,34 @@ export default function RecruitDetailApplyResumeForm({
           </>
         )}
       </div>
+
       <div className="bottom">
         <Button label="제출하기" variant="primary" height="45px" disabled={!selectedResume} onClick={fetchSubmitApply} />
       </div>
     </S.RecruitDetailApplyResumeForm>
   );
 }
+
+const EmptyResume = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  height: 100px;
+  font-size: 14px;
+  .text {
+    font-size: 14px;
+  }
+  .write {
+    font-size: 13px;
+    margin-top: 15px;
+    color: ${(props) => props.theme.colors.blue500};
+    cursor: pointer;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+`;
 
 const S = {
   RecruitDetailApplyResumeForm: styled.div`
@@ -112,7 +140,7 @@ const S = {
     }
     .content {
       padding: 15px 15px 0 15px;
-      max-height: 430px;
+      max-height: 445px;
       overflow-y: auto;
       ${(props) => props.theme.media.tablet`
         padding: 0;

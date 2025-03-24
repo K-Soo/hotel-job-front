@@ -2,11 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import Button from '@/components/common/style/Button';
 import useAuth from '@/hooks/useAuth';
-import path from '@/constants/path';
-import { useRouter } from 'next/router';
 import RecruitDetailApplyResumeForm from '@/components/recruitDetail/RecruitDetailApplyResumeForm';
 import { RecruitmentStatusKeys } from '@/types';
-
 interface RecruitDetailSideMenuProps {
   managerName: string;
   managerNumber: string;
@@ -20,6 +17,7 @@ interface RecruitDetailSideMenuProps {
   setIsOpenApplyForm: React.Dispatch<React.SetStateAction<boolean>>;
   recruitmentStatus: RecruitmentStatusKeys;
   fetchSubmitApply: () => Promise<void>;
+  handleSigninThenApply: () => void;
 }
 
 export default function RecruitDetailSideMenu({
@@ -35,14 +33,14 @@ export default function RecruitDetailSideMenu({
   setIsOpenApplyForm,
   recruitmentStatus,
   setSelectedResume,
+  handleSigninThenApply,
 }: RecruitDetailSideMenuProps) {
   const { isAuthenticated, role, isAuthLoading } = useAuth();
-  const router = useRouter();
 
   if (isAuthLoading) {
     return (
       <S.RecruitDetailSideMenu>
-        <Button label="" variant="secondary" height="50px" onClick={() => router.push(path.SIGN_IN)} fontSize="16px" isLoading={true} />
+        <Button label="" variant="secondary" height="50px" fontSize="16px" isLoading={true} />
       </S.RecruitDetailSideMenu>
     );
   }
@@ -50,7 +48,7 @@ export default function RecruitDetailSideMenu({
   if (!isAuthenticated) {
     return (
       <S.RecruitDetailSideMenu>
-        <Button label="로그인 후 지원하기" variant="primary" height="50px" onClick={() => router.push(path.SIGN_IN)} fontSize="16px" />
+        <Button label="로그인 후 지원하기" variant="primary" height="50px" onClick={() => handleSigninThenApply()} fontSize="16px" />
       </S.RecruitDetailSideMenu>
     );
   }

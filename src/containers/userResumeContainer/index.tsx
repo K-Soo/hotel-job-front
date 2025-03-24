@@ -54,14 +54,18 @@ export default function UserResumeContainer() {
       router.push(`/user/resume/${response.result.id}`);
 
       queryClient.invalidateQueries({ queryKey: [queryKeys.RESUME_LIST], refetchType: 'all' });
+      queryClient.invalidateQueries({ queryKey: [queryKeys.AVAILABLE_RESUME_LIST], refetchType: 'all' });
     } catch (error: any) {
       const responseErrorCode = error.response?.data?.error?.code;
+
       if (responseErrorCode === errorCode.CREATION_LIMIT_EXCEEDED) {
         return addToast({ message: '이력서 생성은 최대 5개까지 가능합니다.', type: 'warning' });
       }
+
       if (responseErrorCode === errorCode.CERTIFICATION_UNAUTHORIZED) {
         return addToast({ message: '본인인증 후 이용가능합니다.', type: 'error' });
       }
+
       addToast({ message: '이력서 생성에 실패했습니다.', type: 'error' });
     }
   };
