@@ -36,6 +36,7 @@ export default function CouponCard({ item, selectedCoupon, handleChangedCoupon, 
           {!item.expiresAt && <span className="info-box__date">유효기간 없음</span>}
         </div>
       </S.MainContent>
+
       <S.SideContent>
         {!isUsed && (
           <Radio checked={selectedCoupon === item.id} name="coupon" onChange={() => handleChangedCoupon(item.id)} value={item.id} />
@@ -85,6 +86,8 @@ const S = {
     .description {
       font-size: 14px;
       font-weight: 500;
+      line-height: 1.2;
+      white-space: pre-line;
     }
     .discountAmount {
       flex: 1;
