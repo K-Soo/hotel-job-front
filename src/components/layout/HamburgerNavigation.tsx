@@ -9,10 +9,14 @@ import { debounce } from 'lodash';
 import { GENERAL_ASIDE_MENU } from '@/constants/menu';
 import { useRouter } from 'next/router';
 import useSignout from '@/hooks/useSignout';
+import useAuth from '@/hooks/useAuth';
+import path from '@/constants/path';
+import Notification from '@/components/common/notification';
 
 export default function HamburgerNavigation() {
   const router = useRouter();
   const [hamburgerNavigationAtomState, setHamburgerNavigationAtomState] = useRecoilState(hamburgerNavigationAtom);
+  const { authAtomState } = useAuth();
 
   const { handleClickSignout } = useSignout();
 
@@ -34,18 +38,20 @@ export default function HamburgerNavigation() {
     setHamburgerNavigationAtomState({ isOpen: false });
   };
 
+  const handleClickSetting = () => {
+    setHamburgerNavigationAtomState({ isOpen: false });
+    router.push(path.USER_PROFILE);
+  };
+
   return (
     <Portal>
       <StyledOverlay initial={{ opacity: 1 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={handleOverlayClick}>
         <S.HamburgerNavigation
-          data-navigation // 데이터 속성 추가
-          drag="x" // 드래그 활성화 (x축)
-          dragConstraints={{ left: 0, right: 300 }} // 드래그 가능한 영역 제한
-          dragElastic={0} // 드래그 탄성 효과
+          data-navigation
+          drag="x"
+          dragConstraints={{ left: 0, right: 300 }}
+          dragElastic={0}
           onDrag={handleDrag}
-          onDragStart={() => console.log('onDragStart')}
-          onDragEnter={() => console.log('onDragEnter')}
-          onDragLeave={() => console.log('onDragLeave')}
           initial={{ x: 300 }}
           animate={{ x: 0 }}
           exit={{ x: 300 }}
@@ -53,9 +59,31 @@ export default function HamburgerNavigation() {
         >
           <S.Header>
             <Icon name="CloseA24x24" onClick={() => setHamburgerNavigationAtomState({ isOpen: false })} />
+            <StyledSignoutButton onClick={() => handleClickSignout()}>로그아웃</StyledSignoutButton>
           </S.Header>
+
+          <S.UserInfo>{authAtomState.nickname && <span className="user-name">{authAtomState.nickname}</span>}</S.UserInfo>
+
+          <S.Panel>
+            <div className="item">
+              <Notification />
+              <span className="item__text">알람</span>
+            </div>
+            <div className="item">
+              <i className="item__icon">
+                <Icon name="Settings24x24" onClick={() => handleClickSetting()} width="24px" height="24px" />
+              </i>
+              <span className="item__text">설정</span>
+            </div>
+          </S.Panel>
+
+          <StyledLine margin="2px" />
+
           <S.Content>
             {GENERAL_ASIDE_MENU.map((element) => {
+              if (element.label === '회원정보') {
+                return;
+              }
               return (
                 <S.ContentItem
                   key={element.label}
@@ -71,14 +99,25 @@ export default function HamburgerNavigation() {
               );
             })}
           </S.Content>
-          <S.Footer>
-            <button onClick={handleClickSignout}>로그아웃</button>
-          </S.Footer>
         </S.HamburgerNavigation>
       </StyledOverlay>
     </Portal>
   );
 }
+
+const StyledLine = styled.div<{ margin: string }>`
+  height: 8px;
+  width: 100%;
+  background-color: ${({ theme }) => theme.colors.gray100};
+`;
+
+const StyledSignoutButton = styled.button`
+  border: 1px solid ${({ theme }) => theme.colors.gray300};
+  padding: 8px 12px;
+  border-radius: 5px;
+  font-size: 14px;
+  color: ${({ theme }) => theme.colors.blue400};
+`;
 
 const StyledOverlay = styled(motion.div)`
   position: fixed;
@@ -98,15 +137,60 @@ const S = {
     height: 100%;
     background-color: white;
     z-index: 20;
-    padding: 15px;
     display: flex;
     flex-direction: column;
   `,
   Header: styled.div`
-    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px;
+    svg {
+      color: ${({ theme }) => theme.colors.black300};
+    }
   `,
+  UserInfo: styled.div`
+    height: 60px;
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    .user-name {
+      font-size: 18px;
+      font-weight: 500;
+      color: ${({ theme }) => theme.colors.blue500};
+      &::after {
+        content: '님';
+        color: ${({ theme }) => theme.colors.black300};
+        padding-left: 1px;
+      }
+    }
+  `,
+  Panel: styled.div`
+    display: flex;
+    align-items: center;
+    margin: 15px 0;
+    .item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 70px;
+      &__icon {
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      &__text {
+        font-size: 12px;
+      }
+    }
+  `,
+
   Content: styled.div`
     flex: 1;
+    padding: 15px;
   `,
   ContentItem: styled(motion.div)`
     height: 50px;
@@ -114,6 +198,7 @@ const S = {
     align-items: center;
     justify-content: space-between;
     border-bottom: 1px solid ${({ theme }) => theme.colors.gray200};
+    color: ${({ theme }) => theme.colors.black300};
   `,
   Footer: styled.div`
     height: 40px;
