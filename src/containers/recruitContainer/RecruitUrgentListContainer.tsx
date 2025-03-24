@@ -74,18 +74,6 @@ export default function RecruitUrgentListContainer() {
             {data.pages.map((page) => {
               return page.result.items.map((item) => <RecruitUrgentCard key={item.id} item={item} />);
             })}
-            {data.pages.map((page) => {
-              return page.result.items.map((item) => <RecruitUrgentCard key={item.id} item={item} />);
-            })}
-            {data.pages.map((page) => {
-              return page.result.items.map((item) => <RecruitUrgentCard key={item.id} item={item} />);
-            })}
-            {data.pages.map((page) => {
-              return page.result.items.map((item) => <RecruitUrgentCard key={item.id} item={item} />);
-            })}
-            {data.pages.map((page) => {
-              return page.result.items.map((item) => <RecruitUrgentCard key={item.id} item={item} />);
-            })}
           </RecruitUrgentList>
           {!isEmptyFirstPage && isFirstPage && nextPage && (
             <div style={{ display: 'flex', justifyContent: 'center' }}>
