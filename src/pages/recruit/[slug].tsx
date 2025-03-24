@@ -7,8 +7,16 @@ import { GetStaticPaths, GetStaticPropsContext, InferGetStaticPropsType } from '
 import path from '@/constants/path';
 import { ErrorBoundary, ErrorComponent } from '@/error';
 import { NextSeo } from 'next-seo';
+import { useRouter } from 'next/router';
+import SkeletonUI from '@/components/common/SkeletonUI';
 
 export default function RecruitDetailPage(props: InferGetStaticPropsType<typeof getStaticProps>) {
+  const router = useRouter();
+
+  if (router.isFallback) {
+    return <SkeletonUI.RecruitmentDetail />;
+  }
+
   const { hotel, title, recruitId } = props.seoData;
 
   return (
@@ -21,6 +29,7 @@ export default function RecruitDetailPage(props: InferGetStaticPropsType<typeof 
           url: `https://www.hotel-job-connect.com/recruit/${recruitId}`,
         }}
       />
+
       <HydrationBoundary state={props.dehydratedState}>
         <ErrorBoundary fallback={<ErrorComponent />}>
           <RecruitDetailContainer />
@@ -55,12 +64,12 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
     return {
       paths: paths,
-      fallback: 'blocking',
+      fallback: true,
     };
   } catch (error) {
     return {
       paths: [],
-      fallback: 'blocking',
+      fallback: true,
     };
   }
 };
