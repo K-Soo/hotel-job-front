@@ -280,6 +280,7 @@ export default function EmployerRecruitmentDetailContainer() {
         ...prev,
         type: 'ALERT',
         title: 'TITLE_15',
+        subTitle: 'DESC_9',
         confirmLabel: '확인',
         onClickConfirm: () => router.push(path.EMPLOYER_RECRUITMENT),
       }));

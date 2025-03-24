@@ -51,7 +51,7 @@ export default function RecruitmentCount({ certificationStatus }: RecruitmentCou
             <h3 className="text-wrapper__title">첫 채용공고 무료등록!</h3>
             <p>본인인증 후 무료 채용공고 쿠폰을 받아보세요!</p>
           </div>
-          <Button label="본인인증 페이지로 이동" variant="primary" width="220px" onClick={() => router.push(path.EMPLOYER_ACCOUNT)} />
+          <Button label="본인인증 하기" variant="primary" width="220px" onClick={() => router.push(path.EMPLOYER_ACCOUNT)} />
         </S.RecruitmentGuidContainer>
       </S.RecruitmentCount>
     );
