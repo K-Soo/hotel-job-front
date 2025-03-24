@@ -11,6 +11,9 @@ public/workbox-*.*
 .pnp.js
 .yarn/install-state.gz
 
+/public/robots.txt
+/public/sitemap*
+
 # testing
 /coverage
 
