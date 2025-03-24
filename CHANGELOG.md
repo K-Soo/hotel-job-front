@@ -1,6 +1,22 @@
 # 변경 로그
 
 프로젝트의 모든 주요 변경 사항
+## [1.15.0](https://github.com/K-Soo/hotel-job-front/compare/v1.14.5...v1.15.0) (2025-03-24)
+
+
+### Updates
+
+* **.gitignore:** robots.txt 및 sitemap 관련 파일 추가 ([8c35e65](https://github.com/K-Soo/hotel-job-front/commit/8c35e65876bddc697ee219a994be545628074e4d))
+* 결제 실패, 성공 및 쿠폰 페이지에 SEO 메타 태그 추가 ([0d5e8bd](https://github.com/K-Soo/hotel-job-front/commit/0d5e8bd71990b37b30048a68570fd0ea81f62260))
+* **EmployerHeader:** 불필요한 QueryClient 임포트 제거 ([53969fd](https://github.com/K-Soo/hotel-job-front/commit/53969fd6a40eb080840bde0b209de5ba49dbd35b))
+* **HamburgerNavigation:** 사용자 정보 및 설정 버튼 추가, 로그아웃 버튼 스타일 개선 ([c8a5658](https://github.com/K-Soo/hotel-job-front/commit/c8a5658433537c209125df9188103d9de065adfc))
+* **Logo:** 인증되지 않은 사용자의 로고 클릭 시 홈으로 리디렉션 추가 ([1c66af1](https://github.com/K-Soo/hotel-job-front/commit/1c66af1c23249299fe918cd7794a615a710eb955))
+* **next-sitemap:** next-sitemap 설정 파일 추가 및 패키지 의존성 추가 ([0f5b8d3](https://github.com/K-Soo/hotel-job-front/commit/0f5b8d331d810ccbbdc99181de38b7a6bb0f3b59))
+* **RecruitDetailPage:** 로딩 상태에서 스켈레톤 UI 추가 및 fallback 설정 변경 ([108ab5b](https://github.com/K-Soo/hotel-job-front/commit/108ab5b7e59a343c1f40102c491e3f94cb4497d9))
+* **RecruitUrgentCard:** whileHover 스타일 주석 처리 및 스타일 정리 ([c13598e](https://github.com/K-Soo/hotel-job-front/commit/c13598eb6d13a81d6eb8e7da149e16be8e63ba5e))
+* **RecruitUrgentList:** 레이아웃을 flex에서 grid로 변경하고 반응형 디자인 추가 ([841e2ca](https://github.com/K-Soo/hotel-job-front/commit/841e2ca2be766ef0b5e82b535efb52430ea19c00))
+* **RecruitUrgentListContainer:** RecruitUrgentCard 컴포넌트 중복 렌더링 추가 ([22cc747](https://github.com/K-Soo/hotel-job-front/commit/22cc747a9460e6732cc355a37ce2e4e344843915))
+
 ### [1.14.5](https://github.com/K-Soo/hotel-job-front/compare/v1.14.4...v1.14.5) (2025-03-24)
 
 
