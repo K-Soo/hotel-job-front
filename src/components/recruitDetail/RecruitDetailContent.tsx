@@ -39,6 +39,7 @@ const S = {
   RecruitDetailContent: styled.div<{ $isOverflow: boolean }>`
     margin-bottom: 50px;
     color: ${({ theme }) => theme.colors.black200};
+
     .content-text {
       max-height: 550px;
       overflow: hidden;
@@ -95,13 +96,13 @@ const S = {
       font-weight: 300;
     }
     ul {
-      list-style: disc;
+      list-style: decimal;
       padding-left: 25px;
       font-weight: 300;
       line-height: 1.4;
     }
     ol {
-      list-style: decimal;
+      list-style: disc;
       padding-left: 25px;
       font-weight: 300;
       line-height: 1.4;
@@ -119,7 +120,10 @@ const S = {
       font-size: 14px;
     }
     li {
-      /* line-height: 1.4; */
+      line-height: 1.4;
+    }
+    strong {
+      font-weight: 500;
     }
   `,
 };

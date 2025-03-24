@@ -75,7 +75,7 @@ export default function PreferencesModal({ name, setIsOpenPreferencesModal }: Pr
       <Background>
         <S.PreferencesModal>
           <S.Title>
-            <h2>복리후생 선택</h2>
+            <h2>우대사항 선택</h2>
           </S.Title>
           {/* <S.Search>
                 <Icon className="search-icon" name="Search24x24" width="24px" height="24px" />
