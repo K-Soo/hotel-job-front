@@ -1,8 +1,14 @@
 import Layout, { EmployerMain, EmployerHeader, EmployerFooter } from '@/components/layout';
 import EmployerCheckoutRecruitmentFailContainer from '@/containers/employerCheckoutRecruitmentFailContainer';
+import { NextSeo } from 'next-seo';
 
 export default function EmployerCheckoutRecruitmentFailPage() {
-  return <EmployerCheckoutRecruitmentFailContainer />;
+  return (
+    <>
+      <NextSeo title="결제 실패" nofollow={true} noindex={true} />
+      <EmployerCheckoutRecruitmentFailContainer />;
+    </>
+  );
 }
 
 EmployerCheckoutRecruitmentFailPage.getLayout = (page: React.ReactElement) => {
