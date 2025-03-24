@@ -3,6 +3,7 @@ import { Roboto } from 'next/font/google';
 import { motion } from 'framer-motion';
 import { useRouter } from 'next/router';
 import path from '@/constants/path';
+import useAuth from '@/hooks/useAuth';
 
 const roboto = Roboto({
   subsets: ['latin'],
@@ -18,12 +19,23 @@ interface LogoProps {
 }
 
 export default function Logo({ size, margin, style, isEmployer }: LogoProps) {
+  const { isAuthenticated } = useAuth();
   const router = useRouter();
+
+  const handleClickLogo = () => {
+    if (!isAuthenticated) {
+      router.push(path.HOME);
+      return;
+    }
+
+    router.push(isEmployer ? path.EMPLOYER : path.HOME);
+  };
+
   return (
     <S.Logo
       className={roboto.className}
       whileTap={{ scale: 0.99 }}
-      onClick={() => router.push(isEmployer ? path.EMPLOYER : path.HOME)}
+      onClick={() => handleClickLogo()}
       size={size}
       $margin={margin}
       style={style}
