@@ -58,7 +58,7 @@ export default function RecruitUrgentCard({ item }: RecruitUrgentCardProps) {
   return (
     <S.RecruitUrgentCard
       whileTap={{ scale: 0.98 }}
-      whileHover={{ border: '1px solid #b0b8c1' }}
+      // whileHover={{ border: '1px solid #b0b8c1' }}
       onClick={() => router.push(`/recruit/${item.id}`)}
     >
       <S.ContentBox>
@@ -131,23 +131,15 @@ const StyledTitle = styled.div<{ $isBold: boolean; $isHighlight: boolean }>`
 
 const S = {
   RecruitUrgentCard: styled(motion.div)`
-    width: calc(25% - 7.5px);
-    aspect-ratio: 4 / 3;
-    max-height: 165px;
+    box-sizing: border-box;
     display: flex;
     flex-direction: column;
     padding: 10px;
     border: 1px solid ${(props) => props.theme.colors.gray200};
+    margin: -1px;
     cursor: pointer;
-    border-radius: 8px;
     user-select: none;
-    ${(props) => props.theme.media.tablet`
-      aspect-ratio: 5 / 3;
-      width: calc(50% - 5px);
-    `};
-    ${(props) => props.theme.media.mobile`
-      max-height: 220px;
-    `};
+    background-color: #fff;
   `,
   HeaderBox: styled.div`
     display: flex;
