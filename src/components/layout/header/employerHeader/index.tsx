@@ -8,7 +8,6 @@ import Icon from '@/icons/Icon';
 import DropdownTemplate from '@/components/common/DropdownTemplate';
 import React from 'react';
 import { motion } from 'framer-motion';
-import { QueryClient } from '@tanstack/react-query';
 import Notification from '@/components/common/notification';
 import SkeletonUI from '@/components/common/SkeletonUI';
 import useSignout from '@/hooks/useSignout';
