@@ -66,9 +66,14 @@ export default function RecruitDetailContainer() {
     }
   }, [applyCheckData]);
 
+  const handleSigninThenApply = React.useCallback(() => {
+    addToast({ message: '로그인 후 이용 가능합니다.', type: 'info' });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const handleClickApply = React.useCallback(() => {
     if (!isAuthenticated) {
-      return addToast({ message: '로그인 후 이용해주세요.', type: 'info' });
+      return handleSigninThenApply();
     }
     setIsOpenApplyForm((prev) => !prev);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -120,12 +125,13 @@ export default function RecruitDetailContainer() {
                 fetchSubmitApply={fetchSubmitApply}
               />
             </Modal.Content>
+
             <Modal.Footer>
               {role === 'JOB_SEEKER' && (
                 <Button
                   label={applyStatus === 'available' ? '제출하기' : '지원완료'}
                   variant="primary"
-                  borderRadius="5px"
+                  borderRadius="10px"
                   fontSize="16px"
                   onClick={fetchSubmitApply}
                   disabled={!selectedResume}
@@ -141,6 +147,7 @@ export default function RecruitDetailContainer() {
             managerNumber={data.result.managerNumber}
             recruitmentStatus={data.result.recruitmentStatus}
             handleClickApply={handleClickApply}
+            handleSigninThenApply={handleSigninThenApply}
             isOpenApplyForm={isOpenApplyForm}
             isApplyCheckError={isApplyCheckError}
             applyStatus={applyStatus}
@@ -157,6 +164,7 @@ export default function RecruitDetailContainer() {
           applyStatus={applyStatus}
           recruitmentStatus={data.result.recruitmentStatus}
           setIsOpenModal={setIsOpenModal}
+          handleSigninThenApply={handleSigninThenApply}
         />
       </>
     );
