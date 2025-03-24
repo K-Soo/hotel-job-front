@@ -10,9 +10,22 @@ export default function RecruitUrgentList({ children }: RecruitUrgentListProps) 
 
 const S = {
   RecruitUrgentList: styled.div`
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: minmax(180px, auto);
     margin-bottom: 100px;
+    gap: 1px;
+    @media (max-width: 800px) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    @media (max-width: 600px) {
+      grid-template-columns: repeat(2, 1fr);
+      grid-auto-rows: minmax(160px, auto);
+    }
+
+    @media (max-width: 400px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
   `,
 };
