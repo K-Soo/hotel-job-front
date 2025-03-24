@@ -50,7 +50,7 @@ export const EMPLOYER_ASIDE_MENU = [
   },
 
   {
-    label: '상품 · 결제관리',
+    label: '상품 · 결제내역',
     value: '',
     icon: 'Card24x24',
     items: [
