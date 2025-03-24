@@ -78,10 +78,12 @@ const S = {
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        padding: 15px 0;
+        padding: 15px;
         &--title {
           font-weight: 500;
-          font-size: 16px;
+          font-size: 15px;
+          line-height: 1.2;
+          white-space: pre-line;
         }
         &--price {
           padding-top: 10px;
