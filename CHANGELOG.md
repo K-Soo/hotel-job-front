@@ -1,6 +1,50 @@
 # 변경 로그
 
 프로젝트의 모든 주요 변경 사항
+### [1.14.3](https://github.com/K-Soo/hotel-job-front/compare/v1.14.2...v1.14.3) (2025-03-24)
+
+
+### Features
+
+* **certification:** 인증 검증 로직 리팩토링 및 중복 코드 제거 ([110b7de](https://github.com/K-Soo/hotel-job-front/commit/110b7deba44149f3ddebb4f5c2a98b717742138c))
+* **employerAccountWithdraw:** 사업자 회원탈퇴 API 호출 및 로그아웃 처리 추가 ([6870d1d](https://github.com/K-Soo/hotel-job-front/commit/6870d1d8b57fb49fe4c929f5c689071a6521f629))
+* **errorCode:** OAUTH_SIGN_IN_TOKEN_RATE_LIMIT 오류 코드 추가 ([df2b473](https://github.com/K-Soo/hotel-job-front/commit/df2b4730249626f4e9759aaef9aba22bc1789ffa))
+* **errorMessages:** 'ERR-2005' 오류 메시지 추가 및 'ERR-8004' 메시지 수정 ([db5f91a](https://github.com/K-Soo/hotel-job-front/commit/db5f91ace060c65097046d1f279d57229d7b2381))
+
+
+### Bug Fixes
+
+* **alertWithConfirm:** 계정 삭제 경고 메시지 간소화 ([90bc315](https://github.com/K-Soo/hotel-job-front/commit/90bc315a3c9505c1ee66d3e03cc2577b7db0565a))
+* **applicant:** 공지사항 폼 닫기 아이콘에 클릭 핸들러 추가 ([00c5cb0](https://github.com/K-Soo/hotel-job-front/commit/00c5cb098e74677223b03ff089f8fd277f244e3d))
+* **certification:** 인증 검증 실패 조건을 'not_found'로 수정 ([c59ce5d](https://github.com/K-Soo/hotel-job-front/commit/c59ce5d3e5e6a2df6cf8d26213236c1e14752a13))
+* **employerSetup:** 로딩 상태를 업데이트하는 로직 추가 ([39d9e30](https://github.com/K-Soo/hotel-job-front/commit/39d9e307d3ee1817120c8b9156b8d152bcfdba91))
+
+
+### Refactors
+
+* **header:** use useSignout 훅으로 로그아웃 처리 로직 변경 ([3af7b5d](https://github.com/K-Soo/hotel-job-front/commit/3af7b5dadcf286f6d45f0979d07f8f82e96a2f03))
+* **navigation:** 로그아웃 처리 로직을 useSignout 훅으로 변경 ([2c537d2](https://github.com/K-Soo/hotel-job-front/commit/2c537d2a9acfdf0e1eed76a02f345bda7af6adc8))
+* **user:** 로그아웃 처리 로직을 useSignout 훅으로 변경 ([af0d8bf](https://github.com/K-Soo/hotel-job-front/commit/af0d8bf62f7f67873b09358702c2f533b6d94ef3))
+* **userApplicationHistory:** 버튼 레이블 및 스타일 업데이트 ([c55512b](https://github.com/K-Soo/hotel-job-front/commit/c55512b37300056ac78b07cf9af13849917d0098))
+* **userProfileContainer:** 로그아웃 처리 로직을 useSignout 훅으로 변경 ([94b5add](https://github.com/K-Soo/hotel-job-front/commit/94b5addf58a22fad25493203396e6638c88512af))
+
+
+### Updates
+
+* **api:** 계정 삭제 API 경로 수정 ([4487c1d](https://github.com/K-Soo/hotel-job-front/commit/4487c1de3b76d88f06360313fdd600a68c667a2f))
+* **CouponCard:** 정보 박스 스타일 개선 및 할인 설명 텍스트 형식 조정 ([6025e1a](https://github.com/K-Soo/hotel-job-front/commit/6025e1a7a21a8a3eb65dce67586400f0519c727b))
+* **CouponList:** 패딩 조정 및 제목 스타일 개선 ([b15858e](https://github.com/K-Soo/hotel-job-front/commit/b15858e6843adab573e6b949105bd10c425bc2bc))
+* **employerAccount:** 인증 및 역할 허용 설정 추가 ([909d660](https://github.com/K-Soo/hotel-job-front/commit/909d6606d0cf136a008eedf202891a6c46825da7))
+* **employerBusinessPage:** 인증 및 역할 허용 설정 추가 ([e297e69](https://github.com/K-Soo/hotel-job-front/commit/e297e697003fa8f10e44a1fe521ac4cfcc9a8def))
+* **MobileNavigation:** 인증 관련 코드 제거 및 회원가입 버튼 삭제 ([ba10f32](https://github.com/K-Soo/hotel-job-front/commit/ba10f324b96de80e7681b32cf150e8dbb54985ff))
+* **ModalFooter:** 모바일 뷰에서 높이 및 정렬 개선, 그라데이션 배경 추가 ([0c7cbab](https://github.com/K-Soo/hotel-job-front/commit/0c7cbab136a0bef7e5d7c95322b95b6155d264f9))
+* **RecruitDetailApplyResumeForm:** 이력서가 없을 때 메시지 및 작성 버튼 추가, 로딩 상태 개선 ([6bfcb04](https://github.com/K-Soo/hotel-job-front/commit/6bfcb0413061fde1d9e59489ac56ce6b69da5f90))
+* **RecruitDetailBottomNavigation:** 로그인 후 지원 처리 함수로 변경, 라우터 의존성 제거 ([2f76610](https://github.com/K-Soo/hotel-job-front/commit/2f76610cbb769f844429def3b6899f1ce2f95881))
+* **RecruitDetailContainer:** 로그인 후 지원하기 버튼 핸들러 함수 추가 및 스타일 개선 ([630900f](https://github.com/K-Soo/hotel-job-front/commit/630900f8d864e706f41d44866644e4b46fdb393c))
+* **RecruitDetailSideMenu:** 로그인 후 지원하기 버튼의 라우터 의존성 제거 및 핸들러 함수로 변경 ([8bd1592](https://github.com/K-Soo/hotel-job-front/commit/8bd15926cf828726bd59558d824572562b1510f7))
+* **types:** 인증 필드 제거 및 리스트 업 관련 필드 추가 ([b0865eb](https://github.com/K-Soo/hotel-job-front/commit/b0865eb6c8251d9613f6954fb75b716ee296130f))
+* **UserResumeContainer:** 이력서 생성 후 사용 가능한 이력서 목록 쿼리 무효화 추가 및 오류 메시지 개선 ([a6adf16](https://github.com/K-Soo/hotel-job-front/commit/a6adf165d0ec0764c7d3ca64c4f7305c657b6a8b))
+
 ### [1.14.2](https://github.com/K-Soo/hotel-job-front/compare/v1.14.1...v1.14.2) (2025-03-21)
 
 
