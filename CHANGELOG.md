@@ -1,6 +1,17 @@
 # 변경 로그
 
 프로젝트의 모든 주요 변경 사항
+### [1.14.4](https://github.com/K-Soo/hotel-job-front/compare/v1.14.3...v1.14.4) (2025-03-24)
+
+
+### Updates
+
+* **alertWithConfirm:** 공고 수정 완료 및 채용공고 목록 이동 관련 텍스트 수정 ([7b599b9](https://github.com/K-Soo/hotel-job-front/commit/7b599b9c7786b8790270d7a1d7a078ff7b0eb3e0))
+* **EmployerCheckoutRecruitmentContainer:** 무료등록 버튼 클릭 시 확인 알림 추가 및 쿼리 무효화 개선 ([8c1fab6](https://github.com/K-Soo/hotel-job-front/commit/8c1fab64ae5439cf8adb7dc17628ddbc7a9774d1))
+* **EmployerRecruitmentDetailContainer:** 알림에 부제목 추가 ([5504833](https://github.com/K-Soo/hotel-job-front/commit/550483319cd33a346899b763894d52434fb83cd4))
+* **menu:** '상품 · 결제관리' 텍스트를 '상품 · 결제내역'으로 변경 ([132efcf](https://github.com/K-Soo/hotel-job-front/commit/132efcf213dda56fcbcf01baa3e56403fca9bcfd))
+* **RecruitmentCount:** 버튼 텍스트를 '본인인증 하기'로 변경 ([4096b84](https://github.com/K-Soo/hotel-job-front/commit/4096b8441f901779eb8d42c8c08d18df7144f21e))
+
 ### [1.14.3](https://github.com/K-Soo/hotel-job-front/compare/v1.14.2...v1.14.3) (2025-03-24)
 
 
