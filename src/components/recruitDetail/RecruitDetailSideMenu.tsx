@@ -61,7 +61,7 @@ export default function RecruitDetailSideMenu({
     );
   }
 
-  if (role !== 'JOB_SEEKER') {
+  if (isAuthenticated && role !== 'JOB_SEEKER') {
     return (
       <S.RecruitDetailSideMenu>
         <Button label="지원자 전용" variant="secondary" height="50px" borderRadius="10px" fontSize="18px" disabled />
