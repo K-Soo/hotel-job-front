@@ -14,10 +14,10 @@ import ProductInfo from '@/components/employerCheckoutRecruitment/ProductInfo';
 import RecruitmentInfo from '@/components/employerCheckoutRecruitment/RecruitmentInfo';
 import TossPaymentInfo from '@/components/employerCheckoutRecruitment/TossPaymentInfo';
 import DiscountInfo from '@/components/employerCheckoutRecruitment/DiscountInfo';
-import { v4 as uuidv4 } from 'uuid';
 import { RECRUITMENT_PRODUCT_NAME, RECRUITMENT_PRODUCT_TYPE } from '@/constants/product';
 import useAlertWithConfirm from '@/hooks/useAlertWithConfirm';
 import { useQueryClient } from '@tanstack/react-query';
+import { v4 as uuidv4 } from 'uuid';
 
 export default function EmployerCheckoutRecruitmentContainer() {
   const [widgets, setWidgets] = React.useState<TossPaymentsWidgets | null>(null);
@@ -174,6 +174,7 @@ export default function EmployerCheckoutRecruitmentContainer() {
       const response = await Post.paymentFreeRecruitmentConfirm({ orderId: data.result.orderId, amount: amount.value });
       console.log('결제 승인 API : ', response);
       await queryClient.invalidateQueries({ queryKey: [queryKeys.COUPON_LIST], refetchType: 'all' });
+      await queryClient.invalidateQueries({ queryKey: [queryKeys.RECRUITMENT_LIST], refetchType: 'all' });
 
       setAlertWithConfirmAtom((prev) => ({
         ...prev,
@@ -192,6 +193,17 @@ export default function EmployerCheckoutRecruitmentContainer() {
     }
   };
 
+  const handleClickConfirmFreePayment = () => {
+    setAlertWithConfirmAtom((prev) => ({
+      ...prev,
+      type: 'CONFIRM',
+      title: 'TITLE_21',
+      confirmLabel: '진행하기',
+      cancelLabel: '취소',
+      onClickConfirm: async () => await fetchConfirmFreePayment(),
+    }));
+  };
+
   return (
     <EmployerCheckoutRecruitment>
       <RecruitmentInfo recruitmentInfo={data?.result.recruitmentInfo} isLoading={isLoading} />
@@ -203,12 +215,13 @@ export default function EmployerCheckoutRecruitmentContainer() {
         appliedCouponId={data?.result?.appliedCouponId ?? null}
       />
       <TossPaymentInfo />
+
       <AmountInfo amountInfo={data?.result.amountInfo} isLoading={isLoading}>
         {amount.value !== 0 && (
           <Button label="결제하기" variant="primary" onClick={fetchConfirmPayment} isLoading={!ready} fontSize="18px" />
         )}
         {amount.value === 0 && (
-          <Button label="무료등록" variant="primary" onClick={fetchConfirmFreePayment} isLoading={!ready} fontSize="18px" />
+          <Button label="무료등록" variant="primary" onClick={handleClickConfirmFreePayment} isLoading={!ready} fontSize="18px" />
         )}
       </AmountInfo>
     </EmployerCheckoutRecruitment>
