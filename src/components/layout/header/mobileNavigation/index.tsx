@@ -8,7 +8,6 @@ import { useSetRecoilState } from 'recoil';
 import { hamburgerNavigationAtom } from '@/recoil/hamburgerNavigation';
 import Notification from '@/components/common/notification';
 import { useScroll, motion, useMotionValueEvent } from 'framer-motion';
-import useAuth from '@/hooks/useAuth';
 import useShare from '@/hooks/useShare';
 
 interface MobileNavigationProps {
@@ -35,7 +34,6 @@ export function MobileNavigation({
   shareIcon,
 }: MobileNavigationProps) {
   const [hasBorder, setHasBorder] = React.useState(false);
-  const { isUnAuthenticated } = useAuth();
   const router = useRouter();
   const { scrollY } = useScroll();
 
@@ -71,7 +69,6 @@ export function MobileNavigation({
 
       <div className="right">
         {notificationIcon && <Notification />}
-        {signUpIcon && isUnAuthenticated && <SignUpButton>회원가입</SignUpButton>}
         {hamburgerIcon && (
           <Icon name="ListA24x24" width="24px" height="24px" onClick={() => setHamburgerNavigationAtomState({ isOpen: true })} />
         )}
@@ -92,17 +89,6 @@ const StyledShareButton = styled.div`
   align-items: center;
   justify-content: center;
   margin-left: 10px;
-`;
-
-const SignUpButton = styled.div`
-  font-size: 12px;
-  border: 1px solid ${(props) => props.theme.colors.gray300};
-  border-radius: 8px;
-  padding: 0 12px;
-  color: ${(props) => props.theme.colors.blue500};
-  height: 32px;
-  display: flex;
-  align-items: center;
 `;
 
 const S = {
