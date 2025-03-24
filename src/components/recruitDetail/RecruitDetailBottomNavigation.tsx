@@ -1,22 +1,21 @@
 import styled from 'styled-components';
 import Button from '@/components/common/style/Button';
 import useAuth from '@/hooks/useAuth';
-import { useRouter } from 'next/router';
-import path from '@/constants/path';
 import { RecruitmentStatusKeys } from '@/types';
 interface RecruitDetailBottomNavigationProps {
   applyStatus: 'available' | 'duplicate' | 'idle';
   recruitmentStatus: RecruitmentStatusKeys;
   setIsOpenModal: React.Dispatch<React.SetStateAction<boolean>>;
+  handleSigninThenApply: () => void;
 }
 
 export default function RecruitDetailBottomNavigation({
   applyStatus,
   recruitmentStatus,
   setIsOpenModal,
+  handleSigninThenApply,
 }: RecruitDetailBottomNavigationProps) {
   const { isAuthenticated, role, isAuthLoading } = useAuth();
-  const router = useRouter();
 
   if (isAuthLoading) {
     return (
@@ -40,7 +39,7 @@ export default function RecruitDetailBottomNavigation({
               variant="primary"
               height="45px"
               borderRadius="10px"
-              onClick={() => router.push(path.SIGN_IN)}
+              onClick={() => handleSigninThenApply()}
             />
           )}
         </div>
