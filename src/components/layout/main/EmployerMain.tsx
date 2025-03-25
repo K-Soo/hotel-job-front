@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { EmployerAside } from '@/components/layout';
 import { useRouter } from 'next/router';
 import useAuth from '@/hooks/useAuth';
-import { Role } from '@/constants/auth';
+import { Role } from '@/constants/role';
 interface EmployerMainProps {
   children: React.ReactNode;
 }
