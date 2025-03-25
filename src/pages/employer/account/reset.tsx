@@ -6,7 +6,7 @@ export default function EmployerAccountResetPage() {
   return (
     <>
       <NextSeo title="비밀번호 변경" nofollow={true} noindex={true} />
-      <EmployerAccountResetContainer />;
+      <EmployerAccountResetContainer />
     </>
   );
 }

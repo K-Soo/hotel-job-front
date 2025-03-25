@@ -4,17 +4,11 @@ import EmployerContainer from '@/containers/employerContainer';
 import { NextSeo } from 'next-seo';
 import useAuth from '@/hooks/useAuth';
 import LoadingOverlay from '@/components/common/LoadingOverlay';
-
+import { Role } from '@/constants/role';
 export default function EmployerPage() {
-  const {
-    authAtomState: { companyVerificationStatus },
-    role,
-  } = useAuth();
+  const { role } = useAuth();
 
-  console.log('companyVerificationStatus: ', companyVerificationStatus);
-  React.useEffect(() => {}, []);
-
-  if (role !== 'EMPLOYER') {
+  if (role !== Role.EMPLOYER) {
     return <LoadingOverlay />;
   }
 

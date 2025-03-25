@@ -32,6 +32,8 @@ function EmployerPaymentTableBody({ data, handleClickPaymentItem }: EmployerPaym
   return (
     <S.RecruitmentTableBody>
       {data.map((item) => {
+        if (!item) return;
+
         const isCoupon = item.paymentMethod === '쿠폰';
 
         return (
