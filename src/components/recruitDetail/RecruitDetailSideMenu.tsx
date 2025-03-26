@@ -40,7 +40,7 @@ export default function RecruitDetailSideMenu({
   if (isAuthLoading) {
     return (
       <S.RecruitDetailSideMenu>
-        <Button label="" variant="secondary" height="50px" fontSize="16px" isLoading={true} />
+        <Button label="" variant="secondary" height="50px" fontSize="16px" borderRadius="10px" isLoading={true} />
       </S.RecruitDetailSideMenu>
     );
   }
@@ -48,7 +48,14 @@ export default function RecruitDetailSideMenu({
   if (!isAuthenticated) {
     return (
       <S.RecruitDetailSideMenu>
-        <Button label="로그인 후 지원하기" variant="primary" height="50px" onClick={() => handleSigninThenApply()} fontSize="16px" />
+        <Button
+          label="로그인 후 지원하기"
+          variant="primary"
+          height="50px"
+          borderRadius="10px"
+          onClick={() => handleSigninThenApply()}
+          fontSize="16px"
+        />
       </S.RecruitDetailSideMenu>
     );
   }
