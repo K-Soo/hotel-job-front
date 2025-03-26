@@ -111,6 +111,7 @@ const S = {
     user-select: none;
     ${(props) => props.theme.media.mobile`
       font-size: 20px;
+      margin-bottom: 5px;
     `};
   `,
   UtilPanel: styled.article`
