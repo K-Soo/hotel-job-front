@@ -30,6 +30,13 @@ export const SALARY_TYPE = {
   HOURLY: '시급',
 } as const;
 
+export const SHORT_SALARY_TYPE = {
+  ANNUAL: '연',
+  MONTHLY: '월',
+  DAILY: '일',
+  HOURLY: '시',
+} as const;
+
 export const SEX_CODE = {
   '01': '남자',
   '02': '여자',
