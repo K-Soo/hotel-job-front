@@ -3,9 +3,13 @@ import Link from 'next/link';
 import path from '@/constants/path';
 import { POLICY } from '@/constants/policy';
 
-export function Footer() {
+interface FooterProps {
+  marginTop?: string;
+}
+
+export function Footer({ marginTop }: FooterProps) {
   return (
-    <S.Footer>
+    <S.Footer $marginTop={marginTop}>
       <div className="container">
         <S.Category>
           {/* <li className="item">
@@ -38,8 +42,8 @@ export function Footer() {
 }
 
 const S = {
-  Footer: styled.footer`
-    margin-top: 30px;
+  Footer: styled.footer<{ $marginTop?: string }>`
+    margin-top: ${(props) => (props.$marginTop ? props.$marginTop : '30px')};
     background-color: ${(props) => props.theme.colors.gray};
     width: 100%;
     padding: 40px 0 30px 0;

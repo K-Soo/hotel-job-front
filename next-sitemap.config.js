@@ -6,13 +6,13 @@ module.exports = {
   changefreq: 'daily',
   priority: 1,
   autoLastmod: true,
-  exclude: ['/404', '/oauth/**', '/certification', '/certification/**', '/user/**', '/employer', '/employer/**'],
+  exclude: ['/404', '/oauth/**', '/certification', '/certification/**', '/user/**', '/employer', '/employer/**', '/sign-in', '/sign-up'],
   robotsTxtOptions: {
     policies: [
       {
         userAgent: '*',
         allow: '/',
-        disallow: ['/404', '/oauth/', '/certification/', '/user/', '/employer/'],
+        disallow: ['/404', '/oauth/', '/certification/', '/user/', '/employer/', '/sign-in', '/sign-up'],
       },
     ],
   },

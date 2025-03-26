@@ -1,6 +1,6 @@
 import styled, { css, keyframes } from 'styled-components';
 
-type TagType = 'BEST' | 'URGENT' | 'VERIFIED' | 'UNVERIFIED' | 'DEFAULT_RESUME' | 'DRAFT' | 'ATTENTION';
+type TagType = 'BEST' | 'URGENT' | 'VERIFIED' | 'UNVERIFIED' | 'DEFAULT_RESUME' | 'DRAFT' | 'ATTENTION' | 'JOB' | 'CONDITION';
 
 interface TagProps {
   label: string;
@@ -50,6 +50,7 @@ export default function Tag({
 }: TagProps) {
   return (
     <S.Tag
+      className="ignore-scroll"
       $margin={margin}
       $fontSize={fontSize}
       $color={color}
@@ -204,6 +205,23 @@ const S = {
         color: ${(props) => props.theme.colors.red300};
         border: none;
         background: none;
+      `};
+
+    ${(props) =>
+      props.$type === 'CONDITION' &&
+      css`
+        border-radius: 20px;
+        font-weight: 300;
+        margin-right: 8px;
+      `};
+
+    ${(props) =>
+      props.$type === 'JOB' &&
+      css`
+        color: ${(props) => props.theme.colors.blue500};
+        border: ${(props) => `1px solid ${props.theme.colors.blue100}`};
+        background-color: ${(props) => props.theme.colors.blue100};
+        border-radius: 30px;
       `};
   `,
 };

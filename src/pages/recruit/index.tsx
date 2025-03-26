@@ -1,4 +1,4 @@
-import Layout, { Header, Footer, Main, DesktopNavigation, MobileNavigation } from '@/components/layout';
+import Layout, { Header, Footer, Main, DesktopNavigation, MobileNavigation, ScrollToTop } from '@/components/layout';
 import RecruitContainer from '@/containers/recruitContainer';
 import BottomNavigation from '@/components/layout/BottomNavigation';
 import { NextSeo } from 'next-seo';
@@ -18,8 +18,9 @@ RecruitPage.getLayout = (page: React.ReactElement) => {
         <DesktopNavigation />
         <MobileNavigation title="채용" notificationIcon />
       </Header>
-      <Main>{page}</Main>
-      <Footer />
+      <Main padding="30px 0 0 0">{page}</Main>
+      <Footer marginTop="0" />
+      <ScrollToTop />
       <BottomNavigation />
     </Layout>
   );

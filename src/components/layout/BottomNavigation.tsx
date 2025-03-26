@@ -1,17 +1,21 @@
+import React from 'react';
 import styled, { css } from 'styled-components';
 import path from '@/constants/path';
 import useAuth from '@/hooks/useAuth';
 import { useRouter } from 'next/router';
-import { useSetRecoilState } from 'recoil';
-import { bottomSheetAtom } from '@/recoil/bottomSheet';
 import Portal from '@/components/common/Portal';
 import Icon from '@/icons/Icon';
+import { animate, motion, useAnimation, useMotionValue, useMotionValueEvent, useScroll } from 'framer-motion';
+import { throttle } from 'lodash';
 
 export default function BottomNavigation() {
-  const router = useRouter();
-  // const setBottomSheetAtom = useSetRecoilState(bottomSheetAtom);
-
   const { isAuthenticated, role } = useAuth();
+
+  const router = useRouter();
+  const controls = useAnimation();
+
+  const bottomNavigationRef = React.useRef<HTMLDivElement>(null);
+  const prevY = React.useRef<number>(0);
 
   const handleLink = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
@@ -19,13 +23,55 @@ export default function BottomNavigation() {
     router.push(name);
   };
 
+  const { scrollY } = useScroll({ container: bottomNavigationRef });
+
+  const translateY = useMotionValue(0);
+  useMotionValueEvent(
+    scrollY,
+    'change',
+    throttle((latest) => {
+      const direction = latest - prevY.current;
+      const scrollYMax = document.documentElement.scrollHeight - window.innerHeight;
+
+      //  50px 이하 항상 보이기
+      if (latest <= 50) {
+        animate(translateY, 0, { type: 'tween', duration: 0.2 });
+        prevY.current = latest;
+        return;
+      }
+
+      // 맨 아래 무조건 숨기기
+      if (latest >= scrollYMax - 1) {
+        animate(translateY, 80, { type: 'tween', duration: 0.2 });
+        prevY.current = latest;
+        return;
+      }
+
+      // 위로 스크롤 중 20px 이상 스크롤
+      if (direction < -20) {
+        animate(translateY, 0, { type: 'tween', duration: 0.2 });
+        prevY.current = latest;
+        return;
+      }
+
+      // 아래로 스크롤
+      if (direction > 0) {
+        animate(translateY, 80, { type: 'tween', duration: 0.2 });
+        prevY.current = latest;
+        return;
+      }
+
+      prevY.current = latest;
+    }, 100),
+  );
+
   // const handleClickPopUpSheet = () => {
   //   setBottomSheetAtom((prev) => ({ ...prev, isOpen: !prev.isOpen }));
   // };
 
   return (
     <Portal>
-      <S.BottomNavigation>
+      <S.BottomNavigation animate={controls} ref={bottomNavigationRef} style={{ translateY }}>
         <div className="item">
           <S.ButtonLink name={path.HOME} onClick={handleLink}>
             <Icon name="HomeSecond24x24" width="24px" height="24px" color={router.pathname === path.HOME ? '#1b64da' : '#8b95a1'} />
@@ -75,7 +121,7 @@ export default function BottomNavigation() {
 }
 
 const S = {
-  BottomNavigation: styled.nav`
+  BottomNavigation: styled(motion.nav)`
     display: none;
     z-index: 10;
     ${(props) => props.theme.media.tablet`

@@ -116,7 +116,7 @@ const StyledTitle = styled.div<{ $isBold: boolean; $isHighlight: boolean }>`
   .text {
     padding: 1px 0;
     color: ${(props) => props.theme.colors.gray800};
-    font-weight: ${(props) => (props.$isBold ? 600 : 400)};
+    font-weight: ${(props) => (props.$isBold ? 500 : 400)};
     width: fit-content;
     display: inline;
     line-height: 1.35;
@@ -144,6 +144,7 @@ const S = {
     user-select: none;
     flex-direction: column;
     max-height: 220px;
+    background-color: white;
     ${(props) => props.theme.media.tablet`
       aspect-ratio: 5 / 3;
       width: calc(50% - 10px);
