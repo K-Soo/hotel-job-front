@@ -62,9 +62,10 @@ export default function RecruitDetailWorkCondition({
 
 const S = {
   RecruitDetailWorkCondition: styled.div`
+    background-color: ${(props) => props.theme.colors.blue30};
+    /* border: 1px solid ${(props) => props.theme.colors.gray200}; */
     border-radius: 10px;
     padding: 10px 15px;
-    background-color: ${(props) => props.theme.colors.gray};
     margin-bottom: 50px;
     font-size: 14px;
     .work-container {
@@ -86,8 +87,8 @@ const S = {
   `,
   RowLabel: styled.div`
     flex-basis: 80px;
-    color: ${(props) => props.theme.colors.black600};
-    font-weight: 300;
+    color: ${(props) => props.theme.colors.black800};
+    font-weight: 500;
   `,
   RowValue: styled.div`
     color: ${(props) => props.theme.colors.black};
