@@ -39,6 +39,7 @@ const colors = {
   red900: '#4d0000',
 
   gray: '#f9fafb', //disabled
+  gray50: '#f5f7fa', //background
   gray100: '#f2f4f6',
   gray200: '#e5e8eb',
   gray300: '#d1d6db',
