@@ -147,7 +147,7 @@ const StyledTitle = styled.div<{ $isBold: boolean; $isHighlight: boolean }>`
   .text {
     padding: 1px 3px 1px 2px;
     color: ${(props) => props.theme.colors.gray800};
-    font-weight: ${(props) => (props.$isBold ? 600 : 400)};
+    font-weight: ${(props) => (props.$isBold ? 500 : 400)};
     font-size: 15px;
     ${(props) =>
       props.$isHighlight &&
