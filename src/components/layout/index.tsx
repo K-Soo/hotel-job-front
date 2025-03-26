@@ -19,6 +19,7 @@ export { MobileNavigation } from '@/components/layout/header/mobileNavigation';
 export { EmployerHeader } from '@/components/layout/header/employerHeader';
 export { EmployerAside } from '@/components/layout/aside/EmployerAside';
 export { EmployerFooter } from '@/components/layout/footer/EmployerFooter';
+export { ScrollToTop } from '@/components/layout/ScrollToTop';
 
 const DynamicNoSSRStyledToaster = dynamic(() => import('@/components/common/StyledToaster'), { ssr: false });
 const DynamicNoSSRLoadingOverlay = dynamic(() => import('@/components/common/LoadingOverlay'), { ssr: false });
