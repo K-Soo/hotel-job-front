@@ -53,8 +53,14 @@ import HomeSecond24x24 from './homeSecond24x24.svg';
 import Widget24x24 from './widget24x24.svg';
 import Copy24x24 from './copy24x24.svg';
 import Eye24x24 from './eye24x24.svg';
+import ArrowToTop24x24 from './arrowToTop24x24.svg';
+import LocationA24x24 from './locationA24x24.svg';
+import LocationB24x24 from './locationB24x24.svg';
 
 export {
+  LocationB24x24,
+  LocationA24x24,
+  ArrowToTop24x24,
   Eye24x24,
   Copy24x24,
   Widget24x24,
