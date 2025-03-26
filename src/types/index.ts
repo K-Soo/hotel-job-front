@@ -681,6 +681,11 @@ export interface RecruitListItem {
   isListUp: boolean;
   listUpCount: number;
 
+  educationCondition: EducationLevelKeys;
+  roomCount: number;
+  workingDay: WorkingDayListKeys;
+  workingTime: { start: string; end: string };
+
   employmentType: {
     CONTRACT: boolean;
     DAILY_WORKER: boolean;
