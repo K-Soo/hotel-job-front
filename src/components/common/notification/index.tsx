@@ -29,8 +29,11 @@ export default function Notification({ margin }: NotificationProps) {
 
   React.useEffect(() => {
     if (!isOpen) return;
+
     if (notificationStatus.status === 'all_read') return;
+
     if (socket) {
+      console.log('markNotificationsAsRead Emit 전송');
       socket.emit('markNotificationsAsRead');
     }
   }, [isOpen, notificationStatus.status, socket]);
