@@ -58,14 +58,16 @@ export default function RecruitUrgentCard({ item }: RecruitUrgentCardProps) {
   return (
     <S.RecruitUrgentCard
       whileTap={{ scale: 0.98 }}
-      // whileHover={{ border: '1px solid #b0b8c1' }}
+      whileHover={{ boxShadow: 'inset 0 0 1px 1px #3182f6' }}
       onClick={() => router.push(`/recruit/${item.id}`)}
     >
       <S.ContentBox>
-        <StyledTitle $isBold={isBold} $isHighlight={isHighlight}>
-          {isTag && <Tag label="급구" type="URGENT" width="32px" margin="0 5px 0 0" fontSize="11px" height="17px" />}
-          <h5 className="recruitment-title">{item.recruitmentTitle}</h5>
-        </StyledTitle>
+        <div>
+          {isTag && <Tag label="급구" type="URGENT" width="32px" fontSize="11px" height="17px" />}
+          <StyledTitle $isBold={isBold} $isHighlight={isHighlight}>
+            <h5 className="recruitment-title">{item.recruitmentTitle} 모십니다아아아</h5>
+          </StyledTitle>
+        </div>
 
         <div className="info-box">
           <div className="info-box__company">{item.hotelName}</div>
@@ -104,13 +106,14 @@ export default function RecruitUrgentCard({ item }: RecruitUrgentCardProps) {
 }
 
 const StyledTitle = styled.div<{ $isBold: boolean; $isHighlight: boolean }>`
+  margin-top: 3px;
   margin-bottom: 8px;
   .recruitment-title {
     display: inline;
     line-height: 1.1;
     vertical-align: bottom;
     color: ${(props) => props.theme.colors.gray800};
-    font-weight: ${(props) => (props.$isBold ? 600 : 400)};
+    font-weight: ${(props) => (props.$isBold ? 500 : 400)};
     font-size: 15px;
     width: fit-content;
     ${(props) =>
@@ -121,8 +124,6 @@ const StyledTitle = styled.div<{ $isBold: boolean; $isHighlight: boolean }>`
       `};
   }
   ${(props) => props.theme.media.mobile`
-    display: flex;
-    flex-direction: column;
     .recruitment-title {
       margin-top: 4px;
      }
@@ -159,6 +160,13 @@ const S = {
       display: flex;
       align-items: center;
       margin-bottom: 15px;
+      ${(props) => props.theme.media.mobile`
+        flex-direction: column;
+        align-items: flex-start;
+        &::after {
+          content: '';
+        }
+      `};
       &__company {
         font-size: 13px;
         font-weight: 400;
