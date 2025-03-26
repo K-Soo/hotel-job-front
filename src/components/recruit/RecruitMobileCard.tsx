@@ -3,12 +3,14 @@ import styled, { css } from 'styled-components';
 import RecruitPrice from '@/components/recruit/RecruitPrice';
 import { RecruitListItem } from '@/types';
 import { addressFormat, dateFormat, employmentTypeFormat } from '@/utils';
-import { EXPERIENCE_CONDITION } from '@/constants/recruitment';
+import { EXPERIENCE_CONDITION, WORKING_DAY_LIST } from '@/constants/recruitment';
 import { ALL_JOBS } from '@/constants/job';
 import { useRouter } from 'next/router';
 import Tag from '@/components/common/Tag';
+import DragScroll from '@/components/common/DragScroll';
 import { motion, useAnimationControls } from 'framer-motion';
-
+import Icon from '@/icons/Icon';
+import { EDUCATION_LEVEL } from '@/constants';
 interface RecruitMobileCardProps {
   item: RecruitListItem;
 }
@@ -61,61 +63,63 @@ export default function RecruitMobileCard({ item }: RecruitMobileCardProps) {
       $isClosed={item.recruitmentStatus === 'CLOSED'}
     >
       <S.HeaderBox>
-        <div className="left">
-          <div className="left__company">{item.hotelName}</div>
-          <address className="left__address">
-            {sido} {sigungu}
-          </address>
-        </div>
+        <span className="company">{item.hotelName}</span>
 
         {dateFormat.dateOrToday(item.priorityDate) === 'TODAY' ? (
           <time className="today">TODAY</time>
         ) : (
-          <time>{dateFormat.dateOrToday(item.priorityDate)}</time>
+          <time className="priority">{dateFormat.dateOrToday(item.priorityDate)}</time>
         )}
       </S.HeaderBox>
 
-      <StyledTitle $isBold={isBold} $isHighlight={isHighlight}>
-        {isTag && <Tag label="급구" type="URGENT" width="32px" margin="0 5px 0 0" fontSize="11px" height="17px" />}
+      <S.ContentBox>
+        <StyledTitle $isBold={isBold} $isHighlight={isHighlight}>
+          {isTag && <Tag label="급구" type="URGENT" width="32px" margin="0 5px 0 0" fontSize="11px" height="17px" />}
+          <h5 className="text">{item.recruitmentTitle}</h5>
+        </StyledTitle>
 
-        <h5 className="text">{item.recruitmentTitle}</h5>
-      </StyledTitle>
+        <div className="description">
+          <Icon name="LocationB24x24" width="16px" height="16px" margin="0 1px 0 0" />
 
-      <S.infoBox>
-        <div className="jobs">
-          {item.jobs.length > 1 ? (
-            <span className="jobs__job">
-              {ALL_JOBS[item.jobs[0]]} 외 {item.jobs.length - 1}
-            </span>
-          ) : (
-            <span className="jobs__job">{ALL_JOBS[item.jobs[0]]} </span>
-          )}
+          <address className="description__address">
+            {sido} {sigungu}
+          </address>
 
-          <div className="jobs__conditions">
-            <span>{EXPERIENCE_CONDITION[item.experienceCondition]}</span>
-            <span>{employmentTypeFormat(item.employmentType)}</span>
-          </div>
-        </div>
-
-        <div>
           <RecruitPrice fonSize="13px" salary={item.salaryType} salaryAmount={item.salaryAmount} />
         </div>
+      </S.ContentBox>
+
+      <S.infoBox>
+        <DragScroll>
+          <Tag
+            label={item.jobs.length > 1 ? `${ALL_JOBS[item.jobs[0]]} 외 ${item.jobs.length - 1}` : ALL_JOBS[item.jobs[0]]}
+            type="JOB"
+            margin="0 8px 0 0"
+          />
+          <Tag label={EXPERIENCE_CONDITION[item.experienceCondition]} type="CONDITION" />
+          {item.workingDay && <Tag label={WORKING_DAY_LIST[item.workingDay]} type="CONDITION" />}
+          <Tag label={employmentTypeFormat(item.employmentType)} type="CONDITION" />
+          <Tag label={EDUCATION_LEVEL[item.educationCondition]} type="CONDITION" />
+          {item.roomCount < 0 && <Tag label={`객실 수 ${item.roomCount}`} type="CONDITION" />}
+          {item.workingTime.start && item.workingTime.end && (
+            <Tag label={`${item.workingTime.start} : ${item.workingTime.end}`} type="CONDITION" />
+          )}
+        </DragScroll>
       </S.infoBox>
     </S.RecruitMobileCard>
   );
 }
 
 const StyledTitle = styled.div<{ $isBold: boolean; $isHighlight: boolean }>`
-  flex: 1;
-  margin-bottom: 15px;
   display: flex;
   align-items: center;
   width: 100%;
+  margin-bottom: 15px;
   .text {
     width: fit-content;
-    color: ${(props) => props.theme.colors.gray800};
     font-weight: ${(props) => (props.$isBold ? 500 : 400)};
-    font-size: 14px;
+    color: ${(props) => (props.$isBold ? '#000000' : '#222222')};
+    font-size: 16px;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
@@ -130,12 +134,17 @@ const StyledTitle = styled.div<{ $isBold: boolean; $isHighlight: boolean }>`
 
 const S = {
   RecruitMobileCard: styled(motion.div)<{ $isClosed: boolean }>`
+    margin: 0 auto;
     width: 100%;
-    height: 100px;
+    height: 130px;
     display: flex;
     flex-direction: column;
-    border-bottom: 1px solid ${(props) => props.theme.colors.gray300};
-    padding: 15px 10px;
+
+    border: 1px solid ${(props) => props.theme.colors.gray200};
+    padding: 15px;
+    background-color: ${(props) => props.theme.colors.white};
+    margin-bottom: 15px;
+    border-radius: 15px;
     ${(props) =>
       props.$isClosed &&
       css`
@@ -146,68 +155,42 @@ const S = {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    color: ${(props) => props.theme.colors.gray700};
     font-size: 13px;
     font-weight: 500;
-    color: ${(props) => props.theme.colors.gray700};
-    .left {
-      display: flex;
-      align-items: center;
-      &__company {
-        font-size: 14px;
-        font-weight: 400;
-        color: ${(props) => props.theme.colors.black100};
-        &::after {
-          content: '·';
-          display: inline-block;
-          color: ${(props) => props.theme.colors.black100};
-          margin: 0 6px;
-        }
-      }
-      &__address {
-        font-size: 13px;
-        font-weight: 300;
-        color: ${(props) => props.theme.colors.gray700};
-      }
+    margin-bottom: 5px;
+    .company {
+      font-size: 14px;
+      font-weight: 400;
+      color: ${(props) => props.theme.colors.black700};
+    }
+    .priority {
+      color: ${(props) => props.theme.colors.black800};
     }
     .today {
       color: ${(props) => props.theme.colors.blue500};
       font-weight: 500;
     }
   `,
-  infoBox: styled.div`
-    display: flex;
-    justify-content: space-between;
-    .jobs {
+  ContentBox: styled.div`
+    flex: 1;
+    .description {
+      color: ${(props) => props.theme.colors.black500};
+      font-size: 13px;
+      text-align: start;
       display: flex;
       align-items: center;
-      white-space: nowrap;
-      font-size: 13px;
-      &__job {
+      &__address {
         &::after {
-          content: '';
-          display: inline-block;
-          width: 1px;
-          height: 10px;
-          background-color: ${(props) => props.theme.colors.gray500};
-          margin: 0 6px;
-        }
-        ${(props) => props.theme.media.mobile`
-        text-overflow: ellipsis;
-        word-break: break-all;
-        white-space: nowrap;
-        overflow: hidden;
-        max-width: 100px;
-        
-        `};
-      }
-      &__conditions {
-        display: flex;
-        align-items: center;
-        color: ${(props) => props.theme.colors.gray600};
-        & > span {
-          margin-right: 5px;
+          content: '·';
+          margin: 0 5px;
+          color: ${(props) => props.theme.colors.gray600};
         }
       }
     }
+  `,
+  infoBox: styled.div`
+    /* margin-top: 15px; */
+    display: flex;
   `,
 };
