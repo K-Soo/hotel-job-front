@@ -4,7 +4,9 @@ import RecruitFilterButton from '@/components/recruit/RecruitFilterButton';
 import RecruitTagButton from '@/components/recruit/RecruitTagButton';
 import DragScroll from '@/components/common/DragScroll';
 import { useRouter } from 'next/router';
-import path from '@/constants/path';
+import { hotelJobKeyValues } from '@/constants/job';
+
+// TODO - path filter
 
 interface RecruitFilterPanelProps {
   handleClickFilterButton: (event: React.MouseEvent<HTMLButtonElement>) => void;
@@ -62,38 +64,62 @@ export default function RecruitFilterPanel({ handleClickFilterButton }: RecruitF
           <RecruitTagButton
             name="job"
             margin="0 15px 0 0"
-            label="부부팀"
-            value={'CLEANING_TEAM'.toLocaleLowerCase()}
+            label="당번"
+            value={hotelJobKeyValues.DUTY_OFFICER.toLocaleLowerCase()}
             onClick={handleClickTagButton}
           />
           <RecruitTagButton
             name="job"
             margin="0 15px 0 0"
             label="캐셔"
-            value={'CASHIER'.toLocaleLowerCase()}
+            value={hotelJobKeyValues.CASHIER.toLocaleLowerCase()}
             onClick={handleClickTagButton}
           />
           <RecruitTagButton
+            name="job"
+            margin="0 15px 0 0"
+            label="부부팀"
+            value={hotelJobKeyValues.CLEANING_TEAM.toLocaleLowerCase()}
+            onClick={handleClickTagButton}
+          />
+          <RecruitTagButton
+            name="job"
+            margin="0 15px 0 0"
+            label="룸메이드"
+            value={hotelJobKeyValues.CLEANING.toLocaleLowerCase()}
+            onClick={handleClickTagButton}
+          />
+
+          {/* <RecruitTagButton
+            name="job"
+            margin="0 15px 0 0"
+            label="베팅"
+            value={hotelJobKeyValues.BEDDING.toLocaleLowerCase()}
+            onClick={handleClickTagButton}
+          /> */}
+
+          {/* <RecruitTagButton
             name="employmentType"
             margin="0 15px 0 0"
             label="파출"
             value={'CONTRACT'.toLocaleLowerCase()}
             onClick={handleClickTagButton}
-          />
-          <RecruitTagButton
+          /> */}
+          {/* <RecruitTagButton
             name="benefits"
             margin="0 15px 0 0"
             label="숙식제공"
             value={'WORK_LIFE_DORMITORY_OPERATION'.toLocaleLowerCase()}
             onClick={handleClickTagButton}
-          />
-          <RecruitTagButton
+          /> */}
+
+          {/* <RecruitTagButton
             name="workingDay"
             margin="0 15px 0 0"
             label="주말"
             value={'WEEKEND_DAY'.toLocaleLowerCase()}
             onClick={handleClickTagButton}
-          />
+          /> */}
         </div>
       </DragScroll>
     </S.RecruitFilterPanel>
