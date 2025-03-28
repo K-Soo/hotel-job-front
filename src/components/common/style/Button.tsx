@@ -149,7 +149,7 @@ const S = {
       props.$variant === 'primary' &&
       css`
         color: ${(props) => props.theme.colors.white};
-        background-color: ${(props) => props.theme.colors.blue600};
+        background-color: ${(props) => props.theme.colors.blue500};
         &:hover {
           background-color: ${(props) => props.theme.colors.blue600};
         }
