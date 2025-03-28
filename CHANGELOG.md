@@ -1,6 +1,113 @@
 # 변경 로그
 
 프로젝트의 모든 주요 변경 사항
+## [1.16.0](https://github.com/K-Soo/hotel-job-front/compare/v1.15.0...v1.16.0) (2025-03-28)
+
+
+### Features
+
+* **BottomNavigation:** 스크롤에 따라 하단 내비게이션 애니메이션 추가 ([549af26](https://github.com/K-Soo/hotel-job-front/commit/549af2600f7345d438f29aa6b71f747d971efd42))
+* **Footer:** marginTop 속성을 추가하여 푸터의 여백 조정 가능 ([8461219](https://github.com/K-Soo/hotel-job-front/commit/8461219664c21dc2d4572007875037eb54d97bd2))
+* **Notification:** 소켓을 통해 알림 읽음 상태 전송 로직 추가 ([bfd053f](https://github.com/K-Soo/hotel-job-front/commit/bfd053f7d0169fc6f67f7317e35e4b47f9eefdc2))
+* **PaginationProgress:** 페이지 진행 상태 표시 컴포넌트 추가 ([4aa0f46](https://github.com/K-Soo/hotel-job-front/commit/4aa0f46f5111343bcbb652d6ac46aa42e43fbee7))
+* **PaginationTag:** 페이지 번호 표시 컴포넌트 추가 ([9de14c0](https://github.com/K-Soo/hotel-job-front/commit/9de14c0fb5b38d3ee687bd9a656c04405292ef4c))
+* **Recruit:** 미디어 쿼리를 사용하여 패딩 및 배경색 추가 ([d486186](https://github.com/K-Soo/hotel-job-front/commit/d4861861dc89914d0593417d4eb5ea10d9c9ca0c))
+* **RecruitBasicList:** RecruitBasicList 컴포넌트 추가 및 기본 스타일 설정 ([b86dae7](https://github.com/K-Soo/hotel-job-front/commit/b86dae7835ac2a71cc0551427511540ad532a650))
+* **RecruitMobileCard:** DragScroll 컴포넌트 추가 및 레이아웃 개선 ([49ecead](https://github.com/K-Soo/hotel-job-front/commit/49eceadd0e266a33fe686ec224fe01ef5d63c1f9))
+* **ScrollToTop:** 스크롤 위치에 따라 상단으로 이동 버튼 추가 ([7aec277](https://github.com/K-Soo/hotel-job-front/commit/7aec277c0f5ae7979b8f5e83cc4dddb536cee629))
+* **Tag:** 'JOB' 및 'CONDITION' 태그 타입 추가 및 스타일 수정 ([4a4f8a4](https://github.com/K-Soo/hotel-job-front/commit/4a4f8a4fd718bb83b77b12de7237baf32704e888))
+
+
+### Bug Fixes
+
+* **RecruitDesktopCard:** font-weight 조정으로 텍스트 스타일 개선 ([427010a](https://github.com/K-Soo/hotel-job-front/commit/427010ac5db01085c7770b779afe8f585ecc1ee3))
+
+
+### Refactors
+
+* **EmployerAccountResetPage:** 세미콜론 삭제 ([37167f9](https://github.com/K-Soo/hotel-job-front/commit/37167f911ff221064baa843557b139a6d954b497))
+
+
+### Styles
+
+* 새로운 급여 표시 형식 추가 및 SVG 아이콘 추가, 스타일 개선 ([cfd8534](https://github.com/K-Soo/hotel-job-front/commit/cfd8534b2e47927c741d4b86ae9f618d8139928a))
+* **RecruitDetailWorkCondition:** 배경색 및 텍스트 스타일 개선 ([9844209](https://github.com/K-Soo/hotel-job-front/commit/9844209f9278b50ebfefa9ae8d1b929f8b30047a))
+
+
+### Updates
+
+* **_document.tsx:** 구글 사이트 검증 메타 태그 추가 ([30b88fb](https://github.com/K-Soo/hotel-job-front/commit/30b88fb2611021965998fb0d33aabcf7ee0479a4))
+* **_document.tsx:** 네이버 사이트 검증 메타 태그 추가 ([756b2de](https://github.com/K-Soo/hotel-job-front/commit/756b2de55c9831ddd087432ba21af320538d6afc))
+* **_document:** HTML 요소에 언어 속성 추가 ([e27b9ac](https://github.com/K-Soo/hotel-job-front/commit/e27b9ac56ae4b1fac34ae80dcb428732b84226d4))
+* 색상 및 스타일 개선, 급여 표시 형식 추가 ([f95c5f4](https://github.com/K-Soo/hotel-job-front/commit/f95c5f431dd1f579087f8deee6a1394ac5ca97c6))
+* **App:** 전역 스타일 시트 및 Pretendard 폰트 추가 ([fc5e4ad](https://github.com/K-Soo/hotel-job-front/commit/fc5e4adf1cfbfed87fd5b20fe3cec29b62cf73b8))
+* **AppThemeProvider:** GlobalStyles 컴포넌트 주석 처리 ([86834f2](https://github.com/K-Soo/hotel-job-front/commit/86834f298181d7341b1e53d904e9f3ec136ff182))
+* **auth:** 역할 상수 삭제 ([4f9dc08](https://github.com/K-Soo/hotel-job-front/commit/4f9dc089a00091a3c57dbe83b1f3bc91642d68c5))
+* **Button:** 배경색을 blue600에서 blue500으로 수정 ([f48adbe](https://github.com/K-Soo/hotel-job-front/commit/f48adbe3e1eda41953597760caa9fb1a9dac3279))
+* **colors:** 새로운 회색 배경 색상 추가 ([a839abf](https://github.com/K-Soo/hotel-job-front/commit/a839abfc687aeeeb631d3bb19dbd3d883c9eb576))
+* **colors:** gray30 색상 추가 ([7f180b5](https://github.com/K-Soo/hotel-job-front/commit/7f180b53378069e487523b6545552fafcda4b149))
+* **config:** Tailwind CSS 및 관련 플러그인 설정 추가 ([5e049a4](https://github.com/K-Soo/hotel-job-front/commit/5e049a414cd73115a87a413292c7fdf9c1b5d69c))
+* **constants:** 새로운 급여 유형 상수 추가 ([4cdd6ce](https://github.com/K-Soo/hotel-job-front/commit/4cdd6cef9404a133bc6c4677d807fed10c1de79e))
+* **ContentPanel:** 새로운 컴포넌트 추가 및 스타일 정의 ([b44c264](https://github.com/K-Soo/hotel-job-front/commit/b44c2648092f39b6419ca180a5be30eed93c1b9b))
+* **EmployerBenefitBanner:** 신규 컴포넌트 추가 및 애니메이션 효과 적용 ([0c8e969](https://github.com/K-Soo/hotel-job-front/commit/0c8e9696c0ce292ee6dcac1cbbee7b81d4d541c5))
+* **EmployerBenefitBanner:** 텍스트 스타일 수정 및 여백 조정 ([c910481](https://github.com/K-Soo/hotel-job-front/commit/c9104810d8833dd1857d5851d1c8d7cd0cb7150b))
+* **EmployerMain:** 역할 상수 경로 수정 ([ca542a7](https://github.com/K-Soo/hotel-job-front/commit/ca542a7c0f277d82ec6dbc793519b83052963459))
+* **EmployerPage:** 역할 상수를 사용하여 조건문 수정 ([ee576b8](https://github.com/K-Soo/hotel-job-front/commit/ee576b8a286bba8862a26296d6c0a9245ddb1f6b))
+* **employerPaymentContainer:** 결제 내역 로딩 오류 처리 및 오류 컴포넌트 추가 ([84094d9](https://github.com/K-Soo/hotel-job-front/commit/84094d9e2273894d840afb7edef5149d2ed5a140))
+* **EmployerPaymentTable:** 결제 항목이 없는 경우 렌더링 방지 로직 추가 ([0f8d55a](https://github.com/K-Soo/hotel-job-front/commit/0f8d55af37bba4bd7f25e85fe9a1d5dee7c53e2e))
+* **formatSalaryDisplay:** 급여 표시 형식화 함수 추가 ([e841295](https://github.com/K-Soo/hotel-job-front/commit/e8412955bb4a551cf313c636dda14269b453d53b))
+* **GeneralForm:** 소셜 로그인 버튼 텍스트 수정 ([b521649](https://github.com/K-Soo/hotel-job-front/commit/b521649c1bd8221bb4db20fa09576490de34a781))
+* **globals.css:** 전역 스타일 및 색상 변수 추가 ([2eeb5b3](https://github.com/K-Soo/hotel-job-front/commit/2eeb5b33da7253b9989c7270f684a630fb0e1a82))
+* **HomeContainer:** 레이아웃 개선을 위해 컴포넌트 구조 수정 및 불필요한 코드 제거 ([e77c500](https://github.com/K-Soo/hotel-job-front/commit/e77c500974aed402e665f67d9bcd3be940c05acb))
+* **HomePage:** Main 컴포넌트에 maxWidth 및 padding 속성 추가 ([212c8f4](https://github.com/K-Soo/hotel-job-front/commit/212c8f48947048a75305179d5fda22176139c60e))
+* **IconDimmed:** fontSize prop 추가 및 스타일 수정, 이미지 파일 추가 ([bf97fa9](https://github.com/K-Soo/hotel-job-front/commit/bf97fa9d0e055b513d479193c6faba2384adb303))
+* **icons:** 새로운 SVG 아이콘 추가 (위로 화살표, 위치 A, 위치 B) ([ffcf105](https://github.com/K-Soo/hotel-job-front/commit/ffcf105a6780420f76b3a1564e1b0b360f251eae))
+* **job:** 호텔 직무 키 값 수정 및 코드 정리 ([72ffff9](https://github.com/K-Soo/hotel-job-front/commit/72ffff9fc1f7ea85fbe97677f489948e37dc70f3))
+* **JobCategory:** 직업 카테고리 컴포넌트 추가 및 스타일 정의 ([f1542e4](https://github.com/K-Soo/hotel-job-front/commit/f1542e4ba8448201c10d836383bcf885d382d92b))
+* **JobSearch:** 모바일 스타일에서 배경색 추가 및 코드 정리 ([244c2a6](https://github.com/K-Soo/hotel-job-front/commit/244c2a6618635fe67c618b53b0d26f81e1725f54))
+* **JobSearch:** 코드 정리 및 PC/MOBILE 모달 주석 추가 ([85e33a7](https://github.com/K-Soo/hotel-job-front/commit/85e33a7905fc2b13b3a7c1406264018eaacbed04))
+* **Layout:** 스크롤 상단으로 이동하는 컴포넌트 추가 ([84e14d6](https://github.com/K-Soo/hotel-job-front/commit/84e14d687f0e7c78dc8855e4704d02a6a946dc36))
+* **layout:** ScrollToTop 컴포넌트 내보내기 추가 ([6093532](https://github.com/K-Soo/hotel-job-front/commit/609353270a92f585c5aca286c752b7e8eec99fcb))
+* **Main:** 메인 컴포넌트의 최대 너비 및 패딩 속성 수정 ([66b9ead](https://github.com/K-Soo/hotel-job-front/commit/66b9eadb2f504165591cc631881284ec5eea809c))
+* **Main:** padding 속성을 추가하여 레이아웃 조정 가능 ([65aa9a4](https://github.com/K-Soo/hotel-job-front/commit/65aa9a43da123a70fcb92deca57958bce747cea2))
+* **MainSpecialListContainer:** 레이아웃 개선을 위해 스페셜 채용 제목의 구조 수정 ([7c004fb](https://github.com/K-Soo/hotel-job-front/commit/7c004fbc1844eb222178a73e81f9aa7b465925f8))
+* **MainTopPanel:** 메인 상단 패널 컴포넌트 추가 및 레이아웃 정의 ([f7356c1](https://github.com/K-Soo/hotel-job-front/commit/f7356c10ef8624ce2f3224104e13b2b07f7c7a37))
+* **MainTopPanel:** 모바일 스타일에서 여백 조정 ([43ee3f3](https://github.com/K-Soo/hotel-job-front/commit/43ee3f3c48abc342daa046bb8eda5bd21f7e167e))
+* **Member:** 회원 정보 및 소셜 로그인 기능을 포함한 새로운 컴포넌트 추가 ([0e93b1f](https://github.com/K-Soo/hotel-job-front/commit/0e93b1fe05622c8dffc6534f037635a4ef4ce7fe))
+* **Navigation:** 네비게이션 컴포넌트의 색상 수정 ([a2b88f2](https://github.com/K-Soo/hotel-job-front/commit/a2b88f2deed8d6697c7d1f3278426957a3faed1f))
+* **next-seo.config.ts:** 사이트 이름에서 중복된 하이픈 제거 및 구글 메타태그 삭제 ([a43b13f](https://github.com/K-Soo/hotel-job-front/commit/a43b13f46a52b483283a1453b52addbfd823984f))
+* **next-sitemap:** 로그인 및 회원가입 경로를 제외 목록에 추가 ([3ff1ea3](https://github.com/K-Soo/hotel-job-front/commit/3ff1ea3abb27df103a13359aec8dcad77ff0f0c0))
+* **NotificationProvider:** 인앱 알림 수신 로그 메시지 개선 ([e2e7745](https://github.com/K-Soo/hotel-job-front/commit/e2e7745ce0d0e2fb8322f8a6c705d802e1332510))
+* **package:** react-intersection-observer 패키지 추가 ([ffe8c71](https://github.com/K-Soo/hotel-job-front/commit/ffe8c71d90c675aa90dca688aacb7bfdfcb0145a))
+* **PaginationProgress:** 높이를 6px에서 3px로 수정 ([d8b5bd2](https://github.com/K-Soo/hotel-job-front/commit/d8b5bd276dfc8ce8d750563e13f5cbf7ef30bc3b))
+* **pretendard:** 폰트 디스플레이 속성을 'swap'으로 설정 ([f369c2a](https://github.com/K-Soo/hotel-job-front/commit/f369c2ac0ff388465ef830af14da95f4b4137b4f))
+* **Recruit:** 모바일 스타일에서 배경색 주석 처리 ([344dde2](https://github.com/K-Soo/hotel-job-front/commit/344dde2f87b3215c271f82947b5dcd7bc5a2edb1))
+* **Recruit:** 패딩 속성을 수정하여 레이아웃 개선 ([d7a3569](https://github.com/K-Soo/hotel-job-front/commit/d7a3569dd38f8fc3cfd5becc115164e281ac3f35))
+* **RecruitBasicMobileContainer:** 모바일 환경을 위한 일반 채용 리스트 컴포넌트 추가 ([f2960df](https://github.com/K-Soo/hotel-job-front/commit/f2960df6e9212a3622ed8cef42a6f113ef4d5298))
+* **RecruitBasicPcContainer:** PC 환경을 위한 일반 채용 리스트 컴포넌트 추가 ([e709894](https://github.com/K-Soo/hotel-job-front/commit/e7098941cc4339a0e72fbd7e686d00585025da2b))
+* **RecruitContainer:** 반응형 디자인을 위한 PC 및 모바일 컨테이너 추가 ([327408a](https://github.com/K-Soo/hotel-job-front/commit/327408a10adffd8e7e0ce7415f7bd88ae8b1da29))
+* **RecruitContainer:** SSR 비활성화를 위해 RecruitBasicPcContainer 및 RecruitBasicMobileContainer를 동적으로 로드하도록 수정 ([357017d](https://github.com/K-Soo/hotel-job-front/commit/357017d96fd9099eb2fb19018140b65ad6a942da))
+* **RecruitDetail:** 모바일에서의 여백 추가 ([7c05346](https://github.com/K-Soo/hotel-job-front/commit/7c053469d430fafad86de55a678d62d9c48b5cf5))
+* **RecruitDetailContent:** 배경색 주석 처리하여 스타일 수정 ([0e3141d](https://github.com/K-Soo/hotel-job-front/commit/0e3141d20444bf74db146c35c0a575aabfe2f442))
+* **RecruitDetailContent:** 버튼 스타일 및 레이아웃 개선, 배경색 추가 ([a167e86](https://github.com/K-Soo/hotel-job-front/commit/a167e86cf84194616de8f40fa0f3ba40bb1e7eed))
+* **RecruitDetailInfo:** 배경색 변경 및 텍스트 스타일 개선 ([f24efa3](https://github.com/K-Soo/hotel-job-front/commit/f24efa3254cac84a5d5a2f482b169f53fc572d28))
+* **RecruitFilterPanel:** 필터 버튼의 라벨 및 값을 호텔 직무 키 값으로 수정 ([8db3120](https://github.com/K-Soo/hotel-job-front/commit/8db312066f9ccb52edbcd144d0ac8f11d21167d9))
+* **RecruitPage:** ScrollToTop 컴포넌트 추가 및 Main, Footer 스타일 수정 ([6ce38ba](https://github.com/K-Soo/hotel-job-front/commit/6ce38ba89f220633fb9e4c97c0d37d293fddb2de))
+* **RecruitPrice:** 급여 표시 형식 개선 및 색상 추가 ([ef1bc17](https://github.com/K-Soo/hotel-job-front/commit/ef1bc1785b308c85f084dacce9b3fcf4e5270ae8))
+* **RecruitSearch:** 레이아웃 개선을 위해 여백 및 최대 너비 속성 추가 ([5193668](https://github.com/K-Soo/hotel-job-front/commit/5193668035a76a09e7b95a7b0e49d65dca873344))
+* **RecruitSpecialCard:** font-weight 조정 및 배경색 추가 ([6dc3f4d](https://github.com/K-Soo/hotel-job-front/commit/6dc3f4d0dc34ab5acec9a15574296018b705883e))
+* **RecruitSpecialListContainer:** 스페셜 채용 제목에서 이모지 제거 ([756b310](https://github.com/K-Soo/hotel-job-front/commit/756b3107a6ec9d05d344daf4db1e293ab198c5d6))
+* **RecruitUrgentCard:** hover 효과 개선 및 제목 스타일 조정 ([5322008](https://github.com/K-Soo/hotel-job-front/commit/53220087e97abac6a7164854cfc9e9266e0e515d))
+* **RecruitUrgentListContainer:** 중복된 RecruitUrgentCard 렌더링 코드 제거 ([bf4e70a](https://github.com/K-Soo/hotel-job-front/commit/bf4e70a0b91eeda9fe2fc2f20c7ec3d64315496f))
+* **role:** 역할 상수 추가 ([0a7e92f](https://github.com/K-Soo/hotel-job-front/commit/0a7e92fa34eeea8760b3a9a311f753b8fafaa25e))
+* **SignInPage:** SEO 설정 변경 - nofollow 및 noindex 추가 ([047d910](https://github.com/K-Soo/hotel-job-front/commit/047d910536abf816d1efd45729f8cbe6b34c1402))
+* **svg:** Spin 아이콘 추가 ([d761d36](https://github.com/K-Soo/hotel-job-front/commit/d761d369d4cf46b3810ea738b66c5612c7c4635a))
+* **svg:** Spin 아이콘 추가 ([a106001](https://github.com/K-Soo/hotel-job-front/commit/a106001ff1afde475467c48345939fae2d7ffc3c))
+* **types:** RecruitListItem 인터페이스에 교육 조건, 방 개수, 근무일 및 근무시간 추가 ([1b580e7](https://github.com/K-Soo/hotel-job-front/commit/1b580e7155f87ccb0c37a93bef58eafee0145632))
+* **User:** 기업회원 버튼 제거 및 로그인 버튼 유지 ([c7f0ad2](https://github.com/K-Soo/hotel-job-front/commit/c7f0ad26d3be07915e4b455eb50aff465e9fddba))
+* **utils:** 급여 표시 형식화 함수 내보내기 추가 ([5989341](https://github.com/K-Soo/hotel-job-front/commit/59893417014c07ef0702e2bec635d875b64b64ee))
+* **WageBanner:** 새로운 임금 배너 컴포넌트 추가 및 클릭 시 링크 열기 기능 구현 ([55520ec](https://github.com/K-Soo/hotel-job-front/commit/55520ec862a14f4bfd6d912f46ecb889d03a37aa))
+
 ## [1.15.0](https://github.com/K-Soo/hotel-job-front/compare/v1.14.5...v1.15.0) (2025-03-24)
 
 
