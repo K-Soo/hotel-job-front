@@ -24,13 +24,16 @@ const getJobObject = (job: string | string[] | undefined): Record<AllJobsKeyValu
 
   const jobsArray = Array.isArray(job) ? job.map((item) => item.toUpperCase()) : [job.toUpperCase()];
 
-  const jobObject = jobsArray.reduce((acc, key) => {
-    const value = ALL_JOBS[key as AllJobsKeyValuesKeys];
-    if (value) {
-      acc[key as AllJobsKeyValuesKeys] = value;
-    }
-    return acc;
-  }, {} as Record<AllJobsKeyValuesKeys, string>);
+  const jobObject = jobsArray.reduce(
+    (acc, key) => {
+      const value = ALL_JOBS[key as AllJobsKeyValuesKeys];
+      if (value) {
+        acc[key as AllJobsKeyValuesKeys] = value;
+      }
+      return acc;
+    },
+    {} as Record<AllJobsKeyValuesKeys, string>,
+  );
 
   return jobObject;
 };
@@ -132,6 +135,7 @@ export default function JobSearch() {
 
   return (
     <S.JobSearch>
+      {/* PC 모달 */}
       {!isTablet && isOpenJobModal && (
         <DynamicJobModalForm
           tabIndex={tabIndex}
@@ -147,6 +151,7 @@ export default function JobSearch() {
         </DynamicJobModalForm>
       )}
 
+      {/* MOBILE 모달 */}
       {isTablet && isOpenModal && (
         <DynamicNoSSRModal handleCloseModal={() => setIsOpenModal(false)}>
           <Modal.Header title="업종 · 직무" handleCloseModal={() => setIsOpenModal(false)} />
@@ -209,16 +214,10 @@ export default function JobSearch() {
 const S = {
   JobSearch: styled.div`
     position: relative;
-
     ${(props) => props.theme.media.mobile`
-      // border-top-left-radius: 8px;
-      // border-top-right-radius: 8px;
       border-radius: 8px;
       padding-left: 15px;
       height: 50px;
-      // border-top: 1px solid ${props.theme.colors.gray500};
-      // border-left: 1px solid ${props.theme.colors.gray500};
-      // border-right: 1px solid ${props.theme.colors.gray500};
       border: 1px solid ${props.theme.colors.gray500};
     `};
 
@@ -236,10 +235,10 @@ const S = {
   JobSearchButton: styled(motion.div)`
     height: 100%;
     border-radius: inherit;
-
     .wrapper {
       height: 100%;
       display: flex;
+      flex-wrap: nowrap;
       align-items: center;
       cursor: pointer;
       font-weight: 600;
