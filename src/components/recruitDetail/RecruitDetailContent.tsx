@@ -41,7 +41,7 @@ export default function RecruitDetailContent({ content }: RecruitDetailContentPr
 const S = {
   RecruitDetailContent: styled.div<{ $isOverflow: boolean }>`
     margin-bottom: 50px;
-    background-color: ${(props) => props.theme.colors.blue30};
+    /* background-color: ${(props) => props.theme.colors.blue30}; */
     border-radius: 10px;
     padding: 10px 15px;
     .content-text {
