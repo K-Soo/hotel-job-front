@@ -19,8 +19,8 @@ export default function EmployerBenefitBanner() {
       onClick={() => router.push(path.LANDING_EMPLOYER)}
     >
       <div className="flex flex-col justify-center text-white">
-        <p>첫 채용 공고 등록 무료! 🎁</p>
-        <p className="text-[18px] leading-7">업체회원 가입하고 혜택을 누리세요.</p>
+        <p className="leading-5">첫 채용 공고 등록 무료! 🎁</p>
+        <p className="text-[18px] leading-6">업체회원 가입하고 혜택을 누리세요.</p>
       </div>
     </motion.article>
   );
