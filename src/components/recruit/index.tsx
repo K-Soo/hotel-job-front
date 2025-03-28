@@ -15,7 +15,7 @@ const S = {
       padding: 15px;
     `};
     ${(props) => props.theme.media.mobile`
-      background-color: ${props.theme.colors.gray50};
+      // background-color: ${props.theme.colors.gray50};
     `};
   `,
 };
