@@ -16,7 +16,7 @@ export default function MainTopPanel() {
 
       <div className="mx-auto flex w-full max-w-[1024px] flex-col gap-[20px] md:flex-row">
         <JobCategory />
-        <div className="flex shrink-0 grow-1 flex-col gap-[10px] md:gap-[20px]">
+        <div className="flex shrink-0 grow-1 flex-col md:gap-[20px]">
           <div className="flex flex-1 gap-[20px]">
             <WageBanner />
 
