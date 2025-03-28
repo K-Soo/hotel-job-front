@@ -202,6 +202,7 @@ export default function JobSearch() {
               <span className="placeholder">업종 · 직무</span>
             )}
           </motion.div>
+
           <S.ArrowBottomIcon>
             <Icon name="ArrowRight16x16" width="16px" height="16px" />
           </S.ArrowBottomIcon>
@@ -214,11 +215,13 @@ export default function JobSearch() {
 const S = {
   JobSearch: styled.div`
     position: relative;
+
     ${(props) => props.theme.media.mobile`
       border-radius: 8px;
       padding-left: 15px;
       height: 50px;
       border: 1px solid ${props.theme.colors.gray500};
+      background-color: white;
     `};
 
     /* TODO - 지역검색 이후 */
