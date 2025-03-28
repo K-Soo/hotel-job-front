@@ -23,6 +23,15 @@ export default function Member() {
     window.location.href = baseUrl;
   };
 
+  const handleClickSetting = () => {
+    if (role === Role.JOB_SEEKER) {
+      router.push(path.USER_PROFILE);
+    }
+    if (role === Role.EMPLOYER) {
+      router.push(path.EMPLOYER_ACCOUNT);
+    }
+  };
+
   return (
     <div className="hidden h-[220px] w-[280px] shrink-1 flex-col rounded-[20px] bg-white p-6 shadow-md md:flex">
       {isAuthLoading && (
@@ -38,7 +47,7 @@ export default function Member() {
             <button className="cursor-pointer text-[14px] text-gray-600 hover:underline" onClick={() => handleClickSignout()}>
               로그아웃
             </button>
-            <Icon name="Settings24x24" width="20px" height="20px" color="#444444" />
+            <Icon name="Settings24x24" width="20px" height="20px" color="#444444" onClick={() => handleClickSetting()} />
           </div>
 
           <div className="leading-5 font-medium">
