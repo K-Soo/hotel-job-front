@@ -15,7 +15,9 @@ import useNotification from '@/hooks/useNotification';
 import { DefaultSeo } from 'next-seo';
 import { queryClientDefaultOption } from '@/constants/queryClientDefaultOption';
 import AppComponent from '@/auth/AppComponent';
+import '@/styles/globals.css';
 import '@/recoil';
+import pretendard from '@/fonts/pretendard';
 
 const DynamicNoSSRAppComponent = dynamic(() => import('@/auth/AppComponent'), { ssr: false });
 
@@ -44,7 +46,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
                   </GuardComponent>,
                 )}
             </NotificationProvider>
-            {/* <ReactQueryDevtools initialIsOpen={false} /> */}
+            <ReactQueryDevtools initialIsOpen={false} />
           </QueryClientProvider>
         </RecoilRoot>
       </AppThemeProvider>
