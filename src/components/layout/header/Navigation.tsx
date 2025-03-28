@@ -55,7 +55,7 @@ const S = {
     .item {
       margin-right: 15px;
       font-size: 18px;
-      color: ${(props) => props.theme.colors.gray700};
+      color: ${(props) => props.theme.colors.black};
       height: 40px;
       padding: 0 12px;
       border-radius: 5px;
@@ -65,7 +65,7 @@ const S = {
       justify-content: center;
       &:hover {
         background-color: ${(props) => props.theme.colors.gray100};
-        color: ${(props) => props.theme.colors.black};
+        color: ${(props) => props.theme.colors.black400};
         transition: all 0.3s;
       }
     }
