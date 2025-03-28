@@ -102,7 +102,7 @@ export default function RecruitMobileCard({ item }: RecruitMobileCardProps) {
           <Tag label={EDUCATION_LEVEL[item.educationCondition]} type="CONDITION" />
           {item.roomCount < 0 && <Tag label={`객실 수 ${item.roomCount}`} type="CONDITION" />}
           {item.workingTime.start && item.workingTime.end && (
-            <Tag label={`${item.workingTime.start} : ${item.workingTime.end}`} type="CONDITION" />
+            <Tag label={dateFormat.timeRange(item.workingTime.start, item.workingTime.end)} type="CONDITION" />
           )}
         </DragScroll>
       </S.infoBox>
