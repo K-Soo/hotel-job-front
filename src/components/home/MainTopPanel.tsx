@@ -8,7 +8,7 @@ import RecruitSearch from '@/components/recruit/recruitSearch';
 
 export default function MainTopPanel() {
   return (
-    <article className="bg-gray-30 px-[15px] py-[35px] lg:px-0">
+    <article className="bg-gray-30 px-[15px] py-[30px] lg:px-0">
       <RecruitSearch>
         <JobSearch />
         {/* <LocationSearch /> */}
