@@ -65,7 +65,7 @@ export default function RecruitUrgentCard({ item }: RecruitUrgentCardProps) {
         <div>
           {isTag && <Tag label="급구" type="URGENT" width="32px" fontSize="11px" height="17px" />}
           <StyledTitle $isBold={isBold} $isHighlight={isHighlight}>
-            <h5 className="recruitment-title">{item.recruitmentTitle} 모십니다아아아</h5>
+            <h5 className="recruitment-title">{item.recruitmentTitle}</h5>
           </StyledTitle>
         </div>
 
