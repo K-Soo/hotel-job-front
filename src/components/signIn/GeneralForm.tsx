@@ -1,6 +1,5 @@
 import styled, { css } from 'styled-components';
 import Image from 'next/image';
-import { useRouter } from 'next/router';
 import { url } from '@/constants/oauth';
 
 export default function GeneralForm() {
@@ -26,12 +25,12 @@ export default function GeneralForm() {
     <S.GeneralForm>
       <S.SocialButton name="KAKAO" onClick={handleClickSocialSignInButton}>
         <Image src="/images/social/kakao_icon.svg" width={18} height={18} alt="kakao" className="image-icon" />
-        <span className="text">카카오 로그인</span>
+        <span className="text">카카오로 시작하기</span>
       </S.SocialButton>
 
       <S.SocialButton name="GOOGLE" onClick={handleClickSocialSignInButton}>
         <Image src="/images/social/google_icon.svg" width={18} height={18} alt="google" className="image-icon" />
-        <span className="text">구글 로그인</span>
+        <span className="text">구글로 시작하기</span>
       </S.SocialButton>
     </S.GeneralForm>
   );

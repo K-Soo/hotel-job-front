@@ -30,7 +30,7 @@ const S = {
     width: calc(100% - 30px);
     position: relative;
     margin: 0 auto;
-    height: 6px;
+    height: 3px;
     background-color: #eee;
     border-radius: 3px;
     overflow: hidden;

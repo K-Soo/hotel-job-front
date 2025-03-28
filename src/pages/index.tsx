@@ -22,7 +22,9 @@ HomePage.getLayout = (page: React.ReactElement) => {
         <DesktopNavigation />
         <MobileNavigation logoIcon notificationIcon signUpIcon />
       </Header>
-      <Main>{page}</Main>
+      <Main maxWidth="100%" padding="0 0 30px 0">
+        {page}
+      </Main>
       <ScrollToTop />
       <Footer />
       <BottomNavigation />

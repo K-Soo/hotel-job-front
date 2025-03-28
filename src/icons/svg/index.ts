@@ -56,8 +56,10 @@ import Eye24x24 from './eye24x24.svg';
 import ArrowToTop24x24 from './arrowToTop24x24.svg';
 import LocationA24x24 from './locationA24x24.svg';
 import LocationB24x24 from './locationB24x24.svg';
+import Spin24x24 from './spin24x24.svg';
 
 export {
+  Spin24x24,
   LocationB24x24,
   LocationA24x24,
   ArrowToTop24x24,

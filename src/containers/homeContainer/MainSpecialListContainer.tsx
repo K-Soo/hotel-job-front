@@ -45,8 +45,8 @@ export default function MainSpecialListContainer() {
 
   if (isSuccess && data) {
     return (
-      <>
-        <RecruitSectionTitle title="🌟 스페셜 채용" />
+      <div className="px-[15px] py-[35px] lg:px-0">
+        <RecruitSectionTitle title="스페셜 채용" />
 
         {isEmptyFirstPage && isFirstPage && <EmptyComponent height="200px" message="등록된 공고가 없어요." isVisibleImage={false} />}
 
@@ -63,7 +63,7 @@ export default function MainSpecialListContainer() {
             })}
           </RecruitSpecialList>
         </InfiniteScroll>
-      </>
+      </div>
     );
   }
 }

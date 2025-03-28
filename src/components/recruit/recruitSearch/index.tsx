@@ -11,9 +11,12 @@ export default function RecruitSearch({ children }: RecruitSearchProps) {
 
 const S = {
   RecruitSearch: styled.div`
+    margin: 0 auto;
     display: flex;
     margin-top: 15px;
     margin-bottom: 50px;
+    max-width: 1024px;
+    width: 100%;
     color: ${({ theme }) => theme.colors.black300};
     ${(props) => props.theme.media.mobile`
       flex-direction: column;
