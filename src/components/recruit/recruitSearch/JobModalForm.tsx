@@ -57,6 +57,7 @@ export default function JobModalForm({
           <Icon name="CloseA24x24" width="24px" height="24px" />
         </IconDimmed>
       </S.Header>
+
       <S.Content>
         <div className="business">
           {BUSINESS_DATA.map((item, index) => (
@@ -76,6 +77,7 @@ export default function JobModalForm({
             </motion.div>
           ))}
         </div>
+
         <div className="job">
           {businessType.length === 0 && (
             <StyledEmpty>
