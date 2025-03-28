@@ -58,7 +58,7 @@ export default function RecruitSpecialListContainer() {
 
     return (
       <>
-        <RecruitSectionTitle title="🌟 스페셜 채용" />
+        <RecruitSectionTitle title="스페셜 채용" />
 
         {isEmptyFirstPage && isFirstPage && <EmptyComponent height="150px" message="해당하는 공고가 없어요." isVisibleImage={false} />}
 
