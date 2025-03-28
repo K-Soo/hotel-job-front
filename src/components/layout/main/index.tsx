@@ -16,20 +16,20 @@ export function Main({ maxWidth, padding, children }: MainProps) {
 
 const S = {
   Main: styled.main<{ $maxWidth?: string; $padding?: string }>`
+    max-width: ${(props) => (props.$maxWidth ? props.$maxWidth : '1024px')};
+    padding: ${(props) => (props.$padding ? props.$padding : '30px 0 30px 0')};
     flex: 1;
     height: 100%;
-    max-width: ${(props) => (props.$maxWidth ? props.$maxWidth : '1024px')};
     width: 100%;
     display: flex;
     flex-direction: column;
     margin: 0 auto;
-    padding: ${(props) => (props.$padding ? props.$padding : '30px 0 30px 0')};
+
     ${(props) =>
       !props.$padding &&
       props.theme.media.laptop`
         padding: 15px 15px 0 15px;
       `};
-
     ${(props) =>
       !props.$padding &&
       props.theme.media.tablet`
