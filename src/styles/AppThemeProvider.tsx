@@ -16,7 +16,7 @@ const theme: DefaultTheme = {
 export default function Theme({ children }: ThemeProps) {
   return (
     <ThemeProvider theme={theme}>
-      <GlobalStyles />
+      {/* <GlobalStyles /> */}
       {children}
     </ThemeProvider>
   );
