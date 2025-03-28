@@ -70,6 +70,7 @@
   },
   "devDependencies": {
     "@svgr/webpack": "^8.1.0",
+    "@tailwindcss/postcss": "^4.0.17",
     "@types/crypto-js": "^4.2.2",
     "@types/lodash": "^4.17.13",
     "@types/node": "^20",
@@ -77,9 +78,15 @@
     "@types/react-dom": "^18",
     "@types/react-infinite-scroller": "^1.2.5",
     "@types/react-scroll": "^1.8.10",
+    "@typescript-eslint/parser": "^8.28.0",
     "env-cmd": "^10.1.0",
     "eslint": "^8",
     "eslint-config-next": "14.2.5",
-    "typescript": "^5"
+    "eslint-config-prettier": "^10.1.1",
+    "eslint-plugin-tailwindcss": "^3.18.0",
+    "postcss": "^8.5.3",
+    "prettier-plugin-tailwindcss": "^0.6.11",
+    "tailwindcss": "^4.0.17",
+    "typescript": "^5.4.5"
   }
 }
