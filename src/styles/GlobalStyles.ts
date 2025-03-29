@@ -23,10 +23,13 @@ const GlobalStyle = createGlobalStyle`
     padding: 0;
     box-sizing: border-box;
     user-select: none;
+    
   }
 
   html {
     overflow-x: hidden;
+    
+
     /* scrollbar-gutter: stable; //스크롤바 공간 예약 */
   }
   body {
@@ -35,6 +38,7 @@ const GlobalStyle = createGlobalStyle`
     font-family: var(--font-family);
     -webkit-text-size-adjust: 100%; 
     text-size-adjust: 100%; //텍스트 크기를 자동으로 조정하지 않음
+    font-family: ${pretendard.style.fontFamily};
     /* overflow-x: hidden; sticky: x */
   }
 
@@ -48,6 +52,11 @@ const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
     -webkit-tap-highlight-color: #e8f3ff; 
   }
+
+  span {
+    font-family: ${pretendard.style.fontFamily};
+  }
+
   select {
     outline: none; /* 기본 포커스 스타일 제거 */
     all: unset;
