@@ -185,7 +185,6 @@ const S = {
     height: 26px;
     font-size: 14px;
     font-weight: 400;
-    line-height: 24px;
     border-radius: 50%;
     margin: 0 6px;
     cursor: pointer;
