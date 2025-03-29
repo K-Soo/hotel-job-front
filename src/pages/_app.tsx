@@ -15,6 +15,7 @@ import useNotification from '@/hooks/useNotification';
 import { DefaultSeo } from 'next-seo';
 import { queryClientDefaultOption } from '@/constants/queryClientDefaultOption';
 import GoogleTagManager from '@/lib/GoogleTagManager';
+import NaverAnalytics from '@/lib/NaverAnalytics';
 import '@/styles/globals.css';
 import '@/recoil';
 
@@ -29,6 +30,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
   return (
     <>
       <GoogleTagManager />
+      <NaverAnalytics />
       <DefaultSeo {...DEFAULT_SEO} />
       <SpeedInsights />
       <AppThemeProvider>
