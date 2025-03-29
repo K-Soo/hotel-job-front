@@ -7,7 +7,7 @@ export default function UtilityMenu() {
     <S.UtilityMenu>
       <div className="wrapper">
         {/*TODO: 다국어 지원 필요 시 추가*/}
-        {/* <Link href={path.SUPPORT_NOTICE}>고객센터</Link> */}
+        {/* <Link href={path.HELP__NOTICE}>고객센터</Link> */}
       </div>
     </S.UtilityMenu>
   );
