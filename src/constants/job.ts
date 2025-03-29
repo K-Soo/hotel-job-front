@@ -18,6 +18,7 @@ export const HOTEL_JOBS = {
   DUTY_OFFICER: '당번',
   DUTY_ASSISTANT: '당번 보조',
   CHEF: '주방',
+  KITCHEN_ASSISTANT: '주방 보조',
   MANAGER: '지배인',
 };
 
