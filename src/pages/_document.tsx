@@ -1,6 +1,7 @@
 import Document, { DocumentContext, Html } from 'next/document';
 import { ServerStyleSheet } from 'styled-components';
 import { Head, Main, NextScript } from 'next/document';
+import pretendard from '@/fonts/pretendard';
 
 export default class MyDocument extends Document {
   static async getInitialProps(ctx: DocumentContext) {
@@ -30,7 +31,7 @@ export default class MyDocument extends Document {
 
   render() {
     return (
-      <Html lang="ko">
+      <Html lang="ko" className={pretendard.variable}>
         <Head>
           <link rel="manifest" href="/manifest.json" />
           <link rel="icon" href="/favicon.ico" sizes="any" />

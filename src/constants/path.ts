@@ -21,11 +21,10 @@ const path = {
 
   CHECKOUT: '/checkout',
 
-  SUPPORT_NOTICE: '/support/notice', //공지사항
-  SUPPORT_FAQ: '/support/faq', //FAQ
-
   POLICY_TERMS: '/policy/terms', //서비스 이용약관
   POLICY__PRIVACY: '/policy/privacy', //개인정보 처리방침
+
+  HELP__NOTICE: '/help/notice',
 
   // USER
   USER: '/user', //마이페이지
