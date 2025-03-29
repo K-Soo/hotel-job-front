@@ -14,10 +14,9 @@ import DEFAULT_SEO from '@/next-seo.config';
 import useNotification from '@/hooks/useNotification';
 import { DefaultSeo } from 'next-seo';
 import { queryClientDefaultOption } from '@/constants/queryClientDefaultOption';
-import AppComponent from '@/auth/AppComponent';
+import GoogleTagManager from '@/lib/GoogleTagManager';
 import '@/styles/globals.css';
 import '@/recoil';
-import pretendard from '@/fonts/pretendard';
 
 const DynamicNoSSRAppComponent = dynamic(() => import('@/auth/AppComponent'), { ssr: false });
 
@@ -29,6 +28,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
 
   return (
     <>
+      <GoogleTagManager />
       <DefaultSeo {...DEFAULT_SEO} />
       <SpeedInsights />
       <AppThemeProvider>
