@@ -1,10 +1,10 @@
 import Script from 'next/script';
+import environment from '@/environment';
 
 export default function GoogleTagManager() {
-  if (process.env.NODE_ENV !== 'production') {
+  if (!environment.isProd) {
     return null;
   }
-
   return (
     <Script
       id="google-tag-manager"
