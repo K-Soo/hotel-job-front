@@ -2,7 +2,7 @@
 
 @layer base {
   :root {
-    --font-pretendard: 'Pretendard Variable', sans-serif;
+    --font-pretendard: var(--font-pretendard);
   }
 
   html {
@@ -16,7 +16,6 @@
   }
 
   textarea {
-    font-family: var(--font-pretendard);
     line-height: 1.5;
   }
 
@@ -32,11 +31,6 @@
   address,
   var {
     font-style: normal;
-  }
-
-  button {
-    all: unset;
-    box-sizing: border-box;
   }
 }
 
