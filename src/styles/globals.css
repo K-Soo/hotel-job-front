@@ -32,6 +32,11 @@
   var {
     font-style: normal;
   }
+
+  button {
+    all: unset;
+    box-sizing: border-box;
+  }
 }
 
 @theme {
