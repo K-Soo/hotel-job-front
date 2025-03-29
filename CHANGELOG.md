@@ -1,6 +1,32 @@
 # 변경 로그
 
 프로젝트의 모든 주요 변경 사항
+### [1.16.1](https://github.com/K-Soo/hotel-job-front/compare/v1.16.0...v1.16.1) (2025-03-29)
+
+
+### Updates
+
+* **App:** 구글 태그 관리자 컴포넌트 추가 ([0602ac3](https://github.com/K-Soo/hotel-job-front/commit/0602ac374b4d0ad6c7b3bc775a2564c840649718))
+* **App:** 네이버 애널리틱스 컴포넌트 추가 ([800d90c](https://github.com/K-Soo/hotel-job-front/commit/800d90c723fb16e771bf0ab275cd93c718f8c856))
+* **Document:** 구글 태그 관리자용 noscript 추가 ([8a6e400](https://github.com/K-Soo/hotel-job-front/commit/8a6e400e2cbc524d589e9f3b0f94572bcb5baff7))
+* **Document:** Pretendard 폰트 클래스를 문서에 추가 ([318ec95](https://github.com/K-Soo/hotel-job-front/commit/318ec955becab100e006dee4c06921127d64d24c))
+* **globals.css:** 버튼 스타일 초기화 및 박스 모델 설정 추가 ([7bc1b47](https://github.com/K-Soo/hotel-job-front/commit/7bc1b47a19c69ad3f7bc660ae8872a399a1bf347))
+* **GlobalStyles:** Pretendard 폰트를 body와 span에 적용 ([ab5a856](https://github.com/K-Soo/hotel-job-front/commit/ab5a85641b71ec4e0cd653a48934eaa9e5c3d940))
+* **GoogleTagManager:** 구글 태그 관리자 스크립트 추가 ([7b7d13a](https://github.com/K-Soo/hotel-job-front/commit/7b7d13a3da1a522d259ea12c1a9b219f576b9e02))
+* **GoogleTagManager:** 환경 변수를 사용하여 프로덕션 환경 확인 로직 수정 ([f9969e0](https://github.com/K-Soo/hotel-job-front/commit/f9969e02c2b04ab3799472041b703d162428ab0c))
+* **Job:** 주방 보조 직무 추가 ([8912730](https://github.com/K-Soo/hotel-job-front/commit/8912730a0ccff02adc2b5169f8082e7542a47e17))
+* **Layout:** Pretendard 폰트 클래스 추가 ([970e88a](https://github.com/K-Soo/hotel-job-front/commit/970e88a48cdb978871560ab5d500b03b8c4215d8))
+* **MainTopPanel:** 모바일 스타일에서 패딩 조정 ([424103f](https://github.com/K-Soo/hotel-job-front/commit/424103f34dcf5cdc9c3eb47de09384cb8bce5785))
+* **Member:** 설정 아이콘 클릭 시 사용자 역할에 따라 프로필로 이동하는 기능 추가 ([212d90a](https://github.com/K-Soo/hotel-job-front/commit/212d90a5f87ff76a81d631ae32a5a87dc4f27c03))
+* **NaverAnalytics:** 네이버 애널리틱스 스크립트 추가 및 프로덕션 환경에서만 로드하도록 수정 ([b3e9364](https://github.com/K-Soo/hotel-job-front/commit/b3e936493aa377b2882a612260b300c1d04fb2ba))
+* **PaginationComponent:** line-height 스타일 제거 ([164db5c](https://github.com/K-Soo/hotel-job-front/commit/164db5c50fbb8b17aab7cead92618721982587cb))
+* **path:** 고객센터 관련 경로를 HELP__NOTICE로 수정 및 불필요한 경로 삭제 ([5ff40db](https://github.com/K-Soo/hotel-job-front/commit/5ff40dbbd5b06b70350f1baf0ba64ebb11eb30ea))
+* **RecruitMobileCard:** 근무 시간 표시 형식 개선 ([445b8ba](https://github.com/K-Soo/hotel-job-front/commit/445b8baf8497f08c30356b7c2fdcf165a5d27fb2))
+* **RecruitMobileCard:** 근무 시간 표시 형식 개선 ([6626035](https://github.com/K-Soo/hotel-job-front/commit/662603538e05a5d17ff794a7f1f37cd91035e053))
+* **RecruitUrgentCard:** 불필요한 텍스트 제거로 제목 표시 개선 ([6349d2e](https://github.com/K-Soo/hotel-job-front/commit/6349d2ef97ee6076352f3aa5b484b5f010e9f5e3))
+* **styles:** Pretendard 폰트 변수를 수정하고 불필요한 스타일 제거 ([5cd6a76](https://github.com/K-Soo/hotel-job-front/commit/5cd6a76e7b83af1dabee6050a5ef22a75cb0634e))
+* **UtilityMenu:** 고객센터 링크 경로를 HELP__NOTICE로 수정 ([6101850](https://github.com/K-Soo/hotel-job-front/commit/61018502ab1219e8f41b6f0ad96ef97d37d5268d))
+
 ## [1.16.0](https://github.com/K-Soo/hotel-job-front/compare/v1.15.0...v1.16.0) (2025-03-28)
 
 
