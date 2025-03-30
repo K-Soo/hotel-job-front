@@ -626,6 +626,10 @@ export interface EmployerPaymentItem {
   totalAmount: number;
   paymentStatus: PaymentStatusKey;
   paymentType: PaymentTypeKey;
+  appliedCouponId: string | null;
+  couponDiscountAmount: number;
+  discountAmount: number;
+  totalDiscountAmount: number;
   paymentMethod: '카드' | '가상계좌' | '간편결제' | '휴대폰' | '쿠폰';
   recruitment: {
     id: string;
