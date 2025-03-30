@@ -58,8 +58,8 @@ export default function MainSpecialListContainer() {
           threshold={450}
         >
           <RecruitSpecialList>
-            {data.pages.map((page) => {
-              return page.result.items.map((item) => <RecruitSpecialCard key={item.id} item={item} />);
+            {data.pages.map((page, index) => {
+              return page.result.items.map((item) => <RecruitSpecialCard key={item.id} item={item} index={index} />);
             })}
           </RecruitSpecialList>
         </InfiniteScroll>
