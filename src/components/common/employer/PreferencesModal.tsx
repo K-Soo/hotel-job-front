@@ -193,7 +193,7 @@ export default function PreferencesModal({ name, setIsOpenPreferencesModal }: Pr
             {selectedItems.map((item) => (
               <ChipsCheckbox
                 key={item}
-                onChange={() => {}}
+                onChange={handleChangeCheckbox}
                 name={item}
                 label={PREFERENCES[item]}
                 value={item}
