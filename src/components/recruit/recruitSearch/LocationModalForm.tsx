@@ -7,7 +7,6 @@ import { LOCATION, CITY } from '@/constants/location';
 import CircleCheckbox from '@/components/common/style/CircleCheckbox';
 import IconDimmed from '@/components/common/IconDimmed';
 import DragScroll from '@/components/common/DragScroll';
-import { useRouter } from 'next/router';
 import useToast from '@/hooks/useToast';
 
 const variants = {

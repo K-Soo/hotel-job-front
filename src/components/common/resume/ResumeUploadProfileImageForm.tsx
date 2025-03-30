@@ -1,11 +1,9 @@
 import React from 'react';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import { FileRejection, useDropzone } from 'react-dropzone';
 import { FieldValues, Path, PathValue, useFormContext } from 'react-hook-form';
-import Image from 'next/image';
 import { Post } from '@/apis';
 import ResumeProfileImage from '@/components/common/resume/ResumeProfileImage';
-import axios from 'axios';
 interface ResumeUploadProfileImageFormProps<T> {
   name: Path<T>;
 }
@@ -22,6 +20,7 @@ export default function ResumeUploadProfileImageForm<T extends FieldValues>({ na
   }, [profileImageValue]);
 
   const onDrop = async (acceptedFiles: File[], fileRejections: FileRejection[]) => {
+    // 프론트 사이드 처라?
     // if (fileRejections.length > 0) {
     //   fileRejections.forEach((rejection) => {
     //     const { errors } = rejection;

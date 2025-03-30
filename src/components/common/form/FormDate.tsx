@@ -1,6 +1,6 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
-import DatePicker, { DatePickerProps, registerLocale } from 'react-datepicker';
+import DatePicker, { registerLocale } from 'react-datepicker';
 import FormError from '@/components/common/form/FormError';
 import { get } from 'lodash';
 import { useFormContext, Path, FieldValues, Controller, useController } from 'react-hook-form';

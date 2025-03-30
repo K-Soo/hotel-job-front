@@ -1,13 +1,8 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
-import Icon from '@/icons/Icon';
 import { motion } from 'framer-motion';
 import CircleCheckbox from '@/components/common/style/CircleCheckbox';
-import IconDimmed from '@/components/common/IconDimmed';
-import { useRouter } from 'next/router';
-import useToast from '@/hooks/useToast';
-import { ParsedUrlQuery } from 'querystring';
-import { HOTEL_JOBS, TOURIST_HOTEL_JOBS, OTHER_JOBS, allJobsKeyValues, AllJobsKeyValuesKeys, ALL_JOBS } from '@/constants/job';
+import { HOTEL_JOBS, TOURIST_HOTEL_JOBS, OTHER_JOBS, AllJobsKeyValuesKeys } from '@/constants/job';
 
 interface JobContentFormProps {
   tabIndex: number;

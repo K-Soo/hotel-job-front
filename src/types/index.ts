@@ -16,12 +16,7 @@ import {
 } from '@/constants/application';
 import { RECRUITMENT_PRODUCT_NAME, RECRUITMENT_PRODUCT_OPTION_NAME, RECRUITMENT_PRODUCT_TYPE } from '@/constants/product';
 import { PAYMENT_STATUS, PAYMENT_TYPE } from '@/constants/payment';
-import {
-  ANNOUNCEMENT_TYPE,
-  FAIL_RESULT_NOTIFICATION_STATUS,
-  PASS_RESULT_NOTIFICATION_STATUS,
-  RESULT_NOTIFICATION_STATUS,
-} from '@/constants/announcement';
+import { ANNOUNCEMENT_TYPE, FAIL_RESULT_NOTIFICATION_STATUS, PASS_RESULT_NOTIFICATION_STATUS } from '@/constants/announcement';
 import { CATEGORY_TYPE } from '@/constants/notification';
 
 export type Provider = 'LOCAL' | 'KAKAO' | 'GOOGLE';

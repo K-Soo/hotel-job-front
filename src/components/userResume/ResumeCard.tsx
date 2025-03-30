@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import Button from '@/components/common/style/Button';
 import Icon from '@/icons/Icon';
 import IconHover from '@/components/common/IconHover';
 import { motion } from 'framer-motion';

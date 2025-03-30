@@ -15,6 +15,9 @@ const S = {
     grid-auto-rows: minmax(180px, auto);
     margin-bottom: 100px;
     gap: 1px;
+    ${(props) => props.theme.media.laptop`
+      margin: 0 15px 100px 15px;
+    `};
     @media (max-width: 800px) {
       grid-template-columns: repeat(3, 1fr);
     }

@@ -32,7 +32,6 @@ export default function RecruitmentRegisterJobConditionForm({ setIsOpenBenefitsM
   const {
     watch,
     setValue,
-    setFocus,
     clearErrors,
     formState: { isValidating, isSubmitting },
   } = useFormContext<CreateRecruitmentForm>();
@@ -62,6 +61,7 @@ export default function RecruitmentRegisterJobConditionForm({ setIsOpenBenefitsM
     if (!additionalTabs.benefits) {
       setValue('conditionInfo.benefits', []);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [additionalTabs.benefits, additionalTabs.workingDay, additionalTabs.workingTime]);
 
   // 근무형태 중 하나라도 선택되면 에러메시지 제거(정규직 필드만 에러 체크했음)

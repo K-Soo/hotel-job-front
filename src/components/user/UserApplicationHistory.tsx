@@ -1,9 +1,7 @@
-import { ApplicantReviewStageStatusKey, ApplicationHistoryStatus } from '@/types';
+import { ApplicationHistoryStatus } from '@/types';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import SkeletonUI from '@/components/common/SkeletonUI';
-import { ParsedUrlQuery } from 'querystring';
-import { useRouter } from 'next/router';
 
 interface UserApplicationHistoryProps {
   isLoading: boolean;

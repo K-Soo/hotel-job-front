@@ -6,7 +6,7 @@ import Button from '@/components/common/style/Button';
 import { ResumeDetailForm } from '@/types';
 import { useSetRecoilState } from 'recoil';
 import { daumPostAtom } from '@/recoil/daumPost';
-import { LOCAL_CODE, SEX_CODE } from '@/constants';
+import { SEX_CODE } from '@/constants';
 import { CAREER_LEVEL } from '@/constants/resume';
 
 export default function ResumeProfileSection() {

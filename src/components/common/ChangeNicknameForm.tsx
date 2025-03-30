@@ -33,6 +33,7 @@ export default function ChangeNicknameForm({ handleCloseModal }: ChangeNicknameF
 
   React.useEffect(() => {
     methods.setFocus('newNickname');
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const onSubmit: SubmitHandler<NicknameFormType> = async (submitData, event) => {

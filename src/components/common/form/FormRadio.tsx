@@ -28,6 +28,7 @@ export default function FormRadio<T extends FieldValues>({ label, name, margin, 
     if (error && watchValue) {
       clearErrors(name);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [error, watchValue]);
 
   React.useEffect(() => {

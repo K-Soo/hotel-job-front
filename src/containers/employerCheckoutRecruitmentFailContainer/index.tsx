@@ -1,8 +1,6 @@
 import React from 'react';
 import { ParsedUrlQuery } from 'querystring';
-import path from '@/constants/path';
 import { useRouter } from 'next/router';
-import { queryKeyChecker } from '@/utils';
 
 interface Query extends ParsedUrlQuery {
   code?: string;

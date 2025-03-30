@@ -1,5 +1,5 @@
 import { Get } from '@/apis';
-import Layout, { Header, Footer, Main, DesktopNavigation, MobileNavigation } from '@/components/layout';
+import Layout, { Header, Footer, Main, DesktopNavigation, MobileNavigation, ScrollToTop } from '@/components/layout';
 import queryKeys from '@/constants/queryKeys';
 import RecruitDetailContainer from '@/containers/recruitDetailContainer';
 import { dehydrate, HydrationBoundary, QueryClient } from '@tanstack/react-query';
@@ -47,6 +47,7 @@ RecruitDetailPage.getLayout = (page: React.ReactElement) => {
         <MobileNavigation backIcon backUrl={path.RECRUIT} notificationIcon shareIcon />
       </Header>
       <Main>{page}</Main>
+      <ScrollToTop />
       <Footer />
     </Layout>
   );

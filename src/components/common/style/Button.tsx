@@ -1,5 +1,4 @@
 import styled, { css, keyframes } from 'styled-components';
-import Icon, { IconType } from '@/icons/Icon';
 import Image from 'next/image';
 
 type ButtonVariant =

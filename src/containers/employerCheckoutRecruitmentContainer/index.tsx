@@ -79,6 +79,7 @@ export default function EmployerCheckoutRecruitmentContainer() {
       router.push(path.EMPLOYER);
       alert('알 수 없는 오류가 발생했습니다. 잠시 후 다시 시도해주세요.');
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [error]);
 
   // ------  결제위젯 초기화 ------

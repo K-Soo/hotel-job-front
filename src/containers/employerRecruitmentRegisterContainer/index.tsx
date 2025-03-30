@@ -1,6 +1,6 @@
 import React from 'react';
 import EmployerRecruitmentRegister from '@/components/employerRecruitmentRegister';
-import { useForm, FormProvider, SubmitHandler, useFormContext, SubmitErrorHandler, Path } from 'react-hook-form';
+import { useForm, FormProvider, SubmitHandler, SubmitErrorHandler } from 'react-hook-form';
 import FormDevTools from '@/components/common/FormDevTools';
 import dynamic from 'next/dynamic';
 import RecruitmentRegisterProgressMenu from '@/components/employerRecruitmentRegister/RecruitmentRegisterProgressMenu';
@@ -111,10 +111,13 @@ export default function EmployerRecruitmentRegisterContainer() {
 
     if (trueKeys.length > 2) {
       // 앞에서 2개의 `true` 값을 유지, 나머지는 `false`로 변경
-      const updatedEmploymentType = employmentTypeEntries.reduce((acc, [key, value]) => {
-        acc[key as keyof typeof employmentType] = trueKeys.includes(key) && trueKeys.indexOf(key) < 2; // 앞 2개만 true
-        return acc;
-      }, {} as typeof employmentType);
+      const updatedEmploymentType = employmentTypeEntries.reduce(
+        (acc, [key, value]) => {
+          acc[key as keyof typeof employmentType] = trueKeys.includes(key) && trueKeys.indexOf(key) < 2; // 앞 2개만 true
+          return acc;
+        },
+        {} as typeof employmentType,
+      );
 
       methods.setValue('conditionInfo.employmentType', updatedEmploymentType);
       addToast({ message: '2개 이상의 고용 형태를 선택할 수 없습니다.', type: 'warning' });

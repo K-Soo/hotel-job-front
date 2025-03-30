@@ -16,6 +16,9 @@ import useResponsive from '@/hooks/useResponsive';
 import RecruitDetailBottomNavigation from '@/components/recruitDetail/RecruitDetailBottomNavigation';
 import useFetchApplyCheck from '@/hooks/useFetchApplyCheck';
 import SkeletonUI from '@/components/common/SkeletonUI';
+import useAlertWithConfirm from '@/hooks/useAlertWithConfirm';
+import useRedirect from '@/hooks/useRedirect';
+import path from '@/constants/path';
 
 const DynamicNoSSRModal = dynamic(() => import('@/components/common/modal'), { ssr: false });
 
@@ -29,9 +32,11 @@ export default function RecruitDetailContainer() {
   const { isAuthenticated, role } = useAuth();
   const { addToast } = useToast();
   const queryClient = useQueryClient();
+  const { setAlertWithConfirmAtom } = useAlertWithConfirm();
 
   const router = useRouter();
   const { slug } = router.query;
+  const { redirectToSignin } = useRedirect();
 
   const { data, isLoading, isSuccess } = useFetchQuery({
     queryKey: [queryKeys.RECRUIT_DETAIL, { slug }],
@@ -67,7 +72,16 @@ export default function RecruitDetailContainer() {
   }, [applyCheckData]);
 
   const handleSigninThenApply = React.useCallback(() => {
-    addToast({ message: '로그인 후 이용 가능합니다.', type: 'info' });
+    setAlertWithConfirmAtom((prev) => ({
+      ...prev,
+      type: 'CONFIRM',
+      title: 'TITLE_22',
+      subTitle: 'DESC_15',
+      confirmLabel: '이동하기',
+      cancelLabel: '취소',
+      onClickConfirm: () => redirectToSignin(),
+    }));
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

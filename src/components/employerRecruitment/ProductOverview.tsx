@@ -1,4 +1,4 @@
-import { RecruitmentItem, RecruitmentStatusKeys } from '@/types';
+import { RecruitmentItem } from '@/types';
 import styled from 'styled-components';
 import Button from '@/components/common/style/Button';
 import { useRouter } from 'next/router';

@@ -13,6 +13,7 @@ import { Auth } from '@/apis';
 import useAuth from '@/hooks/useAuth';
 import { ParsedUrlQuery } from 'querystring';
 import { useRouter } from 'next/router';
+import useRedirect from '@/hooks/useRedirect';
 
 type SignInTab = 'general' | 'company';
 
@@ -27,6 +28,7 @@ export default function SignInContainer() {
   const { type = 'general' } = router.query as UrlQuery;
 
   const { setAuthAtomState } = useAuth();
+  const { getRedirectAfterLogin } = useRedirect();
 
   const methods = useForm<SignInForm>({
     resolver: yupResolver(schema.signInSchema),
@@ -63,11 +65,19 @@ export default function SignInContainer() {
         status: 'AUTHENTICATED',
       });
 
+      const redirect = getRedirectAfterLogin();
+
+      if (redirect) {
+        window.location.href = redirect;
+        return;
+      }
+
       window.location.href = '/employer';
     } catch (error) {
       methods.setValue('password', '');
       setIsSubmitError(true);
     } finally {
+      console.log('ddd');
     }
   };
 

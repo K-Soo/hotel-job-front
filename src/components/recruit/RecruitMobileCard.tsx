@@ -139,7 +139,6 @@ const S = {
     height: 130px;
     display: flex;
     flex-direction: column;
-
     border: 1px solid ${(props) => props.theme.colors.gray200};
     padding: 15px;
     background-color: ${(props) => props.theme.colors.white};

@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { useForm, FormProvider, SubmitHandler, useFormContext, useFieldArray } from 'react-hook-form';
 import { motion } from 'framer-motion';
 
 interface RecruitmentDetailAdditionalProps {
@@ -8,8 +7,6 @@ interface RecruitmentDetailAdditionalProps {
 }
 
 export default function RecruitmentDetailAdditional({ additionalTabs, handleClickToggleButton }: RecruitmentDetailAdditionalProps) {
-  // const { control, register, formState, setValue, watch, reset, resetField } = useFormContext();
-
   return (
     <S.RecruitmentDetailAdditional>
       <motion.button

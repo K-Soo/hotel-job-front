@@ -8,7 +8,7 @@ import { useRouter } from 'next/router';
 import { ParsedUrlQuery } from 'querystring';
 import { RecruitmentApplicantQueryStep } from '@/types/API';
 import EmptyComponent from '@/components/common/EmptyComponent';
-import { EmployerReviewStageStatusKey, RecruitmentDetailApplicantListItem, ResumeDetail } from '@/types';
+import { EmployerReviewStageStatusKey, RecruitmentDetailApplicantListItem } from '@/types';
 import useToast from '@/hooks/useToast';
 import { useQueryClient } from '@tanstack/react-query';
 import { ErrorComponent } from '@/error';

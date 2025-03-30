@@ -4,7 +4,6 @@ import ProductRecruitmentTab from '@/components/employerProductRecruitment/Produ
 import { ParsedUrlQuery } from 'querystring';
 import { ProductRecruitmentQuery } from '@/types/API';
 import { useRouter } from 'next/router';
-import SkeletonUI from '@/components/common/SkeletonUI';
 
 interface Query extends ParsedUrlQuery {
   type?: ProductRecruitmentQuery;

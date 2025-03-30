@@ -6,7 +6,7 @@ import { useRouter } from 'next/router';
 import { ParsedUrlQuery } from 'querystring';
 import { ProductRecruitmentQuery } from '@/types/API';
 import { productFocusAtom } from '@/recoil/product';
-import { useRecoilValue, useRecoilState } from 'recoil';
+import { useRecoilValue } from 'recoil';
 
 interface Query extends ParsedUrlQuery {
   type?: ProductRecruitmentQuery;

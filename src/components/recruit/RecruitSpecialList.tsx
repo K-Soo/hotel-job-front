@@ -14,5 +14,8 @@ const S = {
     flex-wrap: wrap;
     gap: 20px;
     margin-bottom: 100px;
+    ${(props) => props.theme.media.laptop`
+      margin: 0 15px 100px 15px;
+    `};
   `,
 };

@@ -66,6 +66,7 @@ export default function RecruitDetailApplyResumeForm({
                 </button>
               </EmptyResume>
             )}
+
             {data.result.map((resume) => (
               <S.ResumeItem
                 key={resume.id}

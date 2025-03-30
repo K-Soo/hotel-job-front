@@ -1,6 +1,6 @@
 import environment from '@/environment';
 import { initializeApp, getApps, getApp } from 'firebase/app';
-import { getMessaging, isSupported, getToken, onMessage } from 'firebase/messaging';
+import { getMessaging, isSupported, getToken } from 'firebase/messaging';
 
 const firebaseConfig = {
   apiKey: environment.apiKey,
@@ -27,7 +27,6 @@ export async function fetchToken() {
     }
 
     const token = await getToken(fcmMessaging, { vapidKey: environment.vapiKey });
-    // console.log('FETCHED TOKEN: ', token);
     if (!token) {
       throw new Error('token is not exist');
     }
@@ -37,16 +36,5 @@ export async function fetchToken() {
     return null;
   }
 }
-
-// 🔹 Foreground에서 푸시 알림 수신 (앱이 활성 상태일 때)
-// onMessage(firebaseMessaging(), (payload) => {
-//   console.log('Foreground 푸시 알림 수신: ', payload);
-//   const { notification } = payload;
-
-//   new Notification(notification?.title ?? 'title', {
-//     body: notification?.body ?? 'body',
-//     icon: '/icons/icon-192x192.png',
-//   });
-// });
 
 export { app, messaging };

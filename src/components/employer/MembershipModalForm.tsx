@@ -1,10 +1,8 @@
 import styled from 'styled-components';
 import { MEMBERSHIP } from '@/constants/membership';
 import { formatToManWon } from '@/utils';
-import { priceComma } from '@/utils';
-interface MembershipModalFormProps {}
 
-export default function MembershipModalForm({}: MembershipModalFormProps) {
+export default function MembershipModalForm() {
   return (
     <S.MembershipModalForm>
       <S.FormHeader>

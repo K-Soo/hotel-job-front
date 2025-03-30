@@ -1,12 +1,11 @@
 import { EmployerCouponListItem } from '@/types';
 import styled from 'styled-components';
 import { priceComma, dateFormat } from '@/utils';
-import Line from '@/components/common/Line';
 
 interface CouponListProps {
   items: EmployerCouponListItem[];
 }
-//TODO - 쿠폰 할인율
+//TODO - 추후 쿠폰 할인율 추가 시 수정 필요
 export default function CouponList({ items }: CouponListProps) {
   return (
     <S.CouponList>

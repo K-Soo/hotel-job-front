@@ -1,11 +1,8 @@
 import styled from 'styled-components';
-import Button from '@/components/common/style/Button';
-// import Link from 'next/link';
-import Icon from '@/icons/Icon';
+// import Button from '@/components/common/style/Button';
 import React from 'react';
-import { SubmitHandler, useFormContext } from 'react-hook-form';
-import { CreateRecruitmentForm, RecruitmentDetailForm } from '@/types';
-import { useRouter } from 'next/router';
+// import { useFormContext } from 'react-hook-form';
+// import { CreateRecruitmentForm, RecruitmentDetailForm } from '@/types';
 import { Link } from 'react-scroll';
 import { PROGRESS_MENU } from '@/constants/recruitment';
 
@@ -14,10 +11,10 @@ interface RecruitmentDetailProgressMenuProps {
   children: React.ReactNode;
 }
 
+// TODO - 미리보기 기능 추가
 function RecruitmentDetailProgressMenu({ children }: RecruitmentDetailProgressMenuProps) {
-  const { watch, handleSubmit, formState } = useFormContext<CreateRecruitmentForm | RecruitmentDetailForm>();
+  // const { watch } = useFormContext<CreateRecruitmentForm | RecruitmentDetailForm>();
   // const updatedAtWatchValue = watch('updatedAt');
-  const recruitmentStatusWatchValue = watch('recruitmentStatus');
 
   return (
     <S.RecruitmentDetailProgressMenu>
@@ -25,7 +22,6 @@ function RecruitmentDetailProgressMenu({ children }: RecruitmentDetailProgressMe
         <div className="list-container">
           {PROGRESS_MENU.map((menu) => (
             <Link key={menu.id} id={menu.id} className="list-container__item" to={menu.id} smooth={true} offset={-100} duration={500}>
-              {/* <i>ico</i> */}
               <span>{menu.title}</span>
             </Link>
           ))}
@@ -34,7 +30,7 @@ function RecruitmentDetailProgressMenu({ children }: RecruitmentDetailProgressMe
 
       {children}
 
-      <Button label="미리보기" variant="tertiary" />
+      {/* <Button label="미리보기" variant="tertiary" /> */}
     </S.RecruitmentDetailProgressMenu>
   );
 }

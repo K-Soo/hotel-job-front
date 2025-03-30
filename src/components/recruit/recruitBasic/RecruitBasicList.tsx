@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import RecruitSectionTitle from '@/components/recruit/RecruitSectionTitle';
 
 interface RecruitBasicListProps {
   children: React.ReactNode;

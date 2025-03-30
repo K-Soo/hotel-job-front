@@ -1,5 +1,5 @@
 import React from 'react';
-import Layout, { Main, Header, DesktopNavigation, MobileNavigation, Footer } from '@/components/layout';
+import Layout, { Main, Header, DesktopNavigation, MobileNavigation } from '@/components/layout';
 import UserResumeDetailContainer from '@/containers/userResumeDetailContainer';
 import { ErrorBoundary, ErrorComponent } from '@/error';
 import { useRouter } from 'next/router';
@@ -20,7 +20,6 @@ export default function UserResumeDetailPage() {
     }
   }, [authAtomState.certificationStatus]);
 
-  // XXX - loading 처리?
   if (authAtomState.certificationStatus !== 'VERIFIED') {
     return <LoadingSpinner />;
   }

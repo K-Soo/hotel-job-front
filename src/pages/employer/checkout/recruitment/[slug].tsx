@@ -1,5 +1,4 @@
 import Layout, { EmployerMain, EmployerHeader, EmployerFooter } from '@/components/layout';
-import EmployerCheckoutRecruitmentContainer from '@/containers/employerCheckoutRecruitmentContainer';
 import { NextSeo } from 'next-seo';
 import dynamic from 'next/dynamic';
 

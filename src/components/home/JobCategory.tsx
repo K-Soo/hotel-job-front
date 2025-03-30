@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
-import { allJobsKeyValuesKeys, hotelJobKeyValues, otherJobsKeyValues } from '@/constants/job';
+import { hotelJobKeyValues, otherJobsKeyValues } from '@/constants/job';
 import { useRouter } from 'next/router';
 import path from '@/constants/path';
 

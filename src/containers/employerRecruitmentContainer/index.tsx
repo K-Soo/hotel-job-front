@@ -33,6 +33,7 @@ export default function EmployerRecruitmentContainer() {
 
   React.useEffect(() => {
     resetCheckedItems();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page, status]);
 
   const handleClickCheckBoxItem = React.useCallback((event: React.ChangeEvent<HTMLInputElement>) => {

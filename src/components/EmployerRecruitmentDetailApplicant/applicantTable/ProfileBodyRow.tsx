@@ -1,4 +1,4 @@
-import { RecruitmentDetailApplicantListItem, ResumeDetail } from '@/types';
+import { RecruitmentDetailApplicantListItem } from '@/types';
 import styled, { css } from 'styled-components';
 import DefaultProfileImage from '@/components/common/DefaultProfileImage';
 import { SEX_CODE } from '@/constants';

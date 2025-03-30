@@ -43,6 +43,7 @@ export default function FormArrayChipsCheckbox<T extends FieldValues>({
     if (error && watchValue.length !== 0) {
       clearErrors(name);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [watchValue, error]);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
