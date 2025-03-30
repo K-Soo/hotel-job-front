@@ -34,31 +34,33 @@ export default function DetailInfoForm({ setIsOpenJobModal, setIsOpenPreferences
     formState: { isSubmitting },
   } = useFormContext<CreateRecruitmentForm>();
 
-  const departmentValue = watch('recruitmentInfo.department');
-  const positionValue = watch('recruitmentInfo.position');
+  // 우대조건
   const preferencesValue = watch('recruitmentInfo.preferences');
+  // 근무 부서
+  const departmentValue = watch('recruitmentInfo.department');
+  //직급
+  const positionValue = watch('recruitmentInfo.position');
 
   React.useEffect(() => {
-    if (!additionalTabs.department) {
-      setAdditionalTabs((prev) => ({
-        ...prev,
-        department: !!departmentValue,
-      }));
-    }
+    setAdditionalTabs((prev) => ({
+      ...prev,
+      preferences: preferencesValue.length > 0 ? true : false,
+    }));
 
+    // 근무 부서
     if (!additionalTabs.position) {
       setAdditionalTabs((prev) => ({
         ...prev,
-        position: !!positionValue,
+        department: departmentValue.trim() !== '' ? true : false,
       }));
     }
 
-    if (!additionalTabs.preferences) {
-      setAdditionalTabs((prev) => ({
-        ...prev,
-        preferences: !positionValue?.length && !departmentValue,
-      }));
-    }
+    // 직급
+    setAdditionalTabs((prev) => ({
+      ...prev,
+      position: !!positionValue,
+    }));
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [departmentValue, positionValue, preferencesValue]);
 
@@ -74,7 +76,6 @@ export default function DetailInfoForm({ setIsOpenJobModal, setIsOpenPreferences
   };
 
   const isCheckedForeigner = watch('recruitmentInfo.nationality.foreigner');
-  console.log('isCheckedForeigner: ', isCheckedForeigner);
 
   React.useEffect(() => {
     if (isCheckedForeigner) {
