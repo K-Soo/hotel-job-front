@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import HorizontalFormWrapper from '@/components/common/form/HorizontalFormWrapper';
 import FormInputB from '@/components/common/form/FormInputB';
 import FormSelect from '@/components/common/form/FormSelect';
-import FormInput from '@/components/common/form/FormInput';
 import FormNumberInput from '@/components/common/form/FormNumberInput';
 import FormCheckbox from '@/components/common/form/FormCheckbox';
 import FormRadio from '@/components/common/form/FormRadio';
@@ -11,10 +10,8 @@ import RecruitmentDetailAdditional from '@/components/employerRecruitmentRegiste
 import { educationConditionLevelOptions, optionalPositionOptions } from '@/constants/options';
 import Button from '@/components/common/style/Button';
 import { CreateRecruitmentForm } from '@/types';
-import { EXPERIENCE_CONDITION } from '@/constants/recruitment';
 import React from 'react';
 import { ALL_JOBS } from '@/constants/job';
-import useDidMountEffect from '@/hooks/useDidMountEffect';
 import FormArrayChipsCheckbox from '@/components/common/form/FormArrayChipsCheckbox';
 import { PREFERENCES } from '@/constants/preferences';
 
@@ -34,8 +31,7 @@ export default function DetailInfoForm({ setIsOpenJobModal, setIsOpenPreferences
     watch,
     clearErrors,
     setValue,
-    setFocus,
-    formState: { isSubmitting, isValidating },
+    formState: { isSubmitting },
   } = useFormContext<CreateRecruitmentForm>();
 
   const departmentValue = watch('recruitmentInfo.department');
@@ -63,15 +59,13 @@ export default function DetailInfoForm({ setIsOpenJobModal, setIsOpenPreferences
         preferences: !positionValue?.length && !departmentValue,
       }));
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [departmentValue, positionValue, preferencesValue]);
 
   const handleClickToggleButton = (event: React.MouseEvent<HTMLButtonElement>) => {
     const { name } = event.currentTarget;
 
     setAdditionalTabs((prev) => {
-      // if (name === 'preferences') setValue('recruitmentInfo.preferences', []);
-      // if (name === 'department') setValue('recruitmentInfo.department', '');
-      // if (name === 'position') setValue('recruitmentInfo.position', null);
       return {
         ...prev,
         [name]: prev[name] ? false : true,

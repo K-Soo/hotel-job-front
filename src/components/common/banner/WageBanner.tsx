@@ -1,8 +1,8 @@
-import styled from 'styled-components';
+import React from 'react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 
-export default function WageBanner() {
+export default React.memo(function WageBanner() {
   const handleClick = () => {
     window.open('https://www.minimumwage.go.kr/main.do', '_blank', 'noopener,noreferrer');
   };
@@ -17,4 +17,4 @@ export default function WageBanner() {
       <Image className="scale-80 object-contain" src="/images/wage.png" fill alt="wage" priority />
     </motion.article>
   );
-}
+});

@@ -177,6 +177,7 @@ export default function useRequestFCMPermission() {
     });
 
     return () => unsubscribe?.();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [token]);
 
   return { notificationPermissionStatus, token };

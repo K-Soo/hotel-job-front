@@ -1,5 +1,5 @@
 import React from 'react';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import * as svg from './svg';
 
 export type IconType = keyof typeof svg;

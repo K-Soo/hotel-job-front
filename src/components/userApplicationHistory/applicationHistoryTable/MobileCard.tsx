@@ -1,4 +1,4 @@
-import { APPLICANT_REVIEW_STAGE_STATUS, APPLICATION_STATUS } from '@/constants/application';
+import { APPLICANT_REVIEW_STAGE_STATUS } from '@/constants/application';
 import { ApplicationHistory } from '@/types';
 import styled, { css } from 'styled-components';
 import { dateFormat } from '@/utils';

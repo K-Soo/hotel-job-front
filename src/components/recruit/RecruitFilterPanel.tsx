@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import RecruitFilterButton from '@/components/recruit/RecruitFilterButton';
 import RecruitTagButton from '@/components/recruit/RecruitTagButton';
 import DragScroll from '@/components/common/DragScroll';
 import { useRouter } from 'next/router';
@@ -16,8 +15,8 @@ export default function RecruitFilterPanel({ handleClickFilterButton }: RecruitF
   const router = useRouter();
   const [pathname, params] = router.asPath.split('?');
 
-  const dragScrollRef = React.useRef<HTMLElement>(null);
-  const filterButtonRefs = React.useRef<HTMLLIElement[] | null[]>([]);
+  // const dragScrollRef = React.useRef<HTMLElement>(null);
+  // const filterButtonRefs = React.useRef<HTMLLIElement[] | null[]>([]);
 
   const handleClickTagButton = (event: React.MouseEvent<HTMLButtonElement>) => {
     const { value, name } = event.currentTarget;
@@ -130,6 +129,9 @@ const S = {
   RecruitFilterPanel: styled.div`
     display: flex;
     align-items: center;
+    ${(props) => props.theme.media.laptop`
+      padding: 0 15px 0 15px;
+    `};
     .filters {
       display: flex;
     }

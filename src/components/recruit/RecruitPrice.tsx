@@ -1,7 +1,6 @@
-import { SALARY_TYPE, SHORT_SALARY_TYPE } from '@/constants';
+import { SHORT_SALARY_TYPE } from '@/constants';
 import { SalaryTypeKeys } from '@/types';
 import styled, { css } from 'styled-components';
-import { priceComma } from '@/utils';
 import { formatSalaryDisplay } from '@/utils';
 interface RecruitPriceProps {
   fonSize?: string;
@@ -13,7 +12,6 @@ export default function RecruitPrice({ fonSize, salaryAmount, salary }: RecruitP
   return (
     <S.RecruitPrice $fonSize={fonSize} $salary={salary}>
       <span className="pay-type">{SHORT_SALARY_TYPE[salary]}</span>
-      {/* <span className="pay-price">{priceComma(salaryAmount)}</span> */}
       <span className="pay-price">{formatSalaryDisplay(salaryAmount, salary)}</span>
     </S.RecruitPrice>
   );
@@ -25,7 +23,6 @@ const S = {
     width: fit-content;
     font-size: ${(props) => props.$fonSize || '14px'};
     display: flex;
-    /* flex-direction: row-reverse; */
     align-items: center;
     white-space: nowrap;
     .pay-type {

@@ -1,7 +1,7 @@
 import React from 'react';
 import UserProfile from '@/components/userProfile';
 import useFetchQuery from '@/hooks/useFetchQuery';
-import { Get, Delete, Auth } from '@/apis';
+import { Get, Delete } from '@/apis';
 import queryKeys from '@/constants/queryKeys';
 import { keepPreviousData } from '@tanstack/react-query';
 import useAuth from '@/hooks/useAuth';

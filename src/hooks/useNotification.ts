@@ -1,6 +1,5 @@
 import React from 'react';
-import { createContext, useContext } from 'react';
-import { Socket, io } from 'socket.io-client';
+import { io } from 'socket.io-client';
 import useAuth from '@/hooks/useAuth';
 import environment from '@/environment';
 
@@ -13,7 +12,6 @@ export default function useNotification() {
 
   React.useEffect(() => {
     if (!isAuthenticated) {
-      // setSocket(null);
       return;
     }
 
@@ -22,8 +20,6 @@ export default function useNotification() {
       reconnectionAttempts: 3,
       withCredentials: true,
     });
-
-    // setSocket(socketInstance);
 
     socketInstance.on('connect', () => {
       console.info(`✅ 알림 웹소켓 연결됨`);

@@ -2,6 +2,7 @@ import Layout, { Header, Footer, Main, DesktopNavigation, MobileNavigation } fro
 import TalentContainer from '@/containers/talentContainer';
 import BottomNavigation from '@/components/layout/BottomNavigation';
 
+// TODO - 인재정보
 export default function TalentPage() {
   return <TalentContainer />;
 }

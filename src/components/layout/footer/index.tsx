@@ -27,6 +27,11 @@ export function Footer({ marginTop }: FooterProps) {
               개인정보 처리방침
             </Link>
           </li>
+          <li className="item">
+            <Link href={path.HELP__NOTICE} prefetch={false}>
+              고객센터
+            </Link>
+          </li>
         </S.Category>
         <S.Information>
           <h6 className="company">{POLICY.company}</h6>

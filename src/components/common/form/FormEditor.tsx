@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import ReactQuill from 'react-quill-new';
-import { useFormContext, Path, FieldValues, useFieldArray, PathValue } from 'react-hook-form';
+import { useFormContext, Path, FieldValues } from 'react-hook-form';
 import 'react-quill-new/dist/quill.snow.css';
 
 import dynamic from 'next/dynamic';

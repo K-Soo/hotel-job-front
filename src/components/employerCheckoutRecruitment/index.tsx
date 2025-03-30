@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import ProductInfo from '@/components/employerCheckoutRecruitment/ProductInfo';
 
 interface EmployerCheckoutRecruitmentProps {
   children: React.ReactNode;

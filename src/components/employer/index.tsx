@@ -1,11 +1,9 @@
 import styled from 'styled-components';
-import RecentlyRecruitment from '@/components/employer/RecentlyRecruitment';
 import SupportInfo from '@/components/employer/SupportInfo';
 import RecruitmentCount from '@/components/employer/RecruitmentCount';
 import BenefitInfo from '@/components/employer/BenefitInfo';
 import { EmployerAccountInfo } from '@/types';
 import SkeletonUI from '@/components/common/SkeletonUI';
-import CompanyInfo from '@/components/employer/CompanyInfo';
 import CompanyInfoContainer from '@/containers/employerContainer/CompanyInfoContainer';
 interface EmployerProps {
   isLoading: boolean;

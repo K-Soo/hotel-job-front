@@ -1,5 +1,4 @@
 import React from 'react';
-import HistoryStatus from '@/components/userApplicationHistory/HistoryStatus';
 import useFetchQuery from '@/hooks/useFetchQuery';
 import queryKeys from '@/constants/queryKeys';
 import useAuth from '@/hooks/useAuth';

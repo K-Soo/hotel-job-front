@@ -2,7 +2,6 @@ import React from 'react';
 import Recruit from '@/components/recruit';
 import RecruitFilterPanel from '@/components/recruit/RecruitFilterPanel';
 import RecruitSearch from '@/components/recruit/recruitSearch';
-import LocationSearch from '@/components/recruit/recruitSearch/LocationSearch';
 import JobSearch from '@/components/recruit/recruitSearch/JobSearch';
 import RecruitUrgentListContainer from '@/containers/recruitContainer/RecruitUrgentListContainer';
 import RecruitSpecialListContainer from '@/containers/recruitContainer/RecruitSpecialListContainer';
@@ -10,6 +9,7 @@ import Line from '@/components/common/Line';
 import { ErrorBoundary, ErrorComponent } from '@/error';
 import useResponsive from '@/hooks/useResponsive';
 import dynamic from 'next/dynamic';
+// import LocationSearch from '@/components/recruit/recruitSearch/LocationSearch';
 
 const DynamicNoSSRRecruitBasicPcContainer = dynamic(() => import('@/containers/recruitContainer/RecruitBasicPcContainer'), { ssr: false });
 const DynamicNoSSRRecruitBasicMobileContainer = dynamic(() => import('@/containers/recruitContainer/RecruitBasicMobileContainer'), {
@@ -19,12 +19,14 @@ const DynamicNoSSRRecruitBasicMobileContainer = dynamic(() => import('@/containe
 export default function RecruitContainer() {
   const { isTablet } = useResponsive();
 
+  // TODO - 필터 고도화
   const handleClickFilterButton = (event: React.MouseEvent<HTMLButtonElement>) => {};
 
   return (
     <Recruit>
       <RecruitSearch>
         <JobSearch />
+        {/* TODO - 지도 검색 필터 */}
         {/* <LocationSearch /> */}
       </RecruitSearch>
 

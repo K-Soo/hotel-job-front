@@ -1,4 +1,4 @@
-import { FailResultNotificationKey, PassResultNotificationKey, ResultNotificationStatusKey } from '@/types';
+import { FailResultNotificationKey, PassResultNotificationKey } from '@/types';
 
 export const ANNOUNCEMENT_TYPE = {
   ACCEPT: '합격 안내',

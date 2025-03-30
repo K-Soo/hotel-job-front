@@ -12,7 +12,6 @@ import FormNumberInput from '@/components/common/form/FormNumberInput';
 import MinimumWage from '@/components/common/employer/MinimumWage';
 import Line from '@/components/common/Line';
 import { SALARY_TYPE } from '@/constants';
-import useDidMountEffect from '@/hooks/useDidMountEffect';
 import FormInputB from '@/components/common/form/FormInputB';
 import { WORKING_DAY_LIST } from '@/constants/recruitment';
 import { BENEFITS } from '@/constants/benefits';
@@ -32,8 +31,6 @@ export default function RecruitmentDetailJobConditionForm({ isSuccess, setIsOpen
 
   const {
     watch,
-    setValue,
-    setFocus,
     clearErrors,
     formState: { isValidating, isSubmitting },
   } = useFormContext<CreateRecruitmentForm>();

@@ -2,7 +2,7 @@ import React from 'react';
 import { UAParser } from 'ua-parser-js';
 import { isStandalonePWA } from 'ua-parser-js/helpers';
 import { appAtom } from '@/recoil/app';
-import { useRecoilState, useSetRecoilState } from 'recoil';
+import { useSetRecoilState } from 'recoil';
 import useRequestFCMPermission from '@/hooks/useRequestFCMPermission';
 
 export default function AppComponent() {

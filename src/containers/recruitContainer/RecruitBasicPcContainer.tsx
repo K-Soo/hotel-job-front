@@ -70,13 +70,11 @@ export default function RecruitBasicPcContainer() {
     return (
       <>
         <RecruitSectionTitle title="일반채용" count={data.result.pagination.totalItems} />
-        {data.result.items.map((item, index) => {
-          if (isTablet) {
-            return <RecruitMobileCard key={index} item={item} />;
-          }
 
+        {data.result.items.map((item, index) => {
           return <RecruitDesktopCard key={index} item={item} />;
         })}
+
         {!isEmpty && <PaginationComponent pagination={data.result.pagination} margin="20px 0 50px 0" />}
       </>
     );

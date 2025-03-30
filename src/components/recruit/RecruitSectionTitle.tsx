@@ -27,6 +27,9 @@ const S = {
     margin: ${(props) => props.$margin ?? '0 0 20px 0'};
     color: ${(props) => props.theme.colors.black400};
     font-weight: 500;
+    ${(props) => props.theme.media.laptop`
+      padding: 0 15px;
+    `};
     .title {
       font-size: 24px;
       padding-right: 8px;

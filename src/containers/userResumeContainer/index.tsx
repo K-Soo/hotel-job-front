@@ -30,8 +30,8 @@ export default function UserResumeContainer() {
       return setAlertWithConfirmAtom((prev) => ({
         ...prev,
         type: 'CONFIRM',
-        title: 'TITLE_1',
-        subTitle: 'DESC_6',
+        title: 'TITLE_23',
+        subTitle: 'DESC_16',
         onClickConfirm: () => setCertificationModalAtom({ isOpen: true }),
         confirmLabel: '인증하기',
         cancelLabel: '취소',

@@ -1,6 +1,5 @@
 import React from 'react';
 import { DefaultTheme, ThemeProvider } from 'styled-components';
-import GlobalStyles from './GlobalStyles';
 import media from './media';
 import colors from './colors';
 
@@ -14,10 +13,5 @@ const theme: DefaultTheme = {
 };
 
 export default function Theme({ children }: ThemeProps) {
-  return (
-    <ThemeProvider theme={theme}>
-      {/* <GlobalStyles /> */}
-      {children}
-    </ThemeProvider>
-  );
+  return <ThemeProvider theme={theme}>{children}</ThemeProvider>;
 }

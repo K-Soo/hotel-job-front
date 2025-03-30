@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import RecruitDetailLocation from '@/components/recruitDetail/RecruitDetailLocation';
 import RecruitDetailPeriod from '@/components/recruitDetail/RecruitDetailPeriod';
-import RecruitDetailDateTime from '@/components/recruitDetail/RecruitDetailDateTime';
+// import RecruitDetailDateTime from '@/components/recruitDetail/RecruitDetailDateTime';
 import RecruitDetailWorkCondition from '@/components/recruitDetail/RecruitDetailWorkCondition';
 import RecruitDetailInfo from '@/components/recruitDetail/RecruitDetailInfo';
 import RecruitDetailFavoriteShareBar from '@/components/recruitDetail/RecruitDetailFavoriteShareBar';
@@ -16,14 +16,13 @@ interface RecruitDetailProps {
   children: React.ReactNode;
 }
 
+// TODO - 업체이미지, 날짜
 export default function RecruitDetail({ data, children }: RecruitDetailProps) {
   return (
     <S.RecruitDetail>
-      {/* TODO - 업체 이미지 */}
       {/* <S.Images></S.Images> */}
       <div className="detail-container">
         <div className="detail-container__content-form">
-          {/* TODO - 날짜 */}
           {/* <RecruitDetailDateTime /> */}
 
           <S.UtilPanel>

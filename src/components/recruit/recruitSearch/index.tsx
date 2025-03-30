@@ -11,17 +11,19 @@ export default function RecruitSearch({ children }: RecruitSearchProps) {
 
 const S = {
   RecruitSearch: styled.div`
-    margin: 0 auto;
     display: flex;
-    margin-top: 15px;
-    margin-bottom: 50px;
+    margin: 15px auto 50px auto;
     max-width: 1024px;
     width: 100%;
     color: ${({ theme }) => theme.colors.black300};
+    ${(props) => props.theme.media.laptop`
+      padding: 15px 15px 50px 15px;
+      margin: 0 auto 0 auto;
+    `};
+
     ${(props) => props.theme.media.mobile`
       flex-direction: column;
-      margin-top: 0;
-      margin-bottom: 15px;
+      padding: 0 15px 15px 15px;
     `};
   `,
 };

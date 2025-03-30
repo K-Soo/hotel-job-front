@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import HorizontalFormWrapper from '@/components/common/form/HorizontalFormWrapper';
 import FormInputB from '@/components/common/form/FormInputB';
 import FormSelect from '@/components/common/form/FormSelect';
-import FormInput from '@/components/common/form/FormInput';
 import FormNumberInput from '@/components/common/form/FormNumberInput';
 import FormCheckbox from '@/components/common/form/FormCheckbox';
 import FormRadio from '@/components/common/form/FormRadio';
@@ -11,12 +10,10 @@ import RecruitmentDetailAdditional from '@/components/employerRecruitmentRegiste
 import { educationConditionLevelOptions, optionalPositionOptions } from '@/constants/options';
 import Button from '@/components/common/style/Button';
 import { CreateRecruitmentForm } from '@/types';
-import { EXPERIENCE_CONDITION } from '@/constants/recruitment';
 import React from 'react';
 import FormArrayChipsCheckbox from '@/components/common/form/FormArrayChipsCheckbox';
 import { ALL_JOBS } from '@/constants/job';
 import { PREFERENCES } from '@/constants/preferences';
-import useDidMountEffect from '@/hooks/useDidMountEffect';
 
 interface RegisterInfoFormProps {
   setIsOpenJobModal: React.Dispatch<React.SetStateAction<boolean>>;

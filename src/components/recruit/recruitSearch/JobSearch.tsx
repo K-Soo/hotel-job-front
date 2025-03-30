@@ -9,7 +9,7 @@ import dynamic from 'next/dynamic';
 import useResponsive from '@/hooks/useResponsive';
 import Modal from '@/components/common/modal';
 import Button from '@/components/common/style/Button';
-import { HOTEL_JOBS, TOURIST_HOTEL_JOBS, OTHER_JOBS, allJobsKeyValues, AllJobsKeyValuesKeys, ALL_JOBS } from '@/constants/job';
+import { HOTEL_JOBS, TOURIST_HOTEL_JOBS, OTHER_JOBS, AllJobsKeyValuesKeys, ALL_JOBS } from '@/constants/job';
 import useToast from '@/hooks/useToast';
 import path from '@/constants/path';
 
@@ -135,6 +135,33 @@ export default function JobSearch() {
 
   return (
     <S.JobSearch>
+      <S.JobSearchButton
+        onClick={() => {
+          setIsOpenJobModal((prev) => !prev);
+          if (isTablet) {
+            setIsOpenModal(true);
+          }
+        }}
+      >
+        <motion.div className="wrapper">
+          <motion.div whileTap={{ scale: 0.99 }} whileHover={{ color: '#000000' }}>
+            {isMobile && <Icon name="Search24x24" width="24px" height="24px" margin="0 10px 0 0" />}
+            {Object.values(jobObj).length > 0 ? (
+              <div>
+                <span>{Object.values(jobObj)[0]}</span>
+                {Object.values(jobObj).length > 1 && <span>&nbsp;외&nbsp;{Object.values(jobObj).length - 1}</span>}
+              </div>
+            ) : (
+              <span className="placeholder">업종 · 직무</span>
+            )}
+          </motion.div>
+
+          <S.ArrowBottomIcon>
+            <Icon name="ArrowRight16x16" width="16px" height="16px" />
+          </S.ArrowBottomIcon>
+        </motion.div>
+      </S.JobSearchButton>
+
       {/* PC 모달 */}
       {!isTablet && isOpenJobModal && (
         <DynamicJobModalForm
@@ -181,33 +208,6 @@ export default function JobSearch() {
           </Modal.Footer>
         </DynamicNoSSRModal>
       )}
-
-      <S.JobSearchButton
-        onClick={() => {
-          setIsOpenJobModal((prev) => !prev);
-          if (isTablet) {
-            setIsOpenModal(true);
-          }
-        }}
-      >
-        <motion.div className="wrapper">
-          <motion.div whileTap={{ scale: 0.99 }} whileHover={{ color: '#000000' }}>
-            {isMobile && <Icon name="Search24x24" width="24px" height="24px" margin="0 10px 0 0" />}
-            {Object.values(jobObj).length > 0 ? (
-              <div>
-                <span>{Object.values(jobObj)[0]}</span>
-                {Object.values(jobObj).length > 1 && <span>&nbsp;외&nbsp;{Object.values(jobObj).length - 1}</span>}
-              </div>
-            ) : (
-              <span className="placeholder">업종 · 직무</span>
-            )}
-          </motion.div>
-
-          <S.ArrowBottomIcon>
-            <Icon name="ArrowRight16x16" width="16px" height="16px" />
-          </S.ArrowBottomIcon>
-        </motion.div>
-      </S.JobSearchButton>
     </S.JobSearch>
   );
 }
@@ -215,7 +215,7 @@ export default function JobSearch() {
 const S = {
   JobSearch: styled.div`
     position: relative;
-
+    width: 100%;
     ${(props) => props.theme.media.mobile`
       border-radius: 8px;
       padding-left: 15px;

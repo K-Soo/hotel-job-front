@@ -63,6 +63,7 @@ export default function FormInput<T extends FieldValues>({
     if (error && watchValue && watchValue.length !== 0) {
       clearErrors(name);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [name, watchValue]);
 
   React.useEffect(() => {

@@ -4,7 +4,6 @@ import Icon from '@/icons/Icon';
 import { RecruitmentStatusKeys } from '@/types';
 import IconHover from '@/components/common/IconHover';
 import ManagementConfigDropdown from '@/components/employerRecruitment/ManagementConfigDropdown';
-import dynamic from 'next/dynamic';
 
 interface ManagementOverviewProps {
   id: string;

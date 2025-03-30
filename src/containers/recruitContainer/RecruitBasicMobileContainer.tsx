@@ -58,6 +58,7 @@ export default function RecruitBasicMobileContainer() {
     if (currentPage === 1 && nextPage) {
       fetchNextPage();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data, hasNextPage, job, page]);
 
   console.log('일반 리스트 API : ', data);
@@ -76,7 +77,7 @@ export default function RecruitBasicMobileContainer() {
 
     return (
       <RecruitBasicList>
-        <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '20px' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', margin: '0 15px 20px 0' }}>
           <RecruitSectionTitle title="일반 채용" count={data.pages[0].result.pagination.totalItems} margin="0" />
           <PaginationTag currentPage={currentIndex + 1} totalPages={data.pages[0].result.pagination.totalPages} />
         </div>
@@ -120,6 +121,7 @@ const StyledCarouselContainer = styled.section`
   width: 100%;
   overflow: auto hidden;
   gap: 8px;
+  padding: 0 15px;
   scroll-padding: 0 15px;
   &::-webkit-scrollbar {
     display: none;

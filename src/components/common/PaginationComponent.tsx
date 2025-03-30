@@ -77,11 +77,11 @@ export default function PaginationComponent({ margin, pagination }: PaginationCo
             key={element}
             onClick={() => handleClickPage(String(element))}
             whileHover={{
-              backgroundColor: element === currentPage ? '#3182f6' : '#f7f7f7',
+              backgroundColor: '#f7f7f7',
             }}
             animate={{
-              color: element === currentPage ? '#FFFFFF' : '#8b95a1',
-              backgroundColor: element === currentPage ? '#3182f6' : '#FFFFFF',
+              color: element === currentPage ? '#000000' : '#8b95a1',
+              fontWeight: element === currentPage ? '600' : '400',
             }}
             transition={{ duration: 0 }}
           >
@@ -186,7 +186,7 @@ const S = {
     font-size: 14px;
     font-weight: 400;
     border-radius: 50%;
-    margin: 0 6px;
+    margin: 0 3px;
     cursor: pointer;
   `,
 };

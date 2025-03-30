@@ -1,20 +1,17 @@
 import styled from 'styled-components';
-import Button from '@/components/common/style/Button';
+// import Button from '@/components/common/style/Button';
 import { Link } from 'react-scroll';
-import Icon from '@/icons/Icon';
 import React from 'react';
-import { useFormContext } from 'react-hook-form';
-import { RecruitmentDetailForm } from '@/types';
+// import { useFormContext } from 'react-hook-form';
+// import { RecruitmentDetailForm } from '@/types';
 import { PROGRESS_MENU } from '@/constants/recruitment';
 
 interface RecruitmentRegisterProgressMenuProps {
   children: React.ReactNode;
 }
-
+// TODO - 미리보기 기능
 function RecruitmentRegisterProgressMenu({ children }: RecruitmentRegisterProgressMenuProps) {
-  const { watch } = useFormContext<RecruitmentDetailForm>();
-
-  const recruitmentStatusWatchValue = watch('recruitmentStatus');
+  // const { watch } = useFormContext<RecruitmentDetailForm>();
 
   return (
     <S.RecruitmentRegisterProgressMenu>
@@ -22,14 +19,13 @@ function RecruitmentRegisterProgressMenu({ children }: RecruitmentRegisterProgre
         <div className="list-container">
           {PROGRESS_MENU.map((menu) => (
             <Link key={menu.id} id={menu.id} className="list-container__item" to={menu.id} smooth={true} offset={-100} duration={500}>
-              {/* <i>ico</i> */}
               <span>{menu.title}</span>
             </Link>
           ))}
         </div>
       </S.MenuForm>
       {children}
-      <Button label="미리보기" variant="tertiary" />
+      {/* <Button label="미리보기" variant="tertiary" /> */}
     </S.RecruitmentRegisterProgressMenu>
   );
 }

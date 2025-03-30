@@ -1,23 +1,34 @@
 import styled, { css } from 'styled-components';
 import Image from 'next/image';
 import { url } from '@/constants/oauth';
+import useRedirect from '@/hooks/useRedirect';
 
 export default function GeneralForm() {
+  const { getRedirectAfterLogin } = useRedirect();
+
   const handleClickSocialSignInButton = (event: React.MouseEvent<HTMLButtonElement>) => {
     const type = event.currentTarget.name as 'KAKAO' | 'GOOGLE';
 
-    //TODO - IOS
+    //TODO - 고도화 시점에 IOS 웹뷰 개발 및 분기처리 안드로이드는 PWA로 진행
     // if (window?.webkit) {
     //   router.push('/oauth/callback/kakao');
     //   return window.webkit?.messageHandlers?.socialType?.postMessage(type);
     // }
-    // if (isWebview === "1") {
-    //   return window?.jsToWebviewSocialChannel?.postMessage(JSON.stringify({ message: type })); //KAKAO , APPLE, GOOGLE
+    // if (isWebview ???) {
+    //   return window?.jsToWebviewSocialChannel?.postMessage(JSON.stringify({ message: type }));
     // }
     // window.location.href = SOCIAL_URL[type];
 
-    const state = encodeURIComponent(JSON.stringify({ requestType: 'signIn' }));
+    const redirect = getRedirectAfterLogin();
+
+    const statePayload = {
+      requestType: 'signIn',
+      ...(redirect && { redirect }),
+    };
+
+    const state = encodeURIComponent(JSON.stringify(statePayload));
     const baseUrl = url[type] + `&state=${state}`;
+
     window.location.href = baseUrl;
   };
 

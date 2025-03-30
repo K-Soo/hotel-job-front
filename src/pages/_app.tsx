@@ -11,7 +11,6 @@ import NotificationProvider from '@/context/NotificationProvider';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import dynamic from 'next/dynamic';
 import DEFAULT_SEO from '@/next-seo.config';
-import useNotification from '@/hooks/useNotification';
 import { DefaultSeo } from 'next-seo';
 import { queryClientDefaultOption } from '@/constants/queryClientDefaultOption';
 import GoogleTagManager from '@/lib/GoogleTagManager';
@@ -55,8 +54,3 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
     </>
   );
 }
-
-// function NotificationInitializer() {
-//   useNotification();
-//   return null;
-// }

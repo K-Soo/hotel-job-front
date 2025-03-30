@@ -1,7 +1,7 @@
 import React from 'react';
 import ProductRecruitmentSideMenu from '@/components/employerProductRecruitment/productRecruitmentSideMenu';
-import { useSetRecoilState, useResetRecoilState, useRecoilValue } from 'recoil';
-import { selectProductAtom, durationCalcOptionsSelector } from '@/recoil/product';
+import { useResetRecoilState } from 'recoil';
+import { selectProductAtom } from '@/recoil/product';
 
 interface ProductRecruitmentSideMenuContainerProps {
   setIsOpenSideMenu: React.Dispatch<React.SetStateAction<boolean>>;

@@ -25,6 +25,7 @@ const path = {
   POLICY__PRIVACY: '/policy/privacy', //개인정보 처리방침
 
   HELP__NOTICE: '/help/notice',
+  HELP__FAQ: '/help/faq',
 
   // USER
   USER: '/user', //마이페이지

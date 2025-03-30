@@ -1,8 +1,6 @@
 import React from 'react';
 import { useRouter } from 'next/router';
-import axios from 'axios';
 import { useSetRecoilState } from 'recoil';
-import Layout, { Main } from '@/components/layout';
 import { OAuth } from '@/apis';
 import OauthSignUpForm from '@/components/common/OauthSignUpForm';
 import path from '@/constants/path';
@@ -32,6 +30,7 @@ interface OauthContainerProps {
 
 export default function OauthContainer({ oauth }: OauthContainerProps) {
   const [status, setStatus] = React.useState('IDLE');
+  const [redirectUrl, setRedirectUrl] = React.useState<string | null>(null);
   const { setAuthAtomState } = useAuth();
   const router = useRouter();
   const query = router.query as UrlQuery;
@@ -63,7 +62,9 @@ export default function OauthContainer({ oauth }: OauthContainerProps) {
       if (query.error) {
         window.location.href = path.HOME;
       }
+
       const decoded = decodeURIComponent(query.state);
+
       if (decoded === 'undefined') {
         alert('잘못된 접근입니다.');
         window.location.href = path.SIGN_IN;
@@ -72,18 +73,21 @@ export default function OauthContainer({ oauth }: OauthContainerProps) {
 
       const restoredState = JSON.parse(decoded);
 
+      setRedirectUrl(restoredState?.redirect ?? null);
+
       methods.setValue('code', query.code ?? '');
-      methods.setValue('requestType', restoredState.requestType ?? 'signIn');
+      methods.setValue('requestType', restoredState?.requestType ?? 'signIn');
 
-      methods.setValue('ageAgree', restoredState.ageAgree ?? false);
-      methods.setValue('serviceTermsAgree', restoredState.serviceTermsAgree ?? false);
-      methods.setValue('personalInfoAgree', restoredState.personalInfoAgree ?? false);
+      methods.setValue('ageAgree', restoredState?.ageAgree ?? false);
+      methods.setValue('serviceTermsAgree', restoredState?.serviceTermsAgree ?? false);
+      methods.setValue('personalInfoAgree', restoredState?.personalInfoAgree ?? false);
 
-      methods.setValue('smsMarketingAgree', restoredState.serviceTermsAgree ?? false);
-      methods.setValue('emailMarketingAgree', restoredState.emailMarketingAgree ?? false);
+      methods.setValue('smsMarketingAgree', restoredState?.serviceTermsAgree ?? false);
+      methods.setValue('emailMarketingAgree', restoredState?.emailMarketingAgree ?? false);
 
       setStatus('EXIST');
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [query.state, router.isReady]);
 
   const handleInitialOAuthSignIn = async () => {
@@ -94,6 +98,7 @@ export default function OauthContainer({ oauth }: OauthContainerProps) {
     if (!requestBody.code) {
       return;
     }
+
     try {
       const response = await OAuth[oauth](requestBody);
       console.log('카카오 로그인 API : ', response);
@@ -101,10 +106,17 @@ export default function OauthContainer({ oauth }: OauthContainerProps) {
       if (!response.success) {
         throw new Error();
       }
+
       setAuthAtomState({
         ...response.result,
         status: 'AUTHENTICATED',
       });
+
+      if (redirectUrl) {
+        replace(redirectUrl);
+        return;
+      }
+
       replace(path.HOME);
     } catch (error: any) {
       console.error('oauth error: ', JSON.stringify(error?.response?.data));

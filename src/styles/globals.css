@@ -33,6 +33,16 @@
     font-style: normal;
   }
 
+  b {
+    font-size: inherit;
+    font-weight: inherit;
+  }
+
+  strong {
+    font-size: inherit;
+    font-weight: inherit;
+  }
+
   button {
     all: unset;
     box-sizing: border-box;

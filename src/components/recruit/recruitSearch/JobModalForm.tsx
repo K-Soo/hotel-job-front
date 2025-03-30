@@ -5,7 +5,6 @@ import Icon from '@/icons/Icon';
 import { motion } from 'framer-motion';
 import CircleCheckbox from '@/components/common/style/CircleCheckbox';
 import IconDimmed from '@/components/common/IconDimmed';
-import { ParsedUrlQuery } from 'querystring';
 
 interface JobModalFormProps {
   tabIndex: number;

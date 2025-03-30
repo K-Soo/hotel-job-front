@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import SectionTitle from '@/components/common/employer/SectionTitle';
-import Button from '@/components/common/style/Button';
 import CheckBox from '@/components/common/style/CheckBox';
 import { ConsentFormType } from '@/containers/employerAccountWithdrawContainer';
 

@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { RECRUITMENT_PRODUCT_TYPE } from '@/constants/product';
 import { motion } from 'framer-motion';
 import { ParsedUrlQuery } from 'querystring';
-import { ProductRecruitmentQuery, RecruitmentQueryStatus } from '@/types/API';
+import { ProductRecruitmentQuery } from '@/types/API';
 import { useRouter } from 'next/router';
 import { selectProductAtom, productFocusAtom } from '@/recoil/product';
 import { useResetRecoilState } from 'recoil';

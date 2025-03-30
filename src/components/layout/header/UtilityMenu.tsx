@@ -2,12 +2,13 @@ import styled from 'styled-components';
 import Link from 'next/link';
 import path from '@/constants/path';
 
+// TODO - 고객센터
 export default function UtilityMenu() {
   return (
     <S.UtilityMenu>
       <div className="wrapper">
-        {/*TODO: 다국어 지원 필요 시 추가*/}
-        {/* <Link href={path.HELP__NOTICE}>고객센터</Link> */}
+        {/*TODO: 다국어 지원 추가*/}
+        <Link href={path.HELP__NOTICE}>고객센터</Link>
       </div>
     </S.UtilityMenu>
   );

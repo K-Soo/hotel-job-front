@@ -42,6 +42,7 @@ export default function GuardComponent({ allowedRoles, children }: GuardComponen
     if (role === 'EMPLOYER' && authAtomState.companyVerificationStatus === 'NOT_REQUESTED') {
       router.replace(path.EMPLOYER_SETUP_COMPANY);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [allowedRoles, role, authAtomState.companyVerificationStatus, isUnAuthenticated, isAuthFailure]);
 
   if (!allowedRoles) {

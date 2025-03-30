@@ -20,6 +20,11 @@ export const GENERAL_ASIDE_MENU = [
     value: path.USER_PROFILE,
     items: [],
   },
+  {
+    label: '고객센터',
+    value: path.HELP__NOTICE,
+    items: [],
+  },
 ];
 
 export const EMPLOYER_ASIDE_MENU = [

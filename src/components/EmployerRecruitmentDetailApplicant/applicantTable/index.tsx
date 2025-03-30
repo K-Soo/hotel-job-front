@@ -1,7 +1,7 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 import CheckBox from '@/components/common/style/CheckBox';
-import { EmployerReviewStageStatusKey, RecruitmentDetailApplicantListItem, ResumeDetail } from '@/types';
+import { EmployerReviewStageStatusKey, RecruitmentDetailApplicantListItem } from '@/types';
 import { EMPLOYER_REVIEW_STAGE_STATUS } from '@/constants/application';
 import ResumeBodyRow from '@/components/EmployerRecruitmentDetailApplicant/applicantTable/ResumeBodyRow';
 import StepBodyRow from '@/components/EmployerRecruitmentDetailApplicant/applicantTable/StepBodyRow';
