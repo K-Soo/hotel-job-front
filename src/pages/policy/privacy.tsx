@@ -11,7 +11,7 @@ PolicyPrivacyPage.getLayout = (page: React.ReactElement) => {
     <Layout>
       <Header>
         <DesktopNavigation />
-        <MobileNavigation />
+        <MobileNavigation logoIcon />
       </Header>
       <Main>{page}</Main>
       <Footer />
