@@ -1,7 +1,7 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 import FormError from '@/components/common/form/FormError';
-import { useFormContext, Path, FieldValues, PathValue } from 'react-hook-form';
+import { useFormContext, Path, FieldValues } from 'react-hook-form';
 import { get } from 'lodash';
 import ChipsCheckbox from '@/components/common/style/ChipsCheckbox';
 
@@ -46,10 +46,11 @@ export default function FormArrayChipsCheckbox<T extends FieldValues>({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [watchValue, error]);
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const inputValue = watchValue.filter((item) => item !== event.target.name);
-    setValue(name, inputValue as PathValue<T, Path<T>>);
-  };
+  // XXX - UI상으로 목록내에서 체크해제 불가능하게
+  // const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  //   const inputValue = watchValue.filter((item) => item !== event.target.name);
+  //   setValue(name, inputValue as PathValue<T, Path<T>>);
+  // };
 
   return (
     <S.FormArrayChipsCheckbox>
@@ -78,12 +79,13 @@ export default function FormArrayChipsCheckbox<T extends FieldValues>({
             placeholder: watchValue.length === 0 ? placeholder : undefined,
           })}
         />
+
         {watchValue.map((item) => (
           <ChipsCheckbox
             key={item}
             label={optionsKeyData[item]}
             name={item}
-            onChange={handleChange}
+            onChange={() => {}}
             margin="3px"
             value={item}
             checked
@@ -116,6 +118,7 @@ const S = {
         width: 100%;
         border-radius: 5px;
         cursor: pointer;
+        background-color: #ffffff;
         border: 1px solid ${({ theme }) => theme.colors.gray300};
         color: ${({ theme }) => theme.colors.black500};
         &:hover {
