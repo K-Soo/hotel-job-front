@@ -11,16 +11,17 @@ interface PaymentDetailFormProps {
   selectedPayment: EmployerPaymentItem;
 }
 
+// paymentMethod 쿠폰은 결제금액 0원
 export default function PaymentDetailForm({ selectedPayment }: PaymentDetailFormProps) {
   const router = useRouter();
 
   return (
     <S.PaymentDetailForm>
-      {selectedPayment.transactions.map((transaction) => (
-        <React.Fragment key={transaction.id}>
+      {selectedPayment.paymentMethod === '쿠폰' && (
+        <>
           <S.ContentRow>
             <span className="content-title">주문번호</span>
-            <span className="content-value">{transaction.orderId}</span>
+            <span className="content-value">{selectedPayment.orderId}</span>
           </S.ContentRow>
 
           <S.ContentRow>
@@ -28,63 +29,118 @@ export default function PaymentDetailForm({ selectedPayment }: PaymentDetailForm
             <span className="content-value">{PAYMENT_TYPE[selectedPayment.paymentType]}</span>
           </S.ContentRow>
 
-          <S.ContentRow>
-            <span className="content-title">주문상품</span>
-            <span className="content-value">{transaction.orderName}</span>
-          </S.ContentRow>
-
           {selectedPayment.paymentType === 'RECRUITMENT' && (
-            <>
-              <S.ContentRow>
-                <span className="content-title">채용공고</span>
-                <motion.span
-                  className="content-value"
-                  whileHover={{
-                    color: '#1a73e8',
-                    cursor: 'pointer',
-                    textDecoration: 'underline',
-                  }}
-                  onClick={() => router.push(`${path.EMPLOYER_RECRUITMENT}/${selectedPayment.recruitment.id}/applicant`)}
-                >
-                  {selectedPayment.recruitment.recruitmentTitle}
-                </motion.span>
-              </S.ContentRow>
-            </>
+            <S.ContentRow>
+              <span className="content-title">채용공고</span>
+              <motion.span
+                className="content-value"
+                whileHover={{
+                  color: '#1a73e8',
+                  cursor: 'pointer',
+                  textDecoration: 'underline',
+                }}
+                onClick={() => router.push(`${path.EMPLOYER_RECRUITMENT}/${selectedPayment.recruitment.id}/applicant`)}
+              >
+                {selectedPayment.recruitment.recruitmentTitle}
+              </motion.span>
+            </S.ContentRow>
           )}
 
           <S.ContentRow>
-            <span className="content-title">카드종류</span>
-            <span className="content-value">{transaction.cardType}</span>
+            <span className="content-title">결제수단</span>
+            <span className="content-value">쿠폰</span>
           </S.ContentRow>
 
           <S.ContentRow>
-            <span className="content-title">결제종류</span>
-            <span className="content-value">{transaction.method}</span>
+            <span className="content-title">할인 금액</span>
+            <span className="content-value">{priceComma(selectedPayment.totalDiscountAmount)}원</span>
           </S.ContentRow>
 
           <S.ContentRow>
             <span className="content-title">결제금액</span>
-            <span className="content-value">{priceComma(transaction.totalAmount)}원</span>
+            <span className="content-value">{selectedPayment.totalAmount}원</span>
           </S.ContentRow>
+        </>
+      )}
 
-          <S.ContentRow>
-            <span className="content-title">카드번호</span>
-            <span className="content-value">{transaction.number}</span>
-          </S.ContentRow>
+      {selectedPayment.paymentMethod !== '쿠폰' &&
+        selectedPayment.transactions.map((transaction) => (
+          <React.Fragment key={transaction.id}>
+            <S.ContentRow>
+              <span className="content-title">주문번호</span>
+              <span className="content-value">{transaction.orderId}</span>
+            </S.ContentRow>
 
-          <S.ContentRow>
-            <span className="content-title">할부여부</span>
-            <span className="content-value">
-              {transaction.installmentPlanMonths === 0 ? 'N' : `${transaction.installmentPlanMonths}개월`}
-            </span>
-          </S.ContentRow>
+            <S.ContentRow>
+              <span className="content-title">상품타입</span>
+              <span className="content-value">{PAYMENT_TYPE[selectedPayment.paymentType]}</span>
+            </S.ContentRow>
 
-          <S.ContentRow>
-            <span className="content-title">카드 승인일</span>
-            <span className="content-value">{dateFormat.date(transaction.approvedAt, 'YY.MM.DD HH:mm')}</span>
-          </S.ContentRow>
-        </React.Fragment>
-      ))}
+            <S.ContentRow>
+              <span className="content-title">주문상품</span>
+              <span className="content-value">{transaction.orderName}</span>
+            </S.ContentRow>
+
+            {selectedPayment.paymentType === 'RECRUITMENT' && (
+              <>
+                <S.ContentRow>
+                  <span className="content-title">채용공고</span>
+                  <motion.span
+                    className="content-value"
+                    whileHover={{
+                      color: '#1a73e8',
+                      cursor: 'pointer',
+                      textDecoration: 'underline',
+                    }}
+                    onClick={() => router.push(`${path.EMPLOYER_RECRUITMENT}/${selectedPayment.recruitment.id}/applicant`)}
+                  >
+                    {selectedPayment.recruitment.recruitmentTitle}
+                  </motion.span>
+                </S.ContentRow>
+              </>
+            )}
+
+            <S.ContentRow>
+              <span className="content-title">카드종류</span>
+              <span className="content-value">{transaction.cardType}</span>
+            </S.ContentRow>
+
+            <S.ContentRow>
+              <span className="content-title">결제종류</span>
+              <span className="content-value">{transaction.method}</span>
+            </S.ContentRow>
+
+            {/* 쿠폰 할인 내역 (있을 경우에만) */}
+            {selectedPayment.couponDiscountAmount > 0 && (
+              <S.ContentRow>
+                <span className="content-title">쿠폰 할인</span>
+                <span className="content-value">{priceComma(selectedPayment.couponDiscountAmount)}원</span>
+              </S.ContentRow>
+            )}
+
+            <S.ContentRow>
+              <span className="content-title">총 결제금액</span>
+              <span className="content-value">{priceComma(transaction.totalAmount)}원</span>
+            </S.ContentRow>
+
+            <S.ContentRow>
+              <span className="content-title">카드번호</span>
+              <span className="content-value">{transaction.number}</span>
+            </S.ContentRow>
+
+            <S.ContentRow>
+              <span className="content-title">할부여부</span>
+              <span className="content-value">
+                {transaction.installmentPlanMonths === 0 ? 'N' : `${transaction.installmentPlanMonths}개월`}
+              </span>
+            </S.ContentRow>
+
+            <S.ContentRow>
+              <span className="content-title">카드 승인일</span>
+              <span className="content-value">{dateFormat.date(transaction.approvedAt, 'YY.MM.DD HH:mm')}</span>
+            </S.ContentRow>
+          </React.Fragment>
+        ))}
     </S.PaymentDetailForm>
   );
 }
