@@ -203,7 +203,7 @@ export default function BenefitsModal({ name, setIsOpenBenefitsModal }: JobModal
             {selectedItems.map((item) => (
               <ChipsCheckbox
                 key={item}
-                onChange={() => {}}
+                onChange={handleChangeCheckbox}
                 name={item}
                 label={BENEFITS[item]}
                 value={item}

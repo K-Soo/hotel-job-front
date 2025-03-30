@@ -149,7 +149,7 @@ export default function JobModal({ name, setIsOpenJobModal }: JobModalProps) {
             {selectedJob.map((item: AllJobsKeyValuesKeys) => (
               <ChipsCheckbox
                 key={item}
-                onChange={() => {}}
+                onChange={handleChangeCheckbox}
                 name={item}
                 label={ALL_JOBS[item]}
                 value={Object.keys(item)[0]}
