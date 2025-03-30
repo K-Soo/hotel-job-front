@@ -27,7 +27,3 @@ HelpNoticePage.getLayout = (page: React.ReactElement) => {
     </Layout>
   );
 };
-
-export async function getServerSideProps() {
-  throw new Error('💥 서버 에러 테스트 중입니다!');
-}
