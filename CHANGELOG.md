@@ -1,6 +1,24 @@
 # 변경 로그
 
 프로젝트의 모든 주요 변경 사항
+### [1.16.2](https://github.com/K-Soo/hotel-job-front/compare/v1.16.1...v1.16.2) (2025-03-30)
+
+
+### Updates
+
+* 코드 정리 및 불필요한 임포트 제거, FAQ 경로 추가 ([e11261c](https://github.com/K-Soo/hotel-job-front/commit/e11261ce3400b4488ebb0feea0f0805c7c081f62))
+* **AppComponent:** useRecoilState 제거 ([0f8e567](https://github.com/K-Soo/hotel-job-front/commit/0f8e567adcd0883b69e0f60df9e74ef529d1be51))
+* **BenefitsModal:** 체크박스 onChange 핸들러를 handleChangeCheckbox로 수정 ([84590c2](https://github.com/K-Soo/hotel-job-front/commit/84590c26ce71af5815df07672a9a6f2638e363ba))
+* **DetailInfoForm:** 우대조건 및 근무 부서, 직급 상태 관리 로직 개선 ([2ad87bc](https://github.com/K-Soo/hotel-job-front/commit/2ad87bcf9e26024198edcadecff40bc066a9f642))
+* **eslint:** unused-imports 플러그인 추가 및 설정 업데이트 ([4a5f605](https://github.com/K-Soo/hotel-job-front/commit/4a5f6059d559ef08eef52fffef2012ea03b5f402))
+* **FormArrayChipsCheckbox:** 체크박스 해제 기능 주석 처리 및 onChange 핸들러 수정 ([d1aa7fe](https://github.com/K-Soo/hotel-job-front/commit/d1aa7fe4caae6721e41547d36e63226bf8f63d96))
+* **globals.css:** b와 strong 태그에 inherit 스타일 추가 ([414866b](https://github.com/K-Soo/hotel-job-front/commit/414866bb18caa26882fe709f210af35291217c51))
+* **help:** 헬프 섹션 컴포넌트 추가 ([e05d058](https://github.com/K-Soo/hotel-job-front/commit/e05d0584ed4301bc7926c111b92cc7b9f974e6fa))
+* **JobModal:** 체크박스 onChange 핸들러를 handleChangeCheckbox로 수정 ([a7ed5ae](https://github.com/K-Soo/hotel-job-front/commit/a7ed5ae49e22bd66b26c986eef832dc7b2479496))
+* **next.config.js:** 수정된 빌드 제외 규칙 ([645270b](https://github.com/K-Soo/hotel-job-front/commit/645270bf17d434c18cc139ef8ba691d30cc2588a))
+* **PreferencesModal:** 체크박스 onChange 핸들러를 handleChangeCheckbox로 수정 ([b9faa8f](https://github.com/K-Soo/hotel-job-front/commit/b9faa8fb9b1e424f532356a7b502dfe292669961))
+* Sentry 설정 추가 및 서버 에러 테스트 기능 구현, 불필요한 API 파일 삭제 ([6b0ddbf](https://github.com/K-Soo/hotel-job-front/commit/6b0ddbff8f64d1edf67ee9769d847cacc836fa2a))
+
 ### [1.16.1](https://github.com/K-Soo/hotel-job-front/compare/v1.16.0...v1.16.1) (2025-03-29)
 
 
