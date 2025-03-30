@@ -14,9 +14,18 @@ import useResponsive from '@/hooks/useResponsive';
 
 interface RecruitSpecialCardProps {
   item: RecruitListItem;
+  index: number;
 }
 
-export default function RecruitSpecialCard({ item }: RecruitSpecialCardProps) {
+const GRADIENT_COLORS = [
+  ['#3182f6', '#b485c6'],
+  ['#34d399', '#3b82f6'],
+  ['#f97316', '#f43f5e'],
+  ['#a855f7', '#6366f1'],
+  ['#06b6d4', '#3b82f6'],
+];
+
+export default function RecruitSpecialCard({ item, index }: RecruitSpecialCardProps) {
   const [isBold, setIsBold] = React.useState(false);
   const [isHighlight, setIsHighlight] = React.useState(false);
   const [isTag, setIsTag] = React.useState(false);
@@ -57,13 +66,7 @@ export default function RecruitSpecialCard({ item }: RecruitSpecialCardProps) {
   };
 
   return (
-    <S.RecruitSpecialCard
-      whileHover={{
-        boxShadow: 'inset 0 0 0 1px #3182f6',
-      }}
-      whileTap={{ scale: 0.98 }}
-      onClick={() => router.push(`/recruit/${item.id}`)}
-    >
+    <S.RecruitSpecialCard whileTap={{ scale: 0.98 }} onClick={() => router.push(`/recruit/${item.id}`)} index={index}>
       <S.HeaderBox>
         {isTag && <Tag label="급구" type="URGENT" width="32px" margin="0 5px 0 0" fontSize="11px" height="17px" />}
         <Tag label="주목" type="ATTENTION" width="44px" margin="0 5px 0 0" fontSize="11px" height="17px" />
@@ -133,18 +136,33 @@ const StyledTitle = styled.div<{ $isBold: boolean; $isHighlight: boolean }>`
 `;
 
 const S = {
-  RecruitSpecialCard: styled(motion.div)`
+  RecruitSpecialCard: styled(motion.div)<{ index: number }>`
+    ${({ index }) => {
+      const colors = GRADIENT_COLORS[index % GRADIENT_COLORS.length];
+      return css`
+        background-image: linear-gradient(white, white), linear-gradient(to right, ${colors[0]}, ${colors[1]});
+      `;
+    }}
+
     width: calc(33.333% - 14px);
     aspect-ratio: 5/3;
     border-radius: 10px;
     padding: 15px;
     cursor: pointer;
-    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1), inset 0 3px 0 #4593fc;
     display: flex;
     user-select: none;
     flex-direction: column;
     max-height: 220px;
     background-color: white;
+
+    position: relative;
+    border-radius: 12px;
+    border-top: 4px solid transparent;
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+
     ${(props) => props.theme.media.tablet`
       aspect-ratio: 5 / 3;
       width: calc(50% - 10px);
