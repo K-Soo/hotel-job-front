@@ -1,4 +1,5 @@
 const environment = {
+  appEnv: process.env.NEXT_PUBLIC_APP_ENV,
   isLocal: process.env.NEXT_PUBLIC_APP_ENV === 'local',
   isDev: process.env.NEXT_PUBLIC_APP_ENV === 'development',
   isProd: process.env.NEXT_PUBLIC_APP_ENV === 'production',
