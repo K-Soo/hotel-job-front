@@ -66,10 +66,10 @@ export default function RecruitBasicMobileContainer() {
 
   if (isLoading) {
     return (
-      <RecruitMobile>
+      <>
         <SkeletonUI.Line style={{ height: '24px', width: '147px', marginBottom: '20px' }} />
         <SkeletonUI.RecruitBasicList count={2} />
-      </RecruitMobile>
+      </>
     );
   }
 

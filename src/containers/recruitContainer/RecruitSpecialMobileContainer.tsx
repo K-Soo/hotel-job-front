@@ -29,11 +29,11 @@ export default function RecruitSpecialMobileContainer() {
 
   const router = useRouter();
 
-  const { page = '1', location, job } = router.query as Query;
+  const { job } = router.query as Query;
 
-  const { data, isLoading, isSuccess, fetchNextPage, hasNextPage, hasPreviousPage, isFetchingNextPage } = useInfiniteScroll({
+  const { data, isLoading, isSuccess, fetchNextPage, hasNextPage, isFetchingNextPage } = useInfiniteScroll({
     queryFn: Get.getRecruitSpecialList,
-    queryKey: [queryKeys.RECRUIT_SPECIAL_LIST, { limit: SPECIAL_MOBILE_LIMIT, type: 'RECRUIT', page, job }],
+    queryKey: [queryKeys.RECRUIT_SPECIAL_LIST, { limit: SPECIAL_MOBILE_LIMIT, type: 'RECRUIT', job }],
     options: {
       enabled: true,
       throwOnError: true,
@@ -60,14 +60,14 @@ export default function RecruitSpecialMobileContainer() {
       fetchNextPage();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [data, hasNextPage, job, page]);
+  }, [data, hasNextPage, job]);
 
   if (isLoading) {
     return (
-      <>
+      <div className="px-[15px]">
         <SkeletonUI.Line style={{ height: '24px', width: '147px', marginBottom: '20px' }} />
-        <SkeletonUI.RecruitSpecialList count={3} />
-      </>
+        <SkeletonUI.RecruitSpecialList count={2} />
+      </div>
     );
   }
 

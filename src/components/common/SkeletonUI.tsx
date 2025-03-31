@@ -232,7 +232,7 @@ const RecruitSpecialList = ({ count }: { count: number }) => {
 const StyledRecruitSpecialList = styled.div`
   display: flex;
   flex-wrap: wrap;
-  gap: 20px;
+  gap: 15px;
   margin-bottom: 50px;
   .item {
     ${SkeletonAnimation}
@@ -241,12 +241,8 @@ const StyledRecruitSpecialList = styled.div`
     aspect-ratio: 5/3;
     height: 100%;
     ${(props) => props.theme.media.tablet`
-      aspect-ratio: 5 / 3;
-      width: calc(50% - 5px);
-    `};
-    ${(props) => props.theme.media.mobile`
       width: 100%;
-      aspect-ratio: 2 / 1;
+      height: 135px;
     `};
   }
 `;
