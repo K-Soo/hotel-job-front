@@ -14,14 +14,14 @@ import { ParsedUrlQuery } from 'querystring';
 import { keepPreviousData } from '@tanstack/react-query';
 
 interface Query extends ParsedUrlQuery {
-  page?: string;
   job?: any;
 }
+
 const SPECIAL_LIMIT = '9';
 
-export default function RecruitSpecialListContainer() {
+export default function RecruitSpecialPcContainer() {
   const router = useRouter();
-  const { page = '1', location, job } = router.query as Query;
+  const { job } = router.query as Query;
 
   const { data, isLoading, isSuccess, fetchNextPage, hasNextPage, isFetching } = useInfiniteScroll({
     queryFn: Get.getRecruitSpecialList,
@@ -77,6 +77,7 @@ export default function RecruitSpecialListContainer() {
             })}
           </RecruitSpecialList>
         </InfiniteScroll>
+
         {!isEmptyFirstPage && isFirstPage && nextPage && (
           <div style={{ display: 'flex', justifyContent: 'center' }}>
             <Button

@@ -1,6 +1,5 @@
 import React from 'react';
 import RecruitDesktopCard from '@/components/recruit/RecruitDesktopCard';
-import RecruitMobileCard from '@/components/recruit/RecruitMobileCard';
 import useResponsive from '@/hooks/useResponsive';
 import useFetchQuery from '@/hooks/useFetchQuery';
 import { Get } from '@/apis';
@@ -10,6 +9,7 @@ import { ParsedUrlQuery } from 'querystring';
 import { useRouter } from 'next/router';
 import { keepPreviousData } from '@tanstack/react-query';
 import RecruitSectionTitle from '@/components/recruit/RecruitSectionTitle';
+import RecruitPc from '@/components/recruit/recruitBasic/RecruitPc';
 import SkeletonUI from '@/components/common/SkeletonUI';
 import EmptyComponent from '@/components/common/EmptyComponent';
 
@@ -30,7 +30,7 @@ export default function RecruitBasicPcContainer() {
     queryFn: Get.getRecruitBasicList,
     queryKey: [queryKeys.RECRUIT_BASIC_LIST, { limit: BASIC_LIST_LIMIT, type: 'RECRUIT', page, job }],
     options: {
-      enabled: true,
+      enabled: !isTablet,
       staleTime: 60 * 1000 * 5,
       gcTime: 60 * 1000 * 10,
       throwOnError: true,
@@ -48,10 +48,10 @@ export default function RecruitBasicPcContainer() {
 
   if (isLoading) {
     return (
-      <>
+      <RecruitPc>
         <SkeletonUI.Line style={{ height: '24px', width: '147px', marginBottom: '20px' }} />
         <SkeletonUI.RecruitBasicList count={2} />
-      </>
+      </RecruitPc>
     );
   }
 
@@ -62,7 +62,9 @@ export default function RecruitBasicPcContainer() {
       return (
         <>
           <RecruitSectionTitle title="일반채용" />
-          <EmptyComponent height="200px" message="해당하는 공고가 없어요." />
+          <RecruitPc>
+            <EmptyComponent height="200px" message="해당하는 공고가 없어요." />
+          </RecruitPc>
         </>
       );
     }
@@ -71,11 +73,13 @@ export default function RecruitBasicPcContainer() {
       <>
         <RecruitSectionTitle title="일반채용" count={data.result.pagination.totalItems} />
 
-        {data.result.items.map((item, index) => {
-          return <RecruitDesktopCard key={index} item={item} />;
-        })}
+        <RecruitPc>
+          {data.result.items.map((item, index) => {
+            return <RecruitDesktopCard key={index} item={item} />;
+          })}
 
-        {!isEmpty && <PaginationComponent pagination={data.result.pagination} margin="20px 0 50px 0" />}
+          {!isEmpty && <PaginationComponent pagination={data.result.pagination} margin="20px 0 50px 0" />}
+        </RecruitPc>
       </>
     );
   }

@@ -1,28 +1,27 @@
 import React from 'react';
-import RecruitMobileCard from '@/components/recruit/RecruitMobileCard';
-import { Get } from '@/apis';
+import RecruitSectionTitle from '@/components/recruit/RecruitSectionTitle';
+import CarouselItem from '@/components/recruit/CarouselItem';
 import queryKeys from '@/constants/queryKeys';
+import useInfiniteScroll from '@/hooks/useInfiniteScroll';
+import { Get } from '@/apis';
+import EmptyComponent from '@/components/common/EmptyComponent';
+import SkeletonUI from '@/components/common/SkeletonUI';
+import { useRouter } from 'next/router';
 import { ParsedUrlQuery } from 'querystring';
 import { keepPreviousData } from '@tanstack/react-query';
-import RecruitSectionTitle from '@/components/recruit/RecruitSectionTitle';
-import SkeletonUI from '@/components/common/SkeletonUI';
-import EmptyComponent from '@/components/common/EmptyComponent';
-import styled from 'styled-components';
-import useInfiniteScroll from '@/hooks/useInfiniteScroll';
-import { useRouter } from 'next/router';
-import BasicItemWrapper from '@/components/recruit/recruitBasic/BasicItemWrapper';
-import PaginationTag from '@/components/common/PaginationTag';
 import PaginationProgress from '@/components/common/PaginationProgress';
-import useResponsive from '@/hooks/useResponsive';
+import PaginationTag from '@/components/common/PaginationTag';
+import SpecialMobileCard from '@/components/recruit/recruitSpecial/SpecialMobileCard';
+import styled from 'styled-components';
 
 interface Query extends ParsedUrlQuery {
   page?: string;
   job?: any;
 }
 
-const BASIC_LIST_LIMIT = '5';
+const SPECIAL_MOBILE_LIMIT = '5';
 
-export default function RecruitBasicMobileContainer() {
+export default function RecruitSpecialMobileContainer() {
   const [currentIndex, setCurrentIndex] = React.useState(0);
 
   const carouselRef = React.useRef<HTMLDivElement>(null);
@@ -31,24 +30,25 @@ export default function RecruitBasicMobileContainer() {
   const router = useRouter();
 
   const { page = '1', location, job } = router.query as Query;
-  const { isTablet } = useResponsive();
 
   const { data, isLoading, isSuccess, fetchNextPage, hasNextPage, hasPreviousPage, isFetchingNextPage } = useInfiniteScroll({
-    queryFn: Get.getRecruitBasicList,
-    queryKey: [queryKeys.RECRUIT_BASIC_LIST, { limit: BASIC_LIST_LIMIT, type: 'RECRUIT', page, job }],
+    queryFn: Get.getRecruitSpecialList,
+    queryKey: [queryKeys.RECRUIT_SPECIAL_LIST, { limit: SPECIAL_MOBILE_LIMIT, type: 'RECRUIT', page, job }],
     options: {
-      enabled: isTablet,
+      enabled: true,
       throwOnError: true,
       staleTime: 60 * 1000 * 5,
       gcTime: 60 * 1000 * 10,
       placeholderData: keepPreviousData,
     },
     requestQuery: {
-      limit: BASIC_LIST_LIMIT,
+      limit: SPECIAL_MOBILE_LIMIT,
       type: 'RECRUIT',
       job,
     },
   });
+
+  console.log('스페셜 채용 모바일 API : ', data);
 
   React.useEffect(() => {
     if (!data) return;
@@ -62,14 +62,12 @@ export default function RecruitBasicMobileContainer() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data, hasNextPage, job, page]);
 
-  console.log('일반 리스트 API : ', data);
-
   if (isLoading) {
     return (
-      <RecruitMobile>
+      <>
         <SkeletonUI.Line style={{ height: '24px', width: '147px', marginBottom: '20px' }} />
-        <SkeletonUI.RecruitBasicList count={2} />
-      </RecruitMobile>
+        <SkeletonUI.RecruitSpecialList count={3} />
+      </>
     );
   }
 
@@ -79,7 +77,7 @@ export default function RecruitBasicMobileContainer() {
     return (
       <div className="mb-[100px]">
         <div style={{ display: 'flex', justifyContent: 'space-between', margin: '0 15px 20px 0' }}>
-          <RecruitSectionTitle title="일반 채용" count={data.pages[0].result.pagination.totalItems} margin="0" />
+          <RecruitSectionTitle title="스페셜 채용" count={data.pages[0].result.pagination.totalItems} margin="0" />
           <PaginationTag currentPage={currentIndex + 1} totalPages={data.pages[0].result.pagination.totalPages} />
         </div>
 
@@ -88,7 +86,7 @@ export default function RecruitBasicMobileContainer() {
         <StyledCarouselContainer ref={carouselRef}>
           {data.pages.map((page, pageIndex) => {
             return (
-              <BasicItemWrapper
+              <CarouselItem
                 key={pageIndex}
                 ref={(el: HTMLDivElement | null) => {
                   carouselItemRef.current[pageIndex] = el;
@@ -102,9 +100,9 @@ export default function RecruitBasicMobileContainer() {
                 }}
               >
                 {page.result.items.map((item, index) => {
-                  return <RecruitMobileCard key={index} item={item} />;
+                  return <SpecialMobileCard key={item.id} item={item} index={index} />;
                 })}
-              </BasicItemWrapper>
+              </CarouselItem>
             );
           })}
         </StyledCarouselContainer>

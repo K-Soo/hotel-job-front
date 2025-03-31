@@ -79,7 +79,7 @@ export default function RecruitMobileCard({ item }: RecruitMobileCardProps) {
         </StyledTitle>
 
         <div className="description">
-          <Icon name="LocationB24x24" width="16px" height="16px" margin="0 1px 0 0" />
+          <Icon name="LocationA24x24" width="16px" height="16px" margin="0 1px 0 0" />
 
           <address className="description__address">
             {sido} {sigungu}
@@ -142,7 +142,7 @@ const S = {
     border: 1px solid ${(props) => props.theme.colors.gray200};
     padding: 15px;
     background-color: ${(props) => props.theme.colors.white};
-    margin-bottom: 15px;
+    margin-bottom: 10px;
     border-radius: 15px;
     ${(props) =>
       props.$isClosed &&
