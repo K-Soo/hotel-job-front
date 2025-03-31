@@ -1,18 +1,16 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
-import { motion } from 'framer-motion';
+import { motion, useAnimationControls } from 'framer-motion';
 import Icon from '@/icons/Icon';
 import RecruitPrice from '@/components/recruit/RecruitPrice';
-import { useRouter } from 'next/router';
 import { RecruitListItem } from '@/types';
 import { ALL_JOBS } from '@/constants/job';
 import { EXPERIENCE_CONDITION, WORKING_DAY_LIST } from '@/constants/recruitment';
 import { addressFormat, dateFormat, employmentTypeFormat } from '@/utils';
-import IconDimmed from '@/components/common/IconDimmed';
 import Tag from '@/components/common/Tag';
-import useResponsive from '@/hooks/useResponsive';
 import DragScroll from '@/components/common/DragScroll';
 import { EDUCATION_LEVEL } from '@/constants';
+import { useRouter } from 'next/router';
 
 interface SpecialMobileCardProps {
   item: RecruitListItem;
@@ -32,7 +30,9 @@ export default function SpecialMobileCard({ item, index }: SpecialMobileCardProp
   const [isHighlight, setIsHighlight] = React.useState(false);
   const [isTag, setIsTag] = React.useState(false);
 
+  const router = useRouter();
   const { sido, sigungu } = addressFormat(item.address);
+  const controls = useAnimationControls();
 
   const { hasBoldEffect, hasHighlightEffect, hasTagEffect } = React.useMemo(() => {
     const currentDate = new Date();
@@ -59,11 +59,18 @@ export default function SpecialMobileCard({ item, index }: SpecialMobileCardProp
     setIsTag(hasTagEffect);
   }, [hasBoldEffect, hasHighlightEffect, hasTagEffect]);
 
+  const handleClickRecruit = async () => {
+    await controls.start({ scale: [0.98, 1] });
+    router.push(`/recruit/${item.id}`);
+  };
+
   return (
-    <S.SpecialMobileCard index={index}>
+    <S.SpecialMobileCard index={index} animate={controls} initial={{ scale: 1 }} onClick={handleClickRecruit}>
       <S.HeaderBox>
-        {isTag && <Tag label="급구" type="URGENT" width="32px" margin="0 5px 0 0" fontSize="11px" height="17px" />}
-        <Tag label="주목" type="ATTENTION" width="44px" margin="0 5px 0 0" fontSize="11px" height="17px" />
+        <div>
+          {isTag && <Tag label="급구" type="URGENT" width="32px" margin="0 5px 0 0" fontSize="11px" height="17px" />}
+          <Tag label="주목" type="ATTENTION" width="44px" margin="0 5px 0 0" fontSize="11px" height="17px" />
+        </div>
 
         {dateFormat.dateOrToday(item.priorityDate) === 'TODAY' ? (
           <time className="today">TODAY</time>
@@ -74,7 +81,6 @@ export default function SpecialMobileCard({ item, index }: SpecialMobileCardProp
 
       <S.ContentBox>
         <StyledTitle $isBold={isBold} $isHighlight={isHighlight}>
-          {isTag && <Tag label="급구" type="URGENT" width="32px" margin="0 5px 0 0" fontSize="11px" height="17px" />}
           <h5 className="text">{item.recruitmentTitle}</h5>
         </StyledTitle>
 
