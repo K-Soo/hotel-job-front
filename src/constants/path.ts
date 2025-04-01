@@ -5,6 +5,10 @@ const path = {
   SIGN_UP: '/sign-up', //기업 가입
   SIGN_UP_COMPLETE: '/sign-up/complete',
 
+  RECOVER: '/recover',
+  RECOVER_ACCOUNT: '/recover/account', // 아이디 찾기
+  RECOVER_RESET: '/recover/reset', // 비밀번호 찾기
+
   LANDING_EMPLOYER: '/landing/employer', //랜딩 사업자
 
   RECRUIT: '/recruit', // 채용정보 메인 페이지
