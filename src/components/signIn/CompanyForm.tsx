@@ -30,37 +30,21 @@ export default function CompanyForm({ onSubmit, isSubmitError }: CompanyFormProp
 
         <Button label="로그인" type="submit" variant="primary" margin="15px 0 0 0" isLoading={isSubmitting} />
       </form>
-      <div className="line" />
-      <div className="button-group">
-        <div className="button-group__find-box">
-          {/* <Button
-            label="아이디 찾기"
-            fontSize="11px"
-            width="73px"
-            type="submit"
-            height="20px"
-            variant="secondary200"
-            onClick={() => push(path.SIGN_UP)}
-            margin="0 5px 0 0"
-          />
-          <Button
-            label="비밀번호 찾기"
-            fontSize="11px"
-            type="submit"
-            height="20px"
-            variant="secondary200"
-            width="73px"
-            onClick={() => push(path.SIGN_UP)}
-          /> */}
-        </div>
+
+      <div className="account-group">
+        <button className="account-group__recover" onClick={() => push(path.RECOVER)}>
+          아이디 · 비밀번호 찾기
+        </button>
+
         <Button
           label="회원가입"
           fontSize="14px"
           type="submit"
-          height="25px"
-          variant="secondary100"
+          height="30px"
+          variant="primary100"
+          padding="0"
           onClick={() => push(path.SIGN_UP)}
-          width="100px"
+          width="auto"
         />
       </div>
     </S.CompanyForm>
@@ -70,19 +54,18 @@ export default function CompanyForm({ onSubmit, isSubmitError }: CompanyFormProp
 const S = {
   CompanyForm: styled.div`
     width: 100%;
-    .line {
-      border-bottom: 1px solid ${(props) => props.theme.colors.gray300};
-      width: 100%;
-      margin: 25px 0;
-    }
-    .button-group {
+    .account-group {
+      margin-top: 30px;
       display: flex;
       justify-content: space-between;
-      flex: 1;
-      &__find-box {
-        display: flex;
-        align-items: center;
-        width: auto;
+      align-items: center;
+      &__recover {
+        font-size: 13px;
+        color: ${(props) => props.theme.colors.gray600};
+        cursor: pointer;
+        &:hover {
+          text-decoration: underline;
+        }
       }
     }
   `,
