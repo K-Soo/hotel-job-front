@@ -46,7 +46,9 @@ const CarouselItem = React.forwardRef<HTMLDivElement, BasicItemWrapperProps>(({ 
 
   return (
     <S.CarouselItem ref={combinedRef}>
-      <div ref={innerRef}>{children}</div>
+      <div ref={innerRef} className="inner-wrapper">
+        {children}
+      </div>
     </S.CarouselItem>
   );
 });
@@ -62,5 +64,8 @@ const S = {
     width: 100%;
     cursor: grab;
     text-align: center;
+    .inner-wrapper {
+      height: 100%;
+    }
   `,
 };

@@ -172,11 +172,10 @@ const S = {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    font-size: 14px;
+    font-size: 13px;
     padding-right: 15px;
-
     .priority {
-      color: ${(props) => props.theme.colors.black800};
+      color: ${(props) => props.theme.colors.gray500};
     }
     .today {
       color: ${(props) => props.theme.colors.blue500};

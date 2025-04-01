@@ -10,10 +10,10 @@ import EmptyComponent from '@/components/common/EmptyComponent';
 import styled from 'styled-components';
 import useInfiniteScroll from '@/hooks/useInfiniteScroll';
 import { useRouter } from 'next/router';
-import BasicItemWrapper from '@/components/recruit/recruitBasic/BasicItemWrapper';
 import PaginationTag from '@/components/common/PaginationTag';
 import PaginationProgress from '@/components/common/PaginationProgress';
 import useResponsive from '@/hooks/useResponsive';
+import CarouselItem from '@/components/recruit/CarouselItem';
 
 interface Query extends ParsedUrlQuery {
   page?: string;
@@ -88,7 +88,7 @@ export default function RecruitBasicMobileContainer() {
         <StyledCarouselContainer ref={carouselRef}>
           {data.pages.map((page, pageIndex) => {
             return (
-              <BasicItemWrapper
+              <CarouselItem
                 key={pageIndex}
                 ref={(el: HTMLDivElement | null) => {
                   carouselItemRef.current[pageIndex] = el;
@@ -104,7 +104,7 @@ export default function RecruitBasicMobileContainer() {
                 {page.result.items.map((item, index) => {
                   return <RecruitMobileCard key={index} item={item} />;
                 })}
-              </BasicItemWrapper>
+              </CarouselItem>
             );
           })}
         </StyledCarouselContainer>
