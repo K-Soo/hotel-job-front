@@ -1,6 +1,6 @@
 export const signInTabOptions = [
-  { label: '일반회원', value: 'general' },
-  { label: '기업회원', value: 'company' },
+  { label: '개인회원', value: 'general' },
+  { label: '업체회원', value: 'company' },
 ] as const;
 
 export const recruitOrderFilterTabOptions = [
