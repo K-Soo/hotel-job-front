@@ -1,4 +1,5 @@
 import React from 'react';
+import styled from 'styled-components';
 import SignIn from '@/components/signIn';
 import Logo from '@/components/common/Logo';
 import { signInTabOptions } from '@/constants/tabs';
@@ -14,6 +15,7 @@ import useAuth from '@/hooks/useAuth';
 import { ParsedUrlQuery } from 'querystring';
 import { useRouter } from 'next/router';
 import useRedirect from '@/hooks/useRedirect';
+import LandingEmployer from '@/components/landingEmployer';
 
 type SignInTab = 'general' | 'company';
 
@@ -88,13 +90,15 @@ export default function SignInContainer() {
   }, [type]);
 
   return (
-    <SignIn>
-      <FormProvider {...methods}>
-        <Logo size="middle" margin="0 0 50px 0" />
-        <SignInTab tabsOptions={signInTabOptions} />
-        {type === 'general' && <GeneralForm />}
-        {type === 'company' && <CompanyForm onSubmit={onSubmit} isSubmitError={isSubmitError} />}
-      </FormProvider>
-    </SignIn>
+    <article className="mt-[30px] min-h-[100vh]">
+      <SignIn>
+        <FormProvider {...methods}>
+          <SignInTab tabsOptions={signInTabOptions} />
+          {type === 'general' && <GeneralForm />}
+          {type === 'company' && <CompanyForm onSubmit={onSubmit} isSubmitError={isSubmitError} />}
+        </FormProvider>
+      </SignIn>
+      {type === 'company' && <LandingEmployer />}
+    </article>
   );
 }
