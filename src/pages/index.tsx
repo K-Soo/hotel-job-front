@@ -1,4 +1,4 @@
-import Layout, { Header, Footer, Main, DesktopNavigation, MobileNavigation, ScrollToTop } from '@/components/layout';
+import Layout, { Header, Footer, Main, DesktopNavigation, MobileNavigation, ScrollToTopButton } from '@/components/layout';
 import HomeContainer from '@/containers/homeContainer';
 import BottomNavigation from '@/components/layout/BottomNavigation';
 import A2HS from '@/components/common/A2HS';
@@ -25,7 +25,7 @@ HomePage.getLayout = (page: React.ReactElement) => {
       <Main maxWidth="100%" padding="0 0 30px 0">
         {page}
       </Main>
-      <ScrollToTop />
+      <ScrollToTopButton />
       <Footer />
       <BottomNavigation />
     </Layout>
