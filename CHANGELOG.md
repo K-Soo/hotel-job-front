@@ -1,6 +1,23 @@
 # 변경 로그
 
 프로젝트의 모든 주요 변경 사항
+### [1.16.3](https://github.com/K-Soo/hotel-job-front/compare/v1.16.2...v1.16.3) (2025-04-01)
+
+
+### Updates
+
+* **EmployerHeader:** 채용 페이지 링크 클릭 시 라우터 대신 window.location 사용 ([ed9c2c3](https://github.com/K-Soo/hotel-job-front/commit/ed9c2c33f318bbe0d2a7192859424f535100f37b))
+* **EmployerPaymentItem:** 쿠폰 관련 필드 추가하여 결제 정보 확장 ([bc20cc8](https://github.com/K-Soo/hotel-job-front/commit/bc20cc8e38c175883980ffa9d5986505f9a31d7d))
+* **HelpNoticePage:** 서버 사이드 프로퍼티 테스트 코드 제거 ([5e6142a](https://github.com/K-Soo/hotel-job-front/commit/5e6142adebb450bdb878632897a9bbb692246c75))
+* **PaymentDetailForm:** 쿠폰 결제 시 상세 정보 표시 및 결제 항목 클릭 처리 수정 ([f26807e](https://github.com/K-Soo/hotel-job-front/commit/f26807e9b35c806ddc6b978e23b9c8ad40ba07a1))
+* **PrivacyAndTermsPages:** MobileNavigation에 logoIcon 추가 ([f060ce7](https://github.com/K-Soo/hotel-job-front/commit/f060ce7c4b0cb9e05fb7852611aacc25a3ea3f4e))
+* **RecruitComponents:** BasicItemWrapper 제거 및 CarouselItem로 대체, 스타일 수정 ([347432d](https://github.com/K-Soo/hotel-job-front/commit/347432dd356585ac10f945f08386932527c2505c))
+* **RecruitComponents:** RecruitBasicList 제거 및 RecruitPc 추가, 모바일 카드 컴포넌트 수정 ([ca8c5a0](https://github.com/K-Soo/hotel-job-front/commit/ca8c5a034423981e61a33490fe5999d6e4bd768b))
+* **RecruitSpecialCard:** 인덱스 그라디에이션 수정 ([0e2ccf4](https://github.com/K-Soo/hotel-job-front/commit/0e2ccf42c42a637bb151de81595ef92ff9a6d16f))
+* **RecruitSpecialCard:** 인덱스를 props로 추가하여 배경 색상 그라데이션 적용 ([7ab98e7](https://github.com/K-Soo/hotel-job-front/commit/7ab98e727a441fa2f2220e9713ea0951c0368703))
+* **SkeletonUI, RecruitBasicMobileContainer, RecruitSpecialMobileContainer:** 모바일 카드 컴포넌트의 스타일 및 로딩 상태 개선 ([f974fbf](https://github.com/K-Soo/hotel-job-front/commit/f974fbfadbf38bdca9a72577da1801e4a7ec4091))
+* **SpecialMobileCard:** 애니메이션 효과 추가 및 클릭 시 라우터 이동 기능 개선 ([e025077](https://github.com/K-Soo/hotel-job-front/commit/e02507789bfbc3fd8ca8e4b22146121b4d16125b))
+
 ### [1.16.2](https://github.com/K-Soo/hotel-job-front/compare/v1.16.1...v1.16.2) (2025-03-30)
 
 
