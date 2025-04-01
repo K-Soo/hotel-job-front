@@ -1,4 +1,4 @@
-import Layout, { Header, Footer, Main, DesktopNavigation, MobileNavigation, ScrollToTop } from '@/components/layout';
+import Layout, { Header, Footer, Main, DesktopNavigation, MobileNavigation, ScrollToTopButton } from '@/components/layout';
 import BottomNavigation from '@/components/layout/BottomNavigation';
 import HelpNotice from '@/components/helpNotice';
 import { NextSeo } from 'next-seo';
@@ -21,7 +21,7 @@ HelpNoticePage.getLayout = (page: React.ReactElement) => {
         <MobileNavigation logoIcon notificationIcon signUpIcon />
       </Header>
       <Main>{page}</Main>
-      <ScrollToTop />
+      <ScrollToTopButton />
       <Footer />
       <BottomNavigation />
     </Layout>
