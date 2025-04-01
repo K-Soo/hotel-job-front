@@ -19,7 +19,8 @@ export { MobileNavigation } from '@/components/layout/header/mobileNavigation';
 export { EmployerHeader } from '@/components/layout/header/employerHeader';
 export { EmployerAside } from '@/components/layout/aside/EmployerAside';
 export { EmployerFooter } from '@/components/layout/footer/EmployerFooter';
-export { ScrollToTop } from '@/components/layout/ScrollToTop';
+export { ScrollToTopButton } from '@/components/layout/ScrollToTopButton';
+export { AccountNavigation } from '@/components/layout/header/accountNavigation';
 import pretendard from '@/fonts/pretendard';
 
 const DynamicNoSSRStyledToaster = dynamic(() => import('@/components/common/StyledToaster'), { ssr: false });
