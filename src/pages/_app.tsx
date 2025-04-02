@@ -26,6 +26,18 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
   const getLayout = Component.getLayout ?? commonLayout;
   const [queryClient] = React.useState(() => new QueryClient(queryClientDefaultOption));
 
+  React.useEffect(() => {
+    const channel = new BroadcastChannel('auth');
+
+    channel.onmessage = (event) => {
+      if (event.data?.type === 'logout') {
+        window.location.href = '/';
+      }
+    };
+
+    return () => channel.close();
+  }, []);
+
   return (
     <>
       <GoogleTagManager />

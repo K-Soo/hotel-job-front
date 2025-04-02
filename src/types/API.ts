@@ -112,11 +112,19 @@ export interface GetNotificationListRequest {
   limit: string;
 }
 
+export interface EmailVerificationRequest {
+  userName?: string;
+  email: string;
+  redirect: string;
+}
+
 export interface PaymentRecruitmentFreeConfirmRequest extends Pick<PaymentRecruitmentConfirmRequest, 'orderId' | 'amount'> {}
 
 export interface CreateApplicationsAnnouncementRequest extends types.CreateApplicationsAnnouncementForm {}
 
 export interface EmployerAccountResetRequest extends Pick<types.EmployerAccountResetForm, 'currentPassword' | 'newPassword'> {}
+
+export interface EmployerAccountVerificationRequest extends types.EmployerAccountVerificationForm {}
 
 /************************************* RESPONSE **************************************/
 
@@ -473,5 +481,17 @@ export interface EmailVerifyResponse extends BaseResponse {
     status: ResponseStatus;
     token: string;
     redirect: string;
+  };
+}
+
+export interface EmployerAccountVerificationResponse extends BaseResponse {
+  result: {
+    status: ResponseStatus;
+  };
+}
+
+export interface EmailVerificationResponse extends BaseResponse {
+  result: {
+    status: ResponseStatus;
   };
 }

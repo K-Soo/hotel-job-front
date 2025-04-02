@@ -10,7 +10,7 @@ interface ChangePasswordFormProps {
 }
 
 export default function ChangePasswordForm({ onSubmit }: ChangePasswordFormProps) {
-  const { handleSubmit, formState } = useFormContext<any>();
+  const { handleSubmit } = useFormContext<EmployerAccountResetForm>();
 
   return (
     <S.ChangePasswordForm>

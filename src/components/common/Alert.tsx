@@ -77,6 +77,7 @@ const S = {
     align-items: center;
     will-change: transform;
     padding: 35px 25px 25px 25px;
+    z-index: 16;
     ${(props) => props.theme.media.mobile`
       width: 90%;
     `};
@@ -90,6 +91,8 @@ const S = {
       font-size: 20px;
       font-weight: 500;
       text-align: center;
+      white-space: pre-line;
+      line-height: 1.2;
       ${(props) => props.theme.media.mobile`
         font-size: 18px;
       `};

@@ -29,4 +29,8 @@ export const errorMessages: Record<string, string> = {
   'ERR-FORBIDDEN_REQUEST': '최초 결제 요청한 값과 일치하지않습니다.',
   'ERR-UNAUTHORIZED_KEY': '인증되지 않은 결제 요청입니다.',
   'ERR-ALREADY_PROCESSED_PAYMENT': '이미 처리된 결제 입니다.',
+
+  'ERR-9000': '이메일 인증이 실패했습니다. 다시 시도해주세요.',
+  'ERR-9001': '인증 기한이 만료되었습니다. 다시 시도해주세요.',
+  'ERR-9002': '이미 인증을 완료했거나 인증 정보가 유효하지 않습니다.',
 };

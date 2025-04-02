@@ -32,11 +32,9 @@ export default function CompanyForm({ onSubmit, isSubmitError }: CompanyFormProp
       </form>
 
       <div className="account-group">
-        {/* TODO */}
-        <div></div>
-        {/* <button className="account-group__recover" onClick={() => push(path.RECOVER)}>
+        <button className="account-group__recover" onClick={() => push(path.RECOVER)}>
           아이디 · 비밀번호 찾기
-        </button> */}
+        </button>
 
         <Button
           label="회원가입"

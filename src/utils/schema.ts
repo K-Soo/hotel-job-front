@@ -298,6 +298,11 @@ const accountResetSchema = yup.object({
   newPasswordConfirm: validation.NEW_PASSWORD_CONFIRM,
 });
 
+const employerAccountVerificationSchema = yup.object({
+  userName: validation.REQUIRED_TEXT_2({ minLength: 2, maxLength: 10 }),
+  email: validation.REQUIRED_EMAIL(),
+});
+
 export const schema = {
   signInSchema,
   resumeRegister,
@@ -309,4 +314,5 @@ export const schema = {
   recruitmentDetailSchema,
   nicknameSchema,
   accountResetSchema,
+  employerAccountVerificationSchema,
 };

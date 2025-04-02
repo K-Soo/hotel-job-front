@@ -62,7 +62,7 @@ export default function Layout({ children }: LayoutProps) {
     <S.Layout className={pretendard.variable}>
       <DynamicNoSSRStyledToaster />
 
-      {loadingAtomValue.isLoading && <DynamicNoSSRLoadingOverlay />}
+      {loadingAtomValue.isLoading && <DynamicNoSSRLoadingOverlay message={loadingAtomValue.message} />}
       {bottomSheetAtomValue.isOpen && <DynamicNoSSRAccountBottomSheet />}
       {certificationModalAtomValue.isOpen && <DynamicNoSSRCertificationAccountModal />}
 

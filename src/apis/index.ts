@@ -397,6 +397,9 @@ export const Post = {
   // 채용공고 삭제
   removeRecruitment: (body: { ids: string[] }) => requests.post<{ ids: string[] }, API.RemoveRecruitmentResponse>('/employers/recruitment/remove', body),
 
+  // 사업자 - 이름 & 이메일 찾기 검증
+  employerAccountVerification: (body: API.EmployerAccountVerificationRequest) => requests.post<API.EmployerAccountVerificationRequest, API.EmployerAccountVerificationResponse>('/employers/account/verification', body),
+
   // *************************************** EMPLOYER APPLICATIONS ***************************************
   // 합격자 발표
   createApplicationsAnnouncement: (body: API.CreateApplicationsAnnouncementRequest) => requests.post<API.CreateApplicationsAnnouncementRequest, any>('/applications/announcements', body),
@@ -431,8 +434,12 @@ export const Post = {
 
   // *************************************** EMAIL VERIFICATION  ***************************************
   // 이메일 인증 요청
+  emailVerification: (body: API.EmailVerificationRequest) => requests.post<API.EmailVerificationRequest, API.EmailVerificationResponse>('/email-verification/request', body),
+
+  // 이메일 복호화 검증 요청
   emailVerify: (body: { token: string }) => requests.post<{token: string }, API.EmailVerifyResponse>('/email-verification/verify', body),
-// 유저 아이디 요청
+
+  // 유저 아이디 요청
   emailVerifyAccount: (body: { token: string }) => requests.post<{token: string }, any>('/email-verification/verify/account', body),
 };
 
@@ -452,6 +459,8 @@ export const Patch = {
   // 사업자 - 채용공고 복사
   copyRecruitment: (body: { recruitmentId: string }) => requests.patch<{ recruitmentId: string }, any>('/employers/recruitment/copy', body),
   
+
+
   // 사업자 - 비밀번호 변경
   employerAccountReset: (body: API.EmployerAccountResetRequest) => requests.patch<API.EmployerAccountResetRequest, API.EmployerAccountResetResponse>('/employers/account/reset', body),
 
