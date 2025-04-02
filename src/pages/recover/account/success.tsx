@@ -17,7 +17,9 @@ RecoverAccountSuccessPage.getLayout = (page: React.ReactElement) => {
       <Header position="static" borderBottom={false}>
         <AccountNavigation />
       </Header>
-      <Main>{page}</Main>
+      <Main maxWidth="auto" padding="0">
+        {page}
+      </Main>
       <ScrollToTopButton />
     </Layout>
   );
