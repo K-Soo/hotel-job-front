@@ -25,7 +25,14 @@ export default function User() {
   if (isUnAuthenticated) {
     return (
       <S.User>
-        <Button label="로그인" variant="tertiary" height="40px" onClick={() => router.push(path.SIGN_IN)} fontSize="15px" width="80px" />
+        <Button
+          label="로그인/회원가입"
+          variant="account"
+          height="32px"
+          onClick={() => router.push(path.SIGN_IN)}
+          fontSize="13px"
+          width="auto"
+        />
       </S.User>
     );
   }

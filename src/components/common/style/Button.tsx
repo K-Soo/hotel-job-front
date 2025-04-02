@@ -22,7 +22,8 @@ type ButtonVariant =
   | 'select' //검색
   | 'delete' // 삭제
   | 'update' // 수정하기
-  | 'checkoutOutline';
+  | 'checkoutOutline'
+  | 'account';
 
 interface ButtonProps {
   label: string;
@@ -327,6 +328,25 @@ const S = {
         background-color: ${(props) => props.theme.colors.green400};
         &:hover {
           background-color: ${(props) => props.theme.colors.green600};
+        }
+        &:disabled {
+          background-color: ${(props) => props.theme.colors.green300};
+          cursor: not-allowed;
+        }
+      `};
+
+    ${(props) =>
+      props.$variant === 'account' &&
+      css`
+        color: ${(props) => props.theme.colors.blue400};
+        background-color: ${(props) => props.theme.colors.white};
+        border: 1px solid ${(props) => props.theme.colors.gray200};
+        padding: 0 10px;
+        border-radius: 8px;
+        letter-spacing: 1.05px;
+        &:hover {
+          background-color: ${(props) => props.theme.colors.gray100};
+          color: ${(props) => props.theme.colors.blue500};
         }
         &:disabled {
           background-color: ${(props) => props.theme.colors.green300};

@@ -4,7 +4,7 @@ import styled from 'styled-components';
 export default function DifferencePoint() {
   return (
     <S.DifferencePoint>
-      <h2 className="title">타사 호텔업계 사이트와 뭐가 다를까?</h2>
+      <h2 className="title">타사 채용 사이트와 뭐가 다를까?</h2>
       <S.DifferencePointContent>
         {DIFFERENCE_POINTS.map((item, index) => (
           <div className="item" key={index}>

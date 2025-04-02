@@ -4,7 +4,7 @@ import environment from '@/environment';
 export const crypto = {
   encryptionSimpleAES: (plainText: string | number) => {
     if (!plainText) {
-      throw new Error('data is require');
+      throw new Error('plainText is require');
     }
     const b64 = CryptoJS.AES.encrypt(JSON.stringify(plainText), environment.cryptoKey).toString();
     const e64 = CryptoJS.enc.Base64.parse(b64);
@@ -12,16 +12,18 @@ export const crypto = {
     return eHex;
   },
   decryptSimpleAES: (cipherText: string) => {
-    if (cipherText) {
-      const reb64 = CryptoJS.enc.Hex.parse(cipherText);
-      const bytes = reb64.toString(CryptoJS.enc.Base64);
-      const decrypt = CryptoJS.AES.decrypt(bytes, environment.cryptoKey);
-      const plain = decrypt.toString(CryptoJS.enc.Utf8);
-      if (!plain) {
-        return null;
-      }
-      return plain;
+    if (!cipherText) {
+      throw new Error('cipherText is require');
     }
+
+    const reb64 = CryptoJS.enc.Hex.parse(cipherText);
+    const bytes = reb64.toString(CryptoJS.enc.Base64);
+    const decrypt = CryptoJS.AES.decrypt(bytes, environment.cryptoKey);
+    const plain = decrypt.toString(CryptoJS.enc.Utf8);
+    if (!plain) {
+      return null;
+    }
+    return plain;
   },
   encryptAESWithIV: (plainText: string | number) => {
     if (!plainText) {
