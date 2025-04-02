@@ -741,3 +741,8 @@ export interface EmployerAccountResetForm {
   newPassword: string;
   newPasswordConfirm: string;
 }
+
+export interface EmployerAccountVerificationForm {
+  userName: string;
+  email: string;
+}
