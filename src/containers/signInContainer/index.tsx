@@ -1,7 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
 import SignIn from '@/components/signIn';
-import Logo from '@/components/common/Logo';
 import { signInTabOptions } from '@/constants/tabs';
 import { useForm, FormProvider, SubmitHandler } from 'react-hook-form';
 import { SignInForm } from '@/types';
