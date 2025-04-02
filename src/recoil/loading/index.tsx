@@ -1,12 +1,14 @@
-import { atom } from "recoil";
+import { atom } from 'recoil';
 
 export interface LoadingAtom {
   isLoading: boolean;
+  message?: string;
 }
 
 export const loadingAtom = atom<LoadingAtom>({
-  key: "loadingAtom",
+  key: 'loadingAtom',
   default: {
     isLoading: false,
+    message: '',
   },
 });
