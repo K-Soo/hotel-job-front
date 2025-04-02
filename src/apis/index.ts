@@ -428,6 +428,12 @@ export const Post = {
 
   // 채용공고 쿠폰 적용 취소
   cancelCoupon: (body: { orderId: string; couponId: string }) => requests.post<{ orderId: string; couponId: string }, any>('/payment/recruitment/coupon/cancel', body),
+
+  // *************************************** EMAIL VERIFICATION  ***************************************
+  // 이메일 인증 요청
+  emailVerify: (body: { token: string }) => requests.post<{token: string }, API.EmailVerifyResponse>('/email-verification/verify', body),
+// 유저 아이디 요청
+  emailVerifyAccount: (body: { token: string }) => requests.post<{token: string }, any>('/email-verification/verify/account', body),
 };
 
 export const Patch = {

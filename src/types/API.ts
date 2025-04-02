@@ -467,3 +467,11 @@ export interface EmployerAccountResetResponse extends BaseResponse {
     status: ResponseStatus;
   };
 }
+
+export interface EmailVerifyResponse extends BaseResponse {
+  result: {
+    status: ResponseStatus;
+    token: string;
+    redirect: string;
+  };
+}

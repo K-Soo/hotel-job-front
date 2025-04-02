@@ -34,10 +34,10 @@ const S = {
     padding: 0 15px;
   `,
   HelpButton: styled(motion.button)`
-    border-radius: 30px;
-    border: 1px solid ${(props) => props.theme.colors.blue600};
+    border-radius: 8px;
+    border: 1px solid ${(props) => props.theme.colors.gray300};
     color: ${(props) => props.theme.colors.blue600};
-    height: 30px;
+    height: 32px;
     padding: 0 15px;
     font-size: 14px;
     cursor: pointer;
