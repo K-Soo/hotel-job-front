@@ -25,7 +25,7 @@ export function AccountNavigation({}: AccountNavigationProps) {
 
 const S = {
   AccountNavigation: styled.div`
-    height: 50px;
+    height: 60px;
     display: flex;
     align-items: center;
     justify-content: space-between;
