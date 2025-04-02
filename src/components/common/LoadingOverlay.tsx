@@ -57,13 +57,16 @@ const S = {
     justify-content: center;
     background: rgba(255, 255, 255, 0.6);
     backdrop-filter: blur(5px);
-
     min-height: ${({ height }) => height || '100%'};
     z-index: 15;
     .message {
       margin-top: 20px;
       font-size: 18px;
       color: ${({ theme }) => theme.colors.black400};
+      white-space: pre-line;
+      text-align: center;
+      line-height: 1.2;
+      font-weight: 500;
     }
   `,
 };
