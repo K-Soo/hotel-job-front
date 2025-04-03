@@ -421,7 +421,7 @@ export default function PolicyPrivacy() {
 
           <br />
 
-          <p>&bull; 개인정보 처리방침 시행일자 : 2024년 2월 20일</p>
+          <p>&bull; 개인정보 처리방침 시행일자 : 2024년 03월 01ㄴ일</p>
         </S.Content>
       </S.Section>
     </S.PolicyPrivacy>

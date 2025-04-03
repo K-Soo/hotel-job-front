@@ -481,7 +481,7 @@ export default function PolicyTerms({}: PolicyTermsProps) {
 
       <S.SubTitle>부칙</S.SubTitle>
       <S.Content>
-        <p>본 약관은 2024년 2월 20일부터 시행합니다.</p>
+        <p>본 약관은 2024년 03월 01일부터 시행합니다.</p>
       </S.Content>
     </S.PolicyTerms>
   );
