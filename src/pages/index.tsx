@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import Layout, { Header, Footer, Main, DesktopNavigation, MobileNavigation, ScrollToTopButton } from '@/components/layout';
 import HomeContainer from '@/containers/homeContainer';
 import BottomNavigation from '@/components/layout/BottomNavigation';
