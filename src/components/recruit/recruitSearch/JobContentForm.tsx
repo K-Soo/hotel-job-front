@@ -2,7 +2,7 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import { motion } from 'framer-motion';
 import CircleCheckbox from '@/components/common/style/CircleCheckbox';
-import { HOTEL_JOBS, TOURIST_HOTEL_JOBS, OTHER_JOBS, AllJobsKeyValuesKeys } from '@/constants/job';
+import { HOTEL_JOBS, OTHER_JOBS, AllJobsKeyValuesKeys } from '@/constants/job';
 
 interface JobContentFormProps {
   tabIndex: number;
@@ -17,7 +17,6 @@ interface JobContentFormProps {
 const BUSINESS_DATA = [
   { label: '전체', value: 'all' },
   { label: '호텔', value: 'hotel' },
-  { label: '관광호텔', value: 'touristHotel' },
   { label: '기타', value: 'other' },
 ];
 
@@ -28,17 +27,14 @@ export default function JobContentForm({
   handleClickJobItem,
   selectedJob,
 }: JobContentFormProps) {
-  console.log('businessType: ', businessType);
   const [jobCounts, setJobCounts] = React.useState({
     hotel: 0,
-    touristHotel: 0,
     other: 0,
   });
 
   React.useEffect(() => {
     setJobCounts({
       hotel: selectedJob.filter((job) => Object.keys(HOTEL_JOBS).includes(job)).length,
-      touristHotel: selectedJob.filter((job) => Object.keys(TOURIST_HOTEL_JOBS).includes(job)).length,
       other: selectedJob.filter((job) => Object.keys(OTHER_JOBS).includes(job)).length,
     });
   }, [selectedJob]);
