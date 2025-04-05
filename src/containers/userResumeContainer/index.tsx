@@ -25,19 +25,7 @@ export default function UserResumeContainer() {
   const { authAtomState } = useAuth();
   const queryClient = useQueryClient();
 
-  const handleClickCreateResumeButton = async () => {
-    if (authAtomState.certificationStatus !== 'VERIFIED') {
-      return setAlertWithConfirmAtom((prev) => ({
-        ...prev,
-        type: 'CONFIRM',
-        title: 'TITLE_23',
-        subTitle: 'DESC_16',
-        onClickConfirm: () => setCertificationModalAtom({ isOpen: true }),
-        confirmLabel: '인증하기',
-        cancelLabel: '취소',
-      }));
-    }
-
+  const fetchCreateResume = async () => {
     try {
       const queryData = queryClient.getQueryData<GetResumeListResponse>([queryKeys.RESUME_LIST, { nickname: authAtomState.nickname }]);
 
@@ -51,7 +39,7 @@ export default function UserResumeContainer() {
         throw new Error();
       }
 
-      router.push(`/user/resume/${response.result.id}`);
+      await router.push(`/user/resume/${response.result.id}`);
 
       queryClient.invalidateQueries({ queryKey: [queryKeys.RESUME_LIST], refetchType: 'all' });
       queryClient.invalidateQueries({ queryKey: [queryKeys.AVAILABLE_RESUME_LIST], refetchType: 'all' });
@@ -68,6 +56,22 @@ export default function UserResumeContainer() {
 
       addToast({ message: '이력서 생성에 실패했습니다.', type: 'error' });
     }
+  };
+
+  const handleClickCreateResumeButton = () => {
+    if (authAtomState.certificationStatus !== 'VERIFIED') {
+      return setAlertWithConfirmAtom((prev) => ({
+        ...prev,
+        type: 'CONFIRM',
+        title: 'TITLE_23',
+        subTitle: 'DESC_16',
+        onClickConfirm: () => setCertificationModalAtom({ isOpen: true }),
+        confirmLabel: '인증하기',
+        cancelLabel: '취소',
+      }));
+    }
+
+    fetchCreateResume();
   };
 
   return (
