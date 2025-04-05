@@ -29,9 +29,9 @@ const S = {
     min-height: 70px;
   `,
   FormLabel: styled.span<{ required?: boolean }>`
-    color: ${({ theme }) => theme.colors.gray700};
+    color: ${({ theme }) => theme.colors.black400};
     white-space: nowrap;
-    font-size: 14px;
+    font-size: 16px;
     flex-basis: 150px;
     flex-shrink: 0;
     ${(props) =>
