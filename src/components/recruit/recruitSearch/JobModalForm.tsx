@@ -20,7 +20,6 @@ interface JobModalFormProps {
 const BUSINESS_DATA = [
   { label: '전체', value: 'all' },
   { label: '호텔', value: 'hotel' },
-  { label: '관광호텔', value: 'touristHotel' },
   { label: '기타', value: 'other' },
 ];
 
