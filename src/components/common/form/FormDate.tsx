@@ -35,7 +35,6 @@ export default function FormDate<T extends FieldValues>({
     formState: { errors },
     control,
     clearErrors,
-    watch,
   } = useFormContext<T>();
   const {
     field: { value },
@@ -102,7 +101,7 @@ export default function FormDate<T extends FieldValues>({
         }}
       />
 
-      <FormError errors={errors} name={name} style={{ position: 'absolute' }} />
+      <FormError errors={errors} name={name} />
     </S.FormDate>
   );
 }
@@ -112,13 +111,13 @@ const S = {
     margin: ${(props) => (props.$margin ? props.$margin : '0')};
     width: ${(props) => (props.$width ? props.$width : '100%')};
     max-width: ${(props) => (props.$maxWidth ? props.$maxWidth : '100%')};
-
     .react-datepicker-wrapper {
       border-radius: 5px;
       border: 1px solid ${({ theme }) => theme.colors.gray300};
       width: 100%;
       height: 40px;
       cursor: pointer;
+      background-color: ${({ theme }) => theme.colors.white};
 
       .react-datepicker__input-container {
         width: 100%;
@@ -129,14 +128,14 @@ const S = {
         input {
           all: unset;
           border: none;
-          font-size: 14px;
+          font-size: 16px;
           padding-left: 10px;
           margin: 0;
           height: 100%;
 
           &::placeholder {
             color: ${(props) => props.theme.colors.gray400};
-            font-size: 14px;
+            font-size: 16px;
           }
         }
       }
@@ -145,10 +144,10 @@ const S = {
 };
 
 const StyledLabel = styled.label<{ required?: boolean }>`
-  color: ${({ theme }) => theme.colors.gray700};
+  color: ${({ theme }) => theme.colors.black400};
   display: block;
-  margin-bottom: 3px;
-  font-size: 15px;
+  padding-bottom: 4px;
+  font-size: 16px;
   cursor: default;
   white-space: nowrap;
   margin-right: 15px;
