@@ -9,7 +9,7 @@ import dynamic from 'next/dynamic';
 import useResponsive from '@/hooks/useResponsive';
 import Modal from '@/components/common/modal';
 import Button from '@/components/common/style/Button';
-import { HOTEL_JOBS, TOURIST_HOTEL_JOBS, OTHER_JOBS, AllJobsKeyValuesKeys, ALL_JOBS } from '@/constants/job';
+import { HOTEL_JOBS, OTHER_JOBS, AllJobsKeyValuesKeys, ALL_JOBS } from '@/constants/job';
 import useToast from '@/hooks/useToast';
 import path from '@/constants/path';
 
@@ -71,10 +71,6 @@ export default function JobSearch() {
     if (value === 'hotel') {
       setTabIndex(1);
       setBusinessType(Object.entries(HOTEL_JOBS));
-    }
-    if (value === 'touristHotel') {
-      setTabIndex(2);
-      setBusinessType(Object.entries(TOURIST_HOTEL_JOBS));
     }
     if (value === 'other') {
       setTabIndex(3);
