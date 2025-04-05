@@ -135,6 +135,7 @@ export default function DetailInfoForm({ setIsOpenJobModal, setIsOpenPreferences
           name="recruitmentInfo.nationality.marriageVisa"
           placeholder="예시) H-2, F-2, 결혼비자, 영주권"
           maxLength={30}
+          margin="4px 0 0 0"
         />
       </HorizontalFormWrapper>
 
