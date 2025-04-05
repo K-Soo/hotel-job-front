@@ -6,14 +6,12 @@ import { useResumeContext } from '@/context/ResumeProvider';
 import { QueryObserverResult, RefetchOptions } from '@tanstack/react-query';
 import { GetResumeDetailResponse } from '@/types/API';
 import { AxiosError } from 'axios';
-import { dateFormat } from '@/utils';
 interface ResumeBottomControllerProps {
   onSubmit: SubmitHandler<ResumeDetailForm>;
-  updatedAt: Date;
   refetch: (options?: RefetchOptions) => Promise<QueryObserverResult<GetResumeDetailResponse, AxiosError<unknown, any>>>;
 }
 
-export default function ResumeBottomController({ onSubmit, updatedAt, refetch }: ResumeBottomControllerProps) {
+export default function ResumeBottomController({ onSubmit, refetch }: ResumeBottomControllerProps) {
   const { isEditing, setIsEditing, resumeStatus } = useResumeContext();
 
   const {
@@ -26,41 +24,46 @@ export default function ResumeBottomController({ onSubmit, updatedAt, refetch }:
       <div className="resume-bottom-controller">
         {isEditing && resumeStatus === 'PUBLISH' && (
           <Button
-            maxWidth="110px"
-            height="40px"
-            margin="0 15px 0 0"
-            label="취소"
+            maxWidth="150px"
+            height="45px"
+            margin="0 30px 0 0"
+            label="수정취소"
             variant="secondary"
             disabled={false}
             type="button"
             onClick={() => refetch()}
+            borderRadius="8px"
+            fontSize="18px"
           />
         )}
 
         {isEditing && (
           <Button
-            maxWidth="110px"
-            height="40px"
+            maxWidth="150px"
+            height="45px"
             label="작성완료"
             variant="primary"
             disabled={false}
             type="button"
             onClick={handleSubmit(onSubmit)}
             isLoading={isSubmitting}
+            borderRadius="8px"
+            fontSize="18px"
           />
         )}
 
         {!isEditing && (
           <>
-            <S.UpdateTime>최근 수정일: {dateFormat.date(updatedAt, 'MM.DD HH:mm')}</S.UpdateTime>
             <Button
-              maxWidth="110px"
-              height="40px"
+              maxWidth="150px"
+              height="45px"
               label="수정하기"
               variant="update"
               disabled={false}
               type="button"
               onClick={() => setIsEditing(true)}
+              borderRadius="8px"
+              fontSize="18px"
             />
           </>
         )}
@@ -76,14 +79,30 @@ const S = {
     left: 0;
     right: 0;
     width: 100%;
-    height: 60px;
-    border-top: 1px solid ${(props) => props.theme.colors.gray200};
-    background-color: ${(props) => props.theme.colors.white};
+    height: 75px;
+    border-top: 1px solid rgba(0, 0, 0, 0.07);
+    background-color: rgba(255, 255, 255, 0.7);
+    backdrop-filter: saturate(150%) blur(32px);
+    ${(props) => props.theme.media.tablet`
+      padding-bottom: 10px;
+    `};
+
+    /* &::after {
+      content: '';
+      position: absolute;
+      top: -20px;
+      left: 0;
+      right: 0;
+      height: 20px;
+      background: linear-gradient(rgba(255, 255, 255, 0), #fff);
+      z-index: 1;
+    } */
     .resume-bottom-controller {
       height: 100%;
-      max-width: 1024px;
+      max-width: 1070px;
       width: 100%;
       margin: 0 auto;
+      /* border: 1px solid red; */
       display: flex;
       align-items: center;
       justify-content: flex-end;
