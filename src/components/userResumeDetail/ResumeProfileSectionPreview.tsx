@@ -9,8 +9,6 @@ import { parseBirthDateAndCalculateAge } from '@/utils';
 import ResumeProfileImage from '@/components/common/resume/ResumeProfileImage';
 
 export default function ResumeProfileSectionPreview() {
-  const [previewImage, setPreviewImage] = React.useState('');
-
   const { getValues } = useFormContext<ResumeDetailForm>();
   const { isTablet } = useResponsive();
 
@@ -24,14 +22,9 @@ export default function ResumeProfileSectionPreview() {
   const sexCode = getValues('sexCode');
   const phone = getValues('phone');
   const profileImage = getValues('profileImage');
+  const summaryValue = getValues('summary');
 
   const { age, birthYear } = parseBirthDateAndCalculateAge(birthday);
-
-  React.useEffect(() => {
-    if (profileImage) {
-      setPreviewImage(profileImage);
-    }
-  }, [profileImage]);
 
   return (
     <S.ResumeProfileSectionPreview>
@@ -56,40 +49,59 @@ export default function ResumeProfileSectionPreview() {
 
           {!isTablet && (
             <>
-              <S.PhoneBox>
-                <span>📞&nbsp;&nbsp;{phone}</span>
-              </S.PhoneBox>
+              <div className="flex py-1">
+                <span className="min-w-[70px] text-gray-700">휴대폰</span>
+                <p className="text-black">{phone}</p>
+              </div>
 
-              <S.EmailBox>
-                <span>✉️&nbsp;&nbsp;{email}</span>
-              </S.EmailBox>
+              <div className="flex py-1">
+                <span className="min-w-[70px] text-gray-700">이메일</span>
+                <p className="text-black">{email}</p>
+              </div>
 
-              <S.AddressBox>
-                <span>🏠&nbsp;&nbsp;{address}</span>
-                <span>{addressDetail}</span>
-              </S.AddressBox>
+              <div className="flex py-1">
+                <span className="min-w-[70px] text-gray-700">주소</span>
+                <p className="text-black">
+                  {address} {addressDetail}
+                </p>
+              </div>
             </>
           )}
         </div>
 
-        {previewImage && <ResumeProfileImage imageUrl={previewImage} />}
+        {profileImage && (
+          <div className="h-[140px] w-[120px] overflow-hidden rounded-[5px]">
+            <ResumeProfileImage imageUrl={profileImage} />
+          </div>
+        )}
       </article>
 
       {isTablet && (
         <>
-          <S.PhoneBox>
-            <span>📞&nbsp;&nbsp;{phone}</span>
-          </S.PhoneBox>
+          <div className="flex py-1">
+            <span className="min-w-[70px] text-gray-700">휴대폰</span>
+            <p className="text-black">{phone}</p>
+          </div>
 
-          <S.EmailBox>
-            <span>✉️&nbsp;&nbsp;{email}</span>
-          </S.EmailBox>
+          <div className="flex py-1">
+            <span className="min-w-[70px] text-gray-700">이메일</span>
+            <p className="text-black">{email}</p>
+          </div>
 
-          <S.AddressBox>
-            <span>🏠&nbsp;&nbsp;{address}</span>
-            <span>{addressDetail}</span>
-          </S.AddressBox>
+          <div className="flex py-1">
+            <span className="min-w-[70px] text-gray-700">주소</span>
+            <p className="text-black">
+              {address} {addressDetail}
+            </p>
+          </div>
         </>
+      )}
+
+      {summaryValue.length !== 0 && (
+        <div className="mt-15">
+          <h5 className="mb-2 text-[18px] font-[500]">자기소개</h5>
+          <p className="text-[16px] leading-relaxed text-gray-800">{summaryValue}</p>
+        </div>
       )}
     </S.ResumeProfileSectionPreview>
   );
@@ -97,7 +109,11 @@ export default function ResumeProfileSectionPreview() {
 
 const S = {
   ResumeProfileSectionPreview: styled.div`
-    margin-bottom: 50px;
+    background-color: ${({ theme }) => theme.colors.white};
+    padding: 30px;
+    ${(props) => props.theme.media.mobile`
+      padding: 30px 15px;
+      `};
     .profile-preview-container {
       display: flex;
       justify-content: space-between;
@@ -140,15 +156,7 @@ const S = {
   `,
   CertInfoBox: styled.div`
     color: ${({ theme }) => theme.colors.black600};
-    font-size: 14px;
+    font-size: 16px;
     margin-bottom: 20px;
   `,
-  PhoneBox: styled.div`
-    margin: 10px 0;
-  `,
-  EmailBox: styled.div`
-    margin: 10px 0;
-    word-break: break-all;
-  `,
-  AddressBox: styled.div``,
 };
