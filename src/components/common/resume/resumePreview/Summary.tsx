@@ -8,7 +8,7 @@ interface SummaryProps {
 export default function Summary({ resumePreviewData }: SummaryProps) {
   return (
     <S.Summary>
-      <h6 className="title">간단소개</h6>
+      <h6 className="title">자기소개</h6>
       <p>{resumePreviewData.summary}</p>
     </S.Summary>
   );
@@ -17,8 +17,8 @@ export default function Summary({ resumePreviewData }: SummaryProps) {
 const S = {
   Summary: styled.div`
     color: ${({ theme }) => theme.colors.black500};
-    line-height: 1.5;
-    font-size: 15px;
+    line-height: 1.6;
+    font-size: 16px;
     margin-bottom: 80px;
     .title {
       margin-bottom: 5px;
