@@ -118,12 +118,12 @@ const S = {
 
 const StyledLabel = styled.label<{ required?: boolean }>`
   display: block;
-  margin-bottom: 3px;
-  font-size: 14px;
+  padding-bottom: 4px;
+  font-size: 16px;
   cursor: default;
   white-space: nowrap;
   margin-right: 15px;
-  color: ${({ theme }) => theme.colors.gray700};
+  color: ${({ theme }) => theme.colors.black400};
   ${(props) =>
     props.required &&
     css`
@@ -146,7 +146,7 @@ const StyledMotionSelect = styled(motion.select)`
   align-items: center;
   padding-left: 10px;
   border-radius: 5px;
-  font-size: 14px;
+  font-size: 16px;
   cursor: pointer;
   background-color: ${(props) => props.theme.colors.white};
   &:hover {
