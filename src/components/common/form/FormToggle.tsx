@@ -46,7 +46,6 @@ export default function FormToggle<T extends FieldValues>({ label, name }: FormT
 
 const S = {
   FormToggle: styled.div<{ $isToggle: boolean }>`
-    margin-top: 15px;
     width: fit-content;
     display: flex;
     align-items: center;
