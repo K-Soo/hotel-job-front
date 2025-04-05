@@ -9,16 +9,6 @@ export default function GeneralForm() {
   const handleClickSocialSignInButton = (event: React.MouseEvent<HTMLButtonElement>) => {
     const type = event.currentTarget.name as 'KAKAO' | 'GOOGLE';
 
-    //TODO - 고도화 시점에 IOS 웹뷰 개발 및 분기처리 안드로이드는 PWA로 진행
-    // if (window?.webkit) {
-    //   router.push('/oauth/callback/kakao');
-    //   return window.webkit?.messageHandlers?.socialType?.postMessage(type);
-    // }
-    // if (isWebview ???) {
-    //   return window?.jsToWebviewSocialChannel?.postMessage(JSON.stringify({ message: type }));
-    // }
-    // window.location.href = SOCIAL_URL[type];
-
     const redirect = getRedirectAfterLogin();
 
     const statePayload = {
