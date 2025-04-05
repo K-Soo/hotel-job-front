@@ -50,19 +50,28 @@ const S = {
     `};
     .title-input {
       all: unset;
-      font-size: 28px;
+      font-size: 30px;
       word-break: break-all;
+      max-width: 700px;
       width: 100%;
       color: ${(props) => props.theme.colors.black300};
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      border: 2px solid transparent;
+      &:focus {
+        white-space: normal;
+        overflow: visible;
+        text-overflow: unset;
+        border: 2px solid ${(props) => props.theme.colors.blue300};
+      }
       ${(props) => props.theme.media.tablet`
         font-size: 24px;
+        max-width: 600px;
       `};
       ${(props) => props.theme.media.mobile`
-        font-size: 18px;
-      `};
-      @media (max-width: 400px) {
-        font-size: 16px;
-      }
+        max-width: 450px;
+    `};
     }
   `,
 };
