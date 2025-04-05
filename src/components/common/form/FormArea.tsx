@@ -13,6 +13,7 @@ interface FormAreaProps<T> {
   width?: string;
   maxWidth?: string;
   isFocusing?: boolean;
+  placeholder?: string;
 }
 
 export default function FormArea<T extends FieldValues>({
@@ -24,6 +25,7 @@ export default function FormArea<T extends FieldValues>({
   width,
   maxWidth,
   isFocusing,
+  placeholder,
 }: FormAreaProps<T>) {
   const {
     formState: { errors },
@@ -52,7 +54,7 @@ export default function FormArea<T extends FieldValues>({
         maxLength={maxLength}
         {...register(name)}
         disabled={disabled}
-        placeholder="자신을 표현할 수 있는 간단한 자기소개를 해주세요!"
+        placeholder={placeholder ? placeholder : '자신을 표현할 수 있는 간단한 자기소개를 해주세요!'}
       />
       {error && <FormError errors={errors} name={name} />}
     </S.FormArea>
@@ -67,6 +69,7 @@ const S = {
     textarea {
       outline: none;
       border: 1px solid ${({ theme }) => theme.colors.gray300};
+      background-color: ${({ theme }) => theme.colors.white};
     }
   `,
 };
@@ -82,7 +85,7 @@ const StyledTextArea = styled.textarea`
   padding: 15px;
   color: ${({ theme }) => theme.colors.black500};
   font-weight: 400;
-
+  background-color: ${({ theme }) => theme.colors.white};
   &:hover {
     background-color: ${(props) => props.theme.colors.blue};
     border: 1px solid ${(props) => props.theme.colors.blue100};
@@ -100,14 +103,15 @@ const StyledTextArea = styled.textarea`
   &:focus {
     transition: 0.3s;
     border: 1px solid ${(props) => props.theme.colors.blue500};
+    box-shadow: inset 0 0 0 1px ${(props) => props.theme.colors.blue500};
   }
 `;
 
 const StyledLabel = styled.label<{ required?: boolean }>`
-  color: ${({ theme }) => theme.colors.gray700};
+  color: ${({ theme }) => theme.colors.black400};
   display: block;
-  margin-bottom: 3px;
-  font-size: 14px;
+  padding-bottom: 4px;
+  font-size: 16px;
   cursor: default;
   white-space: nowrap;
   margin-right: 15px;
