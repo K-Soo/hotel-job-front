@@ -22,10 +22,14 @@ export default function FormError({ name, errors, margin, style }: FormErrorProp
 
 const S = {
   FormError: styled.div<{ $margin?: string; $type?: any }>`
-    margin: ${(props) => (props.$margin ? props.$margin : '1.5px 0 0 0')};
-    height: 12px;
-    font-size: 11px;
-    color: crimson;
+    height: 20px;
+    font-size: 13px;
+    color: red;
+    font-weight: 500;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    position: absolute;
     ${(props) =>
       props.$type === 'available' &&
       css`
