@@ -3,16 +3,7 @@ import styled from 'styled-components';
 import Portal from '@/components/common/Portal';
 import Background from '@/components/common/Background';
 import Button from '@/components/common/style/Button';
-import {
-  ALL_JOBS,
-  HOTEL_JOBS,
-  TOURIST_HOTEL_JOBS,
-  OTHER_JOBS,
-  hotelJobKeyValues,
-  touristHotelJobsKeyValues,
-  otherJobsKeyValues,
-  AllJobsKeyValuesKeys,
-} from '@/constants/job';
+import { ALL_JOBS, HOTEL_JOBS, OTHER_JOBS, hotelJobKeyValues, otherJobsKeyValues, AllJobsKeyValuesKeys } from '@/constants/job';
 import ChipsCheckbox from '@/components/common/style/ChipsCheckbox';
 import { useFormContext } from 'react-hook-form';
 import { motion } from 'framer-motion';
@@ -20,7 +11,6 @@ import useToast from '@/hooks/useToast';
 
 const MENU_TABS = [
   { label: '호텔', value: 'hotel' },
-  { label: '관광호텔', value: 'touristHotel' },
   { label: '기타', value: 'other' },
 ];
 
@@ -110,19 +100,6 @@ export default function JobModal({ name, setIsOpenJobModal }: JobModalProps) {
                         onChange={handleChangeCheckbox}
                         name={value}
                         label={HOTEL_JOBS[value]}
-                        value={key}
-                        checked={selectedJob.includes(key as AllJobsKeyValuesKeys)}
-                      />
-                    </div>
-                  ))}
-
-                {selectedTab === 'touristHotel' &&
-                  Object.entries(touristHotelJobsKeyValues).map(([key, value]) => (
-                    <div key={key} className="list__item">
-                      <ChipsCheckbox
-                        onChange={handleChangeCheckbox}
-                        name={value}
-                        label={TOURIST_HOTEL_JOBS[value]}
                         value={key}
                         checked={selectedJob.includes(key as AllJobsKeyValuesKeys)}
                       />
