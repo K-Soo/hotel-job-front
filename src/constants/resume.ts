@@ -18,11 +18,11 @@ export const position = {
 } as const;
 
 export const LICENSE_STAGE = {
+  FINAL: '최종 합격',
   FIRST: '1차 합격',
   SECOND: '2차 합격',
   WRITTEN: '필기 합격',
   PRACTICAL: '실기 합격',
-  FINAL: '최종 합격',
 } as const;
 
 export const SANCTION_REASON = {

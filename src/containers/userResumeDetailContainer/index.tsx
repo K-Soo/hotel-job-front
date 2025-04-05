@@ -67,8 +67,6 @@ export default function UserResumeDetailContainer() {
     },
   });
 
-  // console.log('methods: ', methods.watch());
-
   const { data, isLoading, isSuccess, refetch } = useFetchQuery({
     queryKey: [queryKeys.RESUME_DETAIL, { slug, nickname: authAtomState.nickname }],
     queryFn: Get.getResumeDetail,
@@ -159,13 +157,13 @@ export default function UserResumeDetailContainer() {
   if (isSuccess && data) {
     return (
       <FormProvider {...methods}>
-        {/* 이력서 미리보기 */}
         {resumePreviewData && <ResumePreview resumePreviewData={resumePreviewData} closeResume={() => setResumePreviewData(null)} />}
+
         {daumPostAtomValue.isOpen && <DynamicDaumPost />}
 
         <UserResumeDetail>
           <ResumeProgress handleClickPreview={handleClickPreview} />
-          <ResumeBottomController onSubmit={onSubmit} refetch={refetch} updatedAt={data.result.updatedAt} />
+          <ResumeBottomController onSubmit={onSubmit} refetch={refetch} />
         </UserResumeDetail>
         <FormDevTools control={methods.control} />
       </FormProvider>

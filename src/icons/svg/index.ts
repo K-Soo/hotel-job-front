@@ -57,8 +57,12 @@ import ArrowToTop24x24 from './arrowToTop24x24.svg';
 import LocationA24x24 from './locationA24x24.svg';
 import LocationB24x24 from './locationB24x24.svg';
 import Spin24x24 from './spin24x24.svg';
+import UploadImage24x24 from './uploadImage24x24.svg';
+import Print24x24 from './print24x24.svg';
 
 export {
+  Print24x24,
+  UploadImage24x24,
   Spin24x24,
   LocationB24x24,
   LocationA24x24,

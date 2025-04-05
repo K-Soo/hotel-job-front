@@ -18,7 +18,6 @@ import useFetchApplyCheck from '@/hooks/useFetchApplyCheck';
 import SkeletonUI from '@/components/common/SkeletonUI';
 import useAlertWithConfirm from '@/hooks/useAlertWithConfirm';
 import useRedirect from '@/hooks/useRedirect';
-import path from '@/constants/path';
 
 const DynamicNoSSRModal = dynamic(() => import('@/components/common/modal'), { ssr: false });
 

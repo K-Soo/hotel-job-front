@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useFormContext } from 'react-hook-form';
+import { UseFieldArrayRemove, useFormContext } from 'react-hook-form';
 import { ResumeDetailForm } from '@/types';
 import FormInput from '@/components/common/form/FormInput';
 import FormSelect from '@/components/common/form/FormSelect';
@@ -9,12 +9,14 @@ import FormToggle from '@/components/common/form/FormToggle';
 import FormDate from '@/components/common/form/FormDate';
 import Button from '@/components/common/style/Button';
 import { optionalJobOptions, positionOptions } from '@/constants/options';
+import RemoveButton from '@/components/common/style/RemoveButton';
 
 interface ResumeExperienceItemProps {
   index: number;
+  remove: UseFieldArrayRemove;
 }
 
-export default function ResumeExperienceItem({ index }: ResumeExperienceItemProps) {
+export default function ResumeExperienceItem({ index, remove }: ResumeExperienceItemProps) {
   const [isOnResignationReason, setIsOnResignationReason] = React.useState(false);
   const { setValue, setFocus, watch } = useFormContext();
 
@@ -55,30 +57,21 @@ export default function ResumeExperienceItem({ index }: ResumeExperienceItemProp
 
   return (
     <S.ResumeExperienceItem>
-      <FormInput<ResumeDetailForm>
-        name={`experience.${index}.companyName`}
-        placeholder="회사명"
-        label="회사명"
-        required
-        maxLength={30}
-        margin="0 0 15px 0"
-      />
+      <div className="mb-3 flex justify-end align-middle">
+        <RemoveButton onClick={() => remove(index)} />
+      </div>
 
-      <div style={{ display: 'flex', alignItems: 'center', marginBottom: '15px' }}>
+      <FormInput<ResumeDetailForm> name={`experience.${index}.companyName`} placeholder="회사명" label="회사명" required maxLength={30} />
+
+      <FormDate<ResumeDetailForm> maxWidth="210px" name={`experience.${index}.startDate`} label="입사일" required placeholder="입사일" />
+
+      <div className="flex items-center align-middle">
         <FormDate<ResumeDetailForm>
-          maxWidth="100px"
-          name={`experience.${index}.startDate`}
-          label="입사년월"
-          margin="0 15px 0 0"
-          required
-          placeholder="입사년월"
-        />
-        <FormDate<ResumeDetailForm>
-          maxWidth="100px"
+          maxWidth="210px"
           name={`experience.${index}.endDate`}
-          label="퇴사년월"
-          margin="0 10px 0 0"
-          placeholder="퇴사년월"
+          label="퇴사일"
+          margin="0 15px 0 0"
+          placeholder="퇴사일"
         />
         <FormToggle<ResumeDetailForm> label="재직중" name={`experience.${index}.isEmployed`} />
       </div>
@@ -95,7 +88,7 @@ export default function ResumeExperienceItem({ index }: ResumeExperienceItemProp
         <FormSelect name={`experience.${index}.position`} label="직급/직책" options={positionOptions} maxWidth="180px" />
       </div>
 
-      <FormArea name={`experience.${index}.responsibility`} label="담당업무" maxLength={200} />
+      <FormArea name={`experience.${index}.responsibility`} label="담당업무" maxLength={200} placeholder="담당했던 업무를 알려주세요" />
 
       <div className="experience-item__resignation">
         {isOnResignationReason && (
@@ -118,9 +111,12 @@ export default function ResumeExperienceItem({ index }: ResumeExperienceItemProp
 
 const S = {
   ResumeExperienceItem: styled.div`
-    margin-bottom: 30px;
-    padding-bottom: 30px;
-    border-bottom: 1px solid ${(props) => props.theme.colors.gray100};
+    padding: 15px;
+    margin-bottom: 15px;
+    /* border-bottom: 1px solid ${(props) => props.theme.colors.gray100}; */
+    background-color: ${(props) => props.theme.colors.blue30};
+    border: 1px solid ${(props) => props.theme.colors.blue50};
+    border-radius: 10px;
     &:last-child {
       border-bottom: none;
     }

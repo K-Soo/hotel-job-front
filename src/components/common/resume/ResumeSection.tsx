@@ -1,87 +1,73 @@
 import styled from 'styled-components';
-import Button from '@/components/common/style/Button';
-import Icon from '@/icons/Icon';
 interface ResumeSectionProps {
   title: string;
-  isRequired?: boolean;
+  subTitle?: string;
   guide?: string;
-  handleClickAdd?: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  headerBackground?: string;
+  isVisibleHeader?: boolean;
   children: React.ReactNode;
-  visibleAddButton?: boolean;
-  name?: string;
 }
 
-export default function ResumeSection({
-  title,
-  isRequired,
-  guide,
-  handleClickAdd,
-  children,
-  name,
-  visibleAddButton = true,
-}: ResumeSectionProps) {
+export default function ResumeSection({ title, guide, children, subTitle, headerBackground, isVisibleHeader = true }: ResumeSectionProps) {
   return (
     <S.ResumeSection>
-      <S.Header>
-        <div className="left">
-          <h2 className="left__title">{title}</h2>
-          {isRequired && <span className="left__required">필수</span>}
-        </div>
-        {visibleAddButton && (
-          <Button
-            label="추가"
-            variant="secondary"
-            height="30px"
-            width="70px"
-            name={name}
-            fontSize="13px"
-            icon={<Icon name="Plus24x24" width="16px" height="16px" margin="0 2px 0 0" />}
-            iconColor="e5e8eb"
-            onClick={handleClickAdd}
-          />
-        )}
-      </S.Header>
+      {isVisibleHeader && (
+        <S.Header $headerBackground={headerBackground}>
+          <h2 className="title">{title}</h2>
+          {subTitle && <p className="subTitle">{subTitle}</p>}
+        </S.Header>
+      )}
+
       {guide && <S.Guide>{guide}</S.Guide>}
+
       <S.Content>{children}</S.Content>
     </S.ResumeSection>
   );
 }
 
 const S = {
-  ResumeSection: styled.section`
-    margin-bottom: 50px;
+  ResumeSection: styled.section<{ $isEditing?: boolean }>`
+    background-color: ${(props) => props.theme.colors.gray50};
+    background-color: white;
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin: 0 0 30px 0;
+    ${(props) => props.theme.media.tablet`
+      padding: 30px 15px;
+      margin: 30px 0;
+      border-radius: 0;
+    `};
   `,
-  Header: styled.div`
-    border-bottom: 1px solid ${(props) => props.theme.colors.gray600};
+  Header: styled.div<{ $headerBackground?: string }>`
+    background: ${(props) => props.$headerBackground || 'linear-gradient(to right, #2272eb 0%, #2272eb 30%, #64a8ff 100%)'};
+    height: 80px;
+    border-radius: 10px;
+    margin-bottom: 30px;
+    color: white;
+    text-align: center;
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
-    height: 45px;
-    margin-bottom: 15px;
-    .left {
-      display: flex;
-      align-items: center;
-      padding-top: 20px;
-      &__title {
-        font-size: 16px;
+    line-height: 1.4;
+    .title {
+      font-size: 20px;
+      font-weight: 500;
+    }
+    .subTitle {
+      font-size: 16px;
+      font-weight: 300;
+    }
+    ${(props) => props.theme.media.tablet`
+      height: 70px;
+      .title {
+        font-size: 18px;
         font-weight: 500;
-        color: ${(props) => props.theme.colors.black300};
-        user-select: none;
       }
-      &__required {
-        font-size: 13px;
-        color: red;
-        padding-left: 3px;
-      }
-    }
-    .right {
-      display: flex;
-      justify-content: flex-end;
-    }
+    `};
   `,
-  Content: styled.article`
-    /* padding: 30px 0; */
-  `,
+  Content: styled.article``,
   Guide: styled.p`
     padding: 10px;
     color: ${(props) => props.theme.colors.gray600};

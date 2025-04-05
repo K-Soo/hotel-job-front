@@ -39,15 +39,17 @@ export default function FormRadio<T extends FieldValues>({ label, name, margin, 
   }, [isFocusing]);
 
   return (
-    <S.FormRadio $margin={margin} $active={watchValue === value}>
-      <div className="form-radio-container">
-        <input id={`FormRadio-${name}-${value}`} type="radio" {...register(name)} value={value} />
-        <label htmlFor={`FormRadio-${name}-${value}`} tabIndex={0}>
-          <span>{label}</span>
-        </label>
-      </div>
-      <FormError errors={errors} name={name} style={{ position: 'absolute', bottom: '-12px' }} />
-    </S.FormRadio>
+    <>
+      <S.FormRadio $margin={margin} $active={watchValue === value}>
+        <div className="form-radio-container">
+          <input id={`FormRadio-${name}-${value}`} type="radio" {...register(name)} value={value} />
+          <label htmlFor={`FormRadio-${name}-${value}`} tabIndex={0}>
+            <span>{label}</span>
+          </label>
+        </div>
+        <FormError errors={errors} name={name} style={{ position: 'absolute', top: '22px' }} />
+      </S.FormRadio>
+    </>
   );
 }
 

@@ -1,34 +1,48 @@
 import { ResumeDetailForm } from '@/types';
 import styled from 'styled-components';
 import FormMapSelect from '@/components/common/form/FormMapSelect';
-import { useFieldArray } from 'react-hook-form';
+import { useFieldArray, useFormContext } from 'react-hook-form';
 import { LANGUAGE, LANGUAGE_LEVEL } from '@/constants/language';
 import RemoveButton from '@/components/common/style/RemoveButton';
+import DragScroll from '@/components/common/DragScroll';
+import FormChipsRadio from '@/components/common/form/FormChipsRadio';
+import FormError from '@/components/common/form/FormError';
 
 export default function ResumeLanguageForm() {
   const { fields, remove } = useFieldArray<ResumeDetailForm>({ name: 'languages' });
-  console.log('@@: ', fields);
+  const { formState } = useFormContext<ResumeDetailForm>();
 
   return (
     <S.ResumeLanguageForm>
       {fields.map((field, index) => (
-        <div key={field.id} style={{ display: 'flex' }} className="item">
-          <div className="item__wrapper">
+        <div key={field.id} className="language-item">
+          <div className="flex justify-between">
             <FormMapSelect<ResumeDetailForm>
               name={`languages.${index}.name`}
               options={{ '': '선택', ...LANGUAGE }}
               required
-              maxWidth="200px"
-              margin="0 0 15px 0"
+              margin="0 30px 0 0"
+              maxWidth="300px"
             />
-            <FormMapSelect<ResumeDetailForm>
-              name={`languages.${index}.level`}
-              options={{ '': '선택', ...LANGUAGE_LEVEL }}
-              required
-              maxWidth="200px"
-            />
+            <RemoveButton onClick={() => remove(index)} />
           </div>
-          <RemoveButton onClick={() => remove(index)} />
+
+          <div className="py-1">
+            <DragScroll>
+              {Object.entries(LANGUAGE_LEVEL).map(([key, value]) => (
+                <FormChipsRadio
+                  key={`${field.id}-${key}`}
+                  value={key}
+                  name={`languages.${index}.level`}
+                  label={value}
+                  margin="0 15px 0 0"
+                  palette="gray"
+                  index={field.id}
+                />
+              ))}
+            </DragScroll>
+            <FormError errors={formState.errors} name={`languages.${index}.level`} />
+          </div>
         </div>
       ))}
     </S.ResumeLanguageForm>
@@ -37,17 +51,11 @@ export default function ResumeLanguageForm() {
 
 const S = {
   ResumeLanguageForm: styled.div`
-    .item {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 15px;
-      background-color: ${(props) => props.theme.colors.gray};
-      padding: 10px;
+    .language-item {
+      background-color: ${(props) => props.theme.colors.gray50};
+      padding: 15px;
       border-radius: 5px;
-      &__wrapper {
-        width: 100%;
-        height: 100%;
-      }
+      margin-bottom: 15px;
     }
   `,
 };

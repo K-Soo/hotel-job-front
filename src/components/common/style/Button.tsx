@@ -327,7 +327,7 @@ const S = {
         color: ${(props) => props.theme.colors.white};
         background-color: ${(props) => props.theme.colors.green400};
         &:hover {
-          background-color: ${(props) => props.theme.colors.green600};
+          background-color: ${(props) => props.theme.colors.green500};
         }
         &:disabled {
           background-color: ${(props) => props.theme.colors.green300};

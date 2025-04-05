@@ -53,49 +53,50 @@ export default function FormArrayChipsCheckbox<T extends FieldValues>({
   // };
 
   return (
-    <S.FormArrayChipsCheckbox>
-      {label && (
-        <S.FormLabel
-          className="input-label"
-          htmlFor={'form-array-chips-checkbox' + name}
-          required={required && !readOnly}
-          labelFlexBasis={labelFlexBasis}
-          tabIndex={1}
-        >
-          {label}
-        </S.FormLabel>
-      )}
-      <div className="chips-container">
-        <input
-          type="text"
-          id={'form-array-chips-checkbox' + name}
-          readOnly
-          onClick={() => {
-            if (disabled) return;
-            onClickInputForm?.();
-          }}
-          {...(register(name),
-          {
-            placeholder: watchValue.length === 0 ? placeholder : undefined,
-          })}
-        />
-
-        {watchValue.map((item) => (
-          <ChipsCheckbox
-            key={item}
-            label={optionsKeyData[item]}
-            name={item}
-            onChange={() => {}}
-            margin="3px"
-            value={item}
-            checked
-            disabled={disabled}
+    <>
+      <S.FormArrayChipsCheckbox>
+        {label && (
+          <S.FormLabel
+            className="input-label"
+            htmlFor={'form-array-chips-checkbox' + name}
+            required={required && !readOnly}
+            labelFlexBasis={labelFlexBasis}
+            tabIndex={1}
+          >
+            {label}
+          </S.FormLabel>
+        )}
+        <div className="chips-container">
+          <input
+            type="text"
+            id={'form-array-chips-checkbox' + name}
+            readOnly
+            onClick={() => {
+              if (disabled) return;
+              onClickInputForm?.();
+            }}
+            {...(register(name),
+            {
+              placeholder: watchValue.length === 0 ? placeholder : undefined,
+            })}
           />
-        ))}
 
-        <FormError errors={errors} name={name} style={{ position: 'absolute', bottom: '-14px' }} />
-      </div>
-    </S.FormArrayChipsCheckbox>
+          {watchValue.map((item) => (
+            <ChipsCheckbox
+              key={item}
+              label={optionsKeyData[item]}
+              name={item}
+              onChange={() => {}}
+              margin="3px"
+              value={item}
+              checked
+              disabled={disabled}
+            />
+          ))}
+          <FormError errors={errors} name={name} style={{ position: 'absolute', bottom: '-17px' }} />
+        </div>
+      </S.FormArrayChipsCheckbox>
+    </>
   );
 }
 
@@ -143,9 +144,9 @@ const S = {
     }
   `,
   FormLabel: styled.label<{ required?: boolean; labelFlexBasis?: string }>`
-    color: ${({ theme }) => theme.colors.gray700};
+    color: ${({ theme }) => theme.colors.black400};
     display: block;
-    font-size: 14px;
+    font-size: 16px;
     cursor: default;
     white-space: nowrap;
     flex-basis: ${(props) => props.labelFlexBasis || '150px'};

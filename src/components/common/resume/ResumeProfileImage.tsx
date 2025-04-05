@@ -28,30 +28,21 @@ export default function ResumeProfileImage({ imageUrl }: ResumeProfileImageProps
           }}
         />
       )}
-      <StyledDimmed />
     </S.ResumeProfileImage>
   );
 }
 
-const StyledDimmed = styled.div`
-  position: absolute;
-  z-index: 1;
-  background-color: rgba(0, 0, 0, 0.05);
-  width: 100%;
-  height: 100%;
-  border-radius: inherit;
-`;
-
 const S = {
   ResumeProfileImage: styled.div`
     position: relative;
-    width: 100px;
-    height: 120px;
+    width: 100%;
+    height: 100%;
     font-size: 0;
-    border-radius: 8px;
+    border-radius: inherit;
     overflow: hidden;
     display: flex;
     align-items: center;
+    z-index: 1;
     .error-text {
       font-size: 12px;
       text-align: center;

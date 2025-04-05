@@ -188,10 +188,10 @@ const S = {
     }
   `,
   FormLabel: styled.label<{ required?: boolean }>`
-    color: ${({ theme }) => theme.colors.gray700};
+    color: ${({ theme }) => theme.colors.black400};
     display: block;
     margin-bottom: 3px;
-    font-size: 14px;
+    font-size: 16px;
     cursor: default;
     white-space: nowrap;
     margin-right: 15px;

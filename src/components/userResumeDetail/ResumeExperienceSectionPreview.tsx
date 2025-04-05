@@ -53,6 +53,9 @@ const S = {
     display: flex;
     padding: 15px 0;
     border-bottom: 1px solid ${(props) => props.theme.colors.gray200};
+    &:last-child {
+      border-bottom: none;
+    }
     ${(props) => props.theme.media.tablet`
       flex-direction: column;
     `};

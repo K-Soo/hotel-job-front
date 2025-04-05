@@ -7,9 +7,17 @@ export default function ResumeEducationSectionPreview() {
   const { getValues } = useFormContext<ResumeDetailForm>();
   const educationValue = getValues('education');
 
-  return <S.ResumeEducationSectionPreview>{EDUCATION_LEVEL[educationValue]}</S.ResumeEducationSectionPreview>;
+  return (
+    <S.ResumeEducationSectionPreview>
+      <p className="preview-education">{EDUCATION_LEVEL[educationValue]} 졸업</p>
+    </S.ResumeEducationSectionPreview>
+  );
 }
 
 const S = {
-  ResumeEducationSectionPreview: styled.div``,
+  ResumeEducationSectionPreview: styled.div`
+    .preview-education {
+      padding-top: 10px;
+    }
+  `,
 };

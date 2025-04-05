@@ -27,6 +27,7 @@ export default function ResumePolicy({}: ResumePolicyProps) {
 
   return (
     <S.ResumePolicy>
+      <h5 className="mb-8 text-center align-middle text-[22px]">이력서 동의</h5>
       <CheckBox
         name="all"
         label="모두 동의합니다.(이력서 작성을 위한 개인정보 수집동의)"
@@ -41,17 +42,22 @@ export default function ResumePolicy({}: ResumePolicyProps) {
         required
         label="필수 항목에 대한 개인정보 수집 및 이용 동의"
         margin="0 0 15px 0"
+        visibleIcon={false}
       />
-      <FormCheckbox<ResumeRegisterForm> name="isOptionalAgreement" required label="선택 항목에 대한 개인정보 수집 및 이용 동의" />
+      <FormCheckbox<ResumeRegisterForm>
+        name="isOptionalAgreement"
+        required
+        label="선택 항목에 대한 개인정보 수집 및 이용 동의"
+        visibleIcon={false}
+      />
     </S.ResumePolicy>
   );
 }
 
 const S = {
   ResumePolicy: styled.div`
-    border-radius: 8px;
-    border: 1px solid ${(props) => props.theme.colors.gray100};
-    padding: 30px;
+    padding: 15px;
+    margin: 30px 0;
     ${(props) => props.theme.media.tablet`
       padding: 15px 10px;
     `};

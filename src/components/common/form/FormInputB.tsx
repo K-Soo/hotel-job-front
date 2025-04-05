@@ -94,7 +94,7 @@ export default function FormInputB<T extends FieldValues>({
           maxLength={maxLength}
           {...(mask ? registerWithMask(name, mask, { autoUnmask: true, showMaskOnFocus: false, placeholder: '_' }) : register(name))}
         />
-        <FormError errors={errors} name={name} style={{ position: 'absolute' }} />
+        {error && <FormError errors={errors} name={name} style={{ position: 'static' }} />}
       </div>
     </S.FormInputB>
   );
@@ -178,9 +178,9 @@ const S = {
     }
   `,
   FormLabel: styled.label<{ required?: boolean; labelFlexBasis?: string }>`
-    color: ${({ theme }) => theme.colors.gray700};
+    color: ${({ theme }) => theme.colors.black400};
     display: block;
-    font-size: 14px;
+    font-size: 16px;
     cursor: default;
     white-space: nowrap;
     flex-basis: ${(props) => props.labelFlexBasis || '150px'};

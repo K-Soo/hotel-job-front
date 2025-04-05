@@ -30,7 +30,7 @@ const S = {
       align-items: center;
       width: fit-content;
       &__name {
-        min-width: 80px;
+        min-width: 160px;
         color: ${({ theme }) => theme.colors.black400};
       }
       &__level {

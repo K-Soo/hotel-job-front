@@ -40,41 +40,32 @@ export default function Profile({ resumePreviewData }: ProfileProps) {
 
           {!isTablet && (
             <>
-              <S.PhoneBox>
-                <span>📞&nbsp;&nbsp;{phone}</span>
-              </S.PhoneBox>
+              <div className="flex py-1">
+                <span className="min-w-[70px] text-gray-700">휴대폰</span>
+                <p className="text-black">{phone}</p>
+              </div>
 
-              <S.EmailBox>
-                <span>✉️&nbsp;&nbsp;{email}</span>
-              </S.EmailBox>
+              <div className="flex py-1">
+                <span className="min-w-[70px] text-gray-700">이메일</span>
+                <p className="text-black">{email}</p>
+              </div>
 
-              <S.AddressBox>
-                <span>🏠&nbsp;&nbsp;{address}</span>
-                <span>{addressDetail}</span>
-              </S.AddressBox>
+              <div className="flex py-1">
+                <span className="min-w-[70px] text-gray-700">주소</span>
+                <p className="text-black">
+                  {address} {addressDetail}
+                </p>
+              </div>
             </>
           )}
         </div>
 
-        {profileImage && <ResumeProfileImage imageUrl={profileImage} />}
+        {profileImage && (
+          <div className="h-[140px] w-[120px] overflow-hidden rounded-[5px]">
+            <ResumeProfileImage imageUrl={profileImage} />
+          </div>
+        )}
       </article>
-
-      {isTablet && (
-        <>
-          <S.PhoneBox>
-            <span>📞&nbsp;&nbsp;{phone}</span>
-          </S.PhoneBox>
-
-          <S.EmailBox>
-            <span>✉️&nbsp;&nbsp;{email}</span>
-          </S.EmailBox>
-
-          <S.AddressBox>
-            <span>🏠&nbsp;&nbsp;{address}</span>
-            <span>{addressDetail}</span>
-          </S.AddressBox>
-        </>
-      )}
     </S.Profile>
   );
 }
@@ -118,15 +109,7 @@ const S = {
   `,
   CertInfoBox: styled.div`
     color: ${({ theme }) => theme.colors.black600};
-    font-size: 14px;
+    font-size: 16px;
     margin-bottom: 20px;
   `,
-  PhoneBox: styled.div`
-    margin: 10px 0;
-  `,
-  EmailBox: styled.div`
-    margin: 10px 0;
-    word-break: break-all;
-  `,
-  AddressBox: styled.div``,
 };

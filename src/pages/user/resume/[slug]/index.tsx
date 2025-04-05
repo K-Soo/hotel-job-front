@@ -49,7 +49,9 @@ UserResumeDetailPage.getLayout = (page: React.ReactElement) => {
         <DesktopNavigation />
         <MobileNavigation hamburgerIcon backIcon backUrl={path.USER_RESUME} />
       </Header>
-      <Main>{page}</Main>
+      <Main padding="0 0 50px 0" maxWidth="100%">
+        {page}
+      </Main>
     </Layout>
   );
 };
