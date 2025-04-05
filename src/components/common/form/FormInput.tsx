@@ -44,7 +44,7 @@ export default function FormInput<T extends FieldValues>({
   minWidth,
   mask,
   maxLength,
-  errorPosition = 'absolute',
+  errorPosition = 'static',
   inputStyle,
 }: FormInputProps<T>) {
   const {
@@ -106,7 +106,8 @@ const StyledMotionInput = styled(motion.input)<{ readOnly?: boolean; disabled?: 
   padding: 0 10px;
   border-radius: 5px;
   font-size: 16px;
-  &:hover {
+  background-color: ${({ theme }) => theme.colors.white};
+  &:not(:disabled):hover {
     background-color: ${(props) => props.theme.colors.blue};
     border: 1px solid ${(props) => props.theme.colors.blue100};
   }
@@ -119,15 +120,15 @@ const StyledMotionInput = styled(motion.input)<{ readOnly?: boolean; disabled?: 
 
   &::placeholder {
     color: ${(props) => props.theme.colors.gray400};
-    font-size: 15px;
+    font-size: 16px;
     font-weight: 400;
   }
 
   ${(props) =>
     props.disabled &&
     css`
-      border: 1px solid ${({ theme }) => theme.colors.gray300};
-      background-color: ${(props) => props.theme.colors.gray};
+      border: 1px solid ${({ theme }) => theme.colors.gray50};
+      background-color: ${(props) => props.theme.colors.gray50};
       pointer-events: none;
     `};
 
@@ -148,10 +149,10 @@ const S = {
     width: ${(props) => (props.$width ? props.$width : '100%')};
   `,
   FormLabel: styled.label<{ required?: boolean }>`
-    color: ${({ theme }) => theme.colors.gray700};
+    color: ${({ theme }) => theme.colors.black400};
     display: block;
-    margin-bottom: 3px;
-    font-size: 14px;
+    padding-bottom: 4px;
+    font-size: 16px;
     cursor: default;
     white-space: nowrap;
     margin-right: 15px;
