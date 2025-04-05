@@ -1,6 +1,70 @@
 # 변경 로그
 
 프로젝트의 모든 주요 변경 사항
+### [1.16.5](https://github.com/K-Soo/hotel-job-front/compare/v1.16.4...v1.16.5) (2025-04-05)
+
+
+### Refactors
+
+* **HomePage:** 이메일 인증 관련 메시지 처리 및 테스트 버튼 제거 ([ec3f204](https://github.com/K-Soo/hotel-job-front/commit/ec3f204a8221d7876789c8d90925242131ce8039))
+
+
+### Updates
+
+* **Button:** 버튼 호버 상태의 배경색을 변경 ([44216e9](https://github.com/K-Soo/hotel-job-front/commit/44216e90d1d6acdce27a46a88c308013fe01dd2d))
+* **DetailInfoForm:** 입력 필드의 여백 추가 ([300a630](https://github.com/K-Soo/hotel-job-front/commit/300a630ec8755a3c147167ac04a393b18d26a639))
+* **FormArea:** placeholder prop 추가 및 스타일 개선 ([77076ef](https://github.com/K-Soo/hotel-job-front/commit/77076ef627fd55f227d9061c45acf7d68f7f5138))
+* **FormArrayChipsCheckbox:** JSX 구조 개선 및 스타일 수정 ([85334c2](https://github.com/K-Soo/hotel-job-front/commit/85334c2ca5b924a85e07e25c4f67448a621c4c66))
+* **FormDate:** 스타일 개선 및 불필요한 prop 제거 ([f20fb52](https://github.com/K-Soo/hotel-job-front/commit/f20fb5286e2694911d7ab68c25b3cf198260a303))
+* **FormError:** 오류 메시지 스타일 개선 및 레이아웃 조정 ([bb60b23](https://github.com/K-Soo/hotel-job-front/commit/bb60b238e84812b74a9cbcd69a32655afb59ad03))
+* **FormInput:** 오류 위치 스타일 변경 및 입력 필드 스타일 개선 ([b56e965](https://github.com/K-Soo/hotel-job-front/commit/b56e965e350bf0f492c6b8e34847c22f7220319d))
+* **FormInputB:** 오류 메시지 스타일 변경 및 레이블 색상 및 크기 조정 ([3803804](https://github.com/K-Soo/hotel-job-front/commit/3803804cf5c1f2e9527435264175616abf76c609))
+* **FormMapSelect:** 불필요한 속성 제거 및 스타일 개선 ([0295e68](https://github.com/K-Soo/hotel-job-front/commit/0295e68d872d017dc70a5ab7908ce4d70b791e9c))
+* **FormNumberInput:** 레이블 색상 및 크기 조정 ([2cc65ce](https://github.com/K-Soo/hotel-job-front/commit/2cc65ce18d9fe38c0905ce231a591140fa6efc10))
+* **FormRadio:** 오류 메시지 위치 변경 및 스타일 개선 ([90786e8](https://github.com/K-Soo/hotel-job-front/commit/90786e8162198087eade6ecc0aac3c23d086e75e))
+* **FormSelect:** 레이블 및 선택 필드 스타일 개선 ([dc9a075](https://github.com/K-Soo/hotel-job-front/commit/dc9a075d167886335c93ee07b809bb5f9062cbf4))
+* **FormToggle:** 여백 제거 및 스타일 개선 ([8a71dcf](https://github.com/K-Soo/hotel-job-front/commit/8a71dcf431c49fbb87d1f3787304131b609d2d9f))
+* **GeneralForm, useAppRouter:** 불필요한 주석 제거 및 sendRouterEvent 함수 위치 변경 ([b372a6e](https://github.com/K-Soo/hotel-job-front/commit/b372a6ef96780d86d2798d477cc759d7eecf2d61))
+* **help:** 공지 내용의 문장 수정 및 마침표 추가 ([432e08f](https://github.com/K-Soo/hotel-job-front/commit/432e08f338796adff30be7b99b71dab260e5a53c))
+* **HorizontalFormWrapper:** 레이블 색상 및 크기 조정 ([9d30467](https://github.com/K-Soo/hotel-job-front/commit/9d30467037ced8cfeed891a2705c30cefdff0706))
+* **Icons:** 업로드 및 인쇄 아이콘 추가 ([7838bd1](https://github.com/K-Soo/hotel-job-front/commit/7838bd1bde840b146713741ab2f16b7d19b0c9e0))
+* **images:** 프로필 이미지 삭제 및 기본 프로필 이미지 추가 ([f677146](https://github.com/K-Soo/hotel-job-front/commit/f67714681bb6316784a250ca0487fcf6d322c3a2))
+* **index:** React import에서 useEffect 제거 ([6122ea5](https://github.com/K-Soo/hotel-job-front/commit/6122ea5ac20f69be16b869bd66b82c56c915a0bf))
+* **job:** 관광 호텔 직업 관련 코드 주석 처리 ([497127d](https://github.com/K-Soo/hotel-job-front/commit/497127d4b66bbf4cb788d9b64431711376e83e97))
+* **JobContentForm:** 관광호텔 옵션 제거 및 관련 상태 업데이트 ([db9d3f7](https://github.com/K-Soo/hotel-job-front/commit/db9d3f7b7211b6ca19ae349dd038a2c8a41d5e5b))
+* **JobModal:** 관광호텔 탭 제거 및 관련 코드 정리 ([a44a5cc](https://github.com/K-Soo/hotel-job-front/commit/a44a5cc3e7f70ade079ae97f97933f10f6c1bf3c))
+* **JobModalForm:** 관광호텔 옵션 제거 ([2af3123](https://github.com/K-Soo/hotel-job-front/commit/2af3123f31c38fd23c2cf64a333b0fbc89e34768))
+* **JobSearch:** 관광호텔 관련 코드 제거 ([a3a76cb](https://github.com/K-Soo/hotel-job-front/commit/a3a76cb4b42239dc5ad6a6c5cf9b05b007477e1a))
+* **MainLayout:** 불필요한 공백 제거 ([d8aa126](https://github.com/K-Soo/hotel-job-front/commit/d8aa1261fa47949bfde55385223e2fd5c33f2148))
+* **policyTerms:** 약관 시행일 변경 ([c98b533](https://github.com/K-Soo/hotel-job-front/commit/c98b5336261063fa88bf811818586cf5ec133b88))
+* **PreviewNotice:** 이력서 미리보기 경고 메시지 추가 및 스타일 적용 ([b4ad9aa](https://github.com/K-Soo/hotel-job-front/commit/b4ad9aaf154e96330b31d82ff7a94be6f00a7ab9))
+* **PreviewSign:** 이력서 미리보기 서명 컴포넌트 추가 ([846a641](https://github.com/K-Soo/hotel-job-front/commit/846a641b37a7cbd06d8117db3c03d5eab4cc187b))
+* **recruitDetailContainer:** 불필요한 import 문 제거 ([822e982](https://github.com/K-Soo/hotel-job-front/commit/822e9820733cc701f4e78a55607af3dc161c95b6))
+* **RegisterInfoForm:** 입력 필드의 여백 추가 ([9deec5c](https://github.com/K-Soo/hotel-job-front/commit/9deec5c63933af26d61f5c016edd8f5a89aa2dfa))
+* **ResumeBottomController:** 수정 버튼 및 취소 버튼 스타일 개선, updatedAt 속성 제거 ([44b3f8d](https://github.com/K-Soo/hotel-job-front/commit/44b3f8d864be39fbdfd4c01eda9f10e9b13edf10))
+* **ResumeEducationSectionPreview:** 교육 수준 표시 개선 및 스타일 추가 ([0d7560d](https://github.com/K-Soo/hotel-job-front/commit/0d7560d42b8ab1156ca01d4991479dbe4192ee0c))
+* **ResumeExperienceForm:** remove 함수 추가 및 불필요한 스타일 제거 ([475bd6d](https://github.com/K-Soo/hotel-job-front/commit/475bd6d35ef59b2e1ab4a82df59d299a2ff70614))
+* **ResumeExperienceItem:** remove 버튼 추가 및 스타일 개선 ([2e5557a](https://github.com/K-Soo/hotel-job-front/commit/2e5557a6cba6a42f620721ec504cd2e1068347c4))
+* **ResumeExperienceSectionPreview:** 마지막 항목의 하단 경계선 제거 ([3e8b51a](https://github.com/K-Soo/hotel-job-front/commit/3e8b51a464626423e9624e0a3de09d140aea3385))
+* **ResumeLanguageForm:** 언어 항목 추가 및 스타일 개선, 드래그 스크롤 기능 추가 ([418ee51](https://github.com/K-Soo/hotel-job-front/commit/418ee51964771eb7b285e92e9f8c4a3733d9b00a))
+* **ResumeLanguagesSectionPreview:** 언어 이름 최소 너비를 80px에서 160px로 변경 ([cc97433](https://github.com/K-Soo/hotel-job-front/commit/cc97433757b8a5476379998a38b6d87b6dd8af77))
+* **resume:** LICENSE_STAGE에서 FINAL 항목을 최종 합격으로 수정 ([1b83c5e](https://github.com/K-Soo/hotel-job-front/commit/1b83c5ee2e7190b72ed93a861441daf78cfb6c31))
+* **ResumeLicenseForm:** 자격증 항목에 드래그 스크롤 기능 추가 및 스타일 개선 ([4ea5165](https://github.com/K-Soo/hotel-job-front/commit/4ea516540dd38903856338c9a8f94911a4eb12b3))
+* **ResumePolicy:** 이력서 동의 제목 추가 및 스타일 개선 ([3661848](https://github.com/K-Soo/hotel-job-front/commit/366184846ff138413edc3efec24bd58442c29b55))
+* **ResumePreview:** 인쇄 기능 추가 및 스타일 개선 ([5e604c5](https://github.com/K-Soo/hotel-job-front/commit/5e604c5d262ab6969e9714092526322c3d402366))
+* **ResumeProfileImage:** 프로필 이미지 컴포넌트 스타일 개선 및 불필요한 요소 제거 ([a599535](https://github.com/K-Soo/hotel-job-front/commit/a5995359a3a92c2906c721bc601c04e7241dd993))
+* **ResumeProfileSection:** 프로필 섹션 구성 요소 개선 및 불필요한 코드 제거 ([11ce6c7](https://github.com/K-Soo/hotel-job-front/commit/11ce6c7169104a99bb582b4bd80d0afb84d34ec8))
+* **ResumeProfileSectionPreview:** 프로필 섹션 스타일 개선 및 자기소개 추가 ([94db4c2](https://github.com/K-Soo/hotel-job-front/commit/94db4c290d4261625c97864b08994e43f6dee7a3))
+* **ResumeProgress:** 이력서 목록으로 돌아가는 버튼 추가 및 스타일 개선 ([efd82db](https://github.com/K-Soo/hotel-job-front/commit/efd82db81dcfd4be0653e5260adbd1ca0a307334))
+* **ResumeSection:** 헤더 구성 요소 개선 및 불필요한 코드 제거 ([0720e77](https://github.com/K-Soo/hotel-job-front/commit/0720e77748a84948a74084e4827506dfc9f2e333))
+* **ResumeTitleForm:** 제목 입력 필드 스타일 개선 및 최대 너비 설정 ([84d648d](https://github.com/K-Soo/hotel-job-front/commit/84d648de222aad7e9bdffb42be5642f848151b7a))
+* **ResumeUploadProfileImageForm:** 프로필 이미지 업로드 폼 개선 및 스타일 추가 ([c197148](https://github.com/K-Soo/hotel-job-front/commit/c197148187927ea59073f979941fad2fead3a9ed))
+* **Summary:** 자기소개 제목 변경 및 스타일 개선 ([2a62c2f](https://github.com/K-Soo/hotel-job-front/commit/2a62c2f18f0d4a908b1eb8e3f41294488aefbfda))
+* **userResumeContainer:** createResume 버튼 클릭 핸들러 로직 수정 및 비동기 함수로 분리 ([f2fd9b7](https://github.com/K-Soo/hotel-job-front/commit/f2fd9b7aed701544557e657bc39d48149f29c5e0))
+* **UserResumeDetail:** 이력서 상세 컴포넌트 개선 및 필드 추가 ([9294e2d](https://github.com/K-Soo/hotel-job-front/commit/9294e2d66d1e29e86f53e237cd8d7f41e0910273))
+* **userResumeDetailContainer:** 불필요한 console.log 제거 및 ResumeBottomController의 props 정리 ([0afad6e](https://github.com/K-Soo/hotel-job-front/commit/0afad6e769ff72a99756dd03da2dacf11869296b))
+* **UserResumeDetailPage:** Main 컴포넌트에 패딩 및 최대 너비 추가 ([36f33b3](https://github.com/K-Soo/hotel-job-front/commit/36f33b3ccf455fff09b25fcabf7750eca01992a6))
+
 ### [1.16.4](https://github.com/K-Soo/hotel-job-front/compare/v1.16.3...v1.16.4) (2025-04-02)
 
 
