@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import ProductPreview from '@/components/employerProductRecruitment/ProductPreview';
-import ProductRecruitmentTab from '@/components/employerProductRecruitment/ProductRecruitmentTab';
 import { ParsedUrlQuery } from 'querystring';
 import { ProductRecruitmentQuery } from '@/types/API';
 import { useRouter } from 'next/router';
@@ -10,8 +9,8 @@ interface Query extends ParsedUrlQuery {
 }
 
 const TITLE = {
-  MAIN: '채용 성공의 첫걸음 - 메인 페이지',
-  RECRUIT: '주목받는 지면 광고 - 채용 페이지',
+  MAIN: '채용 성공의 첫걸음',
+  RECRUIT: '주목받는 지면 광고',
 };
 
 const SUB_TITLE = {
@@ -30,8 +29,6 @@ export default function EmployerProductRecruitment({ children }: EmployerProduct
 
   return (
     <S.EmployerProductRecruitment>
-      <ProductRecruitmentTab />
-
       <S.Header>
         <h1 className="title">{type.toUpperCase() === 'MAIN' ? TITLE.MAIN : TITLE.RECRUIT}</h1>
         <p className="sub-title">{type.toUpperCase() === 'MAIN' ? SUB_TITLE.MAIN : SUB_TITLE.RECRUIT}</p>
