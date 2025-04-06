@@ -30,7 +30,6 @@ export interface PaginationInfo {
 export interface DefaultRecruitQuery {
   page: string;
   limit: string;
-  type: ProductRecruitmentQuery;
   experience?: types.experienceConditionKeys;
   employment?: types.EmploymentType[];
   benefits?: types.BenefitsKeys[];
