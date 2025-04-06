@@ -35,12 +35,13 @@ const handleRequestAccessToken = async (originalRequest: any) => {
   }
 };
 
-const handleInvalidRefreshToken = () => {
+const handleInvalidRefreshToken = async () => {
   if (typeof window === 'undefined') {
     return;
   }
-  alert('로그인 정보가 만료되었습니다.');
+  await Auth.signOut();
   window.location.href = '/sign-in';
+  alert('로그인 정보가 만료되었습니다.');
 };
 
 export const interceptorHelper = { handleSuccessResponse, handleRequestAccessToken, handleInvalidRefreshToken };
