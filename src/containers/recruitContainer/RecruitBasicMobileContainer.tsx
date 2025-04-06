@@ -4,7 +4,7 @@ import { Get } from '@/apis';
 import queryKeys from '@/constants/queryKeys';
 import { ParsedUrlQuery } from 'querystring';
 import { keepPreviousData } from '@tanstack/react-query';
-import RecruitSectionTitle from '@/components/recruit/RecruitSectionTitle';
+import RecruitSectionTitle from '@/components/home/RecruitSectionTitle';
 import SkeletonUI from '@/components/common/SkeletonUI';
 import EmptyComponent from '@/components/common/EmptyComponent';
 import styled from 'styled-components';
@@ -35,7 +35,7 @@ export default function RecruitBasicMobileContainer() {
 
   const { data, isLoading, isSuccess, fetchNextPage, hasNextPage, hasPreviousPage, isFetchingNextPage } = useInfiniteScroll({
     queryFn: Get.getRecruitBasicList,
-    queryKey: [queryKeys.RECRUIT_BASIC_LIST, { limit: BASIC_LIST_LIMIT, type: 'RECRUIT', page, job }],
+    queryKey: [queryKeys.RECRUIT_BASIC_LIST, { limit: BASIC_LIST_LIMIT, page, job }],
     options: {
       enabled: isTablet,
       throwOnError: true,
@@ -45,7 +45,6 @@ export default function RecruitBasicMobileContainer() {
     },
     requestQuery: {
       limit: BASIC_LIST_LIMIT,
-      type: 'RECRUIT',
       job,
     },
   });
@@ -79,7 +78,7 @@ export default function RecruitBasicMobileContainer() {
     return (
       <div className="mb-[100px]">
         <div style={{ display: 'flex', justifyContent: 'space-between', margin: '0 15px 20px 0' }}>
-          <RecruitSectionTitle title="일반 채용" count={data.pages[0].result.pagination.totalItems} margin="0" />
+          <RecruitSectionTitle title="채용공고" count={data.pages[0].result.pagination.totalItems} margin="0" />
           <PaginationTag currentPage={currentIndex + 1} totalPages={data.pages[0].result.pagination.totalPages} />
         </div>
 
