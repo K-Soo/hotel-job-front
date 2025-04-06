@@ -1,17 +1,7 @@
-import styled from 'styled-components';
-
 interface ContentPanelProps {
   children: React.ReactNode;
 }
 
 export default function ContentPanel({ children }: ContentPanelProps) {
-  return <S.ContentPanel>{children}</S.ContentPanel>;
+  return <article className="mx-auto max-w-[1024px] py-[35px]">{children}</article>;
 }
-
-const S = {
-  ContentPanel: styled.article`
-    margin: 0 auto;
-    max-width: 1024px;
-    padding: 35px 0;
-  `,
-};
