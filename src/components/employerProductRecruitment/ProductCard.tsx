@@ -49,7 +49,7 @@ export default function ProductCard({ product, margin, setIsOpenSideMenu }: Prod
     >
       <S.Header>
         <div className="title-box">
-          <h3 className="title-box__title">{RECRUITMENT_PRODUCT_NAME[product.name]} 상품</h3>
+          <h3 className="title-box__title">{RECRUITMENT_PRODUCT_NAME[product.name]}</h3>
 
           <div className="title-box__tags">
             <Tag label="PC+M" margin="0 0 0" height="28px" width="70px" fontSize="14px" />
