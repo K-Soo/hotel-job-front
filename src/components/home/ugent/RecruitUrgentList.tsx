@@ -36,10 +36,5 @@ const S = {
       grid-template-columns: repeat(2, 1fr);
       grid-auto-rows: minmax(190px, auto);
     }
-
-    @media (max-width: 400px) {
-      grid-template-columns: repeat(1, 1fr);
-      grid-auto-rows: minmax(180px, auto);
-    }
   `,
 };
