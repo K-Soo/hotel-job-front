@@ -1,6 +1,28 @@
 # 변경 로그
 
 프로젝트의 모든 주요 변경 사항
+### [1.18.2](https://github.com/K-Soo/hotel-job-front/compare/v1.18.1...v1.18.2) (2025-04-07)
+
+
+### Updates
+
+* **CompanyForm:** 'FormInput' 컴포넌트에서 margin 속성 제거 ([218ad9c](https://github.com/K-Soo/hotel-job-front/commit/218ad9c1219bdf9016b42b089b89bce3910395a3))
+* **FormArea:** 'error' 상태에 따라 'setFocus' 추가 및 placeholder의 font-size 수정 ([6a416d3](https://github.com/K-Soo/hotel-job-front/commit/6a416d3657064c5d7c57ae51a29e1bebf82b5fdb))
+* **FormCheckbox:** 'FormError' 컴포넌트의 스타일 속성 수정 및 불필요한 주석 제거 ([49c511b](https://github.com/K-Soo/hotel-job-front/commit/49c511b5b81bf12eb502de933fab95fc5e4fdf59))
+* **FormChipsRadio:** 'focusOnError' prop 추가 및 오류 발생 시 포커스 설정 기능 구현 ([6322311](https://github.com/K-Soo/hotel-job-front/commit/6322311dcc6c36946fdc9a9c3d57a6bcd0a1ca6b))
+* **FormDate:** 'FormError' 컴포넌트에 스타일 속성 추가 ([0356386](https://github.com/K-Soo/hotel-job-front/commit/0356386bcbf7feda43675d3742ed537bf5a90afc))
+* **FormInput:** 오류 발생 시 입력 필드에 포커스 설정 기능 추가 ([93208c5](https://github.com/K-Soo/hotel-job-front/commit/93208c541a24fc7788eda691ab1851e395bb563f))
+* **FormMapSelect:** 'position' prop 추가 및 'FormError' 컴포넌트에 스타일 속성 적용 ([aafbdff](https://github.com/K-Soo/hotel-job-front/commit/aafbdff32d46cc9511e7f5efd57882f316fb6df7))
+* **next-sitemap.config.js:** 'exclude' 및 'disallow' 목록에 '/email-verify' 추가 ([58f53d6](https://github.com/K-Soo/hotel-job-front/commit/58f53d6628ef2c32dc2e5a4d0845a57a1eb6e35d))
+* **PremiumInfiniteCard:** 'employmentType' 태그 제거 ([96c022e](https://github.com/K-Soo/hotel-job-front/commit/96c022ee7586f6b6ae83b98a7692a66f634d0015))
+* **RecruitSpecialCard:** 'employmentType' 태그 제거 ([d1e3589](https://github.com/K-Soo/hotel-job-front/commit/d1e358924dbebf66b39ecb818abc7237c1b35115))
+* **RecruitUrgentCard:** 'employmentType' 태그 제거 ([be50050](https://github.com/K-Soo/hotel-job-front/commit/be500502e8d776be43ff357063ee3b943cf5dfbe))
+* **ResumeExperienceForm:** 콘솔 로그 제거 ([5809873](https://github.com/K-Soo/hotel-job-front/commit/5809873dbb6fcc0d7debf04bdc3584b33b02c883))
+* **ResumeExperienceItem:** 'FormInput'에 'errorPosition' prop 추가 ([661b9e1](https://github.com/K-Soo/hotel-job-front/commit/661b9e10d04f77a12dde996fb292c8e0518c099d))
+* **ResumePolicy:** 'isRequiredAgreement'의 margin 값을 15px에서 20px로 수정 ([28215a4](https://github.com/K-Soo/hotel-job-front/commit/28215a45d0e6311867dd1b4ec3894f2d687c844e))
+* **schema:** 'resumeRegister'에서 address 필드의 오류 메시지 추가 및 summary 필드의 유효성 검사 수정 ([2d0d7af](https://github.com/K-Soo/hotel-job-front/commit/2d0d7afa1e1339d23c3d1dbbd48ace0b86bfabdf))
+* **UserResumeDetail:** 'setFocus' 추가 및 'availableEducationLevelOptions'에서 'focusOnError' 속성 추가 ([8c0bed2](https://github.com/K-Soo/hotel-job-front/commit/8c0bed20a67e6699d91be1ca48933ec17e37742c))
+
 ### [1.18.1](https://github.com/K-Soo/hotel-job-front/compare/v1.18.0...v1.18.1) (2025-04-07)
 
 
