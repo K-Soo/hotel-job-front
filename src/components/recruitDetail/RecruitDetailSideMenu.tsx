@@ -35,9 +35,16 @@ export default function RecruitDetailSideMenu({
   setSelectedResume,
   handleSigninThenApply,
 }: RecruitDetailSideMenuProps) {
-  const { isAuthenticated, role, isAuthLoading } = useAuth();
+  const [isInitialLoading, setIsInitialLoading] = React.useState(true);
+  const { isAuthenticated, role, isAuthLoading, authStatus } = useAuth();
 
-  if (isAuthLoading) {
+  React.useEffect(() => {
+    setTimeout(() => {
+      setIsInitialLoading(false);
+    }, 400);
+  }, []);
+
+  if (isAuthLoading || isInitialLoading) {
     return (
       <S.RecruitDetailSideMenu>
         <Button label="" variant="secondary" height="50px" fontSize="16px" borderRadius="10px" isLoading={true} />
