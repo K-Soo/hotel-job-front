@@ -61,37 +61,35 @@ export default function RecruitUrgentCard({ item }: RecruitUrgentCardProps) {
       whileHover={{ boxShadow: 'inset 0 0 1px 1px #3182f6' }}
       onClick={() => router.push(`/recruit/${item.id}`)}
     >
-      <S.ContentBox>
-        <div>
-          {isTag && <Tag label="급구" type="URGENT" width="32px" fontSize="11px" height="17px" />}
-          <StyledTitle $isBold={isBold} $isHighlight={isHighlight}>
-            <h5 className="recruitment-title">{item.recruitmentTitle}</h5>
-          </StyledTitle>
-        </div>
+      <S.HeaderBox>
+        {isTag && <Tag label="급구" type="URGENT" width="32px" margin="0 5px 0 0" fontSize="11px" height="17px" />}
+        <strong className="text-[15px]">{item.hotelName}</strong>
+      </S.HeaderBox>
 
-        <div className="info-box">
-          <div className="info-box__company">{item.hotelName}</div>
-          <address className="info-box__address">
-            {sido} {sigungu}
-          </address>
+      <S.ContentBox>
+        <StyledTitle $isBold={isBold} $isHighlight={isHighlight}>
+          <h5 className="recruitment-title">{item.recruitmentTitle}</h5>
+        </StyledTitle>
+
+        <div className="flex items-center text-[14px] text-gray-700">
+          <Icon name="LocationA24x24" width="16px" height="16px" />
+          <address className="pr-1">{sido}</address>
+          <address>{sigungu}</address>
         </div>
       </S.ContentBox>
 
       <S.JobDetailBox>
-        <div className="jobs">
-          {item.jobs.length > 1 ? (
-            <span className="jobs__text">
-              {ALL_JOBS[item.jobs[0]]} 외 {item.jobs.length - 1}
-            </span>
-          ) : (
-            <span className="jobs__text">{ALL_JOBS[item.jobs[0]]}</span>
-          )}
-          <div className="jobs__conditions">
-            <span className="jobs__conditions--condition">{EXPERIENCE_CONDITION[item.experienceCondition]}</span>
-            <span>{employmentTypeFormat(item.employmentType)}</span>
-          </div>
+        <div className="flex items-center overflow-hidden">
+          <Tag
+            label={item.jobs.length > 1 ? `${ALL_JOBS[item.jobs[0]]} 외 ${item.jobs.length - 1}` : ALL_JOBS[item.jobs[0]]}
+            type="JOB"
+            margin="0 8px 0 0"
+          />
+          <Tag label={EXPERIENCE_CONDITION[item.experienceCondition]} type="CONDITION" />
+          <Tag label={employmentTypeFormat(item.employmentType)} type="CONDITION" />
         </div>
-        <div className="price-wrapper">
+
+        <div className="mt-[10px] flex items-center justify-between">
           <RecruitPrice fonSize="13px" salaryAmount={item.salaryAmount} salary={item.salaryType} />
 
           {!isTablet && (
@@ -144,10 +142,8 @@ const S = {
   `,
   HeaderBox: styled.div`
     display: flex;
-    justify-content: space-between;
     align-items: center;
     font-size: 13px;
-    margin-bottom: 10px;
     font-weight: 500;
     color: ${(props) => props.theme.colors.gray700};
   `,
@@ -156,69 +152,12 @@ const S = {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    .info-box {
-      display: flex;
-      align-items: center;
-      margin-bottom: 15px;
-      ${(props) => props.theme.media.mobile`
-        flex-direction: column;
-        align-items: flex-start;
-        &::after {
-          content: '';
-        }
-      `};
-      &__company {
-        font-size: 13px;
-        font-weight: 400;
-        color: ${(props) => props.theme.colors.black100};
-        &::after {
-          content: '·';
-          display: inline-block;
-          color: ${(props) => props.theme.colors.black100};
-          margin: 0 5px;
-        }
-      }
-      &__address {
-        font-size: 13px;
-        font-weight: 300;
-        color: ${(props) => props.theme.colors.gray700};
-      }
-    }
   `,
   JobDetailBox: styled.div`
+    margin-top: 10px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    margin-top: 10px;
-    .jobs {
-      &__text {
-        font-size: 14px;
-      }
-      &__conditions {
-        display: flex;
-        align-items: center;
-        font-size: 12px;
-        color: ${(props) => props.theme.colors.gray600};
-        margin-top: 5px;
-        &--condition {
-          display: flex;
-          align-items: center;
-          &::after {
-            content: '';
-            display: inline-block;
-            width: 1px;
-            height: 10px;
-            background-color: ${(props) => props.theme.colors.gray500};
-            margin: 0 6px;
-          }
-        }
-      }
-    }
-    .price-wrapper {
-      margin-top: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
+    max-width: 180px;
   `,
 };
