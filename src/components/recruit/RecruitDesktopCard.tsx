@@ -119,7 +119,6 @@ export default function RecruitDesktopCard({ item }: RecruitDesktopCardProps) {
         <S.InfoRow>
           <span>{employmentTypeFormat(item.employmentType)}</span>
           <span>{EXPERIENCE_CONDITION[item.experienceCondition]}</span>
-          {item.workingDay && <span>{WORKING_DAY_LIST[item.workingDay]}</span>}
         </S.InfoRow>
 
         <S.PayRow>
