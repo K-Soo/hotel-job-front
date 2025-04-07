@@ -23,7 +23,7 @@ export default function RecruitPremiumInfiniteContainer() {
   const { job } = router.query as Query;
 
   const { data, isLoading, isSuccess, fetchNextPage, hasNextPage, isFetching } = useInfiniteScroll({
-    queryFn: Get.getRecruitPremiumList,
+    queryFn: Get.getRecruitSpecialList,
     queryKey: [queryKeys.RECRUIT_PREMIUM_LIST, { limit: LIMIT, job }],
     options: {
       enabled: true,
