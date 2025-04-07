@@ -58,7 +58,7 @@ export default function HomeContainer() {
               <RecruitPremiumInfiniteContainer />
             </ErrorBoundary>
           </div>
-          <div className="sm:hidden">
+          <div className="block sm:hidden">
             <ErrorBoundary fallback={null}>
               <RecruitPremiumCarouselContainer />
             </ErrorBoundary>
