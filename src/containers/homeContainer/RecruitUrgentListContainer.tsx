@@ -74,6 +74,7 @@ export default function RecruitUrgentListContainer() {
               return page.result.items.map((item) => <RecruitUrgentCard key={item.id} item={item} />);
             })}
           </RecruitUrgentList>
+
           {!isEmptyFirstPage && isFirstPage && nextPage && (
             <div style={{ display: 'flex', justifyContent: 'center' }}>
               <Button
