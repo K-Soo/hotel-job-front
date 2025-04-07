@@ -115,7 +115,8 @@ const StyledTitle = styled.div<{ $isBold: boolean; $isHighlight: boolean }>`
     font-weight: ${(props) => (props.$isBold ? 500 : 400)};
     width: fit-content;
     display: inline;
-    line-height: 1.35;
+    line-height: 1.1;
+    font-size: 18px;
     ${(props) =>
       props.$isHighlight &&
       css`

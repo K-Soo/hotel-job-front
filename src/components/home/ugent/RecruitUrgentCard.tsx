@@ -76,15 +76,14 @@ export default function RecruitUrgentCard({ item }: RecruitUrgentCardProps) {
           <address className="pr-1">{sido}</address>
           <address>{sigungu}</address>
         </div>
+
+        <strong className="mt-[5px] text-[15px] text-gray-800">
+          {item.jobs.length > 1 ? `${ALL_JOBS[item.jobs[0]]} 외 ${item.jobs.length - 1}` : ALL_JOBS[item.jobs[0]]}
+        </strong>
       </S.ContentBox>
 
       <S.JobDetailBox>
         <div className="flex items-center overflow-hidden">
-          <Tag
-            label={item.jobs.length > 1 ? `${ALL_JOBS[item.jobs[0]]} 외 ${item.jobs.length - 1}` : ALL_JOBS[item.jobs[0]]}
-            type="JOB"
-            margin="0 8px 0 0"
-          />
           <Tag label={EXPERIENCE_CONDITION[item.experienceCondition]} type="CONDITION" />
           <Tag label={employmentTypeFormat(item.employmentType)} type="CONDITION" />
         </div>
@@ -112,7 +111,7 @@ const StyledTitle = styled.div<{ $isBold: boolean; $isHighlight: boolean }>`
     vertical-align: bottom;
     color: ${(props) => props.theme.colors.gray800};
     font-weight: ${(props) => (props.$isBold ? 500 : 400)};
-    font-size: 15px;
+    font-size: 16px;
     width: fit-content;
     ${(props) =>
       props.$isHighlight &&
@@ -146,6 +145,7 @@ const S = {
     font-size: 13px;
     font-weight: 500;
     color: ${(props) => props.theme.colors.gray700};
+    margin-bottom: 2px;
   `,
   ContentBox: styled.div`
     flex: 1;
