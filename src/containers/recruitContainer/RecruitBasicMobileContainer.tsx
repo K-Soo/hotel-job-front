@@ -20,7 +20,7 @@ interface Query extends ParsedUrlQuery {
   job?: any;
 }
 
-const BASIC_LIST_LIMIT = '5';
+const BASIC_LIST_LIMIT = '4';
 
 export default function RecruitBasicMobileContainer() {
   const [currentIndex, setCurrentIndex] = React.useState(0);
