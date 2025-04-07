@@ -73,6 +73,13 @@ export default function FormInput<T extends FieldValues>({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isFocusing]);
 
+  React.useEffect(() => {
+    if (error) {
+      setFocus(name);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [error]);
+
   return (
     <S.FormInput $margin={margin} $horizontal={horizontal} $width={width} $maxWidth={maxWidth} $minWidth={minWidth} className={className}>
       {label && (
