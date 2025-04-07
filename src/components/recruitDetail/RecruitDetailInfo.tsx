@@ -103,7 +103,7 @@ export default function RecruitDetailInfo({
 
 const S = {
   RecruitDetailInfo: styled.div`
-    background-color: ${(props) => props.theme.colors.blue30};
+    background-color: ${(props) => props.theme.colors.gray};
 
     /* border: 1px solid ${(props) => props.theme.colors.gray200}; */
     border-radius: 10px;
