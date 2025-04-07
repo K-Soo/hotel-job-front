@@ -12,6 +12,7 @@ const S = {
   RecruitUrgentList: styled.div`
     display: grid;
     grid-template-columns: repeat(5, 1fr);
+    grid-auto-rows: minmax(200px, auto);
     margin-bottom: 100px;
     gap: 1px;
     ${(props) => props.theme.media.laptop`
