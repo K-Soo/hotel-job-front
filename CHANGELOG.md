@@ -1,6 +1,20 @@
 # 변경 로그
 
 프로젝트의 모든 주요 변경 사항
+### [1.18.3](https://github.com/K-Soo/hotel-job-front/compare/v1.18.2...v1.18.3) (2025-04-07)
+
+
+### Updates
+
+* **KakaoMap:** 'addressDetail' 속성 제거 및 지도 컴포넌트 구조 개선, 빠른 길 찾기 버튼 추가 ([f3baa17](https://github.com/K-Soo/hotel-job-front/commit/f3baa1782eaa08b3a8be9e939ccd1295235d6a37))
+* **RecruitDetailBottomNavigation:** React import 추가 및 초기 로딩 상태 관리 개선 ([60791cb](https://github.com/K-Soo/hotel-job-front/commit/60791cb9a8b6b92d22e237340a5d5ed27e047770))
+* **RecruitDetailContent:** 배경색 변경 및 패딩 크기 조정 ([ecab76a](https://github.com/K-Soo/hotel-job-front/commit/ecab76a82899d460a311c29e0febe13d8d95c25f))
+* **RecruitDetailDateTime:** 등록일 및 수정일 표시 방식 개선, 스타일 조정 ([2e48b84](https://github.com/K-Soo/hotel-job-front/commit/2e48b8450bb3dd5f970c1c8a169a61ec98696988))
+* **RecruitDetailInfo:** 배경색을 파란색에서 회색으로 변경 ([18222c6](https://github.com/K-Soo/hotel-job-front/commit/18222c6faece58f837f296798951b05e2caa5fb1))
+* **RecruitDetail:** RecruitDetailDateTime 컴포넌트 추가 및 레이아웃 조정 ([3d76c3d](https://github.com/K-Soo/hotel-job-front/commit/3d76c3d0322eb9fface709418109a475651b004b))
+* **RecruitDetailSideMenu:** 초기 로딩 상태 관리 개선 및 인증 상태 로직 수정 ([1f04ba0](https://github.com/K-Soo/hotel-job-front/commit/1f04ba0def1cf74f9cc6538c71b625e0f03724bd))
+* **RecruitDetailWorkCondition:** 배경색을 파란색에서 회색으로 변경 ([a483118](https://github.com/K-Soo/hotel-job-front/commit/a483118680b8c01afa88376636ce3acac1c519e7))
+
 ### [1.18.2](https://github.com/K-Soo/hotel-job-front/compare/v1.18.1...v1.18.2) (2025-04-07)
 
 
