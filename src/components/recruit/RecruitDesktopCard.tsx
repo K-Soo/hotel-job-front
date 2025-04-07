@@ -6,7 +6,7 @@ import Tag from '@/components/common/Tag';
 import RecruitPrice from '@/components/recruit/RecruitPrice';
 import { RecruitListItem } from '@/types';
 import { addressFormat, employmentTypeFormat } from '@/utils';
-import { EXPERIENCE_CONDITION, WORKING_DAY_LIST } from '@/constants/recruitment';
+import { EXPERIENCE_CONDITION } from '@/constants/recruitment';
 import { ALL_JOBS } from '@/constants/job';
 import { useRouter } from 'next/router';
 import IconDimmed from '@/components/common/IconDimmed';
