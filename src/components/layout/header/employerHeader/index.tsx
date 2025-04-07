@@ -101,7 +101,7 @@ export function EmployerHeader({ borderBottom = true }: EmployerHeaderProps) {
               <StyledDropDownItem
                 initial={{ backgroundColor: '#FFFFFF' }}
                 whileHover={{ backgroundColor: '#f2f4f6', color: '#4593fc' }}
-                onClick={() => (window.location.href = path.RECRUIT)}
+                onClick={() => (window.location.href = path.HOME)}
               >
                 채용 페이지 바로가기
               </StyledDropDownItem>
