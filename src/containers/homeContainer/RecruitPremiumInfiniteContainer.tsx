@@ -38,6 +38,8 @@ export default function RecruitPremiumInfiniteContainer() {
     },
   });
 
+  console.log('프리미엄 API : ', data);
+
   if (isLoading) {
     return (
       <>
