@@ -14,6 +14,7 @@ interface FormMapSelectProps<T> {
   width?: string;
   maxWidth?: string;
   options: Record<string, string>;
+  position?: 'absolute' | 'static';
 }
 
 export default function FormMapSelect<T extends FieldValues>({
@@ -25,6 +26,7 @@ export default function FormMapSelect<T extends FieldValues>({
   width,
   maxWidth,
   options,
+  position,
 }: FormMapSelectProps<T>) {
   const {
     formState: { errors },
@@ -78,7 +80,7 @@ export default function FormMapSelect<T extends FieldValues>({
         </StyledMotionSelect>
         <Icon className="form-select-icon" name="ArrowRight16x16" width="16px" height="16px" />
       </div>
-      <FormError errors={errors} name={name} />
+      <FormError errors={errors} name={name} style={{ position: 'static' }} />
     </S.FormMapSelect>
   );
 }
