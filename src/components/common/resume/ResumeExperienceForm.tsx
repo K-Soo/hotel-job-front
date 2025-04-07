@@ -6,7 +6,6 @@ import ResumeExperienceItem from '@/components/common/resume/ResumeExperienceIte
 
 export default function ResumeExperienceForm() {
   const { fields, remove } = useFieldArray<ResumeDetailForm>({ name: 'experience' });
-  console.log('fields: ', fields);
 
   return (
     <S.ResumeExperienceForm>
