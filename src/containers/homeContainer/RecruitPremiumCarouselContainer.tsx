@@ -76,7 +76,7 @@ export default function RecruitPremiumCarouselContainer() {
     return (
       <div className="mb-[100px]">
         <div style={{ display: 'flex', justifyContent: 'space-between', margin: '0 15px 20px 0' }}>
-          <RecruitSectionTitle title="프리미엄 TOP" count={data.pages[0].result.pagination.totalItems} margin="0" />
+          <RecruitSectionTitle title="프리미엄 TOP" margin="0" />
           <PaginationTag currentPage={currentIndex + 1} totalPages={data.pages[0].result.pagination.totalPages} />
         </div>
 
