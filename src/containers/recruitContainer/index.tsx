@@ -6,15 +6,8 @@ import JobSearch from '@/components/recruit/recruitSearch/JobSearch';
 import Line from '@/components/common/Line';
 import { ErrorBoundary, ErrorComponent } from '@/error';
 import useResponsive from '@/hooks/useResponsive';
-import dynamic from 'next/dynamic';
+import RecruitBasicPaginateContainer from '@/containers/recruitContainer/RecruitBasicPaginateContainer';
 // import LocationSearch from '@/components/recruit/recruitSearch/LocationSearch';
-
-const RecruitNoSSRBasicPaginateContainer = dynamic(() => import('@/containers/recruitContainer/RecruitBasicPaginateContainer'), {
-  ssr: false,
-});
-const DynamicNoSSRRecruitBasicMobileContainer = dynamic(() => import('@/containers/recruitContainer/RecruitBasicMobileContainer'), {
-  ssr: false,
-});
 
 export default function RecruitContainer() {
   const { isTablet } = useResponsive();
@@ -36,7 +29,7 @@ export default function RecruitContainer() {
 
       {/* TODO - ERROR 높이값 */}
       <ErrorBoundary fallback={<ErrorComponent visibleBackButton={false} height="200px" />}>
-        <RecruitNoSSRBasicPaginateContainer />
+        <RecruitBasicPaginateContainer />
       </ErrorBoundary>
     </Recruit>
   );

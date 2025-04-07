@@ -30,7 +30,6 @@ export default function RecruitBasicPaginateContainer() {
     queryFn: Get.getRecruitBasicList,
     queryKey: [queryKeys.RECRUIT_BASIC_LIST, { limit: LIMIT, page, job }],
     options: {
-      enabled: !isTablet,
       staleTime: 60 * 1000 * 5,
       gcTime: 60 * 1000 * 10,
       throwOnError: true,
