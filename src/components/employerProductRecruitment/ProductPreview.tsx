@@ -16,9 +16,9 @@ export default function ProductPreview() {
   const [tab, setTab] = React.useState<'pc' | 'mobile'>('pc');
 
   const router = useRouter();
-  const { type = 'MAIN' } = router.query as Query;
 
   const productFocusAtomState = useRecoilValue(productFocusAtom);
+  console.log('productFocusAtomState: ', productFocusAtomState);
 
   React.useEffect(() => {
     setTab('pc');
@@ -36,18 +36,23 @@ export default function ProductPreview() {
     const isMobile = tab === 'mobile';
 
     if (productFocusAtomState.product === 'DEFAULT') {
-      controls.start({ y: 0, x: 0, scale: 1, transition: { duration: 0.2 } });
+      controls.start({ y: 0, transition: { duration: 0.2 } });
+    }
+
+    if (productFocusAtomState.product === 'PREMIUM') {
+      controls.start({ y: isMobile ? -500 : -150, scale: isMobile ? 1 : 1, transition: { duration: 0.2 } });
     }
 
     if (productFocusAtomState.product === 'SPECIAL') {
-      controls.start({ y: isMobile ? 0 : 50, x: isMobile ? 0 : 200, scale: isMobile ? 1 : 2, transition: { duration: 0.2 } });
+      controls.start({ y: isMobile ? -1000 : -300, scale: isMobile ? 1 : 1, transition: { duration: 0.2 } });
     }
 
     if (productFocusAtomState.product === 'URGENT') {
-      controls.start({ y: isMobile ? -500 : -100, x: isMobile ? 0 : 200, scale: isMobile ? 1 : 2, transition: { duration: 0.2 } });
+      controls.start({ y: isMobile ? -1550 : -400, scale: 1, transition: { duration: 0.2 } });
     }
+
     if (productFocusAtomState.product === 'BASIC') {
-      controls.start({ y: isMobile ? -900 : -150, x: isMobile ? 0 : 200, scale: isMobile ? 1 : 2, transition: { duration: 0.2 } });
+      controls.start({ y: isMobile ? -2150 : -450, transition: { duration: 0.2 } });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [productFocusAtomState, tab]);
@@ -77,7 +82,7 @@ export default function ProductPreview() {
 
       <S.ImageContent>
         <motion.div className="image-box" ref={imageRef} animate={controls} initial={undefined}>
-          <Image height={1200} width={370} alt="preview" src={`/images/product/${type.toLowerCase()}/${tab}/view.png`} quality={100} />
+          <Image height={1200} width={370} alt="preview" src={`/images/product/${tab}/${tab}.png`} quality={100} />
         </motion.div>
       </S.ImageContent>
     </S.ProductPreview>
