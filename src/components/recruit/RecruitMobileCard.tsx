@@ -63,7 +63,10 @@ export default function RecruitMobileCard({ item }: RecruitMobileCardProps) {
       $isClosed={item.recruitmentStatus === 'CLOSED'}
     >
       <S.HeaderBox>
-        <span className="company">{item.hotelName}</span>
+        <div className="flex items-center">
+          {isTag && <Tag label="급구" type="URGENT" width="32px" margin="0 5px 0 0" fontSize="11px" height="17px" />}
+          <span className="company">{item.hotelName}</span>
+        </div>
 
         {dateFormat.dateOrToday(item.priorityDate) === 'TODAY' ? (
           <time className="today">TODAY</time>
@@ -74,7 +77,6 @@ export default function RecruitMobileCard({ item }: RecruitMobileCardProps) {
 
       <S.ContentBox>
         <StyledTitle $isBold={isBold} $isHighlight={isHighlight}>
-          {isTag && <Tag label="급구" type="URGENT" width="32px" margin="0 5px 0 0" fontSize="11px" height="17px" />}
           <h5 className="text">{item.recruitmentTitle}</h5>
         </StyledTitle>
 
