@@ -67,9 +67,9 @@ export default function PremiumCarouselCard({ item, index }: PremiumCarouselCard
   return (
     <S.PremiumCarouselCard index={index} animate={controls} initial={{ scale: 1 }} onClick={handleClickRecruit}>
       <S.HeaderBox>
-        <div>
+        <div className="flex items-center">
           {isTag && <Tag label="급구" type="URGENT" width="32px" margin="0 5px 0 0" fontSize="11px" height="17px" />}
-          <Tag label="주목" type="ATTENTION" width="44px" margin="0 5px 0 0" fontSize="11px" height="17px" />
+          <span className="text-[15px]">{item.hotelName}</span>
         </div>
 
         {dateFormat.dateOrToday(item.priorityDate) === 'TODAY' ? (
@@ -122,17 +122,16 @@ export default function PremiumCarouselCard({ item, index }: PremiumCarouselCard
 }
 
 const StyledTitle = styled.div<{ $isBold: boolean; $isHighlight: boolean }>`
-  margin-bottom: 10px;
   display: flex;
+  align-items: center;
   width: 100%;
+  margin-bottom: 10px;
   .text {
     width: fit-content;
     padding: 1px 0;
     color: ${(props) => props.theme.colors.gray800};
-    font-weight: ${(props) => (props.$isBold ? 500 : 400)};
-    width: fit-content;
-    line-height: 1.35;
-    text-align: start;
+    color: ${(props) => (props.$isBold ? '#000000' : '#222222')};
+    font-size: 16px;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
@@ -167,19 +166,22 @@ const S = {
     overflow: hidden;
     margin-bottom: 15px;
     height: 135px;
+    display: flex;
+    flex-direction: column;
   `,
   HeaderBox: styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
-    font-size: 13px;
     padding-right: 15px;
     .priority {
       color: ${(props) => props.theme.colors.gray500};
+      font-size: 13px;
     }
     .today {
       color: ${(props) => props.theme.colors.blue500};
       font-weight: 500;
+      font-size: 13px;
     }
     margin-bottom: 4px;
   `,
@@ -219,9 +221,6 @@ const S = {
         ${(props) => props.theme.media.laptop`
         font-size: 12px;
       `};
-        /* & > span {
-        margin-right: 5px;
-      } */
         &--condition {
           display: flex;
           align-items: center;
