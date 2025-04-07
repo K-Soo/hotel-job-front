@@ -85,7 +85,6 @@ export default function RecruitUrgentCard({ item }: RecruitUrgentCardProps) {
       <S.JobDetailBox>
         <div className="flex items-center overflow-hidden">
           <Tag label={EXPERIENCE_CONDITION[item.experienceCondition]} type="CONDITION" />
-          <Tag label={employmentTypeFormat(item.employmentType)} type="CONDITION" />
         </div>
 
         <div className="mt-[10px] flex items-center justify-between">
