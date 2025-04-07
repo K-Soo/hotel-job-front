@@ -101,7 +101,7 @@ export default function FormDate<T extends FieldValues>({
         }}
       />
 
-      <FormError errors={errors} name={name} />
+      <FormError errors={errors} name={name} style={{ position: 'static' }} />
     </S.FormDate>
   );
 }
