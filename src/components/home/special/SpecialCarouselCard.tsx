@@ -59,9 +59,9 @@ export default function SpecialCarouselCard({ item, index }: SpecialCarouselCard
   return (
     <S.SpecialCarouselCard index={index} animate={controls} initial={{ scale: 1 }} onClick={handleClickRecruit}>
       <S.HeaderBox>
-        <div>
+        <div className="flex items-center">
           {isTag && <Tag label="급구" type="URGENT" width="32px" margin="0 5px 0 0" fontSize="11px" height="17px" />}
-          <Tag label="주목" type="ATTENTION" width="44px" margin="0 5px 0 0" fontSize="11px" height="17px" />
+          <span className="text-[15px]">{item.hotelName}</span>
         </div>
 
         {dateFormat.dateOrToday(item.priorityDate) === 'TODAY' ? (
@@ -114,17 +114,16 @@ export default function SpecialCarouselCard({ item, index }: SpecialCarouselCard
 }
 
 const StyledTitle = styled.div<{ $isBold: boolean; $isHighlight: boolean }>`
-  margin-bottom: 10px;
   display: flex;
+  align-items: center;
   width: 100%;
+  margin-bottom: 10px;
   .text {
     width: fit-content;
     padding: 1px 0;
     color: ${(props) => props.theme.colors.gray800};
-    font-weight: ${(props) => (props.$isBold ? 500 : 400)};
-    width: fit-content;
-    line-height: 1.35;
-    text-align: start;
+    color: ${(props) => (props.$isBold ? '#000000' : '#222222')};
+    font-size: 16px;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
@@ -148,6 +147,8 @@ const S = {
     border: 1px solid ${(props) => props.theme.colors.gray300};
     margin-bottom: 15px;
     height: 135px;
+    display: flex;
+    flex-direction: column;
   `,
   HeaderBox: styled.div`
     display: flex;
