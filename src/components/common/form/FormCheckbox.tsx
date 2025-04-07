@@ -78,7 +78,7 @@ export default function FormCheckbox<T extends FieldValues>({
         )}
       </S.CheckBoxContainer>
 
-      <FormError errors={errors} name={name} style={{ position: 'absolute' }} />
+      <FormError errors={errors} name={name} />
     </S.FormCheckbox>
   );
 }
@@ -93,9 +93,6 @@ const S = {
     justify-content: space-between;
     font-size: 13px;
     user-select: none;
-    /* &:hover {
-      color: ${(props) => props.theme.colors.blue700};
-    } */
     input[type='checkbox'] {
       display: none;
     }

@@ -84,6 +84,7 @@ export default function ResumeExperienceItem({ index, remove }: ResumeExperience
           required
           margin="0 15px 0 0"
           maxWidth="200px"
+          errorPosition="static"
         />
         <FormSelect name={`experience.${index}.position`} label="직급/직책" options={positionOptions} maxWidth="180px" />
       </div>

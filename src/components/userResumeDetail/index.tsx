@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { useFormContext } from 'react-hook-form';
+import { Path, useFormContext } from 'react-hook-form';
 import ResumeSection from '@/components/common/resume/ResumeSection';
 import ResumePreviewSection from '@/components/common/resume/ResumePreviewSection';
 import ResumePolicy from '@/components/common/resume/ResumePolicy';
@@ -25,6 +25,7 @@ import FormError from '@/components/common/form/FormError';
 import PreviewNotice from '@/components/common/resume/resumePreview/PreviewNotice';
 import PreviewSign from '@/components/common/resume/resumePreview/PreviewSign';
 import { ResumeDetailForm } from '@/types';
+import React from 'react';
 
 interface UserResumeDetailProps {
   children: React.ReactNode;
@@ -38,8 +39,16 @@ export default function UserResumeDetail({ children }: UserResumeDetailProps) {
     watch,
     setValue,
     getValues,
+    setFocus,
     formState: { errors },
   } = useFormContext<ResumeDetailForm>();
+
+  React.useEffect(() => {
+    const firstErrorField = Object.keys(errors)[0];
+    if (firstErrorField) {
+      // setFocus(firstErrorField as Path<ResumeDetailForm>);
+    }
+  }, [errors]);
 
   const { addToast } = useToast();
 
@@ -106,10 +115,19 @@ export default function UserResumeDetail({ children }: UserResumeDetailProps) {
           >
             <ResumeFormTitle title="학력" required />
             <DragScroll>
-              {availableEducationLevelOptions.map(([key, value]) => (
-                <FormChipsRadio key={key} value={key} name="education" label={value} margin="0 15px 0 0" palette="blue" />
+              {availableEducationLevelOptions.map(([key, value], index) => (
+                <FormChipsRadio
+                  key={key}
+                  value={key}
+                  name="education"
+                  label={value}
+                  margin="0 15px 0 0"
+                  palette="blue"
+                  focusOnError={index === 0}
+                />
               ))}
             </DragScroll>
+
             <FormError errors={errors} name="education" />
 
             <Line color="#FFFFFF" margin="30px 0" />

@@ -98,7 +98,6 @@ export default function PremiumInfiniteCard({ item, index }: PremiumInfiniteCard
           />
 
           <Tag label={EXPERIENCE_CONDITION[item.experienceCondition]} type="CONDITION" />
-          <Tag label={employmentTypeFormat(item.employmentType)} type="CONDITION" />
         </div>
 
         <div className="mt-2 flex items-center justify-between">

@@ -33,6 +33,8 @@ export default function FormArea<T extends FieldValues>({
     setFocus,
   } = useFormContext<T>();
 
+  const error = get(errors, name);
+
   React.useEffect(() => {
     if (isFocusing) {
       setFocus(name);
@@ -40,7 +42,12 @@ export default function FormArea<T extends FieldValues>({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isFocusing]);
 
-  const error = get(errors, name);
+  React.useEffect(() => {
+    if (error) {
+      setFocus(name);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [error]);
 
   return (
     <S.FormArea $width={width} $maxWidth={maxWidth}>
@@ -93,7 +100,7 @@ const StyledTextArea = styled.textarea`
 
   &::placeholder {
     color: ${(props) => props.theme.colors.gray400};
-    font-size: 14px;
+    font-size: 16px;
   }
 
   &:disabled {
