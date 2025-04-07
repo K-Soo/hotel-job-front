@@ -6,7 +6,7 @@ import Tag from '@/components/common/Tag';
 import RecruitPrice from '@/components/recruit/RecruitPrice';
 import { RecruitListItem } from '@/types';
 import { addressFormat, employmentTypeFormat } from '@/utils';
-import { EXPERIENCE_CONDITION } from '@/constants/recruitment';
+import { EXPERIENCE_CONDITION, WORKING_DAY_LIST } from '@/constants/recruitment';
 import { ALL_JOBS } from '@/constants/job';
 import { useRouter } from 'next/router';
 import IconDimmed from '@/components/common/IconDimmed';
@@ -72,17 +72,20 @@ export default function RecruitDesktopCard({ item }: RecruitDesktopCardProps) {
       <S.Body>
         <S.LocationRow>
           <div className="location-box">
-            <span className="city">{CITY_KOREAN_MAP[sido as keyof typeof CITY_KOREAN_MAP]}</span>
-            <span className="suburbs">{sigungu}</span>
+            <span className="mb-1 text-gray-800">{CITY_KOREAN_MAP[sido as keyof typeof CITY_KOREAN_MAP]}</span>
+            <span className="text-gray-800">{sigungu}</span>
           </div>
         </S.LocationRow>
 
         <S.Summary>
-          <StyledTitle $isBold={isBold} $isHighlight={isHighlight}>
+          <div className="mb-2 flex items-center">
             {isTag && <Tag label="급구" type="URGENT" width="32px" margin="0 5px 0 0" fontSize="11px" height="17px" />}
+            <div className="text-[14px] font-light text-black">{item.hotelName}</div>
+          </div>
+
+          <StyledTitle $isBold={isBold} $isHighlight={isHighlight}>
             <h5 className="text">{item.recruitmentTitle}</h5>
           </StyledTitle>
-          <div className="company">{item.hotelName}</div>
         </S.Summary>
 
         <S.Utils>
@@ -114,8 +117,9 @@ export default function RecruitDesktopCard({ item }: RecruitDesktopCardProps) {
         </S.JobRow>
 
         <S.InfoRow>
-          <span className="text">{EXPERIENCE_CONDITION[item.experienceCondition]}</span>
-          <span className="text">{employmentTypeFormat(item.employmentType)}</span>
+          <span>{employmentTypeFormat(item.employmentType)}</span>
+          <span>{EXPERIENCE_CONDITION[item.experienceCondition]}</span>
+          {item.workingDay && <span>{WORKING_DAY_LIST[item.workingDay]}</span>}
         </S.InfoRow>
 
         <S.PayRow>
@@ -145,10 +149,9 @@ const StyledTitle = styled.div<{ $isBold: boolean; $isHighlight: boolean }>`
   display: flex;
   align-items: center;
   .text {
-    padding: 1px 3px 1px 2px;
     color: ${(props) => props.theme.colors.gray800};
     font-weight: ${(props) => (props.$isBold ? 500 : 400)};
-    font-size: 15px;
+    font-size: 16px;
     ${(props) =>
       props.$isHighlight &&
       css`
@@ -195,13 +198,6 @@ const S = {
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      .city {
-        margin-bottom: 5px;
-        color: ${(props) => props.theme.colors.gray800};
-      }
-      .suburbs {
-        color: ${(props) => props.theme.colors.gray700};
-      }
     }
   `,
   Summary: styled.div`
@@ -212,18 +208,6 @@ const S = {
     height: 100%;
     position: relative;
     padding-left: 10px;
-    .icon {
-      position: absolute;
-      right: 5px;
-      bottom: 0;
-      fill: ${(props) => props.theme.colors.gray300};
-    }
-    .company {
-      font-size: 14px;
-      font-weight: 300;
-      color: ${(props) => props.theme.colors.gray800};
-      padding-left: 2px;
-    }
   `,
   Utils: styled.div`
     flex: 1 0 7%;
@@ -242,7 +226,7 @@ const S = {
     align-items: center;
     justify-content: center;
     height: 100%;
-    font-size: 13px;
+    font-size: 15px;
     font-weight: 500;
     padding: 0 5px;
     color: ${(props) => props.theme.colors.black400};
@@ -256,12 +240,10 @@ const S = {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    font-size: 13px;
+    font-size: 14px;
     color: ${(props) => props.theme.colors.gray800};
     height: 100%;
-    .text {
-      padding: 2px 0;
-    }
+    gap: 3px;
   `,
   PayRow: styled.div`
     flex: 1 0 15%;

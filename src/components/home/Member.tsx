@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import Button from '@/components/common/style/Button';
 import Image from 'next/image';
 import IconDimmed from '@/components/common/IconDimmed';
+import IconHover from '@/components/common/IconHover';
 import Icon from '@/icons/Icon';
 import { url } from '@/constants/oauth';
 import useAuth from '@/hooks/useAuth';
@@ -47,7 +48,9 @@ export default function Member() {
             <button className="cursor-pointer text-[14px] text-gray-600 hover:underline" onClick={() => handleClickSignout()}>
               로그아웃
             </button>
-            <Icon name="Settings24x24" width="20px" height="20px" color="#444444" onClick={() => handleClickSetting()} />
+            <IconHover>
+              <Icon name="Settings24x24" width="20px" height="20px" color="#333333" onClick={() => handleClickSetting()} />
+            </IconHover>
           </div>
 
           <div className="leading-5 font-medium">
@@ -58,20 +61,22 @@ export default function Member() {
             </p>
           </div>
 
-          <div className="mt-2 flex flex-1 flex-col justify-between">
+          <div className="mt-2 flex flex-1 flex-col justify-end">
             {role === Role.JOB_SEEKER && (
               <>
                 <Button
-                  label="이력서"
+                  label="내 이력서"
                   variant="primary"
                   borderRadius="10px"
                   margin="0 0 8px 0"
+                  height="40px"
                   onClick={() => router.push(path.USER_RESUME)}
                 />
                 <Button
                   label="지원현황"
                   variant="secondary100"
                   borderRadius="10px"
+                  height="40px"
                   onClick={() => router.push(path.USER_APPLICATION_HISTORY)}
                 />
               </>
@@ -83,6 +88,7 @@ export default function Member() {
                   label="대시보드"
                   variant="primary"
                   borderRadius="10px"
+                  height="40px"
                   margin="0 0 8px 0"
                   onClick={() => router.push(path.EMPLOYER)}
                 />
@@ -91,6 +97,7 @@ export default function Member() {
                   variant="secondary100"
                   borderRadius="10px"
                   margin="0 0 8px 0"
+                  height="40px"
                   onClick={() => router.push(path.EMPLOYER_RECRUITMENT)}
                 />
               </>

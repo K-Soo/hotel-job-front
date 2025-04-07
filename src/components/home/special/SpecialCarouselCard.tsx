@@ -12,20 +12,12 @@ import DragScroll from '@/components/common/DragScroll';
 import { EDUCATION_LEVEL } from '@/constants';
 import { useRouter } from 'next/router';
 
-interface SpecialMobileCardProps {
+interface SpecialCarouselCardProps {
   item: RecruitListItem;
   index: number;
 }
 
-const GRADIENT_COLORS = [
-  ['#3182f6', '#b485c6'],
-  ['#34d399', '#3b82f6'],
-  ['#f97316', '#f43f5e'],
-  ['#a855f7', '#6366f1'],
-  ['#06b6d4', '#3b82f6'],
-];
-
-export default function SpecialMobileCard({ item, index }: SpecialMobileCardProps) {
+export default function SpecialCarouselCard({ item, index }: SpecialCarouselCardProps) {
   const [isBold, setIsBold] = React.useState(false);
   const [isHighlight, setIsHighlight] = React.useState(false);
   const [isTag, setIsTag] = React.useState(false);
@@ -65,7 +57,7 @@ export default function SpecialMobileCard({ item, index }: SpecialMobileCardProp
   };
 
   return (
-    <S.SpecialMobileCard index={index} animate={controls} initial={{ scale: 1 }} onClick={handleClickRecruit}>
+    <S.SpecialCarouselCard index={index} animate={controls} initial={{ scale: 1 }} onClick={handleClickRecruit}>
       <S.HeaderBox>
         <div>
           {isTag && <Tag label="급구" type="URGENT" width="32px" margin="0 5px 0 0" fontSize="11px" height="17px" />}
@@ -117,7 +109,7 @@ export default function SpecialMobileCard({ item, index }: SpecialMobileCardProp
           )}
         </DragScroll>
       </S.infoBox>
-    </S.SpecialMobileCard>
+    </S.SpecialCarouselCard>
   );
 }
 
@@ -146,25 +138,14 @@ const StyledTitle = styled.div<{ $isBold: boolean; $isHighlight: boolean }>`
 `;
 
 const S = {
-  SpecialMobileCard: styled(motion.div)<{ index: number }>`
-    ${({ index }) => {
-      const colors = GRADIENT_COLORS[index % GRADIENT_COLORS.length];
-      return css`
-        background-image: linear-gradient(white, white), linear-gradient(to right, ${colors[0]}, ${colors[1]});
-      `;
-    }}
+  SpecialCarouselCard: styled(motion.div)<{ index: number }>`
     padding: 15px;
     cursor: pointer;
     user-select: none;
     background-color: white;
-    position: relative;
-    border-radius: 5px;
-    border-top-right-radius: 50px;
-    border-top: 2px solid transparent;
-    background-origin: border-box;
-    background-clip: padding-box, border-box;
-    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
     overflow: hidden;
+    border: 1px solid ${(props) => props.theme.colors.gray300};
     margin-bottom: 15px;
     height: 135px;
   `,

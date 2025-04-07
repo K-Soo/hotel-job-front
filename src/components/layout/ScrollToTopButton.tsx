@@ -36,7 +36,7 @@ const S = {
   ScrollToTopButton: styled(motion.div)`
     position: fixed;
     bottom: 95px;
-    right: 15px;
+    right: calc(50% - 512px - 100px);
     z-index: 15;
     padding: 10px;
     border-radius: 50%;
@@ -49,10 +49,10 @@ const S = {
     display: flex;
     align-items: center;
     justify-content: center;
-
     ${(props) => props.theme.media.tablet`
       width: 40px;
       height: 40px;
+      right: 15px;
     `};
   `,
 };

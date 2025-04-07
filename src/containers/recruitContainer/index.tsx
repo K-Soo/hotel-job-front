@@ -3,16 +3,15 @@ import Recruit from '@/components/recruit';
 import RecruitFilterPanel from '@/components/recruit/RecruitFilterPanel';
 import RecruitSearch from '@/components/recruit/recruitSearch';
 import JobSearch from '@/components/recruit/recruitSearch/JobSearch';
-import RecruitUrgentListContainer from '@/containers/recruitContainer/RecruitUrgentListContainer';
-import RecruitSpecialPcContainer from '@/containers/recruitContainer/RecruitSpecialPcContainer';
 import Line from '@/components/common/Line';
 import { ErrorBoundary, ErrorComponent } from '@/error';
 import useResponsive from '@/hooks/useResponsive';
 import dynamic from 'next/dynamic';
 // import LocationSearch from '@/components/recruit/recruitSearch/LocationSearch';
-import RecruitSpecialMobileContainer from '@/containers/recruitContainer/RecruitSpecialMobileContainer';
 
-const DynamicNoSSRRecruitBasicPcContainer = dynamic(() => import('@/containers/recruitContainer/RecruitBasicPcContainer'), { ssr: false });
+const RecruitNoSSRBasicPaginateContainer = dynamic(() => import('@/containers/recruitContainer/RecruitBasicPaginateContainer'), {
+  ssr: false,
+});
 const DynamicNoSSRRecruitBasicMobileContainer = dynamic(() => import('@/containers/recruitContainer/RecruitBasicMobileContainer'), {
   ssr: false,
 });
@@ -33,23 +32,11 @@ export default function RecruitContainer() {
 
       <RecruitFilterPanel handleClickFilterButton={handleClickFilterButton} />
 
-      <Line margin="20px 0" color="#e5e8eb" />
-
-      {/* TODO - ERROR 높이값 */}
-      <ErrorBoundary fallback={null}>
-        {!isTablet && <RecruitSpecialPcContainer />}
-        {isTablet && <RecruitSpecialMobileContainer />}
-      </ErrorBoundary>
-
-      {/* TODO - ERROR 높이값 */}
-      <ErrorBoundary fallback={null}>
-        <RecruitUrgentListContainer />
-      </ErrorBoundary>
+      <Line margin="30px 0" color="#e5e8eb" />
 
       {/* TODO - ERROR 높이값 */}
       <ErrorBoundary fallback={<ErrorComponent visibleBackButton={false} height="200px" />}>
-        {!isTablet && <DynamicNoSSRRecruitBasicPcContainer />}
-        {isTablet && <DynamicNoSSRRecruitBasicMobileContainer />}
+        <RecruitNoSSRBasicPaginateContainer />
       </ErrorBoundary>
     </Recruit>
   );

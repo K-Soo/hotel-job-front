@@ -35,16 +35,15 @@ instance.interceptors.response.use(
     // access token 만료 or 누락
     const shouldRefreshToken = responseData?.error?.code === 'ERR-1000' || responseData?.error?.code === 'ERR-1001';
 
-    // access token 위조
-    // refresh token 만료 or 누락 or 위조
+    //  access token, refresh token 만료 or 누락 or 위조
     // TODO - 리펙토링
-    const shouldLogoutUser = responseData?.error?.code === 'ERR-1020' || responseData?.error?.code === 'ERR-1021' || responseData?.error?.code === 'ERR-1022' || responseData?.error?.code === 'ERR-1002';
+    const shouldLogoutUser = responseData?.error?.code === 'ERR-1020' || responseData?.error?.code === 'ERR-1021' || responseData?.error?.code === 'ERR-1022' || responseData?.error?.code === 'ERR-1002' || responseData?.error?.code === 'ERR-1040';
+    
 
     //소셜로그인 초기 로그인 요청을 했는데 서버에서 userId로 사용자를 찾을수없을때
     const notFoundUser = responseData?.error?.code === 'ERR-1030';
 
     if (shouldRefreshToken && !originalRequest._retry) {
-      // if (shouldRefreshToken) {
       originalRequest._retry = true;
       return interceptorHelper.handleRequestAccessToken(originalRequest);
     }
@@ -112,13 +111,11 @@ export const Get = {
   recruitDetail: ({ id }: { id: string }) => requests.get<API.RecruitDetailResponse>(`/recruit/${id}`),
 
   // 채용공고 프리미엄
-  getRecruitPremiumList: ({ page, limit, benefits, employment, experience, job, type }: API.GetRecruitSpecialListRequest) => {
+  getRecruitPremiumList: ({ page, limit, benefits, employment, experience, job }: API.GetRecruitSpecialListRequest) => {
     const params = new URLSearchParams();
     params.set('page', page);
     params.set('limit', limit);
-    params.set('type', type);
 
-    if (type) params.set('type', type);
     if (experience) params.set('experience', experience);
     if (employment) employment.forEach((item) => params.append('employment', item));
     if (benefits) benefits.forEach((item) => params.append('benefits', item));
@@ -137,13 +134,11 @@ export const Get = {
   },
 
   // 채용공고 스페셜
-  getRecruitSpecialList: ({ page, limit, benefits, employment, experience, job, type }: API.GetRecruitSpecialListRequest) => {
+  getRecruitSpecialList: ({ page, limit, benefits, employment, experience, job }: API.GetRecruitSpecialListRequest) => {
     const params = new URLSearchParams();
     params.set('page', page);
     params.set('limit', limit);
-    params.set('type', type);
 
-    if (type) params.set('type', type);
     if (experience) params.set('experience', experience);
     if (employment) employment.forEach((item) => params.append('employment', item));
     if (benefits) benefits.forEach((item) => params.append('benefits', item));
@@ -162,13 +157,11 @@ export const Get = {
   },
 
   // 채용공고 급구
-  getRecruitUrgentList: ({ page, limit, benefits, employment, experience, job, type }: API.GetRecruitUrgentListRequest) => {
+  getRecruitUrgentList: ({ page, limit, benefits, employment, experience, job }: API.GetRecruitUrgentListRequest) => {
     const params = new URLSearchParams();
     params.set('page', page);
     params.set('limit', limit);
-    params.set('type', type);
 
-    if (type) params.set('type', type);
     if (experience) params.set('experience', experience);
     if (employment) employment.forEach((item) => params.append('employment', item));
     if (benefits) benefits.forEach((item) => params.append('benefits', item));
@@ -187,13 +180,11 @@ export const Get = {
   },
 
   // 채용공고 일반
-  getRecruitBasicList: ({ page, limit, experience, benefits, employment, job, type }: API.GetRecruitBasicListRequest) => {
+  getRecruitBasicList: ({ page, limit, experience, benefits, employment, job }: API.GetRecruitBasicListRequest) => {
     const params = new URLSearchParams();
     params.set('page', page);
     params.set('limit', limit);
-    params.set('type', type);
 
-    if (type) params.set('type', type);
     if (experience) params.set('experience', experience);
 
     if (employment) employment.forEach((item) => params.append('employment', item));
@@ -310,15 +301,7 @@ export const Get = {
 
   // TODO - 타입정의
   // 사업자 - 채용공고 상품 리스트
-  getProductRecruitmentList: ({ type }: { type: API.ProductRecruitmentQuery }) => {
-    const params = new URLSearchParams();
-    if (type) params.set('type', type);
-
-    const queryString = params.toString();
-    const url = `/products/recruitment${queryString && `?${queryString}`}`;
-
-    return requests.get<API.GetProductRecruitmentList>(url);
-  },
+  getProductRecruitmentList: () => requests.get<API.GetProductRecruitmentList>('/products/recruitment'),
   // *************************************** FILE ***************************************
   //이력서 이미지 가져오기
   getResumeProfileImage: (key: string, config: AxiosRequestConfig) => requests.get<any>(`/upload/resume/profile/${key}`, config),

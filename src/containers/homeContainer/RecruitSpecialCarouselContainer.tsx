@@ -1,5 +1,5 @@
 import React from 'react';
-import RecruitSectionTitle from '@/components/recruit/RecruitSectionTitle';
+import RecruitSectionTitle from '@/components/home/RecruitSectionTitle';
 import CarouselItem from '@/components/recruit/CarouselItem';
 import queryKeys from '@/constants/queryKeys';
 import useInfiniteScroll from '@/hooks/useInfiniteScroll';
@@ -11,7 +11,7 @@ import { ParsedUrlQuery } from 'querystring';
 import { keepPreviousData } from '@tanstack/react-query';
 import PaginationProgress from '@/components/common/PaginationProgress';
 import PaginationTag from '@/components/common/PaginationTag';
-import SpecialMobileCard from '@/components/recruit/recruitSpecial/SpecialMobileCard';
+import SpecialCarouselCard from '@/components/home/special/SpecialCarouselCard';
 import styled from 'styled-components';
 
 interface Query extends ParsedUrlQuery {
@@ -19,9 +19,9 @@ interface Query extends ParsedUrlQuery {
   job?: any;
 }
 
-const SPECIAL_MOBILE_LIMIT = '5';
+const LIMIT = '5';
 
-export default function RecruitSpecialMobileContainer() {
+export default function RecruitSpecialCarouselContainer() {
   const [currentIndex, setCurrentIndex] = React.useState(0);
 
   const carouselRef = React.useRef<HTMLDivElement>(null);
@@ -33,7 +33,7 @@ export default function RecruitSpecialMobileContainer() {
 
   const { data, isLoading, isSuccess, fetchNextPage, hasNextPage, isFetchingNextPage } = useInfiniteScroll({
     queryFn: Get.getRecruitSpecialList,
-    queryKey: [queryKeys.RECRUIT_SPECIAL_LIST, { limit: SPECIAL_MOBILE_LIMIT, type: 'RECRUIT', job }],
+    queryKey: [queryKeys.RECRUIT_SPECIAL_LIST, { limit: LIMIT, job }],
     options: {
       enabled: true,
       throwOnError: true,
@@ -42,8 +42,7 @@ export default function RecruitSpecialMobileContainer() {
       placeholderData: keepPreviousData,
     },
     requestQuery: {
-      limit: SPECIAL_MOBILE_LIMIT,
-      type: 'RECRUIT',
+      limit: LIMIT,
       job,
     },
   });
@@ -100,7 +99,7 @@ export default function RecruitSpecialMobileContainer() {
                 }}
               >
                 {page.result.items.map((item, index) => {
-                  return <SpecialMobileCard key={item.id} item={item} index={index} />;
+                  return <SpecialCarouselCard key={item.id} item={item} index={index} />;
                 })}
               </CarouselItem>
             );

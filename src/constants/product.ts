@@ -4,7 +4,7 @@ export const RECRUITMENT_PRODUCT_TYPE = {
 };
 
 export const RECRUITMENT_PRODUCT_NAME = {
-  PREMIUM: '프리미엄',
+  PREMIUM: '프리미엄 TOP',
   SPECIAL: '스페셜',
   URGENT: '급구',
   BASIC: '기본',

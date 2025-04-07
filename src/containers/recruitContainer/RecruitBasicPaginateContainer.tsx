@@ -8,19 +8,19 @@ import PaginationComponent from '@/components/common/PaginationComponent';
 import { ParsedUrlQuery } from 'querystring';
 import { useRouter } from 'next/router';
 import { keepPreviousData } from '@tanstack/react-query';
-import RecruitSectionTitle from '@/components/recruit/RecruitSectionTitle';
-import RecruitPc from '@/components/recruit/recruitBasic/RecruitPc';
+import RecruitSectionTitle from '@/components/home/RecruitSectionTitle';
 import SkeletonUI from '@/components/common/SkeletonUI';
 import EmptyComponent from '@/components/common/EmptyComponent';
+import RecruitMobileCard from '@/components/recruit/RecruitMobileCard';
 
 interface Query extends ParsedUrlQuery {
   page?: string;
   job?: any;
 }
 
-const BASIC_LIST_LIMIT = '20';
+const LIMIT = '20';
 
-export default function RecruitBasicPcContainer() {
+export default function RecruitBasicPaginateContainer() {
   const { isTablet } = useResponsive();
 
   const router = useRouter();
@@ -28,7 +28,7 @@ export default function RecruitBasicPcContainer() {
 
   const { data, isLoading, isSuccess } = useFetchQuery({
     queryFn: Get.getRecruitBasicList,
-    queryKey: [queryKeys.RECRUIT_BASIC_LIST, { limit: BASIC_LIST_LIMIT, type: 'RECRUIT', page, job }],
+    queryKey: [queryKeys.RECRUIT_BASIC_LIST, { limit: LIMIT, page, job }],
     options: {
       enabled: !isTablet,
       staleTime: 60 * 1000 * 5,
@@ -38,8 +38,7 @@ export default function RecruitBasicPcContainer() {
     },
     requestQuery: {
       page,
-      limit: BASIC_LIST_LIMIT,
-      type: 'RECRUIT',
+      limit: LIMIT,
       job,
     },
   });
@@ -48,10 +47,10 @@ export default function RecruitBasicPcContainer() {
 
   if (isLoading) {
     return (
-      <RecruitPc>
+      <div className="mx-[15px] lg:mx-0">
         <SkeletonUI.Line style={{ height: '24px', width: '147px', marginBottom: '20px' }} />
         <SkeletonUI.RecruitBasicList count={2} />
-      </RecruitPc>
+      </div>
     );
   }
 
@@ -61,25 +60,28 @@ export default function RecruitBasicPcContainer() {
     if (isEmpty) {
       return (
         <>
-          <RecruitSectionTitle title="일반채용" />
-          <RecruitPc>
+          <RecruitSectionTitle title="채용공고" />
+          <div className="mx-[15px] lg:mx-0">
             <EmptyComponent height="200px" message="해당하는 공고가 없어요." />
-          </RecruitPc>
+          </div>
         </>
       );
     }
 
     return (
       <>
-        <RecruitSectionTitle title="일반채용" count={data.result.pagination.totalItems} />
+        <RecruitSectionTitle title="채용공고" count={data.result.pagination.totalItems} />
 
-        <RecruitPc>
+        <div className="mx-[15px] lg:mx-0">
           {data.result.items.map((item, index) => {
+            if (isTablet) {
+              return <RecruitMobileCard key={index} item={item} />;
+            }
             return <RecruitDesktopCard key={index} item={item} />;
           })}
 
           {!isEmpty && <PaginationComponent pagination={data.result.pagination} margin="20px 0 50px 0" />}
-        </RecruitPc>
+        </div>
       </>
     );
   }

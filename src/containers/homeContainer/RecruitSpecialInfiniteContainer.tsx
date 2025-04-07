@@ -1,12 +1,11 @@
 import React from 'react';
-import RecruitUrgentCard from '@/components/recruit/RecruitUrgentCard';
-import RecruitUrgentList from '@/components/recruit/RecruitUrgentList';
-import useInfiniteScroll from '@/hooks/useInfiniteScroll';
-import { Get } from '@/apis';
+import RecruitSpecialCard from '@/components/home/special/RecruitSpecialCard';
+import RecruitSectionTitle from '@/components/home/RecruitSectionTitle';
 import InfiniteScroll from 'react-infinite-scroller';
 import queryKeys from '@/constants/queryKeys';
 import Button from '@/components/common/style/Button';
-import RecruitSectionTitle from '@/components/recruit/RecruitSectionTitle';
+import useInfiniteScroll from '@/hooks/useInfiniteScroll';
+import { Get } from '@/apis';
 import EmptyComponent from '@/components/common/EmptyComponent';
 import SkeletonUI from '@/components/common/SkeletonUI';
 import { useRouter } from 'next/router';
@@ -14,39 +13,38 @@ import { ParsedUrlQuery } from 'querystring';
 import { keepPreviousData } from '@tanstack/react-query';
 
 interface Query extends ParsedUrlQuery {
-  page?: string;
   job?: any;
 }
 
-const URGENT_RECRUIT_LIMIT = '12';
+const SPECIAL_LIMIT = '32';
 
-export default function RecruitUrgentListContainer() {
+export default function RecruitSpecialInfiniteContainer() {
   const router = useRouter();
-  const { location, job } = router.query as Query;
+  const { job } = router.query as Query;
 
   const { data, isLoading, isSuccess, fetchNextPage, hasNextPage, isFetching } = useInfiniteScroll({
-    queryFn: Get.getRecruitUrgentList,
-    queryKey: [queryKeys.RECRUIT_URGENT_LIST, { limit: URGENT_RECRUIT_LIMIT, type: 'RECRUIT', job }],
+    queryFn: Get.getRecruitSpecialList,
+    queryKey: [queryKeys.RECRUIT_SPECIAL_LIST, { limit: SPECIAL_LIMIT, job }],
     options: {
+      enabled: true,
       throwOnError: true,
       staleTime: 60 * 1000 * 5,
       gcTime: 60 * 1000 * 10,
       placeholderData: keepPreviousData,
     },
     requestQuery: {
-      limit: URGENT_RECRUIT_LIMIT,
-      type: 'RECRUIT',
+      limit: SPECIAL_LIMIT,
       job,
     },
   });
 
-  console.log('급구 채용 리스트 API : ', data);
+  console.log('스페셜 채용 리스트 API : ', data);
 
   if (isLoading) {
     return (
       <>
         <SkeletonUI.Line style={{ height: '24px', width: '147px', marginBottom: '20px' }} />
-        <SkeletonUI.RecruitUrgentList count={4} />
+        <SkeletonUI.RecruitSpecialList count={3} />
       </>
     );
   }
@@ -58,7 +56,8 @@ export default function RecruitUrgentListContainer() {
 
     return (
       <>
-        <RecruitSectionTitle title="급구채용" />
+        <RecruitSectionTitle title="스페셜 채용" />
+
         {isEmptyFirstPage && isFirstPage && <EmptyComponent height="150px" message="해당하는 공고가 없어요." isVisibleImage={false} />}
 
         <InfiniteScroll
@@ -70,24 +69,25 @@ export default function RecruitUrgentListContainer() {
           hasMore={hasNextPage && !isFetching}
           threshold={450}
         >
-          <RecruitUrgentList>
+          <div className="mx-[15px] mt-0 mb-[100px] flex flex-wrap gap-[15px] lg:mx-0">
             {data.pages.map((page) => {
-              return page.result.items.map((item) => <RecruitUrgentCard key={item.id} item={item} />);
+              return page.result.items.map((item, index) => <RecruitSpecialCard key={item.id} item={item} index={index} />);
             })}
-          </RecruitUrgentList>
-          {!isEmptyFirstPage && isFirstPage && nextPage && (
-            <div style={{ display: 'flex', justifyContent: 'center' }}>
-              <Button
-                label="더보기"
-                variant="tertiary"
-                width="200px"
-                onClick={() => fetchNextPage()}
-                margin="0 0 30px 0"
-                borderRadius="30px"
-              />
-            </div>
-          )}
+          </div>
         </InfiniteScroll>
+
+        {!isEmptyFirstPage && isFirstPage && nextPage && (
+          <div style={{ display: 'flex', justifyContent: 'center' }}>
+            <Button
+              label="더보기"
+              variant="tertiary"
+              width="200px"
+              onClick={() => fetchNextPage()}
+              margin="0 0 30px 0"
+              borderRadius="30px"
+            />
+          </div>
+        )}
       </>
     );
   }

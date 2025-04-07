@@ -59,8 +59,10 @@ import LocationB24x24 from './locationB24x24.svg';
 import Spin24x24 from './spin24x24.svg';
 import UploadImage24x24 from './uploadImage24x24.svg';
 import Print24x24 from './print24x24.svg';
+import ShopB24x24 from './shopB24x24.svg';
 
 export {
+  ShopB24x24,
   Print24x24,
   UploadImage24x24,
   Spin24x24,
