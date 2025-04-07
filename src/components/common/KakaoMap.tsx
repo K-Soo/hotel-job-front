@@ -2,13 +2,13 @@ import React from 'react';
 import styled from 'styled-components';
 import { Map, MapMarker, useKakaoLoader } from 'react-kakao-maps-sdk';
 import environment from '@/environment';
-
+import Icon from '@/icons/Icon';
+import { motion } from 'framer-motion';
 interface KakaoMapProps {
   address: string;
-  addressDetail: string;
 }
 
-function KakaoMap({ address, addressDetail }: KakaoMapProps) {
+function KakaoMap({ address }: KakaoMapProps) {
   const [position, setPosition] = React.useState<{ lat: number; lng: number } | null>(null);
   const [isErrorCoordinates, setIsErrorCoordinates] = React.useState(false);
 
@@ -16,7 +16,13 @@ function KakaoMap({ address, addressDetail }: KakaoMapProps) {
     appkey: environment.kakaoJavascriptKKey,
     libraries: ['services', 'clusterer'],
   });
-  console.log('loading: ', loading);
+
+  const handleOpenKakaoMap = () => {
+    if (!address) return;
+    const encodedAddress = encodeURIComponent(address);
+    const kakaoMapUrl = `https://map.kakao.com/?q=${encodedAddress}`;
+    window.open(kakaoMapUrl, '_blank');
+  };
 
   React.useEffect(() => {
     if (loading || !window.kakao || !address) return;
@@ -43,9 +49,17 @@ function KakaoMap({ address, addressDetail }: KakaoMapProps) {
 
   return (
     <S.KakaoMap>
-      <Map center={position} style={{ width: '100%', height: '100%' }} draggable={true} zoomable={false}>
-        <MapMarker position={position} />
-      </Map>
+      <S.KakaoMapWrapper>
+        <Map center={position} style={{ width: '100%', height: '100%' }} draggable={true} zoomable={false}>
+          <MapMarker position={position} />
+        </Map>
+      </S.KakaoMapWrapper>
+      <S.SearchMap>
+        <Icon name="LocationA24x24" width="20px" height="20px" margin="0 5px 0 0" />
+        <motion.button className="fast" onClick={() => handleOpenKakaoMap()}>
+          빠른 길 찾기
+        </motion.button>
+      </S.SearchMap>
     </S.KakaoMap>
   );
 }
@@ -54,12 +68,32 @@ export default React.memo(KakaoMap);
 
 const S = {
   KakaoMap: styled.div`
-    height: 250px;
-    border: 1px solid ${({ theme }) => theme.colors.gray300};
+    border: 1px solid ${({ theme }) => theme.colors.gray200};
     border-radius: 10px;
+  `,
+  KakaoMapWrapper: styled.div`
+    height: 250px;
     overflow: hidden;
+    border-radius: inherit;
+
     ${(props) => props.theme.media.mobile`
       height: 180px;
     `};
+  `,
+  SearchMap: styled.div`
+    height: 45px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .fast {
+      color: ${({ theme }) => theme.colors.gray700};
+      font-size: 14px;
+      cursor: pointer;
+      font-size: 14px;
+      &:hover {
+        color: ${({ theme }) => theme.colors.black};
+        text-decoration: underline;
+      }
+    }
   `,
 };
