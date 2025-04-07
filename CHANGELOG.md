@@ -1,6 +1,19 @@
 # 변경 로그
 
 프로젝트의 모든 주요 변경 사항
+## [1.18.0](https://github.com/K-Soo/hotel-job-front/compare/v1.17.0...v1.18.0) (2025-04-07)
+
+
+### Updates
+
+* **PremiumCarouselCard:** 헤더 박스 및 스타일 수정, 불필요한 코드 제거 ([6c9deff](https://github.com/K-Soo/hotel-job-front/commit/6c9deff102e49a98733a74c945e6d1d7961a5a34))
+* **RecruitBasicMobileContainer:** LIMIT 값을 '5'에서 '4'로 수정 ([20c6e0a](https://github.com/K-Soo/hotel-job-front/commit/20c6e0a216446e158b9a4da515dc8ccd051e854a))
+* **RecruitMobileCard:** '급구' 태그 추가 및 레이아웃 개선 ([014503a](https://github.com/K-Soo/hotel-job-front/commit/014503a2fcf31fe143ebb2d0a31b266934554358))
+* **RecruitPremiumCarouselContainer:** LIMIT 값을 '5'에서 '4'로 수정 및 쿼리 함수 이름 변경 ([393418e](https://github.com/K-Soo/hotel-job-front/commit/393418ecd204aa4b475de62f29d01e19116190f9))
+* **RecruitSpecialCarouselContainer:** LIMIT 값을 '5'에서 '4'로 수정 ([43492ee](https://github.com/K-Soo/hotel-job-front/commit/43492ee0e4aae41cc59114a51a70e0c2562ae36a))
+* **RecruitUrgentList:** grid-auto-rows 속성 추가로 레이아웃 개선 ([01b0c3e](https://github.com/K-Soo/hotel-job-front/commit/01b0c3e5466b23672abea3067113008a2d23422f))
+* **SpecialCarouselCard:** 헤더 박스 스타일 수정 및 텍스트 정렬 개선 ([38094d9](https://github.com/K-Soo/hotel-job-front/commit/38094d94130b8ef936a42eb4f44393d5f0ee3f16))
+
 ## [1.17.0](https://github.com/K-Soo/hotel-job-front/compare/v1.16.5...v1.17.0) (2025-04-07)
 
 
