@@ -223,9 +223,9 @@ const resumeRegister = yup.object({
   phone: yup.string().required(),
   birthday: yup.string().required(),
   email: validation.REQUIRED_EMAIL(),
-  address: yup.string().required(),
+  address: yup.string().required('주소를 검색해주세요'),
   addressDetail: validation.REQUIRED_TEXT_1({ minLength: 2, maxLength: 50 }),
-  summary: yup.string().default(''),
+  summary: validation.REQUIRED_TEXT_1({ minLength: 5, maxLength: 500 }),
   education: yup.string().oneOf(educationLevelKeys).required(),
   experience: yup
     .array(
