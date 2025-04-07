@@ -17,14 +17,6 @@ interface SpecialCarouselCardProps {
   index: number;
 }
 
-const GRADIENT_COLORS = [
-  ['#3182f6', '#b485c6'],
-  ['#34d399', '#3b82f6'],
-  ['#f97316', '#f43f5e'],
-  ['#a855f7', '#6366f1'],
-  ['#06b6d4', '#3b82f6'],
-];
-
 export default function SpecialCarouselCard({ item, index }: SpecialCarouselCardProps) {
   const [isBold, setIsBold] = React.useState(false);
   const [isHighlight, setIsHighlight] = React.useState(false);
@@ -147,24 +139,13 @@ const StyledTitle = styled.div<{ $isBold: boolean; $isHighlight: boolean }>`
 
 const S = {
   SpecialCarouselCard: styled(motion.div)<{ index: number }>`
-    ${({ index }) => {
-      const colors = GRADIENT_COLORS[index % GRADIENT_COLORS.length];
-      return css`
-        background-image: linear-gradient(white, white), linear-gradient(to right, ${colors[0]}, ${colors[1]});
-      `;
-    }}
     padding: 15px;
     cursor: pointer;
     user-select: none;
     background-color: white;
-    position: relative;
-    border-radius: 5px;
-    border-top-right-radius: 50px;
-    border-top: 2px solid transparent;
-    background-origin: border-box;
-    background-clip: padding-box, border-box;
-    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
     overflow: hidden;
+    border: 1px solid ${(props) => props.theme.colors.gray300};
     margin-bottom: 15px;
     height: 135px;
   `,
