@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import RecruitDetailLocation from '@/components/recruitDetail/RecruitDetailLocation';
 import RecruitDetailPeriod from '@/components/recruitDetail/RecruitDetailPeriod';
-// import RecruitDetailDateTime from '@/components/recruitDetail/RecruitDetailDateTime';
+import RecruitDetailDateTime from '@/components/recruitDetail/RecruitDetailDateTime';
 import RecruitDetailWorkCondition from '@/components/recruitDetail/RecruitDetailWorkCondition';
 import RecruitDetailInfo from '@/components/recruitDetail/RecruitDetailInfo';
 import RecruitDetailFavoriteShareBar from '@/components/recruitDetail/RecruitDetailFavoriteShareBar';
@@ -23,7 +23,10 @@ export default function RecruitDetail({ data, children }: RecruitDetailProps) {
       {/* <S.Images></S.Images> */}
       <div className="detail-container">
         <div className="detail-container__content-form">
-          {/* <RecruitDetailDateTime /> */}
+          <div className="flex items-center justify-between">
+            <RecruitDetailDateTime />
+            <RecruitDetailFavoriteShareBar hotelName={data.hotelName} recruitmentTitle={data.recruitmentTitle} />
+          </div>
 
           <S.UtilPanel>
             <div className="wrapper">
@@ -31,7 +34,6 @@ export default function RecruitDetail({ data, children }: RecruitDetailProps) {
               <address className="addr sido">{data.address.split(' ')[0]}</address>
               <address className="addr sigungu">{data.address.split(' ')[1]}</address>
             </div>
-            <RecruitDetailFavoriteShareBar hotelName={data.hotelName} recruitmentTitle={data.recruitmentTitle} />
           </S.UtilPanel>
 
           <S.Header>
@@ -65,7 +67,7 @@ export default function RecruitDetail({ data, children }: RecruitDetailProps) {
 
           <S.Title>근무지 위치</S.Title>
           <RecruitDetailLocation address={data.address} addressDetail={data.addressDetail} />
-          <DynamicKakaoMap address={data.address} addressDetail={data.addressDetail} />
+          <DynamicKakaoMap address={data.address} />
         </div>
         {children}
       </div>
@@ -104,13 +106,13 @@ const S = {
     margin-bottom: 50px;
   `,
   Title: styled.h2`
-    font-size: 22px;
+    font-size: 24px;
     font-weight: 500;
     margin-bottom: 15px;
     user-select: none;
     ${(props) => props.theme.media.mobile`
-      font-size: 20px;
-      margin-bottom: 5px;
+      font-size: 22px;
+      margin-bottom: 8px;
     `};
   `,
   UtilPanel: styled.article`
