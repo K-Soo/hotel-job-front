@@ -66,7 +66,7 @@ export function EmployerAside() {
           );
         })}
       </div>
-      {isExpanded && <StyledRecruitLink onClick={() => window.open(path.RECRUIT, '_blank')}>채용 페이지 바로가기</StyledRecruitLink>}
+      {isExpanded && <StyledRecruitLink onClick={() => window.open(path.HOME, '_blank')}>채용 페이지 바로가기</StyledRecruitLink>}
     </S.EmployerAside>
   );
 }
