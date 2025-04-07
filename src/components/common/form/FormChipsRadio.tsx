@@ -3,6 +3,7 @@ import styled, { css } from 'styled-components';
 import { useFormContext, Path, FieldValues } from 'react-hook-form';
 import { motion } from 'framer-motion';
 import useDidMountEffect from '@/hooks/useDidMountEffect';
+import { get } from 'lodash';
 
 interface FormChipsRadioProps<T> {
   name: Path<T>;
@@ -12,6 +13,7 @@ interface FormChipsRadioProps<T> {
   disabled?: boolean;
   palette: 'blue' | 'green' | 'gray';
   index?: string;
+  focusOnError?: boolean;
 }
 
 export default function FormChipsRadio<T extends FieldValues>({
@@ -22,12 +24,19 @@ export default function FormChipsRadio<T extends FieldValues>({
   margin,
   palette,
   index,
+  focusOnError,
 }: FormChipsRadioProps<T>) {
-  const { register, watch } = useFormContext<T>();
+  const {
+    register,
+    watch,
+    setFocus,
+    formState: { errors },
+  } = useFormContext<T>();
 
   const watchValue = watch(name);
   const isActive = watchValue === value;
   const ref = React.useRef<HTMLDivElement | null>(null);
+  const error = get(errors, name);
 
   useDidMountEffect(() => {
     if (isActive && ref.current) {
@@ -38,6 +47,12 @@ export default function FormChipsRadio<T extends FieldValues>({
       });
     }
   }, [isActive]);
+
+  React.useEffect(() => {
+    if (error && focusOnError && ref.current) {
+      ref.current.focus();
+    }
+  }, [error, focusOnError]);
 
   return (
     <S.FormChipsRadio $margin={margin} $active={watchValue === value} $palette={palette} ref={ref} whileTap={{ scale: 0.98 }}>
