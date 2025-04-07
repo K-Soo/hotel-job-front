@@ -62,8 +62,7 @@ export default function RecruitDetailWorkCondition({
 
 const S = {
   RecruitDetailWorkCondition: styled.div`
-    background-color: ${(props) => props.theme.colors.blue30};
-    /* border: 1px solid ${(props) => props.theme.colors.gray200}; */
+    background-color: ${(props) => props.theme.colors.gray};
     border-radius: 10px;
     padding: 10px 15px;
     margin-bottom: 50px;

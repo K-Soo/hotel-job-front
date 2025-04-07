@@ -1,3 +1,4 @@
+import React from 'react';
 import styled from 'styled-components';
 import Button from '@/components/common/style/Button';
 import useAuth from '@/hooks/useAuth';
@@ -15,9 +16,16 @@ export default function RecruitDetailBottomNavigation({
   setIsOpenModal,
   handleSigninThenApply,
 }: RecruitDetailBottomNavigationProps) {
+  const [isInitialLoading, setIsInitialLoading] = React.useState(true);
   const { isAuthenticated, role, isAuthLoading } = useAuth();
 
-  if (isAuthLoading) {
+  React.useEffect(() => {
+    setTimeout(() => {
+      setIsInitialLoading(false);
+    }, 800);
+  }, []);
+
+  if (isAuthLoading || isInitialLoading) {
     return (
       <S.RecruitDetailBottomNavigation>
         <div className="wrapper">
