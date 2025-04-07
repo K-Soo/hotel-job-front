@@ -19,7 +19,7 @@ interface Query extends ParsedUrlQuery {
   job?: any;
 }
 
-const LIMIT = '5';
+const LIMIT = '4';
 
 export default function RecruitPremiumCarouselContainer() {
   const [currentIndex, setCurrentIndex] = React.useState(0);
@@ -32,7 +32,7 @@ export default function RecruitPremiumCarouselContainer() {
   const { job } = router.query as Query;
 
   const { data, isLoading, isSuccess, fetchNextPage, hasNextPage, isFetchingNextPage } = useInfiniteScroll({
-    queryFn: Get.getRecruitSpecialList,
+    queryFn: Get.getRecruitPremiumList,
     queryKey: [queryKeys.RECRUIT_PREMIUM_LIST, { limit: LIMIT, job }],
     options: {
       enabled: true,
