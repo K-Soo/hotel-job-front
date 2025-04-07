@@ -1,6 +1,26 @@
 # 변경 로그
 
 프로젝트의 모든 주요 변경 사항
+### [1.18.1](https://github.com/K-Soo/hotel-job-front/compare/v1.18.0...v1.18.1) (2025-04-07)
+
+
+### Updates
+
+* **EmployerAside:** 채용 페이지 링크를 홈 페이지로 변경 ([2dbad6c](https://github.com/K-Soo/hotel-job-front/commit/2dbad6ce0c5bdfa36ea1dd671781b91ba98deee8))
+* **EmployerHeader:** 채용 페이지 링크를 홈 페이지로 변경 ([b5e0de1](https://github.com/K-Soo/hotel-job-front/commit/b5e0de123b242a0a70adef206e5c1021d496a254))
+* **HomeContainer:** 'RecruitPremiumCarouselContainer'의 클래스 이름을 'block'으로 변경 ([b189dc2](https://github.com/K-Soo/hotel-job-front/commit/b189dc2bdb7646133ec735099766a2c80ce2fd8e))
+* **PremiumInfiniteCard:** line-height 수정 및 font-size 추가 ([229e3b9](https://github.com/K-Soo/hotel-job-front/commit/229e3b942c8d825074b56f88e34c8d8098bc89dc))
+* **RecruitContainer:** RecruitBasicPaginateContainer를 동적 임포트에서 일반 임포트로 변경 ([838e9a3](https://github.com/K-Soo/hotel-job-front/commit/838e9a334942c48f431b6bcaf4fe3ce565c68b08))
+* **RecruitDesktopCard:** 'WORKING_DAY_LIST' 상수 임포트를 제거 ([9008193](https://github.com/K-Soo/hotel-job-front/commit/9008193ed3e8910bffa17ab10171156d68deb37e))
+* **RecruitDesktopCard:** 근무일 표시 제거 ([e08eafe](https://github.com/K-Soo/hotel-job-front/commit/e08eafe600bcb2be92b452ddf157d146410a3024))
+* **RecruitPremiumCarouselContainer:** '프리미엄 TOP' 섹션에서 카운트 제거 ([4a821fb](https://github.com/K-Soo/hotel-job-front/commit/4a821fb0e91c13898a7d994777459a50ba126da2))
+* **RecruitPremiumInfiniteContainer:** '프리미엄 API' 로그 추가 ([4019a7b](https://github.com/K-Soo/hotel-job-front/commit/4019a7ba6a659f96143d4df4805f6f406090d99e))
+* **RecruitPremiumInfiniteContainer:** 쿼리 함수 변경 ([c5aaa6b](https://github.com/K-Soo/hotel-job-front/commit/c5aaa6b103d3df5eb50aee42edcec2625214bfdf))
+* **RecruitSpecialCard:** line-height 수정 및 font-size 추가 ([f842a05](https://github.com/K-Soo/hotel-job-front/commit/f842a057009df07e66e32e1b9dbfec74b19b5fef))
+* **RecruitSpecialCarouselContainer:** '스페셜 채용' 섹션에서 카운트 제거 ([96cc7be](https://github.com/K-Soo/hotel-job-front/commit/96cc7befe70dc5a0de440977b72403b174400057))
+* **RecruitUrgentCard:** 직무 태그 표시 방식 수정 및 폰트 크기 조정 ([1b0be95](https://github.com/K-Soo/hotel-job-front/commit/1b0be95cbfccdae19e82a5d101599cbdaa8b8304))
+* **RecruitUrgentList:** 400px 이하 미디어 쿼리 제거 ([b9b372e](https://github.com/K-Soo/hotel-job-front/commit/b9b372e7918125b605187e17b9da058bc5d1aafc))
+
 ## [1.18.0](https://github.com/K-Soo/hotel-job-front/compare/v1.17.0...v1.18.0) (2025-04-07)
 
 
