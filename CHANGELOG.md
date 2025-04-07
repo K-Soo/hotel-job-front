@@ -1,6 +1,56 @@
 # 변경 로그
 
 프로젝트의 모든 주요 변경 사항
+## [1.17.0](https://github.com/K-Soo/hotel-job-front/compare/v1.16.5...v1.17.0) (2025-04-07)
+
+
+### Updates
+
+* 컴포넌트 파일 삭제 및 관련 코드 정리 ([0b85efd](https://github.com/K-Soo/hotel-job-front/commit/0b85efdb6405226c0ba6051121e2fd7242a8a6be))
+* **API.ts:** DefaultRecruitQuery에서 type 필드 제거 ([06836e1](https://github.com/K-Soo/hotel-job-front/commit/06836e1435a8ec49de8a3b3d363e28ba888c7768))
+* **api:** 불필요한 파라미터 제거 및 코드 정리 ([08bc264](https://github.com/K-Soo/hotel-job-front/commit/08bc26427ec4d7cb619444be9b8e180084076eab))
+* **ContentPanel:** styled-components 제거 및 HTML 구조 개선 ([622184a](https://github.com/K-Soo/hotel-job-front/commit/622184aa15e052f440af13c2d9e6266bb9935bab))
+* **EmployerProductRecruitment:** 'ProductRecruitmentTab' 컴포넌트 제거 및 제목 수정 ([38ff5a9](https://github.com/K-Soo/hotel-job-front/commit/38ff5a9f0b4b429fe48b8539390ba098727eca51))
+* **EmployerProductRecruitmentContainer:** 쿼리 파라미터 제거 및 프리미엄 제품 필터링 로직 수정 ([3eeb3a6](https://github.com/K-Soo/hotel-job-front/commit/3eeb3a6033eb2a875a0bb9390f9f6bf41325bb9b))
+* **HomeContainer:** 사이드바 추가 및 다양한 리크루트 섹션 동적 로딩 구현 ([65ac853](https://github.com/K-Soo/hotel-job-front/commit/65ac8538e2762bb815df4b7facbf2fbea2442af1))
+* **Home:** styled-components 제거 및 HTML 구조 개선 ([6f241fe](https://github.com/K-Soo/hotel-job-front/commit/6f241fe7adcb9c17bc6cbfe4483b5490d05bf55b))
+* **index.ts:** ShopB24x24 아이콘 추가 ([c8bb3fa](https://github.com/K-Soo/hotel-job-front/commit/c8bb3fa5b8317e6019abcfdfa052e70617ef1982))
+* **interceptorHelper:** handleInvalidRefreshToken 함수에 비동기 처리 추가 및 알림 순서 변경 ([5b81cfb](https://github.com/K-Soo/hotel-job-front/commit/5b81cfb0d2e9dc4ca439b6c69ca609fc90325ba7))
+* **Member:** IconHover 추가 및 버튼 레이블 수정, 버튼 높이 통일 ([5264f8f](https://github.com/K-Soo/hotel-job-front/commit/5264f8f44db124179c3379abc1e8d21dd124c0dd))
+* **middleware:** 인증 경로 및 예외 처리 로직 개선 ([e89de5c](https://github.com/K-Soo/hotel-job-front/commit/e89de5c87a4874fdb7acaefb8ec0532f220460b5))
+* **PremiumCarouselCard:** 프리미엄 캐러셀 카드 컴포넌트 추가 및 스타일 구현 ([15752ad](https://github.com/K-Soo/hotel-job-front/commit/15752ad8295dc8048b9ed78dddcc17a5e68273b8))
+* **PremiumInfiniteCard:** 컴포넌트 구조 개선 및 스타일 수정 ([d6ad3a8](https://github.com/K-Soo/hotel-job-front/commit/d6ad3a81e1e23b5fd39ee2bc9d9b99b00a5befbd))
+* **PremiumInfiniteCard:** 프리미엄 무한 카드 컴포넌트 추가 및 스타일 구현 ([7271306](https://github.com/K-Soo/hotel-job-front/commit/72713066b3aff7a89738b8d056df82fa3a6d7062))
+* **PremiumListContainer:** 컴포넌트 경로 수정 및 구조 변경 ([1a5b6dc](https://github.com/K-Soo/hotel-job-front/commit/1a5b6dc1a1d67525d365100b6b55c9bd8bc500f9))
+* **product:** 프리미엄 제품 이름을 '프리미엄 TOP'으로 변경 ([f6e7915](https://github.com/K-Soo/hotel-job-front/commit/f6e791596b5acf31fed1b9f2441f9b52efc6646c))
+* **ProductCard:** 채용상품 제목에서 '상품' 텍스트 제거 ([b229861](https://github.com/K-Soo/hotel-job-front/commit/b22986140655ff7e0b0261bd8e89bf6e70dfa727))
+* **ProductPreview:** 이미지 파일 경로 수정 및 불필요한 이미지 삭제 ([0b2e088](https://github.com/K-Soo/hotel-job-front/commit/0b2e08813f8ff84d96cfdcc07d0998d528cbc111))
+* **queryKeys:** 'MAIN_PREMIUM_LIST'를 'RECRUIT_PREMIUM_LIST'로 변경 ([16c02d9](https://github.com/K-Soo/hotel-job-front/commit/16c02d901191093c6c7e80f58005ed9b11831b70))
+* **RecruitBasicMobileContainer:** RecruitSectionTitle 경로 수정 및 쿼리 파라미터에서 type 제거 ([c0449ee](https://github.com/K-Soo/hotel-job-front/commit/c0449ee29d337da80a6dfdfc9a8e36b63782fe4e))
+* **RecruitBasicPaginateContainer:** 기본 채용 리스트를 위한 페이지네이션 컴포넌트 추가 ([690b16c](https://github.com/K-Soo/hotel-job-front/commit/690b16c64884b76e6ab088efaa1e2e6d5cf6e653))
+* **RecruitContainer:** RecruitBasicPcContainer 및 RecruitBasicMobileContainer를 RecruitBasicPaginateContainer로 변경 ([6d4b7c1](https://github.com/K-Soo/hotel-job-front/commit/6d4b7c10b1270ad67aa021af584a6411eb2ae415))
+* **RecruitDesktopCard:** 근무일 정보 추가 및 스타일 개선 ([6672102](https://github.com/K-Soo/hotel-job-front/commit/6672102d08cd7b1eb1adff112e7936275cb7e106))
+* **recruitment.tsx:** 채용상품 제목을 채용정보로 변경하고 canonical URL 추가 ([fbe4d16](https://github.com/K-Soo/hotel-job-front/commit/fbe4d1614c0de23a29dfb1cb5fbd6eb556d7e93e))
+* **RecruitPremiumCarouselContainer:** 프리미엄 채용 카루셀 컴포넌트 추가 및 무한 스크롤 기능 구현 ([276fb40](https://github.com/K-Soo/hotel-job-front/commit/276fb40ec6774327da7c54b9ded13b6c362f87e0))
+* **RecruitPremiumInfiniteContainer:** 쿼리 함수 이름을 getRecruitPremiumList에서 getRecruitSpecialList로 변경 ([b4f4e22](https://github.com/K-Soo/hotel-job-front/commit/b4f4e222312b5961433f1c12c961ce32a0653aa4))
+* **RecruitPremiumInfiniteContainer:** 프리미엄 채용 리스트를 위한 무한 스크롤 컴포넌트 추가 ([ff5e936](https://github.com/K-Soo/hotel-job-front/commit/ff5e9362cb39cbf40b7888d0f75a0addeb9afa1b))
+* **RecruitSectionTitle:** 새로운 컴포넌트 추가 및 스타일 정의 ([9da5a4d](https://github.com/K-Soo/hotel-job-front/commit/9da5a4d82229c465567e9a94b47f87e5802ce6cb))
+* **RecruitSpecialCard:** 새로운 컴포넌트 추가 및 스타일 설정 ([45d2a00](https://github.com/K-Soo/hotel-job-front/commit/45d2a00ea2d3464b2d344fab4d1c30975dbedbc0))
+* **RecruitSpecialCard:** 컴포넌트 구조 개선 및 스타일 수정 ([7aeaf98](https://github.com/K-Soo/hotel-job-front/commit/7aeaf98147cdd501fa3fb448db9279d10b1aaa50))
+* **RecruitSpecialCarouselContainer:** 스페셜 채용 카루셀 컴포넌트 추가 및 무한 스크롤 기능 구현 ([462d9e3](https://github.com/K-Soo/hotel-job-front/commit/462d9e310a47b941b446bde3f0a5eecd5bb55652))
+* **RecruitSpecialInfiniteContainer:** 스페셜 채용 리스트를 위한 무한 스크롤 컴포넌트 추가 ([13b4dd1](https://github.com/K-Soo/hotel-job-front/commit/13b4dd1b786489c83e00c911f84c7e85c6bb3ed0))
+* **RecruitUrgentCard:** 긴급 채용 카드 컴포넌트 추가 및 스타일 구현 ([9a50702](https://github.com/K-Soo/hotel-job-front/commit/9a507025201fc10486217c000bbb1864cdc07040))
+* **RecruitUrgentCard:** 컴포넌트 구조 개선 및 불필요한 코드 제거 ([fa58890](https://github.com/K-Soo/hotel-job-front/commit/fa58890608ba436658f95138f60cac90c84c3426))
+* **RecruitUrgentList:** 그리드 레이아웃 및 반응형 스타일 수정 ([47dd0d8](https://github.com/K-Soo/hotel-job-front/commit/47dd0d88c48f3efc0128566ae71a09f462c0392a))
+* **RecruitUrgentList:** 새로운 컴포넌트 추가 및 스타일 설정 ([c9deb20](https://github.com/K-Soo/hotel-job-front/commit/c9deb203260562bea3ef21f6ad2bf6ec98fdcb34))
+* **RecruitUrgentListContainer:** 급구 채용 리스트 컴포넌트 추가 및 무한 스크롤 기능 구현 ([630a48e](https://github.com/K-Soo/hotel-job-front/commit/630a48e3548556882d223c3013bd493148ea4854))
+* **RecruitUrgentListContainer:** 불필요한 줄 추가 ([0fe8898](https://github.com/K-Soo/hotel-job-front/commit/0fe88988c11a4ca116b7766d7b497655e88b0d64))
+* **ScrollToTopButton:** 버튼 위치 조정 및 반응형 스타일 수정 ([8715392](https://github.com/K-Soo/hotel-job-front/commit/87153922c898e1959c70665707024481d9c35aca))
+* **shopB24x24.svg:** ShopB24x24 아이콘 추가 ([c47d1a8](https://github.com/K-Soo/hotel-job-front/commit/c47d1a8c8f6fc61d28c0ca6556065b30c88ee01d))
+* **Sidebar:** 사이드바 컴포넌트 추가 및 스크롤 기능 구현 ([0177d2c](https://github.com/K-Soo/hotel-job-front/commit/0177d2c2b6b0d37bbfff777b70590d45286690b2))
+* **SpecialCarouselCard:** 그라디언트 색상 상수 제거 및 스타일 수정 ([dbea1c2](https://github.com/K-Soo/hotel-job-front/commit/dbea1c26c99cab9000bc2318d18af0a501637419))
+* **SpecialCarouselCard:** 특별 캐러셀 카드 컴포넌트 추가 및 스타일 구현 ([9016dfd](https://github.com/K-Soo/hotel-job-front/commit/9016dfde9f4ce99d9c59e4d8c550216642817091))
+
 ### [1.16.5](https://github.com/K-Soo/hotel-job-front/compare/v1.16.4...v1.16.5) (2025-04-05)
 
 
