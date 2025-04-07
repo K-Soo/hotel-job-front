@@ -19,7 +19,7 @@ interface Query extends ParsedUrlQuery {
   job?: any;
 }
 
-const LIMIT = '5';
+const LIMIT = '4';
 
 export default function RecruitSpecialCarouselContainer() {
   const [currentIndex, setCurrentIndex] = React.useState(0);
