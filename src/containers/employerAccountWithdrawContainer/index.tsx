@@ -6,6 +6,7 @@ import useLoading from '@/hooks/useLoading';
 import { Delete, Get } from '@/apis';
 import CertificationVerifyModal from '@/components/common/certification/CertificationVerifyModal';
 import useSignout from '@/hooks/useSignout';
+import useAuth from '@/hooks/useAuth';
 
 export type ConsentFormType = {
   rejoinRestriction: boolean;
@@ -23,8 +24,8 @@ export default function EmployerAccountWithdrawContainer() {
   const [progressRecruitmentCount, setProgressRecruitmentCount] = React.useState<number | null>(null);
   const [consentForm, setConsentForm] = React.useState<ConsentFormType>(INITIAL_CONSENT_FORM);
   const [isOpenCertificationWithdrawModal, setIsOpenCertificationWithdrawModal] = React.useState(false);
-  const [isSuccessAuth, setIsSuccessAuth] = React.useState(false);
 
+  const { authAtomState } = useAuth();
   const { setLoadingAtomStatue } = useLoading();
   const { setAlertWithConfirmAtom } = useAlertWithConfirm();
   const { handleClickSignout } = useSignout();
@@ -58,7 +59,12 @@ export default function EmployerAccountWithdrawContainer() {
     }
 
     if (progressRecruitmentCount !== 0) {
-      // return alert('진행중인 채용공고가 있습니다. 채용공고를 모두 마감 후 진행 해주세요.');
+      return alert('진행중인 채용공고가 있습니다. 채용공고를 모두 마감 후 진행 해주세요.');
+    }
+
+    // 본인인증 상태에 따라 분기 처리
+    if (authAtomState.certificationStatus === 'UNVERIFIED') {
+      return onCertificationSuccess();
     }
 
     setAlertWithConfirmAtom((prev) => ({
@@ -92,7 +98,6 @@ export default function EmployerAccountWithdrawContainer() {
   };
 
   const onCertificationSuccess = () => {
-    setIsSuccessAuth(true);
     setAlertWithConfirmAtom((prev) => ({
       ...prev,
       type: 'CONFIRM',
