@@ -10,6 +10,9 @@ import SaleRate from '@/components/common/SaleRate';
 import Icon from '@/icons/Icon';
 import { RECRUITMENT_PRODUCT_DESCRIPTION, RECRUITMENT_PRODUCT_NAME } from '@/constants/product';
 import { selectProductAtom } from '@/recoil/product';
+import useAuth from '@/hooks/useAuth';
+import { Role } from '@/constants/role';
+import useToast from '@/hooks/useToast';
 
 interface ProductCardProps {
   margin?: string;
@@ -21,8 +24,14 @@ export default function ProductCard({ product, margin, setIsOpenSideMenu }: Prod
   const [selectedDuration, setSelectedDuration] = React.useState(product.durations[2]);
   const setSelectProductAtom = useSetRecoilState(selectProductAtom);
   const [productFocusAtomState, setProductFocusAtomState] = useRecoilState(productFocusAtom);
+  const { isAuthenticated, role } = useAuth();
+  const { addToast } = useToast();
 
   const handleClickProductPurchase = () => {
+    if (isAuthenticated || role !== Role.EMPLOYER) {
+      return addToast({ type: 'warning', message: '업체회원만 이용가능합니다.' });
+    }
+
     setSelectProductAtom((prev) => ({
       ...prev,
       ...product,
