@@ -14,3 +14,4 @@ export { phoneNumberFormat } from './phoneNumberFormat';
 export { businessNumberFormat } from './businessNumberFormat';
 export { formatSalaryDisplay } from './formatSalaryDisplay';
 export { crypto } from './crypto';
+export { isInErrorGroup } from './isInErrorGroup';
