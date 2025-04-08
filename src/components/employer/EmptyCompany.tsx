@@ -6,7 +6,7 @@ export default function EmptyCompany({}: EmptyCompanyProps) {
   return (
     <S.EmptyCompany>
       <p>회사정보가 등록되지않았거나</p>
-      <p> 일시적인 오류가 발생했습니다.</p>
+      <p>일시적인 오류가 발생했습니다.</p>
     </S.EmptyCompany>
   );
 }

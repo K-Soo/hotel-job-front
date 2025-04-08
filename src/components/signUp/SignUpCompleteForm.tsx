@@ -21,7 +21,7 @@ export default function SignUpCompleteForm() {
       <Button
         label="확인"
         variant="primary"
-        onClick={() => router.replace(path.EMPLOYER_SETUP_COMPANY)}
+        onClick={() => window.location.replace(path.EMPLOYER_SETUP_COMPANY)}
         width="200px"
         borderRadius="30px"
         fontSize="16px"
