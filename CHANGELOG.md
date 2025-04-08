@@ -1,6 +1,15 @@
 # 변경 로그
 
 프로젝트의 모든 주요 변경 사항
+### [1.18.4](https://github.com/K-Soo/hotel-job-front/compare/v1.18.3...v1.18.4) (2025-04-08)
+
+
+### Updates
+
+* **RecruitDetailDateTime:** 컴포넌트 최적화 ([112b528](https://github.com/K-Soo/hotel-job-front/commit/112b52841c67a786e6cdaff8eb8c1cd93887770c))
+* **RecruitDetailDateTime:** 컴포넌트 props 추가 및 개선 ([7264843](https://github.com/K-Soo/hotel-job-front/commit/7264843c5e977b7ea8a4605caaba99e67bc97d24))
+* **RecruitDetail:** RecruitDetailDateTime 컴포넌트 날짜 props추가 ([b6f849b](https://github.com/K-Soo/hotel-job-front/commit/b6f849be5f1e41a809e8318677cd80a859197ed3))
+
 ### [1.18.3](https://github.com/K-Soo/hotel-job-front/compare/v1.18.2...v1.18.3) (2025-04-07)
 
 
