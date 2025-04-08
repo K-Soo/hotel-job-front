@@ -24,7 +24,7 @@ export default function RecruitDetail({ data, children }: RecruitDetailProps) {
       <div className="detail-container">
         <div className="detail-container__content-form">
           <div className="flex items-center justify-between">
-            <RecruitDetailDateTime />
+            <RecruitDetailDateTime createdAt={data.createdAt} />
             <RecruitDetailFavoriteShareBar hotelName={data.hotelName} recruitmentTitle={data.recruitmentTitle} />
           </div>
 
