@@ -11,7 +11,6 @@ export default function AuthenticationComponent() {
   const router = useRouter();
 
   const { isAuthenticated, setAuthAtomState, authAtomState } = useAuth();
-  console.log('authAtomState: ', authAtomState);
 
   const isExcludedPath = EXCLUDED_PATHS.includes(router.pathname);
 
