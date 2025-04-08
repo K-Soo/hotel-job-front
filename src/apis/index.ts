@@ -3,6 +3,8 @@ import { interceptorHelper } from './interceptorHelper';
 import environment from '@/environment';
 import * as API from '@/types/API';
 import { ApplicantReviewStageStatusKey } from '@/types';
+import { getErrorCode,errorCode } from '@/error';
+import { isInErrorGroup } from '@/utils';
 
 const URL_API = '/api';
 const VERSION = '/v1';
@@ -29,35 +31,40 @@ instance.interceptors.response.use(
   },
   async (error) => {
     const originalRequest = error.config;
+    const responseErrorCode = getErrorCode(error);
 
-    const responseData = error.response.data;
+     // 잘못된 접근 및 요청
+     if (responseErrorCode === errorCode.AUTH_NOT_FOUND_USER) {
+      return interceptorHelper.handleNotFoundUser();
+     }
 
     // access token 만료 or 누락
-    const shouldRefreshToken = responseData?.error?.code === 'ERR-1000' || responseData?.error?.code === 'ERR-1001';
-
-    //  access token, refresh token 만료 or 누락 or 위조
-    // TODO - 리펙토링
-    const shouldLogoutUser = responseData?.error?.code === 'ERR-1020' || responseData?.error?.code === 'ERR-1021' || responseData?.error?.code === 'ERR-1022' || responseData?.error?.code === 'ERR-1002' || responseData?.error?.code === 'ERR-1040';
-    
-
-    //소셜로그인 초기 로그인 요청을 했는데 서버에서 userId로 사용자를 찾을수없을때
-    const notFoundUser = responseData?.error?.code === 'ERR-1030';
+    const shouldRefreshToken = isInErrorGroup(
+      [errorCode.ACCESS_TOKEN_EXPIRED, errorCode.ACCESS_TOKEN_MISSING],
+      responseErrorCode
+    );
 
     if (shouldRefreshToken && !originalRequest._retry) {
       originalRequest._retry = true;
       return interceptorHelper.handleRequestAccessToken(originalRequest);
     }
 
-    if (notFoundUser) {
-      alert('고객센터에 문의해주세요.');
-      Auth.signOut();
-      window.location.href = '/';
-    }
-
+    // access token, refresh token, 사용자 권한 (만료 or 누락 or 위조)
+    const shouldLogoutUser = isInErrorGroup(
+      [
+        errorCode.USER_ROLE_INVALID,
+        errorCode.ACCESS_TOKEN_INVALID_CREDENTIALS,
+        errorCode.REFRESH_TOKEN_EXPIRED,
+        errorCode.REFRESH_TOKEN_MISSING,
+        errorCode.REFRESH_TOKEN_INVALID_CREDENTIALS,
+      ],
+      responseErrorCode
+    );
+ 
     if (shouldLogoutUser) {
       return interceptorHelper.handleInvalidRefreshToken();
     }
-
+ 
     return Promise.reject(error);
   },
 );
@@ -245,7 +252,6 @@ export const Get = {
     return requests.get<API.GetApplicationHistoryResponse>(url);
   },
 
-  // TODO - 타입정의
   // 유저 - 채용공고 지원내역 상태 계수
   getApplicationHistoryStatus: () => requests.get<API.GetApplicationHistoryStatusResponse>(`/applications/history/status`),
 
@@ -264,7 +270,6 @@ export const Get = {
   // 사업자 - 채용공고 목록 상태별 수량 집계
   recruitmentStatusCount: () => requests.get<API.RecruitmentStatusCountResponse>(`/employers/recruitment/status`),
 
-  // TODO - 타입정의
   // 사업자 - 지원자관리 목록 상태별 수량 집계
   recruitmentApplicationStatusCount: ({ id }: { id: string }) => requests.get<API.RecruitmentApplicationStatusCountResponse>(`/applications/recruitment/${id}/status`),
 
@@ -299,7 +304,6 @@ export const Get = {
     return requests.get<API.RecruitmentListResponse>(url);
   },
 
-  // TODO - 타입정의
   // 사업자 - 채용공고 상품 리스트
   getProductRecruitmentList: () => requests.get<API.GetProductRecruitmentList>('/products/recruitment'),
   // *************************************** FILE ***************************************
@@ -396,7 +400,6 @@ export const Post = {
   saveFcmToken: (body: API.SaveFcmTokenRequest) => requests.post<API.SaveFcmTokenRequest, API.SaveFcmTokenResponse>('/notification/push/token', body),
 
   // *************************************** EMPLOYER PAYMENT  ***************************************
-  // TODO - type 정의
   // 채용공고 결제 초기요청
   paymentRecruitmentInitiate: (body: any) => requests.post<any, API.PaymentRecruitmentInitiateResponse>('/payment/recruitment/initiate', body),
 
@@ -461,6 +464,7 @@ export const Delete = {
   // 사업자 - 채용공고 삭제
   removeRecruitment: ({ recruitmentId }: { recruitmentId:string }) => requests.delete<any>(`/employers/recruitment/remove/${recruitmentId}`),
 
+  // TODO - 타입정의
   // 사업자 - 계정삭제
   withdrawEmployer: () => requests.delete<any>(`/employers/withdraw`),
 };
