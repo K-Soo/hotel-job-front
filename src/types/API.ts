@@ -132,9 +132,10 @@ export interface SignInResponse extends BaseResponse {
     accessToken: string;
     role: types.RoleType;
     provider: types.Provider;
-    nickname: string; //new
-    accountStatus: types.AccountStatus; //new
-    certificationStatus: types.CertificationStatus; //new
+    nickname: string;
+    accountStatus: types.AccountStatus;
+    certificationStatus: types.CertificationStatus;
+    companyVerificationStatus: types.CompanyVerificationStatus;
   };
 }
 
