@@ -28,7 +28,11 @@ export default function ProductCard({ product, margin, setIsOpenSideMenu }: Prod
   const { addToast } = useToast();
 
   const handleClickProductPurchase = () => {
-    if (isAuthenticated || role !== Role.EMPLOYER) {
+    if (!isAuthenticated) {
+      return addToast({ type: 'warning', message: '로그인 후 이용가능합니다.' });
+    }
+
+    if (role !== Role.EMPLOYER) {
       return addToast({ type: 'warning', message: '업체회원만 이용가능합니다.' });
     }
 
