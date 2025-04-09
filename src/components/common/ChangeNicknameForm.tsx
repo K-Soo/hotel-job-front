@@ -47,6 +47,7 @@ export default function ChangeNicknameForm({ handleCloseModal }: ChangeNicknameF
       addToast({ type: 'success', message: '닉네임이 변경되었습니다.' });
       await queryClient.invalidateQueries({ queryKey: [queryKeys.USER_PROFILE], refetchType: 'all' });
       await queryClient.invalidateQueries({ queryKey: [queryKeys.EMPLOYER_ACCOUNT], refetchType: 'all' });
+      window.location.reload();
       handleCloseModal();
     } catch (error) {
       alert('닉네임 변경에 실패했습니다. 잠시 후 다시 시도해주세요.');
