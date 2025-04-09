@@ -22,7 +22,7 @@ export default function FormError({ name, errors, margin, style }: FormErrorProp
 
 const S = {
   FormError: styled.div<{ $margin?: string; $type?: any }>`
-    height: 20px;
+    min-height: 20px;
     font-size: 13px;
     color: red;
     font-weight: 500;
