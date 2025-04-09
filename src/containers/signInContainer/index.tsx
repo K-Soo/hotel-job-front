@@ -14,6 +14,7 @@ import { ParsedUrlQuery } from 'querystring';
 import { useRouter } from 'next/router';
 import useRedirect from '@/hooks/useRedirect';
 import LandingEmployer from '@/components/landingEmployer';
+import path from '@/constants/path';
 
 type SignInTab = 'general' | 'company';
 
@@ -57,13 +58,20 @@ export default function SignInContainer() {
     try {
       const response = await Auth.signIn({ userId: data.userId, password: data.password });
       console.log('로그인 API : ', response);
+
       if (!response.success) {
         throw new Error();
       }
+
       setAuthAtomState({
         ...response.result,
         status: 'AUTHENTICATED',
       });
+
+      if (response.result.companyVerificationStatus !== 'VERIFIED') {
+        window.location.href = path.EMPLOYER_SETUP_COMPANY;
+        return;
+      }
 
       const redirect = getRedirectAfterLogin();
 
@@ -72,7 +80,7 @@ export default function SignInContainer() {
         return;
       }
 
-      window.location.href = '/employer';
+      window.location.href = path.EMPLOYER;
     } catch (error) {
       methods.setValue('password', '');
       setIsSubmitError(true);
