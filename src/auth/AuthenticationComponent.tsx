@@ -10,7 +10,7 @@ export const EXCLUDED_PATHS = ['/oauth/kakao/callback', '/oauth/google/callback'
 export default function AuthenticationComponent() {
   const router = useRouter();
 
-  const { isAuthenticated, setAuthAtomState, authAtomState } = useAuth();
+  const { isAuthenticated, setAuthAtomState } = useAuth();
 
   const isExcludedPath = EXCLUDED_PATHS.includes(router.pathname);
 

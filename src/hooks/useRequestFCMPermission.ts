@@ -2,11 +2,10 @@ import React from 'react';
 import { fetchToken, messaging } from '@/lib/firebase-client';
 import { onMessage } from 'firebase/messaging';
 import { Post } from '@/apis';
-import { appAtom } from '@/recoil/app';
-import { useRecoilValue } from 'recoil';
 import { useRouter } from 'next/router';
 import useAuth from '@/hooks/useAuth';
 import { toast } from 'sonner';
+import { isStandalonePWA } from 'ua-parser-js/helpers';
 
 async function requestNotificationPermissionAndToken() {
   if (!('Notification' in window)) {
@@ -34,14 +33,12 @@ export default function useRequestFCMPermission() {
 
   const { isAuthenticated } = useAuth();
 
-  const appAtomValue = useRecoilValue(appAtom);
+  const isPWA = isStandalonePWA();
 
   const isLoading = React.useRef(false);
   const retryLoadToken = React.useRef(0);
 
   const router = useRouter();
-
-  // const isEligiblePath = router.pathname === '/' || router.pathname === '/employer';
 
   React.useEffect(() => {
     async function initialize() {
@@ -94,7 +91,7 @@ export default function useRequestFCMPermission() {
 
       try {
         // FCM 전송
-        const response = await Post.saveFcmToken({ token, isPWA: appAtomValue.isPWA });
+        const response = await Post.saveFcmToken({ token, isPWA });
         console.log('FCM API : ', response);
       } catch (error: any) {
         console.error('FCM 토큰저장 error: ', error?.message);
@@ -104,7 +101,7 @@ export default function useRequestFCMPermission() {
     if (isAuthenticated) {
       initialize();
     }
-  }, [appAtomValue.isPWA, isAuthenticated]);
+  }, [isPWA, isAuthenticated]);
 
   // Foreground 푸시 알림 리스너 등록
   React.useEffect(() => {
