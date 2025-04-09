@@ -1,4 +1,5 @@
 {
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
   "cSpell.words": ["appkey", "Daum", "KAKAO", "pretendard", "sido", "sigungu", "tanstack"],
   "eslint.validate": ["javascript", "typescript", "typescriptreact", "javascriptreact"],
   "eslint.enable": true
