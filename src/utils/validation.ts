@@ -23,6 +23,7 @@ const EMAIL_VALID_TEXT = '이메일 형식을 확인해주세요';
 const KO_VALID_TEXT = '한글만 입력가능합니다.';
 const KO_VALID_TEXT_1 = '모음 입력제한';
 const KO_VALID_TEXT_2 = '자음 입력제한';
+const SPACES_VALID_TEXT = '공백 불가';
 const FIRST_SPACES_VALID_TEXT = '앞 공백 있음';
 const LAST_SPACES_VALID_TEXT = '뒤 공백 있음';
 // const SPECIAL_VALID_TEXT_1 = '특수문자는 허용되지않습니다';
@@ -59,6 +60,7 @@ export const validation = {
     .required()
     .matches(regex.FIRST_SPACE, FIRST_SPACES_VALID_TEXT)
     .matches(regex.LAST_SPACE, LAST_SPACES_VALID_TEXT)
+    .matches(regex.allSpace, SPACES_VALID_TEXT)
     .matches(regex.NICKNAME, '한글, 영문, 숫자로만 이루어져야 하며 특수문자와 공백은 포함할 수 없습니다.'),
   REQUIRED_EMAIL: () =>
     yup
