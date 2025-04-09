@@ -15,6 +15,7 @@ import { useRouter } from 'next/router';
 import useRedirect from '@/hooks/useRedirect';
 import LandingEmployer from '@/components/landingEmployer';
 import path from '@/constants/path';
+import environment from '@/environment';
 
 type SignInTab = 'general' | 'company';
 
@@ -37,8 +38,8 @@ export default function SignInContainer() {
     mode: 'onSubmit',
     reValidateMode: 'onChange',
     defaultValues: {
-      userId: '',
-      password: '',
+      userId: environment.isDev ? 'test1234' : '',
+      password: environment.isDev ? '!@Test1234' : '',
     },
   });
 
