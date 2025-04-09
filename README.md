@@ -7,6 +7,13 @@
 
 <br>
 
+## Related Repositories
+
+- [Hotel Job - Backend](https://github.com/K-Soo/hotel-job-api)
+
+<br>
+
+
 ## Project Overview
 
 **Hotel Job**은 숙박업계 종사자(구직자)와 채용 기업을 연결하는 채용 플랫폼입니다.  
@@ -48,6 +55,10 @@
 | **SEO**              | next-seo , next-sitemap                            |
 
 <br>
+
+
+
+
 
 ## Versioning
 
