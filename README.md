@@ -3,9 +3,16 @@
 > 채용 플랫폼 | Next.js 기반 프론트엔드  
 > **운영 중**: [https://www.hotel-job-connect.com](https://www.hotel-job-connect.com)  
 > **개발 환경**: [https://dev.hotel-job-connect.com](https://dev.hotel-job-connect.com)  
-> **개발 기간**: 2024년 12월 ~ 현재
+> **프로젝트 시작**: 2024년 12월 ~ 현재
 
 <br>
+
+## Related Repositories
+
+- [Hotel Job - Backend](https://github.com/K-Soo/hotel-job-api)
+
+<br>
+
 
 ## Project Overview
 
@@ -49,12 +56,11 @@
 
 <br>
 
+
+
+
+
 ## Versioning
-
-이 프로젝트는 `standard-version`으로 버전을 관리합니다.
-
-배포 시점마다 CHANGELOG를 함께 업데이트하며,  
-상세한 변경 이력은 아래 파일에서 확인할 수 있습니다.
 
 → [CHANGELOG.md](./CHANGELOG.md)
 
