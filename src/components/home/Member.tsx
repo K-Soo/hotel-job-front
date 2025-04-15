@@ -108,7 +108,12 @@ export default function Member() {
 
       {isUnAuthenticated && (
         <>
-          <button className="w-[100%] cursor-pointer text-right text-sm text-gray-700 hover:underline">회원가입</button>
+          <button
+            className="w-[100%] cursor-pointer text-right text-sm text-gray-700 hover:underline"
+            onClick={() => router.push(path.SIGN_IN)}
+          >
+            회원가입
+          </button>
 
           <div className="mt-3 flex-1">
             <Button label="로그인" variant="primary" onClick={() => router.push(path.SIGN_IN)} />
