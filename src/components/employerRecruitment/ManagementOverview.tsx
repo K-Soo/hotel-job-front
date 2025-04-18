@@ -40,10 +40,6 @@ export default function ManagementOverview({
     };
   }, [isDropdownOpen]);
 
-  if (status === 'CLOSED') {
-    return null;
-  }
-
   return (
     <S.ManagementOverview>
       <IconHover width="30px" height="30px" margin="0 auto" onClick={() => setIsDropdownOpen((prev) => !prev)}>
