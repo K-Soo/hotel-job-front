@@ -13,6 +13,7 @@ const config: AxiosRequestConfig = {
   baseURL: environment.apiUrl + URL_API + VERSION,
   withCredentials: true,
 };
+
 export const instance = axios.create(config);
 
 instance.interceptors.request.use(
