@@ -2,8 +2,6 @@
 
 > 채용 플랫폼 | Next.js 기반 프론트엔드  
 > **운영 중**: [https://www.hotel-job-connect.com](https://www.hotel-job-connect.com)  
-> **개발 환경**: [https://dev.hotel-job-connect.com](https://dev.hotel-job-connect.com)  
-> **프로젝트 시작**: 2024년 12월 ~ 현재
 
 <br>
 
